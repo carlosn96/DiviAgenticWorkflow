@@ -1,7 +1,6 @@
 <?php
 /**
  * manage_content.php - Gestor de Estado de Contenido (Ultra-Eficiente)
- * Instituto Ramón López Velarde
  */
 
 $options = getopt("", ["mode:"]);

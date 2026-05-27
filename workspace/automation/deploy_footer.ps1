@@ -1,6 +1,6 @@
 param([switch]$ClearCache)
 $ErrorActionPreference = "Stop"
-$ROOT = "C:\Users\CORE I9\Local Sites\sanpablo"
+$ROOT = ""
 $WP = "$ROOT\wp.bat"
 Set-Location -LiteralPath $ROOT
 
@@ -15,7 +15,7 @@ Copy-Item -Path "$ROOT/workspace/pages/footer-global.json" -Destination "$ROOT/a
 # Compile & update post 110489
 & $WP eval @'
 $engine = new \DAC\Core\Layout_Engine();
-$raw = file_get_contents('C:\Users\CORE I9\Local Sites\sanpablo\workspace\pages\footer-global.json');
+$raw = file_get_contents('$ROOT/workspace/pages/footer-global.json');
 $blocks = $engine->compile($raw);
 wp_update_post(['ID' => 110489, 'post_content' => wp_slash($blocks)]);
 echo 'Footer 110489 updated. Len=' . strlen(get_post_field('post_content', 110489));

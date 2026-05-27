@@ -1,16 +1,17 @@
 param([switch]$ClearCache)
+$ROOT = ""
 $WP = ".\wp.bat"
 $ErrorActionPreference = "Stop"
 
 Write-Host "--- Deploy Header ---" -ForegroundColor Cyan
 
 # Validate
-if (-not (Test-Path "workspace/pages/navbar-global.json")) { throw "navbar-global.json not found" }
+if (-not (Test-Path "$ROOT/workspace/pages/navbar-global.json")) { throw "navbar-global.json not found" }
 
 # Compile & update post 121485
 & $WP eval @'
 $engine = new \DAC\Core\Layout_Engine();
-$raw = file_get_contents('C:\Users\CORE I9\Local Sites\sanpablo\workspace\pages\navbar-global.json');
+$raw = file_get_contents('$ROOT/workspace/pages/navbar-global.json');
 $blocks = $engine->compile($raw);
 wp_update_post(['ID' => 121485, 'post_content' => wp_slash($blocks)]);
 echo 'Header 121485 updated. Len=' . strlen(get_post_field('post_content', 121485));
