@@ -14,7 +14,7 @@ El framework divide el esfuerzo en 4 especialidades para maximizar el razonamien
 
 Para que los esquemas JSON de la Fase 3 sean válidos y el motor de la Fase 4 los pueda renderizar, el proyecto destino **DEBE contar con un Sistema de Diseño JSON** (por ejemplo: `workspace/design-system/proyecto.json`).
 
-**Regla de Oro:** Ningún esquema (generado por `daw_builder.py`) debe contener colores hexadecimales o pídeles harcodeados. En su lugar, el Diseñador usa **tokens**.
+**Regla de Oro:** Ningún esquema (generado por `daw_builder.py`) debe contener colores hexadecimales o píxeles hardcodeados. En su lugar, el Diseñador usa **tokens**.
 Ejemplos:
 - Color: `{{design:color:primary}}` o `{{design:color:ink}}`
 - Tipografía: `{{design:font:heading}}`
