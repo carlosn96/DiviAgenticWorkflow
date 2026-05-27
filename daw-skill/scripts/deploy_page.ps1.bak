@@ -1,0 +1,53 @@
+param (
+    [Parameter(Mandatory=$true)]
+    [string]$Title,
+
+    [Parameter(Mandatory=$true)]
+    [string]$Slug,
+
+    [Parameter(Mandatory=$true)]
+    [string]$SchemaPath,
+
+    [switch]$ClearCache
+)
+
+$ErrorActionPreference = "Stop"
+$ProjectRoot = Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $PSScriptRoot))
+
+Write-Host "--- DAW Execution: Deploying Page '$Title' ---" -ForegroundColor Cyan
+Write-Host "Project Root: $ProjectRoot"
+
+# 1. Validate Schema file exists
+if (-not (Test-Path $SchemaPath)) {
+    throw "Error: Schema file not found at '$SchemaPath'. Paths are relative to the project root."
+}
+
+# 2. Execute via wp.bat wrapper (Local WP environment)
+$wpBat = Join-Path $ProjectRoot "wp.bat"
+if (-not (Test-Path $wpBat)) {
+    throw "Error: wp.bat not found at '$wpBat'. Run this script from the project root directory."
+}
+
+Write-Host "Running: wp.bat agentic deploy_page --title='$Title' --slug='$Slug' --schema='$SchemaPath'" -ForegroundColor Yellow
+& $wpBat agentic deploy_page "--title=$Title" "--slug=$Slug" "--schema=$SchemaPath"
+
+if ($LASTEXITCODE -ne 0) {
+    throw "Error: WP-CLI deployment failed. Check the schema JSON for validation errors."
+}
+
+# 3. Optional Cache Clearing
+if ($ClearCache) {
+    Write-Host "Clearing Divi 5 cache..." -ForegroundColor Yellow
+    & $wpBat eval "et_core_clear_wp_cache();"
+    Write-Host "Cache cleared." -ForegroundColor Green
+}
+
+# 4. Final Verification
+Write-Host "Verifying deployment..." -ForegroundColor Yellow
+$postCount = & $wpBat post list "--name=$Slug" --format=count 2>$null
+if ([int]$postCount -eq 0) {
+    throw "Error: Verification failed. Post with slug '$Slug' was not found in the database after deployment."
+}
+
+Write-Host "Success: Page '$Title' (slug: $Slug) deployed and verified." -ForegroundColor Green
+Write-Host "Next step: Open http://dominio.local/$Slug in your browser to review the result."

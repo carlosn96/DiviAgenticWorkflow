@@ -1,0 +1,516 @@
+{
+    "_count": 102,
+    "_note": "Indice ligero para consulta DAW. Para atributos detallados: php divi-agentic-core\/bin\/extract-module-meta.php <slug>",
+    "modules": {
+        "accordion": {
+            "slug": "accordion",
+            "name": "divi\/accordion",
+            "category": "module"
+        },
+        "accordion-item": {
+            "slug": "accordion-item",
+            "name": "divi\/accordion-item",
+            "category": "child-module"
+        },
+        "audio": {
+            "slug": "audio",
+            "name": "divi\/audio",
+            "category": "module"
+        },
+        "before-after-image": {
+            "slug": "before-after-image",
+            "name": "divi\/before-after-image",
+            "category": "module"
+        },
+        "blog": {
+            "slug": "blog",
+            "name": "divi\/blog",
+            "category": "module"
+        },
+        "blurb": {
+            "slug": "blurb",
+            "name": "divi\/blurb",
+            "category": "module"
+        },
+        "breadcrumbs": {
+            "slug": "breadcrumbs",
+            "name": "divi\/breadcrumbs",
+            "category": "module"
+        },
+        "button": {
+            "slug": "button",
+            "name": "divi\/button",
+            "category": "module"
+        },
+        "canvas-portal": {
+            "slug": "canvas-portal",
+            "name": "divi\/canvas-portal",
+            "category": "module"
+        },
+        "circle-counter": {
+            "slug": "circle-counter",
+            "name": "divi\/circle-counter",
+            "category": "module"
+        },
+        "code": {
+            "slug": "code",
+            "name": "divi\/code",
+            "category": "module"
+        },
+        "column": {
+            "slug": "column",
+            "name": "divi\/column",
+            "category": "structure"
+        },
+        "column-inner": {
+            "slug": "column-inner",
+            "name": "divi\/column-inner",
+            "category": "structure"
+        },
+        "comments": {
+            "slug": "comments",
+            "name": "divi\/comments",
+            "category": "module"
+        },
+        "contact-field": {
+            "slug": "contact-field",
+            "name": "divi\/contact-field",
+            "category": "child-module"
+        },
+        "contact-form": {
+            "slug": "contact-form",
+            "name": "divi\/contact-form",
+            "category": "module"
+        },
+        "contact-form-7": {
+            "slug": "contact-form-7",
+            "name": "divi\/contact-form-7",
+            "category": "module"
+        },
+        "countdown-timer": {
+            "slug": "countdown-timer",
+            "name": "divi\/countdown-timer",
+            "category": "module"
+        },
+        "counter": {
+            "slug": "counter",
+            "name": "divi\/counter",
+            "category": "child-module"
+        },
+        "counters": {
+            "slug": "counters",
+            "name": "divi\/counters",
+            "category": "module"
+        },
+        "cta": {
+            "slug": "cta",
+            "name": "divi\/cta",
+            "category": "module"
+        },
+        "divider": {
+            "slug": "divider",
+            "name": "divi\/divider",
+            "category": "module"
+        },
+        "dropdown": {
+            "slug": "dropdown",
+            "name": "divi\/dropdown",
+            "category": "module"
+        },
+        "filterable-portfolio": {
+            "slug": "filterable-portfolio",
+            "name": "divi\/filterable-portfolio",
+            "category": "module"
+        },
+        "fullwidth-code": {
+            "slug": "fullwidth-code",
+            "name": "divi\/fullwidth-code",
+            "category": "fullwidth-module"
+        },
+        "fullwidth-header": {
+            "slug": "fullwidth-header",
+            "name": "divi\/fullwidth-header",
+            "category": "fullwidth-module"
+        },
+        "fullwidth-image": {
+            "slug": "fullwidth-image",
+            "name": "divi\/fullwidth-image",
+            "category": "fullwidth-module"
+        },
+        "fullwidth-map": {
+            "slug": "fullwidth-map",
+            "name": "divi\/fullwidth-map",
+            "category": "fullwidth-module"
+        },
+        "fullwidth-menu": {
+            "slug": "fullwidth-menu",
+            "name": "divi\/fullwidth-menu",
+            "category": "fullwidth-module"
+        },
+        "fullwidth-portfolio": {
+            "slug": "fullwidth-portfolio",
+            "name": "divi\/fullwidth-portfolio",
+            "category": "fullwidth-module"
+        },
+        "fullwidth-post-content": {
+            "slug": "fullwidth-post-content",
+            "name": "divi\/fullwidth-post-content",
+            "category": "fullwidth-module"
+        },
+        "fullwidth-post-slider": {
+            "slug": "fullwidth-post-slider",
+            "name": "divi\/fullwidth-post-slider",
+            "category": "fullwidth-module"
+        },
+        "fullwidth-post-title": {
+            "slug": "fullwidth-post-title",
+            "name": "divi\/fullwidth-post-title",
+            "category": "fullwidth-module"
+        },
+        "fullwidth-slider": {
+            "slug": "fullwidth-slider",
+            "name": "divi\/fullwidth-slider",
+            "category": "fullwidth-module"
+        },
+        "gallery": {
+            "slug": "gallery",
+            "name": "divi\/gallery",
+            "category": "module"
+        },
+        "global-layout": {
+            "slug": "global-layout",
+            "name": "divi\/global-layout",
+            "category": "structure"
+        },
+        "group": {
+            "slug": "group",
+            "name": "divi\/group",
+            "category": "structure"
+        },
+        "group-carousel": {
+            "slug": "group-carousel",
+            "name": "divi\/group-carousel",
+            "category": "module"
+        },
+        "heading": {
+            "slug": "heading",
+            "name": "divi\/heading",
+            "category": "module"
+        },
+        "icon": {
+            "slug": "icon",
+            "name": "divi\/icon",
+            "category": "module"
+        },
+        "icon-list": {
+            "slug": "icon-list",
+            "name": "divi\/icon-list",
+            "category": "module"
+        },
+        "icon-list-item": {
+            "slug": "icon-list-item",
+            "name": "divi\/icon-list-item",
+            "category": "child-module"
+        },
+        "image": {
+            "slug": "image",
+            "name": "divi\/image",
+            "category": "module"
+        },
+        "link": {
+            "slug": "link",
+            "name": "divi\/link",
+            "category": "module"
+        },
+        "login": {
+            "slug": "login",
+            "name": "divi\/login",
+            "category": "module"
+        },
+        "lottie": {
+            "slug": "lottie",
+            "name": "divi\/lottie",
+            "category": "module"
+        },
+        "map": {
+            "slug": "map",
+            "name": "divi\/map",
+            "category": "module"
+        },
+        "map-pin": {
+            "slug": "map-pin",
+            "name": "divi\/map-pin",
+            "category": "child-module"
+        },
+        "menu": {
+            "slug": "menu",
+            "name": "divi\/menu",
+            "category": "module"
+        },
+        "number-counter": {
+            "slug": "number-counter",
+            "name": "divi\/number-counter",
+            "category": "module"
+        },
+        "portfolio": {
+            "slug": "portfolio",
+            "name": "divi\/portfolio",
+            "category": "module"
+        },
+        "post-content": {
+            "slug": "post-content",
+            "name": "divi\/post-content",
+            "category": "module"
+        },
+        "post-nav": {
+            "slug": "post-nav",
+            "name": "divi\/post-nav",
+            "category": "module"
+        },
+        "post-slider": {
+            "slug": "post-slider",
+            "name": "divi\/post-slider",
+            "category": "module"
+        },
+        "post-title": {
+            "slug": "post-title",
+            "name": "divi\/post-title",
+            "category": "module"
+        },
+        "pricing-table": {
+            "slug": "pricing-table",
+            "name": "divi\/pricing-table",
+            "category": "child-module"
+        },
+        "pricing-tables": {
+            "slug": "pricing-tables",
+            "name": "divi\/pricing-tables",
+            "category": "module"
+        },
+        "row": {
+            "slug": "row",
+            "name": "divi\/row",
+            "category": "structure"
+        },
+        "row-inner": {
+            "slug": "row-inner",
+            "name": "divi\/row-inner",
+            "category": "structure"
+        },
+        "search": {
+            "slug": "search",
+            "name": "divi\/search",
+            "category": "module"
+        },
+        "section": {
+            "slug": "section",
+            "name": "divi\/section",
+            "category": "structure"
+        },
+        "sidebar": {
+            "slug": "sidebar",
+            "name": "divi\/sidebar",
+            "category": "module"
+        },
+        "signup": {
+            "slug": "signup",
+            "name": "divi\/signup",
+            "category": "module"
+        },
+        "signup-custom-field": {
+            "slug": "signup-custom-field",
+            "name": "divi\/signup-custom-field",
+            "category": "child-module"
+        },
+        "slide": {
+            "slug": "slide",
+            "name": "divi\/slide",
+            "category": "child-module"
+        },
+        "slider": {
+            "slug": "slider",
+            "name": "divi\/slider",
+            "category": "module"
+        },
+        "social-media-follow": {
+            "slug": "social-media-follow",
+            "name": "divi\/social-media-follow",
+            "category": "module"
+        },
+        "social-media-follow-item": {
+            "slug": "social-media-follow-item",
+            "name": "divi\/social-media-follow-network",
+            "category": "child-module"
+        },
+        "tab": {
+            "slug": "tab",
+            "name": "divi\/tab",
+            "category": "child-module"
+        },
+        "tabs": {
+            "slug": "tabs",
+            "name": "divi\/tabs",
+            "category": "module"
+        },
+        "team-member": {
+            "slug": "team-member",
+            "name": "divi\/team-member",
+            "category": "module"
+        },
+        "testimonial": {
+            "slug": "testimonial",
+            "name": "divi\/testimonial",
+            "category": "module"
+        },
+        "text": {
+            "slug": "text",
+            "name": "divi\/text",
+            "category": "module"
+        },
+        "toggle": {
+            "slug": "toggle",
+            "name": "divi\/toggle",
+            "category": "module"
+        },
+        "video": {
+            "slug": "video",
+            "name": "divi\/video",
+            "category": "module"
+        },
+        "video-slider": {
+            "slug": "video-slider",
+            "name": "divi\/video-slider",
+            "category": "module"
+        },
+        "video-slider-item": {
+            "slug": "video-slider-item",
+            "name": "divi\/video-slider-item",
+            "category": "child-module"
+        },
+        "woocommerce\/breadcrumb": {
+            "slug": "woocommerce\/breadcrumb",
+            "name": "divi\/woocommerce-breadcrumb",
+            "category": "module"
+        },
+        "woocommerce\/cart-notice": {
+            "slug": "woocommerce\/cart-notice",
+            "name": "divi\/woocommerce-cart-notice",
+            "category": "module"
+        },
+        "woocommerce\/cart-products": {
+            "slug": "woocommerce\/cart-products",
+            "name": "divi\/woocommerce-cart-products",
+            "category": "module"
+        },
+        "woocommerce\/cart-totals": {
+            "slug": "woocommerce\/cart-totals",
+            "name": "divi\/woocommerce-cart-totals",
+            "category": "module"
+        },
+        "woocommerce\/checkout-billing": {
+            "slug": "woocommerce\/checkout-billing",
+            "name": "divi\/woocommerce-checkout-billing",
+            "category": "module"
+        },
+        "woocommerce\/checkout-information": {
+            "slug": "woocommerce\/checkout-information",
+            "name": "divi\/woocommerce-checkout-additional-info",
+            "category": "module"
+        },
+        "woocommerce\/checkout-order-details": {
+            "slug": "woocommerce\/checkout-order-details",
+            "name": "divi\/woocommerce-checkout-order-details",
+            "category": "module"
+        },
+        "woocommerce\/checkout-payment-info": {
+            "slug": "woocommerce\/checkout-payment-info",
+            "name": "divi\/woocommerce-checkout-payment-info",
+            "category": "module"
+        },
+        "woocommerce\/checkout-shipping": {
+            "slug": "woocommerce\/checkout-shipping",
+            "name": "divi\/woocommerce-checkout-shipping",
+            "category": "module"
+        },
+        "woocommerce\/cross-sells": {
+            "slug": "woocommerce\/cross-sells",
+            "name": "divi\/woocommerce-cross-sells",
+            "category": "module"
+        },
+        "woocommerce\/product-add-to-cart": {
+            "slug": "woocommerce\/product-add-to-cart",
+            "name": "divi\/woocommerce-product-add-to-cart",
+            "category": "module"
+        },
+        "woocommerce\/product-additional-info": {
+            "slug": "woocommerce\/product-additional-info",
+            "name": "divi\/woocommerce-product-additional-info",
+            "category": "module"
+        },
+        "woocommerce\/product-description": {
+            "slug": "woocommerce\/product-description",
+            "name": "divi\/woocommerce-product-description",
+            "category": "module"
+        },
+        "woocommerce\/product-gallery": {
+            "slug": "woocommerce\/product-gallery",
+            "name": "divi\/woocommerce-product-gallery",
+            "category": "module"
+        },
+        "woocommerce\/product-images": {
+            "slug": "woocommerce\/product-images",
+            "name": "divi\/woocommerce-product-images",
+            "category": "module"
+        },
+        "woocommerce\/product-meta": {
+            "slug": "woocommerce\/product-meta",
+            "name": "divi\/woocommerce-product-meta",
+            "category": "module"
+        },
+        "woocommerce\/product-price": {
+            "slug": "woocommerce\/product-price",
+            "name": "divi\/woocommerce-product-price",
+            "category": "module"
+        },
+        "woocommerce\/product-rating": {
+            "slug": "woocommerce\/product-rating",
+            "name": "divi\/woocommerce-product-rating",
+            "category": "module"
+        },
+        "woocommerce\/product-reviews": {
+            "slug": "woocommerce\/product-reviews",
+            "name": "divi\/woocommerce-product-reviews",
+            "category": "module"
+        },
+        "woocommerce\/product-stock": {
+            "slug": "woocommerce\/product-stock",
+            "name": "divi\/woocommerce-product-stock",
+            "category": "module"
+        },
+        "woocommerce\/product-tabs": {
+            "slug": "woocommerce\/product-tabs",
+            "name": "divi\/woocommerce-product-tabs",
+            "category": "module"
+        },
+        "woocommerce\/product-title": {
+            "slug": "woocommerce\/product-title",
+            "name": "divi\/woocommerce-product-title",
+            "category": "module"
+        },
+        "woocommerce\/product-upsell": {
+            "slug": "woocommerce\/product-upsell",
+            "name": "divi\/woocommerce-product-upsell",
+            "category": "module"
+        },
+        "woocommerce\/products": {
+            "slug": "woocommerce\/products",
+            "name": "divi\/shop",
+            "category": "module"
+        },
+        "woocommerce\/related-products": {
+            "slug": "woocommerce\/related-products",
+            "name": "divi\/woocommerce-related-products",
+            "category": "module"
+        }
+    }
+}
