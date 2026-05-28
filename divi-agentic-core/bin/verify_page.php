@@ -47,17 +47,32 @@ function check(string $label, bool $pass, string $detail = ''): void {
     if (!$pass) $all_passed = false;
 }
 
+function wp(string $args): string {
+    $cmd = '"' . WP_BAT . '" ' . $args . ' 2>NUL';
+    $r = shell_exec($cmd);
+    if ($r === null) return '';
+    return trim($r);
+}
+
+function clean_content(string $raw): string {
+    $lines = explode("\n", $raw);
+    $clean = [];
+    foreach ($lines as $line) {
+        $line = trim($line);
+        if ($line === '') continue;
+        if (strpos($line, '"M"') !== false) continue;
+        if (strpos($line, 'programa o archivo') !== false) continue;
+        $clean[] = $line;
+    }
+    return implode("\n", $clean);
+}
+
 echo "[VERIFY] Verifying page '{$slug}'...\n\n";
 
 // ── Check 1: Page exists in WordPress ──────────────────────────────
-$cmd = sprintf(
-    '"%s" post list --post_type=page --name="%s" --field=ID --format=json',
-    WP_BAT,
-    $slug
-);
-$output = shell_exec($cmd);
+$output = wp('post list --post_type=page --name="' . $slug . '" --field=ID --format=json');
 $ids = json_decode($output ?? '[]', true);
-$page_id = $ids[0] ?? null;
+$page_id = is_array($ids) ? ($ids[0] ?? null) : null;
 
 if (!$page_id) {
     check('Page exists in WordPress', false, "No page found with slug '{$slug}'");
@@ -67,13 +82,8 @@ if (!$page_id) {
 check('Page exists in WordPress', true, "ID: {$page_id}");
 
 // ── Check 2: Page has content ─────────────────────────────────────
-$cmd = sprintf(
-    '"%s" post get %d --field=post_content --format=json',
-    WP_BAT,
-    $page_id
-);
-$content = shell_exec($cmd);
-$content = trim($content ?? '');
+$raw = wp('post get ' . $page_id . ' --field=post_content');
+$content = clean_content($raw);
 
 if (empty($content)) {
     check('Page has content', false, 'post_content is empty');
@@ -88,15 +98,17 @@ check('Content contains Divi blocks', $has_divi_blocks,
 );
 
 // ── Check 4: GCID variables present in content ────────────────────
-$gcid_count = preg_match_all('/var\(--gcid-[\w-]+\)/', $content, $gcid_matches);
+// Layout Engine produces $variable({...}) with escaped JSON in post_content
+// e.g., $variable({\"type\":\"color\",\"value\":{\"name\":\"gcid-surface-light\",...}})$
+$gcid_count = preg_match_all('/gcid-[\w-]+/', $content, $gcid_matches);
 check('GCID variables applied', $gcid_count > 0,
-    $gcid_count > 0 ? "Found {$gcid_count} gcid references" : 'No var(--gcid-*) found in content'
+    $gcid_count > 0 ? "Found {$gcid_count} gcid references" : 'No gcid-* found in post_content'
 );
 
 if ($gcid_count > 0) {
     $unique_gcids = array_unique($gcid_matches[0]);
     check('Unique GCIDs used', count($unique_gcids) > 0,
-        count($unique_gcids) . ' unique: ' . implode(', ', array_slice($unique_gcids, 0, 5)) . (count($unique_gcids) > 5 ? '...' : '')
+        count($unique_gcids) . ' unique: ' . implode(', ', array_slice($unique_gcids, 0, 6)) . (count($unique_gcids) > 6 ? '...' : '')
     );
 }
 
@@ -120,9 +132,9 @@ if (!empty($page_url)) {
         $accessible ? "HTTP {$http_code}" : "HTTP {$http_code} — page may not be published"
     );
     if ($accessible) {
-        $body_gcid = preg_match_all('/var\(--gcid-[\w-]+\)/', $response, $body_matches);
+        $body_gcid = preg_match_all('/gcid-[\w-]+/', $response, $body_matches);
         check('GCIDs render in HTML output', $body_gcid > 0,
-            $body_gcid > 0 ? "Found {$body_gcid} gcid references in rendered HTML" : 'No gcid refs in rendered HTML (may be in JS-generated inline styles)'
+            $body_gcid > 0 ? "Found {$body_gcid} gcid references in rendered HTML" : 'No gcid refs in rendered HTML'
         );
     }
 }

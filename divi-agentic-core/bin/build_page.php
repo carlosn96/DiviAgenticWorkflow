@@ -479,7 +479,7 @@ if ($do_deploy) {
     }
 
     echo "[DEPLOY] Running: {$cmd}\n";
-    passthru($cmd, $exit_code);
+    passthru($cmd . ' 2>NUL', $exit_code);
     if ($exit_code !== 0) {
         fwrite(STDERR, "[ERROR] Deploy failed with code {$exit_code}\n");
         exit($exit_code);
@@ -496,7 +496,7 @@ if ($do_deploy) {
             $verify_cmd .= ' --url="' . $opts['url'] . '"';
         }
         echo "[VERIFY] Running post-deploy checks...\n";
-        passthru($verify_cmd, $verify_code);
+        passthru($verify_cmd . ' 2>NUL', $verify_code);
         if ($verify_code !== 0) {
             fwrite(STDERR, "[WARN] Verification checks failed for page '{$slug}'\n");
             fwrite(STDERR, "[WARN] Page was deployed but may have issues. Review the check output above.\n");

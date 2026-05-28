@@ -1,35 +1,27 @@
-# Credenciales
-.env
+# Generated outputs (all sites)
+site/*/design-system/
+site/*/pages/
+site/*/content_state/
 
-# Python
+# Project-specific data (add your project site here)
+site/bibliotheca/
+site/bibliotheca/**
+
+# Generated module schemas
+workspace/data/modules/
+
+# Python cache
 __pycache__/
 *.pyc
+*.pyo
 
-# Logs
-*.log
-
-# macOS
+# OS files
 .DS_Store
+Thumbs.db
 
-# Site data (project-specific) — generated outputs
-site/*/pages/*
-!site/*/pages/.gitkeep
+# Environment
+.env
 
-site/*/design-system/*
-!site/*/design-system/.gitkeep
-
-# Site content_state (temporal entre fases)
-site/*/content_state/*
-!site/*/content_state/.gitkeep
-!site/*/content_state/local/.gitkeep
-!site/*/content_state/remote/.gitkeep
-
-# Briefs (tracked opcional)
-site/*/briefs/*
-!site/*/briefs/.gitkeep
-
-# Project data (no genérico)
-site/bibliotheca/
-
-# Scripts temporales
-_commits.ps1
+# Temp
+*.tmp
+/tmp/
