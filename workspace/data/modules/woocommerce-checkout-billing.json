@@ -1,0 +1,28 @@
+{
+    "block": {
+        "name": "divi/woocommerce-checkout-billing",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Woo Checkout Billing"
+                        }
+                    }
+                }
+            },
+            "title": {},
+            "field": {},
+            "formNotice": {},
+            "layout": {
+                "advanced": {
+                    "fieldsWidth": {
+                        "desktop": {
+                            "value": "default"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

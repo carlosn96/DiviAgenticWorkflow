@@ -1,0 +1,71 @@
+{
+    "block": {
+        "name": "divi/pricing-tables",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Pricing Tables"
+                        }
+                    }
+                }
+            },
+            "title": {
+                "decoration": {
+                    "font": {
+                        "font": {
+                            "desktop": {
+                                "value": {
+                                    "headingLevel": "h2"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "subtitle": {},
+            "price": {},
+            "currencyFrequency": {},
+            "content": {
+                "advanced": {
+                    "showBullet": {
+                        "desktop": {
+                            "value": "on"
+                        }
+                    }
+                }
+            },
+            "excluded": {},
+            "featuredTable": {
+                "advanced": {
+                    "showDropShadow": {
+                        "desktop": {
+                            "value": "on"
+                        }
+                    }
+                }
+            },
+            "featuredTitle": {},
+            "featuredContent": {},
+            "featuredSubtitle": {},
+            "featuredPrice": {},
+            "featuredCurrencyFrequency": {},
+            "featuredExcluded": {},
+            "button": {
+                "decoration": {
+                    "button": {
+                        "desktop": {
+                            "value": {
+                                "icon": {
+                                    "enable": "on"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "children": {}
+        }
+    }
+}

@@ -1,0 +1,31 @@
+{
+    "block": {
+        "name": "divi/divider",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Divider"
+                        }
+                    }
+                }
+            },
+            "divider": {
+                "advanced": {
+                    "line": {
+                        "desktop": {
+                            "value": {
+                                "show": "on",
+                                "color": "$variable({\"type\":\"color\",\"value\":{\"name\":\"gcid-primary-color\",\"settings\":{}}})$",
+                                "style": "solid",
+                                "position": "top",
+                                "weight": "1px"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

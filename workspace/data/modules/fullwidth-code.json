@@ -1,0 +1,17 @@
+{
+    "block": {
+        "name": "divi/fullwidth-code",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Fullwidth Code"
+                        }
+                    }
+                }
+            },
+            "content": {}
+        }
+    }
+}

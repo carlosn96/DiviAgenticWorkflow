@@ -1,0 +1,54 @@
+{
+    "block": {
+        "name": "divi/woocommerce-cart-totals",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Woo Cart Totals"
+                        }
+                    }
+                }
+            },
+            "title": {},
+            "content": {},
+            "button": {
+                "decoration": {
+                    "button": {
+                        "desktop": {
+                            "value": {
+                                "icon": {
+                                    "enable": "on"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "columnLabel": {},
+            "field": {},
+            "table": {
+                "advanced": {
+                    "collapseTableGuttersBorders": {
+                        "desktop": {
+                            "value": "off"
+                        }
+                    },
+                    "horizontalGutterWidth": {
+                        "desktop": {
+                            "value": "0px"
+                        }
+                    },
+                    "verticalGutterWidth": {
+                        "desktop": {
+                            "value": "0px"
+                        }
+                    }
+                }
+            },
+            "tableCell": {},
+            "tableRow": {}
+        }
+    }
+}

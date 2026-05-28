@@ -1,0 +1,40 @@
+{
+    "block": {
+        "name": "divi/icon-list",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Icon List"
+                        }
+                    }
+                },
+                "advanced": {
+                    "html": {
+                        "desktop": {
+                            "value": {
+                                "elementType": "ul"
+                            }
+                        }
+                    }
+                }
+            },
+            "icon": {
+                "advanced": {
+                    "color": {
+                        "desktop": {
+                            "value": "var(--gcid-primary-color)"
+                        }
+                    },
+                    "size": {
+                        "desktop": {
+                            "value": "16px"
+                        }
+                    }
+                }
+            },
+            "listItem": []
+        }
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "block": {
+        "name": "divi/lottie",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Lottie Animation"
+                        }
+                    }
+                }
+            },
+            "lottie": {
+                "innerContent": {
+                    "desktop": {
+                        "value": {
+                            "src": "",
+                            "trigger": "onLoad",
+                            "loop": "off",
+                            "speed": 1,
+                            "direction": "forward",
+                            "mode": "normal"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

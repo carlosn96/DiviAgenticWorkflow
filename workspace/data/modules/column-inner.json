@@ -1,0 +1,16 @@
+{
+    "block": {
+        "name": "divi/column-inner",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Column"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

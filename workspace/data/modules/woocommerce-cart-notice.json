@@ -1,0 +1,78 @@
+{
+    "block": {
+        "name": "divi/woocommerce-cart-notice",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Woo Notice"
+                        }
+                    }
+                },
+                "decoration": {
+                    "spacing": {
+                        "desktop": {
+                            "value": {
+                                "margin": {
+                                    "bottom": "2em",
+                                    "left": "0em",
+                                    "right": "0em",
+                                    "syncHorizontal": "off",
+                                    "syncVertical": "off",
+                                    "top": "0em"
+                                },
+                                "padding": {
+                                    "bottom": "15px",
+                                    "left": "15px",
+                                    "right": "15px",
+                                    "syncHorizontal": "off",
+                                    "syncVertical": "off",
+                                    "top": "15px"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "content": {
+                "advanced": {
+                    "pageType": {
+                        "desktop": {
+                            "value": "dynamic"
+                        }
+                    },
+                    "product": {
+                        "desktop": {
+                            "value": "dynamic"
+                        }
+                    }
+                }
+            },
+            "button": {
+                "decoration": {
+                    "button": {
+                        "desktop": {
+                            "value": {
+                                "icon": {
+                                    "enable": "on"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "field": {
+                "advanced": {
+                    "width": {
+                        "desktop": {
+                            "value": "default"
+                        }
+                    }
+                }
+            },
+            "form": {},
+            "title": {}
+        }
+    }
+}

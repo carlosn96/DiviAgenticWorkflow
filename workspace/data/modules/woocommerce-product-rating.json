@@ -1,0 +1,50 @@
+{
+    "block": {
+        "name": "divi/woocommerce-product-rating",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Woo Product Rating"
+                        }
+                    }
+                }
+            },
+            "content": {
+                "advanced": {
+                    "product": {
+                        "desktop": {
+                            "value": "dynamic"
+                        }
+                    }
+                }
+            },
+            "body": {},
+            "elements": {
+                "advanced": {
+                    "showRating": {
+                        "desktop": {
+                            "value": "on"
+                        }
+                    },
+                    "showReviewsLink": {
+                        "desktop": {
+                            "value": "on"
+                        }
+                    }
+                }
+            },
+            "layout": {
+                "advanced": {
+                    "layout": {
+                        "desktop": {
+                            "value": "inline"
+                        }
+                    }
+                }
+            },
+            "rating": {}
+        }
+    }
+}

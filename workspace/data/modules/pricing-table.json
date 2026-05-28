@@ -1,0 +1,37 @@
+{
+    "block": {
+        "name": "divi/pricing-table",
+        "attrs": {
+            "module": {
+                "advanced": {
+                    "featured": {
+                        "desktop": {
+                            "value": "off"
+                        }
+                    }
+                },
+                "decoration": {
+                    "sizing": {
+                        "desktop": {
+                            "value": {
+                                "flexType": "12_24"
+                            }
+                        },
+                        "phone": {
+                            "value": {
+                                "flexType": "24_24"
+                            }
+                        }
+                    }
+                }
+            },
+            "currencyFrequency": {},
+            "subtitle": {},
+            "title": {},
+            "price": {},
+            "button": {},
+            "excluded": {},
+            "content": {}
+        }
+    }
+}

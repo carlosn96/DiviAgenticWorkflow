@@ -1,0 +1,27 @@
+{
+    "block": {
+        "name": "divi/woocommerce-checkout-additional-info",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Woo Checkout Information"
+                        }
+                    }
+                }
+            },
+            "title": {},
+            "elements": {
+                "advanced": {
+                    "showTitle": {
+                        "desktop": {
+                            "value": "on"
+                        }
+                    }
+                }
+            },
+            "field": {}
+        }
+    }
+}

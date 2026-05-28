@@ -1,0 +1,81 @@
+{
+    "block": {
+        "name": "divi/slide",
+        "attrs": {
+            "module": {
+                "advanced": {
+                    "text": {
+                        "text": {
+                            "desktop": {
+                                "value": {
+                                    "color": "dark"
+                                }
+                            }
+                        }
+                    }
+                },
+                "decoration": {
+                    "background": {
+                        "desktop": {
+                            "value": {
+                                "color": "$variable({\"type\":\"color\",\"value\":{\"name\":\"gcid-primary-color\",\"settings\":{}}})$"
+                            }
+                        }
+                    }
+                },
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": ""
+                        }
+                    }
+                }
+            },
+            "image": {
+                "advanced": {
+                    "alignment": {
+                        "desktop": {
+                            "value": "center"
+                        }
+                    }
+                }
+            },
+            "title": {},
+            "contentOverlay": {
+                "decoration": {
+                    "border": {
+                        "desktop": {
+                            "value": {
+                                "radius": {
+                                    "sync": "on",
+                                    "bottomLeft": "3px",
+                                    "bottomRight": "3px",
+                                    "topLeft": "3px",
+                                    "topRight": "3px"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "button": {
+                "decoration": {
+                    "button": {
+                        "desktop": {
+                            "value": {
+                                "icon": {
+                                    "enable": "on"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "content": {},
+            "slideOverlay": {},
+            "arrows": {},
+            "dotNav": {},
+            "video": {}
+        }
+    }
+}

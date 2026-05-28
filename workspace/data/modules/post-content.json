@@ -1,0 +1,9 @@
+{
+    "block": {
+        "name": "divi/post-content",
+        "attrs": {
+            "module": {},
+            "image": {}
+        }
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "block": {
+        "name": "divi/group",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Group"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

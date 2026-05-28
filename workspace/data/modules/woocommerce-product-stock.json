@@ -1,0 +1,28 @@
+{
+    "block": {
+        "name": "divi/woocommerce-product-stock",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Woo Product Stock"
+                        }
+                    }
+                }
+            },
+            "content": {
+                "advanced": {
+                    "product": {
+                        "desktop": {
+                            "value": "dynamic"
+                        }
+                    }
+                }
+            },
+            "inStock": {},
+            "onBackorder": {},
+            "outOfStock": {}
+        }
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "block": {
+        "name": "divi/dropdown",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Dropdown"
+                        }
+                    }
+                },
+                "advanced": {
+                    "dropdown": {
+                        "desktop": {
+                            "value": {
+                                "showOn": "hover",
+                                "direction": "below",
+                                "alignment": "start"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

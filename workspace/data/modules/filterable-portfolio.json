@@ -1,0 +1,104 @@
+{
+    "block": {
+        "name": "divi/filterable-portfolio",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Filterable Portfolio"
+                        }
+                    }
+                },
+                "advanced": {
+                    "text": {
+                        "text": {
+                            "desktop": {
+                                "value": {
+                                    "color": "light"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "portfolio": {
+                "advanced": {
+                    "postsNumber": {
+                        "desktop": {
+                            "value": "10"
+                        }
+                    },
+                    "showCategories": {
+                        "desktop": {
+                            "value": "on"
+                        }
+                    },
+                    "showTitle": {
+                        "desktop": {
+                            "value": "on"
+                        }
+                    },
+                    "showPagination": {
+                        "desktop": {
+                            "value": "on"
+                        }
+                    },
+                    "layout": {
+                        "desktop": {
+                            "value": "on"
+                        }
+                    }
+                }
+            },
+            "portfolioGrid": {
+                "advanced": {
+                    "flexType": {
+                        "desktop": {
+                            "value": "24_24"
+                        }
+                    }
+                },
+                "decoration": {
+                    "layout": {
+                        "desktop": {
+                            "value": {
+                                "display": "grid",
+                                "gridColumnCount": "4"
+                            }
+                        }
+                    }
+                }
+            },
+            "portfolioItem": {},
+            "title": {
+                "decoration": {
+                    "font": {
+                        "font": {
+                            "desktop": {
+                                "value": {
+                                    "headingLevel": "h2"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "overlay": {
+                "decoration": {
+                    "icon": {
+                        "desktop": {
+                            "value": {
+                                "unicode": ""
+                            }
+                        }
+                    }
+                }
+            },
+            "image": {},
+            "filter": {},
+            "meta": {},
+            "pagination": {}
+        }
+    }
+}

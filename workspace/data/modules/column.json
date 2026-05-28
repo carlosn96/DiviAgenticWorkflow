@@ -1,0 +1,25 @@
+{
+    "block": {
+        "name": "divi/column",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Column"
+                        }
+                    }
+                },
+                "decoration": {
+                    "sizing": {
+                        "desktop": {
+                            "value": {
+                                "flexType": "24_24"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

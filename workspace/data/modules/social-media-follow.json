@@ -1,0 +1,65 @@
+{
+    "block": {
+        "name": "divi/social-media-follow",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Social Media Follow"
+                        }
+                    }
+                },
+                "advanced": {
+                    "html": {
+                        "desktop": {
+                            "value": {
+                                "elementType": "ul"
+                            }
+                        }
+                    },
+                    "text": {
+                        "text": {
+                            "desktop": {
+                                "value": {
+                                    "color": "light"
+                                }
+                            }
+                        }
+                    }
+                },
+                "decoration": {
+                    "background": {
+                        "desktop": {
+                            "value": {
+                                "color": ""
+                            }
+                        }
+                    }
+                }
+            },
+            "icon": {
+                "advanced": {
+                    "size": {
+                        "desktop": {
+                            "value": {
+                                "useSize": "off",
+                                "size": "16px"
+                            }
+                        }
+                    }
+                }
+            },
+            "socialNetwork": {
+                "advanced": {
+                    "followButton": {
+                        "desktop": {
+                            "value": "off"
+                        }
+                    }
+                }
+            },
+            "button": {}
+        }
+    }
+}

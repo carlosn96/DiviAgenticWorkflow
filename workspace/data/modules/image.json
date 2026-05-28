@@ -1,0 +1,53 @@
+{
+    "block": {
+        "name": "divi/image",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Image"
+                        }
+                    }
+                },
+                "advanced": {
+                    "spacing": {
+                        "desktop": {
+                            "value": {
+                                "showBottomSpace": "on"
+                            }
+                        }
+                    },
+                    "forceFullwidth": {
+                        "desktop": {
+                            "value": "off"
+                        }
+                    }
+                }
+            },
+            "image": {
+                "innerContent": {
+                    "desktop": {
+                        "value": {
+                            "linkTarget": "off"
+                        }
+                    }
+                },
+                "advanced": {
+                    "lightbox": {
+                        "desktop": {
+                            "value": "off"
+                        }
+                    },
+                    "overlay": {
+                        "desktop": {
+                            "value": {
+                                "use": "off"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

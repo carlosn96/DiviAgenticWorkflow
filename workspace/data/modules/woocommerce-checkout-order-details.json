@@ -1,0 +1,40 @@
+{
+    "block": {
+        "name": "divi/woocommerce-checkout-order-details",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Woo Checkout Details"
+                        }
+                    }
+                }
+            },
+            "title": {},
+            "content": {},
+            "columnLabel": {},
+            "table": {
+                "advanced": {
+                    "collapseTableGuttersBorders": {
+                        "desktop": {
+                            "value": "off"
+                        }
+                    },
+                    "horizontalGutterWidth": {
+                        "desktop": {
+                            "value": "0px"
+                        }
+                    },
+                    "verticalGutterWidth": {
+                        "desktop": {
+                            "value": "0px"
+                        }
+                    }
+                }
+            },
+            "tableCell": {},
+            "tableRow": {}
+        }
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "block": {
+        "name": "divi/canvas-portal",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Canvas Portal"
+                        }
+                    }
+                }
+            },
+            "canvas": {
+                "advanced": {
+                    "canvasId": {
+                        "desktop": {
+                            "value": ""
+                        }
+                    }
+                }
+            },
+            "css": {}
+        }
+    }
+}

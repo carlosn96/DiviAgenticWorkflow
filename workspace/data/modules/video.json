@@ -1,0 +1,40 @@
+{
+    "block": {
+        "name": "divi/video",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Video"
+                        }
+                    }
+                }
+            },
+            "overlay": {
+                "decoration": {
+                    "background": {
+                        "desktop": {
+                            "value": {
+                                "color": "rgba(0,0,0,.6)"
+                            }
+                        }
+                    }
+                }
+            },
+            "video": {},
+            "playIcon": {
+                "decoration": {
+                    "icon": {
+                        "desktop": {
+                            "value": {
+                                "size": "96px",
+                                "useSize": "off"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

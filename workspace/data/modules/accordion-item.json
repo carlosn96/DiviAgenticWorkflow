@@ -1,0 +1,31 @@
+{
+    "block": {
+        "name": "divi/accordion-item",
+        "attrs": {
+            "module": {
+                "advanced": {
+                    "open": {
+                        "desktop": {
+                            "value": "off"
+                        }
+                    }
+                }
+            },
+            "title": {},
+            "closedToggleIcon": {
+                "decoration": {
+                    "icon": {
+                        "desktop": {
+                            "value": {
+                                "useSize": "off"
+                            }
+                        }
+                    }
+                }
+            },
+            "openToggle": {},
+            "closedToggle": {},
+            "content": {}
+        }
+    }
+}

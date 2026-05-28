@@ -1,0 +1,30 @@
+{
+    "block": {
+        "name": "divi/woocommerce-product-description",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Woo Product Description"
+                        }
+                    }
+                }
+            },
+            "content": {
+                "advanced": {
+                    "descriptionType": {
+                        "desktop": {
+                            "value": "short_description"
+                        }
+                    },
+                    "product": {
+                        "desktop": {
+                            "value": "dynamic"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

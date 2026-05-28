@@ -1,0 +1,39 @@
+{
+    "block": {
+        "name": "divi/fullwidth-image",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Fullwidth Image"
+                        }
+                    }
+                }
+            },
+            "image": {
+                "innerContent": {
+                    "desktop": {
+                        "value": {
+                            "linkTarget": "off"
+                        }
+                    }
+                },
+                "advanced": {
+                    "lightbox": {
+                        "desktop": {
+                            "value": "off"
+                        }
+                    },
+                    "overlay": {
+                        "desktop": {
+                            "value": {
+                                "use": "off"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

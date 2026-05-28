@@ -1,0 +1,28 @@
+{
+    "block": {
+        "name": "divi/woocommerce-product-price",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Woo Product Price"
+                        }
+                    }
+                }
+            },
+            "content": {
+                "advanced": {
+                    "product": {
+                        "desktop": {
+                            "value": "dynamic"
+                        }
+                    }
+                }
+            },
+            "price": {},
+            "saleNewPrice": {},
+            "saleOldPrice": {}
+        }
+    }
+}

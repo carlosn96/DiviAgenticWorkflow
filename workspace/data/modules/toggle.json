@@ -1,0 +1,62 @@
+{
+    "block": {
+        "name": "divi/toggle",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Toggle"
+                        }
+                    }
+                },
+                "advanced": {
+                    "open": {
+                        "desktop": {
+                            "value": "off"
+                        }
+                    }
+                }
+            },
+            "openToggleIcon": {
+                "decoration": {
+                    "icon": {
+                        "desktop": {
+                            "value": {
+                                "useSize": "off"
+                            }
+                        }
+                    }
+                }
+            },
+            "closedToggleIcon": {
+                "decoration": {
+                    "icon": {
+                        "desktop": {
+                            "value": {
+                                "useSize": "off"
+                            }
+                        }
+                    }
+                }
+            },
+            "title": {
+                "decoration": {
+                    "font": {
+                        "font": {
+                            "desktop": {
+                                "value": {
+                                    "headingLevel": "h5"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "closedTitle": {},
+            "content": {},
+            "openToggle": {},
+            "closedToggle": {}
+        }
+    }
+}

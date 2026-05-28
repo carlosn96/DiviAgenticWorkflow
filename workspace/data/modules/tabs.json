@@ -1,0 +1,19 @@
+{
+    "block": {
+        "name": "divi/tabs",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Tabs"
+                        }
+                    }
+                }
+            },
+            "content": {},
+            "tab": {},
+            "activeTab": {}
+        }
+    }
+}

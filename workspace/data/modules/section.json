@@ -1,0 +1,27 @@
+{
+    "block": {
+        "name": "divi/section",
+        "attrs": {
+            "module": {
+                "advanced": {
+                    "innerShadow": {
+                        "desktop": {
+                            "value": "off"
+                        }
+                    }
+                },
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Section"
+                        }
+                    }
+                }
+            },
+            "column1": {},
+            "column2": {},
+            "column3": {},
+            "innerSizing": {}
+        }
+    }
+}

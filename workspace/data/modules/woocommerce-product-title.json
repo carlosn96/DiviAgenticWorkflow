@@ -1,0 +1,49 @@
+{
+    "block": {
+        "name": "divi/woocommerce-product-title",
+        "attrs": {
+            "module": {
+                "advanced": {
+                    "text": {
+                        "text": {
+                            "desktop": {
+                                "value": {
+                                    "color": "light"
+                                }
+                            }
+                        }
+                    }
+                },
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Woo Product Title"
+                        }
+                    }
+                }
+            },
+            "title": {
+                "decoration": {
+                    "font": {
+                        "font": {
+                            "desktop": {
+                                "value": {
+                                    "headingLevel": "h1"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "content": {
+                "advanced": {
+                    "product": {
+                        "desktop": {
+                            "value": "dynamic"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

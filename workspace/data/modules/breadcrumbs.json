@@ -1,0 +1,57 @@
+{
+    "block": {
+        "name": "divi/breadcrumbs",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Breadcrumbs"
+                        }
+                    }
+                },
+                "decoration": {
+                    "spacing": {
+                        "desktop": {
+                            "value": {
+                                "margin": {
+                                    "bottom": "0px"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "trail": {
+                "advanced": {
+                    "htmlTag": {
+                        "desktop": {
+                            "value": "nav"
+                        }
+                    }
+                }
+            },
+            "breadcrumb": {},
+            "breadcrumbLink": {},
+            "home": {
+                "innerContent": {
+                    "desktop": {
+                        "value": {
+                            "text": "Home",
+                            "url": ""
+                        }
+                    }
+                }
+            },
+            "separator": {
+                "innerContent": {
+                    "desktop": {
+                        "value": {
+                            "text": "/"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

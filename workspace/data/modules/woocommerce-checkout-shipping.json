@@ -1,0 +1,29 @@
+{
+    "block": {
+        "name": "divi/woocommerce-checkout-shipping",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Woo Checkout Shipping"
+                        }
+                    }
+                }
+            },
+            "title": {},
+            "field": {},
+            "checkbox": {},
+            "radio": {},
+            "layout": {
+                "advanced": {
+                    "fieldsWidth": {
+                        "desktop": {
+                            "value": "default"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "block": {
+        "name": "divi/text",
+        "attrs": {
+            "module": {
+                "advanced": {
+                    "text": {
+                        "text": {
+                            "desktop": {
+                                "value": {
+                                    "color": "light"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "content": {}
+        }
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "block": {
+        "name": "divi/code",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Code"
+                        }
+                    }
+                },
+                "decoration": {
+                    "spacing": {
+                        "desktop": {
+                            "value": {
+                                "margin": {
+                                    "bottom": "0px"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "content": {}
+        }
+    }
+}

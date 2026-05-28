@@ -1,0 +1,34 @@
+{
+    "block": {
+        "name": "divi/counter",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Bar Counter"
+                        }
+                    }
+                },
+                "advanced": {
+                    "html": {
+                        "desktop": {
+                            "value": {
+                                "elementType": "li"
+                            }
+                        }
+                    }
+                }
+            },
+            "barCounter": {},
+            "title": {},
+            "barProgress": {
+                "innerContent": {
+                    "desktop": {
+                        "value": "50"
+                    }
+                }
+            }
+        }
+    }
+}

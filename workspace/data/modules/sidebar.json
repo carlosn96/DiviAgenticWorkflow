@@ -1,0 +1,56 @@
+{
+    "block": {
+        "name": "divi/sidebar",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Sidebar"
+                        }
+                    }
+                },
+                "advanced": {
+                    "text": {
+                        "text": {
+                            "desktop": {
+                                "value": {
+                                    "color": "light"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "title": {},
+            "sidebar": {
+                "innerContent": {
+                    "desktop": {
+                        "value": {
+                            "area": "sidebar-1"
+                        }
+                    }
+                },
+                "advanced": {
+                    "layout": {
+                        "desktop": {
+                            "value": {
+                                "alignment": "left",
+                                "showBorder": "on"
+                            }
+                        }
+                    }
+                }
+            },
+            "sidebarWidgets": {
+                "advanced": {
+                    "flexType": {
+                        "desktop": {
+                            "value": "24_24"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

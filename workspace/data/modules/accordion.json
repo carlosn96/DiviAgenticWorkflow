@@ -1,0 +1,43 @@
+{
+    "block": {
+        "name": "divi/accordion",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Accordion"
+                        }
+                    }
+                }
+            },
+            "title": {
+                "decoration": {
+                    "font": {
+                        "font": {
+                            "desktop": {
+                                "value": {
+                                    "headingLevel": "h5"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "closedToggleIcon": {
+                "decoration": {
+                    "icon": {
+                        "desktop": {
+                            "value": {
+                                "useSize": "off"
+                            }
+                        }
+                    }
+                }
+            },
+            "content": {},
+            "openToggle": {},
+            "closedToggle": {}
+        }
+    }
+}

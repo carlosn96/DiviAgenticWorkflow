@@ -1,0 +1,62 @@
+{
+    "block": {
+        "name": "divi/team-member",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Person"
+                        }
+                    }
+                },
+                "advanced": {
+                    "text": {
+                        "text": {
+                            "desktop": {
+                                "value": {
+                                    "color": "light"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "name": {
+                "decoration": {
+                    "font": {
+                        "font": {
+                            "desktop": {
+                                "value": {
+                                    "headingLevel": "h4"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "position": {},
+            "image": {
+                "innerContent": {
+                    "desktop": {
+                        "value": {
+                            "animation": "off"
+                        }
+                    }
+                }
+            },
+            "content": {},
+            "social": {
+                "decoration": {
+                    "icon": {
+                        "desktop": {
+                            "value": {
+                                "size": "16px"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

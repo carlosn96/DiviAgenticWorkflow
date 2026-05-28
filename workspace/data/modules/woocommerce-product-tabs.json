@@ -1,0 +1,33 @@
+{
+    "block": {
+        "name": "divi/woocommerce-product-tabs",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Woo Product Tabs"
+                        }
+                    }
+                }
+            },
+            "content": {
+                "advanced": {
+                    "includeTabs": {
+                        "desktop": {
+                            "value": "dynamic"
+                        }
+                    },
+                    "product": {
+                        "desktop": {
+                            "value": "dynamic"
+                        }
+                    }
+                }
+            },
+            "activeTab": {},
+            "inactiveTab": {},
+            "tab": {}
+        }
+    }
+}

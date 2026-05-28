@@ -1,0 +1,16 @@
+{
+    "block": {
+        "name": "divi/row",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Row"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

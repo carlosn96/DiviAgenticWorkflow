@@ -1,0 +1,41 @@
+{
+    "block": {
+        "name": "divi/before-after-image",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Before/After Image"
+                        }
+                    }
+                },
+                "decoration": {
+                    "spacing": {
+                        "desktop": {
+                            "value": {
+                                "margin": {
+                                    "bottom": "0px"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "beforeImage": {},
+            "afterImage": {},
+            "slider": {
+                "advanced": {
+                    "orientation": {
+                        "desktop": {
+                            "value": "horizontal"
+                        }
+                    }
+                }
+            },
+            "beforeLabel": {},
+            "afterLabel": {},
+            "labels": {}
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "block": {
+        "name": "divi/map-pin",
+        "attrs": {
+            "pin": {
+                "innerContent": {
+                    "desktop": {
+                        "value": {
+                            "address": "",
+                            "zoom": 18,
+                            "lat": 0,
+                            "lng": 0
+                        }
+                    }
+                }
+            },
+            "title": {},
+            "content": {}
+        }
+    }
+}

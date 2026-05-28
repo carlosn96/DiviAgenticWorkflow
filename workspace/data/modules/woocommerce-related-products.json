@@ -1,0 +1,83 @@
+{
+    "block": {
+        "name": "divi/woocommerce-related-products",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Woo Related Products"
+                        }
+                    }
+                }
+            },
+            "title": {},
+            "image": {},
+            "content": {
+                "advanced": {
+                    "columnsNumber": {
+                        "desktop": {
+                            "value": "dynamic"
+                        }
+                    },
+                    "offsetNumber": {
+                        "desktop": {
+                            "value": "0"
+                        }
+                    },
+                    "orderby": {
+                        "desktop": {
+                            "value": "default"
+                        }
+                    },
+                    "postsNumber": {
+                        "desktop": {
+                            "value": "dynamic"
+                        }
+                    },
+                    "product": {
+                        "desktop": {
+                            "value": "dynamic"
+                        }
+                    }
+                }
+            },
+            "elements": {
+                "advanced": {
+                    "showImage": {
+                        "desktop": {
+                            "value": "on"
+                        }
+                    },
+                    "showName": {
+                        "desktop": {
+                            "value": "on"
+                        }
+                    },
+                    "showPrice": {
+                        "desktop": {
+                            "value": "on"
+                        }
+                    },
+                    "showRating": {
+                        "desktop": {
+                            "value": "on"
+                        }
+                    },
+                    "showSaleBadge": {
+                        "desktop": {
+                            "value": "on"
+                        }
+                    }
+                }
+            },
+            "overlay": {},
+            "overlayIcon": {},
+            "price": {},
+            "productTitle": {},
+            "rating": {},
+            "saleBadge": {},
+            "salePrice": {}
+        }
+    }
+}

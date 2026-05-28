@@ -1,0 +1,37 @@
+{
+    "block": {
+        "name": "divi/post-nav",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Pagination"
+                        }
+                    }
+                },
+                "advanced": {
+                    "inSameTerm": {
+                        "desktop": {
+                            "value": "off"
+                        }
+                    }
+                }
+            },
+            "links": {
+                "advanced": {
+                    "showPrev": {
+                        "desktop": {
+                            "value": "on"
+                        }
+                    },
+                    "showNext": {
+                        "desktop": {
+                            "value": "on"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

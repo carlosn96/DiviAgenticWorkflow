@@ -1,0 +1,39 @@
+{
+    "block": {
+        "name": "divi/woocommerce-product-additional-info",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Woo Product Information"
+                        }
+                    }
+                }
+            },
+            "title": {},
+            "content": {
+                "advanced": {
+                    "product": {
+                        "desktop": {
+                            "value": "dynamic"
+                        }
+                    }
+                }
+            },
+            "attribute": {},
+            "elements": {
+                "advanced": {
+                    "showTitle": {
+                        "desktop": {
+                            "value": "on"
+                        }
+                    }
+                }
+            },
+            "table": {},
+            "tableCell": {},
+            "tableRow": {}
+        }
+    }
+}

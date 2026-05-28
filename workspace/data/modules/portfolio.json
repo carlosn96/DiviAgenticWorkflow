@@ -1,0 +1,104 @@
+{
+    "block": {
+        "name": "divi/portfolio",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Portfolio"
+                        }
+                    }
+                },
+                "advanced": {
+                    "text": {
+                        "text": {
+                            "desktop": {
+                                "value": {
+                                    "color": "light"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "portfolio": {
+                "innerContent": {
+                    "desktop": {
+                        "value": {
+                            "postsNumber": "10"
+                        }
+                    }
+                },
+                "advanced": {
+                    "showCategories": {
+                        "desktop": {
+                            "value": "on"
+                        }
+                    },
+                    "showTitle": {
+                        "desktop": {
+                            "value": "on"
+                        }
+                    },
+                    "showPagination": {
+                        "desktop": {
+                            "value": "on"
+                        }
+                    },
+                    "layout": {
+                        "desktop": {
+                            "value": "fullwidth"
+                        }
+                    }
+                }
+            },
+            "portfolioGrid": {
+                "advanced": {
+                    "flexType": {
+                        "desktop": {
+                            "value": "24_24"
+                        }
+                    }
+                },
+                "decoration": {
+                    "layout": {
+                        "desktop": {
+                            "value": {
+                                "display": "grid",
+                                "gridColumnCount": "4"
+                            }
+                        }
+                    }
+                }
+            },
+            "title": {
+                "decoration": {
+                    "font": {
+                        "font": {
+                            "desktop": {
+                                "value": {
+                                    "headingLevel": "h2"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "overlay": {
+                "advanced": {
+                    "hoverIcon": {
+                        "desktop": {
+                            "value": {
+                                "unicode": ""
+                            }
+                        }
+                    }
+                }
+            },
+            "image": {},
+            "meta": {},
+            "pagination": {}
+        }
+    }
+}

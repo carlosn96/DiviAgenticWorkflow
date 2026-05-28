@@ -1,0 +1,38 @@
+{
+    "block": {
+        "name": "divi/contact-form-7",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Contact Form 7 Styler"
+                        }
+                    }
+                },
+                "decoration": {
+                    "spacing": {
+                        "desktop": {
+                            "value": {
+                                "margin": {
+                                    "bottom": "0px"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "form": {},
+            "field": {},
+            "radioButton": {},
+            "checkbox": {},
+            "button": {},
+            "messageValidation": {},
+            "messageSuccess": {},
+            "messageInvalid": {},
+            "messageAcceptance": {},
+            "messageSpam": {},
+            "messageFailure": {}
+        }
+    }
+}

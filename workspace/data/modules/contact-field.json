@@ -1,0 +1,47 @@
+{
+    "block": {
+        "name": "divi/contact-field",
+        "attrs": {
+            "module": {
+                "decoration": {
+                    "sizing": {
+                        "desktop": {
+                            "value": {
+                                "flexType": "24_24"
+                            }
+                        }
+                    }
+                }
+            },
+            "field": {},
+            "checkbox": {},
+            "radio": {},
+            "fieldTitle": {},
+            "fieldItem": {
+                "advanced": {
+                    "id": {
+                        "desktop": {
+                            "value": ""
+                        }
+                    },
+                    "type": {
+                        "desktop": {
+                            "value": "input"
+                        }
+                    },
+                    "required": {
+                        "desktop": {
+                            "value": "on"
+                        }
+                    }
+                },
+                "innerContent": {
+                    "desktop": {
+                        "value": "New Field"
+                    }
+                }
+            },
+            "conditionalLogic": {}
+        }
+    }
+}

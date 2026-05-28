@@ -1,0 +1,10 @@
+{
+    "block": {
+        "name": "divi/tab",
+        "attrs": {
+            "module": {},
+            "content": {},
+            "title": {}
+        }
+    }
+}

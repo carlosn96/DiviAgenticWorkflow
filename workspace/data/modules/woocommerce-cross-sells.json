@@ -1,0 +1,18 @@
+{
+    "block": {
+        "name": "divi/woocommerce-cross-sells",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Woo Cross Sells"
+                        }
+                    }
+                }
+            },
+            "title": {},
+            "price": {}
+        }
+    }
+}

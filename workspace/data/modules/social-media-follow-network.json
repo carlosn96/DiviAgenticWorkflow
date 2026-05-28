@@ -1,0 +1,43 @@
+{
+    "block": {
+        "name": "divi/social-media-follow-network",
+        "attrs": {
+            "module": {
+                "advanced": {
+                    "html": {
+                        "desktop": {
+                            "value": {
+                                "elementType": "li"
+                            }
+                        }
+                    }
+                }
+            },
+            "icon": {
+                "advanced": {
+                    "size": {
+                        "desktop": {
+                            "value": {
+                                "useSize": "off",
+                                "size": "16px"
+                            }
+                        }
+                    }
+                }
+            },
+            "socialNetwork": {
+                "innerContent": {
+                    "desktop": {
+                        "value": {
+                            "title": "facebook",
+                            "label": "Facebook",
+                            "skypeUrl": "",
+                            "skypeAction": "call"
+                        }
+                    }
+                }
+            },
+            "button": {}
+        }
+    }
+}

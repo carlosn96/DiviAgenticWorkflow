@@ -1,0 +1,29 @@
+{
+    "block": {
+        "name": "divi/heading",
+        "attrs": {
+            "module": {
+                "meta": {
+                    "adminLabel": {
+                        "desktop": {
+                            "value": "Heading"
+                        }
+                    }
+                }
+            },
+            "title": {
+                "decoration": {
+                    "font": {
+                        "font": {
+                            "desktop": {
+                                "value": {
+                                    "headingLevel": "h1"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
