@@ -8,7 +8,7 @@ Pipeline completo PHP para diseñar y desplegar páginas Divi 5 Native.
 
 1. **Plugin activo**: `divi-agentic-core` instalado como plugin de WordPress (junction link desde `DAW_bundle/divi-agentic-core/` → `app/public/wp-content/plugins/divi-agentic-core/`). Activar en WP Admin > Plugins.
 2. **Archivo `.env`**: Copiar `DAW_bundle/.env.example` → `.env` en la raíz del proyecto y completar valores reales.
-3. **Design System**: `site/bibliotheca/design-system/divitheme.json` (generado con `build_design_system.py`).
+3. **Design System**: `site/bibliotheca/design-system/divitheme.json` (generado con `build_design_system.py` v3.0 — inteligencia de diseño).
 
 ---
 
@@ -108,7 +108,7 @@ DAW_bundle/
 │   ├── bibliotheca/                    <-    Marca activa (brand/, page-defs/, design-system/, briefs/, content_state/)
 │   └── example/                        <-    Template para nuevas marcas
 ├── workspace/
-│   ├── build_design_system.py          <- Generador de design system (único Python activo)
+│   ├── build_design_system.py          <- Diseño inteligente v3.0: deriva colores, valida contraste, enriquece presets
 │   ├── data/modules/                   <- Schemas de módulos Divi 5 (102, generados por PHP)
 │   └── automation/                     <- Scripts de automatización
 ├── daw-skill/                          <- Orquestación de 4 fases (SKILL.md)
@@ -129,8 +129,8 @@ DAW_bundle/
 3. Definiciones de página en `site/<DAW_SITE>/page-defs/`.
 4. Pipeline: `site/<DAW_SITE>/page-defs/<slug>.json` → `build_page.php --deploy` → WordPress.
 5. Sin CSS inyectado en `functions.php` ni overrides en `style.css`.
-6. No editar `divitheme.json` a mano — siempre regenerar con `build_design_system.py`.
-7. `build_design_system.py` es el único Python activo; el resto del pipeline es PHP.
+6. No editar `divitheme.json` a mano — regenerar con `build_design_system.py` (v3.0 con inteligencia de diseño).
+7. `build_design_system.py` es el único Python activo; el resto del pipeline es PHP. Sus capacidades: deriva 26 colores desde un `color_accent`, valida contraste WCAG AA/AAA, añade hover states, clamp() fluido, glass-card, divisores SVG y motion presets automáticamente.
 8. **site/ es la frontera**: framework DAW puro arriba, datos de proyecto en `site/<DAW_SITE>/`.
 
 ---

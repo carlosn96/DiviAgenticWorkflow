@@ -39,7 +39,7 @@ El Diseñador entrega un archivo en `DAW_bundle/site/<DAW_SITE>/page-defs/<slug>
 - Carga la definición desde `site/<DAW_SITE>/page-defs/<slug>.json`
 - Carga el design system desde `site/<DAW_SITE>/design-system/divitheme.json`
 - Resuelve `{{design:color:*}}` → `var(--gcid-*)`
-- Expande presets inline (57 presets vía deep_merge)
+- Expande presets inline (64 presets vía deep_merge, incluyendo hero-video, glass-card, 5 separadores SVG)
 - Normaliza gradient stops
 - Valida la estructura (sections → rows → columns → modules)
 - Escribe el schema completo en `site/<DAW_SITE>/pages/<slug>.json`

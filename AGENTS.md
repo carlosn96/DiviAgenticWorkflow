@@ -20,14 +20,14 @@ DAW_bundle/
 │   │   ├── brand/                 <-       _design_vars.json + _design_presets.json
 │   │   ├── page-defs/             <-       ⭐ ENTRADA: JSON semántico del diseñador (tokens {{design:*}}, presets)
 │   │   ├── pages/                 <-       SALIDA OPCIONAL: schema resuelto por build_page.php (--out, solo debug)
-│   │   ├── design-system/         <-       divitheme.json generado (gitignored)
+│   │   ├── design-system/         <-       divitheme.json generado (64 presets + color derivación + contraste validado)
 │   │   ├── briefs/                <-       Briefs de diseño
 │   │   └── content_state/         <-       Estado entre fases (local/ + remote/)
 │   └── example/                   <-    Template para nuevas marcas (brand/, page-defs/, etc.)
 ├── ui-ux-pro-max/                 <- Skill de diseño UI/UX (opcional)
 ├── daw-skill/SKILL.md             <- FLUJO PRINCIPAL: orquestación de 4 fases
 ├── workspace/                     <- Código fuente del framework
-│   ├── build_design_system.py     <- GENERADOR del design system (site/*/brand/ → divitheme.json)
+│   ├── build_design_system.py     <- DISEÑO INTELIGENTE v3.0: deriva colores, valida contraste WCAG, enriquece 64 presets
 │   ├── data/modules/              <- Schemas de módulos generados por PHP (102 módulos)
 │   └── automation/                <- Scripts de automatización
 └── divi-agentic-core/
@@ -85,7 +85,7 @@ Capa 1 — Design System (build_design_system.py)
   site/bibliotheca/brand/_design_vars.json + site/bibliotheca/brand/_design_presets.json
   → build_design_system.py
   → site/bibliotheca/design-system/divitheme.json
-    (57 presets con referencias {{design:type:name}} + tokens)
+    (64 presets: section/text/module/divider/animation/scroll/hover + tokens {{design:type:name}})
 
 Capa 2 — Page Schema + Deploy (build_page.php — UN SOLO COMANDO)
   php divi-agentic-core/bin/build_page.php --def=page-defs/mipagina.json --deploy
@@ -216,9 +216,15 @@ Capa 2 — Page Schema + Deploy (build_page.php — UN SOLO COMANDO)
 
 ## 4. Sistema de Diseño
 
-No editar `divitheme.json` a mano. Usar `build_design_system.py` (v2.0, data-driven):
+No editar `divitheme.json` a mano. Usar `build_design_system.py` (v3.0, design intelligence):
 
-```
+```powershell
+# La herramienta ahora tiene inteligencia de diseño:
+#   - Deriva automáticamente 26 colores desde un solo color_accent
+#   - Valida contraste WCAG AA/AAA
+#   - Añade hover states a módulos interactivos
+#   - Convierte tipografía fija a fluida con clamp()
+#   - Añade presets faltantes (glass-card, divisores SVG, motion)
 python DAW_bundle/workspace/build_design_system.py ^
   --vars DAW_bundle/site/bibliotheca/brand/_design_vars.json ^
   --presets DAW_bundle/site/bibliotheca/brand/_design_presets.json ^
@@ -264,9 +270,9 @@ Si no hay gcids sincronizados, `deploy_page` emite warning y resuelve a hex.
 | Lógica del Diseñador | `daw-skill/references/designer.md` | Mapeo semántico → bloques, tokens, decoration |
 | Lógica del Ingeniero | `daw-skill/references/engineer.md` | Comandos CLI, deploy, verificación |
 | Build page (PHP) | `divi-agentic-core/bin/build_page.php` | Pipeline unificado PHP (usa `DAW_SITE` env) |
-| Design system (generado) | `site/<DAW_SITE>/design-system/divitheme.json` | 57 presets, fuente de verdad de tokens |
+| Design system (generado) | `site/<DAW_SITE>/design-system/divitheme.json` | 64 presets, fuente de verdad de tokens |
 | Variables de entrada | `site/<DAW_SITE>/brand/_design_vars.json` | Colores, fonts, radios, espacio |
-| Presets de diseño | `site/<DAW_SITE>/brand/_design_presets.json` | 57 presets (section/text/module/animation/scroll/hover) |
+| Presets de diseño | `site/<DAW_SITE>/brand/_design_presets.json` | 64 presets (section/text/module/divider/animation/scroll/hover) |
 | Definiciones de página | `site/<DAW_SITE>/page-defs/` | JSON de entrada (home.json, about.json...) |
 | Schemas de páginas | `site/<DAW_SITE>/pages/` | JSON generados (output de build_page.php) |
 | Plugin WordPress | `divi-agentic-core/` | Layout Engine, CLI, metadata |
@@ -288,7 +294,7 @@ Cada tipo de archivo tiene su carpeta asignada. No crear archivos fuera de su ub
 | `site/example/` | Template de estructura para nuevas marcas |
 | `workspace/data/modules/` | Schemas de módulos Divi 5 (102, generados por PHP) |
 | `workspace/automation/` | Scripts de automatización |
-| `workspace/build_design_system.py` | Generador de design system (único Python activo) |
+| `workspace/build_design_system.py` | Generador de design system v3.0 (inteligencia de diseño) |
 | `divi-agentic-core/bin/` | ⭐ build_page.php + generate-module-schema.php |
 | `daw-skill/` | Skill de orquestación y sus referencias |
 | `divi-agentic-core/` | Plugin WordPress |
@@ -301,8 +307,10 @@ Cada tipo de archivo tiene su carpeta asignada. No crear archivos fuera de su ub
 Copy-Item -Recurse DAW_bundle/site/example DAW_bundle/site/minuevamarca
 
 # 2. Crear archivo de variables (solo las que cambian respecto a defaults ultra-pro)
-#    build_design_system.py auto-descubre tokens por prefijo:
-#    color_ → color, font_ → font, radius_ → radius, space_ → spacing
+#    build_design_system.py v3.0 (design intelligence):
+#      - Dado color_accent, deriva 26 colores automáticamente
+#      - Valida contraste WCAG AA/AAA en combinaciones críticas
+#      - Categorías: section, text, module, divider, animation, scroll, transform
 #    Ver site/example/brand/_design_vars.json como referencia
 cat > DAW_bundle/site/minuevamarca/brand/_design_vars.json @'
 {
@@ -315,10 +323,9 @@ cat > DAW_bundle/site/minuevamarca/brand/_design_vars.json @'
 }
 '@
 
-# 3. Crear archivo de presets (opcional: si no existe, se usan 57 defaults ultra-pro)
-#    Categorías: section, text, module, animation, scroll, transform
-#    Usar {{design:color:name}}, {{design:font:name}}, {{design:radius:name}}, {{space_name}}
-#    Ver site/example/brand/_design_presets.json como referencia
+# 3. Crear archivo de presets (opcional: si no existe, se auto-generan 64 defaults premium)
+#    Incluye: hover states, clamp(), glass-card, divisores SVG, motion
+#    Categorías: section, text, module, divider, animation, scroll, transform
 
 # 4. Generar design system (apuntando a la nueva marca)
 $env:DAW_SITE="minuevamarca"
@@ -336,7 +343,7 @@ python DAW_bundle/workspace/build_design_system.py
 
 ## 8. Reglas DAW
 
-1. No editar `divitheme.json` a mano — siempre regenerar con `build_design_system.py`.
+1. No editar `divitheme.json` a mano — regenerar con `build_design_system.py` (v3.0, design intelligence: deriva colores, valida contraste, enriquece presets).
 2. No usar `divi/code` como comodín — consultar `blocks-dictionary.md` primero.
 3. No usar `et_pb_*` (shortcodes Divi 4) — solo namespace `divi/*`.
 4. Colores siempre como `{{design:color:*}}`, nunca hex hardcodeados en schemas.

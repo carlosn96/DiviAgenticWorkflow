@@ -55,13 +55,16 @@ page-defs/<slug>.json
 | Sección oscura alternativa | `divi/section` | `section:dark` |
 | Sección blanca (tarjetas) | `divi/section` | `section:white` |
 | Eyebrow / etiqueta superior | `divi/text` | `text:eyebrow` |
-| Titular H1 hero (masivo) | `divi/text` | `text:display-xl` |
-| Subtítulo H2 fondo claro | `divi/text` | `text:headline` |
-| Subtítulo H2 fondo oscuro | `divi/text` | `text:headline-light` |
+| Titular H1 hero (masivo) | `divi/heading` | `text:display-xl` |
+| H1 hero oscuro | `divi/heading` | `text:hero-title` |
+| Subtítulo H2 fondo claro | `divi/heading` | `text:headline` |
+| Subtítulo H2 fondo oscuro | `divi/heading` | `text:headline-light` |
+| Título H3 sección | `divi/heading` | `text:headline-3` |
 | Párrafo lead oscuro | `divi/text` | `text:lead` |
 | Párrafo lead claro | `divi/text` | `text:lead-dark` |
 | Feature card (icono+texto) | `divi/blurb` | `module:feature-card` |
-| Card estándar | `divi/text` | `module:card` |
+| Card estándar | `divi/text` o `divi/blurb` | `module:card` |
+| Glassmorphism card | `divi/text` o `divi/blurb` | `module:glass-card` |
 | Stat / Contador grande | `divi/number-counter` | `module:stat-item` |
 | Botón CTA primario | `divi/button` | `module:btn-primary` |
 | Botón secundario ghost | `divi/button` | `module:btn-ghost` |
@@ -69,6 +72,9 @@ page-defs/<slug>.json
 | Mapa de ubicación | `divi/map` | — |
 | Formulario de contacto | `divi/contact-form` + `divi/contact-field` | — |
 | Separador decorativo | `divi/divider` | — |
+| Separador SVG con curva | `divi/section` | `divider:curve-*` |
+| Separador SVG con onda | `divi/section` | `divider:wave-*` |
+| Separador SVG inclinado | `divi/section` | `divider:tilt-top` |
 
 ---
 
@@ -148,7 +154,13 @@ Los valores deben ser nombres de tokens definidos en `tokens.color`:
 
 ### 4.2. Design System Creator (Generación Automatizada)
 
-El script `DAW_bundle/workspace/build_design_system.py` genera un `divitheme.json` completo en `site/<DAW_SITE>/design-system/` desde un set mínimo de variables.
+El script `DAW_bundle/workspace/build_design_system.py` (v3.0, design intelligence) genera un `divitheme.json` completo en `site/<DAW_SITE>/design-system/` desde un set mínimo de variables.
+
+**Capacidades inteligentes:**
+- Dado `color_accent`, deriva automáticamente `accent_hover`, `premium`, `sepia_*`, y la paleta completa (26 colores)
+- Valida contraste WCAG AA/AAA en todas las combinaciones texto+fondo críticas
+- Enriquece presets: añade hover states faltantes, clamp() fluido, divisores SVG, glass-card
+- Auto-genera presets completos incluso sin archivo `_design_presets.json`
 
 **Flujo de trabajo:**
 
@@ -182,20 +194,21 @@ wp agentic global_colors sync `
 
 **Variables disponibles (50 total):**
 
-| Grupo | Variables | Default ultra-pro |
-|---|---|---|
-| Brand | `brand_name`, `brand_description` | "Ultra Pro Design System" |
-| Colores (26) | `color_accent`, `color_ink`, `color_parchment_50`… | Paleta neutral-cálida con acento dorado |
-| Tipografía (3) | `font_display`, `font_body`, `font_ui` | Cormorant Garamond / Crimson Pro / DM Sans |
-| Radios (5) | `radius_sm`, `radius_md`, `radius_lg`, `radius_xl`, `radius_full` | 2px / 4px / 8px / 16px / 100px |
-| Espaciado (9) | `space_xs`…`space_5xl` | 8px → 160px |
-| Customizer (5) | `customizer_primary`…`customizer_link` | accent / premium / ink / parchment-700 / accent |
+| Grupo | Variables | Default ultra-pro | Inteligencia |
+|---|---|---|---|
+| Brand | `brand_name`, `brand_description` | "Ultra Pro Design System" | — |
+| Colores (26) | `color_accent`, `color_ink`, `color_parchment_50`… | Paleta neutral-cálida con acento dorado | Deriva 26 colores desde solo `color_accent`. Valida contraste WCAG AA/AAA. |
+| Tipografía (3) | `font_display`, `font_body`, `font_ui` | Cormorant Garamond / Crimson Pro / DM Sans | — |
+| Radios (5) | `radius_sm`, `radius_md`, `radius_lg`, `radius_xl`, `radius_full` | 2px / 4px / 8px / 16px / 100px | — |
+| Espaciado (9) | `space_xs`…`space_5xl` | 8px → 160px | — |
+| Customizer (5) | `customizer_primary`…`customizer_link` | accent / premium / ink / parchment-700 / accent | — |
 
-**Presets generados (57 total):**
+**Presets generados (64 total):**
 
-- **7 secciones**: hero-dark, hero-image-dark, trust-bar, cta-epic, light, dark, white
+- **8 secciones**: hero-dark, hero-image-dark, hero-video, trust-bar, cta-epic, light, dark, white
 - **16 textos**: eyebrow, eyebrow-dark, hero-title, display-xl, display-md, display-md-light, headline, headline-light, headline-3, lead, lead-dark, body-md, stat-num, stat-label, quote-serif, caption
-- **10 módulos**: card, feature-card, stat-item, testimonial-card, image-shadow, accent-line, btn-primary, btn-ghost, btn-outline-light, btn-cta-dark
+- **11 módulos**: card, feature-card, glass-card, stat-item, testimonial-card, image-shadow, accent-line, btn-primary, btn-ghost, btn-outline-light, btn-cta-dark
+- **5 divisores SVG**: curve-top, curve-bottom, wave-top, wave-bottom, tilt-top
 - **12 animaciones**: fade-in, fade-in-fast, slide-up, slide-down, slide-left, slide-right, reveal-up, zoom-in, bounce-up, flip, fold, roll
 - **7 scroll**: fade-in, parallax-up, parallax-down, scale-in, reveal, rotate, blur-in
 - **5 transform**: hover-lift, hover-scale, hover-glow, hover-slide-up, hover-expand
@@ -293,20 +306,26 @@ El Diseñador crea este archivo. `build_page.php` lo procesa en su totalidad.
 
 | Elemento | Bloque | Cómo se estiliza |
 | :--- | :--- | :--- |
-| Hero background | `divi/section` | `"presets": ["section:hero-image-dark"], "background_image": "{{SITE_URL}}/wp-content/uploads/...", "bg_gradient": { "type": "linear", "direction": "180deg", "overlaysImage": "on", "stops": [ ... ] }` |
+| Hero background | `divi/section` | `"presets": ["section:hero-image-dark"], "background_image": "{{SITE_URL}}/wp-content/uploads/...", "bg_gradient": { ... }` |
+| Hero con video background | `divi/section` | `"presets": ["section:hero-video"]` + `background_video_mp4` en page def |
 | Sección oscura | `divi/section` | `"presets": ["section:dark"]` |
 | Sección clara | `divi/section` | `"presets": ["section:light"]` |
 | Sección barra stats | `divi/section` | `"presets": ["section:trust-bar"]` |
 | CTA Final con imagen | `divi/section` | `"presets": ["section:cta-epic"]` |
 | Eyebrow / overline | `divi/text` | `"presets": ["text:eyebrow"]` |
-| Titular hero H1 | `divi/text` | `"presets": ["text:display-xl"]` |
-| Subtítulo / H2 | `divi/text` | `"presets": ["text:headline"]` (o `text:headline-light` para fondo oscuro) |
+| Titular hero H1 | `divi/heading` | `"presets": ["text:display-xl"]` |
+| Hero grande oscuro H1 | `divi/heading` | `"presets": ["text:hero-title"]` |
+| Subtítulo / H2 | `divi/heading` | `"presets": ["text:headline"]` (o `text:headline-light` para fondo oscuro) |
+| H3 sección | `divi/heading` | `"presets": ["text:headline-3"]` |
 | Texto lead oscuro | `divi/text` | `"presets": ["text:lead"]` |
 | Texto lead claro | `divi/text` | `"presets": ["text:lead-dark"]` |
 | Cita / Quote grande | `divi/text` | `"presets": ["text:quote-serif"]` |
 | Línea decorativa | `divi/divider`| `"presets": ["module:accent-line"]` |
 | Tarjeta testimonial | `divi/testimonial`| `"presets": ["module:testimonial-card"]` |
+| Tarjeta glassmorphism | `divi/text` o `divi/blurb` | `"presets": ["module:glass-card"]` |
 | Tarjeta blanca | `divi/text` | `decoration: { background: { color: "{{design:color:surface-white}}" }, border: { radius: ... }, boxShadow: ... }` |
+| Separador curva entre secciones | `divi/section` | `"presets": ["divider:curve-top"]` (como preset de section, no de módulo) |
+| Separador wave entre secciones | `divi/section` | `"presets": ["divider:wave-bottom"]` |
 | Animaciones | Todos | Las animaciones están integradas en los presets. Para animación personalizada: `"decoration": { "animation": { "desktop": { "value": { "style": "slide", "direction": "bottom", "duration": "700ms", "delay": "0ms", "intensity": "15%" } } } }` |
 
 ---
@@ -334,13 +353,52 @@ Ejemplos de definiciones de sección para los patrones que producen el mayor imp
       "column_structure": "4_4",
       "modules": [
         {"type": "divi/text", "presets": ["text:eyebrow"], "content": "<p>Etiqueta</p>"},
-        {"type": "divi/text", "presets": ["text:display-xl"], "content": "<h1>Título Principal</h1>"},
+        {"type": "divi/heading", "presets": ["text:display-xl"], "content": "<h1>T&iacute;tulo Principal</h1>"},
         {"type": "divi/button", "presets": ["module:btn-primary"], "button_text": "Comenzar", "button_url": "/contacto"}
       ]
     }
   ]
 }
 ```
+
+### Patrón: Hero con Video Background
+
+```json
+{
+  "presets": ["section:hero-video"],
+  "background_video_mp4": "{{SITE_URL}}/wp-content/uploads/hero-video.mp4",
+  "rows": [
+    {
+      "column_structure": "4_4",
+      "modules": [
+        {"type": "divi/text", "presets": ["text:eyebrow-dark"], "content": "<p>Contenido audiovisual</p>"},
+        {"type": "divi/heading", "presets": ["text:hero-title"], "content": "<h1>Experiencia <em>Inmersiva</em></h1>"},
+        {"type": "divi/button", "presets": ["module:btn-ghost"], "button_text": "Ver m&aacute;s", "button_url": "/acerca"}
+      ]
+    }
+  ]
+}
+```
+
+### Patrón: Separador SVG entre secciones
+
+Agrega el shape divider como preset adicional en cualquier sección:
+
+```json
+{
+  "presets": ["section:dark", "divider:curve-top"],
+  "rows": [
+    {
+      "column_structure": "4_4",
+      "modules": [
+        {"type": "divi/heading", "presets": ["text:headline-light"], "content": "<h2>Nueva secci&oacute;n con entrada curva</h2>"}
+      ]
+    }
+  ]
+}
+```
+
+Los presets `divider:*` se aplican como presets de sección y decoran el `shapeDivider` del borde superior o inferior de la sección. Cada preset define el estilo, color, altura responsiva y orientación del separador SVG.
 
 ### Patrón: Barra de Stats de Autoridad
 
@@ -408,7 +466,7 @@ Ejemplos de definiciones de sección para los patrones que producen el mayor imp
     {
       "column_structure": "4_4",
       "modules": [
-        {"type": "divi/text", "presets": ["text:headline-light"], "content": "<h2>&iquest;Listo para comenzar?</h2>"},
+        {"type": "divi/heading", "presets": ["text:headline-light"], "content": "<h2>&iquest;Listo para comenzar?</h2>"},
         {"type": "divi/text", "presets": ["text:lead"], "content": "<p>Trabajemos juntos en tu pr&oacute;ximo proyecto.</p>"},
         {"type": "divi/button", "presets": ["module:btn-primary"], "button_text": "Contactar ahora", "button_url": "/contacto",
          "decoration": {"spacing": {"desktop": {"value": {"margin": {"top": "{{design:space:lg}}"}}}}}}
@@ -416,6 +474,41 @@ Ejemplos de definiciones de sección para los patrones que producen el mayor imp
     }
   ]
 }
+```
+
+### Patrón: Features Grid con Glassmorphism
+
+```json
+{
+  "presets": ["section:hero-video"],
+  "background_video_mp4": "{{SITE_URL}}/wp-content/uploads/bg-loop.mp4",
+  "rows": [
+    {
+      "column_structure": "4_4",
+      "modules": [
+        {"type": "divi/heading", "presets": ["text:hero-title"], "content": "<h1>Servicios <em>Premium</em></h1>"}
+      ]
+    },
+    {
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {"type": "1_3", "modules": [
+          {"type": "divi/blurb", "presets": ["module:glass-card"],
+           "title": "Diseño", "icon": "&#xe03a;", "content": "<p>Descripci&oacute;n del servicio.</p>"}
+        ]},
+        {"type": "1_3", "modules": [
+          {"type": "divi/blurb", "presets": ["module:glass-card"],
+           "title": "Desarrollo", "icon": "&#xe03b;", "content": "<p>Descripci&oacute;n del servicio.</p>"}
+        ]},
+        {"type": "1_3", "modules": [
+          {"type": "divi/blurb", "presets": ["module:glass-card"],
+           "title": "Estrategia", "icon": "&#xe03c;", "content": "<p>Descripci&oacute;n del servicio.</p>"}
+        ]}
+      ]
+    }
+  ]
+}
+```
 ```
 
 ---

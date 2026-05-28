@@ -132,35 +132,11 @@ El DAW puede generar cualquier tipo de página. El Design Lead elige el patrón 
 Hero (tipográfico o con imagen) → Trust/Stats bar → Features Grid → About → Testimonial → CTA Final
 ```
 - Preset de sección alternante: `hero-dark` → `light` → `white` → `dark` → `light`
-- Bloques clave: `divi/text` (titular XL), `divi/number-counter`, `divi/blurb`, `divi/testimonial`
-
-### Landing de Conversión (sin navbar)
-```
-Hero con CTA → Problema que resuelve → Solución (features) → Social Proof → Pricing → FAQ → CTA Final
-```
-- Todo el flujo guía al usuario a una sola acción. Eliminar distractores.
+- Bloques clave: `divi/heading` (titular XL), `divi/number-counter`, `divi/blurb`, `divi/testimonial`
 - Bloques: `divi/cta`, `divi/blurb`, `divi/testimonial`, `divi/toggle` (FAQ), `divi/pricing-table`
-
-### Página de Servicios
-```
-Hero compacto → Intro + diferenciador → Grid de servicios (cards) → Proceso/Cómo trabajamos → Casos/Proyectos → CTA
-```
-- Usar `column_structure: "1_3,1_3,1_3"` para el grid de servicios con `module:feature-card`
 - Bloques: `divi/blurb`, `divi/number-counter`, `divi/blog` (casos), `divi/cta`
-
-### Página About / Nosotros
-```
-Hero tipográfico (statement de marca) → Historia (texto + imagen alternados) → Equipo → Valores → CTA
-```
-- El hero usa solo tipografía: `display-xl` centrado en fondo `surface-deep`. Sin imagen de fondo.
-- Bloques: `divi/text`, `divi/image`, `divi/team-member`, `divi/blurb`, `divi/button`
-
-### Página de Contacto
-```
-Hero mínimo → Datos de contacto + Mapa → Formulario → FAQ (opcional)
-```
-- Hero compacto: 50% del padding del hero principal. Solo H1 + subtítulo.
-- Bloques: `divi/text`, `divi/map`, `divi/contact-form` + `divi/contact-field`, `divi/toggle`
+- Bloques: `divi/heading`, `divi/image`, `divi/team-member`, `divi/blurb`, `divi/button`
+- Bloques: `divi/heading`, `divi/map`, `divi/contact-form` + `divi/contact-field`, `divi/toggle`
 
 ### Blog / Archivo de Publicaciones
 ```

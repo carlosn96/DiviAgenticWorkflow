@@ -91,12 +91,12 @@ Este skill es **100% autocontenido** para el proyecto local `divitheme`. Prioriz
 
 **El design system se genera automáticamente.** No se edita a mano.
 
-Usar `build_design_system.py` (v2.0, data-driven) para crear o modificar el sistema de diseño:
+Usar `build_design_system.py` (v3.0, design intelligence) para crear o modificar el sistema de diseño:
 
 ```powershell
 # 1. Crear (o modificar) archivos de variables y presets en su carpeta de marca:
 #    DAW_bundle/site/<DAW_SITE>/brand/_design_vars.json
-#    DAW_bundle/site/<DAW_SITE>/brand/_design_presets.json (57 presets: section/text/module/animation/scroll/hover)
+#    DAW_bundle/site/<DAW_SITE>/brand/_design_presets.json (64 presets: section/text/module/divider/animation/scroll/hover)
 #    (solo las variables que cambian — el resto usa defaults ultra-pro)
 
 # 2. Generar design system completo:
