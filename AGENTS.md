@@ -197,7 +197,20 @@ Capa 2 — Page Schema + Deploy (build_page.php — UN SOLO COMANDO)
    - `--out=path.json` — escribir schema sin desplegar
    - `--no-resolve` — schema raw sin expandir presets/tokens (debug)
    - `--deploy --front` — desplegar y establecer como portada
+   - `--deploy --verify` — ejecutar verificación post-deploy (comprueba gcids, bloques, estructura)
+   - `--deploy --verify --url="https://..."` — verificación + acceso HTTP público
    - `DAW_SITE` env var — cambiar proyecto activo (`$env:DAW_SITE="otromarca"`)
+
+   La verificación post-deploy ejecuta `verify_page.php` que comprueba:
+   - La página existe en WordPress
+   - El contenido contiene bloques Divi 5
+   - Las variables `var(--gcid-*)` están presentes
+   - No quedan tokens `{{design:*}}` sin resolver
+   - Coincidencia estructural vs schema (opcional con `--schema`)
+   - Accesibilidad HTTP pública (opcional con `--url`)
+
+   > Para verificación visual (screenshot), integrar con Playwright:
+   > `npx playwright wk http://localhost/mi-pagina --screenshot`
 
 ---
 

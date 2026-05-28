@@ -59,12 +59,26 @@ El Diseñador entrega un archivo en `DAW_bundle/site/<DAW_SITE>/page-defs/<slug>
   --out=DAW_bundle/site/bibliotheca/pages/slug-de-pagina.json
 ```
 
-**Schema raw sin resolución de tokens (debug):**
+**Verificación post-deploy (comprueba gcids, bloques, estructura):**
 ```powershell
 .\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php `
   --def=DAW_bundle/site/bibliotheca/page-defs/slug-de-pagina.json `
-  --no-resolve --out=DAW_bundle/site/bibliotheca/pages/slug-de-pagina-raw.json
+  --deploy --verify
 ```
+
+**Verificación con chequeo HTTP público:**
+```powershell
+.\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php `
+  --def=DAW_bundle/site/bibliotheca/page-defs/slug-de-pagina.json `
+  --deploy --verify --url="https://midominio.com/slug-de-pagina"
+```
+
+**Verificación standalone (sin rebuild):**
+```powershell
+.\php.bat DAW_bundle/divi-agentic-core/bin/verify_page.php `
+  --slug=slug-de-pagina --url="https://midominio.com/slug-de-pagina"
+```
+`verify_page.php` comprueba: existencia en WP, contenido con bloques Divi, presencia de `var(--gcid-*)`, ausencia de tokens `{{design:*}}` sin resolver, y acceso HTTP público (si se da `--url`).
 
 > [!IMPORTANT]
 > `build_page.php` auto-detecta `SITE_URL` desde WordPress cuando se usa `--deploy`. También se puede forzar con `--site-url="https://midominio.com"`.

@@ -9,6 +9,8 @@
  *   php build_page.php --def=home.json
  *   php build_page.php --def=site/bibliotheca/page-defs/mi-pagina.json --deploy
  *   php build_page.php --def=home.json --deploy --front
+ *   php build_page.php --def=home.json --deploy --verify
+ *   php build_page.php --def=home.json --deploy --verify --page-url="https://example.com/mi-pagina"
  *   php build_page.php --def=home.json --no-resolve --out=pages/raw.json
  *   php build_page.php --def=home.json --site-url="https://example.com"
  *
@@ -49,6 +51,7 @@ define('DESIGN_SYSTEM_PATH', SITE_DIR . $DIR_SEP . 'design-system' . $DIR_SEP . 
 define('DEFS_DIR', SITE_DIR . $DIR_SEP . 'page-defs');
 define('PAGES_DIR', SITE_DIR . $DIR_SEP . 'pages');
 define('WP_BAT', DAW_ROOT . $DIR_SEP . 'wp.bat');
+define('PHP_BAT', DAW_ROOT . $DIR_SEP . 'php.bat');
 
 // ── Helpers ─────────────────────────────────────────────────────────
 
@@ -361,7 +364,7 @@ function validate_page(array $schema): bool {
 
 // ── CLI ─────────────────────────────────────────────────────────────
 
-$opts = getopt('', ['def::', 'out::', 'deploy', 'front', 'no-resolve', 'site-url::', 'help']);
+$opts = getopt('', ['def::', 'out::', 'deploy', 'front', 'no-resolve', 'site-url::', 'verify', 'page-url::', 'help']);
 $def_file = $opts['def'] ?? null;
 $out_file = $opts['out'] ?? null;
 $do_deploy = isset($opts['deploy']);
@@ -376,13 +379,17 @@ if (isset($opts['help']) || !$def_file) {
     echo "  --out=<file>     Output path for resolved schema (default: pages/<slug>.json)\n";
     echo "  --deploy         After building, deploy via WP-CLI\n";
     echo "  --front          Set page as front page (only with --deploy)\n";
-    echo "  --no-resolve     Output raw schema without token/preset resolution\n";
+    echo "  --verify         Run post-deploy verification (only with --deploy)\n";
+    echo "  --url=<url>      Page URL for visual verification (implies --verify)\n";
+    echo "  --no-resolve     Skip preset expansion and token resolution (raw schema)\n";
     echo "  --site-url=<url> Base URL for {{SITE_URL}} replacement (auto-detected with --deploy)\n";
-    echo "  --help           This help\n\n";
+    echo "\n";
     echo "Examples:\n";
     echo "  php build_page.php --def=home.json\n";
     echo "  php build_page.php --def=home.json --deploy\n";
     echo "  php build_page.php --def=home.json --deploy --front\n";
+    echo "  php build_page.php --def=home.json --deploy --verify\n";
+    echo "  php build_page.php --def=home.json --deploy --verify --url=\"https://example.com/pagina\"\n";
     echo "  php build_page.php --def=home.json --site-url='https://midominio.com'\n";
     exit(isset($opts['help']) ? 0 : 1);
 }
@@ -478,4 +485,21 @@ if ($do_deploy) {
         exit($exit_code);
     }
     echo "[OK] Page deployed successfully.\n";
+
+    // Post-deploy verification
+    $do_verify = isset($opts['verify']) || isset($opts['url']);
+    if ($do_verify) {
+        echo "\n";
+        $verify_script = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'verify_page.php';
+        $verify_cmd = '"' . PHP_BAT . '" "' . $verify_script . '" --slug="' . $slug . '"';
+        if (!empty($opts['url'])) {
+            $verify_cmd .= ' --url="' . $opts['url'] . '"';
+        }
+        echo "[VERIFY] Running post-deploy checks...\n";
+        passthru($verify_cmd, $verify_code);
+        if ($verify_code !== 0) {
+            fwrite(STDERR, "[WARN] Verification checks failed for page '{$slug}'\n");
+            fwrite(STDERR, "[WARN] Page was deployed but may have issues. Review the check output above.\n");
+        }
+    }
 }
