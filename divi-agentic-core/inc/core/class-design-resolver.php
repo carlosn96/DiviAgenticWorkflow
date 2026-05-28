@@ -64,11 +64,21 @@ class Design_Resolver {
     // ---------------------------------------------------------------
 
     private function flatten_tokens(): void {
+        $gcid_synced = ! empty( get_option( '_dac_gcid_hash', '' ) );
+
         $groups = $this->design['tokens'] ?? [];
         foreach ( $groups as $group => $values ) {
             if ( is_array( $values ) ) {
                 foreach ( $values as $key => $value ) {
-                    $this->flat_tokens[ "{{design:{$group}:{$key}}}" ] = $value;
+                    $token = "{{design:{$group}:{$key}}}";
+
+                    // Color tokens: use var(--gcid-*) when global colors synced
+                    if ( $gcid_synced && 'color' === $group ) {
+                        $slug = sanitize_title( $key );
+                        $this->flat_tokens[ $token ] = "var(--gcid-{$slug})";
+                    } else {
+                        $this->flat_tokens[ $token ] = $value;
+                    }
                 }
             }
         }
@@ -89,7 +99,10 @@ class Design_Resolver {
     private function resolve_presets_recursive( array &$node ): void {
         // Merge presets if present
         if ( isset( $node['presets'] ) && is_array( $node['presets'] ) ) {
-            foreach ( $node['presets'] as $preset_path ) {
+            // Process in reverse so deep_merge_preset($preset, $node)
+            // correctly gives priority to later presets (node wins over preset).
+            $reversed = array_reverse( $node['presets'] );
+            foreach ( $reversed as $preset_path ) {
                 $preset = $this->get_preset_by_path( $preset_path );
                 if ( $preset !== null ) {
                     $node = $this->deep_merge_preset( $preset, $node );

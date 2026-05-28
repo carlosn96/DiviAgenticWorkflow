@@ -1,11 +1,35 @@
 ---
 name: daw-skill
-description: The Unified Source of Truth for the Divi Agentic Workflow (DAW). Use this for any task involving the creation, modification, or deployment of Divi 5 pages. It orchestrates the 4-phase agentic workflow: Analysis, Design Research, Mapping, and Execution.
+description: The unified source of truth for the local Divi Agentic Workflow (DAW) in divitheme. Use this for any task involving the creation, modification, or deployment of Divi 5 pages. It orchestrates the 4-phase workflow: Analysis, Design Research, Mapping, and Execution.
 ---
 
 # DAW-Skill: Divi Agentic Workflow Orchestrator (v4.0)
 
 Motor definitivo para la construcción de sitios con **Divi 5.5.0 Native**. Aplica separación estricta de responsabilidades mediante una orquestación modular de **4 fases**.
+
+---
+
+## ⚠️ Prerrequisito: Sistema de Colores Globales (gcid)
+
+Antes de desplegar cualquier página, el design system debe tener sus **colores sincronizados** con Divi 5 como Global Colors (`gcid-*`).
+
+### ¿Por qué?
+Los colores registrados como `gcid-*` son visibles y seleccionables en el **color picker del Visual Builder** de Divi, se renderizan vía CSS custom properties (`var(--gcid-ink)`), y son editables desde el Customizer sin re-deploy.
+
+### ¿Cuándo sincronizar?
+
+| Cuándo | Comando |
+|--------|---------|
+| **Una vez, al crear el design system** | `wp agentic global_colors sync --design-system="DAW_bundle/site/bibliotheca/design-system/divitheme.json"` |
+| **Cada vez que cambien los colores en el JSON** | Mismo comando. El sistema detecta cambios vía hash. |
+| **Para verificar estado** | `wp agentic global_colors status --design-system="DAW_bundle/site/bibliotheca/design-system/divitheme.json"` |
+
+### Señal de estado
+- El sistema almacena un **hash MD5** de los colores sincronizados en la opción `_dac_gcid_hash`.
+- El comando `deploy_page` verifica este hash: si existe, resuelve `{{design:color:*}}` como `var(--gcid-*)`. Si no existe, emite un **warning** y resuelve a hex.
+- Para listar los Global Colors activos: `wp agentic global_colors list`
+
+> **Regla**: Los colores se sincronizan **una vez por cambio de design system**, no por página. El sync NO se ejecuta automáticamente en `deploy_page` — es una decisión consciente del operador.
 
 ---
 
@@ -20,7 +44,7 @@ Toda tarea DEBE pasar por estas cuatro fases en orden. Cada fase tiene su módul
    - *Entrega*: Plan Semántico JSON
 
 2. **Fase 2: Investigación de Diseño (Design Lead)**
-   - *Consultar* (integración externa opcional): [`ui-ux-pro-max` skill](../ui-ux-pro-max/SKILL.md) para tendencias, paletas y patrones avanzados
+   - *Consultar* (opcional): [`ui-ux-pro-max` skill](ui-ux-pro-max/SKILL.md) para tendencias, paletas y patrones avanzados
    - *Leer*: [`references/design-lead.md`](references/design-lead.md)
    - *Meta*: Investigar dirección visual moderna, validar contra principios UX críticos, documentar decisiones de diseño.
    - *Entrega*: Documento de dirección visual + UX validation + decisiones documentadas
@@ -28,19 +52,25 @@ Toda tarea DEBE pasar por estas cuatro fases en orden. Cada fase tiene su módul
 3. **Fase 3: Mapeo Visual (El Diseñador)**
    - *Consultar*: [`references/blocks-dictionary.md`](references/blocks-dictionary.md) (atributos exactos + ejemplos de schema)
    - *Leer*: [`references/designer.md`](references/designer.md)
-   - *Meta*: Traducir el plan semántico + dirección visual a un JSON Schema con bloques `divi/*`, tokens `{{design:*}}` y decoration nativa.
-   - *Entrega*: Schema en `workspace/pages/<slug>.json`
+   - *Meta*: Construir un archivo JSON en `site/<DAW_SITE>/page-defs/<slug>.json` con la definición de la página. `build_page.php` lo procesa: carga módulos, resuelve `{{design:color:*}}` → `var(--gcid-*)`, expande presets inline, normaliza posiciones de gradient. Ver `site/bibliotheca/page-defs/home.json` como plantilla.
+   - *Entrega*: Archivo de definición en `site/<DAW_SITE>/page-defs/<slug>.json`
 
 4. **Fase 4: Ejecución CLI (El Ingeniero)**
    - *Leer*: [`references/engineer.md`](references/engineer.md)
-   - *Meta*: Desplegar vía `.\wp.bat agentic deploy_page --design-system=...`, limpiar caché y verificar persistencia en DB.
+   - *Meta*: Desplegar con un solo comando:
+     ```
+      .\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php ^
+        --def=DAW_bundle/site/bibliotheca/page-defs/<slug>.json ^
+        --deploy
+     ```
+     `build_page.php` construye el schema (resuelve tokens, expande presets) y llama a `wp agentic deploy_page`. El Layout Engine convierte `var(--gcid-*)` → `$variable()` syntax en post_content.
    - *Entrega*: WP Post ID confirmado
 
 ---
 
 ## Fuente de Verdad (Ground Truth)
 
-Este skill es **100% autocontenido**. Prioriza siempre estos archivos internos:
+Este skill es **100% autocontenido** para el proyecto local `divitheme`. Prioriza siempre estos archivos internos:
 
 | Recurso | Archivo | Propósito |
 | :--- | :--- | :--- |
@@ -50,15 +80,38 @@ Este skill es **100% autocontenido**. Prioriza siempre estos archivos internos:
 | Lógica del Ingeniero | [`references/engineer.md`](references/engineer.md) | Comandos CLI, deploy, verificación, producción |
 | Lógica del Arquitecto | [`references/architect.md`](references/architect.md) | Análisis semántico |
 | Dirección de Diseño | [`references/design-lead.md`](references/design-lead.md) | Investigación UX/UI, validación, decisiones de diseño |
-| Índice de Bloques Divi 5 | [`references/blocks-index.json`](references/blocks-index.json) | Índice ligero (16 KB): slug, nombre, categoría, children de los 102 bloques. Para atributos detallados: `php divi-agentic-core/bin/extract-module-meta.php <slug>` |
-| Metadata completa (on-demand) | `divi-agentic-core/data/_all_modules_metadata.php` (2.6 MB) | Schema oficial completo de Divi 5. El trait `Module_Metadata` lo lee directamente. No se carga en sesión DAW a menos que se necesite. |
+| Índice de Bloques Divi 5 | [`references/blocks-index.json`](references/blocks-index.json) | Índice ligero (16 KB): slug, nombre, categoría, children de los 102 bloques. Para atributos detallados: `php DAW_bundle/divi-agentic-core/bin/extract-module-meta.php <slug>` |
+| Metadata completa (on-demand) | `DAW_bundle/divi-agentic-core/data/_all_modules_metadata.php` (2.6 MB) | Schema oficial completo de Divi 5. El trait `Module_Metadata` lo lee directamente. No se carga en sesión DAW a menos que se necesite. |
 
 ---
 
 ## Reglas de Diseño
 
 ### Dependencia del Sistema de Diseño
-Consultar el archivo `workspace/design-system/<proyecto>.json` como referencia estricta de estilo, tokens y patrones visuales.
+
+**El design system se genera automáticamente.** No se edita a mano.
+
+Usar `build_design_system.py` (v2.0, data-driven) para crear o modificar el sistema de diseño:
+
+```powershell
+# 1. Crear (o modificar) archivos de variables y presets en su carpeta de marca:
+#    DAW_bundle/site/<DAW_SITE>/brand/_design_vars.json
+#    DAW_bundle/site/<DAW_SITE>/brand/_design_presets.json (57 presets: section/text/module/animation/scroll/hover)
+#    (solo las variables que cambian — el resto usa defaults ultra-pro)
+
+# 2. Generar design system completo:
+$env:DAW_SITE="<DAW_SITE>"
+python DAW_bundle/workspace/build_design_system.py
+
+# 3. Sincronizar colores globales:
+.\wp.bat agentic global_colors sync `
+  --design-system="DAW_bundle/site/bibliotheca/design-system/divitheme.json"
+```
+
+El generador auto-descubre tokens por prefijo (`color_`, `font_`, `radius_`, `space_`) de cualquier archivo de variables — no hay nombres hardcodeados en Python. Funciona con cualquier marca sin modificar el script.
+
+El archivo generado `DAW_bundle/site/bibliotheca/design-system/divitheme.json` es la referencia estricta de estilo, tokens y patrones visuales.
+
 - **Contenedores**: usar decoration nativa (background, spacing) en vez de clases.
 - **Tipografía**: usar `headingFont` y `bodyFont` con tokens `{{design:font:*}}`.
 - **Colores**: usar tokens `{{design:color:*}}` — nunca hex hardcodeados.
@@ -69,7 +122,7 @@ El Design Lead es el guardián de la calidad UX/UI del proyecto. Sus decisiones 
 - Dirección de estilo (Agnóstica y Ultra-Premium)
 - Checklist UX crítica (contraste, touch targets, jerarquía)
 - Documentación de decisiones de diseño
-- Integración externa con `ui-ux-pro-max` skill para deep dives
+- Integración con [`ui-ux-pro-max` skill](ui-ux-pro-max/SKILL.md) para deep dives
 
 ### Bloques Divi 5 — Regla Fundamental
 **NO usar `divi/code` como comodín.** Consultar siempre `blocks-dictionary.md` primero para encontrar el bloque nativo correcto. `divi/code` es el último recurso.

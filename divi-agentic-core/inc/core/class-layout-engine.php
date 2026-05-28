@@ -88,15 +88,22 @@ class Layout_Engine {
                 }
             }
 
-            // Auto-wrap schema decoration values with desktop.value (Divi 5 requirement)
+            // Auto-wrap schema decoration values with desktop.value (Divi 5 requirement).
+            // Skips wrapping if the value already uses any Divi 5 mode key
+            // (desktop, tablet, phone, hover, sticky) — prevents corrupting
+            // structured hover/breakpoint values like transform.hover.value.
+            $dec_modes = [ 'desktop', 'tablet', 'phone', 'hover', 'sticky' ];
             if ( isset( $attrs['module']['decoration'] ) ) {
                 foreach ( ['background', 'spacing', 'layout', 'sizing', 'border', 'boxShadow',
                            'filter', 'transform', 'transition', 'animation', 'position', 'scroll'] as $dk ) {
-                    if ( isset( $attrs['module']['decoration'][$dk] )
-                         && ! isset( $attrs['module']['decoration'][$dk]['desktop'] ) ) {
-                        $attrs['module']['decoration'][$dk] = [
-                            'desktop' => [ 'value' => $attrs['module']['decoration'][$dk] ]
-                        ];
+                    if ( isset( $attrs['module']['decoration'][$dk] ) ) {
+                        $modes = array_keys( $attrs['module']['decoration'][$dk] );
+                        $has_mode = ! empty( array_intersect( $dec_modes, $modes ) );
+                        if ( ! $has_mode ) {
+                            $attrs['module']['decoration'][$dk] = [
+                                'desktop' => [ 'value' => $attrs['module']['decoration'][$dk] ]
+                            ];
+                        }
                     }
                 }
             }
@@ -730,7 +737,8 @@ class Layout_Engine {
                 'divi/row-inner', 'divi/group', 'divi/group-carousel',
                 'divi/global-layout', 'divi/layout', 'divi/placeholder'
             ], true ) ) {
-                // Decoration-only blocks; children handled separately
+                $inner_html = $children_html;
+                $children_html = '';
             }
 
             // --- GROUP 36: Slider / Accordion / Tabs / Icon List / Social Follow (parent containers) ---
@@ -832,11 +840,54 @@ class Layout_Engine {
             }
         }
 
+        // Convert var(--gcid-*) to $variable() syntax for Divi 5 VB recognition.
+        // The frontend resolver (resolve_dynamic_variable) converts it back.
+        $attrs = $this->convert_gcid_to_variable_syntax( $attrs );
+
+        // Normalize gradient stop positions: strip trailing % if present.
+        // Divi 5 Background::gradient_style_declaration() appends unit (default %)
+        // to position, so "0%" + "%" = "0%%" which breaks CSS.
+        if ( isset( $attrs['module']['decoration']['background']['desktop']['value']['gradient']['stops'] ) ) {
+            $stops = &$attrs['module']['decoration']['background']['desktop']['value']['gradient']['stops'];
+            foreach ( $stops as &$stop ) {
+                if ( isset( $stop['position'] ) && is_string( $stop['position'] ) ) {
+                    $stop['position'] = rtrim( $stop['position'], '%' );
+                }
+            }
+            unset( $stop );
+        }
+
         if ( $attrs['module'] === [] ) { $attrs['module'] = (object)[]; }
         $json_attrs = json_encode( $attrs, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
 
         $inner = ( $content !== '' || $inner_html !== '' ) ? "{$content}{$inner_html}" : '';
         return "<!-- wp:{$slug} {$json_attrs} -->\n{$inner}<!-- /wp:{$slug} -->\n";
+    }
+
+    /**
+     * Recursively convert var(--gcid-*) to $variable() syntax for Divi 5 VB recognition.
+     *
+     * The Divi 5 Visual Builder requires $variable({"type":"color","value":{"name":"gcid-*","settings":{}}})$
+     * format in block attributes to recognize global color references. The frontend resolver
+     * converts it back to var(--gcid-*) during CSS rendering.
+     */
+    private function convert_gcid_to_variable_syntax( $value ) {
+        if ( is_string( $value ) && preg_match( '/^var\(--(gcid-[0-9a-z-]+)\)$/', $value, $m ) ) {
+            $json = wp_json_encode( [
+                'type'  => 'color',
+                'value' => [
+                    'name'     => $m[1],
+                    'settings' => new \stdClass(),
+                ],
+            ], JSON_UNESCAPED_SLASHES );
+            return "\$variable({$json})\$";
+        }
+        if ( is_array( $value ) ) {
+            foreach ( $value as $k => $v ) {
+                $value[ $k ] = $this->convert_gcid_to_variable_syntax( $v );
+            }
+        }
+        return $value;
     }
 
 }

@@ -3,8 +3,8 @@
 Archivo maestro de referencia para las Fases 1 (Arquitecto) y 2 (Diseñador).
 
 > **Índice rápido:** [`references/blocks-index.json`](references/blocks-index.json) — 16 KB con slug, nombre, categoría y children de los 102 bloques.
-> **Atributos detallados (bajo demanda):** Ejecutar `php divi-agentic-core/bin/extract-module-meta.php <slug>` para ver el schema completo de cualquier bloque (tipos, defaults, settings groups, render paths). Ej: `php divi-agentic-core/bin/extract-module-meta.php slide`.
-> **Engine runtime:** El trait `Module_Metadata` en `divi-agentic-core` lee `data/_all_modules_metadata.php` directamente para compilar bloques con paths de serialización correctos.
+> **Atributos detallados (bajo demanda):** Ejecutar `php DAW_bundle/divi-agentic-core/bin/extract-module-meta.php <slug>` para ver el schema completo de cualquier bloque (tipos, defaults, settings groups, render paths). Ej: `php DAW_bundle/divi-agentic-core/bin/extract-module-meta.php slide`.
+> **Engine runtime:** El trait `Module_Metadata` en `DAW_bundle/divi-agentic-core` lee `data/_all_modules_metadata.php` directamente para compilar bloques con paths de serialización correctos.
 
 El Arquitecto consulta este diccionario para **discernir el tipo de componente correcto** según el elemento semántico que necesita. El Diseñador lo usa para **construir el JSON Schema** con los atributos exactos que cada bloque espera.
 

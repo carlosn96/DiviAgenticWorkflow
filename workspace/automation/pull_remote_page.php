@@ -1,16 +1,27 @@
 <?php
-// Pull a single page from remote DB → txt backup
-// Usage: php workspace/automation/pull_remote_page.php --slug=inicio
+/**
+ * pull_remote_page.php - Trae una página desde DB remota → backup .txt
+ * 
+ * DEPRECATED: Este script usa mysql_remote.bat y la tabla fxr_posts.
+ * Para trabajo local, usa: .\wp.bat post list
+ * 
+ * Uso: .\php.bat DAW_bundle\workspace\automation\pull_remote_page.php --slug=inicio
+ */
 
 $options = getopt("", ["slug:"]);
 $slug = $options['slug'] ?? '';
 if (!$slug) die("Usage: --slug=PAGE_SLUG\n");
 
-$target_dir = dirname(__DIR__) . '/content_state/remote/';
+$table_prefix = getenv('DAW_DB_TABLE_PREFIX') ?: 'fxr_';
+$site = getenv('DAW_SITE') ?: 'bibliotheca';
+$target_dir = dirname(__DIR__, 2) . "/site/{$site}/content_state/remote/";
 if (!is_dir($target_dir)) mkdir($target_dir, 0777, true);
 
+echo "--- PULL DESDE REMOTO (prefijo: {$table_prefix}) ---\n";
+echo "ADVERTENCIA: Esto consulta base de datos REMOTA.\n\n";
+
 $sep = "|||SEP|||";
-$query = "SET NAMES utf8mb4; SELECT CONCAT(ID, '$sep', post_title, '$sep', post_name, '$sep', post_content, '$sep', post_type, '$sep', post_status, '$sep', post_modified) FROM fxr_posts WHERE post_name = '$slug' AND post_type = 'page' AND post_status = 'publish' LIMIT 1;";
+$query = "SET NAMES utf8mb4; SELECT CONCAT(ID, '$sep', post_title, '$sep', post_name, '$sep', post_content, '$sep', post_type, '$sep', post_status, '$sep', post_modified) FROM {$table_prefix}posts WHERE post_name = '$slug' AND post_type = 'page' AND post_status = 'publish' LIMIT 1;";
 
 $sql_file = __DIR__ . '/pull_' . $slug . '.sql';
 $out_file = __DIR__ . '/pull_' . $slug . '.out';
@@ -37,7 +48,6 @@ echo "Status: {$parts[5]}\n";
 echo "Modified: {$parts[6]}\n";
 echo "Content length: " . strlen($parts[3]) . " chars\n";
 
-// Save txt backup
 $txt_file = $target_dir . $slug . '.txt';
 file_put_contents($txt_file, $parts[3]);
 echo "Saved to: remote/$slug.txt\n";

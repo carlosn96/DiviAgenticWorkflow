@@ -1,19 +1,27 @@
 <?php
 /**
- * push_to_remote.php - Despliegue seguro de contenidos a Producción (SiteGround)
- * Genera un payload SQL hexadecimal para garantizar integridad total.
+ * push_to_remote.php - Exportador de contenidos para despliegue remoto
+ * 
+ * DEPRECATED: Para despliegue local usa .\wp.bat agentic deploy_page
+ * Este script genera payload SQL para base de datos remota.
+ * 
+ * Uso: .\php.bat DAW_bundle\workspace\automation\push_to_remote.php [--slug=mi-pagina] [--dir=local]
  */
 
 $options = getopt("", ["slug:", "dir:"]);
 $target_slug = $options['slug'] ?? null;
 $dir_name = $options['dir'] ?? 'local';
-$dir = dirname(__DIR__) . '/content_state/' . $dir_name . '/';
+$site = getenv('DAW_SITE') ?: 'bibliotheca';
+$dir = dirname(__DIR__, 2) . "/site/{$site}/content_state/{$dir_name}/";
+$table_prefix = getenv('DAW_DB_TABLE_PREFIX') ?: 'fxr_';
 
 if (!is_dir($dir)) {
     die("Error: El directorio $dir no existe.\n");
 }
 
-echo "--- PREPARANDO DESPLIEGUE A PRODUCCIÓN ---\n";
+echo "--- PREPARANDO DESPLIEGUE A PRODUCCIÓN (prefijo: {$table_prefix}) ---\n";
+echo "ADVERTENCIA: Esto genera SQL para base de datos REMOTA.\n";
+echo "Para trabajo local usa: .\\wp.bat agentic deploy_page\n\n";
 echo "Origen: Carpeta '$dir_name'\n";
 
 if ($target_slug) {
@@ -45,8 +53,7 @@ foreach ($files as $file) {
     
     echo " > Procesando Payload: $slug\n";
     
-    // Actualizamos por slug (post_name) en la tabla fxr_posts
-    $sql_content .= "UPDATE fxr_posts SET ";
+    $sql_content .= "UPDATE {$table_prefix}posts SET ";
     $sql_content .= "post_content = $hex_content, ";
     $sql_content .= "post_modified = NOW(), ";
     $sql_content .= "post_modified_gmt = UTC_TIMESTAMP() ";
@@ -64,4 +71,3 @@ echo "ADVERTENCIA: Estás a punto de actualizar la base de datos de PRODUCCIÓN.
 echo "Comando a ejecutar:\n";
 echo " .\\mysql_remote.bat < workspace\\automation\\push_payload_latest.sql\n";
 echo "--------------------------------------------------\n";
-echo "¿Deseas proceder con el despliegue? (ejecutar manualmente o pedir al agente)\n";

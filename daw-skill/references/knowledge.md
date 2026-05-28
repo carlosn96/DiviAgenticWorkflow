@@ -21,7 +21,7 @@ Para la creación de cualquier página o componente, se DEBE seguir el flujo **D
 
 ## 2. Dependencia del Sistema de Diseño (Obligatorio)
 
-Todo proyecto DAW depende **estrictamente** de un archivo de sistema de diseño precargado en la ruta `workspace/design-system/<proyecto>.json` (ej. `san-pablo-mx.json`).
+Todo proyecto DAW depende **estrictamente** de un archivo de sistema de diseño precargado en la ruta `site/<DAW_SITE>/design-system/divitheme.json`.
 
 **Prohibición Absoluta:** Ningún agente (ni el Design Lead ni el Designer) puede inventar, asumir o hardcodear colores, fuentes, radios o tokens que no estén explícitamente declarados en el archivo del proyecto actual.
 
@@ -50,13 +50,13 @@ Todo proyecto DAW depende **estrictamente** de un archivo de sistema de diseño 
 
 | Directorio / Archivo | Propósito |
 | :--- | :--- |
-| `workspace/pages/*.json` | **Fuente de schemas JSON** de páginas. Aquí se guardan todos los esquemas. |
+| `site/<DAW_SITE>/pages/*.json` | **Fuente de schemas JSON** de páginas. Aquí se guardan todos los esquemas. |
 | `workspace/docs/DEPLOYMENT-GUIDE.md` | Guía de despliegue detallada con referencia de bloques y estilos nativos |
-| `workspace/automation/` | Scripts PHP/PS para sincronización y despliegue a producción |
-| `workspace/content_state/local/` | Volcados de DB local en `.txt` (fuente de verdad de contenido existente) |
-| `app/public/wp-content/themes/divi-agentic-core/inc/core/class-layout-engine.php` | Motor compilador JSON → bloques Divi 5 |
-| `app/public/wp-content/themes/divi-agentic-core/inc/cli/class-agentic-command.php` | Registro de comandos `wp agentic` y validador de esquemas nativos |
-| `.agents/skills/daw-skill/` | Este skill (fuente de verdad del flujo DAW) |
+| `workspace/automation/` | Scripts PHP/PS para sincronización, snapshot local y despliegue |
+| `site/<DAW_SITE>/content_state/local/` | Volcados de DB local en `.txt` (fuente de verdad de contenido existente) |
+| `DAW_bundle/divi-agentic-core/inc/core/class-layout-engine.php` | Motor compilador JSON → bloques Divi 5 |
+| `DAW_bundle/divi-agentic-core/inc/cli/class-agentic-command.php` | Registro de comandos `wp agentic` y validador de esquemas nativos |
+| `DAW_bundle/daw-skill/` | Este skill (fuente de verdad del flujo DAW) |
 
 ---
 

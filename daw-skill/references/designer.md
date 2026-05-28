@@ -1,24 +1,30 @@
 # DAW Module: Phase 3 — Visual Mapping (The Designer)
 
 ## Objetivo
-Traducir el **Plan Semántico del Arquitecto + Dirección Visual del Design Lead** en un JSON Schema nativo compatible con el `Layout_Engine` de Divi 5.5.0, usando **Decoration Attributes** (no CSS classes).
+Traducir el **Plan Semántico del Arquitecto + Dirección Visual del Design Lead** en una **definición de página JSON** compatible con `build_page.php`, que la compilará y desplegará como bloques Divi 5.5.0 nativos.
 
 ---
 
 ## 0. Principio Fundamental
 
-**NO usar `module_class` con clases `sp5-*`.**  
-Toda propiedad visual debe expresarse como atributos nativos de Divi 5 (`decoration`, `headingFont`, `bodyFont`, `spacing`, `border`, etc.) y referencias `{{design:*}}` tokens.
+**NO usar `module_class` con clases CSS.**
+Toda propiedad visual se expresa como atributos nativos de Divi 5 (`decoration`, `headingFont`, `bodyFont`, `border`, `animation`, etc.) y referencias `{{design:*}}` tokens.
 
-**NUEVO FLUJO (DAW v4.1):**
-El Diseñador **YA NO ESCRIBE ARCHIVOS JSON EN CRUDO**. Para evitar errores de sintaxis y facilitar la composición, el Diseñador debe crear un script Python en `workspace/build_nombre_pagina.py` importando `daw_builder.py`, el cual generará el JSON final de forma segura.
+**FLUJO PHP-ONLY (DAW v5):**
+El Diseñador crea un **archivo de definición** en `DAW_bundle/site/<DAW_SITE>/page-defs/<slug>.json`. `build_page.php` lo procesa en un solo paso:
 
-El pipeline es:
 ```
-Script Python (daw_builder) 
-  → Genera Schema JSON (seguro y escapado)
-  → Design_Resolver (resuelve tokens contra design-system.json) 
-  → Layout_Engine (compila a bloques Divi 5 nativos)
+page-defs/<slug>.json
+  → build_page.php (carga módulos + design system + resuelve tokens + expande presets)
+  → site/<DAW_SITE>/pages/<slug>.json (schema compilado, solo con --out)
+  → wp agentic deploy_page (Layout Engine → bloques Divi 5 nativos en WP)
+```
+
+**Un solo comando para construir y desplegar:**
+```powershell
+.\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php `
+  --def=DAW_bundle/site/bibliotheca/page-defs/<slug>.json `
+  --deploy
 ```
 
 ---
@@ -27,9 +33,9 @@ Script Python (daw_builder)
 
 - **NUNCA** usar `et_pb_*` — el motor espera el namespace `divi/*` (bloques Gutenberg nativos).
 - **NUNCA** hardcodear hex colors ni valores en px. Usar siempre `{{design:token}}`.
-- **NUNCA** usar `module_class` con clases `sp5-*`. Usar decoration attributes nativos.
-- **SIEMPRE** crear un script Python `workspace/build_<slug>.py` que genere el schema. El script exportará el JSON final en `workspace/pages/<slug>.json`.
-- **LIBERTAD TOTAL**: Usa `**kwargs` en el `daw_builder` para inyectar cualquier estructura nativa (`decoration`, `animation`, `transform`, `hover`), manteniendo el nivel Premium intacto.
+- **NUNCA** usar `module_class` con clases CSS. Usar decoration attributes nativos.
+- **SIEMPRE** usar el archivo `DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json` como única fuente de tokens y presets.
+- **SIEMPRE** usar `{{design:color:name}}` para colores. `build_page.php` los resuelve a `var(--gcid-name)` si los Global Colors están sincronizados, o a hex como fallback.
 
 ---
 
@@ -37,7 +43,7 @@ Script Python (daw_builder)
 
 > **Guía de decisión semántica:** [`references/blocks-dictionary.md`](references/blocks-dictionary.md)
 > **Índice de bloques:** [`references/blocks-index.json`](references/blocks-index.json) (102 bloques: slug, nombre, categoría, children)
-> **Atributos detallados (bajo demanda):** Ejecutar `php divi-agentic-core/bin/extract-module-meta.php <slug>` para ver tipos, defaults, settings groups y render paths de cualquier bloque.
+> **Atributos detallados (bajo demanda):** Ejecutar `php DAW_bundle/divi-agentic-core/bin/extract-module-meta.php <slug>` para ver tipos, defaults, settings groups y render paths de cualquier bloque.
 
 ### Tabla rápida de bloques por elemento visual
 
@@ -81,36 +87,201 @@ Script Python (daw_builder)
 
 ## 4. Sistema de Design Tokens (`{{design:*}}`)
 
-**IMPORTANTE:** El Diseñador no puede inventar colores ni fuentes. Debe consultar el archivo `workspace/design-system/<proyecto>.json` y usar ÚNICAMENTE los tokens allí definidos.
+**IMPORTANTE:** El Diseñador no puede inventar colores ni fuentes. Debe consultar el archivo `DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json` y usar ÚNICAMENTE los tokens allí definidos.
 
 Los tokens mapean a las propiedades declaradas en el nodo `tokens` de ese JSON:
 
-| Uso en el Schema | Resuelve a |
-| :--- | :--- |
-| `{{design:color:ink}}` | Valor definido en `tokens.color.ink` |
-| `{{design:color:accent}}` | Valor definido en `tokens.color.accent` |
-| `{{design:font:display}}` | Valor definido en `tokens.font.display` |
-| `{{design:radius:lg}}` | Valor definido en `tokens.radius.lg` (ej. 16px) |
-| `{{design:space:xl}}` | Valor definido en `tokens.space.xl` (ej. 48px) |
+| Uso en el Schema | Sin Global Colors | Con Global Colors sincronizados |
+| :--- | :--- | :--- |
+| `{{design:color:ink}}` | `#1A1814` (hex) | `$variable({"type":"color","value":{"name":"gcid-ink","settings":{}}})$` → editable en VB |
+| `{{design:color:accent}}` | `#A67C40` (hex) | `$variable({"type":"color","value":{"name":"gcid-accent","settings":{}}})$` → editable en VB |
+
+> **IMPORTANTE (Two-Layer Resolution)**:
+> 1. **build_page.php**: `{{design:color:*}}` → `var(--gcid-*)` (si hay sync previo; fallback a hex si no).
+> 2. **Layout Engine** (`convert_gcid_to_variable_syntax`): `var(--gcid-*)` → `$variable({"type":"color","value":{"name":"gcid-*","settings":{}}})$` antes de `json_encode`.
+>
+> Divi 5 VB requiere la sintaxis `$variable()` para reconocer colores globales. El Layout Engine aplica la conversión automáticamente al serializar a JSON en `post_content`. Si no hay sync, resuelve a hex como fallback en ambos pasos.
 
 *Nota: Para lograr el estándar premium, el Diseñador debe abusar de los tokens de espaciado grande (`space:lg`, `space:xl`) y los radios orgánicos (`radius:lg`, `radius:full`).*
 
 ---
 
-## 5. Presets del Sistema de Diseño
+### 4.1. Mapeo al Customizer de Divi (Obligatorio)
 
-El archivo `<proyecto>.json` también incluye un objeto `presets` prefabricado (ej. configuraciones complejas de sombras y padding). 
+El design system JSON debe incluir una sección `customizer` que mapee los tokens de color a los 5 slots de color global del Customizer de Divi. El `global_colors sync` lee esta sección y actualiza automáticamente los colores del Customizer.
 
-Si el JSON incluye el preset `section.hero-dark` o `module.card`, en el schema se aplican así:
+**Estructura obligatoria en `<proyecto>.json`:**
+
+| Clave JSON | Slot de Divi | Propósito |
+|---|---|---|
+| `primary` | `gcid-primary-color` | Color principal (botones, enlaces) |
+| `secondary` | `gcid-secondary-color` | Color secundario |
+| `heading` | `gcid-heading-color` | Color de títulos |
+| `body` | `gcid-body-color` | Color de texto de cuerpo |
+| `link` | `gcid-link-color` | Color de enlaces |
+
+Los valores deben ser nombres de tokens definidos en `tokens.color`:
 
 ```json
 {
-  "presets": ["section:hero-dark"],
-  "rows": [...]
+  "tokens": {
+    "color": {
+      "accent": "#A67C40",
+      "premium": "#D4A96A",
+      "ink": "#1A1814",
+      "parchment-700": "#5C5244"
+    }
+  },
+  "customizer": {
+    "primary":   "accent",
+    "secondary": "premium",
+    "heading":   "ink",
+    "body":      "parchment-700",
+    "link":      "accent"
+  }
 }
 ```
 
-**Regla de Calidad Premium:** Si el JSON no tiene un preset adecuado, el Diseñador debe construir un bloque `decoration` que asegure calidad ultra-premium (paddings amplios, sombras de gran difusión, border-radius redondeados). El resolver mergea el preset como base; las claves explícitas en `decoration` vencen al preset.
+**Regla:** si la sección `customizer` falta, el sync omite el mapeo — los colores del Customizer quedan en sus valores por defecto. Para activarlos, agrega el bloque y ejecuta `wp agentic global_colors sync --force`.
+
+---
+
+### 4.2. Design System Creator (Generación Automatizada)
+
+El script `DAW_bundle/workspace/build_design_system.py` genera un `divitheme.json` completo en `site/<DAW_SITE>/design-system/` desde un set mínimo de variables.
+
+**Flujo de trabajo:**
+
+1. Crea un archivo JSON con solo las variables que quieras personalizar:
+
+```json
+{
+  "brand_name": "Mi Marca",
+  "brand_description": "Descripción premium",
+  "color_accent": "#8B6F47",
+  "font_display": "'Playfair Display', Georgia, serif",
+  "font_ui": "'Inter', system-ui, sans-serif"
+}
+```
+
+2. Ejecuta el generador:
+
+```powershell
+python DAW_bundle/workspace/build_design_system.py `
+  --vars mi-proyecto-vars.json `
+  --out DAW_bundle/site/bibliotheca/design-system/divitheme.json
+```
+
+3. Sincroniza colores globales:
+
+```powershell
+wp agentic global_colors sync `
+  --design-system="DAW_bundle/site/bibliotheca/design-system/divitheme.json"
+```
+
+**Variables disponibles (50 total):**
+
+| Grupo | Variables | Default ultra-pro |
+|---|---|---|
+| Brand | `brand_name`, `brand_description` | "Ultra Pro Design System" |
+| Colores (26) | `color_accent`, `color_ink`, `color_parchment_50`… | Paleta neutral-cálida con acento dorado |
+| Tipografía (3) | `font_display`, `font_body`, `font_ui` | Cormorant Garamond / Crimson Pro / DM Sans |
+| Radios (5) | `radius_sm`, `radius_md`, `radius_lg`, `radius_xl`, `radius_full` | 2px / 4px / 8px / 16px / 100px |
+| Espaciado (9) | `space_xs`…`space_5xl` | 8px → 160px |
+| Customizer (5) | `customizer_primary`…`customizer_link` | accent / premium / ink / parchment-700 / accent |
+
+**Presets generados (33 total):**
+
+- **7 secciones**: hero-dark, hero-image-dark, trust-bar, cta-epic, light, dark, white
+- **16 textos**: eyebrow, hero-title, display-xl, display-md, headline, headline-3, lead, body-md, stat-num, stat-label, quote-serif, caption…
+- **10 módulos**: card, feature-card, stat-item, testimonial-card, image-shadow, accent-line, btn-primary, btn-ghost, btn-outline-light, btn-cta-dark
+
+**Regla:** Si solo necesitas cambiar el color acento, provees `color_accent` y `color_accent_hover`. Las 24 variables de color restantes toman su valor ultra-pro por defecto. El sistema completo queda funcional.
+
+---
+
+## 5. Formato de Definición de Página (`page-defs/<slug>.json`)
+
+El Diseñador crea este archivo. `build_page.php` lo procesa en su totalidad.
+
+```json
+{
+  "title": "Título de la Página",
+  "slug": "mi-pagina",
+  "description": "Opcional",
+  "sections": [
+    {
+      "presets": ["section:hero-dark"],
+      "parallax": "on",
+      "bg_gradient": {
+        "type": "linear", "direction": "135deg",
+        "overlaysImage": "on",
+        "stops": [
+          {"color": "rgba(15,23,42,0.92)", "position": "0"},
+          {"color": "rgba(15,23,42,0.35)", "position": "100"}
+        ]
+      },
+      "rows": [
+        {
+          "column_structure": "4_4",
+          "modules": [
+            {
+              "type": "divi/text",
+              "presets": ["text:eyebrow"],
+              "content": "<p>Etiqueta superior</p>"
+            },
+            {
+              "type": "divi/text",
+              "presets": ["text:display-xl"],
+              "content": "<h1>Título <em>Principal</em></h1>"
+            }
+          ]
+        },
+        {
+          "column_structure": "1_2,1_2",
+          "columns": [
+            {
+              "type": "1_2",
+              "modules": [
+                {
+                  "type": "divi/button",
+                  "presets": ["module:btn-primary"],
+                  "button_text": "Acción principal",
+                  "button_url": "/contacto"
+                }
+              ]
+            },
+            {
+              "type": "1_2",
+              "modules": [
+                {
+                  "type": "divi/blurb",
+                  "presets": ["module:feature-card"],
+                  "title": "Feature",
+                  "icon": "&#xe03a;",
+                  "content": "<p>Descripción breve de la característica.</p>"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+**Formato de definición:**
+- `sections[]` — arreglo de secciones
+  - `presets[]` — refs a presets del design system (`section:*`, `text:*`, `module:*`)
+  - `rows[]` — arreglo de filas
+    - `column_structure` — string como `"4_4"`, `"1_2,1_2"`, `"1_3,1_3,1_3"`
+    - `modules[]` — (modo simple) módulos en columna única (4_4 implícito)
+    - `columns[]` — (modo explícito) arreglo de columnas, cada una con `type` y `modules[]`
+    - `module.type` — nombre del módulo Divi 5: `divi/text`, `divi/blurb`, etc.
+    - `module.presets[]` — presets a aplicar (se expanden inline vía deep_merge)
+    - `module.decoration` — decoration object (spacing, border, boxShadow, animation, etc.)
+    - `animation`, `scroll`, `transform` — motion presets como string (ej: `"fade-in"`)
 
 ---
 
@@ -131,137 +302,137 @@ Si el JSON incluye el preset `section.hero-dark` o `module.card`, en el schema s
 | Cita / Quote grande | `divi/text` | `"presets": ["text:quote-serif"]` |
 | Línea decorativa | `divi/divider`| `"presets": ["module:accent-line"]` |
 | Tarjeta testimonial | `divi/testimonial`| `"presets": ["module:testimonial-card"]` |
-| Tarjeta blanca | `divi/text` | `decoration: { background: { color: "{{design:color:white}}" }, border: { radius: ... }, boxShadow: ... }` |
+| Tarjeta blanca | `divi/text` | `decoration: { background: { color: "{{design:color:surface-white}}" }, border: { radius: ... }, boxShadow: ... }` |
 | Animaciones | Todos | Las animaciones están integradas en los presets. Para animación personalizada: `"decoration": { "animation": { "desktop": { "value": { "style": "slide", "direction": "bottom", "duration": "700ms", "delay": "0ms", "intensity": "15%" } } } }` |
 
 ---
 
-## 7. Construyendo la página con DAW Builder SDK (Python)
+## 7. Patrones de Composición Ultra-Premium (Definiciones JSON)
 
-```python
-import sys, os
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from daw_builder import Page, Section, Row, Module
+Ejemplos de definiciones de sección para los patrones que producen el mayor impacto visual:
 
-page = Page("Mi Página")
+### Patrón: Hero Tipográfico con Imagen de Fondo
 
-hero = Section(
-    presets=["section:hero-image-dark"],
-    background_image="{{SITE_URL}}/wp-content/uploads/2026/05/hero-bg.jpg"
-)
-r1 = Row("1_2,1_2")
-r1.add_module(0, Module(
-    "divi/text",
-    headingFont={
-        "h1": {"font": {"desktop": {"value": {
-            "fontFamily": "{{design:font:display}}",
-            "color": "{{design:color:white}}",
-            "size": "48px", "weight": "700"
-        }}}}
-    },
-    content="<h1>Título <em>Principal</em></h1>"
-))
-r1.add_module(0, Module(
-    "divi/code",
-    content="<a href='/contacto' style='...'>Contactar</a>"
-))
-r1.add_module(1, Module(
-    "divi/image",
-    src="{{SITE_URL}}/wp-content/uploads/2026/05/imagen.png",
-    alt="Descripción"
-))
-
-hero.add_row(r1)
-page.add_section(hero)
-
-page.export(os.path.join(os.path.dirname(os.path.abspath(__file__)), "pages", "mi-pagina.json"))
-```
-
----
-
-## 8. Patrones de Composición Ultra-Premium (Ejemplos Python)
-
-Ejemplos de scripts para los patrones que producen el mayor impacto visual:
-
-### Patrón: Hero Tipográfico de Clase Mundial con Imagen de Fondo
-
-```python
-hero = Section(
-    presets=["section:hero-image-dark"],
-    background_image="{{SITE_URL}}/wp-content/uploads/2026/04/La_Biblia_PW-scaled.jpg",
-    bg_position="center 40%",
-    bg_gradient={
-        "type": "linear", "direction": "135deg", "overlaysImage": "on",
-        "stops": [
-            { "color": "rgba(0,19,56,0.90)", "position": "0%" },
-            { "color": "rgba(0,19,56,0.30)", "position": "100%" }
-        ]
+```json
+{
+  "presets": ["section:hero-image-dark"],
+  "background_image": "{{SITE_URL}}/wp-content/uploads/hero-bg.jpg",
+  "bg_position": "center 40%",
+  "bg_gradient": {
+    "type": "linear", "direction": "135deg", "overlaysImage": "on",
+    "stops": [
+      {"color": "rgba(0,19,56,0.90)", "position": "0"},
+      {"color": "rgba(0,19,56,0.30)", "position": "100"}
+    ]
+  },
+  "rows": [
+    {
+      "column_structure": "4_4",
+      "modules": [
+        {"type": "divi/text", "presets": ["text:eyebrow"], "content": "<p>Etiqueta</p>"},
+        {"type": "divi/text", "presets": ["text:display-xl"], "content": "<h1>Título Principal</h1>"},
+        {"type": "divi/button", "presets": ["module:btn-primary"], "button_text": "Comenzar", "button_url": "/contacto"}
+      ]
     }
-)
-r1 = Row("4_4")
-r1.add_module(0, Module("divi/text", presets=["text:eyebrow"], content="<p>Etiqueta</p>"))
-hero.add_row(r1)
+  ]
+}
 ```
+
 ### Patrón: Barra de Stats de Autoridad
 
-```python
-trust = Section(presets=["section:dark"])
-r2 = Row("1_3,1_3,1_3")
-stats = [("15+", "Años"), ("50", "Expertos"), ("100%", "Satisfechos")]
-for i, (num, title) in enumerate(stats):
-    r2.add_module(i, Module(
-        "divi/number-counter", presets=["module:stat-item"],
-        title=title, number=num
-    ))
-trust.add_row(r2)
+```json
+{
+  "presets": ["section:trust-bar"],
+  "rows": [
+    {
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {"type": "1_3", "modules": [
+          {"type": "divi/number-counter", "presets": ["module:stat-item"], "title": "Años de experiencia", "number": "15"}
+        ]},
+        {"type": "1_3", "modules": [
+          {"type": "divi/number-counter", "presets": ["module:stat-item"], "title": "Clientes activos", "number": "500"}
+        ]},
+        {"type": "1_3", "modules": [
+          {"type": "divi/number-counter", "presets": ["module:stat-item"], "title": "Proyectos completados", "number": "1200"}
+        ]}
+      ]
+    }
+  ]
+}
 ```
 
-### Patrón: Grid de Features con Hover Elevación
+### Patrón: Grid de Features con Hover
 
-```python
-features = Section(presets=["section:light"])
-grid = Row("1_3,1_3,1_3")
-servicios = [
-    ("Servicio Uno", "&#xe03a;", "Descripción breve..."),
-    ("Servicio Dos", "&#xe03b;", "Descripción breve..."),
-    ("Servicio Tres", "&#xe03c;", "Descripción breve...")
-]
-for i, (title, icon, text) in enumerate(servicios):
-    grid.add_module(i, Module(
-        "divi/blurb",
-        presets=["module:feature-card"],
-        title=title, icon=icon, content=f"<p>{text}</p>",
-        decoration={
-            "animation": {"desktop": {"value": {"style": "slide", "delay": f"{i*100}ms"}}}
-        }
-    ))
-features.add_row(grid)
+```json
+{
+  "presets": ["section:light"],
+  "rows": [
+    {
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {"type": "1_3", "modules": [
+          {"type": "divi/blurb", "presets": ["module:feature-card"],
+           "title": "Servicio Uno", "icon": "&#xe03a;", "content": "<p>Descripci&oacute;n breve.</p>",
+           "decoration": {"animation": {"desktop": {"value": {"style": "slide", "direction": "bottom", "delay": "0ms"}}}}}
+        ]},
+        {"type": "1_3", "modules": [
+          {"type": "divi/blurb", "presets": ["module:feature-card"],
+           "title": "Servicio Dos", "icon": "&#xe03b;", "content": "<p>Descripci&oacute;n breve.</p>",
+           "decoration": {"animation": {"desktop": {"value": {"style": "slide", "direction": "bottom", "delay": "100ms"}}}}}
+        ]},
+        {"type": "1_3", "modules": [
+          {"type": "divi/blurb", "presets": ["module:feature-card"],
+           "title": "Servicio Tres", "icon": "&#xe03c;", "content": "<p>Descripci&oacute;n breve.</p>",
+           "decoration": {"animation": {"desktop": {"value": {"style": "slide", "direction": "bottom", "delay": "200ms"}}}}}
+        ]}
+      ]
+    }
+  ]
+}
 ```
 
 ### Patrón: CTA Final de Alto Impacto
 
-```python
-cta = Section(
-    presets=["section:hero-dark"],
-    decoration={ "spacing": { "desktop": { "value": { "padding": { "top": "{{design:space:3xl}}", "bottom": "{{design:space:3xl}}" } } } } }
-)
-r_cta = Row("4_4")
-r_cta.add_module(0, Module("divi/text", presets=["text:headline-light"], content="<h2>¿Listo para comenzar?</h2>"))
-r_cta.add_module(0, Module("divi/text", presets=["text:lead"], content="<p>Únete hoy mismo.</p>"))
-r_cta.add_module(0, Module("divi/button", presets=["module:btn-primary"], button_text="Contactar", button_url="/contacto",
-    decoration={ "spacing": { "desktop": { "value": { "margin": { "top": "{{design:space:lg}}" } } } } }
-))
-cta.add_row(r_cta)
+```json
+{
+  "presets": ["section:hero-dark"],
+  "decoration": {
+    "spacing": {"desktop": {"value": {"padding": {"top": "{{design:space:3xl}}", "bottom": "{{design:space:3xl}}"}}}}
+  },
+  "rows": [
+    {
+      "column_structure": "4_4",
+      "modules": [
+        {"type": "divi/text", "presets": ["text:headline-light"], "content": "<h2>&iquest;Listo para comenzar?</h2>"},
+        {"type": "divi/text", "presets": ["text:lead"], "content": "<p>Trabajemos juntos en tu pr&oacute;ximo proyecto.</p>"},
+        {"type": "divi/button", "presets": ["module:btn-primary"], "button_text": "Contactar ahora", "button_url": "/contacto",
+         "decoration": {"spacing": {"desktop": {"value": {"margin": {"top": "{{design:space:lg}}"}}}}}}
+      ]
+    }
+  ]
+}
 ```
 
 ---
 
-## 10. Despliegue (El Ingeniero)
+## 8. Build + Deploy (El Ingeniero)
 
 ```powershell
-.\wp.bat agentic deploy_page `
-  --title="T&iacute;tulo de la P&aacute;gina" `
-  --slug="slug-de-pagina" `
-  --schema="workspace/pages/slug-de-pagina.json" `
-  --design-system="workspace/design-system/proyecto.json"
+# Un solo comando: construye el schema y despliega en WordPress
+.\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php `
+  --def=DAW_bundle/site/bibliotheca/page-defs/<slug>.json `
+  --deploy
+
+# Opciones adicionales:
+# --out=path.json         escribir schema sin desplegar (debug)
+# --no-resolve            schema raw sin expandir presets/tokens
+# --deploy --front        desplegar y establecer como portada
+# --site-url="https://..."  URL explícita (se auto-detecta con --deploy)
 ```
+
+Ver [`references/engineer.md`](references/engineer.md) para el flujo completo con Global Colors, verificación de deployment y troubleshooting.
+
+> [!CAUTION]
+> **PROHIBIDO** usar `et_pb_*` (shortcodes Divi 4). El motor `Layout_Engine` espera únicamente el namespace `divi/*`.
+> **PROHIBIDO** usar `divi/code` como comodín visual. Consultar `blocks-dictionary.md` primero.

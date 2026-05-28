@@ -66,6 +66,170 @@ class Agentic_Command {
     }
 
     /**
+     * Syncs design-system color tokens to Divi 5 Global Colors (gcid-*).
+     *
+     * ## OPTIONS
+     *
+     * <subcommand>
+     * : Subcommand: sync, status, list
+     *
+     * [--design-system=<path>]
+     * : Path to the design-system JSON file.
+     *
+     * [--force]
+     * : Force re-sync even if hash matches.
+     *
+     * @when after_wp_load
+     */
+    public function global_colors( $args, $assoc_args ) {
+        $subcommand = $args[0] ?? 'status';
+        $ds_path    = $assoc_args['design-system'] ?? '';
+        $colors_ds  = [];
+        $ds_hash    = '';
+        $key_map    = [];
+
+        if ( ! empty( $ds_path ) ) {
+            if ( ! file_exists( $ds_path ) ) {
+                \WP_CLI::error( "Design system not found: {$ds_path}" );
+            }
+            $raw = file_get_contents( $ds_path );
+            $raw = ltrim( $raw, "\xEF\xBB\xBF" );
+            $ds  = json_decode( $raw, true );
+            if ( json_last_error() !== JSON_ERROR_NONE ) {
+                \WP_CLI::error( 'Design system JSON error: ' . json_last_error_msg() );
+            }
+
+            $color_tokens       = $ds['tokens']['color'] ?? [];
+            $token_count        = count( $color_tokens );
+            foreach ( $color_tokens as $key => $hex ) {
+                $gcid                 = 'gcid-' . sanitize_title( $key );
+                $key_map[ $gcid ]     = $key;
+                $colors_ds[ $gcid ]   = [
+                    'color'  => $hex,
+                    'active' => 'yes',
+                ];
+            }
+
+            // Auto-map design system tokens to Divi 5 Customizer colors.
+            // Reads the "customizer" section from design system JSON:
+            //   "customizer": { "primary": "accent", "secondary": "premium", ... }
+            // Maps short slot names → Divi gcid IDs, then reads the referenced
+            // token hex. No hardcoded mapping needed — change the JSON, not PHP.
+            $customizer_slots = [
+                'primary'   => 'gcid-primary-color',
+                'secondary' => 'gcid-secondary-color',
+                'heading'   => 'gcid-heading-color',
+                'body'      => 'gcid-body-color',
+                'link'      => 'gcid-link-color',
+            ];
+            $customizer_map = $ds['customizer'] ?? [];
+            foreach ( $customizer_map as $slot => $token_key ) {
+                $gcid = $customizer_slots[ $slot ] ?? '';
+                if ( ! empty( $gcid ) && isset( $color_tokens[ $token_key ] ) ) {
+                    $key_map[ $gcid ]   = $token_key . ' (customizer)';
+                    $colors_ds[ $gcid ] = [
+                        'color'  => $color_tokens[ $token_key ],
+                        'active' => 'yes',
+                    ];
+                }
+            }
+
+            $ds_hash = md5( json_encode( $colors_ds ) );
+        }
+
+        $stored_hash = get_option( '_dac_gcid_hash', '' );
+
+        switch ( $subcommand ) {
+            case 'sync':
+                if ( empty( $colors_ds ) ) {
+                    \WP_CLI::error( 'No color tokens found in design system.' );
+                }
+                if ( $ds_hash === $stored_hash && ! isset( $assoc_args['force'] ) ) {
+                    \WP_CLI::success( 'Global colors already in sync. Use --force to re-sync.' );
+                    return;
+                }
+                if ( ! class_exists( '\ET\Builder\Packages\GlobalData\GlobalData' ) ) {
+                    \WP_CLI::error( 'Divi 5 GlobalData class not found. Is Divi 5 active?' );
+                }
+
+                // Clear existing global_colors first to prevent accumulation.
+                // Divi 5 set_global_colors(…, true) merges by default (array_merge),
+                // so every sync would add duplicates without this cleanup.
+                $existing_global_data = maybe_unserialize( et_get_option( 'et_global_data' ) );
+                if ( is_array( $existing_global_data ) && isset( $existing_global_data['global_colors'] ) ) {
+                    $existing_global_data['global_colors'] = [];
+                    et_update_option( 'et_global_data', $existing_global_data );
+                }
+
+                \ET\Builder\Packages\GlobalData\GlobalData::set_global_colors( $colors_ds, true );
+                update_option( '_dac_gcid_hash', $ds_hash );
+                \WP_CLI::success( $token_count . ' global colors synced + 5 Customizer defaults overridden with design system values.' );
+                $this->_print_gcid_table( $colors_ds, $key_map );
+                break;
+
+            case 'status':
+                if ( empty( $ds_path ) ) {
+                    $this->_show_gcids();
+                    break;
+                }
+                if ( ! empty( $stored_hash ) && $ds_hash === $stored_hash ) {
+                    \WP_CLI::success( 'Global colors SYNCED with design system.' );
+                    $this->_print_gcid_table( $colors_ds, $key_map );
+                } elseif ( ! empty( $stored_hash ) ) {
+                    \WP_CLI::warning( 'Global colors OUT OF SYNC.' );
+                    \WP_CLI::log( 'Run: wp agentic global_colors sync --design-system="' . $ds_path . '"' );
+                    $this->_print_gcid_table( $colors_ds, $key_map );
+                } else {
+                    \WP_CLI::warning( 'No global colors synced yet.' );
+                    \WP_CLI::log( 'Run: wp agentic global_colors sync --design-system="path/to/divitheme.json"' );
+                }
+                break;
+
+            case 'list':
+                $this->_show_gcids();
+                break;
+
+            default:
+                \WP_CLI::error( "Unknown subcommand: {$subcommand}. Use: sync, status, list" );
+        }
+    }
+
+    private function _print_gcid_table( array $colors, array $key_map ): void {
+        $items = [];
+        foreach ( $colors as $gcid => $data ) {
+            $label = $key_map[ $gcid ] ?? $gcid;
+            $items[] = [
+                'gcid'  => $gcid,
+                'token' => "{{design:color:{$label}}}",
+                'hex'   => $data['color'],
+                'css'   => "var(--{$gcid})",
+            ];
+        }
+        \WP_CLI\Utils\format_items( 'table', $items, [ 'gcid', 'token', 'hex', 'css' ] );
+    }
+
+    private function _show_gcids(): void {
+        if ( ! class_exists( '\ET\Builder\Packages\GlobalData\GlobalData' ) ) {
+            \WP_CLI::error( 'Divi 5 GlobalData class not found.' );
+        }
+        $colors = \ET\Builder\Packages\GlobalData\GlobalData::get_global_colors();
+        if ( empty( $colors ) ) {
+            \WP_CLI::log( 'No global colors registered in Divi 5.' );
+            return;
+        }
+        $items = [];
+        foreach ( $colors as $gcid => $data ) {
+            $items[] = [
+                'gcid'  => $gcid,
+                'color' => $data['color'] ?? '—',
+                'status' => $data['status'] ?? '—',
+            ];
+        }
+        \WP_CLI::log( 'Divi 5 Global Colors:' );
+        \WP_CLI\Utils\format_items( 'table', $items, [ 'gcid', 'color', 'status' ] );
+    }
+
+    /**
      * Deploys a page from a JSON schema.
      *
      * ## OPTIONS
@@ -107,9 +271,22 @@ class Agentic_Command {
 
         // ------------- DESIGN TOKEN RESOLUTION -------------
         if ( isset( $assoc_args['design-system'] ) ) {
+            $gcid_hash = get_option( '_dac_gcid_hash', '' );
+            if ( ! empty( $gcid_hash ) ) {
+                \WP_CLI::log( 'Global colors active — tokens resolve to var(--gcid-*)' );
+            }
+
             $resolver = new \DAC\Core\Design_Resolver( $assoc_args['design-system'] );
             $raw = $resolver->resolve_schema_string( $raw );
             \WP_CLI::log( "Design tokens resolved from: {$assoc_args['design-system']}" );
+
+            if ( empty( $gcid_hash ) ) {
+                $ds_colors = $resolver->get_design()['tokens']['color'] ?? [];
+                if ( ! empty( $ds_colors ) ) {
+                    \WP_CLI::warning( 'Color tokens will resolve to hex — no global colors synced.' );
+                    \WP_CLI::log( '  Run: wp agentic global_colors sync --design-system="' . $assoc_args['design-system'] . '"' );
+                }
+            }
         }
         // ----------------------------------------------------
 

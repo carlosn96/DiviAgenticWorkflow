@@ -14,11 +14,13 @@ param (
 $ErrorActionPreference = "Stop"
 
 # Default configuration
-$WPCLI = ".\wp.bat"
+$WPCLI = "DAW_bundle\wp.bat"
 $ProjectRoot = $PWD.Path
 
-# Resolving configuration from .env if present
-$EnvFile = Join-Path $PWD ".env"
+# Resolve project root (DAW_bundle is one level below project root)
+$DAWRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path
+$ProjectRoot = (Resolve-Path (Join-Path $DAWRoot "..")).Path
+$EnvFile = Join-Path $ProjectRoot ".env"
 if (Test-Path $EnvFile) {
     Get-Content $EnvFile | Where-Object { $_ -match '^\s*([^#]+?)\s*=\s*(.*)$' } | ForEach-Object {
         $varName = $Matches[1].Trim()
@@ -27,7 +29,7 @@ if (Test-Path $EnvFile) {
         if ($varName -eq "PROJECT_ROOT" -and $varValue -ne ".") { $ProjectRoot = Resolve-Path $varValue }
     }
 } else {
-    Write-Host "NOTE: No .env file found. Using defaults ($WPCLI and PWD). See .env.example" -ForegroundColor Yellow
+    Write-Host "NOTE: No .env found at $EnvFile. Using defaults ($WPCLI and PWD)." -ForegroundColor Yellow
 }
 
 Write-Host "--- DAW Execution: Deploying Page '$Title' ---" -ForegroundColor Cyan
