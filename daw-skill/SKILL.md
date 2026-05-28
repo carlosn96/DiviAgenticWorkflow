@@ -74,7 +74,7 @@ Este skill es **100% autocontenido** para el proyecto local `divitheme`. Prioriz
 
 | Recurso | Archivo | Propósito |
 | :--- | :--- | :--- |
-| Diccionario de bloques | [`references/blocks-dictionary.md`](references/blocks-dictionary.md) | Guía completa de 94+ bloques, cuándo usar cada uno, atributos y ejemplos |
+| Diccionario de bloques | [`references/blocks-dictionary.md`](references/blocks-dictionary.md) | Guía completa de 102 módulos, cuándo usar cada uno, atributos y ejemplos |
 | Estándares del proyecto | [`references/knowledge.md`](references/knowledge.md) | Variables CSS, directorios, reglas técnicas |
 | Lógica del Diseñador | [`references/designer.md`](references/designer.md) | Mapeo semántico → bloques, tokens, presets, decoration |
 | Lógica del Ingeniero | [`references/engineer.md`](references/engineer.md) | Comandos CLI, deploy, verificación, producción |

@@ -260,7 +260,7 @@ Si no hay gcids sincronizados, `deploy_page` emite warning y resuelve a hex.
 | Recurso | Path (desde DAW_bundle/) | Propósito |
 |---------|--------------------------|-----------|
 | SKILL.md (4 fases) | `daw-skill/SKILL.md` | Orquestación completa análisis → diseño → mapeo → CLI |
-| Diccionario de bloques | `daw-skill/references/blocks-dictionary.md` | Guía de 94+ bloques Divi 5 |
+| Diccionario de bloques | `daw-skill/references/blocks-dictionary.md` | Guía de 102 módulos Divi 5 |
 | Lógica del Diseñador | `daw-skill/references/designer.md` | Mapeo semántico → bloques, tokens, decoration |
 | Lógica del Ingeniero | `daw-skill/references/engineer.md` | Comandos CLI, deploy, verificación |
 | Build page (PHP) | `divi-agentic-core/bin/build_page.php` | Pipeline unificado PHP (usa `DAW_SITE` env) |

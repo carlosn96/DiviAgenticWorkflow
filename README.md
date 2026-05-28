@@ -61,6 +61,8 @@ php DAW_bundle/divi-agentic-core/bin/build_page.php ^
 | `--out=<file>` | Escribir schema resuelto sin desplegar |
 | `--deploy` | Construir + desplegar vía `wp agentic deploy_page` |
 | `--front` | Establecer como portada (solo con `--deploy`) |
+| `--verify` | Ejecutar verificación post-deploy (solo con `--deploy`) |
+| `--url=<url>` | URL pública para verificación visual (implica `--verify`) |
 | `--site-url=<url>` | URL base para `{{SITE_URL}}` (auto-detectado con `--deploy`) |
 | `--no-resolve` | Schema raw sin expandir presets/tokens (debug) |
 | `--help` | Ayuda |

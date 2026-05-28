@@ -10,7 +10,7 @@ Traducir el **Plan Semántico del Arquitecto + Dirección Visual del Design Lead
 **NO usar `module_class` con clases CSS.**
 Toda propiedad visual se expresa como atributos nativos de Divi 5 (`decoration`, `headingFont`, `bodyFont`, `border`, `animation`, etc.) y referencias `{{design:*}}` tokens.
 
-**FLUJO PHP-ONLY (DAW v5):**
+**FLUJO PHP-ONLY (DAW v4.0):**
 El Diseñador crea un **archivo de definición** en `DAW_bundle/site/<DAW_SITE>/page-defs/<slug>.json`. `build_page.php` lo procesa en un solo paso:
 
 ```
@@ -168,8 +168,9 @@ El script `DAW_bundle/workspace/build_design_system.py` genera un `divitheme.jso
 
 ```powershell
 python DAW_bundle/workspace/build_design_system.py `
-  --vars mi-proyecto-vars.json `
-  --out DAW_bundle/site/bibliotheca/design-system/divitheme.json
+  --vars DAW_bundle/site/<DAW_SITE>/brand/_design_vars.json `
+  --presets DAW_bundle/site/<DAW_SITE>/brand/_design_presets.json `
+  --out DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json
 ```
 
 3. Sincroniza colores globales:

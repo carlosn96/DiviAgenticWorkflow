@@ -91,7 +91,7 @@ Cuando el Diseñador necesita confirmar la serialización exacta de un bloque, e
 ```powershell
 .\php.bat DAW_bundle/divi-agentic-core/bin/extract-module-meta.php <slug>
 ```
-Ejemplo: `.\php.bat DAW_bundle\divi-agentic-core\bin\extract-module-meta.php slide` — muestra todos los atributos, tipos, settings groups y paths de render que el Layout_Engine usa para serializar.
+Ejemplo: `.\php.bat DAW_bundle/divi-agentic-core/bin/extract-module-meta.php slide` — muestra todos los atributos, tipos, settings groups y paths de render que el Layout_Engine usa para serializar.
 
 ### Paso 3: Limpiar la caché de Divi
 
@@ -191,19 +191,21 @@ Para despliegues repetibles, usa directamente `build_page.php --deploy`:
 .\php.bat DAW_bundle\workspace\automation\universal_clean.php
 ```
 
-### Despliegue a producción (Hex-Safe)
+### Despliegue a producción (flujo local → remoto)
+
+**Nota:** El pipeline de deploy remoto está pendiente de revalidación. Ver `AGENTS.md` §3.2 (raíz del proyecto) para el estado actual de la conexión remota.
 
 **Página ya existente en producción:**
 ```powershell
 .\php.bat DAW_bundle\workspace\automation\push_to_remote.php --slug=slug-de-pagina --dir=local
-Get-Content push_payload.sql | .\mysql_remote.bat
 ```
 
 **Página nueva en producción:**
 ```powershell
 .\php.bat DAW_bundle\workspace\automation\create_page_remote.php --slug=slug-de-pagina --title="Título"
-Get-Content create_slug-de-pagina_remote.sql | .\mysql_remote.bat
 ```
+
+> El comando `mysql_remote.bat` no está disponible como herramienta válida hasta que se confirme el servidor remoto y la conexión sea revalidada.
 
 ---
 

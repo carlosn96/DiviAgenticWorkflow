@@ -50,8 +50,8 @@ Todo proyecto DAW depende **estrictamente** de un archivo de sistema de diseño 
 
 | Directorio / Archivo | Propósito |
 | :--- | :--- |
-| `site/<DAW_SITE>/pages/*.json` | **Fuente de schemas JSON** de páginas. Aquí se guardan todos los esquemas. |
-| `workspace/docs/DEPLOYMENT-GUIDE.md` | Guía de despliegue detallada con referencia de bloques y estilos nativos |
+| `site/<DAW_SITE>/page-defs/*.json` | **⭐ Entrada del pipeline**: JSON semántico del diseñador con tokens `{{design:*}}`. Único punto de entrada para construir páginas. |
+| `site/<DAW_SITE>/pages/*.json` | **Salida opcional** de `build_page.php --out`. Schemas resueltos para debug/inspección. No participa en el pipeline normal. |
 | `workspace/automation/` | Scripts PHP/PS para sincronización, snapshot local y despliegue |
 | `site/<DAW_SITE>/content_state/local/` | Volcados de DB local en `.txt` (fuente de verdad de contenido existente) |
 | `DAW_bundle/divi-agentic-core/inc/core/class-layout-engine.php` | Motor compilador JSON → bloques Divi 5 |
