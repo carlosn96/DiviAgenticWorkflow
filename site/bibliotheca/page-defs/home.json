@@ -1,0 +1,609 @@
+{
+  "title": "Inicio - Biblioteca Digital Premium",
+  "slug": "home",
+  "description": "Página principal premium del ecosistema Bibliotheca",
+  "sections": [
+    {
+      "presets": ["section:hero-image-dark"],
+      "background_image": "{{SITE_URL}}/wp-content/uploads/2026/05/hero-bg.jpg",
+      "bg_position": "center 30%",
+      "bg_size": "cover",
+      "bg_gradient": {
+        "type": "linear",
+        "direction": "180deg",
+        "overlaysImage": "on",
+        "stops": [
+          {"color": "rgba(26,24,20,0.0)",  "position": "0"},
+          {"color": "rgba(26,24,20,0.85)", "position": "55"},
+          {"color": "rgba(26,24,20,1.0)",  "position": "100"}
+        ]
+      },
+      "rows": [
+        {
+          "column_structure": "4_4",
+          "modules": [
+            {"type": "divi/text", "presets": ["text:eyebrow-dark"],
+             "content": "<p>PARA MENTES CURIOSAS</p>",
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "24px"}}}}}},
+            {"type": "divi/heading", "presets": ["text:hero-title"],
+             "content": "<h1>Donde Grandes Ideas</h1>",
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "40px"}}}}}},
+            {"type": "divi/heading", "presets": ["text:hero-title"],
+             "content": "<h1>Encuentran su Hogar</h1>",
+             "decoration": {
+               "spacing": {"desktop": {"value": {"padding": {"bottom": "40px", "left": "1.5ch"}}}},
+               "sizing": {"desktop": {"value": {"width": "auto"}}}}},
+            {"type": "divi/text", "presets": ["text:lead"],
+             "content": "<p>M&aacute;s de 50,000 t&iacute;tulos curados por especialistas. Acceso instant&aacute;neo al conocimiento que importa.</p>",
+             "decoration": {
+               "spacing": {"desktop": {"value": {"padding": {"bottom": "48px"}}}},
+               "sizing": {"desktop": {"value": {"width": "720px"}}}}}
+          ]
+        },
+        {
+          "column_structure": "1_2,1_2",
+          "modules": [
+            {"type": "divi/button", "presets": ["module:btn-primary"],
+             "button_text": "EXPLORAR CAT&Aacute;LOGO",
+             "button_url": "/catalogo"},
+            {"type": "divi/button", "presets": ["module:btn-outline-light"],
+             "button_text": "CONOCER PLANES",
+             "button_url": "/planes",
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"left": "8px"}}}}}}
+          ]
+        }
+      ]
+    },
+    {
+      "presets": ["section:trust-bar"],
+      "rows": [
+        {
+          "column_structure": "1_4,1_4,1_4,1_4",
+          "modules": [
+            {"type": "divi/number-counter", "presets": ["module:stat-item"],
+             "number": "50,000+", "title": "T&Iacute;TULOS CURADOS",
+             "headingFont": {"h3": {"font": {"desktop": {"value": {
+               "fontFamily": "{{design:font:display}}", "color": "{{design:color:ink}}",
+               "size": "48px", "weight": "600", "lineHeight": "1.0", "letterSpacing": "-0.02em"}}}}},
+             "bodyFont": {"body": {"font": {"desktop": {"value": {
+               "fontFamily": "{{design:font:ui}}", "color": "{{design:color:parchment-700}}",
+               "size": "11px", "weight": "500", "textTransform": "uppercase",
+               "letterSpacing": "0.12em", "lineHeight": "1.3"}}}}},
+             "decoration": {
+               "border": {"desktop": {"value": {
+                 "right": {"width": "1px", "color": "{{design:color:parchment-300}}", "style": "solid"}}}},
+               "animation": {"desktop": {"value": {"style": "fade", "duration": "1800ms", "delay": "0ms"}}}}},
+            {"type": "divi/number-counter", "presets": ["module:stat-item"],
+             "number": "12,000+", "title": "VOCES AUTORIZADAS",
+             "headingFont": {"h3": {"font": {"desktop": {"value": {
+               "fontFamily": "{{design:font:display}}", "color": "{{design:color:ink}}",
+               "size": "48px", "weight": "600", "lineHeight": "1.0", "letterSpacing": "-0.02em"}}}}},
+             "bodyFont": {"body": {"font": {"desktop": {"value": {
+               "fontFamily": "{{design:font:ui}}", "color": "{{design:color:parchment-700}}",
+               "size": "11px", "weight": "500", "textTransform": "uppercase",
+               "letterSpacing": "0.12em", "lineHeight": "1.3"}}}}},
+             "decoration": {
+               "border": {"desktop": {"value": {
+                 "right": {"width": "1px", "color": "{{design:color:parchment-300}}", "style": "solid"}}}},
+               "animation": {"desktop": {"value": {"style": "fade", "duration": "1800ms", "delay": "200ms"}}}}},
+            {"type": "divi/number-counter", "presets": ["module:stat-item"],
+             "number": "150+", "title": "DISCIPLINAS",
+             "headingFont": {"h3": {"font": {"desktop": {"value": {
+               "fontFamily": "{{design:font:display}}", "color": "{{design:color:ink}}",
+               "size": "48px", "weight": "600", "lineHeight": "1.0", "letterSpacing": "-0.02em"}}}}},
+             "bodyFont": {"body": {"font": {"desktop": {"value": {
+               "fontFamily": "{{design:font:ui}}", "color": "{{design:color:parchment-700}}",
+               "size": "11px", "weight": "500", "textTransform": "uppercase",
+               "letterSpacing": "0.12em", "lineHeight": "1.3"}}}}},
+             "decoration": {
+               "border": {"desktop": {"value": {
+                 "right": {"width": "1px", "color": "{{design:color:parchment-300}}", "style": "solid"}}}},
+               "animation": {"desktop": {"value": {"style": "fade", "duration": "1800ms", "delay": "400ms"}}}}},
+            {"type": "divi/number-counter", "presets": ["module:stat-item"],
+             "number": "Est. 2015", "title": "EN ACTIVIDAD",
+             "headingFont": {"h3": {"font": {"desktop": {"value": {
+               "fontFamily": "{{design:font:display}}", "color": "{{design:color:ink}}",
+               "size": "48px", "weight": "600", "lineHeight": "1.0", "letterSpacing": "-0.02em"}}}}},
+             "bodyFont": {"body": {"font": {"desktop": {"value": {
+               "fontFamily": "{{design:font:ui}}", "color": "{{design:color:parchment-700}}",
+               "size": "11px", "weight": "500", "textTransform": "uppercase",
+               "letterSpacing": "0.12em", "lineHeight": "1.3"}}}}},
+             "decoration": {
+               "animation": {"desktop": {"value": {"style": "fade", "duration": "1800ms", "delay": "600ms"}}}}}
+          ]
+        }
+      ]
+    },
+    {
+      "presets": ["section:light"],
+      "rows": [
+        {
+          "column_structure": "4_4",
+          "modules": [
+            {"type": "divi/text", "presets": ["text:eyebrow"],
+             "content": "<p>&Aacute;REAS DEL CONOCIMIENTO</p>",
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "40px"}}}}}}
+          ]
+        },
+        {
+          "column_structure": "1_4,1_2,1_4",
+          "modules": [
+            {"type": "divi/group",
+             "decoration": {
+               "background": {"desktop": {"value": {"color": "{{design:color:ink-soft}}"}}},
+               "sizing": {"desktop": {"value": {"height": "280px"}}},
+               "spacing": {"desktop": {"value": {"padding": "32px"}}},
+               "border": {"desktop": {"value": {
+                 "radius": {"sync": "on", "topLeft": "{{design:radius:md}}", "topRight": "{{design:radius:md}}", "bottomRight": "{{design:radius:md}}", "bottomLeft": "{{design:radius:md}}"}}}},
+               "transform": {"hover": {"value": {"translateY": "-4px"}}},
+               "animation": {"desktop": {"value": {"style": "fade", "duration": "480ms", "delay": "0ms"}}}},
+             "children": [
+               {"type": "divi/text",
+                "content": "<h4>Filosof&iacute;a</h4>",
+                "headingFont": {"h4": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:ui}}", "size": "11px", "weight": "500",
+                  "textTransform": "uppercase", "letterSpacing": "0.14em",
+                  "color": "{{design:color:premium}}"}}}}},
+                "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "8px"}}}}}},
+               {"type": "divi/text",
+                "content": "<h3>Filosof&iacute;a</h3>",
+                "headingFont": {"h3": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:display}}", "size": "28px", "weight": "500",
+                  "color": "{{design:color:text-on-dark}}", "lineHeight": "1.2"}}}}},
+                "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "4px"}}}}}},
+               {"type": "divi/text",
+                "content": "<p>Grandes preguntas, pensadores que transformaron el mundo.</p><p>1,240 t&iacute;tulos</p>",
+                "bodyFont": {"body": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:ui}}", "size": "13px",
+                  "color": "{{design:color:parchment-300}}"}}}}}}
+             ]},
+            {"type": "divi/group",
+             "decoration": {
+               "background": {"desktop": {"value": {"color": "{{design:color:ink-soft}}"}}},
+               "sizing": {"desktop": {"value": {"height": "280px"}}},
+               "spacing": {"desktop": {"value": {"padding": "32px"}}},
+               "border": {"desktop": {"value": {
+                 "radius": {"sync": "on", "topLeft": "{{design:radius:md}}", "topRight": "{{design:radius:md}}", "bottomRight": "{{design:radius:md}}", "bottomLeft": "{{design:radius:md}}"}}}},
+               "transform": {"hover": {"value": {"translateY": "-4px"}}},
+               "animation": {"desktop": {"value": {"style": "fade", "duration": "480ms", "delay": "80ms"}}}},
+             "children": [
+               {"type": "divi/text",
+                "content": "<h4>Literatura</h4>",
+                "headingFont": {"h4": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:ui}}", "size": "11px", "weight": "500",
+                  "textTransform": "uppercase", "letterSpacing": "0.14em",
+                  "color": "{{design:color:premium}}"}}}}},
+                "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "8px"}}}}}},
+               {"type": "divi/text",
+                "content": "<h3>Literatura</h3>",
+                "headingFont": {"h3": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:display}}", "size": "28px", "weight": "500",
+                  "color": "{{design:color:text-on-dark}}", "lineHeight": "1.2"}}}}},
+                "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "4px"}}}}}},
+               {"type": "divi/text",
+                "content": "<p>Novelas, ensayos y poes&iacute;a que capturan la experiencia humana.</p><p>8,430 t&iacute;tulos</p>",
+                "bodyFont": {"body": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:ui}}", "size": "13px",
+                  "color": "{{design:color:parchment-300}}"}}}}}}
+             ]},
+            {"type": "divi/group",
+             "decoration": {
+               "background": {"desktop": {"value": {"color": "{{design:color:ink-soft}}"}}},
+               "sizing": {"desktop": {"value": {"height": "280px"}}},
+               "spacing": {"desktop": {"value": {"padding": "32px"}}},
+               "border": {"desktop": {"value": {
+                 "radius": {"sync": "on", "topLeft": "{{design:radius:md}}", "topRight": "{{design:radius:md}}", "bottomRight": "{{design:radius:md}}", "bottomLeft": "{{design:radius:md}}"}}}},
+               "transform": {"hover": {"value": {"translateY": "-4px"}}},
+               "animation": {"desktop": {"value": {"style": "fade", "duration": "480ms", "delay": "160ms"}}}},
+             "children": [
+               {"type": "divi/text",
+                "content": "<h4>Historia</h4>",
+                "headingFont": {"h4": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:ui}}", "size": "11px", "weight": "500",
+                  "textTransform": "uppercase", "letterSpacing": "0.14em",
+                  "color": "{{design:color:premium}}"}}}}},
+                "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "8px"}}}}}},
+               {"type": "divi/text",
+                "content": "<h3>Historia</h3>",
+                "headingFont": {"h3": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:display}}", "size": "28px", "weight": "500",
+                  "color": "{{design:color:text-on-dark}}", "lineHeight": "1.2"}}}}},
+                "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "4px"}}}}}},
+               {"type": "divi/text",
+                "content": "<p>Civilizaciones, momentos cruciales y las lecciones del ayer.</p><p>6,200 t&iacute;tulos</p>",
+                "bodyFont": {"body": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:ui}}", "size": "13px",
+                  "color": "{{design:color:parchment-300}}"}}}}}}
+             ]}
+          ]
+        },
+        {
+          "column_structure": "1_2,1_4,1_4",
+          "modules": [
+            {"type": "divi/group",
+             "decoration": {
+               "background": {"desktop": {"value": {"color": "{{design:color:ink-soft}}"}}},
+               "sizing": {"desktop": {"value": {"height": "280px"}}},
+               "spacing": {"desktop": {"value": {"padding": "32px"}}},
+               "border": {"desktop": {"value": {
+                 "radius": {"sync": "on", "topLeft": "{{design:radius:md}}", "topRight": "{{design:radius:md}}", "bottomRight": "{{design:radius:md}}", "bottomLeft": "{{design:radius:md}}"}}}},
+               "transform": {"hover": {"value": {"translateY": "-4px"}}},
+               "animation": {"desktop": {"value": {"style": "fade", "duration": "480ms", "delay": "240ms"}}}},
+             "children": [
+               {"type": "divi/text",
+                "content": "<h4>Ciencia</h4>",
+                "headingFont": {"h4": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:ui}}", "size": "11px", "weight": "500",
+                  "textTransform": "uppercase", "letterSpacing": "0.14em",
+                  "color": "{{design:color:premium}}"}}}}},
+                "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "8px"}}}}}},
+               {"type": "divi/text",
+                "content": "<h3>Ciencia</h3>",
+                "headingFont": {"h3": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:display}}", "size": "28px", "weight": "500",
+                  "color": "{{design:color:text-on-dark}}", "lineHeight": "1.2"}}}}},
+                "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "4px"}}}}}},
+               {"type": "divi/text",
+                "content": "<p>Descubrimientos que redefinen nuestra comprensi&oacute;n de la realidad.</p><p>3,890 t&iacute;tulos</p>",
+                "bodyFont": {"body": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:ui}}", "size": "13px",
+                  "color": "{{design:color:parchment-300}}"}}}}}}
+             ]},
+            {"type": "divi/group",
+             "decoration": {
+               "background": {"desktop": {"value": {"color": "{{design:color:ink-soft}}"}}},
+               "sizing": {"desktop": {"value": {"height": "280px"}}},
+               "spacing": {"desktop": {"value": {"padding": "32px"}}},
+               "border": {"desktop": {"value": {
+                 "radius": {"sync": "on", "topLeft": "{{design:radius:md}}", "topRight": "{{design:radius:md}}", "bottomRight": "{{design:radius:md}}", "bottomLeft": "{{design:radius:md}}"}}}},
+               "transform": {"hover": {"value": {"translateY": "-4px"}}},
+               "animation": {"desktop": {"value": {"style": "fade", "duration": "480ms", "delay": "320ms"}}}},
+             "children": [
+               {"type": "divi/text",
+                "content": "<h4>Arte</h4>",
+                "headingFont": {"h4": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:ui}}", "size": "11px", "weight": "500",
+                  "textTransform": "uppercase", "letterSpacing": "0.14em",
+                  "color": "{{design:color:premium}}"}}}}},
+                "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "8px"}}}}}},
+               {"type": "divi/text",
+                "content": "<h3>Arte</h3>",
+                "headingFont": {"h3": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:display}}", "size": "28px", "weight": "500",
+                  "color": "{{design:color:text-on-dark}}", "lineHeight": "1.2"}}}}},
+                "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "4px"}}}}}},
+               {"type": "divi/text",
+                "content": "<p>Creatividad, est&eacute;tica y la evoluci&oacute;n de la expresi&oacute;n visual.</p><p>2,150 t&iacute;tulos</p>",
+                "bodyFont": {"body": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:ui}}", "size": "13px",
+                  "color": "{{design:color:parchment-300}}"}}}}}}
+             ]},
+            {"type": "divi/group",
+             "decoration": {
+               "background": {"desktop": {"value": {"color": "{{design:color:ink-soft}}"}}},
+               "sizing": {"desktop": {"value": {"height": "280px"}}},
+               "spacing": {"desktop": {"value": {"padding": "32px"}}},
+               "border": {"desktop": {"value": {
+                 "radius": {"sync": "on", "topLeft": "{{design:radius:md}}", "topRight": "{{design:radius:md}}", "bottomRight": "{{design:radius:md}}", "bottomLeft": "{{design:radius:md}}"}}}},
+               "transform": {"hover": {"value": {"translateY": "-4px"}}},
+               "animation": {"desktop": {"value": {"style": "fade", "duration": "480ms", "delay": "400ms"}}}},
+             "children": [
+               {"type": "divi/text",
+                "content": "<h4>Tecnolog&iacute;a</h4>",
+                "headingFont": {"h4": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:ui}}", "size": "11px", "weight": "500",
+                  "textTransform": "uppercase", "letterSpacing": "0.14em",
+                  "color": "{{design:color:premium}}"}}}}},
+                "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "8px"}}}}}},
+               {"type": "divi/text",
+                "content": "<h3>Tecnolog&iacute;a</h3>",
+                "headingFont": {"h3": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:display}}", "size": "28px", "weight": "500",
+                  "color": "{{design:color:text-on-dark}}", "lineHeight": "1.2"}}}}},
+                "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "4px"}}}}}},
+               {"type": "divi/text",
+                "content": "<p>Innovaci&oacute;n digital y el futuro de la sociedad conectada.</p><p>1,670 t&iacute;tulos</p>",
+                "bodyFont": {"body": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:ui}}", "size": "13px",
+                  "color": "{{design:color:parchment-300}}"}}}}}}
+             ]}
+          ]
+        }
+      ]
+    },
+    {
+      "presets": ["section:white"],
+      "rows": [
+        {
+          "column_structure": "4_4",
+          "modules": [
+            {"type": "divi/text", "presets": ["text:eyebrow"],
+             "content": "<p>DESDE 2015</p>",
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "16px"}}}}}}
+          ]
+        },
+        {
+          "column_structure": "1_2,1_2",
+          "modules": [
+            {"type": "divi/heading", "presets": ["text:headline"],
+             "content": "<h2>La Curadur&iacute;a<br>como Disciplina</h2>",
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "24px"}}}}}},
+            {"type": "divi/text", "presets": ["text:lead-dark"],
+             "content": "<p>Desde 2015, un equipo de especialistas selecciona cada t&iacute;tulo seg&uacute;n un &uacute;nico criterio: que ampl&iacute;e genuinamente la comprensi&oacute;n del lector. Sin algoritmos. Sin popularidad. Solo criterio.</p>",
+             "decoration": {
+               "spacing": {"desktop": {"value": {"padding": {"bottom": "16px"}}}},
+               "sizing": {"desktop": {"value": {"maxWidth": "720px"}}}}},
+            {"type": "divi/text",
+             "content": "<p>&mdash; El Equipo Editorial</p>",
+             "bodyFont": {"body": {"font": {"desktop": {"value": {
+               "fontFamily": "{{design:font:ui}}", "size": "14px", "weight": "500",
+               "color": "{{design:color:parchment-700}}"}}}}},
+             "decoration": {
+               "spacing": {"desktop": {"value": {"padding": {"bottom": "32px"}}}},
+               "sizing": {"desktop": {"value": {"maxWidth": "720px"}}}}
+            },
+            {"type": "divi/image",
+             "src": "{{SITE_URL}}/wp-content/uploads/2026/05/biblioteca-interior.jpg",
+             "alt": "Estanter&iacute;a y mesa de lectura en biblioteca",
+             "decoration": {
+               "border": {"desktop": {"value": {
+                 "radius": {"sync": "on", "topLeft": "{{design:radius:md}}", "topRight": "{{design:radius:md}}", "bottomRight": "{{design:radius:md}}", "bottomLeft": "{{design:radius:md}}"}}}},
+               "boxShadow": {"desktop": {"value": {
+                 "horizontal": "0px", "vertical": "12px", "blur": "40px",
+                 "spread": "-4px", "color": "rgba(26,24,20,0.12)"}}}}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "presets": ["section:light"],
+      "rows": [
+        {
+          "column_structure": "4_4",
+          "modules": [
+            {"type": "divi/heading", "presets": ["text:headline"],
+             "content": "<h2>Lo que Dicen Nuestros Lectores</h2>",
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "48px"}}}}}}
+          ]
+        },
+        {
+          "column_structure": "4_4",
+          "modules": [
+            {"type": "divi/testimonial", "presets": ["module:testimonial-card"],
+             "content": "<p>Esta biblioteca transform&oacute; mi manera de investigar. Cada recomendaci&oacute;n ha sido una revelaci&oacute;n.</p>",
+             "author": "Dra. Mariana V&eacute;lez — Investigadora, UNAM",
+             "decoration": {
+               "sizing": {"desktop": {"value": {"maxWidth": "680px", "margin": "0 auto"}}},
+               "animation": {"desktop": {"value": {"style": "fade", "duration": "800ms"}}}}}
+          ]
+        }
+      ]
+    },
+    {
+      "presets": ["section:white"],
+      "rows": [
+        {
+          "column_structure": "1_2,1_2",
+          "modules": [
+            {"type": "divi/heading", "presets": ["text:headline"],
+             "content": "<h2>Novedades</h2>",
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "8px"}}}}}},
+            {"type": "divi/text",
+             "content": "<p>Publicado este mes</p>",
+             "bodyFont": {"body": {"font": {"desktop": {"value": {
+               "fontFamily": "{{design:font:ui}}", "size": "14px",
+               "color": "{{design:color:accent}}"}}}}},
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"top": "12px"}}}}}},
+            {"type": "divi/text",
+             "content": "<p><a href=\"/catalogo\">Ver cat&aacute;logo completo &rarr;</a></p>",
+             "headingFont": {"p": {"font": {"desktop": {"value": {
+               "fontFamily": "{{design:font:ui}}", "size": "14px",
+               "color": "{{design:color:accent}}"}}}}},
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"top": "12px"}}}}}}
+          ]
+        },
+        {
+          "column_structure": "1_5,1_5,1_5,1_5,1_5",
+          "modules": [
+            {"type": "divi/group",
+             "decoration": {
+               "background": {"desktop": {"value": {"color": "{{design:color:surface-white}}"}}},
+               "border": {"desktop": {"value": {
+                 "radius": {"sync": "on", "topLeft": "{{design:radius:lg}}", "topRight": "{{design:radius:lg}}", "bottomRight": "{{design:radius:lg}}", "bottomLeft": "{{design:radius:lg}}"}}}},
+               "boxShadow": {"desktop": {"value": {
+                 "horizontal": "0px", "vertical": "4px", "blur": "16px", "spread": "0px",
+                 "color": "rgba(26,24,20,0.08)"}}},
+               "spacing": {"desktop": {"value": {"padding": "24px"}}},
+               "animation": {"desktop": {"value": {"style": "fade", "duration": "480ms", "delay": "0ms"}}}},
+             "children": [
+               {"type": "divi/text",
+                "content": "<h5>Filosof&iacute;a</h5>",
+                "headingFont": {"h5": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:ui}}", "size": "11px", "weight": "500",
+                  "textTransform": "uppercase", "letterSpacing": "0.08em",
+                  "color": "{{design:color:accent-hover}}"}}}}},
+                "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "8px"}}}}}},
+               {"type": "divi/text",
+                "content": "<h4>El Orden del Discurso</h4>",
+                "headingFont": {"h4": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:display}}", "size": "17px", "weight": "600",
+                  "color": "{{design:color:ink}}", "lineHeight": "1.3"}}}}},
+                "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "4px"}}}}}},
+               {"type": "divi/text",
+                "content": "<p>Michel Foucault</p>",
+                "bodyFont": {"body": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:ui}}", "size": "13px",
+                  "color": "{{design:color:parchment-700}}"}}}}}}
+             ]},
+            {"type": "divi/group",
+             "decoration": {
+               "background": {"desktop": {"value": {"color": "{{design:color:surface-white}}"}}},
+               "border": {"desktop": {"value": {
+                 "radius": {"sync": "on", "topLeft": "{{design:radius:lg}}", "topRight": "{{design:radius:lg}}", "bottomRight": "{{design:radius:lg}}", "bottomLeft": "{{design:radius:lg}}"}}}},
+               "boxShadow": {"desktop": {"value": {
+                 "horizontal": "0px", "vertical": "4px", "blur": "16px", "spread": "0px",
+                 "color": "rgba(26,24,20,0.08)"}}},
+               "spacing": {"desktop": {"value": {"padding": "24px"}}},
+               "animation": {"desktop": {"value": {"style": "fade", "duration": "480ms", "delay": "100ms"}}}},
+             "children": [
+               {"type": "divi/text",
+                "content": "<h5>Filosof&iacute;a</h5>",
+                "headingFont": {"h5": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:ui}}", "size": "11px", "weight": "500",
+                  "textTransform": "uppercase", "letterSpacing": "0.08em",
+                  "color": "{{design:color:accent-hover}}"}}}}},
+                "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "8px"}}}}}},
+               {"type": "divi/text",
+                "content": "<h4>S&eacute;neca: Cartas a Lucilio</h4>",
+                "headingFont": {"h4": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:display}}", "size": "17px", "weight": "600",
+                  "color": "{{design:color:ink}}", "lineHeight": "1.3"}}}}},
+                "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "4px"}}}}}},
+               {"type": "divi/text",
+                "content": "<p>S&eacute;neca</p>",
+                "bodyFont": {"body": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:ui}}", "size": "13px",
+                  "color": "{{design:color:parchment-700}}"}}}}}}
+             ]},
+            {"type": "divi/group",
+             "decoration": {
+               "background": {"desktop": {"value": {"color": "{{design:color:surface-white}}"}}},
+               "border": {"desktop": {"value": {
+                 "radius": {"sync": "on", "topLeft": "{{design:radius:lg}}", "topRight": "{{design:radius:lg}}", "bottomRight": "{{design:radius:lg}}", "bottomLeft": "{{design:radius:lg}}"}}}},
+               "boxShadow": {"desktop": {"value": {
+                 "horizontal": "0px", "vertical": "4px", "blur": "16px", "spread": "0px",
+                 "color": "rgba(26,24,20,0.08)"}}},
+               "spacing": {"desktop": {"value": {"padding": "24px"}}},
+               "animation": {"desktop": {"value": {"style": "fade", "duration": "480ms", "delay": "200ms"}}}},
+             "children": [
+               {"type": "divi/text",
+                "content": "<h5>Filosof&iacute;a</h5>",
+                "headingFont": {"h5": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:ui}}", "size": "11px", "weight": "500",
+                  "textTransform": "uppercase", "letterSpacing": "0.08em",
+                  "color": "{{design:color:accent-hover}}"}}}}},
+                "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "8px"}}}}}},
+               {"type": "divi/text",
+                "content": "<h4>La Rep&uacute;blica</h4>",
+                "headingFont": {"h4": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:display}}", "size": "17px", "weight": "600",
+                  "color": "{{design:color:ink}}", "lineHeight": "1.3"}}}}},
+                "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "4px"}}}}}},
+               {"type": "divi/text",
+                "content": "<p>Plat&oacute;n</p>",
+                "bodyFont": {"body": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:ui}}", "size": "13px",
+                  "color": "{{design:color:parchment-700}}"}}}}}}
+             ]},
+            {"type": "divi/group",
+             "decoration": {
+               "background": {"desktop": {"value": {"color": "{{design:color:surface-white}}"}}},
+               "border": {"desktop": {"value": {
+                 "radius": {"sync": "on", "topLeft": "{{design:radius:lg}}", "topRight": "{{design:radius:lg}}", "bottomRight": "{{design:radius:lg}}", "bottomLeft": "{{design:radius:lg}}"}}}},
+               "boxShadow": {"desktop": {"value": {
+                 "horizontal": "0px", "vertical": "4px", "blur": "16px", "spread": "0px",
+                 "color": "rgba(26,24,20,0.08)"}}},
+               "spacing": {"desktop": {"value": {"padding": "24px"}}},
+               "animation": {"desktop": {"value": {"style": "fade", "duration": "480ms", "delay": "300ms"}}}},
+             "children": [
+               {"type": "divi/text",
+                "content": "<h5>Literatura</h5>",
+                "headingFont": {"h5": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:ui}}", "size": "11px", "weight": "500",
+                  "textTransform": "uppercase", "letterSpacing": "0.08em",
+                  "color": "{{design:color:accent-hover}}"}}}}},
+                "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "8px"}}}}}},
+               {"type": "divi/text",
+                "content": "<h4>1984</h4>",
+                "headingFont": {"h4": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:display}}", "size": "17px", "weight": "600",
+                  "color": "{{design:color:ink}}", "lineHeight": "1.3"}}}}},
+                "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "4px"}}}}}},
+               {"type": "divi/text",
+                "content": "<p>George Orwell</p>",
+                "bodyFont": {"body": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:ui}}", "size": "13px",
+                  "color": "{{design:color:parchment-700}}"}}}}}}
+             ]},
+            {"type": "divi/group",
+             "decoration": {
+               "background": {"desktop": {"value": {"color": "{{design:color:surface-white}}"}}},
+               "border": {"desktop": {"value": {
+                 "radius": {"sync": "on", "topLeft": "{{design:radius:lg}}", "topRight": "{{design:radius:lg}}", "bottomRight": "{{design:radius:lg}}", "bottomLeft": "{{design:radius:lg}}"}}}},
+               "boxShadow": {"desktop": {"value": {
+                 "horizontal": "0px", "vertical": "4px", "blur": "16px", "spread": "0px",
+                 "color": "rgba(26,24,20,0.08)"}}},
+               "spacing": {"desktop": {"value": {"padding": "24px"}}},
+               "animation": {"desktop": {"value": {"style": "fade", "duration": "480ms", "delay": "400ms"}}}},
+             "children": [
+               {"type": "divi/text",
+                "content": "<h5>Literatura</h5>",
+                "headingFont": {"h5": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:ui}}", "size": "11px", "weight": "500",
+                  "textTransform": "uppercase", "letterSpacing": "0.08em",
+                  "color": "{{design:color:accent-hover}}"}}}}},
+                "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "8px"}}}}}},
+               {"type": "divi/text",
+                "content": "<h4>El Aleph</h4>",
+                "headingFont": {"h4": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:display}}", "size": "17px", "weight": "600",
+                  "color": "{{design:color:ink}}", "lineHeight": "1.3"}}}}},
+                "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "4px"}}}}}},
+               {"type": "divi/text",
+                "content": "<p>Jorge Luis Borges</p>",
+                "bodyFont": {"body": {"font": {"desktop": {"value": {
+                  "fontFamily": "{{design:font:ui}}", "size": "13px",
+                  "color": "{{design:color:parchment-700}}"}}}}}}
+             ]}
+          ]
+        }
+      ]
+    },
+    {
+      "presets": ["section:cta-epic"],
+      "rows": [
+        {
+          "column_structure": "4_4",
+          "modules": [
+            {"type": "divi/text", "presets": ["text:eyebrow-dark"],
+             "content": "<p>PARA MENTES CURIOSAS</p>",
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "16px"}}}}}},
+            {"type": "divi/heading", "presets": ["text:display-md-light"],
+             "content": "<h2>Comienza tu<br>Viaje Intelectual</h2>",
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "24px"}}}}}},
+            {"type": "divi/text", "presets": ["text:lead"],
+             "content": "<p>Acceso ilimitado. Curaci&oacute;n experta. Sin ruido.</p>",
+             "decoration": {
+               "spacing": {"desktop": {"value": {"padding": {"bottom": "40px"}}}},
+               "sizing": {"desktop": {"value": {"maxWidth": "480px"}}}}},
+            {"type": "divi/button", "presets": ["module:btn-cta-dark"],
+             "button_text": "CREAR CUENTA — ES GRATIS",
+             "button_url": "/registro"},
+            {"type": "divi/text",
+             "content": "<p>Sin tarjeta de cr&eacute;dito &middot; Cancela cuando quieras</p>",
+             "bodyFont": {"body": {"font": {"desktop": {"value": {
+               "fontFamily": "{{design:font:ui}}", "size": "12px",
+               "color": "{{design:color:parchment-500}}"}}}}},
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"top": "16px"}}}}}}
+          ]
+        }
+      ]
+    },
+    {
+      "presets": ["section:dark"],
+      "rows": [
+        {
+          "column_structure": "4_4",
+          "modules": [
+            {"type": "divi/text",
+             "content": "<p>&copy; 2025 Bibliotheca &middot; Conocimiento sin ruido</p>",
+             "bodyFont": {"body": {"font": {"desktop": {"value": {
+               "fontFamily": "{{design:font:ui}}", "size": "13px",
+               "color": "{{design:color:parchment-500}}"}}}}}}
+          ]
+        }
+      ]
+    }
+  ]
+}

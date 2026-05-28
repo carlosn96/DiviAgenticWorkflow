@@ -1,0 +1,130 @@
+{
+  "title": "Sobre Nosotros",
+  "slug": "sobre-nosotros",
+  "description": "Historia, misión y equipo de la Biblioteca Digital",
+  "sections": [
+    {
+      "presets": ["section:hero-dark"],
+      "bg_gradient": {
+        "type": "linear", "direction": "180deg", "overlaysImage": "off",
+        "stops": [
+          {"color": "rgba(26,24,20,0.95)", "position": "0"},
+          {"color": "rgba(45,42,37,0.9)", "position": "100"}
+        ]
+      },
+      "rows": [
+        {
+          "column_structure": "4_4",
+          "modules": [
+            {"type": "divi/text", "presets": ["text:eyebrow-dark"],
+             "content": "<p>NUESTRA HISTORIA</p>",
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "24px"}}}}}},
+            {"type": "divi/heading", "presets": ["text:hero-title"],
+             "content": "<h1>M&aacute;s de una d&eacute;cada</h1>",
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "8px"}}}}}},
+            {"type": "divi/heading", "presets": ["text:hero-title"],
+             "content": "<h1>cultivando el conocimiento</h1>",
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "40px"}}}}}},
+            {"type": "divi/text", "presets": ["text:lead"],
+             "content": "<p>Fundada en 2015, Bibliotheca naci&oacute; con la misi&oacute;n de democratizar el acceso a la cultura y el conocimiento de calidad en M&eacute;xico y Am&eacute;rica Latina.</p>",
+             "decoration": {"sizing": {"desktop": {"value": {"width": "640px"}}}}}
+          ]
+        }
+      ]
+    },
+    {
+      "presets": ["section:light"],
+      "rows": [
+        {
+          "column_structure": "1_2,1_2",
+          "modules": [
+            {"type": "divi/text",
+             "content": "<h2>Nuestra Misi&oacute;n</h2>",
+             "headingFont": {"h2": {"font": {"desktop": {"value": {
+               "fontFamily": "{{design:font:display}}", "size": "40px", "weight": "500",
+               "color": "{{design:color:ink}}", "lineHeight": "1.2"}}}}},
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "24px"}}}}}},
+            {"type": "divi/text", "presets": ["text:lead-dark"],
+             "content": "<p>Creemos que el conocimiento de calidad debe estar al alcance de todos. Curamos cada t&iacute;tulo con rigor acad&eacute;mico para garantizar que nuestra colecci&oacute;n sea un recurso confiable para estudiantes, investigadores y lectores apasionados.</p>"}
+          ]
+        },
+        {
+          "column_structure": "1_2,1_2",
+          "modules": [
+            {"type": "divi/text",
+             "content": "<h2>Nuestra Visi&oacute;n</h2>",
+             "headingFont": {"h2": {"font": {"desktop": {"value": {
+               "fontFamily": "{{design:font:display}}", "size": "40px", "weight": "500",
+               "color": "{{design:color:ink}}", "lineHeight": "1.2"}}}}},
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "24px"}}}}}},
+            {"type": "divi/text", "presets": ["text:lead-dark"],
+             "content": "<p>Ser la biblioteca digital de referencia en el mundo de habla hispana, preservando el patrimonio cultural y promoviendo el pensamiento cr&iacute;tico a trav&eacute;s de la lectura y la investigaci&oacute;n.</p>"}
+          ]
+        }
+      ]
+    },
+    {
+      "presets": ["section:white"],
+      "rows": [
+        {
+          "column_structure": "4_4",
+          "modules": [
+            {"type": "divi/text", "presets": ["text:eyebrow"],
+             "content": "<p>EQUIPO</p>",
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "16px"}}}}}},
+            {"type": "divi/heading", "presets": ["text:display-md"],
+             "content": "<h2>Conoce a nuestro equipo</h2>",
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "48px"}}}}}}
+          ]
+        },
+        {
+          "column_structure": "1_4,1_4,1_4,1_4",
+          "modules": [
+            {"type": "divi/blurb", "presets": ["module:card"],
+             "title": "Dra. Mariana Santos",
+             "content": "<p>Directora de Contenidos</p><p>Doctora en Letras por la UNAM. Especialista en literatura latinoamericana.</p>",
+             "icon": "&#xe0b4;",
+             "decoration": {"animation": {"desktop": {"value": {"style": "fade", "duration": "480ms", "delay": "0ms"}}}}},
+            {"type": "divi/blurb", "presets": ["module:card"],
+             "title": "Mtro. Ricardo L&oacute;pez",
+             "content": "<p>Coordinador de Investigaci&oacute;n</p><p>Maestro en Historia por el COLMEX. L&iacute;nea de investigaci&oacute;n en archivos digitales.</p>",
+             "icon": "&#xe0b4;",
+             "decoration": {"animation": {"desktop": {"value": {"style": "fade", "duration": "480ms", "delay": "100ms"}}}}},
+            {"type": "divi/blurb", "presets": ["module:card"],
+             "title": "Lic. Ana Fern&aacute;ndez",
+             "content": "<p>Bibliotec&oacute;loga Jefe</p><p>Especialista en sistemas de clasificaci&oacute;n y metadatos con 15 a&ntilde;os de experiencia.</p>",
+             "icon": "&#xe0b4;",
+             "decoration": {"animation": {"desktop": {"value": {"style": "fade", "duration": "480ms", "delay": "200ms"}}}}},
+            {"type": "divi/blurb", "presets": ["module:card"],
+             "title": "Ing. Pablo Mendoza",
+             "content": "<p>Director de Tecnolog&iacute;a</p><p>Ingeniero en Sistemas. Arquitecto de la plataforma digital y experiencia de usuario.</p>",
+             "icon": "&#xe0b4;",
+             "decoration": {"animation": {"desktop": {"value": {"style": "fade", "duration": "480ms", "delay": "300ms"}}}}}
+          ]
+        }
+      ]
+    },
+    {
+      "presets": ["section:cta-epic"],
+      "rows": [
+        {
+          "column_structure": "4_4",
+          "modules": [
+            {"type": "divi/text", "presets": ["text:eyebrow-dark"],
+             "content": "<p>&Uacute;NETE</p>",
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "24px"}}}}}},
+            {"type": "divi/heading", "presets": ["text:display-md-light"],
+             "content": "<h2>S&eacute; parte de nuestra comunidad</h2>",
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "16px"}}}}}},
+            {"type": "divi/text", "presets": ["text:lead"],
+             "content": "<p>M&aacute;s de 15,000 lectores ya conf&iacute;an en nosotros para su formaci&oacute;n intelectual.</p>",
+             "decoration": {"spacing": {"desktop": {"value": {"padding": {"bottom": "40px"}}}}}},
+            {"type": "divi/button", "presets": ["module:btn-primary"],
+             "button_text": "CREAR CUENTA GRATUITA",
+             "button_url": "/registro"}
+          ]
+        }
+      ]
+    }
+  ]
+}
