@@ -190,11 +190,14 @@ wp agentic global_colors sync `
 | Espaciado (9) | `space_xs`…`space_5xl` | 8px → 160px |
 | Customizer (5) | `customizer_primary`…`customizer_link` | accent / premium / ink / parchment-700 / accent |
 
-**Presets generados (33 total):**
+**Presets generados (57 total):**
 
 - **7 secciones**: hero-dark, hero-image-dark, trust-bar, cta-epic, light, dark, white
-- **16 textos**: eyebrow, hero-title, display-xl, display-md, headline, headline-3, lead, body-md, stat-num, stat-label, quote-serif, caption…
+- **16 textos**: eyebrow, eyebrow-dark, hero-title, display-xl, display-md, display-md-light, headline, headline-light, headline-3, lead, lead-dark, body-md, stat-num, stat-label, quote-serif, caption
 - **10 módulos**: card, feature-card, stat-item, testimonial-card, image-shadow, accent-line, btn-primary, btn-ghost, btn-outline-light, btn-cta-dark
+- **12 animaciones**: fade-in, fade-in-fast, slide-up, slide-down, slide-left, slide-right, reveal-up, zoom-in, bounce-up, flip, fold, roll
+- **7 scroll**: fade-in, parallax-up, parallax-down, scale-in, reveal, rotate, blur-in
+- **5 transform**: hover-lift, hover-scale, hover-glow, hover-slide-up, hover-expand
 
 **Regla:** Si solo necesitas cambiar el color acento, provees `color_accent` y `color_accent_hover`. Las 24 variables de color restantes toman su valor ultra-pro por defecto. El sistema completo queda funcional.
 
