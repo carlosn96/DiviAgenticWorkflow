@@ -1,0 +1,36 @@
+{
+  "brand_name": "Mi Marca",
+  "brand_description": "Descripción del proyecto",
+
+  "color_accent": "#8B6F47",
+  "color_accent_hover": "#6D5536",
+  "color_ink": "#1C1A17",
+  "color_ink_soft": "#2E2B26",
+  "color_surface_deep": "#1C1A17",
+  "color_surface_mid": "#2E2B26",
+  "color_surface_light": "#F5F1E8",
+  "color_surface_white": "#FCFAF5",
+  "color_text_primary": "#1C1A17",
+  "color_text_secondary": "#5C5244",
+  "color_text_on_dark": "#FCFAF5",
+  "color_success": "#3D6B4F",
+  "color_error": "#8B3A3A",
+
+  "font_display": "'Cormorant Garamond', Georgia, serif",
+  "font_body": "'Crimson Pro', Georgia, serif",
+  "font_ui": "'DM Sans', system-ui, sans-serif",
+
+  "radius_sm": "2px",
+  "radius_md": "4px",
+  "radius_lg": "8px",
+  "radius_xl": "16px",
+  "radius_full": "100px",
+
+  "space_xs": "8px",
+  "space_sm": "16px",
+  "space_md": "24px",
+  "space_lg": "40px",
+  "space_xl": "64px",
+  "space_2xl": "80px",
+  "space_3xl": "120px"
+}

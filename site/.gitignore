@@ -1,0 +1,20 @@
+# Outputs generados (reproducibles con build_page.php --deploy)
+*/pages/*
+!*/pages/.gitkeep
+
+*/design-system/*
+!*/design-system/.gitkeep
+
+# Estado temporal entre fases
+*/content_state/*
+!*/content_state/.gitkeep
+!*/content_state/local/.gitkeep
+!*/content_state/remote/.gitkeep
+
+# Briefs (tracked opcional)
+*/briefs/*
+!*/briefs/.gitkeep
+
+# Python cache
+__pycache__/
+*.pyc
