@@ -30,3 +30,6 @@ site/*/briefs/*
 
 # Project data (no genérico)
 site/bibliotheca/
+
+# Scripts temporales
+_commits.ps1
