@@ -10,7 +10,7 @@
  *   php build_page.php --def=site/bibliotheca/page-defs/mi-pagina.json --deploy
  *   php build_page.php --def=home.json --deploy --front
  *   php build_page.php --def=home.json --deploy --verify
- *   php build_page.php --def=home.json --deploy --verify --page-url="https://example.com/mi-pagina"
+ *   php build_page.php --def=home.json --deploy --verify --url="https://example.com/mi-pagina"
  *   php build_page.php --def=home.json --no-resolve --out=pages/raw.json
  *   php build_page.php --def=home.json --site-url="https://example.com"
  *
@@ -364,7 +364,7 @@ function validate_page(array $schema): bool {
 
 // ── CLI ─────────────────────────────────────────────────────────────
 
-$opts = getopt('', ['def::', 'out::', 'deploy', 'front', 'no-resolve', 'site-url::', 'verify', 'page-url::', 'help']);
+$opts = getopt('', ['def::', 'out::', 'deploy', 'front', 'no-resolve', 'site-url::', 'verify', 'url::', 'help']);
 $def_file = $opts['def'] ?? null;
 $out_file = $opts['out'] ?? null;
 $do_deploy = isset($opts['deploy']);
