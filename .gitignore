@@ -1,0 +1,32 @@
+# Credenciales
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# Site data (project-specific) — generated outputs
+site/*/pages/*
+!site/*/pages/.gitkeep
+
+site/*/design-system/*
+!site/*/design-system/.gitkeep
+
+# Site content_state (temporal entre fases)
+site/*/content_state/*
+!site/*/content_state/.gitkeep
+!site/*/content_state/local/.gitkeep
+!site/*/content_state/remote/.gitkeep
+
+# Briefs (tracked opcional)
+site/*/briefs/*
+!site/*/briefs/.gitkeep
+
+# Project data (no genérico)
+site/bibliotheca/
