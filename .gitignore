@@ -1,7 +1,5 @@
-# Ignore all project data (sites are separate repos)
-site/**
-# Keep example template (framework scaffold)
-!site/example/
+# Ignore generated page schemas (output of build_page.php --out)
+site/*/pages/**
 
 # Deprecated catalog templates (Divi 4 compiled)
 workspace/catalog/

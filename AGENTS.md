@@ -53,10 +53,7 @@ DAW_bundle/
     ├── Plugin WordPress (Layout Engine, CLI, metadata)
     └── bin/
         ├── env_loader.php         <- ⭐ Carga .env automáticamente (DAW_SITE, API keys, etc.)
-        ├── orchestrate_page.php   <- ⭐ ORQUESTADOR: brief → DIE → variants → compose → post-compose → build → deploy
-        ├── compose_page.php       <- Arma page-def desde templates + slots (valida slots no resueltos)
-        ├── post_compose.php       <- ⭐ Capa premium: inyecta presets de marca, limpia imágenes demo
-        ├── build_page.php         <- ⭐ Build + deploy (incluye quality gate: valida presets, slots, imágenes)
+        ├── build_page.php         <- ⭐ ÚNICO script: lee page-def → resuelve tokens → expande presets → deploy (quality gate incluido)
         └── verify_page.php        <- Verificación post-deploy
 ```
 
@@ -66,7 +63,7 @@ DAW_bundle/
 
 > **Python**: Usar el intérprete Python global del sistema (el que esté disponible en PATH como `python`).
 > Verificar con: `python --version`. No usar entornos virtuales (venv).
-> El pipeline de páginas (orquestador → build → deploy) es 100% PHP, no requiere Python.
+> El pipeline de páginas es: DIE (ML opcional) → plan.json → build_page.php --deploy.
 > El DIE (Design Intelligence Engine) sí requiere Python para generar planes ML — pero es opcional: si el script no existe, el orquestador cae al lookup tradicional.
 
 ```powershell
@@ -115,8 +112,9 @@ python DAW_bundle/workspace/build_design_system.py
 #     Configura tu API key en .env (DEEPSEEK_API_KEY, GEMINI_API_KEY, OPENAI_API_KEY, etc.)
 python DAW_bundle/workspace/automation/generate_brief.py --prompt "hazme una pagina para contacto de mi biblioteca digital"
 
-# 6b. (Recomendado) Usar orquestador con el brief YAML (carga en O(1) y realiza el deploy)
-.\php.bat DAW_bundle/divi-agentic-core/bin/orchestrate_page.php --brief=contacto-biblioteca --deploy
+# 6b. (Recomendado) DIE → plan.json → build + deploy
+python DAW_bundle/ml-dataset/artifacts/design_intelligence.py --brief-file=site/bibliotheca/briefs/contacto-biblioteca.json --output=site/bibliotheca/plans/contacto.json
+.\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php --def=site/bibliotheca/plans/contacto.json --deploy
 ```
 
 ---
@@ -136,26 +134,28 @@ Capa 1 — Design System (build_design_system.py)
   → site/bibliotheca/design-system/divitheme.json
     (64 presets: section/text/module/divider/animation/scroll/hover + tokens {{design:type:name}})
 
-Capa 2a — Orquestación (orchestrate_page.php — RECOMENDADO)
-  php divi-agentic-core/bin/orchestrate_page.php --brief=mi-pagina --deploy
+Capa 2a — DIE → plan.json (RECOMENDADO)
+  python ml-dataset/artifacts/design_intelligence.py --brief-file=site/<DAW_SITE>/briefs/<slug>.json --output=site/<DAW_SITE>/plans/<slug>.json
 
-  orchestrate_page.php hace TODO:
-    • Lee site/<DAW_SITE>/briefs/<slug>.yml
-    • 🥇 Consulta DIE (Design Intelligence Engine) — ML clasifica secciones, busca template similar en catálogo, recomienda módulos
-    • 🥈 Si DIE no está disponible o no encuentra template, cae a lookup fijo ($SECTION_TEMPLATES + variants)
-    • 🥉 Si lookup fijo falla, cae a buscador semántico legacy (search_catalog.py)
-    • Consulta design-patterns.json (O(1) keyed lookup por section_type)
-    • Mapea tone a variante de decoración (editorial-grid, liquid-glass, etc.)
-    • Ensambla .page.json en compositions/
-    • Delega a compose_page.php → page-defs/ (valida slots no resueltos)
-    • Delega a post_compose.php → inyecta presets de marca faltantes, limpia imágenes demo
-    • [--deploy] Delega a build_page.php --deploy → WordPress (quality gate incluido)
+  design_intelligence.py (DIE v3.0) hace TODO en un solo proceso:
+    • Carga A+B+C+D+E como módulos Python (sin archivos intermedios)
+    • Lee brief JSON con tone, product_type, sections[]
+    • Clasifica cada sección con D (content classifier)
+    • Busca template similar con B (semantic index)
+    • Determina estructura de columnas con A (section patterns)
+    • Recomienda módulos complementarios con C (module affinities)
+    • Genera decoration blocks con E (decoration engine):
+      - Gradients, shadows, animations, hover/scroll effects
+      - Shape dividers, border-radius, masks
+      - Todo con tokens {{design:color:*}}, nunca hex
+    • Ensambla plan.json completo listo para build_page.php
+    • Output: plan.json sin PHP intermedio, listo para consumir
 
-Capa 2b — Page Schema + Deploy (build_page.php — DIRECTO)
-  php divi-agentic-core/bin/build_page.php --def=page-defs/mipagina.json --deploy
+Capa 2b — Page Schema + Deploy (build_page.php — ÚNICO SCRIPT)
+  php divi-agentic-core/bin/build_page.php --def=plans/mipagina.json --deploy
 
   build_page.php hace TODO:
-    • Lee page-defs/<slug>.json desde site/<DAW_SITE>/page-defs/ (ver §3)
+    • Lee plans/<slug>.json desde site/<DAW_SITE>/plans/ (output del DIE)
     • Carga estructura de módulo desde schema PHP (workspace/data/modules/)
     • Carga design system desde site/<DAW_SITE>/design-system/divitheme.json
     • Resuelve {{design:color:name}} → var(--gcid-*)
@@ -172,77 +172,81 @@ Capa 2b — Page Schema + Deploy (build_page.php — DIRECTO)
      Un solo lenguaje (PHP), un solo comando.
      El DIE es una etapa previa ML opcional que genera el plan; el build consume ese plan sin Python.
 
-### page-defs/ vs pages/ (duda frecuente)
+### plans/ vs pages/ (duda frecuente)
 
 | Carpeta | Rol | Quién escribe | Git |
 |---------|-----|---------------|-----|
-| `page-defs/` | **Entrada** — JSON semántico del diseñador con `{{design:*}}` tokens y presets por nombre. El pipeline lee de aquí. | El diseñador (Fase 3) | Trackeado |
+| `plans/` | **Entrada** — plan.json generado por el DIE con decoration blocks + estructura + tokens `{{design:*}}`. El pipeline lee de aquí. | DIE (`design_intelligence.py`) | Trackeado |
 | `pages/` | **Salida opcional** — Schema completo con tokens resueltos, presets expandidos inline. `build_page.php` genera esto solo si se pasa `--out`. NO es necesario para el deploy (`--deploy` trabaja en memoria). | `build_page.php` | Ignorado |
 
-> El flujo normal es `page-defs/<slug>.json → build_page.php --deploy`. `pages/` existe únicamente para debug: inspeccionar el schema resuelto antes de enviarlo a WordPress.
+> El flujo normal es `brief.json → DIE → plans/<slug>.json → build_page.php --deploy`. `pages/` existe únicamente para debug.
 ```
 
 ---
 
-## 3. Variants de decoración
+## 3. Decoration blocks (Artifact E)
 
-Cada sección puede tener variantes que sobreescriben decoration (animation, scroll, divider, spacing, presets). La variante se elige por tone en el orquestador.
+La decoración ya no se maneja con variantes de sección en archivos JSON separados. El Decoration Engine (Artifact E) genera decoration blocks completos en el plan.json, usando:
 
-```
-workspace/sections/hero-split/
-├── _base.section.json              ← estructura base (módulos, slots)
-├── editorial-grid.variant.json     ← asymmetric 3_5,2_5 + stagger + scroll:reveal + parallax-up
-└── ... (más variantes)
-```
+- **Gradients**: lineales/radiales con múltiples stops, mapeados por tone y product_type
+- **Shadows**: múltiples capas (box-shadow, text-shadow) con opacidad y blur
+- **Animaciones**: keyframes + easing + delays, con tokens {{design:*}}
+- **Hover/scroll effects**: parallax-up, fade, stagger, reveal
+- **Shape dividers**: 6 estilos (rounded, angle, arrow, wave, curve, custom)
+- **Border-radius**: radios por esquina, responsive
+- **Masks**: clip-path CSS con formas geométricas
+- **Presets**: section, text, module, divider, animation, scroll, hover
 
-Uso: `template: "hero-split@editorial-grid"` en el .page.json.
+Todo usa tokens `{{design:color:*}}`, nunca hex. El DIE combina tone + product_type + brand_vars para seleccionar decoration personas desde 7 clusters K-means entrenados en 877 templates reales.
 
-Actualmente solo existe `editorial-grid`. Por crear: `liquid-glass` (glassmorphism + fluid), `monochrome-brutalist` (0 radius + high contrast).
-
-> **Catalog templates** (`workspace/sections/catalog/*.section.json`) no usan variantes — son templates planos del catálogo de 877 layouts. El DIE los selecciona directamente por similitud semántica. Sus decoraciones vienen incluidas en el .section.json.
+> No se necesitan archivos `.variant.json`. El DIE + brand presets son la única fuente de decoration.
 
 ---
 
 ## 4. Crear una página nueva
 
-### A. Con orquestador (recomendado)
+### A. Con DIE (recomendado)
 
-0. (Una vez) Construir artefactos ML del DIE (opcional — necesario para templates del catálogo):
+0. (Una vez) Construir artefactos ML:
    ```
-   python ml-dataset/artifacts/d_content_classifier.py   # ← genera content-classifier.pkl
-   python ml-dataset/artifacts/b_semantic_index.py       # ← genera semantic-index.pkl
-   python ml-dataset/artifacts/a_section_patterns.py     # ← genera section-patterns.json
-   python ml-dataset/artifacts/c_module_affinities.py    # ← genera module-affinities.json
+   python ml-dataset/artifacts/e_decorator.py --build        # ← decoration clusters + rules
+   python ml-dataset/artifacts/d_content_classifier.py       # ← content-classifier.pkl
+   python ml-dataset/artifacts/b_semantic_index.py           # ← semantic-index.pkl
+   python ml-dataset/artifacts/a_section_patterns.py         # ← section-patterns.json
+   python ml-dataset/artifacts/c_module_affinities.py        # ← module-affinities.json
    ```
-   > Si los artefactos no existen, el orquestador funciona igual — usa lookup fijo ($SECTION_TEMPLATES).
+   > Si los artefactos no existen, el DIE funciona con defaults para estructura.
 
-1. (opcional) Extraer patrones de diseño del catálogo:
-    ```
-    python DAW_bundle/workspace/extract_patterns.py
-    ```
-
-2. Crear brief en `site/<DAW_SITE>/briefs/<slug>.yml`:
-   ```yaml
-   title: Mi Página
-   slug: mi-pagina
-   tone: editorial    # ← determina variante de decoración
-   sections:
-     - section_type: hero
-       eyebrow: WELCOME
-       title: Título Principal
-       text: Descripción...
-       btn_primary_text: Acción
-       btn_primary_url: /ruta
-   ```
-
-3. Orquestar + Build + Deploy (un solo comando):
-   ```
-   .\php.bat DAW_bundle/divi-agentic-core/bin/orchestrate_page.php --brief=mi-pagina --deploy
+1. Crear brief en `site/<DAW_SITE>/briefs/<slug>.json`:
+   ```json
+   {
+     "title": "Mi Página",
+     "slug": "mi-pagina",
+     "tone": "editorial",
+     "product_type": "bibliotheca",
+     "sections": [
+       {
+         "section_type": "hero",
+         "title": "Título Principal",
+         "text": "Descripción...",
+         "btn_primary_text": "Acción"
+       }
+     ]
+   }
    ```
 
-   > El orquestador invoca automáticamente el DIE. Si existe `design_intelligence.py` y los artefactos .pkl, genera planes ML. Si no, cae a lookup fijo.
+2. DIE → plan.json:
+   ```
+   python ml-dataset/artifacts/design_intelligence.py --brief-file=site/<DAW_SITE>/briefs/<slug>.json --output=site/<DAW_SITE>/plans/<slug>.json
+   ```
+   > El DIE carga A+B+C+D+E, genera decoration blocks con `{{design:color:*}}` tokens, y produce plan.json listo para build.
 
-### B. Directo (page-def.json)
+3. Build + Deploy:
+   ```
+   .\php.bat divi-agentic-core/bin/build_page.php --def=site/<DAW_SITE>/plans/<slug>.json --deploy
+   ```
+
+### B. Directo (page-def.json — legacy)
 
 0. (Una vez por proyecto o tras actualizar Divi) Regenerar schemas de módulos:
    ```
@@ -392,9 +396,9 @@ Si no hay gcids sincronizados, `deploy_page` emite warning y resuelve a hex.
 | Diccionario de bloques | `daw-skill/references/blocks-dictionary.md` | Guía de 102 módulos Divi 5 |
 | Lógica del Diseñador | `daw-skill/references/designer.md` | Mapeo semántico → bloques, tokens, decoration |
 | Lógica del Ingeniero | `daw-skill/references/engineer.md` | Comandos CLI, deploy, verificación |
-| Orquestador | `divi-agentic-core/bin/orchestrate_page.php` | ⭐ Brief → DIE → variants → compose → build → deploy |
-| Composer | `divi-agentic-core/bin/compose_page.php` | Arma page-def desde templates + slots |
-| Build page | `divi-agentic-core/bin/build_page.php` | Pipeline unificado PHP (usa `DAW_SITE` env) |
+| DIE (Design Intelligence Engine) | `ml-dataset/artifacts/design_intelligence.py` | ⭐ A+B+C+D+E: brief → plan.json con decoration blocks |
+| Build page | `divi-agentic-core/bin/build_page.php` | Único script PHP: lee plan → resuelve tokens → deploy (usa `DAW_SITE` env) |
+| Decoration Engine | `ml-dataset/artifacts/e_decorator.py` | ⭐ K-means sobre 877 templates + 4 CSVs → decoration blocks |
 | Design system (generado) | `site/<DAW_SITE>/design-system/divitheme.json` | 64 presets, fuente de verdad de tokens |
 | Variables de entrada | `site/<DAW_SITE>/brand/_design_vars.json` | Colores, fonts, radios, espacio |
 | Presets de diseño | `site/<DAW_SITE>/brand/_design_presets.json` | 64 presets (section/text/module/divider/animation/scroll/hover) |
@@ -403,11 +407,12 @@ Si no hay gcids sincronizados, `deploy_page` emite warning y resuelve a hex.
 | Templates de sección | `workspace/sections/` | _base.section.json + *.variant.json + catalog/*.section.json |
 | Catálogo de templates | `workspace/sections/catalog/` | 877 templates compilados como .section.json (usados por DIE) |
 | Patrones de diseño | `workspace/design-patterns.json` | O(1) keyed: composition + module affinity + color clusters |
-| DIE — Design Intelligence Engine | `ml-dataset/artifacts/design_intelligence.py` | ⭐ Orquestador ML: clasifica + busca + recomienda (A+B+C+D) |
+| DIE — Design Intelligence Engine | `ml-dataset/artifacts/design_intelligence.py` | ⭐ Orquestador ML: clasifica + busca + recomienda + decora (A+B+C+D+E) |
 | DIE — Artefacto A | `ml-dataset/artifacts/a_section_patterns.py` | Patrones estructurales de 877 templates |
 | DIE — Artefacto B | `ml-dataset/artifacts/b_semantic_index.py` | Índice semántico (892 templates, 384-dim embeddings) |
 | DIE — Artefacto C | `ml-dataset/artifacts/c_module_affinities.py` | Matriz PMI de co-ocurrencia de módulos |
 | DIE — Artefacto D | `ml-dataset/artifacts/d_content_classifier.py` | Clasificador TF-IDF + Naive Bayes (98.2% acc) |
+| DIE — Artefacto E | `ml-dataset/artifacts/e_decorator.py` | Decoration Engine: K-means clusters + 4 CSVs → decoration blocks |
 | Dataset DIE | `ml-dataset/dataset.jsonl` | 877 registros limpios con contenido real |
 | Plugin WordPress | `divi-agentic-core/` | Layout Engine, CLI, metadata |
 
@@ -420,11 +425,11 @@ Cada tipo de archivo tiene su carpeta asignada. No crear archivos fuera de su ub
 | Carpeta | Contenido |
 |---------|-----------|
 | `site/<DAW_SITE>/brand/` | ⭐ Datos de marca: `_design_vars.json` + `_design_presets.json` |
-| `site/<DAW_SITE>/page-defs/` | ⭐ Definiciones de página en JSON (salida de compose_page.php, entrada de build_page.php) |
+| `site/<DAW_SITE>/plans/` | ⭐ plan.json generado por DIE (entrada de build_page.php) |
 | `site/<DAW_SITE>/pages/` | Schemas resueltos (output opcional de `build_page.php --out`, solo para debug/inspección) |
 | `site/<DAW_SITE>/design-system/` | `divitheme.json` generado (output, gitignored) |
 | `site/<DAW_SITE>/briefs/` | ⭐ Briefs YAML de diseño (entrada del orquestador) |
-| `site/<DAW_SITE>/compositions/` | .page.json generado por el orquestador (input de compose_page.php) |
+| `site/<DAW_SITE>/compositions/` | (legacy — eliminado, usar plans/) |
 | `site/<DAW_SITE>/content_state/` | Estado de contenido entre fases (local/ + remote/) |
 | `site/example/` | Template de estructura para nuevas marcas |
 | `workspace/sections/` | ⭐ Templates de sección con variantes de decoración |
@@ -435,7 +440,7 @@ Cada tipo de archivo tiene su carpeta asignada. No crear archivos fuera de su ub
 | `workspace/build_design_system.py` | Generador de design system v3.0 (inteligencia de diseño) |
 | `ml-dataset/` | ⭐ Dataset + artefactos ML del DIE |
 | `ml-dataset/artifacts/` | Scripts + modelos del DIE (A, B, C, D + orquestador) |
-| `divi-agentic-core/bin/` | ⭐ orquestador + compose + build + verify + generate-module-schema |
+| `divi-agentic-core/bin/` | ⭐ build_page.php + verify_page.php + generate-module-schema (orquestador eliminado) |
 | `daw-skill/` | Skill de orquestación y sus referencias |
 | `divi-agentic-core/` | Plugin WordPress |
 | `ui-ux-pro-max/` | Skill auxiliar de diseño UI/UX (opcional) |
@@ -472,11 +477,12 @@ python DAW_bundle/workspace/automation/generate_brief.py `
   --prompt "pagina principal de mi nueva marca" `
   --tone editorial
 
-# 7. Orquestar, componer, post-componer (calidad premium) y desplegar
-.\php.bat DAW_bundle/divi-agentic-core/bin/orchestrate_page.php --brief=home --deploy
+# 7. DIE → plan.json → build + deploy
+python DAW_bundle/ml-dataset/artifacts/design_intelligence.py --brief-file=site/bibliotheca/briefs/home.json --output=site/bibliotheca/plans/home.json
+.\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php --def=site/bibliotheca/plans/home.json --deploy
 ```
 
-**Regla**: todo dato de marca va en `site/<DAW_SITE>/brand/`. Definiciones de página en `site/<DAW_SITE>/page-defs/`. Código PHP de build en `divi-agentic-core/bin/`. 
+**Regla**: todo dato de marca va en `site/<DAW_SITE>/brand/`. Plans en `site/<DAW_SITE>/plans/`. Código PHP de build en `divi-agentic-core/bin/`. 
 **Framework**: no mezclar datos de proyecto con el código del DAW. `site/` es la frontera.
 
 ---
@@ -491,15 +497,15 @@ python DAW_bundle/workspace/automation/generate_brief.py `
 6. Sin CSS inyectado en `functions.php` ni overrides en `style.css`.
 7. Posiciones de gradient sin `%` (el Layout Engine normaliza).
 8. **Frontera site/**: todo dato de proyecto va en `site/<DAW_SITE>/`. El framework DAW (skills, plugin, build scripts) no contiene datos de proyecto.
-9. **Pipeline de página**: `site/<DAW_SITE>/page-defs/<slug>.json` → `build_page.php --deploy` → página en WP. Un solo comando PHP, sin Python, sin archivos intermedios.
-10. El pipeline de página es 100% PHP. No usar Python para construir páginas.
+9. **Pipeline de página**: `brief.json → DIE (Python) → plans/<slug>.json → build_page.php --deploy` → página en WP.
+10. El DIE (ML, Python) genera el plan. `build_page.php` (PHP) ejecuta el deploy. Cada uno en su lenguaje.
 11. **Multi-marca**: definir `DAW_SITE=<nombre>` en `.env` (raíz del proyecto). Todos los scripts PHP lo leen automáticamente vía `env_loader.php`. No necesita `$env:` ni vars de sistema.
 12. **Marca activa obligatoria**: antes de cualquier operación, verificar que `.env` contiene `DAW_SITE=<marca>`. Si no está definido, defaults a `bibliotheca` con advertencia.
-13. **Pipeline completo**: brief → **DIE (ML)** → orchestrate → compose → **post-compose** (calidad premium) → build → quality gate → deploy.
-    - El DIE es opcional: si `design_intelligence.py` o los artefactos .pkl no existen, el orquestador cae automáticamente al lookup fijo `$SECTION_TEMPLATES`.
+13. **Pipeline completo**: brief → **DIE (A+B+C+D+E)** → plan.json → `build_page.php --deploy` → quality gate → página en WP. Sin orchestrate_page, compose_page, post_compose.
     - El DIE se llama UNA vez por página (no por sección), cargando modelos una sola vez.
-    - Prioridad de templates: DIE (catalog/) → lookup fijo (local templates) → buscador semántico legacy.
-14. **Catálogo de templates**: `workspace/sections/catalog/*.section.json` contiene 877 templates compilados. El DIE los selecciona por similitud semántica. No tienen variantes — su decoración viene incluida.
+    - decoration blocks usan `{{design:color:*}}` tokens, nunca hex.
+    - 7 clusters K-means (scikit-learn) sobre 877 templates reales, combinados con 4 CSVs curados.
+14. **Catálogo de templates**: `workspace/sections/catalog/*.section.json` contiene 877 templates compilados. El DIE los selecciona por similitud semántica (B). La decoración la genera E, no viene del template.
 
 ---
 
