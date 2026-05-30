@@ -1,6 +1,6 @@
 # Estado de Artefactos Inteligentes
 
-Actualizado: 2026-05-29
+Actualizado: 2026-05-30
 
 ## Leyenda
 - [x] Completado y verificado
@@ -31,10 +31,35 @@ Actualizado: 2026-05-29
 - [x] Modelo: `ml-dataset/artifacts/content-classifier.pkl`
 - [x] 98.2% accuracy en training
 
+## Artefacto E: Decoration Engine
+- [x] Script: `ml-dataset/artifacts/e_decorator.py`
+- [x] Output: `ml-dataset/artifacts/decoration-clusters.pkl`
+- [x] Output: `ml-dataset/artifacts/decoration-rules.json`
+- [x] K-means clustering (scikit-learn) sobre vectores decoration de 877 templates → 7 clusters
+- [x] Integración con colors.csv → mapeo product_type → paleta (97 paletas)
+- [x] Integración con styles.csv → mapeo tone → decoration persona (~35 estilos)
+- [x] Integración con typography.csv → mapeo tone → font pairing (57 pairings)
+- [x] Integración con ux-guidelines.csv → constraints de animación/timing (99 reglas)
+- [x] `get_decoration()` devuelve decoration blocks completos con `{{design:color:*}}` tokens
+- [x] Importable como `from e_decorator import DecorationEngine`
+
 ## DIE: Design Intelligence Engine (Orquestador)
-- [x] Script: `ml-dataset/artifacts/design_intelligence.py`
-- [x] Integración con PHP: `orchestrate_page.php`
-- [x] Pipeline: brief → call_die() → catalog template → compose → build
+- [x] Refactor para importar A+B+C+D+E como módulos (no shell_exec)
+- [x] Eliminar dependencia de orchestrate_page.php
+- [x] Eliminar dependencia de compose_page.php
+- [x] Eliminar dependencia de post_compose.php
+- [x] Pipeline final: brief.json → DIE → plan.json → build_page.php --deploy
+- [x] `load_brand_vars()` / `load_brand_presets()` → brand-aware decoration
+- [x] `product_type` soportado en section_def y brief
+- [x] Decoration blocks incluidos en plan.json (step 5: E)
+- [x] CLI: `--brief-file`, `--section-file`, `--section`, `--output`, `--no-brand`
+
+## Cleanup Pipeline PHP
+- [x] Eliminar `divi-agentic-core/bin/orchestrate_page.php`
+- [x] Eliminar `divi-agentic-core/bin/compose_page.php`
+- [x] Eliminar `divi-agentic-core/bin/post_compose.php`
+- [x] `.gitignore` actualizado: `site/*/pages/**` en vez de `site/**`
+- [x] AGENTS.md actualizado: nuevo pipeline, nuevas referencias, nuevas reglas
 
 ---
 
@@ -43,11 +68,12 @@ Actualizado: 2026-05-29
 | Fecha | Artefacto | Cambio | Estado |
 |---|---|---|---|
 | 2026-05-29 | A | Build inicial | ✅ |
-| 2026-05-29 | A | Output verificado: 18 tipos, 877 templates, estructura + módulos + decoraciones | ✅ |
-| 2026-05-29 | B | Build + verificado: 892 templates indexados, búsqueda semántica con categorías reales | ✅ |
-| 2026-05-29 | C | Build + verificado: matriz PMI con 18 tipos de sección, afinidades reales | ✅ |
-| 2026-05-29 | D | Build + verificado: 98.2% accuracy en training, clasifica español e inglés | ✅ |
-| 2026-05-29 | DIE | Build + verificado: orquesta A+B+C+D, produce plan.json accionable | ✅ |
-| 2026-05-29 | DIE | Integración con orchestrate_page.php: DIE genera plans, PHP usa catalog templates con fallback | ✅ |
-| 2026-05-29 | DIE | Fix: template fallback para queries sin word overlap (español) | ✅ |
-| 2026-05-29 | DIE | Fix: trust brief section_type sobre clasificador D (evita sobreescritura) | ✅ |
+| 2026-05-29 | A | Output verificado: 18 tipos, 877 templates | ✅ |
+| 2026-05-29 | B | Build + verificado: 892 templates indexados | ✅ |
+| 2026-05-29 | C | Build + verificado: matriz PMI 18 tipos | ✅ |
+| 2026-05-29 | D | Build + verificado: 98.2% accuracy | ✅ |
+| 2026-05-29 | DIE | Build + verificado: orquesta A+B+C+D | ✅ |
+| 2026-05-30 | E | Build + verificado: K-means, 7 clusters, 4 CSVs integradas, decoration blocks | ✅ |
+| 2026-05-30 | DIE | Refactor v3.0: A+B+C+D+E como módulos, brand-aware, product_type | ✅ |
+| 2026-05-30 | Pipeline | PHP muerto: orchestrate/compose/post_compose eliminados | ✅ |
+| 2026-05-30 | Docs | AGENTS.md, .gitignore, TASKS.md actualizados | ✅ |

@@ -1,31 +1,22 @@
 #!/usr/bin/env python3
 """
-DIE: Design Intelligence Engine
-
-Orquestador que encadena los 4 artefactos inteligentes para producir
-un plan de diseno accionable (plan.json) a partir de una seccion del brief.
+DIE: Design Intelligence Engine (v3.0)
+=======================================
+Orquestador unificado que importa A+B+C+D+E como módulos para producir
+plan.json completo listo para build_page.php --deploy.
 
 Uso:
-  python design_intelligence.py --section='{"title":"hero","tone":"editorial","text":"..."}' 2>&1
+  python design_intelligence.py --brief-file=brief.json 2>&1
 
-Output: plan.json  (consumido por orchestrate_page.php)
-  {
-    "section_type": "hero",
-    "confidence": 0.94,
-    "template": "Hero University",
-    "template_path": "...",
-    "template_score": 0.91,
-    "column_structure": "4_4",
-    "modules": ["heading", "text", "button", "image"],
-    "variant": "editorial-grid",
-    "has_gradient": true
-  }
+Output: plan.json con structure + decoration blocks.
+
+Sin archivos intermedios. Sin orchestrate_page.php.
+Sin compose_page.php. Sin post_compose.php.
 """
 
-import json, sys, os, random
+import json, sys, os, random, re
 from pathlib import Path
 
-# Workaround for Windows console encoding
 if hasattr(sys.stdout, 'reconfigure'):
     try:
         sys.stdout.reconfigure(encoding='utf-8')
@@ -39,26 +30,8 @@ SECTION_PATTERNS_PATH = ARTIFACTS_DIR / "section-patterns.json"
 AFFINITIES_PATH = ARTIFACTS_DIR / "module-affinities.json"
 CLASSIFIER_PATH = ARTIFACTS_DIR / "content-classifier.pkl"
 SEMANTIC_INDEX_PATH = ARTIFACTS_DIR / "semantic-index.pkl"
-EMBEDDINGS_PATH = DAW_ROOT / "workspace" / "catalog" / "embeddings.pkl"
 
-# Tone to variant mapping (from orchestrate_page.php)
-TONE_VARIANTS = {
-    "editorial": {
-        "hero": "editorial-grid", "hero-split": "editorial-grid",
-        "content-split": "editorial-grid", "content-split-icon-list": "editorial-list",
-    },
-    "modern": {
-        "hero-centered": "liquid-glass", "features-3col": "monochrome-brutalist",
-    },
-    "premium": {
-        "hero-centered": "liquid-glass", "cta-centered": "glass-cta",
-    },
-    "minimal": {},
-    "dramatic": {},
-    "playful": {},
-}
-
-# Column structure compatibility: which module types work with which structures
+# Column structure compatibility
 COLUMN_MODULE_COMPAT = {
     "4_4": ["text", "heading", "button", "image", "video", "map", "code", "divider", "signup"],
     "1_2,1_2": ["text", "heading", "blurb", "button", "image", "testimonial", "team_member", "icon"],
@@ -73,40 +46,70 @@ COLUMN_MODULE_COMPAT = {
 }
 
 
+def load_brand_vars():
+    """Carga _design_vars.json desde la marca activa."""
+    daw_site = os.environ.get("DAW_SITE", "bibliotheca")
+    brand_path = DAW_ROOT / "site" / daw_site / "brand" / "_design_vars.json"
+    if brand_path.exists():
+        return json.loads(brand_path.read_text("utf-8"))
+    # Try DAW_bundle/site/ path
+    brand_path2 = DAW_ROOT / "DAW_bundle" / "site" / daw_site / "brand" / "_design_vars.json"
+    if brand_path2.exists():
+        return json.loads(brand_path2.read_text("utf-8"))
+    return {}
+
+
+def load_brand_presets():
+    """Carga _design_presets.json desde la marca activa."""
+    daw_site = os.environ.get("DAW_SITE", "bibliotheca")
+    presets_path = DAW_ROOT / "site" / daw_site / "brand" / "_design_presets.json"
+    if presets_path.exists():
+        return json.loads(presets_path.read_text("utf-8"))
+    presets_path2 = DAW_ROOT / "DAW_bundle" / "site" / daw_site / "brand" / "_design_presets.json"
+    if presets_path2.exists():
+        return json.loads(presets_path2.read_text("utf-8"))
+    return {}
+
+
 class DesignIntelligenceEngine:
+    """Orquestador A+B+C+D+E. Importa todos los artefactos como módulos."""
+
     def __init__(self):
         self.patterns = {}
         self.affinities = {}
         self.classifier = None
+        self.semantic_items = []
+        self.semantic_embeddings = None
         self.semantic_index = None
+        self.deco_engine = None
         self._loaded = False
 
     def load(self):
-        """Load all artifacts"""
+        """Carga A+B+C+D+E"""
         print("[DIE] Cargando artefactos...", file=sys.stderr)
 
         # A: Section Patterns
         if SECTION_PATTERNS_PATH.exists():
             self.patterns = json.loads(SECTION_PATTERNS_PATH.read_text("utf-8"))
-            print(f"[DIE]  A: {len(self.patterns)} tipos de seccion", file=sys.stderr)
+            print(f"[DIE]  A: {len(self.patterns)} section types", file=sys.stderr)
         else:
-            print(f"[DIE]  A: NO ENCONTRADO {SECTION_PATTERNS_PATH}", file=sys.stderr)
+            print(f"[DIE]  A: NO ENCONTRADO", file=sys.stderr)
 
         # C: Module Affinities
         if AFFINITIES_PATH.exists():
             self.affinities = json.loads(AFFINITIES_PATH.read_text("utf-8"))
-            print(f"[DIE]  C: {len(self.affinities)} tipos con afinidades", file=sys.stderr)
+            print(f"[DIE]  C: {len(self.affinities)} affinity types", file=sys.stderr)
         else:
-            print(f"[DIE]  C: NO ENCONTRADO {AFFINITIES_PATH}", file=sys.stderr)
+            print(f"[DIE]  C: NO ENCONTRADO", file=sys.stderr)
 
-        # D: Classifier
+        # D: Content Classifier
         if CLASSIFIER_PATH.exists():
             sys.path.insert(0, str(ARTIFACTS_DIR))
             from d_content_classifier import ContentClassifier
             self.classifier = ContentClassifier.load(CLASSIFIER_PATH)
-            print(f"[DIE]  D: clasificador cargado", file=sys.stderr)
+            print(f"[DIE]  D: classifier loaded", file=sys.stderr)
         else:
-            print(f"[DIE]  D: NO ENCONTRADO {CLASSIFIER_PATH}", file=sys.stderr)
+            print(f"[DIE]  D: NO ENCONTRADO", file=sys.stderr)
 
         # B: Semantic Index
         if SEMANTIC_INDEX_PATH.exists():
@@ -116,30 +119,44 @@ class DesignIntelligenceEngine:
             self.semantic_items = si_data["items"]
             self.semantic_embeddings = si_data.get("embeddings_normalized",
                                                      si_data.get("embeddings"))
-            print(f"[DIE]  B: {len(self.semantic_items)} templates indexados", file=sys.stderr)
-        elif EMBEDDINGS_PATH.exists():
+            print(f"[DIE]  B: {len(self.semantic_items)} templates indexed", file=sys.stderr)
             sys.path.insert(0, str(ARTIFACTS_DIR))
             from b_semantic_index import SemanticIndex
-            self.semantic_index_obj = SemanticIndex()
-            self.semantic_index_obj.build(EMBEDDINGS_PATH)
-            print(f"[DIE]  B: indice construido desde embeddings.pkl", file=sys.stderr)
+            self.semantic_index = SemanticIndex()
+            self.semantic_index.items = self.semantic_items
+            self.semantic_index.embeddings_normalized = self.semantic_embeddings
+            self.semantic_index._load_model()
+            print(f"[DIE]  B: model loaded", file=sys.stderr)
         else:
             print(f"[DIE]  B: NO ENCONTRADO", file=sys.stderr)
 
+        # E: Decoration Engine
+        sys.path.insert(0, str(ARTIFACTS_DIR))
+        from e_decorator import DecorationEngine
+        self.deco_engine = DecorationEngine()
+        if self.deco_engine.rules_path.exists() and self.deco_engine.clusters_path.exists():
+            self.deco_engine.load()
+            print(f"[DIE]  E: decoration engine loaded", file=sys.stderr)
+        else:
+            print(f"[DIE]  E: NO ENCONTRADO — run e_decorator.py --build first", file=sys.stderr)
+
         self._loaded = True
 
-    def generate_plan(self, section_def: dict) -> dict:
-        """Generate a complete design plan for one section"""
+    def generate_plan(self, section_def: dict, brand_vars=None, brand_presets=None) -> dict:
+        """Generate a complete design plan with structure + decoration."""
         if not self._loaded:
             self.load()
 
         title = section_def.get("title", "")
         section_type = section_def.get("section_type", "")
         tone = section_def.get("tone", "editorial")
+        product_type = section_def.get("product_type", "")
         text = section_def.get("text", "")
+        slots = section_def.get("slots", {})
         query_text = f"{title} {text}".strip() or title
 
         plan = {
+            "page_def_version": "2.0",
             "section_type": "generic",
             "confidence": 0.0,
             "template": None,
@@ -147,13 +164,12 @@ class DesignIntelligenceEngine:
             "template_score": 0.0,
             "column_structure": "4_4",
             "modules": [],
-            "variant": "",
-            "has_gradient": False,
-            "has_divider": False,
+            "slots": slots,
+            "decoration": {},
+            "presets": [],
         }
 
-        # Paso 1: Clasificar semánticamente (Artefacto D)
-        # Trust designer-provided section_type; use D classifier as fallback
+        # ── Paso 1: Clasificar semánticamente (D) ──
         if self.classifier and query_text and (not section_type or section_type == "generic"):
             try:
                 result = self.classifier.predict(query_text)
@@ -166,7 +182,6 @@ class DesignIntelligenceEngine:
         elif section_type:
             plan["section_type"] = section_type
             plan["confidence"] = 1.0
-            # Get module recommendations even when type is from brief
             if self.classifier and query_text:
                 try:
                     result = self.classifier.predict(query_text)
@@ -175,26 +190,18 @@ class DesignIntelligenceEngine:
                 except Exception:
                     pass
 
-        # Paso 2: Buscar template semánticamente similar (Artefacto B)
+        # ── Paso 2: Template semánticamente similar (B) ──
         best_template = None
         best_score = 0.0
-        if hasattr(self, "semantic_items") and self.semantic_items:
+        if self.semantic_index:
             try:
-                sys.path.insert(0, str(ARTIFACTS_DIR))
-                from b_semantic_index import SemanticIndex
-                si = SemanticIndex()
-                si.items = self.semantic_items
-                si.embeddings_normalized = self.semantic_embeddings
-                si._load_model()
-                results = si.search(query_text, category=section_type, limit=1)
+                results = self.semantic_index.search(query_text, category=section_type, limit=1)
                 if results:
                     best_template = results[0]
                     best_score = results[0]["score"]
             except Exception as e:
-                print(f"[DIE]  B error using SemanticIndex: {e}", file=sys.stderr)
-                # Fallback to simple overlap if something fails
+                print(f"[DIE]  B error: {e}", file=sys.stderr)
                 try:
-                    import numpy as np
                     matching = []
                     for i, item in enumerate(self.semantic_items):
                         cat = item.get("category", "")
@@ -220,13 +227,12 @@ class DesignIntelligenceEngine:
             plan["template_path"] = best_template.get("path", "")
             plan["template_score"] = round(best_score, 4)
 
-        # Paso 3: Elegir estructura de columna (Artefacto A)
+        # ── Paso 3: Estructura de columna (A) ──
         section_patterns = self.patterns.get(section_type, {})
         if section_patterns:
             col_structures = section_patterns.get("column_structures", [])
             if col_structures:
-                # Weighted random selection
-                total_weight = sum(c["frequency"] for c in col_structures)
+                total_weight = sum(c.get("frequency", c.get("count", 1)) for c in col_structures)
                 r = random.random() * total_weight
                 cumulative = 0.0
                 for cs in col_structures:
@@ -237,64 +243,89 @@ class DesignIntelligenceEngine:
                 if not plan["column_structure"]:
                     plan["column_structure"] = col_structures[0]["structure"]
 
-            # Decorations
-            deco = section_patterns.get("decorations", {})
-            plan["has_gradient"] = random.random() < deco.get("gradient_frequency", 0.0)
-            plan["has_divider"] = random.random() < deco.get("divider_frequency", 0.0)
-
-        # Paso 4: Variant por tone
-        variant_map = TONE_VARIANTS.get(tone, {})
-        plan["variant"] = variant_map.get(section_type, variant_map.get(
-            plan.get("template", ""), ""))
-
-        # Paso 5: Si no hay template del índice B, sugerir desde patrones A
-        if not plan["template"] and section_patterns:
+        # ── Paso 4: Módulos complementarios (C) ──
+        if not plan["modules"] and section_patterns:
             common_modules = section_patterns.get("common_modules", [])
-            if not plan["modules"]:
-                plan["modules"] = [m["module_tag"] for m in common_modules[:6]]
+            plan["modules"] = [m["module_tag"] for m in common_modules[:6]]
+
+        affinity_data = self.affinities.get(section_type, {})
+        if affinity_data:
+            top_pairs = affinity_data.get("top_pairs", [])
+            for pair in top_pairs[:3]:
+                mods = pair.get("modules", [])
+                for m in mods:
+                    if m not in plan["modules"]:
+                        plan["modules"].append(m)
+
+        # ── Paso 5: Decoration blocks (E) ──
+        if self.deco_engine and self.deco_engine.is_ready():
+            try:
+                decoration = self.deco_engine.get_decoration(
+                    section_type=section_type,
+                    tone=tone,
+                    product_type=product_type,
+                    brand_vars=brand_vars or {},
+                    brand_presets=brand_presets or {},
+                )
+                plan["decoration"] = decoration
+                if "section_preset" in decoration:
+                    plan["presets"].append(decoration["section_preset"])
+            except Exception as e:
+                print(f"[DIE]  E error: {e}", file=sys.stderr)
+                plan["decoration"] = {}
+        else:
+            print(f"[DIE]  E: not ready, skipping decoration", file=sys.stderr)
+            plan["decoration"] = {}
 
         return plan
 
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="Design Intelligence Engine")
+    parser = argparse.ArgumentParser(description="DIE v3.0 — Design Intelligence Engine")
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--section", help="JSON section definition as string")
     group.add_argument("--section-file", help="Path to JSON file with section definition")
-    group.add_argument("--brief-file", help="Path to JSON file with full brief (tone + sections array)")
-    parser.add_argument("--output", help="Output path for plan.json (single) or plans.json (batch)")
+    group.add_argument("--brief-file", help="Path to JSON brief file (tone + product_type + sections)")
+    parser.add_argument("--output", help="Output path for plan.json / plans.json")
+    parser.add_argument("--no-brand", action="store_true", help="Skip brand vars loading")
     args = parser.parse_args()
+
+    brand_vars = {} if args.no_brand else load_brand_vars()
+    brand_presets = {} if args.no_brand else load_brand_presets()
+    if brand_vars:
+        print(f"[DIE] Brand: {brand_vars.get('brand_name', 'unknown')}", file=sys.stderr)
 
     die = DesignIntelligenceEngine()
 
     if args.brief_file:
-        # Batch mode: process all sections in one brief
         brief = json.loads(Path(args.brief_file).read_text("utf-8"))
         tone = brief.get("tone", "editorial")
+        product_type = brief.get("product_type", brand_vars.get("brand_name", ""))
         sections = brief.get("sections", [])
         plans = []
         for sec in sections:
             sec["tone"] = tone
-            plan = die.generate_plan(sec)
+            sec["product_type"] = product_type
+            plan = die.generate_plan(sec, brand_vars, brand_presets)
             plans.append(plan)
         output = json.dumps(plans, indent=2, ensure_ascii=False)
         print(output)
         if args.output:
             Path(args.output).write_text(output, encoding="utf-8")
-            print(f"[DIE] Planes escritos: {args.output} ({len(plans)} secciones)", file=sys.stderr)
+            print(f"[DIE] Plans written: {args.output} ({len(plans)} sections)", file=sys.stderr)
     else:
         if args.section_file:
             section_def = json.loads(Path(args.section_file).read_text("utf-8"))
         else:
             section_def = json.loads(args.section)
-
-        plan = die.generate_plan(section_def)
+        section_def["product_type"] = section_def.get("product_type", brand_vars.get("brand_name", ""))
+        plan = die.generate_plan(section_def, brand_vars, brand_presets)
         output = json.dumps(plan, indent=2, ensure_ascii=False)
         print(output)
         if args.output:
             Path(args.output).write_text(output, encoding="utf-8")
-            print(f"[DIE] Plan escrito: {args.output}", file=sys.stderr)
+            print(f"[DIE] Plan written: {args.output}", file=sys.stderr)
 
     return 0
 
