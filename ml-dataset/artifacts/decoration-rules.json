@@ -1,0 +1,1622 @@
+{
+  "meta": {
+    "version": "2.0",
+    "description": "Decoration rules for DIE — Artifact E",
+    "clusters": 7,
+    "features": [
+      "has_gradient",
+      "gradient_stops_norm",
+      "gradient_is_linear",
+      "gradient_is_radial",
+      "gradient_deg_norm",
+      "has_bg_image",
+      "has_bg_color",
+      "bg_is_dark",
+      "has_shadow",
+      "shadow_active",
+      "shadow_blur_norm",
+      "shadow_spread_norm",
+      "has_border_radius",
+      "border_radius_norm",
+      "has_animation",
+      "anim_is_fade",
+      "anim_is_slide",
+      "anim_is_zoom",
+      "anim_is_flip",
+      "anim_duration_norm",
+      "anim_delay_norm",
+      "has_hover",
+      "hover_is_scale",
+      "hover_intensity_norm",
+      "has_scroll",
+      "scroll_is_vertical",
+      "has_divider_top",
+      "has_divider_bottom",
+      "has_mask",
+      "is_parallax",
+      "section_count_norm",
+      "row_count_norm",
+      "module_count_norm",
+      "has_dipl_modules"
+    ],
+    "sources": {
+      "templates_analyzed": 877,
+      "colors_csv": 96,
+      "styles_csv": 78,
+      "typography_csv": 126,
+      "ux_csv": 99
+    }
+  },
+  "cluster_profiles": {
+    "cluster_0": {
+      "size": 136,
+      "pct": 15.5,
+      "feature_proportions": {
+        "has_gradient": 0.007,
+        "has_bg_image": 0.162,
+        "has_bg_color": 1.0,
+        "bg_is_dark": 0.426,
+        "has_shadow": 0.0,
+        "has_border_radius": 0.0,
+        "has_animation": 0.0,
+        "has_hover": 0.0,
+        "has_scroll": 0.0,
+        "has_divider_top": 0.015,
+        "has_divider_bottom": 0.022,
+        "has_mask": 0.022,
+        "is_parallax": 0.0,
+        "has_dipl_modules": 0.993
+      },
+      "section_types": {
+        "generic": 49,
+        "gallery": 12,
+        "hero": 11,
+        "testimonials": 9,
+        "countdown": 8
+      },
+      "representatives": [
+        "Call To Action We Provide Digital Services To Get Ahead On The Internet",
+        "Faqpage Schema Advice Answers From The Team In 3 Columns",
+        "Power Up Your Productivity Get Your Perfect Laptop Today",
+        "Faqpage Schema Top Questions Regarding Faqpage Schema",
+        "Call To Action Natural Creativity To Bring The Best"
+      ]
+    },
+    "cluster_1": {
+      "size": 623,
+      "pct": 71.0,
+      "feature_proportions": {
+        "has_gradient": 0.0,
+        "has_bg_image": 0.059,
+        "has_bg_color": 0.0,
+        "bg_is_dark": 0.0,
+        "has_shadow": 0.0,
+        "has_border_radius": 0.0,
+        "has_animation": 0.0,
+        "has_hover": 0.0,
+        "has_scroll": 0.0,
+        "has_divider_top": 0.0,
+        "has_divider_bottom": 0.003,
+        "has_mask": 0.002,
+        "is_parallax": 0.008,
+        "has_dipl_modules": 0.904
+      },
+      "section_types": {
+        "generic": 229,
+        "hero": 69,
+        "features": 63,
+        "product": 44,
+        "about": 37
+      },
+      "representatives": [
+        "Call To Action Grow Your Business With Our Enhanced Marketing Skills",
+        "Faqpage Schema Try Frequently Asked Questions In Grid Style",
+        "Timeline Lets Display Timeless Moments In A New Fashion",
+        "Pricing Table Monthly Annual Toggle With 3 Plans Each",
+        "Contact Last Form Module For Divi Youll Ever Need"
+      ]
+    },
+    "cluster_2": {
+      "size": 1,
+      "pct": 0.1,
+      "feature_proportions": {
+        "has_gradient": 0.0,
+        "has_bg_image": 0.0,
+        "has_bg_color": 1.0,
+        "bg_is_dark": 0.0,
+        "has_shadow": 0.0,
+        "has_border_radius": 1.0,
+        "has_animation": 0.0,
+        "has_hover": 0.0,
+        "has_scroll": 1.0,
+        "has_divider_top": 0.0,
+        "has_divider_bottom": 0.0,
+        "has_mask": 0.0,
+        "is_parallax": 0.0,
+        "has_dipl_modules": 1.0
+      },
+      "section_types": {
+        "pricing": 1
+      },
+      "representatives": [
+        "We Love To Plan"
+      ]
+    },
+    "cluster_3": {
+      "size": 53,
+      "pct": 6.0,
+      "feature_proportions": {
+        "has_gradient": 1.0,
+        "has_bg_image": 0.509,
+        "has_bg_color": 0.094,
+        "bg_is_dark": 0.038,
+        "has_shadow": 0.0,
+        "has_border_radius": 0.019,
+        "has_animation": 0.0,
+        "has_hover": 0.0,
+        "has_scroll": 0.0,
+        "has_divider_top": 0.019,
+        "has_divider_bottom": 0.0,
+        "has_mask": 0.0,
+        "is_parallax": 0.019,
+        "has_dipl_modules": 0.962
+      },
+      "section_types": {
+        "hero": 22,
+        "generic": 8,
+        "gallery": 5,
+        "about": 3,
+        "features": 3
+      },
+      "representatives": [
+        "Call To Action Premium Divi Plugins",
+        "Lifestyle Photography Service Table",
+        "Why People Need A Health Adviser",
+        "Disover Timeless Jewellery Hero",
+        "Fresh Picks Of The Week Product"
+      ]
+    },
+    "cluster_4": {
+      "size": 1,
+      "pct": 0.1,
+      "feature_proportions": {
+        "has_gradient": 0.0,
+        "has_bg_image": 0.0,
+        "has_bg_color": 0.0,
+        "bg_is_dark": 0.0,
+        "has_shadow": 1.0,
+        "has_border_radius": 0.0,
+        "has_animation": 0.0,
+        "has_hover": 0.0,
+        "has_scroll": 0.0,
+        "has_divider_top": 0.0,
+        "has_divider_bottom": 0.0,
+        "has_mask": 0.0,
+        "is_parallax": 0.0,
+        "has_dipl_modules": 1.0
+      },
+      "section_types": {
+        "timeline": 1
+      },
+      "representatives": [
+        "Timeline Dental Implant Sample Process"
+      ]
+    },
+    "cluster_5": {
+      "size": 1,
+      "pct": 0.1,
+      "feature_proportions": {
+        "has_gradient": 0.0,
+        "has_bg_image": 0.0,
+        "has_bg_color": 0.0,
+        "bg_is_dark": 0.0,
+        "has_shadow": 0.0,
+        "has_border_radius": 0.0,
+        "has_animation": 1.0,
+        "has_hover": 0.0,
+        "has_scroll": 0.0,
+        "has_divider_top": 0.0,
+        "has_divider_bottom": 0.0,
+        "has_mask": 0.0,
+        "is_parallax": 0.0,
+        "has_dipl_modules": 1.0
+      },
+      "section_types": {
+        "hero": 1
+      },
+      "representatives": [
+        "Hero Pet Care"
+      ]
+    },
+    "cluster_6": {
+      "size": 62,
+      "pct": 7.1,
+      "feature_proportions": {
+        "has_gradient": 1.0,
+        "has_bg_image": 0.694,
+        "has_bg_color": 0.065,
+        "bg_is_dark": 0.032,
+        "has_shadow": 0.0,
+        "has_border_radius": 0.0,
+        "has_animation": 0.0,
+        "has_hover": 0.0,
+        "has_scroll": 0.0,
+        "has_divider_top": 0.032,
+        "has_divider_bottom": 0.097,
+        "has_mask": 0.016,
+        "is_parallax": 0.016,
+        "has_dipl_modules": 1.0
+      },
+      "section_types": {
+        "generic": 23,
+        "hero": 18,
+        "blog": 4,
+        "timeline": 4,
+        "cta": 3
+      },
+      "representatives": [
+        "Content Vertical Separator You Got Two Options",
+        "Your Journey To Beauty Timeline Section",
+        "Contact Contact Us Night And Bridge",
+        "Something Beautiful Wedding Section",
+        "Construction Recent Projects"
+      ]
+    }
+  },
+  "decoration_by_tone": {
+    "editorial": {
+      "matched_cluster": "cluster_6",
+      "cluster_score": 0.1,
+      "suggestions": {
+        "bg_is_dark": false,
+        "has_gradient": true,
+        "has_shadow": false,
+        "has_animation": false,
+        "has_hover": false,
+        "has_scroll": false,
+        "has_dividers": false,
+        "has_border_radius": false,
+        "has_parallax": false
+      }
+    },
+    "modern": {
+      "matched_cluster": "cluster_6",
+      "cluster_score": 0.3,
+      "suggestions": {
+        "bg_is_dark": false,
+        "has_gradient": true,
+        "has_shadow": false,
+        "has_animation": false,
+        "has_hover": false,
+        "has_scroll": false,
+        "has_dividers": false,
+        "has_border_radius": false,
+        "has_parallax": false
+      }
+    },
+    "premium": {
+      "matched_cluster": "cluster_0",
+      "cluster_score": 0.3,
+      "suggestions": {
+        "bg_is_dark": true,
+        "has_gradient": false,
+        "has_shadow": false,
+        "has_animation": false,
+        "has_hover": false,
+        "has_scroll": false,
+        "has_dividers": false,
+        "has_border_radius": false,
+        "has_parallax": false
+      }
+    },
+    "minimal": {
+      "matched_cluster": "cluster_6",
+      "cluster_score": 0,
+      "suggestions": {
+        "bg_is_dark": false,
+        "has_gradient": false,
+        "has_shadow": false,
+        "has_animation": false,
+        "has_hover": false,
+        "has_scroll": false,
+        "has_dividers": false,
+        "has_border_radius": false,
+        "has_parallax": false
+      }
+    },
+    "dramatic": {
+      "matched_cluster": "cluster_0",
+      "cluster_score": 0.3,
+      "suggestions": {
+        "bg_is_dark": true,
+        "has_gradient": false,
+        "has_shadow": false,
+        "has_animation": false,
+        "has_hover": false,
+        "has_scroll": false,
+        "has_dividers": false,
+        "has_border_radius": false,
+        "has_parallax": false
+      }
+    },
+    "playful": {
+      "matched_cluster": "cluster_2",
+      "cluster_score": 0.2,
+      "suggestions": {
+        "bg_is_dark": false,
+        "has_gradient": false,
+        "has_shadow": false,
+        "has_animation": false,
+        "has_hover": false,
+        "has_scroll": true,
+        "has_dividers": false,
+        "has_border_radius": true,
+        "has_parallax": false
+      }
+    }
+  },
+  "style_by_tone": {
+    "editorial": [
+      {
+        "name": "Minimalism & Swiss Style",
+        "keywords": "Clean, simple, spacious, functional, white space, high contrast, geometric, sans-serif, grid-based, essential",
+        "effects": "Subtle hover (200-250ms), smooth transitions, sharp shadows if any, clear type hierarchy, fast loading",
+        "checklist": "☐ Grid-based layout 12-16 columns, ☐ Typography hierarchy clear, ☐ No unnecessary decorations, ☐ WCAG AAA contrast verified, ☐ Mobile responsive grid"
+      },
+      {
+        "name": "Flat Design",
+        "keywords": "2D, minimalist, bold colors, no shadows, clean lines, simple shapes, typography-focused, modern, icon-heavy",
+        "effects": "No gradients/shadows, simple hover (color/opacity shift), fast loading, clean transitions (150-200ms ease), minimal icons",
+        "checklist": "☐ No shadows/gradients, ☐ 4-6 solid colors max, ☐ Clean lines consistent, ☐ Simple shapes used, ☐ Icon-heavy layout, ☐ High saturation colors, ☐ Fast loading verified"
+      },
+      {
+        "name": "Zero Interface",
+        "keywords": "Minimal visible UI, voice-first, gesture-based, AI-driven, invisible controls, predictive, context-aware, ambient",
+        "effects": "Voice recognition UI, gesture detection, AI predictions (smooth reveal), progressive disclosure, smart suggestions",
+        "checklist": "☐ Voice commands responsive, ☐ Gesture detection active, ☐ AI predictions hidden/revealed, ☐ Progressive disclosure working, ☐ Minimal visible UI, ☐ Smart suggestions contextual"
+      }
+    ],
+    "modern": [
+      {
+        "name": "Minimalism & Swiss Style",
+        "keywords": "Clean, simple, spacious, functional, white space, high contrast, geometric, sans-serif, grid-based, essential",
+        "effects": "Subtle hover (200-250ms), smooth transitions, sharp shadows if any, clear type hierarchy, fast loading",
+        "checklist": "☐ Grid-based layout 12-16 columns, ☐ Typography hierarchy clear, ☐ No unnecessary decorations, ☐ WCAG AAA contrast verified, ☐ Mobile responsive grid"
+      },
+      {
+        "name": "Glassmorphism",
+        "keywords": "Frosted glass, transparent, blurred background, layered, vibrant background, light source, depth, multi-layer",
+        "effects": "Backdrop blur (10-20px), subtle border (1px solid rgba white 0.2), light reflection, Z-depth",
+        "checklist": "☐ Backdrop-filter blur 10-20px, ☐ Translucent white 15-30% opacity, ☐ Subtle border 1px light, ☐ Vibrant background verified, ☐ Text contrast 4.5:1 checked"
+      },
+      {
+        "name": "Vibrant & Block-based",
+        "keywords": "Bold, energetic, playful, block layout, geometric shapes, high color contrast, duotone, modern, energetic",
+        "effects": "Large sections (48px+ gaps), animated patterns, bold hover (color shift), scroll-snap, large type (32px+), 200-300ms",
+        "checklist": "☐ Block layout with 48px+ gaps, ☐ Large typography 32px+, ☐ 4-6 vibrant colors max, ☐ Animated patterns active, ☐ Scroll-snap enabled, ☐ High contrast verified (7:1+)"
+      }
+    ],
+    "premium": [
+      {
+        "name": "Dark Mode (OLED)",
+        "keywords": "Dark theme, low light, high contrast, deep black, midnight blue, eye-friendly, OLED, night mode, power efficient",
+        "effects": "Minimal glow (text-shadow: 0 0 10px), dark-to-light transitions, low white emission, high readability, visible focus",
+        "checklist": "☐ Deep black #000000 or #121212, ☐ Vibrant neon accents used, ☐ Text contrast 7:1+, ☐ Minimal glow effects, ☐ OLED power optimization, ☐ No white (#FFFFFF) background"
+      },
+      {
+        "name": "Hero-Centric Design",
+        "keywords": "Large hero section, compelling headline, high-contrast CTA, product showcase, value proposition, hero image/video, dramatic visual",
+        "effects": "Smooth scroll reveal, fade-in animations on hero, subtle background parallax, CTA glow/pulse effect",
+        "checklist": "☐ Hero section full viewport height, ☐ Headline visible above fold, ☐ CTA button high contrast, ☐ Background image optimized (WebP), ☐ Text readable on background, ☐ Mobile responsive layout"
+      },
+      {
+        "name": "Cyberpunk UI",
+        "keywords": "Neon, dark mode, terminal, HUD, sci-fi, glitch, dystopian, futuristic, matrix, tech noir",
+        "effects": "Neon glow (text-shadow), glitch animations (skew/offset), scanlines (::before overlay), terminal fonts",
+        "checklist": "☐ Dark background only, ☐ Neon accents visible, ☐ Glitch effect subtle, ☐ Scanlines optional, ☐ Monospace font, ☐ Terminal aesthetic"
+      }
+    ],
+    "minimal": [
+      {
+        "name": "Minimalism & Swiss Style",
+        "keywords": "Clean, simple, spacious, functional, white space, high contrast, geometric, sans-serif, grid-based, essential",
+        "effects": "Subtle hover (200-250ms), smooth transitions, sharp shadows if any, clear type hierarchy, fast loading",
+        "checklist": "☐ Grid-based layout 12-16 columns, ☐ Typography hierarchy clear, ☐ No unnecessary decorations, ☐ WCAG AAA contrast verified, ☐ Mobile responsive grid"
+      },
+      {
+        "name": "Flat Design",
+        "keywords": "2D, minimalist, bold colors, no shadows, clean lines, simple shapes, typography-focused, modern, icon-heavy",
+        "effects": "No gradients/shadows, simple hover (color/opacity shift), fast loading, clean transitions (150-200ms ease), minimal icons",
+        "checklist": "☐ No shadows/gradients, ☐ 4-6 solid colors max, ☐ Clean lines consistent, ☐ Simple shapes used, ☐ Icon-heavy layout, ☐ High saturation colors, ☐ Fast loading verified"
+      },
+      {
+        "name": "Zero Interface",
+        "keywords": "Minimal visible UI, voice-first, gesture-based, AI-driven, invisible controls, predictive, context-aware, ambient",
+        "effects": "Voice recognition UI, gesture detection, AI predictions (smooth reveal), progressive disclosure, smart suggestions",
+        "checklist": "☐ Voice commands responsive, ☐ Gesture detection active, ☐ AI predictions hidden/revealed, ☐ Progressive disclosure working, ☐ Minimal visible UI, ☐ Smart suggestions contextual"
+      }
+    ],
+    "dramatic": [
+      {
+        "name": "Minimalism & Swiss Style",
+        "keywords": "Clean, simple, spacious, functional, white space, high contrast, geometric, sans-serif, grid-based, essential",
+        "effects": "Subtle hover (200-250ms), smooth transitions, sharp shadows if any, clear type hierarchy, fast loading",
+        "checklist": "☐ Grid-based layout 12-16 columns, ☐ Typography hierarchy clear, ☐ No unnecessary decorations, ☐ WCAG AAA contrast verified, ☐ Mobile responsive grid"
+      },
+      {
+        "name": "Brutalism",
+        "keywords": "Raw, unpolished, stark, high contrast, plain text, default fonts, visible borders, asymmetric, anti-design",
+        "effects": "No smooth transitions (instant), sharp corners (0px), bold typography (700+), visible grid, large blocks",
+        "checklist": "☐ No border-radius (0px), ☐ No transitions (instant), ☐ Bold typography (700+), ☐ Pure primary colors used, ☐ Visible grid/borders, ☐ Asymmetric layout intentional"
+      },
+      {
+        "name": "Vibrant & Block-based",
+        "keywords": "Bold, energetic, playful, block layout, geometric shapes, high color contrast, duotone, modern, energetic",
+        "effects": "Large sections (48px+ gaps), animated patterns, bold hover (color shift), scroll-snap, large type (32px+), 200-300ms",
+        "checklist": "☐ Block layout with 48px+ gaps, ☐ Large typography 32px+, ☐ 4-6 vibrant colors max, ☐ Animated patterns active, ☐ Scroll-snap enabled, ☐ High contrast verified (7:1+)"
+      }
+    ],
+    "playful": [
+      {
+        "name": "Minimalism & Swiss Style",
+        "keywords": "Clean, simple, spacious, functional, white space, high contrast, geometric, sans-serif, grid-based, essential",
+        "effects": "Subtle hover (200-250ms), smooth transitions, sharp shadows if any, clear type hierarchy, fast loading",
+        "checklist": "☐ Grid-based layout 12-16 columns, ☐ Typography hierarchy clear, ☐ No unnecessary decorations, ☐ WCAG AAA contrast verified, ☐ Mobile responsive grid"
+      },
+      {
+        "name": "Neumorphism",
+        "keywords": "Soft UI, embossed, debossed, convex, concave, light source, subtle depth, rounded (12-16px), monochromatic",
+        "effects": "Soft box-shadow (multiple: -5px -5px 15px, 5px 5px 15px), smooth press (150ms), inner subtle shadow",
+        "checklist": "☐ Rounded corners 12-16px consistent, ☐ Multiple shadow layers (2-3), ☐ Pastel color verified, ☐ Monochromatic palette checked, ☐ Press animation smooth 150ms"
+      },
+      {
+        "name": "Vibrant & Block-based",
+        "keywords": "Bold, energetic, playful, block layout, geometric shapes, high color contrast, duotone, modern, energetic",
+        "effects": "Large sections (48px+ gaps), animated patterns, bold hover (color shift), scroll-snap, large type (32px+), 200-300ms",
+        "checklist": "☐ Block layout with 48px+ gaps, ☐ Large typography 32px+, ☐ 4-6 vibrant colors max, ☐ Animated patterns active, ☐ Scroll-snap enabled, ☐ High contrast verified (7:1+)"
+      }
+    ]
+  },
+  "typography_by_tone": {
+    "editorial": [
+      {
+        "name": "Classic Elegant",
+        "heading": "Playfair Display",
+        "body": "Inter",
+        "mood": "elegant, luxury, sophisticated, timeless, premium, editorial",
+        "notes": "High contrast between elegant heading and clean body. Perfect for luxury/premium."
+      },
+      {
+        "name": "Editorial Classic",
+        "heading": "Cormorant Garamond",
+        "body": "Libre Baskerville",
+        "mood": "editorial, classic, literary, traditional, refined, bookish",
+        "notes": "All-serif pairing for traditional editorial feel."
+      }
+    ],
+    "modern": [
+      {
+        "name": "Classic Elegant",
+        "heading": "Playfair Display",
+        "body": "Inter",
+        "mood": "elegant, luxury, sophisticated, timeless, premium, editorial",
+        "notes": "High contrast between elegant heading and clean body. Perfect for luxury/premium."
+      },
+      {
+        "name": "Modern Professional",
+        "heading": "Poppins",
+        "body": "Open Sans",
+        "mood": "modern, professional, clean, corporate, friendly, approachable",
+        "notes": "Geometric Poppins for headings, humanist Open Sans for readability."
+      }
+    ],
+    "premium": [
+      {
+        "name": "Classic Elegant",
+        "heading": "Playfair Display",
+        "body": "Inter",
+        "mood": "elegant, luxury, sophisticated, timeless, premium, editorial",
+        "notes": "High contrast between elegant heading and clean body. Perfect for luxury/premium."
+      },
+      {
+        "name": "Editorial Classic",
+        "heading": "Cormorant Garamond",
+        "body": "Libre Baskerville",
+        "mood": "editorial, classic, literary, traditional, refined, bookish",
+        "notes": "All-serif pairing for traditional editorial feel."
+      }
+    ],
+    "minimal": [
+      {
+        "name": "Modern Professional",
+        "heading": "Poppins",
+        "body": "Open Sans",
+        "mood": "modern, professional, clean, corporate, friendly, approachable",
+        "notes": "Geometric Poppins for headings, humanist Open Sans for readability."
+      },
+      {
+        "name": "Minimal Swiss",
+        "heading": "Inter",
+        "body": "Inter",
+        "mood": "minimal, clean, swiss, functional, neutral, professional",
+        "notes": "Single font family with weight variations. Ultimate simplicity."
+      }
+    ],
+    "dramatic": [
+      {
+        "name": "Tech Startup",
+        "heading": "Space Grotesk",
+        "body": "DM Sans",
+        "mood": "tech, startup, modern, innovative, bold, futuristic",
+        "notes": "Space Grotesk has unique character, DM Sans is highly readable."
+      },
+      {
+        "name": "Bold Statement",
+        "heading": "Bebas Neue",
+        "body": "Source Sans 3",
+        "mood": "bold, impactful, strong, dramatic, modern, headlines",
+        "notes": "Bebas Neue for large headlines only. All-caps display font."
+      }
+    ],
+    "playful": [
+      {
+        "name": "Modern Professional",
+        "heading": "Poppins",
+        "body": "Open Sans",
+        "mood": "modern, professional, clean, corporate, friendly, approachable",
+        "notes": "Geometric Poppins for headings, humanist Open Sans for readability."
+      },
+      {
+        "name": "Minimal Swiss",
+        "heading": "Inter",
+        "body": "Inter",
+        "mood": "minimal, clean, swiss, functional, neutral, professional",
+        "notes": "Single font family with weight variations. Ultimate simplicity."
+      }
+    ]
+  },
+  "color_by_product_type": {
+    "SaaS (General)": {
+      "primary": "#2563EB",
+      "secondary": "#3B82F6",
+      "cta": "#F97316",
+      "background": "#F8FAFC",
+      "text": "#1E293B",
+      "border": "#E2E8F0",
+      "notes": "Trust blue + orange CTA contrast"
+    },
+    "Micro SaaS": {
+      "primary": "#6366F1",
+      "secondary": "#818CF8",
+      "cta": "#10B981",
+      "background": "#F5F3FF",
+      "text": "#1E1B4B",
+      "border": "#E0E7FF",
+      "notes": "Indigo primary + emerald CTA"
+    },
+    "E-commerce": {
+      "primary": "#059669",
+      "secondary": "#10B981",
+      "cta": "#F97316",
+      "background": "#ECFDF5",
+      "text": "#064E3B",
+      "border": "#A7F3D0",
+      "notes": "Success green + urgency orange"
+    },
+    "E-commerce Luxury": {
+      "primary": "#1C1917",
+      "secondary": "#44403C",
+      "cta": "#CA8A04",
+      "background": "#FAFAF9",
+      "text": "#0C0A09",
+      "border": "#D6D3D1",
+      "notes": "Premium dark + gold accent"
+    },
+    "Service Landing Page": {
+      "primary": "#0EA5E9",
+      "secondary": "#38BDF8",
+      "cta": "#F97316",
+      "background": "#F0F9FF",
+      "text": "#0C4A6E",
+      "border": "#BAE6FD",
+      "notes": "Sky blue trust + warm CTA"
+    },
+    "B2B Service": {
+      "primary": "#0F172A",
+      "secondary": "#334155",
+      "cta": "#0369A1",
+      "background": "#F8FAFC",
+      "text": "#020617",
+      "border": "#E2E8F0",
+      "notes": "Professional navy + blue CTA"
+    },
+    "Financial Dashboard": {
+      "primary": "#0F172A",
+      "secondary": "#1E293B",
+      "cta": "#22C55E",
+      "background": "#020617",
+      "text": "#F8FAFC",
+      "border": "#334155",
+      "notes": "Dark bg + green positive indicators"
+    },
+    "Analytics Dashboard": {
+      "primary": "#1E40AF",
+      "secondary": "#3B82F6",
+      "cta": "#F59E0B",
+      "background": "#F8FAFC",
+      "text": "#1E3A8A",
+      "border": "#DBEAFE",
+      "notes": "Blue data + amber highlights"
+    },
+    "Healthcare App": {
+      "primary": "#0891B2",
+      "secondary": "#22D3EE",
+      "cta": "#059669",
+      "background": "#ECFEFF",
+      "text": "#164E63",
+      "border": "#A5F3FC",
+      "notes": "Calm cyan + health green"
+    },
+    "Educational App": {
+      "primary": "#4F46E5",
+      "secondary": "#818CF8",
+      "cta": "#F97316",
+      "background": "#EEF2FF",
+      "text": "#1E1B4B",
+      "border": "#C7D2FE",
+      "notes": "Playful indigo + energetic orange"
+    },
+    "Creative Agency": {
+      "primary": "#EC4899",
+      "secondary": "#F472B6",
+      "cta": "#06B6D4",
+      "background": "#FDF2F8",
+      "text": "#831843",
+      "border": "#FBCFE8",
+      "notes": "Bold pink + cyan accent"
+    },
+    "Portfolio/Personal": {
+      "primary": "#18181B",
+      "secondary": "#3F3F46",
+      "cta": "#2563EB",
+      "background": "#FAFAFA",
+      "text": "#09090B",
+      "border": "#E4E4E7",
+      "notes": "Monochrome + blue accent"
+    },
+    "Gaming": {
+      "primary": "#7C3AED",
+      "secondary": "#A78BFA",
+      "cta": "#F43F5E",
+      "background": "#0F0F23",
+      "text": "#E2E8F0",
+      "border": "#4C1D95",
+      "notes": "Neon purple + rose action"
+    },
+    "Government/Public Service": {
+      "primary": "#0F172A",
+      "secondary": "#334155",
+      "cta": "#0369A1",
+      "background": "#F8FAFC",
+      "text": "#020617",
+      "border": "#E2E8F0",
+      "notes": "High contrast navy + blue"
+    },
+    "Fintech/Crypto": {
+      "primary": "#F59E0B",
+      "secondary": "#FBBF24",
+      "cta": "#8B5CF6",
+      "background": "#0F172A",
+      "text": "#F8FAFC",
+      "border": "#334155",
+      "notes": "Gold trust + purple tech"
+    },
+    "Social Media App": {
+      "primary": "#E11D48",
+      "secondary": "#FB7185",
+      "cta": "#2563EB",
+      "background": "#FFF1F2",
+      "text": "#881337",
+      "border": "#FECDD3",
+      "notes": "Vibrant rose + engagement blue"
+    },
+    "Productivity Tool": {
+      "primary": "#0D9488",
+      "secondary": "#14B8A6",
+      "cta": "#F97316",
+      "background": "#F0FDFA",
+      "text": "#134E4A",
+      "border": "#99F6E4",
+      "notes": "Teal focus + action orange"
+    },
+    "Design System/Component Library": {
+      "primary": "#4F46E5",
+      "secondary": "#6366F1",
+      "cta": "#F97316",
+      "background": "#EEF2FF",
+      "text": "#312E81",
+      "border": "#C7D2FE",
+      "notes": "Indigo brand + doc hierarchy"
+    },
+    "AI/Chatbot Platform": {
+      "primary": "#7C3AED",
+      "secondary": "#A78BFA",
+      "cta": "#06B6D4",
+      "background": "#FAF5FF",
+      "text": "#1E1B4B",
+      "border": "#DDD6FE",
+      "notes": "AI purple + cyan interactions"
+    },
+    "NFT/Web3 Platform": {
+      "primary": "#8B5CF6",
+      "secondary": "#A78BFA",
+      "cta": "#FBBF24",
+      "background": "#0F0F23",
+      "text": "#F8FAFC",
+      "border": "#4C1D95",
+      "notes": "Purple tech + gold value"
+    },
+    "Creator Economy Platform": {
+      "primary": "#EC4899",
+      "secondary": "#F472B6",
+      "cta": "#F97316",
+      "background": "#FDF2F8",
+      "text": "#831843",
+      "border": "#FBCFE8",
+      "notes": "Creator pink + engagement orange"
+    },
+    "Sustainability/ESG Platform": {
+      "primary": "#059669",
+      "secondary": "#10B981",
+      "cta": "#0891B2",
+      "background": "#ECFDF5",
+      "text": "#064E3B",
+      "border": "#A7F3D0",
+      "notes": "Nature green + ocean blue"
+    },
+    "Remote Work/Collaboration Tool": {
+      "primary": "#6366F1",
+      "secondary": "#818CF8",
+      "cta": "#10B981",
+      "background": "#F5F3FF",
+      "text": "#312E81",
+      "border": "#E0E7FF",
+      "notes": "Calm indigo + success green"
+    },
+    "Mental Health App": {
+      "primary": "#8B5CF6",
+      "secondary": "#C4B5FD",
+      "cta": "#10B981",
+      "background": "#FAF5FF",
+      "text": "#4C1D95",
+      "border": "#EDE9FE",
+      "notes": "Calming lavender + wellness green"
+    },
+    "Pet Tech App": {
+      "primary": "#F97316",
+      "secondary": "#FB923C",
+      "cta": "#2563EB",
+      "background": "#FFF7ED",
+      "text": "#9A3412",
+      "border": "#FED7AA",
+      "notes": "Playful orange + trust blue"
+    },
+    "Smart Home/IoT Dashboard": {
+      "primary": "#1E293B",
+      "secondary": "#334155",
+      "cta": "#22C55E",
+      "background": "#0F172A",
+      "text": "#F8FAFC",
+      "border": "#475569",
+      "notes": "Dark tech + status green"
+    },
+    "EV/Charging Ecosystem": {
+      "primary": "#0891B2",
+      "secondary": "#22D3EE",
+      "cta": "#22C55E",
+      "background": "#ECFEFF",
+      "text": "#164E63",
+      "border": "#A5F3FC",
+      "notes": "Electric cyan + eco green"
+    },
+    "Subscription Box Service": {
+      "primary": "#D946EF",
+      "secondary": "#E879F9",
+      "cta": "#F97316",
+      "background": "#FDF4FF",
+      "text": "#86198F",
+      "border": "#F5D0FE",
+      "notes": "Excitement purple + urgency orange"
+    },
+    "Podcast Platform": {
+      "primary": "#1E1B4B",
+      "secondary": "#312E81",
+      "cta": "#F97316",
+      "background": "#0F0F23",
+      "text": "#F8FAFC",
+      "border": "#4338CA",
+      "notes": "Dark audio + warm accent"
+    },
+    "Dating App": {
+      "primary": "#E11D48",
+      "secondary": "#FB7185",
+      "cta": "#F97316",
+      "background": "#FFF1F2",
+      "text": "#881337",
+      "border": "#FECDD3",
+      "notes": "Romantic rose + warm orange"
+    },
+    "Micro-Credentials/Badges Platform": {
+      "primary": "#0369A1",
+      "secondary": "#0EA5E9",
+      "cta": "#CA8A04",
+      "background": "#F0F9FF",
+      "text": "#0C4A6E",
+      "border": "#BAE6FD",
+      "notes": "Trust blue + achievement gold"
+    },
+    "Knowledge Base/Documentation": {
+      "primary": "#475569",
+      "secondary": "#64748B",
+      "cta": "#2563EB",
+      "background": "#F8FAFC",
+      "text": "#1E293B",
+      "border": "#E2E8F0",
+      "notes": "Neutral grey + link blue"
+    },
+    "Hyperlocal Services": {
+      "primary": "#059669",
+      "secondary": "#10B981",
+      "cta": "#F97316",
+      "background": "#ECFDF5",
+      "text": "#064E3B",
+      "border": "#A7F3D0",
+      "notes": "Location green + action orange"
+    },
+    "Beauty/Spa/Wellness Service": {
+      "primary": "#EC4899",
+      "secondary": "#F9A8D4",
+      "cta": "#8B5CF6",
+      "background": "#FDF2F8",
+      "text": "#831843",
+      "border": "#FBCFE8",
+      "notes": "Soft pink + lavender luxury"
+    },
+    "Luxury/Premium Brand": {
+      "primary": "#1C1917",
+      "secondary": "#44403C",
+      "cta": "#CA8A04",
+      "background": "#FAFAF9",
+      "text": "#0C0A09",
+      "border": "#D6D3D1",
+      "notes": "Premium black + gold accent"
+    },
+    "Restaurant/Food Service": {
+      "primary": "#DC2626",
+      "secondary": "#F87171",
+      "cta": "#CA8A04",
+      "background": "#FEF2F2",
+      "text": "#450A0A",
+      "border": "#FECACA",
+      "notes": "Appetizing red + warm gold"
+    },
+    "Fitness/Gym App": {
+      "primary": "#F97316",
+      "secondary": "#FB923C",
+      "cta": "#22C55E",
+      "background": "#1F2937",
+      "text": "#F8FAFC",
+      "border": "#374151",
+      "notes": "Energy orange + success green"
+    },
+    "Real Estate/Property": {
+      "primary": "#0F766E",
+      "secondary": "#14B8A6",
+      "cta": "#0369A1",
+      "background": "#F0FDFA",
+      "text": "#134E4A",
+      "border": "#99F6E4",
+      "notes": "Trust teal + professional blue"
+    },
+    "Travel/Tourism Agency": {
+      "primary": "#0EA5E9",
+      "secondary": "#38BDF8",
+      "cta": "#F97316",
+      "background": "#F0F9FF",
+      "text": "#0C4A6E",
+      "border": "#BAE6FD",
+      "notes": "Sky blue + adventure orange"
+    },
+    "Hotel/Hospitality": {
+      "primary": "#1E3A8A",
+      "secondary": "#3B82F6",
+      "cta": "#CA8A04",
+      "background": "#F8FAFC",
+      "text": "#1E40AF",
+      "border": "#BFDBFE",
+      "notes": "Luxury navy + gold service"
+    },
+    "Wedding/Event Planning": {
+      "primary": "#DB2777",
+      "secondary": "#F472B6",
+      "cta": "#CA8A04",
+      "background": "#FDF2F8",
+      "text": "#831843",
+      "border": "#FBCFE8",
+      "notes": "Romantic pink + elegant gold"
+    },
+    "Legal Services": {
+      "primary": "#1E3A8A",
+      "secondary": "#1E40AF",
+      "cta": "#B45309",
+      "background": "#F8FAFC",
+      "text": "#0F172A",
+      "border": "#CBD5E1",
+      "notes": "Authority navy + trust gold"
+    },
+    "Insurance Platform": {
+      "primary": "#0369A1",
+      "secondary": "#0EA5E9",
+      "cta": "#22C55E",
+      "background": "#F0F9FF",
+      "text": "#0C4A6E",
+      "border": "#BAE6FD",
+      "notes": "Security blue + protected green"
+    },
+    "Banking/Traditional Finance": {
+      "primary": "#0F172A",
+      "secondary": "#1E3A8A",
+      "cta": "#CA8A04",
+      "background": "#F8FAFC",
+      "text": "#020617",
+      "border": "#E2E8F0",
+      "notes": "Trust navy + premium gold"
+    },
+    "Online Course/E-learning": {
+      "primary": "#0D9488",
+      "secondary": "#2DD4BF",
+      "cta": "#F97316",
+      "background": "#F0FDFA",
+      "text": "#134E4A",
+      "border": "#5EEAD4",
+      "notes": "Progress teal + achievement orange"
+    },
+    "Non-profit/Charity": {
+      "primary": "#0891B2",
+      "secondary": "#22D3EE",
+      "cta": "#F97316",
+      "background": "#ECFEFF",
+      "text": "#164E63",
+      "border": "#A5F3FC",
+      "notes": "Compassion blue + action orange"
+    },
+    "Music Streaming": {
+      "primary": "#1E1B4B",
+      "secondary": "#4338CA",
+      "cta": "#22C55E",
+      "background": "#0F0F23",
+      "text": "#F8FAFC",
+      "border": "#312E81",
+      "notes": "Dark audio + play green"
+    },
+    "Video Streaming/OTT": {
+      "primary": "#0F0F23",
+      "secondary": "#1E1B4B",
+      "cta": "#E11D48",
+      "background": "#000000",
+      "text": "#F8FAFC",
+      "border": "#312E81",
+      "notes": "Cinema dark + play red"
+    },
+    "Job Board/Recruitment": {
+      "primary": "#0369A1",
+      "secondary": "#0EA5E9",
+      "cta": "#22C55E",
+      "background": "#F0F9FF",
+      "text": "#0C4A6E",
+      "border": "#BAE6FD",
+      "notes": "Professional blue + success green"
+    },
+    "Marketplace (P2P)": {
+      "primary": "#7C3AED",
+      "secondary": "#A78BFA",
+      "cta": "#22C55E",
+      "background": "#FAF5FF",
+      "text": "#4C1D95",
+      "border": "#DDD6FE",
+      "notes": "Trust purple + transaction green"
+    },
+    "Logistics/Delivery": {
+      "primary": "#2563EB",
+      "secondary": "#3B82F6",
+      "cta": "#F97316",
+      "background": "#EFF6FF",
+      "text": "#1E40AF",
+      "border": "#BFDBFE",
+      "notes": "Tracking blue + delivery orange"
+    },
+    "Agriculture/Farm Tech": {
+      "primary": "#15803D",
+      "secondary": "#22C55E",
+      "cta": "#CA8A04",
+      "background": "#F0FDF4",
+      "text": "#14532D",
+      "border": "#BBF7D0",
+      "notes": "Earth green + harvest gold"
+    },
+    "Construction/Architecture": {
+      "primary": "#64748B",
+      "secondary": "#94A3B8",
+      "cta": "#F97316",
+      "background": "#F8FAFC",
+      "text": "#334155",
+      "border": "#E2E8F0",
+      "notes": "Industrial grey + safety orange"
+    },
+    "Automotive/Car Dealership": {
+      "primary": "#1E293B",
+      "secondary": "#334155",
+      "cta": "#DC2626",
+      "background": "#F8FAFC",
+      "text": "#0F172A",
+      "border": "#E2E8F0",
+      "notes": "Premium dark + action red"
+    },
+    "Photography Studio": {
+      "primary": "#18181B",
+      "secondary": "#27272A",
+      "cta": "#F8FAFC",
+      "background": "#000000",
+      "text": "#FAFAFA",
+      "border": "#3F3F46",
+      "notes": "Pure black + white contrast"
+    },
+    "Coworking Space": {
+      "primary": "#F59E0B",
+      "secondary": "#FBBF24",
+      "cta": "#2563EB",
+      "background": "#FFFBEB",
+      "text": "#78350F",
+      "border": "#FDE68A",
+      "notes": "Energetic amber + booking blue"
+    },
+    "Cleaning Service": {
+      "primary": "#0891B2",
+      "secondary": "#22D3EE",
+      "cta": "#22C55E",
+      "background": "#ECFEFF",
+      "text": "#164E63",
+      "border": "#A5F3FC",
+      "notes": "Fresh cyan + clean green"
+    },
+    "Home Services (Plumber/Electrician)": {
+      "primary": "#1E40AF",
+      "secondary": "#3B82F6",
+      "cta": "#F97316",
+      "background": "#EFF6FF",
+      "text": "#1E3A8A",
+      "border": "#BFDBFE",
+      "notes": "Professional blue + urgent orange"
+    },
+    "Childcare/Daycare": {
+      "primary": "#F472B6",
+      "secondary": "#FBCFE8",
+      "cta": "#22C55E",
+      "background": "#FDF2F8",
+      "text": "#9D174D",
+      "border": "#FCE7F3",
+      "notes": "Soft pink + safe green"
+    },
+    "Senior Care/Elderly": {
+      "primary": "#0369A1",
+      "secondary": "#38BDF8",
+      "cta": "#22C55E",
+      "background": "#F0F9FF",
+      "text": "#0C4A6E",
+      "border": "#E0F2FE",
+      "notes": "Calm blue + reassuring green"
+    },
+    "Medical Clinic": {
+      "primary": "#0891B2",
+      "secondary": "#22D3EE",
+      "cta": "#22C55E",
+      "background": "#F0FDFA",
+      "text": "#134E4A",
+      "border": "#CCFBF1",
+      "notes": "Medical teal + health green"
+    },
+    "Pharmacy/Drug Store": {
+      "primary": "#15803D",
+      "secondary": "#22C55E",
+      "cta": "#0369A1",
+      "background": "#F0FDF4",
+      "text": "#14532D",
+      "border": "#BBF7D0",
+      "notes": "Pharmacy green + trust blue"
+    },
+    "Dental Practice": {
+      "primary": "#0EA5E9",
+      "secondary": "#38BDF8",
+      "cta": "#FBBF24",
+      "background": "#F0F9FF",
+      "text": "#0C4A6E",
+      "border": "#BAE6FD",
+      "notes": "Fresh blue + smile yellow"
+    },
+    "Veterinary Clinic": {
+      "primary": "#0D9488",
+      "secondary": "#14B8A6",
+      "cta": "#F97316",
+      "background": "#F0FDFA",
+      "text": "#134E4A",
+      "border": "#99F6E4",
+      "notes": "Caring teal + warm orange"
+    },
+    "Florist/Plant Shop": {
+      "primary": "#15803D",
+      "secondary": "#22C55E",
+      "cta": "#EC4899",
+      "background": "#F0FDF4",
+      "text": "#14532D",
+      "border": "#BBF7D0",
+      "notes": "Natural green + floral pink"
+    },
+    "Bakery/Cafe": {
+      "primary": "#92400E",
+      "secondary": "#B45309",
+      "cta": "#F8FAFC",
+      "background": "#FEF3C7",
+      "text": "#78350F",
+      "border": "#FDE68A",
+      "notes": "Warm brown + cream white"
+    },
+    "Coffee Shop": {
+      "primary": "#78350F",
+      "secondary": "#92400E",
+      "cta": "#FBBF24",
+      "background": "#FEF3C7",
+      "text": "#451A03",
+      "border": "#FDE68A",
+      "notes": "Coffee brown + warm gold"
+    },
+    "Brewery/Winery": {
+      "primary": "#7C2D12",
+      "secondary": "#B91C1C",
+      "cta": "#CA8A04",
+      "background": "#FEF2F2",
+      "text": "#450A0A",
+      "border": "#FECACA",
+      "notes": "Deep burgundy + craft gold"
+    },
+    "Airline": {
+      "primary": "#1E3A8A",
+      "secondary": "#3B82F6",
+      "cta": "#F97316",
+      "background": "#EFF6FF",
+      "text": "#1E40AF",
+      "border": "#BFDBFE",
+      "notes": "Sky blue + booking orange"
+    },
+    "News/Media Platform": {
+      "primary": "#DC2626",
+      "secondary": "#EF4444",
+      "cta": "#1E40AF",
+      "background": "#FEF2F2",
+      "text": "#450A0A",
+      "border": "#FECACA",
+      "notes": "Breaking red + link blue"
+    },
+    "Magazine/Blog": {
+      "primary": "#18181B",
+      "secondary": "#3F3F46",
+      "cta": "#EC4899",
+      "background": "#FAFAFA",
+      "text": "#09090B",
+      "border": "#E4E4E7",
+      "notes": "Editorial black + accent pink"
+    },
+    "Freelancer Platform": {
+      "primary": "#6366F1",
+      "secondary": "#818CF8",
+      "cta": "#22C55E",
+      "background": "#EEF2FF",
+      "text": "#312E81",
+      "border": "#C7D2FE",
+      "notes": "Creative indigo + hire green"
+    },
+    "Consulting Firm": {
+      "primary": "#0F172A",
+      "secondary": "#334155",
+      "cta": "#CA8A04",
+      "background": "#F8FAFC",
+      "text": "#020617",
+      "border": "#E2E8F0",
+      "notes": "Authority navy + premium gold"
+    },
+    "Marketing Agency": {
+      "primary": "#EC4899",
+      "secondary": "#F472B6",
+      "cta": "#06B6D4",
+      "background": "#FDF2F8",
+      "text": "#831843",
+      "border": "#FBCFE8",
+      "notes": "Bold pink + creative cyan"
+    },
+    "Event Management": {
+      "primary": "#7C3AED",
+      "secondary": "#A78BFA",
+      "cta": "#F97316",
+      "background": "#FAF5FF",
+      "text": "#4C1D95",
+      "border": "#DDD6FE",
+      "notes": "Excitement purple + action orange"
+    },
+    "Conference/Webinar Platform": {
+      "primary": "#1E40AF",
+      "secondary": "#3B82F6",
+      "cta": "#22C55E",
+      "background": "#EFF6FF",
+      "text": "#1E3A8A",
+      "border": "#BFDBFE",
+      "notes": "Professional blue + join green"
+    },
+    "Membership/Community": {
+      "primary": "#7C3AED",
+      "secondary": "#A78BFA",
+      "cta": "#22C55E",
+      "background": "#FAF5FF",
+      "text": "#4C1D95",
+      "border": "#DDD6FE",
+      "notes": "Community purple + join green"
+    },
+    "Newsletter Platform": {
+      "primary": "#0369A1",
+      "secondary": "#0EA5E9",
+      "cta": "#F97316",
+      "background": "#F0F9FF",
+      "text": "#0C4A6E",
+      "border": "#BAE6FD",
+      "notes": "Trust blue + subscribe orange"
+    },
+    "Digital Products/Downloads": {
+      "primary": "#6366F1",
+      "secondary": "#818CF8",
+      "cta": "#22C55E",
+      "background": "#EEF2FF",
+      "text": "#312E81",
+      "border": "#C7D2FE",
+      "notes": "Digital indigo + buy green"
+    },
+    "Church/Religious Organization": {
+      "primary": "#7C3AED",
+      "secondary": "#A78BFA",
+      "cta": "#CA8A04",
+      "background": "#FAF5FF",
+      "text": "#4C1D95",
+      "border": "#DDD6FE",
+      "notes": "Spiritual purple + warm gold"
+    },
+    "Sports Team/Club": {
+      "primary": "#DC2626",
+      "secondary": "#EF4444",
+      "cta": "#FBBF24",
+      "background": "#FEF2F2",
+      "text": "#7F1D1D",
+      "border": "#FECACA",
+      "notes": "Team red + championship gold"
+    },
+    "Museum/Gallery": {
+      "primary": "#18181B",
+      "secondary": "#27272A",
+      "cta": "#F8FAFC",
+      "background": "#FAFAFA",
+      "text": "#09090B",
+      "border": "#E4E4E7",
+      "notes": "Gallery black + white space"
+    },
+    "Theater/Cinema": {
+      "primary": "#1E1B4B",
+      "secondary": "#312E81",
+      "cta": "#CA8A04",
+      "background": "#0F0F23",
+      "text": "#F8FAFC",
+      "border": "#4338CA",
+      "notes": "Dramatic dark + spotlight gold"
+    },
+    "Language Learning App": {
+      "primary": "#4F46E5",
+      "secondary": "#818CF8",
+      "cta": "#22C55E",
+      "background": "#EEF2FF",
+      "text": "#312E81",
+      "border": "#C7D2FE",
+      "notes": "Learning indigo + progress green"
+    },
+    "Coding Bootcamp": {
+      "primary": "#0F172A",
+      "secondary": "#1E293B",
+      "cta": "#22C55E",
+      "background": "#020617",
+      "text": "#F8FAFC",
+      "border": "#334155",
+      "notes": "Terminal dark + success green"
+    },
+    "Cybersecurity Platform": {
+      "primary": "#00FF41",
+      "secondary": "#0D0D0D",
+      "cta": "#FF3333",
+      "background": "#000000",
+      "text": "#E0E0E0",
+      "border": "#1F1F1F",
+      "notes": "Matrix green + alert red"
+    },
+    "Developer Tool / IDE": {
+      "primary": "#1E293B",
+      "secondary": "#334155",
+      "cta": "#22C55E",
+      "background": "#0F172A",
+      "text": "#F8FAFC",
+      "border": "#475569",
+      "notes": "Code dark + run green"
+    },
+    "Biotech / Life Sciences": {
+      "primary": "#0EA5E9",
+      "secondary": "#0284C7",
+      "cta": "#10B981",
+      "background": "#F0F9FF",
+      "text": "#0C4A6E",
+      "border": "#BAE6FD",
+      "notes": "DNA blue + life green"
+    },
+    "Space Tech / Aerospace": {
+      "primary": "#F8FAFC",
+      "secondary": "#94A3B8",
+      "cta": "#3B82F6",
+      "background": "#0B0B10",
+      "text": "#F8FAFC",
+      "border": "#1E293B",
+      "notes": "Star white + launch blue"
+    },
+    "Architecture / Interior": {
+      "primary": "#171717",
+      "secondary": "#404040",
+      "cta": "#D4AF37",
+      "background": "#FFFFFF",
+      "text": "#171717",
+      "border": "#E5E5E5",
+      "notes": "Minimal black + accent gold"
+    },
+    "Quantum Computing": {
+      "primary": "#00FFFF",
+      "secondary": "#7B61FF",
+      "cta": "#FF00FF",
+      "background": "#050510",
+      "text": "#E0E0FF",
+      "border": "#333344",
+      "notes": "Quantum cyan + interference purple"
+    },
+    "Biohacking / Longevity": {
+      "primary": "#FF4D4D",
+      "secondary": "#4D94FF",
+      "cta": "#00E676",
+      "background": "#F5F5F7",
+      "text": "#1C1C1E",
+      "border": "#E5E5EA",
+      "notes": "Bio red/blue + vitality green"
+    },
+    "Autonomous Systems": {
+      "primary": "#00FF41",
+      "secondary": "#008F11",
+      "cta": "#FF3333",
+      "background": "#0D1117",
+      "text": "#E6EDF3",
+      "border": "#30363D",
+      "notes": "Terminal green + alert red"
+    },
+    "Generative AI Art": {
+      "primary": "#18181B",
+      "secondary": "#3F3F46",
+      "cta": "#EC4899",
+      "background": "#FAFAFA",
+      "text": "#09090B",
+      "border": "#E4E4E7",
+      "notes": "Canvas neutral + creative pink"
+    },
+    "Spatial / Vision OS": {
+      "primary": "#FFFFFF",
+      "secondary": "#E5E5E5",
+      "cta": "#007AFF",
+      "background": "#888888",
+      "text": "#000000",
+      "border": "#CCCCCC",
+      "notes": "Glass white + system blue"
+    },
+    "Climate Tech": {
+      "primary": "#059669",
+      "secondary": "#10B981",
+      "cta": "#FBBF24",
+      "background": "#ECFDF5",
+      "text": "#064E3B",
+      "border": "#A7F3D0",
+      "notes": "Nature green + solar gold"
+    }
+  },
+  "ux_constraints": {
+    "Animation": [
+      {
+        "issue": "Excessive Motion",
+        "description": "Too many animations cause distraction and motion sickness",
+        "do": "Animate 1-2 key elements per view maximum",
+        "dont": "Animate everything that moves",
+        "severity": "High"
+      },
+      {
+        "issue": "Duration Timing",
+        "description": "Animations should feel responsive not sluggish",
+        "do": "Use 150-300ms for micro-interactions",
+        "dont": "Use animations longer than 500ms for UI",
+        "severity": "Medium"
+      },
+      {
+        "issue": "Reduced Motion",
+        "description": "Respect user's motion preferences",
+        "do": "Check prefers-reduced-motion media query",
+        "dont": "Ignore accessibility motion settings",
+        "severity": "High"
+      },
+      {
+        "issue": "Loading States",
+        "description": "Show feedback during async operations",
+        "do": "Use skeleton screens or spinners",
+        "dont": "Leave UI frozen with no feedback",
+        "severity": "High"
+      },
+      {
+        "issue": "Hover vs Tap",
+        "description": "Hover effects don't work on touch devices",
+        "do": "Use click/tap for primary interactions",
+        "dont": "Rely only on hover for important actions",
+        "severity": "High"
+      },
+      {
+        "issue": "Continuous Animation",
+        "description": "Infinite animations are distracting",
+        "do": "Use for loading indicators only",
+        "dont": "Use for decorative elements",
+        "severity": "Medium"
+      }
+    ],
+    "Touch": [
+      {
+        "issue": "Touch Target Size",
+        "description": "Small buttons are hard to tap accurately",
+        "do": "Minimum 44x44px touch targets",
+        "dont": "Tiny clickable areas",
+        "severity": "High"
+      },
+      {
+        "issue": "Touch Spacing",
+        "description": "Adjacent touch targets need adequate spacing",
+        "do": "Minimum 8px gap between touch targets",
+        "dont": "Tightly packed clickable elements",
+        "severity": "Medium"
+      },
+      {
+        "issue": "Gesture Conflicts",
+        "description": "Custom gestures can conflict with system",
+        "do": "Avoid horizontal swipe on main content",
+        "dont": "Override system gestures",
+        "severity": "Medium"
+      },
+      {
+        "issue": "Tap Delay",
+        "description": "300ms tap delay feels laggy",
+        "do": "Use touch-action CSS or fastclick",
+        "dont": "Default mobile tap handling",
+        "severity": "Medium"
+      },
+      {
+        "issue": "Pull to Refresh",
+        "description": "Accidental refresh is frustrating",
+        "do": "Disable where not needed",
+        "dont": "Enable by default everywhere",
+        "severity": "Low"
+      },
+      {
+        "issue": "Haptic Feedback",
+        "description": "Tactile feedback improves interaction feel",
+        "do": "Use for confirmations and important actions",
+        "dont": "Overuse vibration feedback",
+        "severity": "Low"
+      }
+    ],
+    "Layout": [
+      {
+        "issue": "Z-Index Management",
+        "description": "Stacking context conflicts cause hidden elements",
+        "do": "Define z-index scale system (10 20 30 50)",
+        "dont": "Use arbitrary large z-index values",
+        "severity": "High"
+      },
+      {
+        "issue": "Overflow Hidden",
+        "description": "Hidden overflow can clip important content",
+        "do": "Test all content fits within containers",
+        "dont": "Blindly apply overflow-hidden",
+        "severity": "Medium"
+      },
+      {
+        "issue": "Fixed Positioning",
+        "description": "Fixed elements can overlap or be inaccessible",
+        "do": "Account for safe areas and other fixed elements",
+        "dont": "Stack multiple fixed elements carelessly",
+        "severity": "Medium"
+      },
+      {
+        "issue": "Stacking Context",
+        "description": "New stacking contexts reset z-index",
+        "do": "Understand what creates new stacking context",
+        "dont": "Expect z-index to work across contexts",
+        "severity": "Medium"
+      },
+      {
+        "issue": "Content Jumping",
+        "description": "Layout shift when content loads is jarring",
+        "do": "Reserve space for async content",
+        "dont": "Let images/content push layout around",
+        "severity": "High"
+      },
+      {
+        "issue": "Viewport Units",
+        "description": "100vh can be problematic on mobile browsers",
+        "do": "Use dvh or account for mobile browser chrome",
+        "dont": "Use 100vh for full-screen mobile layouts",
+        "severity": "Medium"
+      }
+    ],
+    "Interaction": [
+      {
+        "issue": "Focus States",
+        "description": "Keyboard users need visible focus indicators",
+        "do": "Use visible focus rings on interactive elements",
+        "dont": "Remove focus outline without replacement",
+        "severity": "High"
+      },
+      {
+        "issue": "Hover States",
+        "description": "Visual feedback on interactive elements",
+        "do": "Change cursor and add subtle visual change",
+        "dont": "No hover feedback on clickable elements",
+        "severity": "Medium"
+      },
+      {
+        "issue": "Active States",
+        "description": "Show immediate feedback on press/click",
+        "do": "Add pressed/active state visual change",
+        "dont": "No feedback during interaction",
+        "severity": "Medium"
+      },
+      {
+        "issue": "Disabled States",
+        "description": "Clearly indicate non-interactive elements",
+        "do": "Reduce opacity and change cursor",
+        "dont": "Confuse disabled with normal state",
+        "severity": "Medium"
+      },
+      {
+        "issue": "Loading Buttons",
+        "description": "Prevent double submission during async actions",
+        "do": "Disable button and show loading state",
+        "dont": "Allow multiple clicks during processing",
+        "severity": "High"
+      },
+      {
+        "issue": "Error Feedback",
+        "description": "Users need to know when something fails",
+        "do": "Show clear error messages near problem",
+        "dont": "Silent failures with no feedback",
+        "severity": "High"
+      }
+    ]
+  }
+}
