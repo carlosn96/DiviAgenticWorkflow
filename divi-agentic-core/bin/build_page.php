@@ -191,6 +191,24 @@ function extract_motion_presets(array &$attrs): void {
 
 function build_module(array $def, array $design_system, bool $resolved, string $site_url = ''): array {
     $module_type = $def['type'];
+
+    // Transform divi/heading to divi/text for native compatibility with global typography presets and contrast guarantees
+    if ($module_type === 'divi/heading') {
+        $module_type = 'divi/text';
+        // Auto-wrap content in proper header tag if it's plain text
+        if (isset($def['content']) && is_string($def['content']) && !str_starts_with(trim($def['content']), '<h')) {
+            $level = 'h2';
+            foreach ($def['presets'] ?? [] as $preset_ref) {
+                if (str_contains($preset_ref, 'display-xl') || str_contains($preset_ref, 'hero-title')) {
+                    $level = 'h1';
+                } elseif (str_contains($preset_ref, 'display-md') || str_contains($preset_ref, 'headline')) {
+                    $level = 'h2';
+                }
+            }
+            $def['content'] = "<{$level}>" . $def['content'] . "</{$level}>";
+        }
+    }
+
     unset($def['type']);
 
     $schema = load_module_schema($module_type);
@@ -210,17 +228,42 @@ function build_module(array $def, array $design_system, bool $resolved, string $
 
     $schema_attrs = $schema['block']['attrs'] ?? [];
 
-    $result = deep_merge($schema_attrs, $def);
+    // Prioritize Presets -> Overrides. Initialize result with schema base attributes.
+    $result = $schema_attrs;
+
+    if ($resolved && $presets) {
+        $result = apply_presets($result, $presets, $design_system, $site_url);
+    }
+
+    // Merge local page overrides ($def) on top of the preset-applied structure
+    $result = deep_merge($result, $def);
     $result['module'] = $module_type;
     if ($children) {
         $result['children'] = $children;
     }
 
-    $tokens = $design_system['tokens'] ?? [];
-
-    if ($resolved && $presets) {
-        $result = apply_presets($result, $presets, $design_system, $site_url);
+    // For heading blocks, align headingLevel with the resolved level from presets or tag headers in content
+    if ($module_type === 'divi/heading') {
+        $detected_level = null;
+        if (isset($result['headingFont'])) {
+            foreach (['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as $level) {
+                if (isset($result['headingFont'][$level])) {
+                    $detected_level = $level;
+                    break;
+                }
+            }
+        }
+        if (!$detected_level && isset($result['content']) && is_string($result['content'])) {
+            if (preg_match('/<h([1-6])\b/i', $result['content'], $matches)) {
+                $detected_level = 'h' . $matches[1];
+            }
+        }
+        if ($detected_level) {
+            $result['title']['decoration']['font']['font']['desktop']['value']['headingLevel'] = $detected_level;
+        }
     }
+
+    $tokens = $design_system['tokens'] ?? [];
 
     if ($resolved) {
         $result = resolve_tokens_recursive($result, $tokens, $site_url);
@@ -273,14 +316,15 @@ function build_row(array $def, array $design_system, bool $resolved, string $sit
         $def['decoration'] = normalize_decoration_gradients($def['decoration']);
     }
 
-    $result = deep_merge($def, [
-        'column_structure' => $col_structure,
-        'columns' => $columns,
-    ]);
-
+    // Apply presets first, then local overrides
+    $result = [];
     if ($resolved && $presets) {
         $result = apply_presets($result, $presets, $design_system, $site_url);
     }
+
+    $result = deep_merge($result, $def);
+    $result['column_structure'] = $col_structure;
+    $result['columns'] = $columns;
 
     return $result;
 }
@@ -306,11 +350,14 @@ function build_section(array $def, array $design_system, bool $resolved, string 
         $def['decoration'] = normalize_decoration_gradients($def['decoration']);
     }
 
-    $result = deep_merge($def, ['rows' => $rows]);
-
+    // Apply presets first, then local overrides
+    $result = [];
     if ($resolved && $presets) {
         $result = apply_presets($result, $presets, $design_system, $site_url);
     }
+
+    $result = deep_merge($result, $def);
+    $result['rows'] = $rows;
 
     return $result;
 }

@@ -60,6 +60,13 @@ class Layout_Engine {
         ];
 
         $slug = $mapping[$block_name] ?? $block_name;
+
+        if ( $slug === 'divi/row-inner' ) {
+            $content_key = 'columns-inner';
+        } elseif ( $slug === 'divi/column-inner' ) {
+            $content_key = 'modules';
+        }
+
         $content = '';
         $inner_html = '';
 
@@ -67,7 +74,7 @@ class Layout_Engine {
         $children_html = '';
         if ( isset( $data['children'] ) && is_array( $data['children'] ) ) {
             foreach ( $data['children'] as $child ) {
-                $child_type = $child['module'] ?? 'divi/contact-field';
+                $child_type = $child['module'] ?? $child['type'] ?? 'divi/contact-field';
                 $children_html .= $this->render_block( $child_type, $child, '' );
             }
         }
@@ -268,6 +275,20 @@ class Layout_Engine {
                         unset( $attrs['module']['bodyFont'] );
                     }
                 }
+                
+                // Fix: divi/heading needs title.innerContent + headingLevel for Divi 5
+                if ( $slug === 'divi/heading' && isset( $data['content'] ) ) {
+                    $heading_text = $data['content'];
+                    $heading_level = 'h2';
+                    if ( preg_match( '/<h([1-6])>/', $heading_text, $m ) ) {
+                        $heading_level = 'h' . $m[1];
+                        $heading_text = strip_tags( $heading_text );
+                    } elseif ( isset( $data['title']['level'] ) ) {
+                        $heading_level = $data['title']['level'];
+                    }
+                    $attrs['title']['innerContent'] = [ 'desktop' => [ 'value' => $heading_text ] ];
+                    $attrs['title']['decoration']['font']['font']['desktop']['value']['headingLevel'] = $heading_level;
+                }
             }
 
             // --- GROUP 3: Image-like (image.innerContent.desktop.value) ---
@@ -295,6 +316,131 @@ class Layout_Engine {
                             'rel' => []
                         ]]
                     ];
+                }
+                // Fix: Map the custom preset attributes under module.decoration.button
+                // to standard Divi 5 button attributes under button.decoration
+                if ( isset( $attrs['module']['decoration']['button'] ) ) {
+                    $btn_styles = $attrs['module']['decoration']['button'];
+                    unset( $attrs['module']['decoration']['button'] );
+                    
+                    if ( ! isset( $attrs['button']['decoration'] ) ) {
+                        $attrs['button']['decoration'] = [];
+                    }
+                    
+                    $target_dec =& $attrs['button']['decoration'];
+                    
+                    foreach ( [ 'desktop', 'tablet', 'phone', 'hover' ] as $state_key ) {
+                        if ( ! isset( $btn_styles[ $state_key ]['value'] ) ) {
+                            continue;
+                        }
+                        $vals = $btn_styles[ $state_key ]['value'];
+                        
+                        $breakpoint = 'desktop';
+                        $state      = 'value';
+                        
+                        if ( in_array( $state_key, [ 'desktop', 'tablet', 'phone' ], true ) ) {
+                            $breakpoint = $state_key;
+                            $state      = 'value';
+                        } elseif ( $state_key === 'hover' ) {
+                            $breakpoint = 'desktop';
+                            $state      = 'hover';
+                        }
+                        
+                        // 1. Background Color
+                        if ( isset( $vals['backgroundColor'] ) ) {
+                            $target_dec['background'][ $breakpoint ][ $state ]['color'] = $vals['backgroundColor'];
+                        }
+                        
+                        // 2. Text Color
+                        if ( isset( $vals['textColor'] ) ) {
+                            $target_dec['font']['font'][ $breakpoint ][ $state ]['color'] = $vals['textColor'];
+                        }
+                        
+                        // 3. Border Radius
+                        if ( isset( $vals['borderRadius'] ) ) {
+                            $rad = $vals['borderRadius'];
+                            $target_dec['border'][ $breakpoint ][ $state ]['radius'] = [
+                                'topLeft'     => $rad,
+                                'topRight'    => $rad,
+                                'bottomRight' => $rad,
+                                'bottomLeft'  => $rad,
+                                'sync'        => 'on'
+                            ];
+                        }
+                        
+                        // 4. Padding
+                        if ( isset( $vals['padding'] ) ) {
+                            $pad = $vals['padding'];
+                            if ( is_string( $pad ) ) {
+                                $parts = preg_split( '/\s+/', trim( $pad ) );
+                                if ( count( $parts ) === 2 ) {
+                                    $top_bottom = $parts[0];
+                                    $left_right = $parts[1];
+                                    $target_dec['spacing'][ $breakpoint ][ $state ]['padding'] = [
+                                        'top'    => $top_bottom,
+                                        'bottom' => $top_bottom,
+                                        'left'   => $left_right,
+                                        'right'  => $left_right
+                                    ];
+                                } elseif ( count( $parts ) === 4 ) {
+                                    $target_dec['spacing'][ $breakpoint ][ $state ]['padding'] = [
+                                        'top'    => $parts[0],
+                                        'right'  => $parts[1],
+                                        'bottom' => $parts[2],
+                                        'left'   => $parts[3]
+                                    ];
+                                } else {
+                                    $target_dec['spacing'][ $breakpoint ][ $state ]['padding'] = [
+                                        'top'    => $pad,
+                                        'bottom' => $pad,
+                                        'left'   => $pad,
+                                        'right'  => $pad
+                                    ];
+                                }
+                            } else {
+                                $target_dec['spacing'][ $breakpoint ][ $state ]['padding'] = $pad;
+                            }
+                        }
+                        
+                        // 5. Font Styles (family, weight, size, letterSpacing, textTransform)
+                        if ( isset( $vals['fontFamily'] ) ) {
+                            $target_dec['font']['font'][ $breakpoint ][ $state ]['fontFamily'] = $vals['fontFamily'];
+                        }
+                        if ( isset( $vals['fontWeight'] ) ) {
+                            $target_dec['font']['font'][ $breakpoint ][ $state ]['fontWeight'] = $vals['fontWeight'];
+                        }
+                        if ( isset( $vals['fontSize'] ) ) {
+                            $target_dec['font']['font'][ $breakpoint ][ $state ]['size'] = $vals['fontSize'];
+                        }
+                        if ( isset( $vals['letterSpacing'] ) ) {
+                            $target_dec['font']['font'][ $breakpoint ][ $state ]['letterSpacing'] = $vals['letterSpacing'];
+                        }
+                        if ( isset( $vals['textTransform'] ) ) {
+                            $target_dec['font']['font'][ $breakpoint ][ $state ]['textTransform'] = $vals['textTransform'];
+                        }
+                        
+                        // 6. Border Styles (color, width, style)
+                        if ( isset( $vals['borderColor'] ) || isset( $vals['borderWidth'] ) || isset( $vals['borderStyle'] ) ) {
+                            $b_color = $vals['borderColor'] ?? '';
+                            $b_width = $vals['borderWidth'] ?? '';
+                            $b_style = $vals['borderStyle'] ?? 'solid';
+                            
+                            $border_all = [];
+                            if ( $b_color !== '' ) {
+                                $border_all['color'] = $b_color;
+                            }
+                            if ( $b_width !== '' ) {
+                                $border_all['width'] = $b_width;
+                            }
+                            if ( $b_style !== '' ) {
+                                $border_all['style'] = $b_style;
+                            }
+                            
+                            if ( ! empty( $border_all ) ) {
+                                $target_dec['border'][ $breakpoint ][ $state ]['styles']['all'] = $border_all;
+                            }
+                        }
+                    }
                 }
             }
 
@@ -374,20 +520,38 @@ class Layout_Engine {
 
             // --- GROUP 9: Blurb (icon/image + title + content) ---
             elseif ( $slug === 'divi/blurb' ) {
-                $attrs['title']['innerContent'] = [ 'desktop' => ['value' => $data['title'] ?? ''] ];
+                // Fix: title.innerContent.desktop.value must be {text: string}, not plain string
+                $attrs['title']['innerContent'] = [ 'desktop' => ['value' => [ 'text' => $data['title'] ?? '' ] ] ];
                 $attrs['content']['innerContent'] = [ 'desktop' => ['value' => $data['content'] ?? ''] ];
                 if ( isset( $data['icon'] ) ) {
+                    // Fix: icon must be {unicode, type, weight} object, not plain string
                     $attrs['imageIcon']['innerContent'] = [
                         'desktop' => ['value' => [
-                            'useIcon' => 'on',
-                            'icon'    => $data['icon'],
-                            'src'     => ''
+                            'useIcon'   => 'on',
+                            'icon'      => [
+                                'unicode' => $data['icon'],
+                                'type'    => 'divi',
+                                'weight'  => '400'
+                            ],
+                            'src'       => '',
+                            'animation' => 'off'
                         ]]
                     ];
                 }
-                // Fix: Propagate headingFont to title.decoration.font
+                // Fix: Propagate headingFont to title.decoration.font without overwriting existing structure
                 if ( isset( $data['headingFont'] ) && is_array( $data['headingFont'] ) ) {
-                    $attrs['title']['decoration']['font']['font'] = current( $data['headingFont'] );
+                    $font_data = current( $data['headingFont'] );
+                    if ( isset( $font_data['font'] ) ) {
+                        $attrs['title']['decoration']['font']['font'] = array_merge(
+                            $attrs['title']['decoration']['font']['font'] ?? [],
+                            $font_data['font']
+                        );
+                    } else {
+                        $attrs['title']['decoration']['font']['font'] = array_merge(
+                            $attrs['title']['decoration']['font']['font'] ?? [],
+                            $font_data
+                        );
+                    }
                     unset( $attrs['module']['headingFont'] );
                 }
                 // Fix: Propagate bodyFont to content.decoration.bodyFont
@@ -399,14 +563,27 @@ class Layout_Engine {
 
             // --- GROUP 10: Number Counter / Counter / Circle Counter ---
             elseif ( in_array( $slug, [ 'divi/number-counter', 'divi/counter', 'divi/circle-counter' ], true ) ) {
-                $attrs['title']['innerContent'] = [ 'desktop' => ['value' => $data['title'] ?? ''] ];
+                $title_value = $data['title'] ?? '';
+                if ( is_array( $title_value ) ) {
+                    $title_value = $title_value['innerContent']['desktop']['value'] ?? ( $data['label'] ?? '' );
+                }
+                if ( '' === $title_value && isset( $data['label'] ) ) {
+                    $title_value = $data['label'];
+                }
+                $attrs['title']['innerContent'] = [ 'desktop' => ['value' => $title_value ] ];
                 
                 // EnablePercentSign: schema value wins, else auto-detect from %
                 if ( isset( $data['enablePercentSign'] ) ) {
                     $attrs['number']['advanced']['enablePercentSign'] = [ 'desktop' => [ 'value' => $data['enablePercentSign'] ] ];
                 }
-                $number_val = $data['number'] ?? '0';
-                if ( strpos( $number_val, '%' ) !== false ) {
+                $number_raw = $data['number'] ?? '0';
+                // Handle both schema shorthand (string) and Divi 5 block attribute (nested object)
+                if ( is_array( $number_raw ) ) {
+                    $number_val = $number_raw['innerContent']['desktop']['value'] ?? '0';
+                } else {
+                    $number_val = $number_raw;
+                }
+                if ( is_string( $number_val ) && strpos( $number_val, '%' ) !== false ) {
                     $number_val = str_replace( '%', '', $number_val );
                     if ( ! isset( $data['enablePercentSign'] ) ) {
                         $attrs['number']['advanced']['enablePercentSign'] = [ 'desktop' => [ 'value' => 'on' ] ];
@@ -414,14 +591,36 @@ class Layout_Engine {
                 }
                 $attrs['number']['innerContent'] = [ 'desktop' => ['value' => $number_val ] ];
 
-                // Fix: Propagate headingFont to number.decoration.font (the big stat)
+                // Fix: Propagate headingFont to number.decoration.font (the big stat) without overwriting existing structure
                 if ( isset( $data['headingFont'] ) && is_array( $data['headingFont'] ) ) {
-                    $attrs['number']['decoration']['font']['font'] = current( $data['headingFont'] );
+                    $font_data = current( $data['headingFont'] );
+                    if ( isset( $font_data['font'] ) ) {
+                        $attrs['number']['decoration']['font']['font'] = array_merge(
+                            $attrs['number']['decoration']['font']['font'] ?? [],
+                            $font_data['font']
+                        );
+                    } else {
+                        $attrs['number']['decoration']['font']['font'] = array_merge(
+                            $attrs['number']['decoration']['font']['font'] ?? [],
+                            $font_data
+                        );
+                    }
                     unset( $attrs['module']['headingFont'] );
                 }
-                // Fix: Propagate bodyFont to title.decoration.font (the label below)
-                if ( isset( $data['bodyFont'] ) ) {
-                    $attrs['title']['decoration']['font']['font'] = current( $data['bodyFont'] );
+                // Fix: Propagate bodyFont to title.decoration.font (the label below) without overwriting existing structure
+                if ( isset( $data['bodyFont'] ) && is_array( $data['bodyFont'] ) ) {
+                    $font_data = current( $data['bodyFont'] );
+                    if ( isset( $font_data['font'] ) ) {
+                        $attrs['title']['decoration']['font']['font'] = array_merge(
+                            $attrs['title']['decoration']['font']['font'] ?? [],
+                            $font_data['font']
+                        );
+                    } else {
+                        $attrs['title']['decoration']['font']['font'] = array_merge(
+                            $attrs['title']['decoration']['font']['font'] ?? [],
+                            $font_data
+                        );
+                    }
                     unset( $attrs['module']['bodyFont'] );
                 }
             }
@@ -683,8 +882,10 @@ class Layout_Engine {
 
             // --- GROUP 29: Icon List Item ---
             elseif ( $slug === 'divi/icon-list-item' ) {
-                if ( isset( $data['title'] ) ) {
-                    $attrs['title']['innerContent'] = [ 'desktop' => ['value' => $data['title']] ];
+                // Support both 'title' (new) and 'content' (legacy template) keys
+                $label = $data['title'] ?? ( isset( $data['content'] ) && is_string( $data['content'] ) ? $data['content'] : null );
+                if ( $label !== null ) {
+                    $attrs['title']['innerContent'] = [ 'desktop' => ['value' => $label] ];
                 }
                 if ( isset( $data['icon'] ) ) {
                     $attrs['icon'] = [ 'advanced' => [ 'icon' => [ 'desktop' => ['value' => $data['icon'] ] ] ] ];
@@ -823,8 +1024,17 @@ class Layout_Engine {
         }
 
         // Children from content_key (rows, columns, modules)
-        if ( $is_divi && $content_key && isset( $data[ $content_key ] ) ) {
-            foreach ( $data[ $content_key ] as $item ) {
+        $items_to_render = [];
+        if ( $is_divi && $content_key ) {
+            if ( $content_key === 'columns-inner' && isset( $data['columns'] ) ) {
+                $items_to_render = $data['columns'];
+            } elseif ( isset( $data[ $content_key ] ) ) {
+                $items_to_render = $data[ $content_key ];
+            }
+        }
+
+        if ( ! empty( $items_to_render ) ) {
+            foreach ( $items_to_render as $item ) {
                 switch ( $content_key ) {
                     case 'rows':
                         $content .= $this->render_block( 'divi/row', $item, 'columns' );
@@ -832,8 +1042,11 @@ class Layout_Engine {
                     case 'columns':
                         $content .= $this->render_block( 'divi/column', $item, 'modules' );
                         break;
+                    case 'columns-inner':
+                        $content .= $this->render_block( 'divi/column-inner', $item, 'modules' );
+                        break;
                     case 'modules':
-                        $module_type = $item['module'] ?? 'divi/text';
+                        $module_type = $item['module'] ?? $item['type'] ?? 'divi/text';
                         $content .= $this->render_block( $module_type, $item, '' );
                         break;
                 }
