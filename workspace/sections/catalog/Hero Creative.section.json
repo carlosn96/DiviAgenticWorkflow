@@ -1,0 +1,68 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "gradient": {
+            "enabled": "on",
+            "type": "linear",
+            "direction": "360deg",
+            "overlaysImage": "on",
+            "stops": [
+              {
+                "color": "{{design:color:ink-soft}}",
+                "position": "0%"
+              },
+              {
+                "color": "rgba(61,107,79,0.0)",
+                "position": "100%"
+              }
+            ]
+          },
+          "image": {
+            "url": "https://diviplus.io/wp-content/uploads/2020/11/collection-03-painting.jpg",
+            "size": "cover",
+            "position": "center center",
+            "repeat": "no-repeat",
+            "parallax": {
+              "enabled": "off"
+            }
+          }
+        }
+      }
+    },
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "top": "8%",
+            "bottom": "8%"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "content": "{{slot:title}}",
+              "level": "h2"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "{{design:color:parchment-50}}"
+        }
+      }
+    },
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "top": "10%",
+            "bottom": "10%"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "3_5,2_5",
+      "columns": [
+        {
+          "type": "3_5",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/image",
+              "module": "divi/image",
+              "src": "https://diviplus.io/wp-content/uploads/2021/01/puppy-dog-animal-cute-pet-2-1.png",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "2_5",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "content": "{{slot:title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/divider",
+              "module": "divi/divider",
+              "show_divider": "on"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

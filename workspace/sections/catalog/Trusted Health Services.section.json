@@ -1,0 +1,137 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "bottom": "0px"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_2,1_2",
+      "columns": [
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                }
+              },
+              "column_structure": "4_4",
+              "columns": [
+                {
+                  "type": "4_4",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/text",
+                      "module": "divi/text",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "0px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:eyebrow}}"
+                    },
+                    {
+                      "type": "divi/heading",
+                      "module": "divi/heading",
+                      "content": "{{slot:title}}",
+                      "level": "h2"
+                    },
+                    {
+                      "type": "divi/text",
+                      "module": "divi/text",
+                      "content": "{{slot:text}}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "25px"
+                      }
+                    }
+                  }
+                }
+              },
+              "column_structure": "1_2,1_2",
+              "columns": [
+                {
+                  "type": "1_2",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "title": "{{slot:features[0].title}}",
+                      "content": "<p><span>Explore Our Pharma Company for quality meds, personalized care. Your excellence, our dedicated commitment to health.</span></p>",
+                      "src": ""
+                    }
+                  ]
+                },
+                {
+                  "type": "1_2",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "title": "{{slot:features[1].title}}",
+                      "content": "<p><span>Embark on a wellness journey Our Company, where top-tier meds and personal care elevate your well-being. </span></p>",
+                      "src": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/image",
+              "module": "divi/image",
+              "src": "{{slot:features[1].image}}",
+              "alt": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

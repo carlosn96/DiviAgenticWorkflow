@@ -1,0 +1,106 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "rgba(166,124,64,0.1)"
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "left": "5%"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "2_5,3_5",
+      "columns": [
+        {
+          "type": "2_5",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "70px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/image",
+              "module": "divi/image",
+              "src": "",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "3_5",
+          "module": "divi/column",
+          "decoration": {
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "30px",
+                    "right": "50px",
+                    "bottom": "30px",
+                    "left": "50px"
+                  }
+                }
+              }
+            },
+            "border": {
+              "desktop": {
+                "value": {
+                  "radius": {
+                    "topLeft": "40px",
+                    "topRight": "",
+                    "bottomRight": "",
+                    "bottomLeft": "40px"
+                  }
+                }
+              }
+            },
+            "boxShadow": {
+              "desktop": {
+                "value": {
+                  "style": "preset1",
+                  "color": "rgba(26,24,20,0.05)"
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

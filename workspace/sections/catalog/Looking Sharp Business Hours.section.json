@@ -1,0 +1,349 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:parchment-50}}"
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "50px",
+                    "bottom": "30px"
+                  }
+                }
+              }
+            },
+            "border": {
+              "desktop": {
+                "value": {
+                  "radius": {
+                    "topLeft": "200px",
+                    "topRight": "200px",
+                    "bottomRight": "",
+                    "bottomLeft": ""
+                  }
+                }
+              }
+            },
+            "boxShadow": {
+              "desktop": {
+                "value": {
+                  "style": "preset1",
+                  "color": "rgba(26,24,20,0.08)"
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[0].text}}"
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[0].title}}",
+              "content": "<p>8.00 AM – 6.00 PM</p>",
+              "src": ""
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[0].title}}",
+              "content": "<p>9.00 AM – 4.00 PM</p>",
+              "src": ""
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[0].title}}",
+              "content": "<p>Closed</p>",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "border": {
+                  "desktop": {
+                    "value": {
+                      "radius": {
+                        "topLeft": "50%",
+                        "topRight": "50%",
+                        "bottomRight": "50%",
+                        "bottomLeft": "50%"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:parchment-50}}"
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "30px",
+                    "bottom": "50px"
+                  }
+                }
+              }
+            },
+            "border": {
+              "desktop": {
+                "value": {
+                  "radius": {
+                    "topLeft": "",
+                    "topRight": "",
+                    "bottomRight": "200px",
+                    "bottomLeft": "200px"
+                  }
+                }
+              }
+            },
+            "boxShadow": {
+              "desktop": {
+                "value": {
+                  "style": "preset1",
+                  "color": "rgba(26,24,20,0.08)"
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[2].text}}"
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "10px",
+                        "bottom": "10px"
+                      },
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                },
+                "border": {
+                  "desktop": {
+                    "value": {
+                      "radius": {
+                        "topLeft": "40px",
+                        "topRight": "40px",
+                        "bottomRight": "40px",
+                        "bottomLeft": "40px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[2].title}}",
+              "content": "<p>Hot Towel Treatment</p>",
+              "src": ""
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "10px",
+                        "bottom": "10px"
+                      },
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                },
+                "border": {
+                  "desktop": {
+                    "value": {
+                      "radius": {
+                        "topLeft": "40px",
+                        "topRight": "40px",
+                        "bottomRight": "40px",
+                        "bottomLeft": "40px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[2].title}}",
+              "content": "<p>Beard Trimming</p>",
+              "src": ""
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "10px",
+                        "bottom": "10px"
+                      },
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                },
+                "border": {
+                  "desktop": {
+                    "value": {
+                      "radius": {
+                        "topLeft": "40px",
+                        "topRight": "40px",
+                        "bottomRight": "40px",
+                        "bottomLeft": "40px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[2].title}}",
+              "content": "<p>Classic Haircuts</p>",
+              "src": ""
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "10px",
+                        "bottom": "10px"
+                      },
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                },
+                "border": {
+                  "desktop": {
+                    "value": {
+                      "radius": {
+                        "topLeft": "40px",
+                        "topRight": "40px",
+                        "bottomRight": "40px",
+                        "bottomLeft": "40px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[2].title}}",
+              "content": "<p>Straight Razor Shaves</p>",
+              "src": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

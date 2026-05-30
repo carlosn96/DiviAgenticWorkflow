@@ -1,0 +1,64 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "rgba(26,24,20,0.6)",
+          "image": {
+            "url": "https://diviplus.io/wp-content/uploads/2019/11/dpa-blog-post-4.webp",
+            "size": "cover",
+            "position": "center center",
+            "repeat": "no-repeat",
+            "parallax": {
+              "enabled": "off"
+            }
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder"
+            },
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "content": "{{slot:title}}",
+              "level": "h2"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

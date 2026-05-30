@@ -1,0 +1,150 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "RGBA(255,255,255,0)",
+          "image": {
+            "url": "https://diviplus.io/wp-content/uploads/2025/06/farm-bg.webp?_t=1749731452",
+            "size": "initial",
+            "position": "bottom_left",
+            "repeat": "no-repeat",
+            "parallax": {
+              "enabled": "off"
+            }
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[0].title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:features[0].text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:ink}}"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "{{slot:features[1].title}}",
+              "content": "Chemical-free cultivation practices that preserve soil health and produce fresh, natural crops.",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "{{slot:features[2].title}}",
+              "content": "Accurate analysis to improve fertility and crop planning.",
+              "src": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "0px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "{{slot:features[3].title}}",
+              "content": "Customized schedules for seasonal and climate-friendly farming.",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "{{slot:features[4].title}}",
+              "content": "Efficient water management systems for better crop health.",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "{{slot:features[5].title}}",
+              "content": "High-quality, tested seeds for strong and reliable growth.",
+              "src": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

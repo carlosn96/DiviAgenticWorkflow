@@ -1,0 +1,202 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "background": {
+          "desktop": {
+            "value": {
+              "color": "{{design:color:accent}}"
+            }
+          }
+        },
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "0px",
+                "bottom": "0px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder"
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "20px",
+                    "right": "20px",
+                    "bottom": "20px",
+                    "left": "20px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "15px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[1].title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "15px",
+                        "bottom": "15px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[1].title}}",
+              "content": "",
+              "src": ""
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "15px",
+                        "bottom": "15px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[1].title}}",
+              "content": "",
+              "src": ""
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "15px",
+                        "bottom": "15px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[1].title}}",
+              "content": "",
+              "src": ""
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "15px",
+                        "bottom": "15px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[1].title}}",
+              "content": "",
+              "src": ""
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "15px",
+                        "bottom": "15px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[1].title}}",
+              "content": "",
+              "src": ""
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "15px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[1].title}}",
+              "content": "",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

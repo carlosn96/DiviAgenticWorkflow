@@ -1,0 +1,108 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:text}}"
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:ink}}",
+                    "size": "16px"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_4,1_4,1_4,1_4",
+      "columns": [
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "{{slot:gallery[0].title}}",
+              "content": "Your content goes here. Edit this text inline or in the module Content settings. You can also style every aspect of this content.",
+              "src": "https://diviplus.io/wp-content/uploads/2021/03/Divi-Plus-Sermon.jpg"
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "{{slot:gallery[1].title}}",
+              "content": "Your content goes here. Edit this text inline or in the module Content settings. You can also style every aspect of this content.",
+              "src": "https://diviplus.io/wp-content/uploads/2021/03/Divi-Plus-Baptism.jpg"
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "{{slot:gallery[2].title}}",
+              "content": "Your content goes here. Edit this text inline or in the module Content settings. You can also style every aspect of this content.",
+              "src": "https://diviplus.io/wp-content/uploads/2021/03/Divi-Plus-Missions.jpg"
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "{{slot:gallery[3].title}}",
+              "content": "Your content goes here. Edit this text inline or in the module Content settings. You can also style every aspect of this content.",
+              "src": "https://diviplus.io/wp-content/uploads/2021/03/Divi-Plus-Salvation.jpg"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

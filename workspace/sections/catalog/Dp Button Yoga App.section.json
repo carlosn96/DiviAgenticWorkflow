@@ -1,0 +1,53 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "2_5,3_5",
+      "columns": [
+        {
+          "type": "2_5",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/image",
+              "module": "divi/image",
+              "src": "{{slot:gallery[0].image}}",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "3_5",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "content": "{{slot:gallery[0].title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:gallery[0].text}}"
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:gallery[0].text}}"
+            },
+            {
+              "type": "divi/button",
+              "module": "divi/button",
+              "button_text": "{{slot:gallery[0].btn_text}}",
+              "button_url": "{{slot:gallery[0].btn_url}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

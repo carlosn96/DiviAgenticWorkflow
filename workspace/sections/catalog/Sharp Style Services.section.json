@@ -1,0 +1,176 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "right": "10%"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_4,3_4",
+      "columns": [
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder"
+            }
+          ]
+        },
+        {
+          "type": "3_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "column_structure": "4_4",
+              "columns": [
+                {
+                  "type": "4_4",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/heading",
+                      "module": "divi/heading",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "10px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:title}}",
+                      "level": "h2"
+                    },
+                    {
+                      "type": "divi/text",
+                      "module": "divi/text",
+                      "content": "{{slot:text}}",
+                      "bodyFont": {
+                        "desktop": {
+                          "value": {
+                            "fontFamily": "{{design:font:body}}",
+                            "color": "{{design:color:ink}}"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "column_structure": "1_3,1_3,1_3",
+              "columns": [
+                {
+                  "type": "1_3",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "padding": {
+                                "top": "50px",
+                                "bottom": "50px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "title": "{{slot:features[0].title}}",
+                      "content": "Your content goes here. Edit or remove this text inline or in the module Content settings. You can also style every aspect of this content in the module Design settings.",
+                      "src": ""
+                    }
+                  ]
+                },
+                {
+                  "type": "1_3",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "padding": {
+                                "top": "50px",
+                                "bottom": "50px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "title": "{{slot:features[1].title}}",
+                      "content": "Your content goes here. Edit or remove this text inline or in the module Content settings. You can also style every aspect of this content in the module Design settings.",
+                      "src": ""
+                    }
+                  ]
+                },
+                {
+                  "type": "1_3",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "padding": {
+                                "top": "50px",
+                                "bottom": "50px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "title": "{{slot:features[2].title}}",
+                      "content": "Your content goes here. Edit or remove this text inline or in the module Content settings. You can also style every aspect of this content in the module Design settings.",
+                      "src": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "{{design:color:parchment-100}}"
+        }
+      }
+    },
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "bottom": "30px"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "0px",
+                "bottom": "40px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:ink}}",
+                    "size": "32px"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "background": {
+          "desktop": {
+            "value": {
+              "color": "{{design:color:parchment-100}}"
+            }
+          }
+        },
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "10px",
+                "bottom": "10px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "1_2,1_2",
+      "columns": [
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:text}}"
+            }
+          ]
+        },
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/image",
+              "module": "divi/image",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "10px",
+                        "bottom": "10px"
+                      }
+                    }
+                  }
+                },
+                "layout": {
+                  "desktop": {
+                    "value": {
+                      "textAlign": "right"
+                    }
+                  }
+                }
+              },
+              "src": "https://diviplus.io/wp-content/uploads/2019/11/wild-life-logo.webp",
+              "alt": "Logo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "bottom": "0px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:parchment-700}}",
+                    "size": "13px"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

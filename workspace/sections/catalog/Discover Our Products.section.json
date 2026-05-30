@@ -1,0 +1,387 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "bottom": "0px"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:eyebrow}}"
+            },
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:title}}",
+              "level": "h2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_4,1_4,1_4,1_4",
+      "columns": [
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder"
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder"
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder"
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "10px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/button",
+              "module": "divi/button",
+              "button_text": "{{slot:btn_primary_text}}",
+              "button_url": "{{slot:btn_primary_url}}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_4,1_4,1_4,1_4",
+      "columns": [
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "decoration": {
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "15px",
+                    "right": "15px",
+                    "bottom": "15px",
+                    "left": "15px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:parchment-50}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "25px",
+                        "right": "15px",
+                        "bottom": "25px",
+                        "left": "15px"
+                      }
+                    }
+                  }
+                },
+                "border": {
+                  "desktop": {
+                    "value": {
+                      "radius": {
+                        "topLeft": "10px",
+                        "topRight": "10px",
+                        "bottomRight": "10px",
+                        "bottomLeft": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "10+",
+              "content": "<p>Years of Experience</p>",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "decoration": {
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "15px",
+                    "right": "15px",
+                    "bottom": "15px",
+                    "left": "15px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:parchment-50}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "25px",
+                        "right": "15px",
+                        "bottom": "25px",
+                        "left": "15px"
+                      }
+                    }
+                  }
+                },
+                "border": {
+                  "desktop": {
+                    "value": {
+                      "radius": {
+                        "topLeft": "10px",
+                        "topRight": "10px",
+                        "bottomRight": "10px",
+                        "bottomLeft": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "1000+",
+              "content": "<p>Happy customers</p>",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "decoration": {
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "15px",
+                    "right": "15px",
+                    "bottom": "15px",
+                    "left": "15px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:parchment-50}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "25px",
+                        "right": "15px",
+                        "bottom": "25px",
+                        "left": "15px"
+                      }
+                    }
+                  }
+                },
+                "border": {
+                  "desktop": {
+                    "value": {
+                      "radius": {
+                        "topLeft": "10px",
+                        "topRight": "10px",
+                        "bottomRight": "10px",
+                        "bottomLeft": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "50+",
+              "content": "<p>Team Member</p>",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "decoration": {
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "15px",
+                    "right": "15px",
+                    "bottom": "15px",
+                    "left": "15px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:parchment-50}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "25px",
+                        "right": "15px",
+                        "bottom": "25px",
+                        "left": "15px"
+                      }
+                    }
+                  }
+                },
+                "border": {
+                  "desktop": {
+                    "value": {
+                      "radius": {
+                        "topLeft": "10px",
+                        "topRight": "10px",
+                        "bottomRight": "10px",
+                        "bottomLeft": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "200+",
+              "content": "<p>Successful Projects</p>",
+              "src": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

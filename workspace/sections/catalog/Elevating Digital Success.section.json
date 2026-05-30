@@ -1,0 +1,197 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "background": {
+          "desktop": {
+            "value": {
+              "gradient": {
+                "enabled": "on",
+                "type": "linear",
+                "direction": "180deg",
+                "overlaysImage": "on",
+                "stops": [
+                  {
+                    "color": "rgba(0,0,0,0.6)",
+                    "position": "0%"
+                  },
+                  {
+                    "color": "rgba(0,0,0,0)",
+                    "position": "100%"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "40px",
+                "right": "20px",
+                "bottom": "40px",
+                "left": "20px"
+              }
+            }
+          }
+        },
+        "border": {
+          "desktop": {
+            "value": {
+              "radius": {
+                "topLeft": "15px",
+                "topRight": "15px",
+                "bottomRight": "15px",
+                "bottomLeft": "15px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "1_2,1_4,1_4",
+      "columns": [
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:gallery[0].title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:gallery[0].text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:parchment-50}}"
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/button",
+              "module": "divi/button",
+              "button_text": "{{slot:gallery[0].btn_text}}",
+              "button_url": "{{slot:gallery[0].btn_url}}"
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:parchment-300}}"
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:gallery[1].title}}",
+              "content": "<p>A website is your brand’s digital identity. We create visually stunning, user-friendly, and high-performing websites that enhance customer experience and drive conversions. Whether it’s an eCommerce store, or custom web application, we bring your vision to life with responsive design and seamless functionality.</p>",
+              "src": ""
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:parchment-300}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "top": "60px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:gallery[1].title}}",
+              "content": "<p>Engage and grow your audience with strategic social media campaigns. We manage and optimize your presence on platforms like Facebook, LinkedIn, foster customer relationships, and drive conversions through targeted content.</p>",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:parchment-300}}"
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:gallery[2].title}}",
+              "content": "<p>Get found by the right audience with our data-driven SEO strategies. We optimize your website for higher rankings, better traffic, and increased visibility on search engines. Our techniques include keyword research, on-page SEO, technical optimization, and link building to ensure long-term success.</p>",
+              "src": ""
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:parchment-300}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "top": "60px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:gallery[2].title}}",
+              "content": "<p>Maximize your ROI with highly effective paid ad campaigns. Our Google Ads, Facebook Ads, and display advertising strategies ensure you reach your ideal customers with precision targeting and optimized ad spend, driving instant traffic and sales.</p>",
+              "src": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "gradient": {
+            "enabled": "on",
+            "type": "linear",
+            "direction": "90deg",
+            "overlaysImage": "on",
+            "stops": [
+              {
+                "color": "rgba(0,0,0,0.6)",
+                "position": "0%"
+              },
+              {
+                "color": "rgba(0,0,0,0)",
+                "position": "100%"
+              }
+            ]
+          },
+          "image": {
+            "url": "https://diviplus.io/wp-content/uploads/2019/11/dpar-landscape-architecture-villa-house-building-home.webp",
+            "size": "cover",
+            "position": "center center",
+            "repeat": "no-repeat",
+            "parallax": {
+              "enabled": "on"
+            }
+          }
+        }
+      }
+    },
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "top": "0px",
+            "bottom": "0px"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "background": {
+          "desktop": {
+            "value": {
+              "gradient": {
+                "enabled": "on",
+                "type": "linear",
+                "direction": "90deg",
+                "overlaysImage": "on",
+                "stops": [
+                  {
+                    "color": "rgba(253,251,247,0.0)",
+                    "position": "0%"
+                  },
+                  {
+                    "color": "{{design:color:parchment-300}}",
+                    "position": "100%"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "spacing": {
+          "desktop": {
+            "value": {
+              "margin": {
+                "top": "0px",
+                "bottom": "0px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "1_2,1_2",
+      "columns": [
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": []
+        },
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "decoration": {
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "right": "10%"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "0px",
+                        "bottom": "0px"
+                      },
+                      "margin": {
+                        "top": "0px",
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:eyebrow}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:parchment-50}}",
+                    "size": "5vw"
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "top": "-30px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:text}}"
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "left": "40px"
+                      },
+                      "margin": {
+                        "top": "55px",
+                        "bottom": "65px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:text}}"
+            },
+            {
+              "type": "divi/button",
+              "module": "divi/button",
+              "button_text": "{{slot:btn_primary_text}}",
+              "button_url": "{{slot:btn_primary_url}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

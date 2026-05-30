@@ -1,0 +1,203 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "image": {
+            "url": "https://diviplus.io/wp-content/uploads/2021/03/header-event-bg.jpg",
+            "size": "cover",
+            "position": "center center",
+            "repeat": "no-repeat",
+            "parallax": {
+              "enabled": "off"
+            }
+          }
+        }
+      }
+    },
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "top": "0px",
+            "bottom": "0px"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "8%"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "bottom": "0px"
+                      },
+                      "margin": {
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:eyebrow}}"
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:parchment-50}}",
+                    "size": "20px"
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/button",
+              "module": "divi/button",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "30px"
+                      }
+                    }
+                  }
+                }
+              },
+              "button_text": "{{slot:btn_primary_text}}",
+              "button_url": "{{slot:btn_primary_url}}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:text}}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "bottom": "8%"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "1_2,1_2",
+      "columns": [
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "left": "20px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:parchment-50}}",
+                    "size": "16px"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "rgba(45,42,37,0.72)"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "right": "0px",
+                        "left": "0px"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "boxShadow": {
+                  "desktop": {
+                    "value": {
+                      "style": "preset3",
+                      "color": "rgba(26,24,20,0.1)"
+                    }
+                  }
+                },
+                "layout": {
+                  "desktop": {
+                    "value": {
+                      "textAlign": "center"
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:gallery[0].title}}",
+              "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+              "src": "https://diviplus.io/wp-content/uploads/2019/11/divi-plus-wedding-box-1-2.jpg"
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "boxShadow": {
+                  "desktop": {
+                    "value": {
+                      "style": "preset3",
+                      "color": "rgba(26,24,20,0.1)"
+                    }
+                  }
+                },
+                "layout": {
+                  "desktop": {
+                    "value": {
+                      "textAlign": "center"
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:gallery[1].title}}",
+              "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+              "src": "https://diviplus.io/wp-content/uploads/2019/11/divi-plus-slider.jpg"
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "boxShadow": {
+                  "desktop": {
+                    "value": {
+                      "style": "preset3",
+                      "color": "rgba(26,24,20,0.1)"
+                    }
+                  }
+                },
+                "layout": {
+                  "desktop": {
+                    "value": {
+                      "textAlign": "center"
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:gallery[2].title}}",
+              "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+              "src": "https://diviplus.io/wp-content/uploads/2019/11/divi-plus-wedding-after.jpg"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

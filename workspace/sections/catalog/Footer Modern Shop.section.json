@@ -1,0 +1,296 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "{{design:color:parchment-100}}"
+        }
+      }
+    },
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "top": "0px",
+            "bottom": "0px"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "0px",
+                "bottom": "0px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "1_4,1_4,1_4,1_4",
+      "columns": [
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "decoration": {
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "60px",
+                    "right": "60px",
+                    "bottom": "60px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:text}}"
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "1em"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "",
+              "content": "<a href=\"tel:+000-000-0000\">+000-000-0000</a>",
+              "src": ""
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "1em"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "",
+              "content": "<a href=\"mailto:hello@example.com\">hello@example.com</a>",
+              "src": ""
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "1em"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "",
+              "content": "<p>Street, City, State, Country</p>",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "decoration": {
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "60px",
+                    "right": "60px",
+                    "bottom": "60px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:eyebrow}}"
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:text}}"
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "decoration": {
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "60px",
+                    "right": "60px",
+                    "bottom": "60px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:eyebrow}}"
+            },
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder"
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:ink-soft}}"
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "60px",
+                    "right": "50px",
+                    "bottom": "60px",
+                    "left": "50px"
+                  }
+                }
+              }
+            },
+            "boxShadow": {
+              "desktop": {
+                "value": {
+                  "style": "preset3"
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:eyebrow}}"
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "30px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:text}}"
+            },
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "border": {
+                  "desktop": {
+                    "value": {
+                      "radius": {
+                        "topLeft": "0px",
+                        "topRight": "0px",
+                        "bottomRight": "0px",
+                        "bottomLeft": "0px"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

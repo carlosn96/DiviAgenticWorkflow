@@ -1,0 +1,149 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "{{design:color:parchment-200}}"
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "0px",
+                "bottom": "0px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "3_5,2_5",
+      "columns": [
+        {
+          "type": "3_5",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "gradient": {
+                    "enabled": "on",
+                    "type": "linear",
+                    "direction": "180deg",
+                    "overlaysImage": "on",
+                    "stops": [
+                      {
+                        "color": "rgba(0,0,0,0.6)",
+                        "position": "0%"
+                      },
+                      {
+                        "color": "rgba(0,0,0,0)",
+                        "position": "100%"
+                      }
+                    ]
+                  },
+                  "image": {
+                    "url": "https://diviplus.io/wp-content/uploads/2019/11/chain-jewelry-necklace.webp",
+                    "size": "cover",
+                    "position": "bottom_center",
+                    "repeat": "no-repeat",
+                    "parallax": {
+                      "enabled": "off"
+                    }
+                  }
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "30px",
+                    "right": "30px",
+                    "bottom": "350px",
+                    "left": "30px"
+                  }
+                }
+              }
+            },
+            "border": {
+              "desktop": {
+                "value": {
+                  "radius": {
+                    "topLeft": "",
+                    "topRight": "20px",
+                    "bottomRight": "20px",
+                    "bottomLeft": ""
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "165px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:ink}}",
+                    "size": "18px"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "2_5",
+          "module": "divi/column",
+          "decoration": {
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "right": "50px",
+                    "left": "50px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:text}}"
+            },
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

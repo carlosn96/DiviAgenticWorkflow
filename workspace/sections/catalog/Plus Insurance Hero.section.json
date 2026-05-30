@@ -1,0 +1,35 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "image": {
+            "url": "https://themes.diviplus.io/insurance-company/wp-content/uploads/2023/08/dpic-home-hero-bg.webp",
+            "size": "cover",
+            "position": "center center",
+            "repeat": "no-repeat",
+            "parallax": {
+              "enabled": "off"
+            }
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "2_5",
+      "columns": [
+        {
+          "type": "2_5",
+          "module": "divi/column",
+          "modules": []
+        }
+      ]
+    }
+  ]
+}

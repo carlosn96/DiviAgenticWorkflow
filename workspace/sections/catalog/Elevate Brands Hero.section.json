@@ -1,0 +1,59 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "gradient": {
+            "enabled": "on",
+            "type": "circular",
+            "direction": "180deg",
+            "overlaysImage": "on",
+            "stops": [
+              {
+                "color": "{{design:color:success}}",
+                "position": "0%"
+              },
+              {
+                "color": "{{design:color:parchment-50}}",
+                "position": "100%"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "top": "10.5%",
+            "bottom": "10.5%"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_2",
+      "columns": [
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/image",
+              "module": "divi/image",
+              "src": "",
+              "alt": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

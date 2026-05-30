@@ -1,0 +1,233 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "content": "{{slot:title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:eyebrow}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "rgba(26,24,20,0.04)",
+                    "size": "10vw"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "0px",
+                        "bottom": "0px"
+                      },
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:stats[0].text}}"
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "0px",
+                        "bottom": "0px"
+                      },
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:stats[1].text}}"
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "0px",
+                        "bottom": "0px"
+                      },
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:stats[2].text}}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "0px",
+                        "bottom": "0px"
+                      },
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:stats[3].text}}"
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "0px",
+                        "bottom": "0px"
+                      },
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:stats[4].text}}"
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "0px",
+                        "bottom": "0px"
+                      },
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:stats[5].text}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

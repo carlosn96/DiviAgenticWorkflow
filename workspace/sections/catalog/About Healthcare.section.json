@@ -1,0 +1,106 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "top": "0px",
+            "bottom": "0px"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_2,1_2",
+      "columns": [
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder"
+            }
+          ]
+        },
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "bottom": "30px"
+                      }
+                    }
+                  }
+                }
+              },
+              "column_structure": "4_4",
+              "columns": [
+                {
+                  "type": "4_4",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/text",
+                      "module": "divi/text",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "20px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:eyebrow}}",
+                      "bodyFont": {
+                        "desktop": {
+                          "value": {
+                            "fontFamily": "{{design:font:body}}",
+                            "color": "{{design:color:success}}",
+                            "size": "20px"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "divi/divider",
+                      "module": "divi/divider",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "20px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "show_divider": "on"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

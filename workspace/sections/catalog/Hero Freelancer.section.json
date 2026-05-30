@@ -1,0 +1,90 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "rgba(0,0,0,0)",
+          "gradient": {
+            "enabled": "on",
+            "type": "linear",
+            "direction": "90deg",
+            "overlaysImage": "on",
+            "stops": [
+              {
+                "color": "rgb(4 14 39 / 75%)",
+                "position": "0%"
+              },
+              {
+                "color": "rgba(61,107,79,0.0)",
+                "position": "100%"
+              }
+            ]
+          },
+          "image": {
+            "url": "https://diviplus.io/wp-content/uploads/2020/09/divi-plus-freelancer-header-1.jpg",
+            "size": "cover",
+            "position": "center center",
+            "repeat": "no-repeat",
+            "parallax": {
+              "enabled": "off"
+            }
+          }
+        }
+      }
+    },
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "top": "10%",
+            "bottom": "10%"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:eyebrow}}"
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "60px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:text}}"
+            },
+            {
+              "type": "divi/button",
+              "module": "divi/button",
+              "button_text": "{{slot:btn_primary_text}}",
+              "button_url": "{{slot:btn_primary_url}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

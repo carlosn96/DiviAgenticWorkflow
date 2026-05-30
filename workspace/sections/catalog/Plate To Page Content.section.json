@@ -1,0 +1,134 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "top": "0px",
+            "bottom": "0px"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "0px",
+                "right": "5%",
+                "bottom": "0px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "2_5,3_5",
+      "columns": [
+        {
+          "type": "2_5",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "gradient": {
+                    "enabled": "on",
+                    "type": "linear",
+                    "direction": "180deg",
+                    "overlaysImage": "on",
+                    "stops": [
+                      {
+                        "color": "rgba(0,0,0,0.6)",
+                        "position": "0%"
+                      },
+                      {
+                        "color": "rgba(0,0,0,0)",
+                        "position": "100%"
+                      }
+                    ]
+                  },
+                  "image": {
+                    "url": "https://themes.diviplus.io/food-blogger/wp-content/uploads/2022/04/sweet-dish-food-brown-chocolate.webp",
+                    "size": "cover",
+                    "position": "center center",
+                    "repeat": "no-repeat",
+                    "parallax": {
+                      "enabled": "on"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/image",
+              "module": "divi/image",
+              "decoration": {
+                "boxShadow": {
+                  "desktop": {
+                    "value": {
+                      "style": "preset3"
+                    }
+                  }
+                }
+              },
+              "src": "{{slot:gallery[0].image}}",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "3_5",
+          "module": "divi/column",
+          "decoration": {
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "120px",
+                    "right": "100px",
+                    "bottom": "120px",
+                    "left": "100px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder"
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:gallery[0].text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "size": "18px"
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:gallery[0].text}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

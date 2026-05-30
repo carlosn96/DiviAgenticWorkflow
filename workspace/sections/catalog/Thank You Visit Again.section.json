@@ -1,0 +1,130 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "gradient": {
+            "enabled": "on",
+            "type": "linear",
+            "direction": "180deg",
+            "overlaysImage": "on",
+            "stops": [
+              {
+                "color": "rgba(0,0,0,0.6)",
+                "position": "0%"
+              },
+              {
+                "color": "rgba(0,0,0,0)",
+                "position": "100%"
+              }
+            ]
+          },
+          "image": {
+            "url": "https://diviplus.io/wp-content/uploads/2019/11/dpa-hero-image.webp?_t=1731911487",
+            "size": "cover",
+            "position": "center center",
+            "repeat": "no-repeat",
+            "parallax": {
+              "enabled": "off"
+            }
+          }
+        }
+      }
+    },
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "top": "120px",
+            "bottom": "100px"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_2,1_4,1_4",
+      "columns": [
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "content": "{{slot:gallery[0].title}}",
+              "level": "h2"
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "50px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:gallery[1].title}}",
+              "content": "<p>+000-000-0000<br />+000-000-0000</p>",
+              "src": ""
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "{{slot:gallery[1].title}}",
+              "content": "<p>Plot Number 012, Street, City, State, Country 01234</p>",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "50px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:gallery[2].title}}",
+              "content": "<p>abc@example.com<br />xyz@example.com</p>",
+              "src": ""
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "{{slot:gallery[2].title}}",
+              "content": "<p>+000-000-0000<br />+000-000-0000</p>",
+              "src": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

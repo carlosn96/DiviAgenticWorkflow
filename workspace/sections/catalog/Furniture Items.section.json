@@ -1,0 +1,78 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "image": {
+            "url": "https://diviplus.io/wp-content/uploads/2024/09/home-decor-01.webp?_t=1725599062",
+            "size": "initial",
+            "position": "center_right",
+            "repeat": "no-repeat",
+            "parallax": {
+              "enabled": "off"
+            }
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "content": "{{slot:title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/icon-list",
+              "module": "divi/icon-list",
+              "children": [
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

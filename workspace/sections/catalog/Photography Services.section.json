@@ -1,0 +1,316 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "{{design:color:parchment-50}}"
+        }
+      }
+    },
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "top": "80px",
+            "bottom": "80px"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_2,1_2",
+      "columns": [
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:parchment-50}}"
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "54px",
+                        "right": "60px",
+                        "bottom": "54px",
+                        "left": "60px"
+                      },
+                      "margin": {
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[0].title}}",
+              "content": "",
+              "src": ""
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "bottom": "0px"
+                      },
+                      "margin": {
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[0].text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "rgba(245,241,232,0.5)",
+                    "size": "130px"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:parchment-50}}"
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "54px",
+                        "right": "60px",
+                        "bottom": "54px",
+                        "left": "60px"
+                      },
+                      "margin": {
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[1].title}}",
+              "content": "",
+              "src": ""
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "bottom": "0px"
+                      },
+                      "margin": {
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[1].text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "rgba(245,241,232,0.5)",
+                    "size": "130px"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_2,1_2",
+      "columns": [
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:parchment-50}}"
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "bottom": "0px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "54px",
+                        "right": "60px",
+                        "bottom": "54px",
+                        "left": "60px"
+                      },
+                      "margin": {
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[2].title}}",
+              "content": "",
+              "src": ""
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "bottom": "0px"
+                      },
+                      "margin": {
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[2].text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "rgba(245,241,232,0.5)",
+                    "size": "130px"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:parchment-50}}"
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "54px",
+                        "right": "60px",
+                        "bottom": "54px",
+                        "left": "60px"
+                      },
+                      "margin": {
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[3].title}}",
+              "content": "",
+              "src": ""
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "bottom": "0px"
+                      },
+                      "margin": {
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[3].text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "rgba(245,241,232,0.5)",
+                    "size": "130px"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

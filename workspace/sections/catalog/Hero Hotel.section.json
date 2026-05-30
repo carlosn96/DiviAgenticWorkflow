@@ -1,0 +1,88 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "rgba(26,24,20,0.34)",
+          "gradient": {
+            "enabled": "on",
+            "type": "radial",
+            "direction": "180deg",
+            "overlaysImage": "on",
+            "stops": [
+              {
+                "color": "rgba(45,42,37,0.91)",
+                "position": "0%"
+              },
+              {
+                "color": "rgba(61,107,79,0.0)",
+                "position": "100%"
+              }
+            ]
+          },
+          "image": {
+            "url": "https://diviplus.io/wp-content/uploads/2019/11/divi-plus-hotal-bg.jpg",
+            "size": "cover",
+            "position": "center center",
+            "repeat": "no-repeat",
+            "parallax": {
+              "enabled": "off"
+            }
+          }
+        }
+      }
+    },
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "top": "14%",
+            "bottom": "14%"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:text}}"
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:text}}"
+            },
+            {
+              "type": "divi/button",
+              "module": "divi/button",
+              "decoration": {
+                "boxShadow": {
+                  "desktop": {
+                    "value": {
+                      "style": "preset1"
+                    }
+                  }
+                }
+              },
+              "button_text": "{{slot:btn_primary_text}}",
+              "button_url": "{{slot:btn_primary_url}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

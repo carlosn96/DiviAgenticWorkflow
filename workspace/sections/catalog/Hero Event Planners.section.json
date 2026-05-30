@@ -1,0 +1,79 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "gradient": {
+            "enabled": "on",
+            "type": "linear",
+            "direction": "90deg",
+            "overlaysImage": "on",
+            "stops": [
+              {
+                "color": "{{design:color:parchment-100}}",
+                "position": "0%"
+              },
+              {
+                "color": "rgba(253,251,247,0.0)",
+                "position": "100%"
+              }
+            ]
+          },
+          "image": {
+            "url": "https://diviplus.io/wp-content/uploads/2021/03/Wedding-Planner-Hero.jpg",
+            "size": "cover",
+            "position": "center center",
+            "repeat": "no-repeat",
+            "parallax": {
+              "enabled": "off"
+            }
+          }
+        }
+      }
+    },
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "top": "10%",
+            "bottom": "10%"
+          }
+        }
+      }
+    },
+    "border": {
+      "desktop": {
+        "value": {
+          "radius": {
+            "topLeft": "5px",
+            "topRight": "5px",
+            "bottomRight": "5px",
+            "bottomLeft": "5px"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:text}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "top": "0px",
+            "bottom": "0px"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "0px",
+                "bottom": "0px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "gradient": {
+                    "enabled": "on",
+                    "type": "linear",
+                    "direction": "180deg",
+                    "overlaysImage": "on",
+                    "stops": [
+                      {
+                        "color": "rgba(0,0,0,0.6)",
+                        "position": "0%"
+                      },
+                      {
+                        "color": "rgba(0,0,0,0)",
+                        "position": "100%"
+                      }
+                    ]
+                  },
+                  "image": {
+                    "url": "https://diviplus.io/wp-content/uploads/2019/11/dle-hero-section-71-2.webp",
+                    "size": "cover",
+                    "position": "center center",
+                    "repeat": "no-repeat",
+                    "parallax": {
+                      "enabled": "off"
+                    }
+                  }
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "370px",
+                    "bottom": "370px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": []
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:success}}"
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "70px",
+                    "right": "20px",
+                    "bottom": "70px",
+                    "left": "20px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:eyebrow}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:parchment-50}}",
+                    "size": "18px"
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:text}}"
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "gradient": {
+                    "enabled": "on",
+                    "type": "linear",
+                    "direction": "180deg",
+                    "overlaysImage": "on",
+                    "stops": [
+                      {
+                        "color": "rgba(0,0,0,0.6)",
+                        "position": "0%"
+                      },
+                      {
+                        "color": "rgba(0,0,0,0)",
+                        "position": "100%"
+                      }
+                    ]
+                  },
+                  "image": {
+                    "url": "https://diviplus.io/wp-content/uploads/2019/11/dle-hero-section-71-1.webp",
+                    "size": "cover",
+                    "position": "center center",
+                    "repeat": "no-repeat",
+                    "parallax": {
+                      "enabled": "off"
+                    }
+                  }
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "350px",
+                    "bottom": "350px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": []
+        }
+      ]
+    }
+  ]
+}

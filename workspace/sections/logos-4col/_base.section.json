@@ -1,0 +1,61 @@
+{
+  "presets": ["section:light"],
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "{{design:color:surface-light}}"
+        }
+      }
+    },
+    "spacing": {
+      "desktop": { "value": { "padding": { "top": "80px", "bottom": "80px", "right": "96px", "left": "96px" } } },
+      "tablet": { "value": { "padding": { "top": "60px", "bottom": "60px", "right": "48px", "left": "48px" } } },
+      "phone": { "value": { "padding": { "top": "40px", "bottom": "40px", "right": "24px", "left": "24px" } } }
+    }
+  },
+  "rows": [
+    {
+      "column_structure": "1_1",
+      "columns": [
+        {
+          "type": "1_1",
+          "decoration": {
+            "spacing": {
+              "desktop": { "value": { "align": "center", "padding": { "bottom": "48px" } } }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/heading",
+              "presets": ["text:display-md"],
+              "content": "<h2>{{slot:title}}</h2>"
+            },
+            {
+              "type": "divi/text",
+              "presets": ["text:lead"],
+              "content": "<p>{{slot:text}}</p>"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "column_structure": "1_4,1_4,1_4,1_4",
+      "_repeat": {
+        "source": "logos",
+        "target": "columns",
+        "column_type": "1_4"
+      },
+      "modules": [
+        {
+          "type": "divi/blurb",
+          "presets": ["module:card"],
+          "title": "",
+          "icon": "{{slot:icon}}",
+          "content": "<p style='text-align: center; font-size: 0.85rem; color: var(--gcid-sepia-300);'>{{slot:name}}</p>"
+        }
+      ]
+    }
+  ]
+}

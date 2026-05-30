@@ -1,0 +1,61 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "0px",
+                "bottom": "0px"
+              }
+            }
+          }
+        },
+        "border": {
+          "desktop": {
+            "value": {
+              "radius": {
+                "topLeft": "40px",
+                "topRight": "40px",
+                "bottomRight": "40px",
+                "bottomLeft": "40px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "border": {
+                  "desktop": {
+                    "value": {
+                      "radius": {
+                        "topLeft": "40px",
+                        "topRight": "40px",
+                        "bottomRight": "40px",
+                        "bottomLeft": "40px"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

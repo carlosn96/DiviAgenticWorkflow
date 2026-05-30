@@ -1,0 +1,140 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_2,1_2",
+      "columns": [
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/image",
+              "module": "divi/image",
+              "src": "",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "column_structure": "4_4",
+              "columns": [
+                {
+                  "type": "4_4",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/heading",
+                      "module": "divi/heading",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "10px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:title}}",
+                      "level": "h2"
+                    },
+                    {
+                      "type": "divi/text",
+                      "module": "divi/text",
+                      "content": "{{slot:text}}",
+                      "bodyFont": {
+                        "desktop": {
+                          "value": {
+                            "fontFamily": "{{design:font:body}}",
+                            "color": "{{design:color:ink}}"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "column_structure": "1_2,1_2",
+              "columns": [
+                {
+                  "type": "1_2",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "15px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "title": "Trusted Expertise",
+                      "content": "<p>Navigating the real estate market can be overwhelming, but with our deep industry knowledge and years of experience, we simplify the process for you. Our team of real estate professionals stays updated with market trends, property values, and investment opportunities, ensuring that you make informed decisions. Whether you are a first-time homebuyer or a seasoned investor, we provide personalized solutions that align with your needs, preferences, and budget.</p>",
+                      "src": ""
+                    }
+                  ]
+                },
+                {
+                  "type": "1_2",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "15px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "title": "Customer-Centric Approach",
+                      "content": "<p>We believe in building long-term relationships based on trust, integrity, and transparency. Our customer-first approach means that we listen to your needs and prioritize your interests throughout the buying, selling, or renting process. From negotiating the best deals to handling legal paperwork, we ensure a hassle-free and secure transaction. Our commitment to clear communication and ethical practices makes us a trusted partner in your real estate journey.</p>",
+                      "src": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

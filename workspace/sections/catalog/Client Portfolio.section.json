@@ -1,0 +1,81 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "{{design:color:parchment-200}}"
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "3_4,1_4",
+      "columns": [
+        {
+          "type": "3_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:ink}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                },
+                "boxShadow": {
+                  "desktop": {
+                    "value": {
+                      "style": "preset1"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "{{slot:testimonials[0].title}}",
+              "content": "<p><a href=\"tel:+000-000-0000\">+000-000-0000</a></p>",
+              "src": ""
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "{{slot:testimonials[0].title}}",
+              "content": "<p><a href=\"mailto:hello@example.com\">hello@example.com</a></p>",
+              "src": ""
+            },
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

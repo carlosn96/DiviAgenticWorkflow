@@ -1,0 +1,338 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "{{design:color:ink-soft}}"
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "2_3,1_3",
+      "columns": [
+        {
+          "type": "2_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "bottom": "0px"
+                      },
+                      "margin": {
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:gallery[0].title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:gallery[0].title}}",
+              "level": "h2"
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/button",
+              "module": "divi/button",
+              "button_text": "{{slot:gallery[0].btn_text}}",
+              "button_url": "{{slot:gallery[0].btn_url}}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "0px",
+                "bottom": "0px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "1_4,1_4,1_4,1_4",
+      "columns": [
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "right": "5px",
+                        "left": "0px"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "right": "5px",
+                        "left": "0px"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "right": "5px",
+                        "left": "0px"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "right": "5px",
+                        "left": "0px"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "100px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "1_4,1_4,1_4,1_4",
+      "columns": [
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:ink-soft}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "20px",
+                        "right": "20px",
+                        "bottom": "20px",
+                        "left": "20px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:gallery[0].title}}",
+              "content": "<p>International Projects</p>",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:ink-soft}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "20px",
+                        "right": "20px",
+                        "bottom": "20px",
+                        "left": "20px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:gallery[1].title}}",
+              "content": "Creative Designers",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:ink-soft}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "20px",
+                        "right": "20px",
+                        "bottom": "20px",
+                        "left": "20px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:gallery[2].title}}",
+              "content": "<p>Nationwide projects</p>",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:ink-soft}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "20px",
+                        "right": "20px",
+                        "bottom": "20px",
+                        "left": "20px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:gallery[3].title}}",
+              "content": "Awards Won",
+              "src": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

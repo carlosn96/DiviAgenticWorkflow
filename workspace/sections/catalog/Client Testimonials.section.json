@@ -1,0 +1,131 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "rgba(253,251,247,0.0)"
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_2,1_2",
+      "columns": [
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:sepia-100}}"
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "50px",
+                    "right": "50px",
+                    "bottom": "50px",
+                    "left": "50px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "40px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:testimonials[0].title}}",
+              "content": "<p>Make Appointment</p>",
+              "src": ""
+            },
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "border": {
+                  "desktop": {
+                    "value": {
+                      "radius": {
+                        "topLeft": "3px",
+                        "topRight": "3px",
+                        "bottomRight": "3px",
+                        "bottomLeft": "3px"
+                      }
+                    }
+                  }
+                },
+                "boxShadow": {
+                  "desktop": {
+                    "value": {
+                      "style": "preset2",
+                      "color": "rgba(26,24,20,0.1)"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/image",
+              "module": "divi/image",
+              "src": "{{slot:testimonials[0].image}}",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:testimonials[1].title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:testimonials[1].text}}"
+            },
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "gradient": {
+            "enabled": "on",
+            "type": "linear",
+            "direction": "180deg",
+            "overlaysImage": "on",
+            "stops": [
+              {
+                "color": "rgba(253,251,247,0.63)",
+                "position": "0%"
+              },
+              {
+                "color": "rgba(253,251,247,0.66)",
+                "position": "100%"
+              }
+            ]
+          },
+          "image": {
+            "url": "https://diviplus.io/wp-content/uploads/2020/08/wedding.jpg",
+            "size": "cover",
+            "position": "center center",
+            "repeat": "no-repeat",
+            "parallax": {
+              "enabled": "off"
+            }
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:eyebrow}}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:parchment-50}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "20px",
+                        "right": "20px",
+                        "bottom": "20px",
+                        "left": "20px"
+                      }
+                    }
+                  }
+                },
+                "boxShadow": {
+                  "desktop": {
+                    "value": {
+                      "style": "preset3"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:parchment-50}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "20px",
+                        "right": "20px",
+                        "bottom": "20px",
+                        "left": "20px"
+                      }
+                    }
+                  }
+                },
+                "boxShadow": {
+                  "desktop": {
+                    "value": {
+                      "style": "preset3"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:parchment-50}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "20px",
+                        "right": "20px",
+                        "bottom": "20px",
+                        "left": "20px"
+                      }
+                    }
+                  }
+                },
+                "boxShadow": {
+                  "desktop": {
+                    "value": {
+                      "style": "preset3"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

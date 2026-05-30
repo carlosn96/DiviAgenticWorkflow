@@ -1,0 +1,309 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_4,1_4,1_4,1_4",
+      "columns": [
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "rgba(26,24,20,0.66)",
+                  "image": {
+                    "url": "https://diviplus.io/wp-content/uploads/2024/09/dish-food-ingredient.webp?_t=1725944663",
+                    "size": "cover",
+                    "position": "center center",
+                    "repeat": "no-repeat",
+                    "parallax": {
+                      "enabled": "off"
+                    }
+                  }
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "20px",
+                    "right": "10px",
+                    "bottom": "20px",
+                    "left": "10px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/icon-list",
+              "module": "divi/icon-list",
+              "children": [
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "rgba(26,24,20,0.66)",
+                  "image": {
+                    "url": "https://diviplus.io/wp-content/uploads/2024/09/bowl-dish-food.webp?_t=1725944927",
+                    "size": "cover",
+                    "position": "center center",
+                    "repeat": "no-repeat",
+                    "parallax": {
+                      "enabled": "off"
+                    }
+                  }
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "20px",
+                    "right": "10px",
+                    "bottom": "20px",
+                    "left": "10px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/icon-list",
+              "module": "divi/icon-list",
+              "children": [
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "rgba(26,24,20,0.66)",
+                  "image": {
+                    "url": "https://diviplus.io/wp-content/uploads/2024/09/restaurant-dish.webp?_t=1725945053",
+                    "size": "cover",
+                    "position": "center center",
+                    "repeat": "no-repeat",
+                    "parallax": {
+                      "enabled": "off"
+                    }
+                  }
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "20px",
+                    "right": "10px",
+                    "bottom": "20px",
+                    "left": "10px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/icon-list",
+              "module": "divi/icon-list",
+              "children": [
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "rgba(26,24,20,0.66)",
+                  "image": {
+                    "url": "https://diviplus.io/wp-content/uploads/2024/09/asian-dish-meal.webp?_t=1725945282",
+                    "size": "cover",
+                    "position": "center center",
+                    "repeat": "no-repeat",
+                    "parallax": {
+                      "enabled": "off"
+                    }
+                  }
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "20px",
+                    "right": "10px",
+                    "bottom": "20px",
+                    "left": "10px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/icon-list",
+              "module": "divi/icon-list",
+              "children": [
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:premium}}"
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "50px",
+                    "right": "30px",
+                    "bottom": "50px",
+                    "left": "30px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/image",
+              "module": "divi/image",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "10px",
+                        "bottom": "10px"
+                      }
+                    }
+                  }
+                },
+                "layout": {
+                  "desktop": {
+                    "value": {
+                      "textAlign": "center"
+                    }
+                  }
+                }
+              },
+              "src": "https://diviplus.io/wp-content/uploads/2019/11/dpdm-logo-4.webp?_t=1732104525",
+              "alt": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

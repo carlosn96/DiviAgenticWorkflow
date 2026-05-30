@@ -1,0 +1,84 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "top": "0px",
+            "bottom": "0px"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "9px",
+                "bottom": "0px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "2_5,3_5",
+      "columns": [
+        {
+          "type": "2_5",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "rgba(26,24,20,0.56)",
+                  "image": {
+                    "url": "https://diviplus.io/wp-content/uploads/2019/11/people-meal-child-baking.webp?_t=1739960103",
+                    "size": "cover",
+                    "position": "center center",
+                    "repeat": "no-repeat",
+                    "parallax": {
+                      "enabled": "off"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "modules": []
+        },
+        {
+          "type": "3_5",
+          "module": "divi/column",
+          "decoration": {
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "20px",
+                    "right": "20px",
+                    "bottom": "20px",
+                    "left": "20px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

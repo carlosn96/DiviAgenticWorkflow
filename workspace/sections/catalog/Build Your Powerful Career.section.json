@@ -1,0 +1,247 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "gradient": {
+            "enabled": "on",
+            "type": "linear",
+            "direction": "180deg",
+            "overlaysImage": "on",
+            "stops": [
+              {
+                "color": "rgba(0,0,0,0.6)",
+                "position": "0%"
+              },
+              {
+                "color": "rgba(0,0,0,0)",
+                "position": "100%"
+              }
+            ]
+          },
+          "image": {
+            "url": "https://diviplus.io/wp-content/uploads/2019/11/interview-business-communication.webp",
+            "size": "cover",
+            "position": "top_center",
+            "repeat": "no-repeat",
+            "parallax": {
+              "enabled": "off"
+            }
+          }
+        }
+      }
+    },
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "top": "150px",
+            "bottom": "150px"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "bottom": "100px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "2_5,3_5",
+      "columns": [
+        {
+          "type": "2_5",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:gallery[0].text}}"
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:gallery[0].text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:parchment-50}}"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "3_5",
+          "module": "divi/column",
+          "decoration": {
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "left": "100px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "boxShadow": {
+                  "desktop": {
+                    "value": {
+                      "style": "preset1",
+                      "color": "rgba(253,251,247,0.52)"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "top": "20px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:gallery[1].text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:parchment-50}}"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "0px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "1_6,1_6,1_6,1_6,1_6,1_6",
+      "columns": [
+        {
+          "type": "1_6",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/image",
+              "module": "divi/image",
+              "src": "{{slot:gallery[2].image}}",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "1_6",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/image",
+              "module": "divi/image",
+              "src": "{{slot:gallery[3].image}}",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "1_6",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/image",
+              "module": "divi/image",
+              "src": "{{slot:gallery[4].image}}",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "1_6",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/image",
+              "module": "divi/image",
+              "src": "{{slot:gallery[5].image}}",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "1_6",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/image",
+              "module": "divi/image",
+              "src": "{{slot:gallery[6].image}}",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "1_6",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/image",
+              "module": "divi/image",
+              "src": "{{slot:gallery[7].image}}",
+              "alt": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

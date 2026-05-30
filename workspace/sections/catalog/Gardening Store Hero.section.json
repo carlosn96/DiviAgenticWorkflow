@@ -1,0 +1,95 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "gradient": {
+            "enabled": "on",
+            "type": "linear",
+            "direction": "180deg",
+            "overlaysImage": "on",
+            "stops": [
+              {
+                "color": "rgba(0,0,0,0.6)",
+                "position": "0%"
+              },
+              {
+                "color": "rgba(0,0,0,0)",
+                "position": "100%"
+              }
+            ]
+          },
+          "image": {
+            "url": "https://diviplus.io/wp-content/uploads/2019/11/plant-stem-leaf.webp",
+            "size": "cover",
+            "position": "center center",
+            "repeat": "no-repeat",
+            "parallax": {
+              "enabled": "off"
+            }
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "10%"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/image",
+              "module": "divi/image",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "left": "50px"
+                      }
+                    }
+                  }
+                },
+                "boxShadow": {
+                  "desktop": {
+                    "value": {
+                      "style": "preset4",
+                      "color": "{{design:color:parchment-50}}"
+                    }
+                  }
+                },
+                "layout": {
+                  "desktop": {
+                    "value": {
+                      "textAlign": "right"
+                    }
+                  }
+                }
+              },
+              "src": "https://diviplus.io/wp-content/uploads/2019/11/New-Project-01.webp",
+              "alt": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

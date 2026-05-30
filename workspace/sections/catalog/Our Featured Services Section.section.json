@@ -1,0 +1,665 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "0px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:text}}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "0px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "gradient": {
+                        "enabled": "on",
+                        "type": "linear",
+                        "direction": "180deg",
+                        "overlaysImage": "on",
+                        "stops": [
+                          {
+                            "color": "rgba(0,0,0,0.6)",
+                            "position": "0%"
+                          },
+                          {
+                            "color": "rgba(0,0,0,0)",
+                            "position": "100%"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "50px",
+                        "right": "20px",
+                        "bottom": "60px",
+                        "left": "20px"
+                      },
+                      "margin": {
+                        "bottom": "-25px"
+                      }
+                    }
+                  }
+                },
+                "border": {
+                  "desktop": {
+                    "value": {
+                      "radius": {
+                        "topLeft": "",
+                        "topRight": "",
+                        "bottomRight": "",
+                        "bottomLeft": ""
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[0].title}}",
+              "content": "<p>Your content goes here. Edit or remove this text inline or in the module Content settings. You can also style every aspect of this content in the module Design settings.</p>",
+              "src": ""
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:parchment-50}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "8px",
+                        "right": "4px",
+                        "bottom": "8px",
+                        "left": "4px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[0].text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:ink}}",
+                    "size": "30px"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "gradient": {
+                        "enabled": "on",
+                        "type": "linear",
+                        "direction": "180deg",
+                        "overlaysImage": "on",
+                        "stops": [
+                          {
+                            "color": "rgba(0,0,0,0.6)",
+                            "position": "0%"
+                          },
+                          {
+                            "color": "rgba(0,0,0,0)",
+                            "position": "100%"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "50px",
+                        "right": "20px",
+                        "bottom": "60px",
+                        "left": "20px"
+                      },
+                      "margin": {
+                        "bottom": "-25px"
+                      }
+                    }
+                  }
+                },
+                "border": {
+                  "desktop": {
+                    "value": {
+                      "radius": {
+                        "topLeft": "",
+                        "topRight": "",
+                        "bottomRight": "",
+                        "bottomLeft": ""
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[1].title}}",
+              "content": "<p>Your content goes here. Edit or remove this text inline or in the module Content settings. You can also style every aspect of this content in the module Design settings.</p>",
+              "src": ""
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:parchment-50}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "8px",
+                        "right": "4px",
+                        "bottom": "8px",
+                        "left": "4px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[1].text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:ink}}",
+                    "size": "30px"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "gradient": {
+                        "enabled": "on",
+                        "type": "linear",
+                        "direction": "180deg",
+                        "overlaysImage": "on",
+                        "stops": [
+                          {
+                            "color": "rgba(0,0,0,0.6)",
+                            "position": "0%"
+                          },
+                          {
+                            "color": "rgba(0,0,0,0)",
+                            "position": "100%"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "50px",
+                        "right": "20px",
+                        "bottom": "60px",
+                        "left": "20px"
+                      },
+                      "margin": {
+                        "bottom": "-25px"
+                      }
+                    }
+                  }
+                },
+                "border": {
+                  "desktop": {
+                    "value": {
+                      "radius": {
+                        "topLeft": "",
+                        "topRight": "",
+                        "bottomRight": "",
+                        "bottomLeft": ""
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[2].title}}",
+              "content": "<p>Your content goes here. Edit or remove this text inline or in the module Content settings. You can also style every aspect of this content in the module Design settings.</p>",
+              "src": ""
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:parchment-50}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "8px",
+                        "right": "4px",
+                        "bottom": "8px",
+                        "left": "4px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[2].text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:ink}}",
+                    "size": "30px"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "10px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "gradient": {
+                        "enabled": "on",
+                        "type": "linear",
+                        "direction": "180deg",
+                        "overlaysImage": "on",
+                        "stops": [
+                          {
+                            "color": "rgba(0,0,0,0.6)",
+                            "position": "0%"
+                          },
+                          {
+                            "color": "rgba(0,0,0,0)",
+                            "position": "100%"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "50px",
+                        "right": "20px",
+                        "bottom": "60px",
+                        "left": "20px"
+                      },
+                      "margin": {
+                        "bottom": "-25px"
+                      }
+                    }
+                  }
+                },
+                "border": {
+                  "desktop": {
+                    "value": {
+                      "radius": {
+                        "topLeft": "",
+                        "topRight": "",
+                        "bottomRight": "",
+                        "bottomLeft": ""
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[3].title}}",
+              "content": "<p>Your content goes here. Edit or remove this text inline or in the module Content settings. You can also style every aspect of this content in the module Design settings.</p>",
+              "src": ""
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:parchment-50}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "8px",
+                        "right": "4px",
+                        "bottom": "8px",
+                        "left": "4px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[3].text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:ink}}",
+                    "size": "30px"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "gradient": {
+                        "enabled": "on",
+                        "type": "linear",
+                        "direction": "180deg",
+                        "overlaysImage": "on",
+                        "stops": [
+                          {
+                            "color": "rgba(0,0,0,0.6)",
+                            "position": "0%"
+                          },
+                          {
+                            "color": "rgba(0,0,0,0)",
+                            "position": "100%"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "50px",
+                        "right": "20px",
+                        "bottom": "60px",
+                        "left": "20px"
+                      },
+                      "margin": {
+                        "bottom": "-25px"
+                      }
+                    }
+                  }
+                },
+                "border": {
+                  "desktop": {
+                    "value": {
+                      "radius": {
+                        "topLeft": "",
+                        "topRight": "",
+                        "bottomRight": "",
+                        "bottomLeft": ""
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[4].title}}",
+              "content": "<p>Your content goes here. Edit or remove this text inline or in the module Content settings. You can also style every aspect of this content in the module Design settings.</p>",
+              "src": ""
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:parchment-50}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "8px",
+                        "right": "4px",
+                        "bottom": "8px",
+                        "left": "4px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[4].text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:ink}}",
+                    "size": "30px"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "gradient": {
+                        "enabled": "on",
+                        "type": "linear",
+                        "direction": "180deg",
+                        "overlaysImage": "on",
+                        "stops": [
+                          {
+                            "color": "rgba(0,0,0,0.6)",
+                            "position": "0%"
+                          },
+                          {
+                            "color": "rgba(0,0,0,0)",
+                            "position": "100%"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "50px",
+                        "right": "20px",
+                        "bottom": "60px",
+                        "left": "20px"
+                      },
+                      "margin": {
+                        "bottom": "-25px"
+                      }
+                    }
+                  }
+                },
+                "border": {
+                  "desktop": {
+                    "value": {
+                      "radius": {
+                        "topLeft": "",
+                        "topRight": "",
+                        "bottomRight": "",
+                        "bottomLeft": ""
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[5].title}}",
+              "content": "<p>Your content goes here. Edit or remove this text inline or in the module Content settings. You can also style every aspect of this content in the module Design settings.</p>",
+              "src": ""
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:parchment-50}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "8px",
+                        "right": "4px",
+                        "bottom": "8px",
+                        "left": "4px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[5].text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:ink}}",
+                    "size": "30px"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

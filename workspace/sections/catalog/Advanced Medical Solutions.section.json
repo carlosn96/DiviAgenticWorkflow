@@ -1,0 +1,256 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "rgba(253,251,247,0.64)"
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_2,1_2",
+      "columns": [
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[0].text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:success}}"
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[0].title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[0].text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:parchment-700}}"
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/button",
+              "module": "divi/button",
+              "button_text": "{{slot:features[0].btn_text}}",
+              "button_url": "{{slot:features[0].btn_url}}"
+            }
+          ]
+        },
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "column_structure": "1_2,1_2",
+              "columns": [
+                {
+                  "type": "1_2",
+                  "module": "divi/column-inner",
+                  "decoration": {
+                    "background": {
+                      "desktop": {
+                        "value": {
+                          "color": "rgba(61,107,79,0.2)"
+                        }
+                      }
+                    },
+                    "spacing": {
+                      "desktop": {
+                        "value": {
+                          "padding": {
+                            "top": "15px",
+                            "right": "15px",
+                            "bottom": "15px",
+                            "left": "15px"
+                          }
+                        }
+                      }
+                    },
+                    "boxShadow": {
+                      "desktop": {
+                        "value": {
+                          "style": "preset1",
+                          "color": "rgba(26,24,20,0.08)"
+                        }
+                      }
+                    }
+                  },
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "title": "{{slot:features[0].title}}",
+                      "content": "<p>Stay on top of your health with regular checkups, screenings, and preventive care. Our expert doctors provide thorough consultations to ensure early detection and timely treatment.</p>",
+                      "src": ""
+                    }
+                  ]
+                },
+                {
+                  "type": "1_2",
+                  "module": "divi/column-inner",
+                  "decoration": {
+                    "background": {
+                      "desktop": {
+                        "value": {
+                          "color": "rgba(61,107,79,0.2)"
+                        }
+                      }
+                    },
+                    "spacing": {
+                      "desktop": {
+                        "value": {
+                          "padding": {
+                            "top": "15px",
+                            "right": "15px",
+                            "bottom": "15px",
+                            "left": "15px"
+                          }
+                        }
+                      }
+                    },
+                    "boxShadow": {
+                      "desktop": {
+                        "value": {
+                          "style": "preset1",
+                          "color": "rgba(26,24,20,0.08)"
+                        }
+                      }
+                    }
+                  },
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "title": "{{slot:features[1].title}}",
+                      "content": "<p>Get expert medical advice from qualified specialists in cardiology, dermatology, orthopedics, and more. We offer personalized treatment plans tailored to your specific health needs.</p>",
+                      "src": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "column_structure": "4_4",
+              "columns": [
+                {
+                  "type": "4_4",
+                  "module": "divi/column-inner",
+                  "decoration": {
+                    "background": {
+                      "desktop": {
+                        "value": {
+                          "color": "rgba(61,107,79,0.2)"
+                        }
+                      }
+                    },
+                    "spacing": {
+                      "desktop": {
+                        "value": {
+                          "padding": {
+                            "top": "15px",
+                            "right": "15px",
+                            "bottom": "15px",
+                            "left": "15px"
+                          }
+                        }
+                      }
+                    },
+                    "boxShadow": {
+                      "desktop": {
+                        "value": {
+                          "style": "preset1",
+                          "color": "rgba(26,24,20,0.08)"
+                        }
+                      }
+                    }
+                  },
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "title": "Urgent Care",
+                      "content": "<p>Immediate medical attention when you need it the most. Our emergency services ensure quick response, expert care, and life-saving treatments in critical situations.</p>",
+                      "src": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

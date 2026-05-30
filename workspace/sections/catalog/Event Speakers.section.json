@@ -1,0 +1,176 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "{{design:color:parchment-50}}"
+        }
+      }
+    },
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "bottom": "100px"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "2_3,1_3",
+      "columns": [
+        {
+          "type": "2_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "column_structure": "1_3,1_3,1_3",
+              "columns": [
+                {
+                  "type": "1_3",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "decoration": {
+                        "boxShadow": {
+                          "desktop": {
+                            "value": {
+                              "style": "preset1"
+                            }
+                          }
+                        }
+                      },
+                      "title": "{{slot:gallery[0].title}}",
+                      "content": "Director",
+                      "src": "https://diviplus.io/wp-content/uploads/2021/03/event-speakers1.jpg"
+                    }
+                  ]
+                },
+                {
+                  "type": "1_3",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "decoration": {
+                        "boxShadow": {
+                          "desktop": {
+                            "value": {
+                              "style": "preset1"
+                            }
+                          }
+                        }
+                      },
+                      "title": "{{slot:gallery[1].title}}",
+                      "content": "Chief Executive Officer",
+                      "src": "https://diviplus.io/wp-content/uploads/2021/03/event-speakers2.jpg"
+                    }
+                  ]
+                },
+                {
+                  "type": "1_3",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "decoration": {
+                        "boxShadow": {
+                          "desktop": {
+                            "value": {
+                              "style": "preset1"
+                            }
+                          }
+                        }
+                      },
+                      "title": "{{slot:gallery[2].title}}",
+                      "content": "Entrepreneur",
+                      "src": "https://diviplus.io/wp-content/uploads/2021/03/event-speakers3.jpg"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "20px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:gallery[1].text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:parchment-500}}",
+                    "size": "20px"
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:gallery[1].text}}"
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:gallery[1].text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "size": "16px"
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/button",
+              "module": "divi/button",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "button_text": "{{slot:gallery[1].btn_text}}",
+              "button_url": "{{slot:gallery[1].btn_url}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

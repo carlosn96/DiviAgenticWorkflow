@@ -1,0 +1,499 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "RGBA(255,255,255,0)",
+          "gradient": {
+            "enabled": "on",
+            "type": "linear",
+            "direction": "180deg",
+            "overlaysImage": "on",
+            "stops": [
+              {
+                "color": "rgba(0,0,0,0.6)",
+                "position": "0%"
+              },
+              {
+                "color": "rgba(0,0,0,0)",
+                "position": "100%"
+              }
+            ]
+          },
+          "image": {
+            "url": "https://diviplus.io/wp-content/uploads/2024/09/sea-water-ocean.webp?_t=1725603097",
+            "size": "cover",
+            "position": "center center",
+            "repeat": "no-repeat",
+            "parallax": {
+              "enabled": "on"
+            }
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:success}}"
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "30px",
+                    "right": "30px",
+                    "bottom": "30px",
+                    "left": "30px"
+                  }
+                }
+              }
+            },
+            "boxShadow": {
+              "desktop": {
+                "value": {
+                  "style": "preset4",
+                  "color": "rgba(158,146,130,0.81)"
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[0].title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/icon-list",
+              "module": "divi/icon-list",
+              "children": [
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "rgba(253,251,247,0.77)"
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "30px",
+                    "right": "30px",
+                    "bottom": "30px",
+                    "left": "30px"
+                  }
+                }
+              }
+            },
+            "boxShadow": {
+              "desktop": {
+                "value": {
+                  "style": "preset4",
+                  "color": "rgba(158,146,130,0.81)"
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[1].title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/icon-list",
+              "module": "divi/icon-list",
+              "children": [
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:success}}"
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "30px",
+                    "right": "30px",
+                    "bottom": "30px",
+                    "left": "30px"
+                  }
+                }
+              }
+            },
+            "boxShadow": {
+              "desktop": {
+                "value": {
+                  "style": "preset4",
+                  "color": "rgba(158,146,130,0.81)"
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[2].title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/icon-list",
+              "module": "divi/icon-list",
+              "children": [
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_2,1_2",
+      "columns": [
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "rgba(253,251,247,0.77)"
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "30px",
+                    "right": "30px",
+                    "bottom": "30px",
+                    "left": "30px"
+                  }
+                }
+              }
+            },
+            "boxShadow": {
+              "desktop": {
+                "value": {
+                  "style": "preset4",
+                  "color": "rgba(158,146,130,0.81)"
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[3].title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/icon-list",
+              "module": "divi/icon-list",
+              "children": [
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "rgba(253,251,247,0.77)"
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "30px",
+                    "right": "30px",
+                    "bottom": "30px",
+                    "left": "30px"
+                  }
+                }
+              }
+            },
+            "boxShadow": {
+              "desktop": {
+                "value": {
+                  "style": "preset4",
+                  "color": "rgba(158,146,130,0.81)"
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[4].title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/icon-list",
+              "module": "divi/icon-list",
+              "children": [
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:success}}"
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "30px",
+                    "right": "30px",
+                    "bottom": "30px",
+                    "left": "30px"
+                  }
+                }
+              }
+            },
+            "boxShadow": {
+              "desktop": {
+                "value": {
+                  "style": "preset4",
+                  "color": "rgba(158,146,130,0.81)"
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/icon-list",
+              "module": "divi/icon-list",
+              "children": [
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

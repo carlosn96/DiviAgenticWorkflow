@@ -1,0 +1,321 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "rgba(166,124,64,0.1)"
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_2,1_2",
+      "columns": [
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder"
+            }
+          ]
+        },
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "column_structure": "4_4",
+              "columns": [
+                {
+                  "type": "4_4",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/heading",
+                      "module": "divi/heading",
+                      "content": "{{slot:title}}",
+                      "level": "h2"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "column_structure": "1_2,1_2",
+              "columns": [
+                {
+                  "type": "1_2",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "decoration": {
+                        "background": {
+                          "desktop": {
+                            "value": {
+                              "color": "{{design:color:parchment-50}}"
+                            }
+                          }
+                        },
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "padding": {
+                                "top": "15px",
+                                "right": "20px",
+                                "bottom": "15px",
+                                "left": "20px"
+                              },
+                              "margin": {
+                                "bottom": "50px"
+                              }
+                            }
+                          }
+                        },
+                        "boxShadow": {
+                          "desktop": {
+                            "value": {
+                              "style": "preset1",
+                              "color": "rgba(26,24,20,0.08)"
+                            }
+                          }
+                        }
+                      },
+                      "title": "Monday",
+                      "content": "<p>10am – 6pm</p>",
+                      "src": ""
+                    },
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "decoration": {
+                        "background": {
+                          "desktop": {
+                            "value": {
+                              "color": "{{design:color:parchment-50}}"
+                            }
+                          }
+                        },
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "padding": {
+                                "top": "15px",
+                                "right": "20px",
+                                "bottom": "15px",
+                                "left": "20px"
+                              },
+                              "margin": {
+                                "bottom": "50px"
+                              }
+                            }
+                          }
+                        },
+                        "boxShadow": {
+                          "desktop": {
+                            "value": {
+                              "style": "preset1",
+                              "color": "rgba(26,24,20,0.08)"
+                            }
+                          }
+                        }
+                      },
+                      "title": "Wednesday",
+                      "content": "<p>10am – 6pm</p>",
+                      "src": ""
+                    },
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "decoration": {
+                        "background": {
+                          "desktop": {
+                            "value": {
+                              "color": "{{design:color:parchment-50}}"
+                            }
+                          }
+                        },
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "padding": {
+                                "top": "15px",
+                                "right": "20px",
+                                "bottom": "15px",
+                                "left": "20px"
+                              },
+                              "margin": {
+                                "bottom": "0px"
+                              }
+                            }
+                          }
+                        },
+                        "boxShadow": {
+                          "desktop": {
+                            "value": {
+                              "style": "preset1",
+                              "color": "rgba(26,24,20,0.08)"
+                            }
+                          }
+                        }
+                      },
+                      "title": "Friday",
+                      "content": "<p>10am – 6pm</p>",
+                      "src": ""
+                    }
+                  ]
+                },
+                {
+                  "type": "1_2",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "decoration": {
+                        "background": {
+                          "desktop": {
+                            "value": {
+                              "color": "{{design:color:parchment-50}}"
+                            }
+                          }
+                        },
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "padding": {
+                                "top": "15px",
+                                "right": "20px",
+                                "bottom": "15px",
+                                "left": "20px"
+                              },
+                              "margin": {
+                                "bottom": "50px"
+                              }
+                            }
+                          }
+                        },
+                        "boxShadow": {
+                          "desktop": {
+                            "value": {
+                              "style": "preset1",
+                              "color": "rgba(26,24,20,0.08)"
+                            }
+                          }
+                        }
+                      },
+                      "title": "Tuesday",
+                      "content": "<p>10am – 6pm</p>",
+                      "src": ""
+                    },
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "decoration": {
+                        "background": {
+                          "desktop": {
+                            "value": {
+                              "color": "{{design:color:parchment-50}}"
+                            }
+                          }
+                        },
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "padding": {
+                                "top": "15px",
+                                "right": "20px",
+                                "bottom": "15px",
+                                "left": "20px"
+                              },
+                              "margin": {
+                                "bottom": "50px"
+                              }
+                            }
+                          }
+                        },
+                        "boxShadow": {
+                          "desktop": {
+                            "value": {
+                              "style": "preset1",
+                              "color": "rgba(26,24,20,0.08)"
+                            }
+                          }
+                        }
+                      },
+                      "title": "Thursday",
+                      "content": "<p>10am – 6pm</p>",
+                      "src": ""
+                    },
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "decoration": {
+                        "background": {
+                          "desktop": {
+                            "value": {
+                              "color": "{{design:color:parchment-50}}"
+                            }
+                          }
+                        },
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "padding": {
+                                "top": "15px",
+                                "right": "20px",
+                                "bottom": "15px",
+                                "left": "20px"
+                              },
+                              "margin": {
+                                "bottom": "0px"
+                              }
+                            }
+                          }
+                        },
+                        "boxShadow": {
+                          "desktop": {
+                            "value": {
+                              "style": "preset1",
+                              "color": "rgba(26,24,20,0.08)"
+                            }
+                          }
+                        }
+                      },
+                      "title": "Sat - Sun",
+                      "content": "<p>Closed</p>",
+                      "src": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

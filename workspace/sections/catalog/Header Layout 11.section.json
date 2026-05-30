@@ -1,0 +1,103 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "{{design:color:ink-soft}}"
+        }
+      }
+    },
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "top": "0px",
+            "bottom": "0px"
+          }
+        }
+      }
+    },
+    "boxShadow": {
+      "desktop": {
+        "value": {
+          "style": "preset1",
+          "color": "rgba(26,24,20,0.12)"
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "background": {
+          "desktop": {
+            "value": {
+              "gradient": {
+                "enabled": "on",
+                "type": "linear",
+                "direction": "90deg",
+                "overlaysImage": "on",
+                "stops": [
+                  {
+                    "color": "rgba(0,0,0,0.6)",
+                    "position": "0%"
+                  },
+                  {
+                    "color": "rgba(0,0,0,0)",
+                    "position": "100%"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "0px",
+                "right": "8px",
+                "bottom": "0px",
+                "left": "8px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "1_4,3_4",
+      "columns": [
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": []
+        },
+        {
+          "type": "3_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "top": "0px",
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

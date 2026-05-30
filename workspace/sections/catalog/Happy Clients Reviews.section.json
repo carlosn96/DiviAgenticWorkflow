@@ -1,0 +1,73 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "gradient": {
+            "enabled": "on",
+            "type": "linear",
+            "direction": "90deg",
+            "overlaysImage": "on",
+            "stops": [
+              {
+                "color": "{{design:color:parchment-50}}",
+                "position": "0%"
+              },
+              {
+                "color": "{{design:color:sepia-100}}",
+                "position": "100%"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_2,1_2",
+      "columns": [
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder"
+            }
+          ]
+        },
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:testimonials[0].text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "rgba(61,107,79,0.08)",
+                    "size": "8vw"
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "content": "{{slot:testimonials[0].title}}",
+              "level": "h2"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,247 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "{{design:color:ink}}",
+          "gradient": {
+            "enabled": "on",
+            "type": "linear",
+            "direction": "180deg",
+            "overlaysImage": "on",
+            "stops": [
+              {
+                "color": "{{design:color:ink-soft}}",
+                "position": "0%"
+              },
+              {
+                "color": "{{design:color:ink}}",
+                "position": "100%"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:eyebrow}}"
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:accent}}",
+                    "size": "30px"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "border": {
+          "desktop": {
+            "value": {
+              "radius": {
+                "topLeft": "15px",
+                "topRight": "15px",
+                "bottomRight": "5px",
+                "bottomLeft": "5px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "1_3,2_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "rgba(0,0,0,0)",
+                  "gradient": {
+                    "enabled": "on",
+                    "type": "linear",
+                    "direction": "180deg",
+                    "overlaysImage": "on",
+                    "stops": [
+                      {
+                        "color": "{{design:color:ink}}",
+                        "position": "0%"
+                      },
+                      {
+                        "color": "{{design:color:ink}}",
+                        "position": "100%"
+                      }
+                    ]
+                  },
+                  "image": {
+                    "url": "https://diviplus.io/wp-content/uploads/2020/09/laptop-notebook-technology-camera-headphone-pen-122-pxhere.com-1.jpg",
+                    "size": "cover",
+                    "position": "center center",
+                    "repeat": "no-repeat",
+                    "parallax": {
+                      "enabled": "off"
+                    }
+                  }
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "4%",
+                    "right": "4%",
+                    "bottom": "4%",
+                    "left": "4%"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "30px",
+                        "bottom": "30px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "hello@example.com",
+              "content": "",
+              "src": ""
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "30px",
+                        "bottom": "30px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "0123456789",
+              "content": "",
+              "src": ""
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "30px",
+                        "bottom": "30px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "Address",
+              "content": "890 Lorem Ipsum Street #12\r\nAlabama, United States",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "2_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:parchment-50}}"
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:parchment-50}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "40px",
+                        "right": "40px",
+                        "bottom": "40px",
+                        "left": "40px"
+                      },
+                      "margin": {
+                        "bottom": "1px"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

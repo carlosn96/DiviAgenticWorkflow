@@ -1,0 +1,123 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "background": {
+          "desktop": {
+            "value": {
+              "gradient": {
+                "enabled": "on",
+                "type": "linear",
+                "direction": "90deg",
+                "overlaysImage": "on",
+                "stops": [
+                  {
+                    "color": "rgba(0,0,0,0.6)",
+                    "position": "0%"
+                  },
+                  {
+                    "color": "rgba(0,0,0,0)",
+                    "position": "100%"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "40px",
+                "bottom": "40px",
+                "left": "40px"
+              }
+            }
+          }
+        },
+        "border": {
+          "desktop": {
+            "value": {
+              "radius": {
+                "topLeft": "20px",
+                "topRight": "",
+                "bottomRight": "",
+                "bottomLeft": "20px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "3_5,2_5",
+      "columns": [
+        {
+          "type": "3_5",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "content": "{{slot:team[0].title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:team[0].text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:ink}}"
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "{{slot:team[0].title}}",
+              "content": "<p>Board-certified dermatologists with years of expertise.</p>",
+              "src": ""
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "{{slot:team[0].title}}",
+              "content": "<p>Cutting-edge technology for effective skin solutions.</p>",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "2_5",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder",
+              "decoration": {
+                "border": {
+                  "desktop": {
+                    "value": {
+                      "radius": {
+                        "topLeft": "",
+                        "topRight": "",
+                        "bottomRight": "230px",
+                        "bottomLeft": "230px"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

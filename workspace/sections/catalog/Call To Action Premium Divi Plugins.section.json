@@ -1,0 +1,104 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "{{design:color:parchment-50}}",
+          "gradient": {
+            "enabled": "on",
+            "type": "linear",
+            "direction": "360deg",
+            "overlaysImage": "on",
+            "stops": [
+              {
+                "color": "{{design:color:premium}}",
+                "position": "0%"
+              },
+              {
+                "color": "{{design:color:error}}",
+                "position": "100%"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "top": "10%",
+            "bottom": "10%"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_2,1_2",
+      "columns": [
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "bottom": "28px"
+                      },
+                      "margin": {
+                        "top": "30px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:text}}"
+            }
+          ]
+        },
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/image",
+              "module": "divi/image",
+              "src": "https://diviplus.io/wp-content/uploads/2019/11/freelancer-text-animator-bg.png",
+              "alt": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/button",
+              "module": "divi/button",
+              "button_text": "{{slot:btn_primary_text}}",
+              "button_url": "{{slot:btn_primary_url}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "top": "0px"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "0px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "10px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:title}}",
+              "level": "h2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_4,1_4,1_4,1_4",
+      "columns": [
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "{{slot:features[0].title}}",
+              "content": "<ol>\n<li>Startup Support</li>\n<li>Financial Health Check</li>\n<li>Tax Strategy Development</li>\n<li>Consulting Services</li>\n</ol>",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "{{slot:features[1].title}}",
+              "content": "<ol>\n<li>Startup Support</li>\n<li>Financial Health Check</li>\n<li>Tax Strategy Development</li>\n<li>Consulting Services</li>\n</ol>",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "{{slot:features[2].title}}",
+              "content": "<ol>\n<li>Startup Support</li>\n<li>Financial Health Check</li>\n<li>Tax Strategy Development</li>\n<li>Consulting Services</li>\n</ol>",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "{{slot:features[3].title}}",
+              "content": "<ol>\n<li>Startup Support</li>\n<li>Financial Health Check</li>\n<li>Tax Strategy Development</li>\n<li>Consulting Services</li>\n</ol>",
+              "src": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

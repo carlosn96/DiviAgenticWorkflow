@@ -1,0 +1,122 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_2,1_2",
+      "columns": [
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "content": "{{slot:features[0].title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/image",
+              "module": "divi/image",
+              "src": "{{slot:features[0].image}}",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "column_structure": "1_2,1_2",
+              "columns": [
+                {
+                  "type": "1_2",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "title": "{{slot:features[0].title}}",
+                      "content": "<p>Your content goes here. Edit or remove this text inline or in the module Content settings. You can also style every aspect of this content</p>",
+                      "src": ""
+                    }
+                  ]
+                },
+                {
+                  "type": "1_2",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "title": "{{slot:features[1].title}}",
+                      "content": "<p>Your content goes here. Edit or remove this text inline or in the module Content settings. You can also style every aspect of this content</p>",
+                      "src": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "column_structure": "1_2,1_2",
+              "columns": [
+                {
+                  "type": "1_2",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "title": "{{slot:features[2].title}}",
+                      "content": "<p>Your content goes here. Edit or remove this text inline or in the module Content settings. You can also style every aspect of this content</p>",
+                      "src": ""
+                    }
+                  ]
+                },
+                {
+                  "type": "1_2",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "title": "{{slot:features[3].title}}",
+                      "content": "<p>Your content goes here. Edit or remove this text inline or in the module Content settings. You can also style every aspect of this content</p>",
+                      "src": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "column_structure": "4_4",
+              "columns": [
+                {
+                  "type": "4_4",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/button",
+                      "module": "divi/button",
+                      "button_text": "{{slot:btn_primary_text}}",
+                      "button_url": "{{slot:btn_primary_url}}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

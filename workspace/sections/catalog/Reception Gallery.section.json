@@ -1,0 +1,52 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "2_3",
+      "columns": [
+        {
+          "type": "2_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "column_structure": "4_4",
+              "columns": [
+                {
+                  "type": "4_4",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/placeholder",
+                      "module": "divi/placeholder",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "padding": {
+                                "top": "0px",
+                                "bottom": "0px"
+                              },
+                              "margin": {
+                                "top": "0px",
+                                "bottom": "0px"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

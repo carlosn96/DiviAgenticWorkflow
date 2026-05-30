@@ -1,0 +1,470 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "{{design:color:ink}}"
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_3,2_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "margin": {
+                        "bottom": "8px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:features[0].text}}"
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:features[0].text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:parchment-50}}",
+                    "size": "18px"
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/button",
+              "module": "divi/button",
+              "button_text": "{{slot:features[0].btn_text}}",
+              "button_url": "{{slot:features[0].btn_url}}"
+            }
+          ]
+        },
+        {
+          "type": "2_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "column_structure": "1_2,1_2",
+              "columns": [
+                {
+                  "type": "1_2",
+                  "module": "divi/column-inner",
+                  "decoration": {
+                    "background": {
+                      "desktop": {
+                        "value": {
+                          "gradient": {
+                            "enabled": "on",
+                            "type": "linear",
+                            "direction": "180deg",
+                            "overlaysImage": "on",
+                            "stops": [
+                              {
+                                "color": "rgba(0,0,0,0.6)",
+                                "position": "0%"
+                              },
+                              {
+                                "color": "rgba(0,0,0,0)",
+                                "position": "100%"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "spacing": {
+                      "desktop": {
+                        "value": {
+                          "padding": {
+                            "top": "60px",
+                            "right": "15px",
+                            "bottom": "60px",
+                            "left": "15px"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "modules": [
+                    {
+                      "type": "divi/heading",
+                      "module": "divi/heading",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "12px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:features[0].title}}",
+                      "level": "h2"
+                    },
+                    {
+                      "type": "divi/text",
+                      "module": "divi/text",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "15px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:features[0].text}}",
+                      "bodyFont": {
+                        "desktop": {
+                          "value": {
+                            "fontFamily": "{{design:font:body}}",
+                            "color": "{{design:color:parchment-50}}",
+                            "size": "20px"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "divi/text",
+                      "module": "divi/text",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "15px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:features[0].text}}",
+                      "bodyFont": {
+                        "desktop": {
+                          "value": {
+                            "fontFamily": "{{design:font:body}}",
+                            "color": "{{design:color:parchment-50}}",
+                            "size": "20px"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "divi/text",
+                      "module": "divi/text",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "15px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:features[0].text}}",
+                      "bodyFont": {
+                        "desktop": {
+                          "value": {
+                            "fontFamily": "{{design:font:body}}",
+                            "color": "{{design:color:parchment-50}}",
+                            "size": "20px"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "divi/text",
+                      "module": "divi/text",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "15px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:features[0].text}}",
+                      "bodyFont": {
+                        "desktop": {
+                          "value": {
+                            "fontFamily": "{{design:font:body}}",
+                            "color": "{{design:color:parchment-50}}",
+                            "size": "20px"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "divi/text",
+                      "module": "divi/text",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "15px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:features[0].text}}",
+                      "bodyFont": {
+                        "desktop": {
+                          "value": {
+                            "fontFamily": "{{design:font:body}}",
+                            "color": "{{design:color:parchment-50}}",
+                            "size": "20px"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "1_2",
+                  "module": "divi/column-inner",
+                  "decoration": {
+                    "background": {
+                      "desktop": {
+                        "value": {
+                          "gradient": {
+                            "enabled": "on",
+                            "type": "linear",
+                            "direction": "180deg",
+                            "overlaysImage": "on",
+                            "stops": [
+                              {
+                                "color": "rgba(0,0,0,0.6)",
+                                "position": "0%"
+                              },
+                              {
+                                "color": "rgba(0,0,0,0)",
+                                "position": "100%"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "spacing": {
+                      "desktop": {
+                        "value": {
+                          "padding": {
+                            "top": "60px",
+                            "right": "15px",
+                            "bottom": "60px",
+                            "left": "15px"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "modules": [
+                    {
+                      "type": "divi/heading",
+                      "module": "divi/heading",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "12px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:features[1].title}}",
+                      "level": "h2"
+                    },
+                    {
+                      "type": "divi/text",
+                      "module": "divi/text",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "15px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:features[1].text}}",
+                      "bodyFont": {
+                        "desktop": {
+                          "value": {
+                            "fontFamily": "{{design:font:body}}",
+                            "color": "{{design:color:parchment-50}}",
+                            "size": "20px"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "divi/text",
+                      "module": "divi/text",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "15px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:features[1].text}}",
+                      "bodyFont": {
+                        "desktop": {
+                          "value": {
+                            "fontFamily": "{{design:font:body}}",
+                            "color": "{{design:color:parchment-50}}",
+                            "size": "20px"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "divi/text",
+                      "module": "divi/text",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "15px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:features[1].text}}",
+                      "bodyFont": {
+                        "desktop": {
+                          "value": {
+                            "fontFamily": "{{design:font:body}}",
+                            "color": "{{design:color:parchment-50}}",
+                            "size": "20px"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "divi/text",
+                      "module": "divi/text",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "15px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:features[1].text}}",
+                      "bodyFont": {
+                        "desktop": {
+                          "value": {
+                            "fontFamily": "{{design:font:body}}",
+                            "color": "{{design:color:parchment-50}}",
+                            "size": "20px"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "divi/text",
+                      "module": "divi/text",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "15px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:features[1].text}}",
+                      "bodyFont": {
+                        "desktop": {
+                          "value": {
+                            "fontFamily": "{{design:font:body}}",
+                            "color": "{{design:color:parchment-50}}",
+                            "size": "20px"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "divi/text",
+                      "module": "divi/text",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "15px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:features[1].text}}",
+                      "bodyFont": {
+                        "desktop": {
+                          "value": {
+                            "fontFamily": "{{design:font:body}}",
+                            "color": "{{design:color:parchment-50}}",
+                            "size": "20px"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

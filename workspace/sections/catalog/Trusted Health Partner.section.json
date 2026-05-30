@@ -1,0 +1,241 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "rgba(158,146,130,0.06)"
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_2,1_2",
+      "columns": [
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder"
+            }
+          ]
+        },
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "column_structure": "4_4",
+              "columns": [
+                {
+                  "type": "4_4",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/text",
+                      "module": "divi/text",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "0px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:eyebrow}}"
+                    },
+                    {
+                      "type": "divi/heading",
+                      "module": "divi/heading",
+                      "content": "{{slot:title}}",
+                      "level": "h2"
+                    },
+                    {
+                      "type": "divi/text",
+                      "module": "divi/text",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "top": "-17px",
+                                "bottom": "11px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:text}}"
+                    },
+                    {
+                      "type": "divi/text",
+                      "module": "divi/text",
+                      "content": "{{slot:text}}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "column_structure": "4_4",
+              "columns": [
+                {
+                  "type": "4_4",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "5px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "title": "Trusted Health Partner",
+                      "content": "",
+                      "src": ""
+                    },
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "5px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "title": "Quality Pharmaceuticals",
+                      "content": "",
+                      "src": ""
+                    },
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "5px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "title": "Caring Pharmacy Team",
+                      "content": "",
+                      "src": ""
+                    },
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "title": "Safe and Reliable",
+                      "content": "",
+                      "src": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "21px",
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "column_structure": "4_4",
+              "columns": [
+                {
+                  "type": "4_4",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/button",
+                      "module": "divi/button",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "0px"
+                              }
+                            }
+                          }
+                        },
+                        "boxShadow": {
+                          "desktop": {
+                            "value": {
+                              "style": "preset1",
+                              "color": "rgba(26,24,20,0.1)"
+                            }
+                          }
+                        }
+                      },
+                      "button_text": "{{slot:btn_primary_text}}",
+                      "button_url": "{{slot:btn_primary_url}}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

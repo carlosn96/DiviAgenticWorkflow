@@ -1,0 +1,252 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_2,1_2",
+      "columns": [
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "column_structure": "4_4",
+              "columns": [
+                {
+                  "type": "4_4",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/heading",
+                      "module": "divi/heading",
+                      "content": "{{slot:title}}",
+                      "level": "h2"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "column_structure": "1_2,1_2",
+              "columns": [
+                {
+                  "type": "1_2",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "decoration": {
+                        "background": {
+                          "desktop": {
+                            "value": {
+                              "color": "{{design:color:parchment-50}}"
+                            }
+                          }
+                        },
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "padding": {
+                                "top": "20px",
+                                "right": "15px",
+                                "bottom": "20px",
+                                "left": "15px"
+                              }
+                            }
+                          }
+                        },
+                        "boxShadow": {
+                          "desktop": {
+                            "value": {
+                              "style": "preset1",
+                              "color": "rgba(26,24,20,0.08)"
+                            }
+                          }
+                        }
+                      },
+                      "title": "{{slot:features[0].title}}",
+                      "content": "",
+                      "src": "https://diviplus.io/wp-content/uploads/2025/06/app-developer-icon-small-04-1.webp?_t=1749719703"
+                    }
+                  ]
+                },
+                {
+                  "type": "1_2",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "decoration": {
+                        "background": {
+                          "desktop": {
+                            "value": {
+                              "color": "{{design:color:parchment-50}}"
+                            }
+                          }
+                        },
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "padding": {
+                                "top": "20px",
+                                "right": "15px",
+                                "bottom": "20px",
+                                "left": "15px"
+                              }
+                            }
+                          }
+                        },
+                        "boxShadow": {
+                          "desktop": {
+                            "value": {
+                              "style": "preset1",
+                              "color": "rgba(26,24,20,0.08)"
+                            }
+                          }
+                        }
+                      },
+                      "title": "{{slot:features[1].title}}",
+                      "content": "",
+                      "src": "https://diviplus.io/wp-content/uploads/2025/06/app-developer-icon-small-01-1.webp?_t=1749720176"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "column_structure": "1_2,1_2",
+              "columns": [
+                {
+                  "type": "1_2",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "decoration": {
+                        "background": {
+                          "desktop": {
+                            "value": {
+                              "color": "{{design:color:parchment-50}}"
+                            }
+                          }
+                        },
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "padding": {
+                                "top": "20px",
+                                "right": "15px",
+                                "bottom": "20px",
+                                "left": "15px"
+                              }
+                            }
+                          }
+                        },
+                        "boxShadow": {
+                          "desktop": {
+                            "value": {
+                              "style": "preset1",
+                              "color": "rgba(26,24,20,0.08)"
+                            }
+                          }
+                        }
+                      },
+                      "title": "{{slot:features[2].title}}",
+                      "content": "",
+                      "src": "https://diviplus.io/wp-content/uploads/2025/06/app-developer-icon-small-02-1.webp?_t=1749720663"
+                    }
+                  ]
+                },
+                {
+                  "type": "1_2",
+                  "module": "divi/column-inner",
+                  "modules": [
+                    {
+                      "type": "divi/blurb",
+                      "module": "divi/blurb",
+                      "decoration": {
+                        "background": {
+                          "desktop": {
+                            "value": {
+                              "color": "{{design:color:parchment-50}}"
+                            }
+                          }
+                        },
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "padding": {
+                                "top": "20px",
+                                "right": "15px",
+                                "bottom": "20px",
+                                "left": "15px"
+                              }
+                            }
+                          }
+                        },
+                        "boxShadow": {
+                          "desktop": {
+                            "value": {
+                              "style": "preset1",
+                              "color": "rgba(26,24,20,0.08)"
+                            }
+                          }
+                        }
+                      },
+                      "title": "{{slot:features[3].title}}",
+                      "content": "",
+                      "src": "https://diviplus.io/wp-content/uploads/2025/06/app-developer-icon-small-03-1.webp?_t=1749720717"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

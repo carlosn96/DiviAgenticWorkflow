@@ -1,0 +1,298 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_2",
+      "columns": [
+        {
+          "type": "1_2",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:error}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "10px",
+                        "bottom": "10px"
+                      },
+                      "margin": {
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:eyebrow}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:parchment-50}}",
+                    "size": "30px"
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "Custom Strategy",
+              "content": "<p><span>We’ll develop a personalized coaching strategy tailored to your business needs.</span></p>",
+              "src": ""
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "20px",
+                        "right": "30px",
+                        "bottom": "20px",
+                        "left": "30px"
+                      },
+                      "margin": {
+                        "bottom": "40px"
+                      }
+                    }
+                  }
+                },
+                "boxShadow": {
+                  "desktop": {
+                    "value": {
+                      "style": "preset3",
+                      "color": "rgba(26,24,20,0.16)"
+                    }
+                  }
+                }
+              },
+              "title": "Consultation",
+              "content": "<p><span>Schedule a consultation to discuss your goals and challenges with our experts.</span></p>",
+              "src": ""
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:error}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "10px",
+                        "bottom": "10px"
+                      },
+                      "margin": {
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:eyebrow}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:parchment-50}}",
+                    "size": "30px"
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "20px",
+                        "right": "30px",
+                        "bottom": "20px",
+                        "left": "30px"
+                      },
+                      "margin": {
+                        "bottom": "40px"
+                      }
+                    }
+                  }
+                },
+                "boxShadow": {
+                  "desktop": {
+                    "value": {
+                      "style": "preset3",
+                      "color": "rgba(26,24,20,0.16)"
+                    }
+                  }
+                }
+              },
+              "title": "Custom Strategy",
+              "content": "<p><span>We’ll develop a personalized coaching strategy tailored to your business needs.</span></p>",
+              "src": ""
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:error}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "10px",
+                        "bottom": "10px"
+                      },
+                      "margin": {
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:eyebrow}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:parchment-50}}",
+                    "size": "30px"
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "20px",
+                        "right": "30px",
+                        "bottom": "20px",
+                        "left": "30px"
+                      },
+                      "margin": {
+                        "bottom": "40px"
+                      }
+                    }
+                  }
+                },
+                "boxShadow": {
+                  "desktop": {
+                    "value": {
+                      "style": "preset3",
+                      "color": "rgba(26,24,20,0.16)"
+                    }
+                  }
+                }
+              },
+              "title": "Implementation",
+              "content": "<p><span>Put the strategy into action with guided support and resources from our team.</span></p>",
+              "src": ""
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "color": "{{design:color:error}}"
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "10px",
+                        "bottom": "10px"
+                      },
+                      "margin": {
+                        "bottom": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:eyebrow}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:parchment-50}}",
+                    "size": "30px"
+                  }
+                }
+              }
+            },
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "20px",
+                        "right": "30px",
+                        "bottom": "20px",
+                        "left": "30px"
+                      },
+                      "margin": {
+                        "bottom": "40px"
+                      }
+                    }
+                  }
+                },
+                "boxShadow": {
+                  "desktop": {
+                    "value": {
+                      "style": "preset3",
+                      "color": "rgba(26,24,20,0.16)"
+                    }
+                  }
+                }
+              },
+              "title": "Evaluation",
+              "content": "<p><span>Track your progress and make adjustments as needed to ensure success.</span></p>",
+              "src": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

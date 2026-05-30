@@ -1,0 +1,145 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "{{design:color:ink-soft}}"
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:text}}"
+            },
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:text}}",
+              "bodyFont": {
+                "desktop": {
+                  "value": {
+                    "fontFamily": "{{design:font:body}}",
+                    "color": "{{design:color:parchment-50}}"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/icon-list",
+              "module": "divi/icon-list",
+              "children": [
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                },
+                {
+                  "type": "divi/icon-list-item",
+                  "module": "divi/icon-list-item",
+                  "content": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "0px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/text",
+              "module": "divi/text",
+              "content": "{{slot:text}}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "bottom": "60px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:parchment-100}}"
+                }
+              }
+            },
+            "border": {
+              "desktop": {
+                "value": {
+                  "radius": {
+                    "topLeft": "15px",
+                    "topRight": "15px",
+                    "bottomRight": "15px",
+                    "bottomLeft": "15px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "layout": {
+                  "desktop": {
+                    "value": {
+                      "textAlign": "center"
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:gallery[0].title}}",
+              "content": "Immerse your child in the world of letters and words through engaging activities that promote early literacy skills such as phonics, storytelling, and basic reading",
+              "src": "https://themes.diviplus.io/kindergarten/wp-content/uploads/2023/11/dpk-home-about-image2.webp"
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:parchment-100}}"
+                }
+              }
+            },
+            "border": {
+              "desktop": {
+                "value": {
+                  "radius": {
+                    "topLeft": "15px",
+                    "topRight": "15px",
+                    "bottomRight": "15px",
+                    "bottomLeft": "15px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "layout": {
+                  "desktop": {
+                    "value": {
+                      "textAlign": "center"
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:gallery[1].title}}",
+              "content": "Create a supportive environment where all children can play and learn together, fostering inclusivity and understanding of diversity",
+              "src": "https://themes.diviplus.io/kindergarten/wp-content/uploads/2023/11/dpk-home-about-image1.webp"
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:parchment-100}}"
+                }
+              }
+            },
+            "border": {
+              "desktop": {
+                "value": {
+                  "radius": {
+                    "topLeft": "15px",
+                    "topRight": "15px",
+                    "bottomRight": "15px",
+                    "bottomLeft": "15px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "layout": {
+                  "desktop": {
+                    "value": {
+                      "textAlign": "center"
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:gallery[2].title}}",
+              "content": "Unleash your child's creativity with a program that includes drawing, painting, and crafting, fostering artistic expression and fine motor skills",
+              "src": "https://themes.diviplus.io/kindergarten/wp-content/uploads/2023/11/dpk-home-about-image.webp"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

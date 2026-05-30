@@ -1,0 +1,193 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "gradient": {
+                    "enabled": "on",
+                    "type": "linear",
+                    "direction": "180deg",
+                    "overlaysImage": "on",
+                    "stops": [
+                      {
+                        "color": "rgba(0,0,0,0.6)",
+                        "position": "0%"
+                      },
+                      {
+                        "color": "rgba(0,0,0,0)",
+                        "position": "100%"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "20px",
+                    "right": "15px",
+                    "bottom": "20px",
+                    "left": "15px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "gradient": {
+                        "enabled": "on",
+                        "type": "linear",
+                        "direction": "180deg",
+                        "overlaysImage": "on",
+                        "stops": [
+                          {
+                            "color": "rgba(0,0,0,0.6)",
+                            "position": "0%"
+                          },
+                          {
+                            "color": "rgba(0,0,0,0)",
+                            "position": "100%"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "20px",
+                        "right": "0px",
+                        "bottom": "20px",
+                        "left": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[0].title}}",
+              "content": "<p>Every business has unique needs, and off-the-shelf software doesn’t always provide the perfect fit. Our custom software development services ensure that you get a tailor-made solution designed specifically for your business processes. We work closely with you to understand your requirements and build software that enhances productivity, automates tasks, and streamlines operations. Our team utilizes agile methodologies and the latest technologies to develop robust, scalable, and high-performing software that evolves with your business. Whether you need a web application, mobile app, or enterprise software, we deliver seamless, user-friendly, and efficient solutions.</p>",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "gradient": {
+                    "enabled": "on",
+                    "type": "linear",
+                    "direction": "180deg",
+                    "overlaysImage": "on",
+                    "stops": [
+                      {
+                        "color": "rgba(0,0,0,0.6)",
+                        "position": "0%"
+                      },
+                      {
+                        "color": "rgba(0,0,0,0)",
+                        "position": "100%"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "20px",
+                    "right": "15px",
+                    "bottom": "20px",
+                    "left": "15px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "background": {
+                  "desktop": {
+                    "value": {
+                      "gradient": {
+                        "enabled": "on",
+                        "type": "linear",
+                        "direction": "180deg",
+                        "overlaysImage": "on",
+                        "stops": [
+                          {
+                            "color": "rgba(0,0,0,0.6)",
+                            "position": "0%"
+                          },
+                          {
+                            "color": "rgba(0,0,0,0)",
+                            "position": "100%"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "20px",
+                        "right": "0px",
+                        "bottom": "20px",
+                        "left": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[1].title}}",
+              "content": "<p>Cloud technology is transforming how businesses operate, offering flexibility, scalability, and cost efficiency. We provide cloud-based solutions, including migration, integration, and management, ensuring your business data is secure, accessible, and well-organized. Our cloud expertise covers AWS, Azure, and Google Cloud, enabling businesses to leverage powerful computing resources, data storage, and collaborative tools. By integrating cloud solutions into your business, you can enhance performance, reduce infrastructure costs, and improve accessibility from anywhere in the world. We ensure smooth transitions and minimal downtime, allowing you to focus on growth while we manage your cloud infrastructure.</p>",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/placeholder",
+              "module": "divi/placeholder"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

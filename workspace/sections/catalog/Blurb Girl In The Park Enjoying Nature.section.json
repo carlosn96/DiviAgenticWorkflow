@@ -1,0 +1,154 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "{{design:color:parchment-50}}"
+        }
+      }
+    },
+    "spacing": {
+      "desktop": {
+        "value": {
+          "padding": {
+            "top": "0px"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "border": {
+                  "desktop": {
+                    "value": {
+                      "radius": {
+                        "topLeft": "20px",
+                        "topRight": "20px",
+                        "bottomRight": "20px",
+                        "bottomLeft": "20px"
+                      }
+                    }
+                  }
+                },
+                "boxShadow": {
+                  "desktop": {
+                    "value": {
+                      "style": "preset3"
+                    }
+                  }
+                },
+                "layout": {
+                  "desktop": {
+                    "value": {
+                      "textAlign": "center"
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:gallery[0].title}}",
+              "content": "Nullam sit amet elit vitae lacus maximus egestas a a nunc. Praesent sollicitudin gravida commodo. Integer vulputate.",
+              "src": "https://diviplus.io/wp-content/uploads/2020/10/nature-forest-outdoor-person-people-girl-1198262.jpg"
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "border": {
+                  "desktop": {
+                    "value": {
+                      "radius": {
+                        "topLeft": "20px",
+                        "topRight": "20px",
+                        "bottomRight": "20px",
+                        "bottomLeft": "20px"
+                      }
+                    }
+                  }
+                },
+                "boxShadow": {
+                  "desktop": {
+                    "value": {
+                      "style": "preset3"
+                    }
+                  }
+                },
+                "layout": {
+                  "desktop": {
+                    "value": {
+                      "textAlign": "center"
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:gallery[1].title}}",
+              "content": "Nullam sit amet elit vitae lacus maximus egestas a a nunc. Praesent sollicitudin gravida commodo. Integer vulputate.",
+              "src": "https://diviplus.io/wp-content/uploads/2020/10/nature-forest-person-girl-woman-hair-1196518.jpg"
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "border": {
+                  "desktop": {
+                    "value": {
+                      "radius": {
+                        "topLeft": "20px",
+                        "topRight": "20px",
+                        "bottomRight": "20px",
+                        "bottomLeft": "20px"
+                      }
+                    }
+                  }
+                },
+                "boxShadow": {
+                  "desktop": {
+                    "value": {
+                      "style": "preset3"
+                    }
+                  }
+                },
+                "layout": {
+                  "desktop": {
+                    "value": {
+                      "textAlign": "center"
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:gallery[2].title}}",
+              "content": "Nullam sit amet elit vitae lacus maximus egestas a a nunc. Praesent sollicitudin gravida commodo. Integer vulputate.",
+              "src": "https://diviplus.io/wp-content/uploads/2020/10/tree-nature-forest-outdoor-person-girl-1197138.jpg"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

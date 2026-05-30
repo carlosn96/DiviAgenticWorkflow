@@ -1,0 +1,63 @@
+{
+  "presets": ["section:light"],
+  "rows": [
+    {
+      "column_structure": "1_2,1_2",
+      "columns": [
+        {
+          "type": "1_2",
+          "modules": [
+            {
+              "type": "divi/text",
+              "presets": ["text:eyebrow-dark"],
+              "content": "<p>{{slot:eyebrow}}</p>"
+            },
+            {
+              "type": "divi/heading",
+              "presets": ["text:display-md"],
+              "decoration": {
+                "spacing": {
+                  "desktop": { "value": { "padding": { "bottom": "24px" } } }
+                }
+              },
+              "content": "<h2>{{slot:title}}</h2>"
+            },
+            {
+              "type": "divi/text",
+              "presets": ["text:lead"],
+              "decoration": {
+                "spacing": {
+                  "desktop": { "value": { "padding": { "bottom": "24px" } } }
+                }
+              },
+              "content": "<p>{{slot:text}}</p>"
+            },
+            {
+              "type": "divi/text",
+              "presets": ["text:body-md"],
+              "content": "<p>{{slot:body}}</p>"
+            },
+            {
+              "type": "divi/button",
+              "presets": ["module:btn-primary"],
+              "button_text": "{{slot:btn_text}}",
+              "button_url": "{{slot:btn_url}}"
+            }
+          ]
+        },
+        {
+          "type": "1_2",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "presets": ["module:glass-card"],
+              "title": "",
+              "content": "<span style='font-size: 0.9rem;'>{{slot:media_attribution}}</span>",
+              "icon": "{{slot:media_icon}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

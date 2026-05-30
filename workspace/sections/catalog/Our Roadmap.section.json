@@ -1,0 +1,71 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "content": "{{slot:title}}",
+              "level": "h2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "Initial Consultation & Design Brief",
+              "content": "<p>We begin by discussing your vision, preferences, and lifestyle needs, So we can plan accordingly This includes understanding your aesthetic preferences, budget, and the functional requirements of each space in your home.</p>",
+              "src": "https://diviplus.io/wp-content/uploads/2024/11/dpa-accountant-discussionwebp.webp?_t=1732098414"
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "Concept Development & Design Presentation",
+              "content": "<p>Based on the consultation, we create a customized design concept, including layout plans, color schemes, furniture selections, and decor. We present this concept to you for feedback and refinement to ensure it aligns with your vision.</p>",
+              "src": "https://diviplus.io/wp-content/uploads/2024/11/achievement-american-analysis-brainstorming.webp?_t=1732100508"
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "title": "Execution & Final Styling",
+              "content": "<p>Once the design is approved, we oversee the sourcing, procurement, and installation of furniture, fixtures, and decor. The final touches are added to ensure your home reflects the design vision, creating a stylish and functional space.</p>",
+              "src": "https://diviplus.io/wp-content/uploads/2019/11/dpar-mansion-property-living-room-room-interior-design.webp?_t=1732101009"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

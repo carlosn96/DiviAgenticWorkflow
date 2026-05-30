@@ -1,0 +1,346 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_3,2_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "content": "{{slot:features[0].title}}",
+              "level": "h2"
+            },
+            {
+              "type": "divi/image",
+              "module": "divi/image",
+              "src": "{{slot:features[0].image}}",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "2_3",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "column_structure": "1_2,1_2",
+              "columns": [
+                {
+                  "type": "1_2",
+                  "module": "divi/column-inner",
+                  "decoration": {
+                    "background": {
+                      "desktop": {
+                        "value": {
+                          "color": "{{design:color:parchment-200}}"
+                        }
+                      }
+                    },
+                    "spacing": {
+                      "desktop": {
+                        "value": {
+                          "padding": {
+                            "top": "20px",
+                            "right": "20px",
+                            "bottom": "20px",
+                            "left": "20px"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "modules": [
+                    {
+                      "type": "divi/heading",
+                      "module": "divi/heading",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "10px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:features[0].title}}",
+                      "level": "h2"
+                    },
+                    {
+                      "type": "divi/icon-list",
+                      "module": "divi/icon-list",
+                      "children": [
+                        {
+                          "type": "divi/icon-list-item",
+                          "module": "divi/icon-list-item",
+                          "content": ""
+                        },
+                        {
+                          "type": "divi/icon-list-item",
+                          "module": "divi/icon-list-item",
+                          "content": ""
+                        },
+                        {
+                          "type": "divi/icon-list-item",
+                          "module": "divi/icon-list-item",
+                          "content": ""
+                        }
+                      ]
+                    },
+                    {
+                      "type": "divi/button",
+                      "module": "divi/button",
+                      "button_text": "{{slot:features[0].btn_text}}",
+                      "button_url": "{{slot:features[0].btn_url}}"
+                    }
+                  ]
+                },
+                {
+                  "type": "1_2",
+                  "module": "divi/column-inner",
+                  "decoration": {
+                    "background": {
+                      "desktop": {
+                        "value": {
+                          "color": "{{design:color:parchment-300}}"
+                        }
+                      }
+                    },
+                    "spacing": {
+                      "desktop": {
+                        "value": {
+                          "padding": {
+                            "top": "20px",
+                            "right": "20px",
+                            "bottom": "20px",
+                            "left": "20px"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "modules": [
+                    {
+                      "type": "divi/heading",
+                      "module": "divi/heading",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "10px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:features[1].title}}",
+                      "level": "h2"
+                    },
+                    {
+                      "type": "divi/icon-list",
+                      "module": "divi/icon-list",
+                      "children": [
+                        {
+                          "type": "divi/icon-list-item",
+                          "module": "divi/icon-list-item",
+                          "content": ""
+                        },
+                        {
+                          "type": "divi/icon-list-item",
+                          "module": "divi/icon-list-item",
+                          "content": ""
+                        },
+                        {
+                          "type": "divi/icon-list-item",
+                          "module": "divi/icon-list-item",
+                          "content": ""
+                        }
+                      ]
+                    },
+                    {
+                      "type": "divi/button",
+                      "module": "divi/button",
+                      "button_text": "{{slot:features[1].btn_text}}",
+                      "button_url": "{{slot:features[1].btn_url}}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "divi/row-inner",
+              "module": "divi/row-inner",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "0px"
+                      }
+                    }
+                  }
+                }
+              },
+              "column_structure": "1_2,1_2",
+              "columns": [
+                {
+                  "type": "1_2",
+                  "module": "divi/column-inner",
+                  "decoration": {
+                    "background": {
+                      "desktop": {
+                        "value": {
+                          "color": "{{design:color:parchment-300}}"
+                        }
+                      }
+                    },
+                    "spacing": {
+                      "desktop": {
+                        "value": {
+                          "padding": {
+                            "top": "20px",
+                            "right": "20px",
+                            "bottom": "20px",
+                            "left": "20px"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "modules": [
+                    {
+                      "type": "divi/heading",
+                      "module": "divi/heading",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "10px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:features[2].title}}",
+                      "level": "h2"
+                    },
+                    {
+                      "type": "divi/icon-list",
+                      "module": "divi/icon-list",
+                      "children": [
+                        {
+                          "type": "divi/icon-list-item",
+                          "module": "divi/icon-list-item",
+                          "content": ""
+                        },
+                        {
+                          "type": "divi/icon-list-item",
+                          "module": "divi/icon-list-item",
+                          "content": ""
+                        },
+                        {
+                          "type": "divi/icon-list-item",
+                          "module": "divi/icon-list-item",
+                          "content": ""
+                        }
+                      ]
+                    },
+                    {
+                      "type": "divi/button",
+                      "module": "divi/button",
+                      "button_text": "{{slot:features[2].btn_text}}",
+                      "button_url": "{{slot:features[2].btn_url}}"
+                    }
+                  ]
+                },
+                {
+                  "type": "1_2",
+                  "module": "divi/column-inner",
+                  "decoration": {
+                    "background": {
+                      "desktop": {
+                        "value": {
+                          "color": "{{design:color:parchment-200}}"
+                        }
+                      }
+                    },
+                    "spacing": {
+                      "desktop": {
+                        "value": {
+                          "padding": {
+                            "top": "20px",
+                            "right": "20px",
+                            "bottom": "20px",
+                            "left": "20px"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "modules": [
+                    {
+                      "type": "divi/heading",
+                      "module": "divi/heading",
+                      "decoration": {
+                        "spacing": {
+                          "desktop": {
+                            "value": {
+                              "margin": {
+                                "bottom": "10px"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "content": "{{slot:features[3].title}}",
+                      "level": "h2"
+                    },
+                    {
+                      "type": "divi/icon-list",
+                      "module": "divi/icon-list",
+                      "children": [
+                        {
+                          "type": "divi/icon-list-item",
+                          "module": "divi/icon-list-item",
+                          "content": ""
+                        },
+                        {
+                          "type": "divi/icon-list-item",
+                          "module": "divi/icon-list-item",
+                          "content": ""
+                        },
+                        {
+                          "type": "divi/icon-list-item",
+                          "module": "divi/icon-list-item",
+                          "content": ""
+                        }
+                      ]
+                    },
+                    {
+                      "type": "divi/button",
+                      "module": "divi/button",
+                      "button_text": "{{slot:features[3].btn_text}}",
+                      "button_url": "{{slot:features[3].btn_url}}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

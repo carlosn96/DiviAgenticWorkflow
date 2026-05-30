@@ -1,0 +1,6 @@
+sentence-transformers>=2.2.0
+scipy>=1.7.0
+numpy>=1.21.0
+torch>=1.10.0
+transformers>=4.20.0
+huggingface-hub>=0.10.0

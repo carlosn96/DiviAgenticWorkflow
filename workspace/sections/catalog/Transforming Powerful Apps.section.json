@@ -1,0 +1,361 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "module": "divi/column",
+          "modules": [
+            {
+              "type": "divi/heading",
+              "module": "divi/heading",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "right": "15px",
+                        "left": "15px"
+                      }
+                    }
+                  }
+                }
+              },
+              "content": "{{slot:title}}",
+              "level": "h2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "0px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:parchment-500}}"
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "30px",
+                    "right": "15px",
+                    "bottom": "30px",
+                    "left": "15px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "30px",
+                        "right": "15px",
+                        "bottom": "30px",
+                        "left": "15px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[0].title}}",
+              "content": "<p>Create stunning, user-centric designs that enhance engagement and provide seamless navigation. Our UI/UX experts focus on intuitive interfaces, smooth interactions, and visually appealing layouts.</p>",
+              "src": "https://diviplus.io/wp-content/uploads/2025/03/app-developer-icon-small-01.webp?_t=1740998333"
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:parchment-500}}"
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "30px",
+                    "right": "15px",
+                    "bottom": "30px",
+                    "left": "15px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "30px",
+                        "right": "15px",
+                        "bottom": "30px",
+                        "left": "15px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[1].title}}",
+              "content": "<p>Reach a wider audience with apps that run smoothly on iOS, Android, and the web. We use modern frameworks like Flutter and React Native to ensure seamless performance across all devices.</p>",
+              "src": "https://diviplus.io/wp-content/uploads/2025/03/app-developer-icon-small-02.webp?_t=1740999151"
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:parchment-500}}"
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "30px",
+                    "right": "15px",
+                    "bottom": "30px",
+                    "left": "15px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "30px",
+                        "right": "15px",
+                        "bottom": "30px",
+                        "left": "15px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[2].title}}",
+              "content": "<p>Keep your app running at peak performance with our ongoing maintenance, updates, and bug fixes. We ensure security patches, feature enhancements, and compatibility with the latest OS versions.</p>",
+              "src": "https://diviplus.io/wp-content/uploads/2025/03/app-developer-icon-small-03.webp?_t=1740999202"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "10px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:parchment-500}}"
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "30px",
+                    "right": "15px",
+                    "bottom": "30px",
+                    "left": "15px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "30px",
+                        "right": "15px",
+                        "bottom": "30px",
+                        "left": "15px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[3].title}}",
+              "content": "<p>Enhance app functionality by integrating third-party APIs, payment gateways, cloud services, and AI tools. We build secure and scalable APIs to connect your app with external platforms effortlessly.</p>",
+              "src": "https://diviplus.io/wp-content/uploads/2025/03/app-developer-icon-small-04.webp?_t=1740999268"
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:parchment-500}}"
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "30px",
+                    "right": "15px",
+                    "bottom": "30px",
+                    "left": "15px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "30px",
+                        "right": "15px",
+                        "bottom": "30px",
+                        "left": "15px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[4].title}}",
+              "content": "<p>Boost productivity with custom enterprise applications designed for automation, data management, and team collaboration. Our solutions help businesses optimize workflows and improve efficiency.</p>",
+              "src": "https://diviplus.io/wp-content/uploads/2025/03/app-developer-icon-small-05.webp?_t=1740999322"
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:parchment-500}}"
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "padding": {
+                    "top": "30px",
+                    "right": "15px",
+                    "bottom": "30px",
+                    "left": "15px"
+                  }
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "30px",
+                        "right": "15px",
+                        "bottom": "30px",
+                        "left": "15px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[5].title}}",
+              "content": "<p>Maximize app visibility and downloads with strategic keyword optimization, user reviews management, and performance tracking on app stores like Google Play and Apple App Store.</p>",
+              "src": "https://diviplus.io/wp-content/uploads/2025/03/app-developer-icon-small-06.webp?_t=1740999381"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

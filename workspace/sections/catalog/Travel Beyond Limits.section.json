@@ -1,0 +1,265 @@
+{
+  "type": "regular",
+  "module": "divi/section",
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "rgba(26,24,20,0.66)",
+          "image": {
+            "url": "https://diviplus.io/wp-content/uploads/2024/09/project-05.webp?_t=1726136311",
+            "size": "cover",
+            "position": "center center",
+            "repeat": "no-repeat",
+            "parallax": {
+              "enabled": "off"
+            }
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:parchment-50}}"
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "30px",
+                        "right": "30px",
+                        "bottom": "30px",
+                        "left": "30px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[0].title}}",
+              "content": "<p><strong>Online Reservation:</strong> Systems for booking flights, accommodations, rental cars, and activities.</p>\n<p><strong>Real-Time Availability:</strong> Up-to-date availability information for accommodations and services.</p>\n<p><strong>Dynamic Pricing:</strong> Integration with pricing engines to reflect real-time rates and discounts.</p>",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:parchment-50}}"
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "30px",
+                        "right": "30px",
+                        "bottom": "30px",
+                        "left": "30px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[1].title}}",
+              "content": "<p><strong>Destination Guides:</strong> Detailed information about travel destinations, including attractions, restaurants, and local culture.</p>\n<p><strong>Maps and Itineraries:</strong> Interactive maps and suggested itineraries to help travelers plan their trips.s.</p>",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:parchment-50}}"
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "30px",
+                        "right": "30px",
+                        "bottom": "30px",
+                        "left": "30px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[2].title}}",
+              "content": "<p><strong>Customer Feedback</strong>: Reviews and ratings for accommodations, activities, and services.</p>\n<p><strong>Testimonial Sections</strong>: Positive experiences shared by previous customers.</p>",
+              "src": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divi/row",
+      "module": "divi/row",
+      "decoration": {
+        "spacing": {
+          "desktop": {
+            "value": {
+              "padding": {
+                "top": "0px"
+              }
+            }
+          }
+        }
+      },
+      "column_structure": "1_3,1_3,1_3",
+      "columns": [
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:parchment-50}}"
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "30px",
+                        "right": "30px",
+                        "bottom": "30px",
+                        "left": "30px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[3].title}}",
+              "content": "<p><strong>Promotions and Discounts</strong>: Information about special offers, deals, and travel packages.</p>\n<p><strong>Seasonal Packages</strong>: Tailored packages for holidays or peak seasons.</p>",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:parchment-50}}"
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "30px",
+                        "right": "30px",
+                        "bottom": "30px",
+                        "left": "30px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[4].title}}",
+              "content": "<p><strong>Virtual Tours</strong>: 360-degree tours of hotels, attractions, and other points of interest.</p>\n<p><strong>Photo Galleries</strong>: High-quality images showcasing destinations and accommodations.</p>",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "type": "1_3",
+          "module": "divi/column",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "{{design:color:parchment-50}}"
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "module": "divi/blurb",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "padding": {
+                        "top": "30px",
+                        "right": "30px",
+                        "bottom": "30px",
+                        "left": "30px"
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "{{slot:features[5].title}}",
+              "content": "<p><strong>Live Chat</strong>: Real-time assistance for booking queries and customer support.</p>\n<p><strong>Contact Forms</strong>: Easy-to-use forms for inquiries and feedback.</p>\n<p><strong>Help Center</strong>: FAQs and self-service resources for common issues.</p>",
+              "src": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
