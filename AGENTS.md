@@ -26,21 +26,41 @@ DAW_bundle/
 │   └── example/                   <-    Template para nuevas marcas (brand/, page-defs/, etc.)
 ├── ui-ux-pro-max/                 <- Skill de diseño UI/UX (opcional)
 ├── daw-skill/SKILL.md             <- FLUJO PRINCIPAL: orquestación de 4 fases
-├── workspace/                     <- Código fuente del framework
+├── workspace/                     <- Caché, datos extraídos, scripts one-time
 │   ├── build_design_system.py     <- DISEÑO INTELIGENTE v3.0: deriva colores, valida contraste WCAG, enriquece 64 presets
+│   ├── design-patterns.json       <- Patrones extraídos de 877 catálogos Divi 4 (O(1) keyed)
+│   ├── extract_patterns.py        <- One-time: analiza 892 templates → design-patterns.json
 │   ├── data/modules/              <- Schemas de módulos generados por PHP (102 módulos)
-│   └── automation/                <- Scripts de automatización
+│   └── sections/                  <- ⭐ Templates de sección con variantes
+│       ├── hero-split/_base.section.json + *.variant.json
+│       └── ... (*.section.json para templates sin variante)
 └── divi-agentic-core/
     ├── Plugin WordPress (Layout Engine, CLI, metadata)
     └── bin/
-        └── build_page.php         <- ⭐ PUNTO ÚNICO DE ENTRADA ($DAW_SITE via env)
+        ├── env_loader.php         <- ⭐ Carga .env automáticamente (DAW_SITE, API keys, etc.)
+        ├── orchestrate_page.php   <- ⭐ ORQUESTADOR: brief → variants → compose → post-compose → build → deploy
+        ├── compose_page.php       <- Arma page-def desde templates + slots (valida slots no resueltos)
+        ├── post_compose.php       <- ⭐ Capa premium: inyecta presets de marca, limpia imágenes demo
+        ├── build_page.php         <- ⭐ Build + deploy (incluye quality gate: valida presets, slots, imágenes)
+        └── verify_page.php        <- Verificación post-deploy
 ```
 
 ---
 
 ## ⚡ Primeros Pasos (Quickstart)
 
+> **Python**: Usar el intérprete Python global del sistema (el que esté disponible en PATH como `python`).
+> Verificar con: `python --version`. No usar entornos virtuales (venv).
+> Las dependencias Python solo se necesitan para el buscador semántico de catálogos (paso opcional 3b).
+> El pipeline de páginas (orquestador → build → deploy) es 100% PHP, no requiere Python.
+
 ```powershell
+# 0. ⚡ Elegir marca activa (OBLIGATORIO si cambias de proyecto)
+#    Editar .env en raíz del proyecto y definir:
+#      DAW_SITE=nombre-de-tu-marca
+#    Todas las rutas site/<DAW_SITE>/ se resuelven automáticamente.
+#    Si no se define, defaults a 'bibliotheca'.
+
 # 1. Activar el plugin
 #    Ir a WP Admin > Plugins > "Divi Agentic Core" > Activar
 #    (junction link desde DAW_bundle/divi-agentic-core/ → app/public/wp-content/plugins/)
@@ -48,8 +68,18 @@ DAW_bundle/
 # 2. Configurar entorno
 Copy-Item DAW_bundle/.env.example .env        # editar con credenciales reales
 
-# 3. (una vez) Generar schemas de módulos Divi 5
+# 3a. (una vez) Generar schemas de módulos Divi 5
 .\php.bat DAW_bundle/divi-agentic-core/bin/generate-module-schema.php --all
+
+# 3b. (opcional, una vez) Instalar dependencias para buscador semántico de catálogos
+python -m pip install -r DAW_bundle/workspace/automation/requirements.txt
+#    Esto instala: sentence-transformers, torch (CPU), numpy, scipy, transformers, huggingface-hub
+#    Luego compilar el índice semántico (una vez):
+python DAW_bundle/workspace/automation/generate_embeddings.py
+
+# 3c. (una vez por proyecto) Pre-compilar catálogo completo a Divi 5
+#    Traduce los 892 layouts del catálogo a esquemas Divi 5 tokenizados y slotificados de una sola vez
+python DAW_bundle/workspace/automation/compile_catalog.py
 
 # 4. (una vez por marca) Generar design system
 #    Variables en: site/<DAW_SITE>/brand/_design_vars.json
@@ -61,13 +91,12 @@ python DAW_bundle/workspace/build_design_system.py
 .\wp.bat agentic global_colors sync `
   --design-system="DAW_bundle/site/bibliotheca/design-system/divitheme.json"
 
-# 6. Crear definición de página en site/bibliotheca/page-defs/<slug>.json
-#    (ver site/bibliotheca/page-defs/home.json como plantilla)
+# 6a. (Opcional) Generar brief YAML desde lenguaje natural
+#     Configura tu API key en .env (DEEPSEEK_API_KEY, GEMINI_API_KEY, OPENAI_API_KEY, etc.)
+python DAW_bundle/workspace/automation/generate_brief.py --prompt "hazme una pagina para contacto de mi biblioteca digital"
 
-# 7. Build + Deploy (un solo comando)
-.\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php `
-  --def=DAW_bundle/site/bibliotheca/page-defs/mi-pagina.json `
-  --deploy
+# 6b. (Recomendado) Usar orquestador con el brief YAML (carga en O(1) y realiza el deploy)
+.\php.bat DAW_bundle/divi-agentic-core/bin/orchestrate_page.php --brief=contacto-biblioteca --deploy
 ```
 
 ---
@@ -87,7 +116,20 @@ Capa 1 — Design System (build_design_system.py)
   → site/bibliotheca/design-system/divitheme.json
     (64 presets: section/text/module/divider/animation/scroll/hover + tokens {{design:type:name}})
 
-Capa 2 — Page Schema + Deploy (build_page.php — UN SOLO COMANDO)
+Capa 2a — Orquestación (orchestrate_page.php — RECOMENDADO)
+  php divi-agentic-core/bin/orchestrate_page.php --brief=mi-pagina --deploy
+
+  orchestrate_page.php hace TODO:
+    • Lee site/<DAW_SITE>/briefs/<slug>.yml
+    • 🥇 Prioriza bases locales ($SECTION_TEMPLATES + variants) sobre catálogo
+    • Consulta design-patterns.json (O(1) keyed lookup por section_type)
+    • Mapea tone a variante de decoración (editorial-grid, liquid-glass, etc.)
+    • Ensambla .page.json en compositions/
+    • Delega a compose_page.php → page-defs/ (valida slots no resueltos)
+    • Delega a post_compose.php → inyecta presets de marca faltantes, limpia imágenes demo
+    • [--deploy] Delega a build_page.php --deploy → WordPress (quality gate incluido)
+
+Capa 2b — Page Schema + Deploy (build_page.php — DIRECTO)
   php divi-agentic-core/bin/build_page.php --def=page-defs/mipagina.json --deploy
 
   build_page.php hace TODO:
@@ -119,7 +161,52 @@ Capa 2 — Page Schema + Deploy (build_page.php — UN SOLO COMANDO)
 
 ---
 
-## 3. Crear una página nueva (PHP-only)
+## 3. Variants de decoración
+
+Cada sección puede tener variantes que sobreescriben decoration (animation, scroll, divider, spacing, presets). La variante se elige por tone en el orquestador.
+
+```
+workspace/sections/hero-split/
+├── _base.section.json              ← estructura base (módulos, slots)
+├── editorial-grid.variant.json     ← asymmetric 3_5,2_5 + stagger + scroll:reveal + parallax-up
+└── ... (más variantes)
+```
+
+Uso: `template: "hero-split@editorial-grid"` en el .page.json.
+
+Actualmente solo existe `editorial-grid`. Por crear: `liquid-glass` (glassmorphism + fluid), `monochrome-brutalist` (0 radius + high contrast).
+
+---
+
+## 4. Crear una página nueva
+
+### A. Con orquestador (recomendado)
+
+0. (Una vez) Extraer patrones de diseño del catálogo:
+   ```
+   python DAW_bundle/workspace/extract_patterns.py
+   ```
+
+1. Crear brief en `site/<DAW_SITE>/briefs/<slug>.yml`:
+   ```yaml
+   title: Mi Página
+   slug: mi-pagina
+   tone: editorial    # ← determina variante de decoración
+   sections:
+     - section_type: hero
+       eyebrow: WELCOME
+       title: Título Principal
+       text: Descripción...
+       btn_primary_text: Acción
+       btn_primary_url: /ruta
+   ```
+
+2. Orquestar + Build + Deploy (un solo comando):
+   ```
+   .\php.bat DAW_bundle/divi-agentic-core/bin/orchestrate_page.php --brief=mi-pagina --deploy
+   ```
+
+### B. Directo (page-def.json)
 
 0. (Una vez por proyecto o tras actualizar Divi) Regenerar schemas de módulos:
    ```
@@ -269,12 +356,16 @@ Si no hay gcids sincronizados, `deploy_page` emite warning y resuelve a hex.
 | Diccionario de bloques | `daw-skill/references/blocks-dictionary.md` | Guía de 102 módulos Divi 5 |
 | Lógica del Diseñador | `daw-skill/references/designer.md` | Mapeo semántico → bloques, tokens, decoration |
 | Lógica del Ingeniero | `daw-skill/references/engineer.md` | Comandos CLI, deploy, verificación |
-| Build page (PHP) | `divi-agentic-core/bin/build_page.php` | Pipeline unificado PHP (usa `DAW_SITE` env) |
+| Orquestador | `divi-agentic-core/bin/orchestrate_page.php` | ⭐ Brief → variants → compose → build → deploy |
+| Composer | `divi-agentic-core/bin/compose_page.php` | Arma page-def desde templates + slots |
+| Build page | `divi-agentic-core/bin/build_page.php` | Pipeline unificado PHP (usa `DAW_SITE` env) |
 | Design system (generado) | `site/<DAW_SITE>/design-system/divitheme.json` | 64 presets, fuente de verdad de tokens |
 | Variables de entrada | `site/<DAW_SITE>/brand/_design_vars.json` | Colores, fonts, radios, espacio |
 | Presets de diseño | `site/<DAW_SITE>/brand/_design_presets.json` | 64 presets (section/text/module/divider/animation/scroll/hover) |
 | Definiciones de página | `site/<DAW_SITE>/page-defs/` | JSON de entrada (home.json, about.json...) |
-| Schemas de páginas | `site/<DAW_SITE>/pages/` | JSON generados (output de build_page.php) |
+| Briefs de diseño | `site/<DAW_SITE>/briefs/` | YAML de entrada para el orquestador |
+| Templates de sección | `workspace/sections/` | _base.section.json + *.variant.json |
+| Patrones de diseño | `workspace/design-patterns.json` | O(1) keyed: composition + module affinity + color clusters |
 | Plugin WordPress | `divi-agentic-core/` | Layout Engine, CLI, metadata |
 
 ---
@@ -286,54 +377,57 @@ Cada tipo de archivo tiene su carpeta asignada. No crear archivos fuera de su ub
 | Carpeta | Contenido |
 |---------|-----------|
 | `site/<DAW_SITE>/brand/` | ⭐ Datos de marca: `_design_vars.json` + `_design_presets.json` |
-| `site/<DAW_SITE>/page-defs/` | ⭐ Definiciones de página en JSON (entrada al pipeline, lo que escribe el diseñador) |
+| `site/<DAW_SITE>/page-defs/` | ⭐ Definiciones de página en JSON (salida de compose_page.php, entrada de build_page.php) |
 | `site/<DAW_SITE>/pages/` | Schemas resueltos (output opcional de `build_page.php --out`, solo para debug/inspección) |
 | `site/<DAW_SITE>/design-system/` | `divitheme.json` generado (output, gitignored) |
-| `site/<DAW_SITE>/briefs/` | Briefs de diseño por página |
+| `site/<DAW_SITE>/briefs/` | ⭐ Briefs YAML de diseño (entrada del orquestador) |
+| `site/<DAW_SITE>/compositions/` | .page.json generado por el orquestador (input de compose_page.php) |
 | `site/<DAW_SITE>/content_state/` | Estado de contenido entre fases (local/ + remote/) |
 | `site/example/` | Template de estructura para nuevas marcas |
+| `workspace/sections/` | ⭐ Templates de sección con variantes de decoración |
+| `workspace/design-patterns.json` | Patrones O(1) extraídos de 877 catálogos |
 | `workspace/data/modules/` | Schemas de módulos Divi 5 (102, generados por PHP) |
 | `workspace/automation/` | Scripts de automatización |
 | `workspace/build_design_system.py` | Generador de design system v3.0 (inteligencia de diseño) |
-| `divi-agentic-core/bin/` | ⭐ build_page.php + generate-module-schema.php |
+| `divi-agentic-core/bin/` | ⭐ orquestador + compose + build + verify + generate-module-schema |
 | `daw-skill/` | Skill de orquestación y sus referencias |
 | `divi-agentic-core/` | Plugin WordPress |
 | `ui-ux-pro-max/` | Skill auxiliar de diseño UI/UX (opcional) |
 
 ### Cómo crear una nueva marca
 
+> ⚠️ **Antes de empezar**: editar `.env` en la raíz del proyecto y definir `DAW_SITE=nombre-de-tu-marca`.
+> Todos los scripts PHP leen `.env` automáticamente vía `env_loader.php`. No necesitas `$env:DAW_SITE`.
+
 ```powershell
-# 1. Copiar template de ejemplo
+# 1. Copiar template de ejemplo (incluye 64 presets premium pre-cargados)
 Copy-Item -Recurse DAW_bundle/site/example DAW_bundle/site/minuevamarca
 
-# 2. Crear archivo de variables (solo las que cambian respecto a defaults ultra-pro)
-#    build_design_system.py v3.0 (design intelligence):
-#      - Dado color_accent, deriva 26 colores automáticamente
-#      - Valida contraste WCAG AA/AAA en combinaciones críticas
-#      - Categorías: section, text, module, divider, animation, scroll, transform
-#    Ver site/example/brand/_design_vars.json como referencia
-cat > DAW_bundle/site/minuevamarca/brand/_design_vars.json @'
-{
-  "brand_name": "Mi Marca",
-  "brand_description": "Descripción del proyecto",
-  "color_accent": "#8B6F47",
-  "color_ink": "#1C1A17",
-  "font_display": "Playfair Display",
-  "radius_sm": "4px"
-}
-'@
+# 2. Editar identidad visual (REQUERIDO)
+#    El template ya trae 64 presets completos (section, text, module, divider,
+#    animation, scroll, transform) con {{design:color:*}} tokens.
+#    Solo necesitas definir colores y tipografías en:
+#      site/minuevamarca/brand/_design_vars.json
+#    build_design_system.py deriva automáticamente ~26 colores desde color_accent.
+#    Ver site/example/brand/_design_vars.json como referencia.
 
-# 3. Crear archivo de presets (opcional: si no existe, se auto-generan 64 defaults premium)
-#    Incluye: hover states, clamp(), glass-card, divisores SVG, motion
-#    Categorías: section, text, module, divider, animation, scroll, transform
+# 3. Editar .env con la marca activa
+#    En .env (raíz del proyecto): DAW_SITE=minuevamarca
 
-# 4. Generar design system (apuntando a la nueva marca)
-$env:DAW_SITE="minuevamarca"
+# 4. Generar design system (resuelve tokens, valida contraste WCAG, enriquece presets)
 python DAW_bundle/workspace/build_design_system.py
 
-# 5. Sincronizar colores en Divi 5
+# 5. Sincronizar colores globales en Divi 5
 .\wp.bat agentic global_colors sync `
   --design-system="DAW_bundle/site/minuevamarca/design-system/divitheme.json"
+
+# 6. Generar brief (ahora es brand-aware: lee _design_vars.json para el prompt)
+python DAW_bundle/workspace/automation/generate_brief.py `
+  --prompt "pagina principal de mi nueva marca" `
+  --tone editorial
+
+# 7. Orquestar, componer, post-componer (calidad premium) y desplegar
+.\php.bat DAW_bundle/divi-agentic-core/bin/orchestrate_page.php --brief=home --deploy
 ```
 
 **Regla**: todo dato de marca va en `site/<DAW_SITE>/brand/`. Definiciones de página en `site/<DAW_SITE>/page-defs/`. Código PHP de build en `divi-agentic-core/bin/`. 
@@ -353,4 +447,41 @@ python DAW_bundle/workspace/build_design_system.py
 8. **Frontera site/**: todo dato de proyecto va en `site/<DAW_SITE>/`. El framework DAW (skills, plugin, build scripts) no contiene datos de proyecto.
 9. **Pipeline de página**: `site/<DAW_SITE>/page-defs/<slug>.json` → `build_page.php --deploy` → página en WP. Un solo comando PHP, sin Python, sin archivos intermedios.
 10. El pipeline de página es 100% PHP. No usar Python para construir páginas.
-11. **Multi-marca**: cambiar `$env:DAW_SITE` para alternar entre proyectos en `site/`.
+11. **Multi-marca**: definir `DAW_SITE=<nombre>` en `.env` (raíz del proyecto). Todos los scripts PHP lo leen automáticamente vía `env_loader.php`. No necesita `$env:` ni vars de sistema.
+12. **Marca activa obligatoria**: antes de cualquier operación, verificar que `.env` contiene `DAW_SITE=<marca>`. Si no está definido, defaults a `bibliotheca` con advertencia.
+13. **Pipeline completo**: brief → orchestrate → compose → **post-compose** (calidad premium) → build → quality gate → deploy.
+
+---
+
+## 9. Generador de Briefs Inteligente (generate_brief.py)
+
+El script `generate_brief.py` en `DAW_bundle/workspace/automation/` automatiza el primer paso del flujo de trabajo, traduciendo requerimientos en lenguaje natural de los usuarios a briefs estructurados YAML.
+
+### Características y Operación:
+0. **Brand-Aware (nuevo)**: Lee `DAW_SITE` del entorno y construye el `SYSTEM_PROMPT` dinámicamente desde `site/<DAW_SITE>/brand/_design_vars.json`. Si no encuentra vars de marca, usa un prompt genérico premium. Los briefs se guardan en `site/<DAW_SITE>/briefs/`.
+1. **Detección Dinámica de Proveedores**: Lee tu archivo `.env` buscando en orden de costo:
+   - **DeepSeek** (`DEEPSEEK_API_KEY`) -> Usa `deepseek-chat` de bajísimo costo.
+   - **Gemini** (`GEMINI_API_KEY`) -> Modelo `gemini-2.5-flash` ultra económico.
+   - **OpenAI** (`OPENAI_API_KEY`) -> Modelo `gpt-4o-mini` rápido y económico.
+   - **OpenRouter** (`OPENROUTER_API_KEY`) -> Mapeo inteligente de prefijos (ej. `gpt-4o-mini` -> `openai/gpt-4o-mini`).
+   - **Anthropic** (`ANTHROPIC_API_KEY`) -> Modelo `claude-3-5-haiku` como fallback.
+   - **Groq** (`GROQ_API_KEY`) -> Modelo `llama-3.3-70b-versatile` para inferencia instantánea gratuita.
+2. **Estrategia de Fallback Activo**: Si un proveedor devuelve un error (como caída de DNS o límite excedido), el generador pasa automáticamente al siguiente proveedor activo de la lista.
+3. **Bypass de Bloqueos Cloudflare**: Envía un User-Agent de navegador para evitar errores `403 Forbidden (error 1010)` al conectarse a APIs como Groq.
+4. **Auto-Mapeo de Modelos Deprecados**: Traduce automáticamente modelos antiguos de Groq (como `llama3-8b-8192`) a sus sucesores activos (`llama-3.1-8b-instant`).
+5. **Modo Interactivo**: Si no pasas `--prompt`, te solicitará el requerimiento directamente en la consola interactiva.
+6. **Limpieza de Preámbulo de IA**: Limpia el output eliminando explicaciones conversacionales previas y posteriores al bloque YAML.
+
+### Ejemplos de Comandos:
+```powershell
+# Ejecución simple interactiva
+python DAW_bundle/workspace/automation/generate_brief.py
+
+# Especificando un prompt directo, forzando tono estético y depurando la llamada
+python DAW_bundle/workspace/automation/generate_brief.py `
+  --prompt "hazme una pagina para contacto de mi biblioteca digital" `
+  --tone editorial `
+  --out contacto `
+  --verbose
+```
+

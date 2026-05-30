@@ -124,6 +124,7 @@ Ejemplo: `.\php.bat DAW_bundle/divi-agentic-core/bin/extract-module-meta.php sli
 | `global_colors status` | Verifica si los Global Colors están sincronizados |
 | `global_colors list` | Lista los Global Colors registrados en Divi 5 |
 | `deploy_page` | Crea o actualiza una página desde un JSON schema |
+| `export_page --slug=<slug>` | Exporta una página existente de WordPress a `page-defs/<slug>.json` (roundtrip: Divi 5 blocks → schema editable) |
 | `deploy_global_ecosystem` | Despliega el Header, Footer y Body global en el Theme Builder |
 
 > [!NOTE]
