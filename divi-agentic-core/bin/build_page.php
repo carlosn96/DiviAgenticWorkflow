@@ -411,7 +411,7 @@ function validate_page(array $schema): bool {
 
 // ── CLI ─────────────────────────────────────────────────────────────
 
-$opts = getopt('', ['def::', 'out::', 'deploy', 'front', 'no-resolve', 'site-url::', 'verify', 'url::', 'help']);
+$opts = getopt('', ['def::', 'out::', 'deploy', 'front', 'lint', 'no-resolve', 'site-url::', 'verify', 'url::', 'help']);
 $def_file = $opts['def'] ?? null;
 $out_file = $opts['out'] ?? null;
 $do_deploy = isset($opts['deploy']);
@@ -428,6 +428,7 @@ if (isset($opts['help']) || !$def_file) {
     echo "  --front          Set page as front page (only with --deploy)\n";
     echo "  --verify         Run post-deploy verification (only with --deploy)\n";
     echo "  --url=<url>      Page URL for visual verification (implies --verify)\n";
+    echo "  --lint           Run lint_page_def.php before building (validates 6 Leyes)\n";
     echo "  --no-resolve     Skip preset expansion and token resolution (raw schema)\n";
     echo "  --site-url=<url> Base URL for {{SITE_URL}} replacement (auto-detected with --deploy)\n";
     echo "\n";
@@ -470,6 +471,20 @@ if (!$page_def) {
 }
 
 $design_system = load_design_system();
+
+// Pre-build lint check
+if (isset($opts['lint'])) {
+    $lint_script = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'lint_page_def.php';
+    $presets_path = SITE_DIR . DIRECTORY_SEPARATOR . 'brand' . DIRECTORY_SEPARATOR . '_design_presets.json';
+    $lint_cmd = sprintf('"%s" "%s" --def="%s" --presets="%s" 2>&1', PHP_BINARY, $lint_script, $def_file, $presets_path);
+    echo "[BUILD] Running lint...\n";
+    passthru($lint_cmd, $lint_exit);
+    if ($lint_exit !== 0) {
+        fwrite(STDERR, "[ERROR] Lint check failed. Fix issues before building.\n");
+        exit(1);
+    }
+    echo "[BUILD] Lint passed.\n";
+}
 
 // Resolve output path
 $slug = $page_def['slug'] ?? preg_replace('/\.json$/i', '', basename($def_file));

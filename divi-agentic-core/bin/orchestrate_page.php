@@ -365,7 +365,7 @@ function build_composition(array $brief, array $patterns): array {
 
     $section_counts = [];
 
-    // 🧠 Try DIE first: ML-powered plans for ALL sections (skip if script missing)
+    // 🧠 Try DIE first for structural recommendations only (no template injection)
     $die_plans = null;
     if (file_exists(DIE_SCRIPT)) {
         $die_plans = call_die($brief);
@@ -389,16 +389,10 @@ function build_composition(array $brief, array $patterns): array {
             }
         }
 
-        // 🥇 Priority 1: DIE recommendation from 877 template catalog (for design variety!)
-        // We use it if it exists and has a valid score.
+        // 🥇 Priority 1: DIE structural recommendations only (no catalog template injection)
         $die_plan = $die_plans[$i] ?? null;
-        if ($die_plan && !empty($die_plan['template'])) {
-            $catalog_path = CATALOG_SECTIONS_DIR . DIRECTORY_SEPARATOR . $die_plan['template'] . '.section.json';
-            if (file_exists($catalog_path)) {
-                $template = "catalog/" . $die_plan['template'];
-                $score = $die_plan['template_score'] ?? 0;
-                fwrite(STDOUT, "[ORCH]  DIE Plan Match (Priority 1): {$type} → catalog/{$die_plan['template']} (score: {$score})\n");
-            }
+        if ($die_plan && !empty($die_plan['recommended_structure'])) {
+            fwrite(STDOUT, "[ORCH]  DIE Recommendation: {$type} → {$die_plan['recommended_structure']}\n");
         }
 
         // 🥈 Priority 2: local base templates (premium, curated, clean slots)
@@ -424,45 +418,10 @@ function build_composition(array $brief, array $patterns): array {
             }
         }
 
-        // 🥉 Fallback: semantic catalog search (legacy)
+        // 🥉 Fallback: skeleton section (no catalog template injection — catalog is reference only)
         if (!$template) {
-            $title_query = $slots['title'] ?? $sec_def['title'] ?? '';
-            $query_str = trim("{$tone} {$type} {$title_query}");
-            $search_cmd = sprintf('python "%s" --category %s --query %s --limit 1 2>&1', 
-                DAW_ROOT . '/workspace/automation/search_catalog.py', 
-                escapeshellarg($type),
-                escapeshellarg($query_str)
-            );
-            $search_output = shell_exec($search_cmd);
-            $search_results = json_decode($search_output, true);
-            
-            if (!empty($search_results) && isset($search_results[0]['name'])) {
-                $matched_name = $search_results[0]['name'];
-                $score = $search_results[0]['score'] ?? 0;
-                $threshold = 0.60;
-                $blacklist = ['kindergarten', 'day-care', 'kinder', 'child', 'baby', 'toy', 'play', 'day_care', 'pets', 'pet', 'dog', 'cat', 'spa', 'beauty', 'salon', 'hair', 'yoga', 'makeup', 'plumber', 'roofing', 'repair', 'mechanic', 'dentist', 'dental', 'massage'];
-                $is_blacklisted = false;
-                $matched_name_lower = strtolower($matched_name);
-                foreach ($blacklist as $bad_word) {
-                    if (str_contains($matched_name_lower, $bad_word)) { $is_blacklisted = true; break; }
-                }
-                if ($score >= $threshold && !$is_blacklisted) {
-                    $target_template_path = SECTIONS_DIR . DIRECTORY_SEPARATOR . 'catalog' . DIRECTORY_SEPARATOR . $matched_name . '.section.json';
-                    if (file_exists($target_template_path)) {
-                        $template = "catalog/{$matched_name}";
-                        fwrite(STDOUT, "[ORCH]  Catalog Fallback: '{$query_str}' -> '{$template}' (score: {$score})\n");
-                    }
-                } elseif ($is_blacklisted) {
-                    fwrite(STDOUT, "[ORCH]  Catalog Rejected (Blacklisted): '{$matched_name}'\n");
-                } else {
-                    fwrite(STDOUT, "[ORCH]  Catalog Rejected (Score {$score} < {$threshold}): '{$matched_name}'\n");
-                }
-            }
-        }
-        
-        if (!$template) {
-            fwrite(STDOUT, "[ORCH]  WARNING: No template resolved for section '{$type}', skipping\n");
-            continue;
+            $template = '_skeleton';
+            fwrite(STDOUT, "[ORCH]  Skeleton: {$type} → no template, using empty skeleton\n");
         }
 
         // Get pattern recommendation for this section type

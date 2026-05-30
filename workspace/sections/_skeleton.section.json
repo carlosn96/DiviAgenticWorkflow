@@ -1,0 +1,35 @@
+{
+  "presets": ["section:light"],
+  "decoration": {
+    "spacing": {
+      "desktop": { "value": { "padding": { "top": "96px", "bottom": "96px", "right": "96px", "left": "96px" } } },
+      "tablet": { "value": { "padding": { "top": "64px", "bottom": "64px", "right": "48px", "left": "48px" } } },
+      "phone": { "value": { "padding": { "top": "40px", "bottom": "40px", "right": "24px", "left": "24px" } } }
+    },
+    "animation": {
+      "desktop": { "value": { "style": "fade", "duration": "600ms", "delay": "50ms" } }
+    }
+  },
+  "rows": [
+    {
+      "column_structure": "4_4",
+      "columns": [
+        {
+          "type": "4_4",
+          "modules": [
+            {
+              "type": "divi/text",
+              "presets": ["text:display-md"],
+              "content": "<h2>{{slot:title}}</h2>"
+            },
+            {
+              "type": "divi/text",
+              "presets": ["text:body-md"],
+              "content": "<p>{{slot:text}}</p>"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
