@@ -1,0 +1,68 @@
+{
+  "presets": ["section:cta-epic"],
+  "rows": [
+    {
+      "column_structure": "1_1",
+      "columns": [
+        {
+          "type": "1_1",
+          "decoration": {
+            "spacing": {
+              "desktop": { "value": { "max_width": "750px", "align": "center" } }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/text",
+              "presets": ["text:eyebrow-dark"],
+              "decoration": {
+                "spacing": {
+                  "desktop": { "value": { "padding": { "bottom": "8px" } } }
+                }
+              },
+              "content": "<p>{{slot:eyebrow}}</p>"
+            },
+            {
+              "type": "divi/heading",
+              "presets": ["text:display-md-light"],
+              "decoration": {
+                "spacing": {
+                  "desktop": { "value": { "padding": { "bottom": "24px" } } }
+                },
+                "animation": {
+                  "desktop": { "value": { "style": "slide", "direction": "bottom", "duration": "600ms", "delay": "100ms" } }
+                }
+              },
+              "content": "<h2>{{slot:title}}</h2>"
+            },
+            {
+              "type": "divi/text",
+              "presets": ["text:lead"],
+              "decoration": {
+                "spacing": {
+                  "desktop": { "value": { "padding": { "bottom": "40px" } } }
+                },
+                "animation": {
+                  "desktop": { "value": { "style": "fade", "duration": "600ms", "delay": "200ms" } }
+                }
+              },
+              "content": "<p>{{slot:text}}</p>"
+            },
+            {
+              "type": "divi/button",
+              "presets": ["module:btn-cta-dark"],
+              "button_text": "{{slot:btn_primary_text}}",
+              "button_url": "{{slot:btn_primary_url}}"
+            },
+            {
+              "type": "divi/button",
+              "presets": ["module:btn-outline-light"],
+              "button_text": "{{slot:btn_secondary_text}}",
+              "button_url": "{{slot:btn_secondary_url}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

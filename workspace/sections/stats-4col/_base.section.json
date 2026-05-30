@@ -1,0 +1,36 @@
+{
+  "presets": ["section:trust-bar"],
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "color": "{{design:color:surface-light}}"
+        }
+      }
+    },
+    "spacing": {
+      "desktop": { "value": { "padding": { "top": "80px", "bottom": "80px", "right": "96px", "left": "96px" } } },
+      "tablet": { "value": { "padding": { "top": "60px", "bottom": "60px", "right": "48px", "left": "48px" } } },
+      "phone": { "value": { "padding": { "top": "40px", "bottom": "40px", "right": "24px", "left": "24px" } } }
+    }
+  },
+  "rows": [
+    {
+      "column_structure": "1_4,1_4,1_4,1_4",
+      "_repeat": {
+        "source": "stats",
+        "target": "columns",
+        "column_type": "1_4"
+      },
+      "modules": [
+        {
+          "type": "divi/number-counter",
+          "presets": ["module:stat-item"],
+          "number": "{{slot:number}}",
+          "label": "{{slot:label}}",
+          "enablePercentSign": "off"
+        }
+      ]
+    }
+  ]
+}

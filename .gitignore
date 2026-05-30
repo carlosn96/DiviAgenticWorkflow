@@ -1,10 +1,11 @@
-# Generated outputs (all sites)
-site/*/design-system/
-site/*/pages/
-site/*/content_state/
+# Ignore all project data (sites are separate repos)
+site/**
+# Keep example template (framework scaffold)
+!site/example/
 
 # Deprecated catalog templates (Divi 4 compiled)
 workspace/catalog/
+workspace/sections/catalog/
 
 # Debug / scratch files
 workspace/scratch/
@@ -30,3 +31,6 @@ Thumbs.db
 # Temp
 *.tmp
 /tmp/
+
+# Backup copy
+workspace/automation/generate_brief copy.py

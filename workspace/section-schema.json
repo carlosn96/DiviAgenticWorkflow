@@ -1,0 +1,155 @@
+{
+  "content-list": {
+    "section_type": "content-list",
+    "template": "content-split-icon-list",
+    "slots": ["body", "eyebrow", "icon", "text", "title"],
+    "section_fields": ["eyebrow", "title", "text", "body"],
+    "item_fields": {"items": ["title", "icon"]},
+    "repeat_sources": ["items"],
+    "presets": ["section:dark"],
+    "design_tokens": [],
+    "variants": {
+      "editorial-list.variant": {
+        "slots": ["body", "eyebrow", "icon", "text", "title"],
+        "repeat_sources": ["items"],
+        "design_tokens": []
+      }
+    }
+  },
+  "content": {
+    "section_type": "content",
+    "template": "content-split",
+    "slots": ["body", "btn_primary_text", "btn_primary_url", "eyebrow", "media_attribution", "media_icon", "text", "title"],
+    "section_fields": ["eyebrow", "title", "text", "body", "btn_primary_text", "btn_primary_url"],
+    "item_fields": {},
+    "repeat_sources": [],
+    "presets": ["section:light"],
+    "design_tokens": [],
+    "variants": {
+      "editorial-grid.variant": {
+        "slots": ["body", "btn_primary_text", "btn_primary_url", "eyebrow", "media_attribution", "media_icon", "text", "title"],
+        "repeat_sources": [],
+        "design_tokens": []
+      }
+    }
+  },
+  "cta": {
+    "section_type": "cta",
+    "template": "cta-centered",
+    "slots": ["btn_primary_text", "btn_primary_url", "btn_secondary_text", "btn_secondary_url", "eyebrow", "text", "title"],
+    "section_fields": ["eyebrow", "title", "text", "btn_primary_text", "btn_primary_url"],
+    "item_fields": {},
+    "repeat_sources": [],
+    "presets": ["section:cta-epic"],
+    "design_tokens": [],
+    "variants": {
+      "glass-cta.variant": {
+        "slots": ["btn_primary_text", "btn_primary_url", "btn_secondary_text", "btn_secondary_url", "eyebrow", "text", "title"],
+        "repeat_sources": [],
+        "design_tokens": []
+      }
+    }
+  },
+  "features": {
+    "section_type": "features",
+    "template": "features-3col",
+    "slots": ["eyebrow", "icon", "text", "title"],
+    "section_fields": ["eyebrow", "title", "text"],
+    "item_fields": {"features": ["title", "icon", "text"]},
+    "repeat_sources": ["features"],
+    "presets": ["section:light"],
+    "design_tokens": [],
+    "variants": {
+      "monochrome-brutalist.variant": {
+        "slots": ["eyebrow", "icon", "text", "title"],
+        "repeat_sources": ["features"],
+        "design_tokens": []
+      }
+    }
+  },
+  "hero-centered": {
+    "section_type": "hero-centered",
+    "template": "hero-centered",
+    "slots": ["btn_primary_text", "btn_primary_url", "btn_secondary_text", "btn_secondary_url", "eyebrow", "text", "title"],
+    "section_fields": ["eyebrow", "title", "text", "btn_primary_text", "btn_primary_url"],
+    "item_fields": {},
+    "repeat_sources": [],
+    "presets": ["section:hero-dark"],
+    "design_tokens": ["image:hero-bg"],
+    "variants": {
+      "liquid-glass.variant": {
+        "slots": [],
+        "repeat_sources": [],
+        "design_tokens": []
+      }
+    }
+  },
+  "hero": {
+    "section_type": "hero",
+    "template": "hero-split",
+    "slots": ["btn_primary_text", "btn_primary_url", "btn_secondary_text", "btn_secondary_url", "decorative_attribution", "decorative_icon", "decorative_text", "eyebrow", "text", "title"],
+    "section_fields": ["eyebrow", "title", "text", "btn_primary_text", "btn_primary_url"],
+    "item_fields": {},
+    "repeat_sources": [],
+    "presets": ["section:hero-dark"],
+    "design_tokens": [],
+    "variants": {
+      "editorial-grid.variant": {
+        "slots": ["btn_primary_text", "btn_primary_url", "decorative_attribution", "decorative_icon", "decorative_text", "eyebrow", "text", "title"],
+        "repeat_sources": [],
+        "design_tokens": []
+      }
+    }
+  },
+  "logos": {
+    "section_type": "logos",
+    "template": "logos-4col",
+    "slots": ["icon", "name", "text", "title"],
+    "section_fields": ["title", "text"],
+    "item_fields": {"logos": ["icon", "name"]},
+    "repeat_sources": ["logos"],
+    "presets": ["section:light"],
+    "design_tokens": ["color:surface-light"],
+    "variants": {
+      "dark-scroll.variant": {
+        "slots": ["icon", "name", "text", "title"],
+        "repeat_sources": ["logos"],
+        "design_tokens": []
+      }
+    }
+  },
+  "stats": {
+    "section_type": "stats",
+    "template": "stats-4col",
+    "slots": ["label", "number"],
+    "section_fields": [],
+    "item_fields": {"stats": ["number", "label"]},
+    "repeat_sources": ["stats"],
+    "presets": ["section:trust-bar"],
+    "design_tokens": ["color:surface-light"],
+    "variants": {
+      "glass-metric.variant": {
+        "slots": ["label", "number"],
+        "repeat_sources": ["stats"],
+        "design_tokens": []
+      }
+    }
+  },
+  "testimonials": {
+    "section_type": "testimonials",
+    "template": "testimonials-3col",
+    "slots": ["avatar", "eyebrow", "name", "role", "text", "title"],
+    "section_fields": ["eyebrow", "title"],
+    "item_fields": {"testimonials": ["text", "name", "role"]},
+    "repeat_sources": ["testimonials"],
+    "presets": ["section:light"],
+    "design_tokens": ["color:surface-light"],
+    "variants": {
+      "minimal-card.variant": {
+        "slots": ["avatar", "eyebrow", "name", "role", "text", "title"],
+        "repeat_sources": ["testimonials"],
+        "design_tokens": ["color:surface-light", "radius:md"]
+      }
+    }
+  }
+}

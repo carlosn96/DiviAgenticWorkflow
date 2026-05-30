@@ -1,0 +1,146 @@
+{
+  "decoration": {
+    "background": {
+      "desktop": {
+        "value": {
+          "overlay": {
+            "gradient": "linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.50) 50%, rgba(240,240,255,0.20) 100%)"
+          }
+        }
+      }
+    },
+    "spacing": {
+      "desktop": { "value": { "padding": { "top": "240px", "bottom": "240px", "right": "48px", "left": "48px" } } },
+      "tablet": { "value": { "padding": { "top": "140px", "bottom": "140px" } } },
+      "phone": { "value": { "padding": { "top": "96px", "bottom": "96px" } } }
+    },
+    "scroll": {
+      "desktop": { "value": "reveal" }
+    }
+  },
+  "rows": [
+    {
+      "column_structure": "1_1",
+      "columns": [
+        {
+          "type": "1_1",
+          "decoration": {
+            "background": {
+              "desktop": {
+                "value": {
+                  "color": "rgba(255,255,255,0.12)",
+                  "use_background_color": "on"
+                }
+              }
+            },
+            "spacing": {
+              "desktop": {
+                "value": {
+                  "max_width": "750px",
+                  "align": "center",
+                  "padding": { "top": "48px", "bottom": "48px", "right": "48px", "left": "48px" }
+                }
+              },
+              "tablet": { "value": { "padding": { "top": "32px", "bottom": "32px", "right": "32px", "left": "32px" } } }
+            },
+            "border": {
+              "desktop": {
+                "value": {
+                  "radii": "20px",
+                  "styles": "solid",
+                  "color": "rgba(255,255,255,0.35)",
+                  "width": "1px"
+                }
+              }
+            },
+            "box_shadow": {
+              "desktop": {
+                "value": {
+                  "style": "preset5",
+                  "horizontal": "0px",
+                  "vertical": "32px",
+                  "blur": "80px",
+                  "spread": "-16px",
+                  "color": "rgba(0,0,0,0.10)"
+                }
+              }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/text",
+              "presets": ["text:eyebrow-dark"],
+              "decoration": {
+                "animation": {
+                  "desktop": { "value": { "style": "fade", "direction": "bottom", "duration": "1000ms", "delay": "200ms", "easing": "ease-out" } }
+                }
+              }
+            },
+            {
+              "type": "divi/heading",
+              "presets": ["text:hero-title"],
+              "decoration": {
+                "spacing": {
+                  "desktop": { "value": { "padding": { "bottom": "16px" } } }
+                },
+                "animation": {
+                  "desktop": { "value": { "style": "fade", "direction": "bottom", "duration": "1000ms", "delay": "400ms", "easing": "ease-out" } }
+                }
+              }
+            },
+            {
+              "type": "divi/text",
+              "presets": ["text:lead-dark"],
+              "decoration": {
+                "spacing": {
+                  "desktop": { "value": { "padding": { "bottom": "32px" } } }
+                },
+                "animation": {
+                  "desktop": { "value": { "style": "fade", "direction": "bottom", "duration": "800ms", "delay": "600ms", "easing": "ease-out" } }
+                }
+              }
+            },
+            {
+              "type": "divi/row-inner",
+              "column_structure": "auto,auto",
+              "decoration": {
+                "spacing": {
+                  "desktop": {
+                    "value": {
+                      "display": "flex",
+                      "flex_direction": "row",
+                      "flex_wrap": "wrap",
+                      "align_items": "center",
+                      "justify_content": "center",
+                      "gap": "16px"
+                    }
+                  }
+                }
+              },
+              "modules": [
+                {
+                  "type": "divi/button",
+                  "presets": ["module:btn-primary"],
+                  "decoration": {
+                    "animation": {
+                      "desktop": { "value": { "style": "fade", "direction": "bottom", "duration": "800ms", "delay": "800ms", "easing": "ease-out" } }
+                    }
+                  }
+                },
+                {
+                  "type": "divi/button",
+                  "presets": ["module:btn-ghost"],
+                  "decoration": {
+                    "animation": {
+                      "desktop": { "value": { "style": "fade", "direction": "bottom", "duration": "800ms", "delay": "1000ms", "easing": "ease-out" } }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
