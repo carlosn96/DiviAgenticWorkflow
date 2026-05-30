@@ -457,6 +457,90 @@ class Agentic_Command {
     }
 
     /**
+     * Exports a WordPress page of Divi 5 blocks into a schema JSON.
+     *
+     * ## OPTIONS
+     *
+     * --slug=<slug>
+     * : The slug of the page to export.
+     *
+     * [--brand=<brand>]
+     * : The brand directory to save to (defaults to env DAW_SITE or 'bibliotheca').
+     *
+     * [--dest=<path>]
+     * : Override destination file path.
+     *
+     * @when after_wp_load
+     */
+    public function export_page( $args, $assoc_args ) {
+        $slug = $assoc_args['slug'] ?? '';
+        if ( empty( $slug ) ) {
+            \WP_CLI::error( "Please specify --slug=<slug>" );
+        }
+
+        // Determine brand from env DAW_SITE, --brand arg, or .env
+        $brand = $assoc_args['brand'] ?? getenv( 'DAW_SITE' );
+        if ( empty( $brand ) ) {
+            $brand = 'bibliotheca';
+            \WP_CLI::warning( "DAW_SITE not set in environment or .env — defaulting to 'bibliotheca'. Set DAW_SITE=<brand> in .env to target a different brand." );
+        }
+
+        // Paths
+        $daw_root = dirname( DIVI_AGENTIC_CORE_DIR );
+        $ds_path  = $daw_root . DIRECTORY_SEPARATOR . 'site' . DIRECTORY_SEPARATOR . $brand . DIRECTORY_SEPARATOR . 'design-system' . DIRECTORY_SEPARATOR . 'divitheme.json';
+        
+        $dest_path = $assoc_args['dest'] ?? '';
+        if ( empty( $dest_path ) ) {
+            $dest_path = $daw_root . DIRECTORY_SEPARATOR . 'site' . DIRECTORY_SEPARATOR . $brand . DIRECTORY_SEPARATOR . 'page-defs' . DIRECTORY_SEPARATOR . $slug . '.json';
+        }
+
+        // Normalize paths
+        $dest_path = str_replace( '/', DIRECTORY_SEPARATOR, $dest_path );
+
+        \WP_CLI::log( "Exporting page '{$slug}' for brand '{$brand}'..." );
+        if ( file_exists( $ds_path ) ) {
+            \WP_CLI::log( "Using design system tokens from: {$ds_path}" );
+        } else {
+            \WP_CLI::warning( "Design system not found at: {$ds_path}. Hex colors won't be reverse-resolved." );
+            $ds_path = null;
+        }
+
+        // Find post by slug
+        $page = get_page_by_path( $slug, OBJECT, 'page' );
+        if ( ! $page ) {
+            \WP_CLI::error( "Page not found in WordPress with slug: {$slug}" );
+        }
+
+        try {
+            // Convert blocks to schema
+            require_once dirname( __DIR__ ) . '/core/class-blocks-to-schema.php';
+            $exporter = new \DAC\Core\BlocksToSchema( $ds_path );
+            $schema   = $exporter->convert( $page->post_content );
+        } catch ( \Throwable $e ) {
+            \WP_CLI::error( "Conversion error: " . $e->getMessage() . "\n" . $e->getTraceAsString() );
+        }
+
+        // Add page level parameters
+        $schema = array_merge( [
+            'title' => $page->post_title,
+            'slug'  => $page->post_name,
+        ], $schema );
+
+        // Save
+        $dest_dir = dirname( $dest_path );
+        if ( ! is_dir( $dest_dir ) ) {
+            mkdir( $dest_dir, 0777, true );
+        }
+
+        $json_data = json_encode( $schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
+        if ( false === file_put_contents( $dest_path, $json_data ) ) {
+            \WP_CLI::error( "Failed to write schema to: {$dest_path}" );
+        }
+
+        \WP_CLI::success( "Page '{$page->post_title}' exported successfully to: {$dest_path}" );
+    }
+
+    /**
      * Validate schema string for allowed blocks only.
      * Design classes are no longer validated — visual properties
      * are expressed as Divi 5 native decoration attributes.

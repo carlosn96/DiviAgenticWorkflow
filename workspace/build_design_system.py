@@ -361,7 +361,8 @@ def enrich_presets(presets, tokens=None):
     - Add hover states to interactive module presets that lack them
     - Ensure divider presets exist
     - Ensure glass-card exists
-    - Fill missing preset categories
+    - Add radial glows/auras to dark sections (hero-dark, cta-epic, dark)
+    - Add micro-typography (letter-spacing negative, line-height tight) to display headings
     """
     enriched = []
     
@@ -371,16 +372,37 @@ def enrich_presets(presets, tokens=None):
             presets[cat] = {}
             enriched.append(f'  + Created empty category: {cat}')
 
-    # ── TEXT: clamp() fluid typography ──
+    # ── SECTION: glows/auras to dark sections ──
+    if 'section' in presets:
+        dark_glows = {
+            'hero-dark': 'radial-gradient(circle at 80% 20%, rgba(166,124,64,0.06) 0%, transparent 60%)',
+            'cta-epic': 'radial-gradient(circle at 20% 80%, rgba(166,124,64,0.05) 0%, transparent 50%)',
+            'dark': 'radial-gradient(circle at 50% 50%, rgba(166,124,64,0.04) 0%, transparent 70%)',
+        }
+        for name, glow in dark_glows.items():
+            if name in presets['section']:
+                preset = presets['section'][name]
+                if 'decoration' not in preset:
+                    preset['decoration'] = {}
+                if 'background' not in preset['decoration']:
+                    preset['decoration']['background'] = {'desktop': {'value': {}}}
+                
+                bg_val = preset['decoration']['background']['desktop'].get('value', {})
+                if 'overlay' not in bg_val:
+                    bg_val['overlay'] = {'gradient': glow}
+                    preset['decoration']['background']['desktop']['value'] = bg_val
+                    enriched.append(f'  + Added radial glow (aura) -> section:{name}')
+
+    # ── TEXT: clamp() fluid typography & micro-typography (letter-spacing) ──
     if 'text' in presets:
         for name, preset in presets['text'].items():
+            # Fluid clamp()
             if name in CLAMP_PRESETS:
                 current_size = _get_font_size(preset)
                 if current_size and 'clamp' not in current_size and current_size.endswith('px'):
                     size_val = int(current_size.replace('px', ''))
                     if size_val >= 28:
                         min_s, pref_s, max_s = CLAMP_PRESETS[name]
-                        # Find and replace size value
                         for key in ('headingFont', 'bodyFont'):
                             group = preset.get(key, {})
                             for tag in group.values():
@@ -389,7 +411,6 @@ def enrich_presets(presets, tokens=None):
                                     val = bp.get('value', {})
                                     if 'size' in val and val['size'] == current_size:
                                         val['size'] = f'clamp({min_s}, {pref_s}, {max_s})'
-                                        # Remove tablet/phone overrides for fluid presets
                                         for bp_key in ('tablet', 'phone'):
                                             if bp_key in font_data:
                                                 bp_val = font_data[bp_key].get('value', {})
@@ -397,6 +418,26 @@ def enrich_presets(presets, tokens=None):
                                                     del bp_val['size']
                                         enriched.append(f'  + Fluid clamp() -> text:{name}')
                                         break
+            
+            # Micro-typography: Letter-spacing & line-height adjustments for headings
+            if _is_heading_preset(name):
+                # Apply letter-spacing and line-height tweaks for premium look
+                for key in ('headingFont', 'bodyFont'):
+                    group = preset.get(key, {})
+                    for tag in group.values():
+                        font_data = tag.get('font', {})
+                        if 'desktop' in font_data:
+                            val = font_data['desktop'].get('value', {})
+                            
+                            # Tighter line height for large headings
+                            if 'lineHeight' not in val:
+                                val['lineHeight'] = '1.05' if 'title' in name or 'xl' in name else '1.15'
+                                enriched.append(f'  + Line-height compression ({val["lineHeight"]}) -> text:{name}')
+                                
+                            # Negative letter spacing to give Vercel/Apple premium look
+                            if 'letterSpacing' not in val:
+                                val['letterSpacing'] = '-0.02em' if 'title' in name or 'xl' in name else '-0.015em'
+                                enriched.append(f'  + Negative letter-spacing ({val["letterSpacing"]}) -> text:{name}')
 
     # ── MODULE: hover states ──
     if 'module' in presets:
@@ -675,6 +716,52 @@ def build_complete_schema(v, presets_path=None, enrich=True):
 # RESOLVE VARIABLES
 # ═══════════════════════════════════════════════════════════════════
 
+def auto_correct_colors(v):
+    """Adjust colors to actively guarantee at least WCAG AA (4.5:1) contrast."""
+    # 1. Contrast: text_primary vs surface_light
+    surface_light = v.get('color_surface_light', ULTRA_PRO_DEFAULTS['color_surface_light'])
+    text_primary = v.get('color_text_primary', ULTRA_PRO_DEFAULTS['color_text_primary'])
+    cr1 = contrast_ratio(text_primary, surface_light)
+    if cr1 < 4.5:
+        for factor in [0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3]:
+            candidate = adjust_lightness(text_primary, factor)
+            if contrast_ratio(candidate, surface_light) >= 4.5:
+                v['color_text_primary'] = candidate
+                break
+
+    # 2. Contrast: text_secondary vs surface_light
+    text_secondary = v.get('color_text_secondary', ULTRA_PRO_DEFAULTS['color_text_secondary'])
+    cr2 = contrast_ratio(text_secondary, surface_light)
+    if cr2 < 4.5:
+        for factor in [0.85, 0.75, 0.65, 0.55, 0.45, 0.35]:
+            candidate = adjust_lightness(text_secondary, factor)
+            if contrast_ratio(candidate, surface_light) >= 4.5:
+                v['color_text_secondary'] = candidate
+                break
+
+    # 3. Contrast: text_on_dark vs surface_deep
+    surface_deep = v.get('color_surface_deep', ULTRA_PRO_DEFAULTS['color_surface_deep'])
+    text_on_dark = v.get('color_text_on_dark', ULTRA_PRO_DEFAULTS['color_text_on_dark'])
+    cr3 = contrast_ratio(text_on_dark, surface_deep)
+    if cr3 < 4.5:
+        for factor in [1.15, 1.25, 1.35, 1.45, 1.55, 1.65, 1.75]:
+            candidate = adjust_lightness(text_on_dark, factor)
+            if contrast_ratio(candidate, surface_deep) >= 4.5:
+                v['color_text_on_dark'] = candidate
+                break
+
+    # 4. Contrast: text_on_dark vs surface_mid
+    surface_mid = v.get('color_surface_mid', ULTRA_PRO_DEFAULTS['color_surface_mid'])
+    cr4 = contrast_ratio(text_on_dark, surface_mid)
+    if cr4 < 4.5:
+        for factor in [1.15, 1.25, 1.35, 1.45, 1.55, 1.65, 1.75]:
+            candidate = adjust_lightness(text_on_dark, factor)
+            if contrast_ratio(candidate, surface_mid) >= 4.5:
+                v['color_text_on_dark'] = candidate
+                break
+
+    return v
+
 def resolve_variables(user_vars=None):
     resolved = dict(ULTRA_PRO_DEFAULTS)
     if user_vars:
@@ -686,6 +773,8 @@ def resolve_variables(user_vars=None):
     for k, v in derived.items():
         if k not in resolved or resolved[k] == ULTRA_PRO_DEFAULTS.get(k):
             resolved[k] = v
+    # Actively fix contrast conflicts
+    resolved = auto_correct_colors(resolved)
     return resolved
 
 

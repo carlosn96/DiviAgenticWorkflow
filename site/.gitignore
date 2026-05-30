@@ -11,9 +11,7 @@
 !*/content_state/local/.gitkeep
 !*/content_state/remote/.gitkeep
 
-# Briefs (tracked opcional)
-*/briefs/*
-!*/briefs/.gitkeep
+
 
 # Python cache
 __pycache__/

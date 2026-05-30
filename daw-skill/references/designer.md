@@ -36,6 +36,10 @@ page-defs/<slug>.json
 - **NUNCA** usar `module_class` con clases CSS. Usar decoration attributes nativos.
 - **SIEMPRE** usar el archivo `DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json` como única fuente de tokens y presets.
 - **SIEMPRE** usar `{{design:color:name}}` para colores. `build_page.php` los resuelve a `var(--gcid-name)` si los Global Colors están sincronizados, o a hex como fallback.
+- **SIEMPRE** usar la siguiente estrategia inteligente para **imágenes (`src`)**:
+  1. **Buscar en Media Library**: Si en la biblioteca de medios (`wp-content/uploads/`) ya existe un recurso diseñado o un placeholder establecido para la marca, usar ese URL.
+  2. **Generación con IA**: Si no existe y el entorno o las herramientas del agente permiten la generación de imágenes (ej. `generate_image` tool), generar la imagen necesaria para el contexto del sitio y subirla a la biblioteca de medios (usando `wp media import`).
+  3. **Fetch de Placeholder Genérico**: Como última opción si lo anterior no es viable, usar un servicio de placeholder externo genérico (ej. `https://placehold.co/800x600` o `https://picsum.photos/...`) con dimensiones explícitas adecuadas para el espacio asignado.
 
 ---
 
@@ -328,192 +332,143 @@ El Diseñador crea este archivo. `build_page.php` lo procesa en su totalidad.
 | Separador wave entre secciones | `divi/section` | `"presets": ["divider:wave-bottom"]` |
 | Animaciones | Todos | Las animaciones están integradas en los presets. Para animación personalizada: `"decoration": { "animation": { "desktop": { "value": { "style": "slide", "direction": "bottom", "duration": "700ms", "delay": "0ms", "intensity": "15%" } } } }` |
 
----
+## 7. Composición Avanzada (Bento Grids y Layouts Asimétricos)
 
-## 7. Patrones de Composición Ultra-Premium (Definiciones JSON)
+Para alcanzar el estándar premium (estilo diviplus.io), el Diseñador debe componer layouts dinámicos y asimétricos directamente en la definición de la página, combinando anidación estructural con presets visuales de primer nivel.
 
-Ejemplos de definiciones de sección para los patrones que producen el mayor impacto visual:
+### 7.1. Estructura de Bento Grid Nativo (Anidación)
 
-### Patrón: Hero Tipográfico con Imagen de Fondo
+El Bento Grid se compone anidando una fila interna (`divi/row-inner`) dentro de una de las columnas principales. El framework DAW soporta anidación recursiva en su totalidad:
+- Las secciones contienen filas (`divi/row`).
+- Las filas contienen columnas (`divi/column`).
+- Las columnas pueden contener módulos de contenido o una fila interna (`divi/row-inner`).
+- Las filas internas contienen columnas internas (`divi/column-inner`).
+- Las columnas internas contienen módulos de contenido.
 
+### 7.2. Asimetría Visual y Ritmo
+Para lograr la estética premium asimétrica, utiliza márgenes de compensación en las columnas internas. Por ejemplo, desfasa una de las columnas verticalmente respecto a la otra:
+- Columna 1 (izquierda): Sin margen especial.
+- Columna 2 (derecha): Aplicar `"decoration": { "spacing": { "desktop": { "value": { "margin": { "top": "40px" } } } } }`. Esto creará el desfase vertical característico de los Bento Grids modernos.
+
+### 7.3. Aplicación de Presets Premium
+Para dotar a los bloques de una terminación de altísima calidad sin inyectar CSS, aplica presets y decoraciones nativas:
+- **Tarjetas Bento**: Utiliza `presets: ["module:glass-card", "transform:hover-lift"]` en los blurbs, imágenes o textos. Esto les otorgará un fondo translúcido desenfocado, bordes finos, sombra suave y elevación interactiva al pasar el cursor.
+- **Botones y Acciones**: Usa `presets: ["module:btn-primary"]` y `presets: ["module:btn-ghost"]` de forma coordinada.
+- **Títulos de Impacto**: Combina `presets: ["text:eyebrow"]` (etiqueta pequeña en mayúsculas sobre el título), `presets: ["text:display-xl"]` o `text:hero-title` para el titular principal (con tamaño fluido vía clamp), y `presets: ["text:lead"]` para la descripción del hero.
+
+#### Ejemplo de Bento Grid Dinámico en la definición de página:
 ```json
 {
-  "presets": ["section:hero-image-dark"],
-  "background_image": "{{SITE_URL}}/wp-content/uploads/hero-bg.jpg",
-  "bg_position": "center 40%",
-  "bg_gradient": {
-    "type": "linear", "direction": "135deg", "overlaysImage": "on",
-    "stops": [
-      {"color": "rgba(0,19,56,0.90)", "position": "0"},
-      {"color": "rgba(0,19,56,0.30)", "position": "100"}
-    ]
-  },
+  "presets": ["section:dark"],
   "rows": [
     {
-      "column_structure": "4_4",
-      "modules": [
-        {"type": "divi/text", "presets": ["text:eyebrow"], "content": "<p>Etiqueta</p>"},
-        {"type": "divi/heading", "presets": ["text:display-xl"], "content": "<h1>T&iacute;tulo Principal</h1>"},
-        {"type": "divi/button", "presets": ["module:btn-primary"], "button_text": "Comenzar", "button_url": "/contacto"}
-      ]
-    }
-  ]
-}
-```
-
-### Patrón: Hero con Video Background
-
-```json
-{
-  "presets": ["section:hero-video"],
-  "background_video_mp4": "{{SITE_URL}}/wp-content/uploads/hero-video.mp4",
-  "rows": [
-    {
-      "column_structure": "4_4",
-      "modules": [
-        {"type": "divi/text", "presets": ["text:eyebrow-dark"], "content": "<p>Contenido audiovisual</p>"},
-        {"type": "divi/heading", "presets": ["text:hero-title"], "content": "<h1>Experiencia <em>Inmersiva</em></h1>"},
-        {"type": "divi/button", "presets": ["module:btn-ghost"], "button_text": "Ver m&aacute;s", "button_url": "/acerca"}
-      ]
-    }
-  ]
-}
-```
-
-### Patrón: Separador SVG entre secciones
-
-Agrega el shape divider como preset adicional en cualquier sección:
-
-```json
-{
-  "presets": ["section:dark", "divider:curve-top"],
-  "rows": [
-    {
-      "column_structure": "4_4",
-      "modules": [
-        {"type": "divi/heading", "presets": ["text:headline-light"], "content": "<h2>Nueva secci&oacute;n con entrada curva</h2>"}
-      ]
-    }
-  ]
-}
-```
-
-Los presets `divider:*` se aplican como presets de sección y decoran el `shapeDivider` del borde superior o inferior de la sección. Cada preset define el estilo, color, altura responsiva y orientación del separador SVG.
-
-### Patrón: Barra de Stats de Autoridad
-
-```json
-{
-  "presets": ["section:trust-bar"],
-  "rows": [
-    {
-      "column_structure": "1_3,1_3,1_3",
+      "column_structure": "1_2,1_2",
       "columns": [
-        {"type": "1_3", "modules": [
-          {"type": "divi/number-counter", "presets": ["module:stat-item"], "title": "Años de experiencia", "number": "15"}
-        ]},
-        {"type": "1_3", "modules": [
-          {"type": "divi/number-counter", "presets": ["module:stat-item"], "title": "Clientes activos", "number": "500"}
-        ]},
-        {"type": "1_3", "modules": [
-          {"type": "divi/number-counter", "presets": ["module:stat-item"], "title": "Proyectos completados", "number": "1200"}
-        ]}
+        {
+          "type": "1_2",
+          "decoration": { "spacing": { "desktop": { "value": { "padding": { "right": "5%" } } } } },
+          "modules": [
+            { "type": "divi/text", "presets": ["text:eyebrow"], "content": "<p>EXPLORAR</p>" },
+            { "type": "divi/text", "presets": ["text:display-xl"], "content": "<h1>Colecciones Especiales</h1>" },
+            { "type": "divi/button", "presets": ["module:btn-primary"], "button_text": "Ver más" }
+          ]
+        },
+        {
+          "type": "1_2",
+          "modules": [
+            {
+              "type": "divi/row-inner",
+              "column_structure": "1_2,1_2",
+              "columns": [
+                {
+                  "type": "1_2",
+                  "decoration": { "spacing": { "desktop": { "value": { "margin": { "top": "40px" } } } } },
+                  "modules": [
+                    { "type": "divi/blurb", "presets": ["module:glass-card", "transform:hover-lift"], "title": "Ficción", "content": "<p>2.5k Títulos</p>", "icon": "&#x2728;" }
+                  ]
+                },
+                {
+                  "type": "1_2",
+                  "modules": [
+                    { "type": "divi/image", "presets": ["module:glass-card", "transform:hover-lift"], "src": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800&q=80" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
       ]
     }
   ]
 }
-```
-
-### Patrón: Grid de Features con Hover
-
-```json
-{
-  "presets": ["section:light"],
-  "rows": [
-    {
-      "column_structure": "1_3,1_3,1_3",
-      "columns": [
-        {"type": "1_3", "modules": [
-          {"type": "divi/blurb", "presets": ["module:feature-card"],
-           "title": "Servicio Uno", "icon": "&#xe03a;", "content": "<p>Descripci&oacute;n breve.</p>",
-           "decoration": {"animation": {"desktop": {"value": {"style": "slide", "direction": "bottom", "delay": "0ms"}}}}}
-        ]},
-        {"type": "1_3", "modules": [
-          {"type": "divi/blurb", "presets": ["module:feature-card"],
-           "title": "Servicio Dos", "icon": "&#xe03b;", "content": "<p>Descripci&oacute;n breve.</p>",
-           "decoration": {"animation": {"desktop": {"value": {"style": "slide", "direction": "bottom", "delay": "100ms"}}}}}
-        ]},
-        {"type": "1_3", "modules": [
-          {"type": "divi/blurb", "presets": ["module:feature-card"],
-           "title": "Servicio Tres", "icon": "&#xe03c;", "content": "<p>Descripci&oacute;n breve.</p>",
-           "decoration": {"animation": {"desktop": {"value": {"style": "slide", "direction": "bottom", "delay": "200ms"}}}}}
-        ]}
-      ]
-    }
-  ]
-}
-```
-
-### Patrón: CTA Final de Alto Impacto
-
-```json
-{
-  "presets": ["section:hero-dark"],
-  "decoration": {
-    "spacing": {"desktop": {"value": {"padding": {"top": "{{design:space:3xl}}", "bottom": "{{design:space:3xl}}"}}}}
-  },
-  "rows": [
-    {
-      "column_structure": "4_4",
-      "modules": [
-        {"type": "divi/heading", "presets": ["text:headline-light"], "content": "<h2>&iquest;Listo para comenzar?</h2>"},
-        {"type": "divi/text", "presets": ["text:lead"], "content": "<p>Trabajemos juntos en tu pr&oacute;ximo proyecto.</p>"},
-        {"type": "divi/button", "presets": ["module:btn-primary"], "button_text": "Contactar ahora", "button_url": "/contacto",
-         "decoration": {"spacing": {"desktop": {"value": {"margin": {"top": "{{design:space:lg}}"}}}}}}
-      ]
-    }
-  ]
-}
-```
-
-### Patrón: Features Grid con Glassmorphism
-
-```json
-{
-  "presets": ["section:hero-video"],
-  "background_video_mp4": "{{SITE_URL}}/wp-content/uploads/bg-loop.mp4",
-  "rows": [
-    {
-      "column_structure": "4_4",
-      "modules": [
-        {"type": "divi/heading", "presets": ["text:hero-title"], "content": "<h1>Servicios <em>Premium</em></h1>"}
-      ]
-    },
-    {
-      "column_structure": "1_3,1_3,1_3",
-      "columns": [
-        {"type": "1_3", "modules": [
-          {"type": "divi/blurb", "presets": ["module:glass-card"],
-           "title": "Diseño", "icon": "&#xe03a;", "content": "<p>Descripci&oacute;n del servicio.</p>"}
-        ]},
-        {"type": "1_3", "modules": [
-          {"type": "divi/blurb", "presets": ["module:glass-card"],
-           "title": "Desarrollo", "icon": "&#xe03b;", "content": "<p>Descripci&oacute;n del servicio.</p>"}
-        ]},
-        {"type": "1_3", "modules": [
-          {"type": "divi/blurb", "presets": ["module:glass-card"],
-           "title": "Estrategia", "icon": "&#xe03c;", "content": "<p>Descripci&oacute;n del servicio.</p>"}
-        ]}
-      ]
-    }
-  ]
-}
-```
 ```
 
 ---
 
-## 8. Build + Deploy (El Ingeniero)
+## 8. Uso del Buscador Semántico de Referencias (Catálogo Divi Plus)
+
+Para evitar construir secciones complejas desde cero o inventar estilos no estandarizados, el Diseñador debe consultar la base de datos de referencias local de **Divi Plus** usando el buscador semántico en Python.
+
+### 8.0. Prerrequisitos del Catálogo Semántico
+
+Antes de usar el buscador, el entorno debe estar preparado:
+
+> **Python**: Usar el intérprete Python global del sistema (el que esté en PATH como `python`). No usar entornos virtuales (venv).
+
+#### Dependencias
+```powershell
+python -m pip install -r DAW_bundle/workspace/automation/requirements.txt
+```
+Esto instala: `sentence-transformers`, `numpy`, `scipy`, `torch` (CPU), `transformers`, `huggingface-hub`.
+
+#### Compilar/Actualizar el índice
+```powershell
+python DAW_bundle/workspace/automation/generate_embeddings.py
+```
+Escanea `workspace/catalog/jsons/` (892 plantillas Divi Plus), genera vectores semánticos con el modelo `all-MiniLM-L6-v2` y escribe `workspace/catalog/embeddings.pkl`.
+
+#### Verificar estado
+```powershell
+# El archivo indexado debe existir
+Test-Path DAW_bundle/workspace/catalog/embeddings.pkl
+
+# Probar una búsqueda real
+python DAW_bundle/workspace/automation/search_catalog.py --query "timeline" --limit 3
+```
+
+> **Nota**: El modelo `all-MiniLM-L6-v2` (~80 MB) se descarga automáticamente de HuggingFace la primera vez que se ejecuta `generate_embeddings.py` o `search_catalog.py`. Se requiere internet en esa primera ejecución. El caché queda en `~\.cache\huggingface\`.
+
+### 8.1. Cómo realizar búsquedas
+Cuando necesites diseñar un tipo de sección específico (ej. un timeline, una tabla de precios con toggle, o un bento grid), ejecuta el buscador local desde la terminal pasando tu consulta semántica:
+
+```powershell
+# Ejemplo de búsqueda
+python DAW_bundle/workspace/automation/search_catalog.py --query "timeline list" --limit 3
+```
+
+El script devolverá un JSON con las 3 mejores coincidencias semánticas del catálogo:
+```json
+[
+  {
+    "name": "Minimal Timeline Content",
+    "path": "C:\\...\\DAW_bundle\\workspace\\catalog\\jsons\\Minimal Timeline Content\\minimal-timeline-content.json",
+    "score": 0.4943
+  }
+]
+```
+
+### 8.2. Cómo utilizar el resultado (Ciclo de Ingeniería Inversa)
+Una vez que el buscador te indique las mejores rutas de coincidencia:
+1. **Inspecciona el JSON de referencia:** Abre el archivo indicado en el campo `path` de la coincidencia y analiza su estructura (filas, columnas, tamaños y márgenes de espaciado).
+2. **Extrae las proporciones estéticas:** Copia las decisiones de espaciado (márgenes, paddings, alturas de iconos) y de anidación (Bento grids).
+3. **Mapeo Obligatorio a Tokens (No hardcodear):** Traduce todos los valores fijos del shortcode a tokens abstractos:
+   - Colores hexadecimales planos ➔ Reemplázalos por tokens del proyecto activo como `{{design:color:accent}}` o `{{design:color:surface-light}}`.
+   - Familias tipográficas fijas ➔ Reemplázalas por `{{design:font:display}}` o `{{design:font:body}}`.
+   - Clases CSS personalizadas ➔ Tradúcelas a atributos nativos de Divi 5 (dentro del objeto `decoration`).
+
+---
+
+## 9. Build + Deploy (El Ingeniero)
 
 ```powershell
 # Un solo comando: construye el schema y despliega en WordPress

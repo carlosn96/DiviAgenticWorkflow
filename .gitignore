@@ -3,9 +3,14 @@ site/*/design-system/
 site/*/pages/
 site/*/content_state/
 
-# Project-specific data (add your project site here)
-site/bibliotheca/
-site/bibliotheca/**
+# Deprecated catalog templates (Divi 4 compiled)
+workspace/catalog/
+
+# Debug / scratch files
+workspace/scratch/
+
+# Archive (old code)
+_archive/
 
 # Generated module schemas
 workspace/data/modules/

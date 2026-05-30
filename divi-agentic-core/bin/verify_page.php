@@ -14,6 +14,7 @@
  *   1 — One or more checks failed
  */
 
+require_once __DIR__ . '/env_loader.php';
 $DIR_SEP = DIRECTORY_SEPARATOR;
 define('DAW_ROOT', str_replace('/', $DIR_SEP, dirname(__DIR__, 2)));
 define('SITE', getenv('DAW_SITE') ?: 'bibliotheca');
