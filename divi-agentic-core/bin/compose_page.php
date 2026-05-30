@@ -160,6 +160,16 @@ function process_repeat(array $node, array $slots, string $context = ''): array 
 
     $raw_items = $slots[$source_key] ?? [];
     if (!is_array($raw_items) || empty($raw_items)) {
+        // Robust fallback: if expected source is empty, search for other array fields in slots
+        foreach (['items', 'features', 'testimonials', 'stats', 'logos'] as $fallback_key) {
+            if ($fallback_key !== $source_key && isset($slots[$fallback_key]) && is_array($slots[$fallback_key]) && !empty($slots[$fallback_key])) {
+                $raw_items = $slots[$fallback_key];
+                fwrite(STDERR, "[COMPOSE]  Auto-healed: mapped empty repeat source '{$source_key}' to '{$fallback_key}'\n");
+                break;
+            }
+        }
+    }
+    if (!is_array($raw_items) || empty($raw_items)) {
         fwrite(STDERR, "[WARN] _repeat source '{$source_key}' empty\n");
         $node[$target_key] = []; return fill_slots($node, $slots, $context);
     }
@@ -256,12 +266,14 @@ foreach ($composition['sections'] ?? [] as $i => $section_def) {
     $slots = $section_def['slots'] ?? [];
     $section = fill_slots($template, $slots, "section-{$i}:{$template_name}");
     $section['_section_type'] = $section_def['section_type'] ?? 'content';
+    $section['_template'] = $template_name;
     $sections[] = $section;
 }
 
 $page_def = [
     'title' => $title,
     'slug'  => $slug,
+    'tone'  => $composition['tone'] ?? 'editorial',
     'description' => $composition['description'] ?? '',
     'sections' => $sections,
 ];

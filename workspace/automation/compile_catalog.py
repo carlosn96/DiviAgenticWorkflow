@@ -11,6 +11,8 @@ os.environ["CUDA_VISIBLE_DEVICES"] = ""
 SCRIPT_DIR = Path(__file__).parent.resolve()
 DAW_ROOT = SCRIPT_DIR.parent.parent
 CATALOG_DIR = DAW_ROOT / "workspace" / "catalog" / "jsons"
+if not CATALOG_DIR.exists():
+    CATALOG_DIR = DAW_ROOT.parent / "DAW_bundle" / "workspace" / "catalog" / "jsons"
 OUTPUT_DIR = DAW_ROOT / "workspace" / "sections" / "catalog"
 DESIGN_SYSTEM_PATH = DAW_ROOT / "site" / "bibliotheca" / "design-system" / "divitheme.json"
 
@@ -414,6 +416,7 @@ def translate_node(node, brand_colors, col_idx=0, num_cols=1, section_type='gene
             translated = translate_node(child, brand_colors, col_idx=col_item_idx, num_cols=num_cols, section_type=section_type, column_indices=column_indices)
             if translated:
                 res['modules'].append(translated)
+        optimize_column_slots(res['modules'], col_item_idx, num_cols, section_type)
                 
     else:
         # It's a module
@@ -471,46 +474,104 @@ def translate_node(node, brand_colors, col_idx=0, num_cols=1, section_type='gene
                         'content': child.content_str.strip() or child.attrs.get('content', '')
                     })
 
-        # Apply slot placeholders for content text
-        apply_slot_placeholders(res, col_idx, num_cols, section_type)
+        pass
 
     return res
 
-def apply_slot_placeholders(res, col_idx, num_cols, section_type):
-    module = res.get('module')
-    if not module:
-        return
-
-    # Check for lists (features, testimonials, stats)
-    if num_cols > 1 and section_type in ('features', 'testimonials', 'stats', 'gallery', 'team'):
-        if module == 'divi/heading' or module == 'divi/blurb':
-            # Heading title
-            if 'title' in res:
-                res['title'] = f"{{{{slot:{section_type}[{col_idx}].title}}}}"
-            elif 'content' in res:
-                res['content'] = f"{{{{slot:{section_type}[{col_idx}].title}}}}"
-        elif module == 'divi/text':
-            res['content'] = f"{{{{slot:{section_type}[{col_idx}].text}}}}"
-        elif module == 'divi/image':
-            res['src'] = f"{{{{slot:{section_type}[{col_idx}].image}}}}"
-        elif module == 'divi/button':
-            res['button_text'] = f"{{{{slot:{section_type}[{col_idx}].btn_text}}}}"
-            res['button_url'] = f"{{{{slot:{section_type}[{col_idx}].btn_url}}}}"
+def optimize_column_slots(modules, col_idx, num_cols, section_type):
+    # Check for lists (features, testimonials, stats, gallery, team)
+    is_list = num_cols > 1 and section_type in ('features', 'testimonials', 'stats', 'gallery', 'team')
+    
+    # Extract only leaf modules
+    leaf_mods = []
+    def collect_leaf_modules(mods):
+        for m in mods:
+            if m.get('type') in ('divi/row', 'divi/column', 'divi/section'):
+                continue
+            leaf_mods.append(m)
+    collect_leaf_modules(modules)
+    
+    if is_list:
+        text_mods = [m for m in leaf_mods if m.get('type') == 'divi/text']
+        heading_mods = [m for m in leaf_mods if m.get('type') in ('divi/heading', 'divi/blurb')]
+        
+        # 1. Map heading/blurb modules
+        for mod in heading_mods:
+            if 'title' in mod:
+                mod['title'] = f"{{{{slot:{section_type}[{col_idx}].title}}}}"
+            elif 'content' in mod:
+                mod['content'] = f"{{{{slot:{section_type}[{col_idx}].title}}}}"
+                
+        # 2. Map text modules
+        if len(text_mods) == 1:
+            text_mods[0]['content'] = f"{{{{slot:{section_type}[{col_idx}].text}}}}"
+        elif len(text_mods) == 2:
+            text_mods[0]['content'] = f"{{{{slot:{section_type}[{col_idx}].title}}}}"
+            text_mods[1]['content'] = f"{{{{slot:{section_type}[{col_idx}].text}}}}"
+        elif len(text_mods) >= 3:
+            text_mods[0]['content'] = f"{{{{slot:{section_type}[{col_idx}].eyebrow}}}}"
+            text_mods[1]['content'] = f"{{{{slot:{section_type}[{col_idx}].title}}}}"
+            for m in text_mods[2:]:
+                m['content'] = f"{{{{slot:{section_type}[{col_idx}].text}}}}"
+                
+        # 3. Map image and button modules
+        for mod in leaf_mods:
+            m_type = mod.get('type')
+            if m_type == 'divi/image':
+                mod['src'] = f"{{{{slot:{section_type}[{col_idx}].image}}}}"
+            elif m_type == 'divi/button':
+                mod['button_text'] = f"{{{{slot:{section_type}[{col_idx}].btn_text}}}}"
+                mod['button_url'] = f"{{{{slot:{section_type}[{col_idx}].btn_url}}}}"
     else:
-        # Non-list standard slots
-        if module == 'divi/heading':
-            res['content'] = "{{slot:title}}"
-        elif module == 'divi/text':
-            # Check length to see if it's subtitle/eyebrow or body text
-            content_len = len(res.get('content', ''))
-            if content_len > 0 and content_len < 25:
-                # Eyebrow
-                res['content'] = "{{slot:eyebrow}}"
+        # Non-list standard slots (hero, cta, content, etc.)
+        text_mods = [m for m in leaf_mods if m.get('type') == 'divi/text']
+        heading_mods = [m for m in leaf_mods if m.get('type') == 'divi/heading']
+        button_mods = [m for m in leaf_mods if m.get('type') == 'divi/button']
+        
+        # 1. Map heading modules
+        for mod in heading_mods:
+            mod['content'] = "{{slot:title}}"
+            
+        # 2. Map button modules
+        for mod in button_mods:
+            mod['button_text'] = "{{slot:btn_primary_text}}"
+            mod['button_url'] = "{{slot:btn_primary_url}}"
+            
+        # 3. Map text modules
+        def is_heading_text(content):
+            if not content:
+                return False
+            content_lower = content.lower()
+            return any(tag in content_lower for tag in ['<h1', '<h2', '<h3', '<h4', '<h5', '<h6'])
+            
+        if len(text_mods) == 1:
+            if is_heading_text(text_mods[0].get('content', '')):
+                text_mods[0]['content'] = "{{slot:title}}"
             else:
-                res['content'] = "{{slot:text}}"
-        elif module == 'divi/button':
-            res['button_text'] = "{{slot:btn_primary_text}}"
-            res['button_url'] = "{{slot:btn_primary_url}}"
+                text_mods[0]['content'] = "{{slot:text}}"
+        elif len(text_mods) == 2:
+            has_heading_mod = len(heading_mods) > 0
+            first_len = len(text_mods[0].get('content', ''))
+            
+            if has_heading_mod:
+                text_mods[0]['content'] = "{{slot:eyebrow}}"
+                text_mods[1]['content'] = "{{slot:text}}"
+            else:
+                if first_len < 30 and not is_heading_text(text_mods[0].get('content', '')):
+                    if is_heading_text(text_mods[1].get('content', '')):
+                        text_mods[0]['content'] = "{{slot:eyebrow}}"
+                        text_mods[1]['content'] = "{{slot:title}}"
+                    else:
+                        text_mods[0]['content'] = "{{slot:eyebrow}}"
+                        text_mods[1]['content'] = "{{slot:text}}"
+                else:
+                    text_mods[0]['content'] = "{{slot:title}}"
+                    text_mods[1]['content'] = "{{slot:text}}"
+        elif len(text_mods) >= 3:
+            text_mods[0]['content'] = "{{slot:eyebrow}}"
+            text_mods[1]['content'] = "{{slot:title}}"
+            for m in text_mods[2:]:
+                m['content'] = "{{slot:text}}"
 
 def main():
     print("[COMPILE] Loading design system...")

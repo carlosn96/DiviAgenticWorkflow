@@ -109,12 +109,30 @@ function call_die(array $brief): ?array {
     }
     $die_input = ['tone' => $brief['tone'] ?? 'editorial', 'sections' => $sections];
     file_put_contents($tmp_path, json_encode($die_input, JSON_UNESCAPED_UNICODE));
-    $cmd = sprintf('python "%s" --brief-file "%s" 2>nul', DIE_SCRIPT, $tmp_path);
+
+    // Resolve python CLI command to use venv python with PyTorch/SentenceTransformers
+    $python_cmd = getenv('PYTHON_CLI_COMMAND') ?: 'python';
+    $venv_python = DAW_ROOT . DIRECTORY_SEPARATOR . 'worskpace' . DIRECTORY_SEPARATOR . 'scraper' . DIRECTORY_SEPARATOR . 'venv' . DIRECTORY_SEPARATOR . 'Scripts' . DIRECTORY_SEPARATOR . 'python.exe';
+    if ($python_cmd === 'python' && file_exists($venv_python)) {
+        $python_cmd = '"' . $venv_python . '"';
+    }
+
+    $cmd = sprintf('%s "%s" --brief-file "%s" 2>nul', $python_cmd, DIE_SCRIPT, $tmp_path);
     $output = shell_exec($cmd);
     unlink($tmp_path);
     if (!$output) { fwrite(STDOUT, "[ORCH] DIE: no output\n"); return null; }
-    $plans = json_decode($output, true);
-    if (!is_array($plans)) { fwrite(STDOUT, "[ORCH] DIE: invalid JSON\n"); return null; }
+
+    // Extract JSON array or object from output (ignores debug logs/warnings)
+    if (preg_match('/(\[\s*\{.*\}\s*\]|\{\s*".*"\s*\})/s', $output, $matches)) {
+        $plans = json_decode($matches[1], true);
+    } else {
+        $plans = json_decode($output, true);
+    }
+
+    if (!is_array($plans)) {
+        fwrite(STDOUT, "[ORCH] DIE: invalid JSON. Raw output was:\n" . $output . "\n");
+        return null;
+    }
     return $plans;
 }
 
@@ -371,10 +389,20 @@ function build_composition(array $brief, array $patterns): array {
             }
         }
 
-        // 🥇 Priority: local base templates (premium, curated, clean slots)
-        //    Only use DIE for section types WITHOUT a local template
-        $has_local = isset($SECTION_TEMPLATES[$type]);
-        if ($has_local) {
+        // 🥇 Priority 1: DIE recommendation from 877 template catalog (for design variety!)
+        // We use it if it exists and has a valid score.
+        $die_plan = $die_plans[$i] ?? null;
+        if ($die_plan && !empty($die_plan['template'])) {
+            $catalog_path = CATALOG_SECTIONS_DIR . DIRECTORY_SEPARATOR . $die_plan['template'] . '.section.json';
+            if (file_exists($catalog_path)) {
+                $template = "catalog/" . $die_plan['template'];
+                $score = $die_plan['template_score'] ?? 0;
+                fwrite(STDOUT, "[ORCH]  DIE Plan Match (Priority 1): {$type} → catalog/{$die_plan['template']} (score: {$score})\n");
+            }
+        }
+
+        // 🥈 Priority 2: local base templates (premium, curated, clean slots)
+        if (!$template && isset($SECTION_TEMPLATES[$type])) {
             $template_name = $SECTION_TEMPLATES[$type];
             $base_path = SECTIONS_DIR . DIRECTORY_SEPARATOR . $template_name . DIRECTORY_SEPARATOR . '_base.section.json';
             if (file_exists($base_path)) {
@@ -393,51 +421,6 @@ function build_composition(array $brief, array $patterns): array {
                 }
             } else {
                 fwrite(STDOUT, "[ORCH]  Base NOT FOUND: {$base_path}\n");
-            }
-        }
-
-        // 🥈 DIE plan (ML-powered, only for section types without local template)
-        if (!$template) {
-            $die_plan = $die_plans[$i] ?? null;
-            if ($die_plan && !empty($die_plan['template'])) {
-                $catalog_path = CATALOG_SECTIONS_DIR . DIRECTORY_SEPARATOR . $die_plan['template'] . '.section.json';
-                if (file_exists($catalog_path)) {
-                    $template = "catalog/" . $die_plan['template'];
-                    fwrite(STDOUT, "[ORCH]  DIE: {$type} → catalog/{$die_plan['template']} ({$die_plan['section_type']} @ {$die_plan['confidence']})\n");
-                }
-            } elseif (!$die_plan) {
-                fwrite(STDOUT, "[ORCH]  DIE: no plan for section {$i}\n");
-            }
-        }
-
-        // 🥉 Fallback: if local AND DIE failed, try DIE anyway as last resort
-        if (!$template) {
-            $template_name = $SECTION_TEMPLATES[$type] ?? null;
-            if ($template_name) {
-                $variant_name = suggest_variant($tone, $template_name);
-                
-                // Alternate layout to avoid identical structures
-                if ($occurrence > 1 && $type === 'content') {
-                    $alt_template = 'content-split-icon-list';
-                    $base_path_alt = SECTIONS_DIR . DIRECTORY_SEPARATOR . $alt_template . DIRECTORY_SEPARATOR . '_base.section.json';
-                    if (file_exists($base_path_alt)) {
-                        $template = suggest_variant($tone, $alt_template);
-                        fwrite(STDOUT, "[ORCH]  Alternating: {$type} #{$occurrence} → {$template}\n");
-                    }
-                }
-
-                if (!$template) {
-                    $base_path = SECTIONS_DIR . DIRECTORY_SEPARATOR . $template_name . DIRECTORY_SEPARATOR . '_base.section.json';
-                    if (file_exists($base_path)) {
-                        $template = $variant_name;
-                        fwrite(STDOUT, "[ORCH]  Local: {$type} → {$template}\n");
-                    } else {
-                        fwrite(STDOUT, "[ORCH]  Base NOT FOUND: {$base_path}\n");
-                    }
-                }
-            } else {
-                fwrite(STDOUT, "[ORCH]  No section template for '{$type}', skipping\n");
-                continue;
             }
         }
 

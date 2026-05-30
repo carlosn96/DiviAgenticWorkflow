@@ -180,36 +180,40 @@ class DesignIntelligenceEngine:
         best_score = 0.0
         if hasattr(self, "semantic_items") and self.semantic_items:
             try:
-                import numpy as np
-                from numpy.linalg import norm
-
-                matching = []
-                for i, item in enumerate(self.semantic_items):
-                    cat = item.get("category", "")
-                    if cat == section_type or section_type == "generic":
-                        matching.append((i, item, 1.0))
-
-                # Score simple: prefix match de palabras
-                query_words = set(query_text.lower().split())
-                for idx, item, _ in matching:
-                    name = item.get("name", "").lower()
-                    name_words = set(name.split())
-                    overlap = len(query_words & name_words)
-                    if overlap > 0 and len(name_words) > 0:
-                        score = overlap / max(len(name_words), len(query_words))
-                    else:
-                        score = 0.0
-
-                    if score > best_score:
-                        best_score = score
-                        best_template = item
-
-                # Fallback: if no word overlap, use first matching template in category
-                if not best_template and matching:
-                    best_template = matching[0][1]
-                    best_score = 0.01
+                sys.path.insert(0, str(ARTIFACTS_DIR))
+                from b_semantic_index import SemanticIndex
+                si = SemanticIndex()
+                si.items = self.semantic_items
+                si.embeddings_normalized = self.semantic_embeddings
+                si._load_model()
+                results = si.search(query_text, category=section_type, limit=1)
+                if results:
+                    best_template = results[0]
+                    best_score = results[0]["score"]
             except Exception as e:
-                print(f"[DIE]  B error: {e}", file=sys.stderr)
+                print(f"[DIE]  B error using SemanticIndex: {e}", file=sys.stderr)
+                # Fallback to simple overlap if something fails
+                try:
+                    import numpy as np
+                    matching = []
+                    for i, item in enumerate(self.semantic_items):
+                        cat = item.get("category", "")
+                        if cat == section_type or section_type == "generic":
+                            matching.append((i, item, 1.0))
+                    query_words = set(query_text.lower().split())
+                    for idx, item, _ in matching:
+                        name = item.get("name", "").lower()
+                        name_words = set(name.split())
+                        overlap = len(query_words & name_words)
+                        score = overlap / max(len(name_words), len(query_words)) if (overlap > 0 and len(name_words) > 0) else 0.0
+                        if score > best_score:
+                            best_score = score
+                            best_template = item
+                    if not best_template and matching:
+                        best_template = matching[0][1]
+                        best_score = 0.01
+                except Exception:
+                    pass
 
         if best_template:
             plan["template"] = best_template["name"]

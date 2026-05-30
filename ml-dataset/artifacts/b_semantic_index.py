@@ -33,7 +33,7 @@ class SemanticIndex:
         self.name_to_item = {}
 
     def build(self, embeddings_path: Path):
-        print(f"[B] Cargando embeddings: {embeddings_path}")
+        print(f"[B] Cargando embeddings: {embeddings_path}", file=sys.stderr)
         with open(embeddings_path, "rb") as f:
             data = pickle.load(f)
         self.items = data["items"]
@@ -51,9 +51,9 @@ class SemanticIndex:
         # Cargar modelo SentenceTransformer una sola vez
         self._load_model()
 
-        print(f"[B]  {len(self.items)} templates indexados ({self.embeddings.shape[1]} dims)")
+        print(f"[B]  {len(self.items)} templates indexados ({self.embeddings.shape[1]} dims)", file=sys.stderr)
         cats = set(item.get("category") for item in self.items)
-        print(f"[B]  Categorías disponibles: {sorted(cats)}")
+        print(f"[B]  Categorías disponibles: {sorted(cats)}", file=sys.stderr)
 
     def search(self, query_text: str, category: str | None = None, limit: int = 5) -> list:
         """Busqueda semantica: vectoriza el query y encuentra los mas cercanos"""
@@ -97,7 +97,7 @@ class SemanticIndex:
             from sentence_transformers import SentenceTransformer
             self._model = SentenceTransformer("all-MiniLM-L6-v2")
             sys.stderr = old_stderr
-            print(f"[B]  Modelo SentenceTransformer cargado")
+            print(f"[B]  Modelo SentenceTransformer cargado", file=sys.stderr)
         except Exception as e:
             print(f"[B]  Warning: SentenceTransformer no disponible: {e}", file=sys.stderr)
             self._model = None
