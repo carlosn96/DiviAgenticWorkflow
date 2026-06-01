@@ -39,6 +39,32 @@ Los colores registrados como `gcid-*` son visibles y seleccionables en el **colo
 
 Toda tarea DEBE pasar por estas cuatro fases en orden. Cada fase produce un artefacto concreto. La siguiente fase no comienza hasta que el artefacto esté escrito.
 
+### ⚡ Pipeline Activo: VIE v2.0 + SchemaRegistry (Recomendado)
+
+El DAW usa el **Visual Impact Engine (VIE v2.0)** como motor determinístico de producción. Lee un brief JSON rico y construye `plans/<slug>.json` usando `SchemaRegistry` (auto-descubrimiento de 102 módulos Divi 5) + `ModuleBuilder` (reglas visuales determinísticas).
+
+El antiguo pipeline DIE (ML, 877 templates, clasificador TF-IDF) fue archivado en `_archive/die_pipeline/`.
+
+**Flujo automático UX-Pro → VIE v2.0 (recomendado para páginas nuevas):**
+```powershell
+# 1. Generar brief rico con arrays de contenido real (Fase 1)
+python DAW_bundle/workspace/automation/ux_pro_brief_generator.py --query "SaaS Landing Page" --out site/<DAW_SITE>/briefs/<slug>.json
+
+# 2. VIE mapea secciones → módulos Divi 5 nativos (Fases 2-3)
+python -B DAW_bundle/ml-dataset/artifacts/visual_impact_engine.py --brief-file=site/<DAW_SITE>/briefs/<slug>.json --site <DAW_SITE> --output=site/<DAW_SITE>/plans/<slug>.json
+
+# 3. Build + Deploy (Fase 4)
+.\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php --def=site/<DAW_SITE>/plans/<slug>.json --deploy
+```
+
+| Escenario | Flujo |
+|-----------|-------|
+| Nueva página desde prompt | `ux_pro_brief_generator.py` → `visual_impact_engine.py` → `build_page.php` |
+| Página con diseño muy específico | Skill manual 4 fases (abajo) |
+| Iteración sobre plan existente | Editar `plans/<slug>.json` → `build_page.php` |
+
+**Cuándo usar cada flujo:** Si el usuario da un prompt natural sin textos definidos, usar el pipeline automático UX-Pro → VIE. Si entrega textos exactos, wireframes o requiere control fino, usar las 4 fases manuales abajo.
+
 ---
 
 ### Fase 1 — Análisis Semántico (El Arquitecto)
@@ -48,21 +74,26 @@ Toda tarea DEBE pasar por estas cuatro fases en orden. Cada fase produce un arte
 - *Meta*: Definir estructura semántica y objetivos de negocio. Para cada sección, elegir el bloque Divi 5 correcto consultando el diccionario.
 
 #### 💡 Criterio de uso del Generador de Briefs (`generate_brief.py`):
-El uso del generador de briefs de Python es opcional y se rige por las siguientes reglas inteligentes:
-1. **Usar únicamente si no existe el archivo de brief (`<slug>.yml`)** en `site/<DAW_SITE>/briefs/`. Si el archivo ya existe (por ejemplo, ya tienes un `home.yml` o el brief de la página ya está definido), **NO** ejecutes el generador para evitar sobreescrituras accidentales o duplicidad de criterios.
-2. **Usar para requerimientos abstractos o creativos**: Si el usuario pide una página nueva sin copys ni estructura definida (ej. "landing editorial de club de lectura").
-3. **NO usar para datos rígidos o predefinidos**: Si el usuario ya entrega los textos, datos de contacto específicos o un wireframe detallado, ve directo a escribir el Plan Semántico.
+El uso de `generate_brief.py` (con LLM) y de `ux_pro_brief_generator.py` (determinístico BM25) se rige por:
+1. **Usar `ux_pro_brief_generator.py` para páginas nuevas** que no tienen estructura definida. Genera briefs ricos con arrays de datos: `items[]`, `testimonials[]`, `phases[]`, `features[]`.
+2. **No usar si ya existe un brief** en `site/<DAW_SITE>/briefs/<slug>.json`.
+3. **Ir directo al plan** si el usuario entrega textos exactos, wireframes o estructura definida.
 
-**Artefacto obligatorio — Plan Semántico** (escribirlo en el chat o en un archivo antes de continuar):
+**Artefacto obligatorio — Brief JSON** (escribirlo antes de continuar):
+```json
+{
+  "title": "Página",
+  "slug": "slug",
+  "sections": [
+    {"section_type": "hero", "title": "...", "text": "...", "btn_primary_text": "..."},
+    {"section_type": "features", "items": [{"title": "...", "icon": "", "text": "..."}]},
+    {"section_type": "cta", "title": "...", "text": "...", "btn_primary_text": "..."}
+  ]
+}
 ```
-Página: <nombre>
-Objetivo de negocio: <qué debe lograr el visitante>
-Secciones:
-  1. <nombre_sección> — objetivo: <qué comunica> — bloque raíz: divi/<bloque>
-  2. <nombre_sección> — objetivo: <qué comunica> — bloque raíz: divi/<bloque>
-  ...
-```
-> ⛔ **STOP**: si el Plan Semántico no está escrito, NO iniciar Fase 2.
+Tipos de `section_type` soportados por VIE v2.0: `hero`, `hero-centered`, `features`, `content`, `content-list`, `stats`, `testimonials`, `pricing`, `faq`, `icon-list`, `timeline`, `contact`, `process`, `team`, `gallery`, `logos`, `cta`.
+
+> ⛔ **STOP**: si el Brief JSON no está escrito, NO iniciar Fase 2.
 
 ---
 

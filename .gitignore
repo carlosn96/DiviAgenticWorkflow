@@ -1,5 +1,5 @@
 # Ignore generated page schemas (output of build_page.php --out)
-site/*/pages/**
+site/
 
 # Deprecated catalog templates (Divi 4 compiled)
 workspace/catalog/

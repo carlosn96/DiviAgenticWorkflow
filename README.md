@@ -6,9 +6,9 @@ Pipeline inteligente: DIE (Python) → plan.json → build_page.php (PHP) → Wo
 
 ## Requisitos
 
-1. **Plugin activo**: `divi-agentic-core` instalado como plugin de WordPress (junction link desde `DAW_bundle/divi-agentic-core/` → `app/public/wp-content/plugins/divi-agentic-core/`). Activar en WP Admin > Plugins.
+1. **Plugin activo**: `divi-agentic-core` instalado como plugin de WordPress (copia desde `DAW_bundle/divi-agentic-core/` → `app/public/wp-content/plugins/divi-agentic-core/`). Activar en WP Admin > Plugins.
 2. **Archivo `.env`**: Copiar `DAW_bundle/.env.example` → `.env` en la raíz del proyecto y completar valores reales.
-3. **Design System**: `site/bibliotheca/design-system/divitheme.json` (generado con `build_design_system.py` v3.0 — inteligencia de diseño).
+3. **Design System**: `site/<DAW_SITE>/design-system/divitheme.json` (generado con `build_design_system.py` v3.0 — inteligencia de diseño).
 4. **Dependencias Python DIE**: `python -m pip install -r ml-dataset/requirements.txt` (scikit-learn, sentence-transformers, numpy, scipy, PyYAML).
 
 ---
@@ -31,24 +31,23 @@ python DAW_bundle/ml-dataset/artifacts/b_semantic_index.py
 python DAW_bundle/ml-dataset/artifacts/a_section_patterns.py
 python DAW_bundle/ml-dataset/artifacts/c_module_affinities.py
 
-# 5. Generar design system
-$env:DAW_SITE="bibliotheca"
+# 5. Generar design system (DAW_SITE se lee del .env)
 python DAW_bundle/workspace/build_design_system.py
 
 # 6. Sincronizar colores globales
 .\wp.bat agentic global_colors sync `
-  --design-system="DAW_bundle/site/bibliotheca/design-system/divitheme.json"
+  --design-system="DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json"
 
 # 7. Generar brief (opcional, requiere API key en .env)
 python DAW_bundle/workspace/automation/generate_brief.py `
-  --prompt "pagina principal de biblioteca digital" --tone editorial
+  --prompt "pagina principal" --tone editorial
 
 # 8. DIE → plan.json → Build + Deploy
 python DAW_bundle/ml-dataset/artifacts/design_intelligence.py `
-  --brief-file=DAW_bundle/site/bibliotheca/briefs/home.json `
-  --output=DAW_bundle/site/bibliotheca/plans/home.json
+  --brief-file=DAW_bundle/site/<DAW_SITE>/briefs/home.json `
+  --output=DAW_bundle/site/<DAW_SITE>/plans/home.json
 .\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php `
-  --def=DAW_bundle/site/bibliotheca/plans/home.json `
+  --def=DAW_bundle/site/<DAW_SITE>/plans/home.json `
   --deploy
 ```
 
@@ -78,8 +77,8 @@ Output: `plan.json` con decoration blocks + `{{design:color:*}}` tokens.
 
 ### Fase Build: build_page.php
 ```powershell
-php DAW_bundle/divi-agentic-core/bin/build_page.php ^
-  --def=DAW_bundle/site/bibliotheca/plans/home.json ^
+.\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php `
+  --def=DAW_bundle/site/<DAW_SITE>/plans/home.json `
   --deploy
 ```
 
@@ -107,7 +106,7 @@ DAW_bundle/
 ├── VEREDICTO_GLOBAL_DAW.md             <- Diagnóstico unificado del sistema
 ├── .env.example                        <- Template de configuración
 ├── site/                               <- ⭐ DATOS DE PROYECTO
-│   ├── bibliotheca/                    <-    Marca activa (brand/, plans/, briefs/, pages/, design-system/)
+│   ├── <DAW_SITE>/                    <-    Marca activa (brand/, plans/, briefs/, pages/, design-system/)
 │   └── example/                        <-    Template para nuevas marcas
 ├── ml-dataset/                         <- ⭐ ML: dataset + artefactos del DIE
 │   ├── dataset.jsonl                   <-    877 templates Divi 4
@@ -123,7 +122,7 @@ DAW_bundle/
 │       └── content-classifier.pkl      <-       Output D
 ├── workspace/
 │   ├── build_design_system.py          <- Diseño inteligente v3.0
-│   ├── data/modules/                   <- Schemas de módulos Divi 5 (102)
+│   ├── data/modules/                   <- Schemas de módulos Divi 5 (103)
 │   └── automation/                     <- Scripts de automatización
 ├── daw-skill/                          <- Orquestación de 4 fases (SKILL.md)
 ├── divi-agentic-core/
@@ -131,8 +130,7 @@ DAW_bundle/
 │   └── bin/
 │       ├── build_page.php              <- ⭐ Único script PHP de build+deploy
 │       └── generate-module-schema.php  <- Genera schemas de módulos
-├── ui-ux-pro-max/                      <- Skill externo de diseño UI/UX
-└── tests/                              <- Tests del pipeline
+└── ui-ux-pro-max/                      <- Skill externo de diseño UI/UX
 ```
 
 ---
