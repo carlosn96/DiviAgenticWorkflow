@@ -175,6 +175,10 @@ class Design_Resolver {
         foreach ( $node as $key => $value ) {
             if ( isset( $merged[ $key ] ) && is_array( $merged[ $key ] ) && is_array( $value ) ) {
                 $merged[ $key ] = $this->deep_merge_preset( $merged[ $key ], $value );
+            } elseif ( isset( $merged[ $key ] ) && is_array( $merged[ $key ] ) && is_scalar( $value ) ) {
+                // Do not destroy the preset array with a simple scalar.
+                // Divi 5 schema mappings (e.g., 'icon') are handled by Layout_Engine later.
+                continue;
             } else {
                 $merged[ $key ] = $value;
             }

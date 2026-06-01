@@ -17,7 +17,34 @@
 require_once __DIR__ . '/env_loader.php';
 $DIR_SEP = DIRECTORY_SEPARATOR;
 define('DAW_ROOT', str_replace('/', $DIR_SEP, dirname(__DIR__, 2)));
-define('SITE', getenv('DAW_SITE') ?: 'bibliotheca');
+
+$daw_site = getenv('DAW_SITE');
+if ($daw_site === false || $daw_site === '') {
+    $env_path = dirname(__DIR__, 3) . $DIR_SEP . '.env';
+    if (file_exists($env_path)) {
+        foreach (file($env_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+            $line = trim($line);
+            if (str_starts_with($line, 'DAW_SITE=')) {
+                $val = trim(substr($line, 9));
+                if ((str_starts_with($val, '"') && str_ends_with($val, '"')) ||
+                    (str_starts_with($val, "'") && str_ends_with($val, "'"))) {
+                    $val = substr($val, 1, -1);
+                }
+                if ($val !== '') {
+                    putenv("DAW_SITE={$val}");
+                    $daw_site = $val;
+                }
+                break;
+            }
+        }
+    }
+}
+if (!$daw_site) {
+    fwrite(STDERR, "[ERROR] DAW_SITE no está definido. Debes configurar una marca antes de ejecutar verify_page.php.\n");
+    fwrite(STDERR, "  Edita .env en la raíz del proyecto y añade: DAW_SITE=nombre-de-tu-marca\n");
+    exit(1);
+}
+define('SITE', $daw_site);
 define('SITE_DIR', DAW_ROOT . $DIR_SEP . 'site' . $DIR_SEP . SITE);
 define('WP_BAT', DAW_ROOT . $DIR_SEP . 'wp.bat');
 

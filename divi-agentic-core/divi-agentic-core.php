@@ -19,3 +19,13 @@ add_action( 'cli_init', function () {
 		\DAC\CLI\Agentic_Command::register();
 	}
 } );
+
+// Enqueue brand specific CSS
+add_action( 'wp_enqueue_scripts', function () {
+    wp_enqueue_style(
+        'daw-brand-styles',
+        plugin_dir_url( __FILE__ ) . 'assets/css/brand.css',
+        [],
+        DIVI_AGENTIC_CORE_VERSION
+    );
+} );

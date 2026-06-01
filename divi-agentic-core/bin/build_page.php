@@ -7,7 +7,7 @@
  *
  * Usage:
  *   php build_page.php --def=home.json
- *   php build_page.php --def=site/bibliotheca/page-defs/mi-pagina.json --deploy
+ *   php build_page.php --def=site/<DAW_SITE>/page-defs/mi-pagina.json --deploy
  *   php build_page.php --def=home.json --deploy --front
  *   php build_page.php --def=home.json --deploy --verify
  *   php build_page.php --def=home.json --deploy --verify --url="https://example.com/mi-pagina"
@@ -44,7 +44,35 @@
 // ── Paths ──────────────────────────────────────────────────────────
 $DIR_SEP = DIRECTORY_SEPARATOR;
 define('DAW_ROOT', str_replace('/', $DIR_SEP, dirname(__DIR__, 2)));
-define('SITE', getenv('DAW_SITE') ?: 'bibliotheca');
+
+// Leer DAW_SITE desde .env si no está en entorno
+if (getenv('DAW_SITE') === false || getenv('DAW_SITE') === '') {
+    $env_path = dirname(__DIR__, 3) . $DIR_SEP . '.env';
+    if (file_exists($env_path)) {
+        foreach (file($env_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+            $line = trim($line);
+            if (str_starts_with($line, 'DAW_SITE=')) {
+                $val = trim(substr($line, 9));
+                if ((str_starts_with($val, '"') && str_ends_with($val, '"')) ||
+                    (str_starts_with($val, "'") && str_ends_with($val, "'"))) {
+                    $val = substr($val, 1, -1);
+                }
+                if ($val !== '') {
+                    putenv("DAW_SITE={$val}");
+                }
+                break;
+            }
+        }
+    }
+}
+$daw_site = getenv('DAW_SITE');
+if (!$daw_site) {
+    fwrite(STDERR, "[ERROR] DAW_SITE no está definido. Debes configurar una marca antes de ejecutar build_page.php.\n");
+    fwrite(STDERR, "  Edita .env en la raíz del proyecto y añade: DAW_SITE=nombre-de-tu-marca\n");
+    fwrite(STDERR, "  O ejecuta: \$env:DAW_SITE=\"nombre-de-tu-marca\" (PowerShell)\n");
+    exit(1);
+}
+define('SITE', $daw_site);
 define('SITE_DIR', DAW_ROOT . $DIR_SEP . 'site' . $DIR_SEP . SITE);
 define('MODULES_DIR', DAW_ROOT . $DIR_SEP . 'workspace' . $DIR_SEP . 'data' . $DIR_SEP . 'modules');
 define('DESIGN_SYSTEM_PATH', SITE_DIR . $DIR_SEP . 'design-system' . $DIR_SEP . 'divitheme.json');
@@ -242,26 +270,8 @@ function build_module(array $def, array $design_system, bool $resolved, string $
         $result['children'] = $children;
     }
 
-    // For heading blocks, align headingLevel with the resolved level from presets or tag headers in content
-    if ($module_type === 'divi/heading') {
-        $detected_level = null;
-        if (isset($result['headingFont'])) {
-            foreach (['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as $level) {
-                if (isset($result['headingFont'][$level])) {
-                    $detected_level = $level;
-                    break;
-                }
-            }
-        }
-        if (!$detected_level && isset($result['content']) && is_string($result['content'])) {
-            if (preg_match('/<h([1-6])\b/i', $result['content'], $matches)) {
-                $detected_level = 'h' . $matches[1];
-            }
-        }
-        if ($detected_level) {
-            $result['title']['decoration']['font']['font']['desktop']['value']['headingLevel'] = $detected_level;
-        }
-    }
+    // For divi/text blocks that were originally divi/heading, headingLevel is already
+    // handled via content auto-wrapping in the <h1>/<h2> tag above.
 
     $tokens = $design_system['tokens'] ?? [];
 

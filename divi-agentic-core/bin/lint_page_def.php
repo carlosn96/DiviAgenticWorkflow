@@ -7,7 +7,7 @@
  *
  * Usage:
  *   php lint_page_def.php --def=home.json
- *   php lint_page_def.php --def=site/bibliotheca/page-defs/home.json --verbose
+ *   php lint_page_def.php --def=site/<DAW_SITE>/page-defs/home.json --verbose
  *   php lint_page_def.php --def=home.json --presets=_design_presets.json
  *
  * Exit codes:
@@ -17,7 +17,34 @@
 
 $DIR_SEP = DIRECTORY_SEPARATOR;
 define('DAW_ROOT', str_replace('/', $DIR_SEP, dirname(__DIR__, 2)));
-define('DEFS_DIR', DAW_ROOT . $DIR_SEP . 'site' . $DIR_SEP . (getenv('DAW_SITE') ?: 'bibliotheca') . $DIR_SEP . 'page-defs');
+
+// Enforce fail-fast check for DAW_SITE (no defaults or fallback)
+$daw_site = getenv('DAW_SITE');
+if ($daw_site === false || $daw_site === '') {
+    $env_path = dirname(__DIR__, 3) . $DIR_SEP . '.env';
+    if (file_exists($env_path)) {
+        foreach (file($env_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+            $line = trim($line);
+            if (str_starts_with($line, 'DAW_SITE=')) {
+                $val = trim(substr($line, 9));
+                if ((str_starts_with($val, '"') && str_ends_with($val, '"')) ||
+                    (str_starts_with($val, "'") && str_ends_with($val, "'"))) {
+                    $val = substr($val, 1, -1);
+                }
+                if ($val !== '') {
+                    putenv("DAW_SITE={$val}");
+                    $daw_site = $val;
+                }
+                break;
+            }
+        }
+    }
+}
+if (!$daw_site) {
+    fwrite(STDERR, "[ERROR] DAW_SITE no está definido. Debes configurar una marca activa en .env antes de ejecutar lint_page_def.php.\n");
+    exit(1);
+}
+define('DEFS_DIR', DAW_ROOT . $DIR_SEP . 'site' . $DIR_SEP . $daw_site . $DIR_SEP . 'page-defs');
 
 $opts = getopt('', ['def::', 'presets::', 'verbose', 'help']);
 $def_file = $opts['def'] ?? null;
