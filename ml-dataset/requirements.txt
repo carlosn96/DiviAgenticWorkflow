@@ -5,3 +5,16 @@ sentence-transformers>=2.2.0
 torch>=1.10.0
 transformers>=4.20.0
 huggingface-hub>=0.10.0
+
+# Visual Intelligence Engine (v4.0+)
+# CIELAB/CIELCH perceptual color spaces, Delta E, color conversion
+colour-science>=0.4.0
+
+# Legacy color utilities (optional, used by some artefacts)
+colormath>=3.0.0
+
+# WCAG contrast ratio calculation (optional)
+wcag-contrast-ratio>=0.9
+
+# Brand generator YAML parsing (optional)
+pyyaml>=5.0

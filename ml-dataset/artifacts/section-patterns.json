@@ -1,123 +1,121 @@
 {
   "about": {
-    "total_samples": 41,
+    "total_samples": 108,
     "column_structures": [
       {
         "structure": "1_2,1_2",
-        "frequency": 0.732,
-        "count": 30
+        "frequency": 0.676,
+        "count": 73
       },
       {
         "structure": "1_3,1_3,1_3",
-        "frequency": 0.195,
-        "count": 8
+        "frequency": 0.167,
+        "count": 18
       },
       {
         "structure": "3_5,2_5",
-        "frequency": 0.122,
-        "count": 5
+        "frequency": 0.12,
+        "count": 13
       },
       {
         "structure": "2_5,3_5",
-        "frequency": 0.098,
-        "count": 4
+        "frequency": 0.083,
+        "count": 9
       },
       {
         "structure": "1_4,1_4,1_4,1_4",
-        "frequency": 0.049,
-        "count": 2
+        "frequency": 0.037,
+        "count": 4
+      },
+      {
+        "structure": "1_4,1_2,1_4",
+        "frequency": 0.009,
+        "count": 1
+      },
+      {
+        "structure": "3_4,1_4",
+        "frequency": 0.009,
+        "count": 1
       }
     ],
     "common_modules": [
       {
         "module_tag": "et_pb_text",
-        "frequency": 1.585,
-        "count": 65
-      },
-      {
-        "module_tag": "dipl_double_color_heading",
-        "frequency": 0.732,
-        "count": 30
-      },
-      {
-        "module_tag": "dipl_button_item",
-        "frequency": 0.707,
-        "count": 29
+        "frequency": 1.528,
+        "count": 165
       },
       {
         "module_tag": "et_pb_blurb",
-        "frequency": 0.683,
-        "count": 28
+        "frequency": 0.704,
+        "count": 76
       },
       {
-        "module_tag": "dipl_button",
-        "frequency": 0.634,
-        "count": 26
+        "module_tag": "dipl_double_color_heading",
+        "frequency": 0.676,
+        "count": 73
       },
       {
-        "module_tag": "dipl_floating_image_item",
-        "frequency": 0.634,
-        "count": 26
-      },
-      {
-        "module_tag": "et_pb_number_counter",
-        "frequency": 0.585,
-        "count": 24
+        "module_tag": "dipl_button_item",
+        "frequency": 0.657,
+        "count": 71
       },
       {
         "module_tag": "dipl_image_mask_item",
-        "frequency": 0.561,
-        "count": 23
+        "frequency": 0.62,
+        "count": 67
       },
       {
-        "module_tag": "dipl_image_mask",
-        "frequency": 0.366,
-        "count": 15
+        "module_tag": "dipl_button",
+        "frequency": 0.593,
+        "count": 64
       },
       {
-        "module_tag": "dipl_floating_image",
-        "frequency": 0.317,
-        "count": 13
-      },
-      {
-        "module_tag": "dipl_separator",
-        "frequency": 0.293,
-        "count": 12
+        "module_tag": "dipl_floating_image_item",
+        "frequency": 0.583,
+        "count": 63
       },
       {
         "module_tag": "et_pb_social_media_follow_network",
-        "frequency": 0.293,
-        "count": 12
+        "frequency": 0.417,
+        "count": 45
+      },
+      {
+        "module_tag": "dipl_image_mask",
+        "frequency": 0.398,
+        "count": 43
+      },
+      {
+        "module_tag": "et_pb_number_counter",
+        "frequency": 0.324,
+        "count": 35
+      },
+      {
+        "module_tag": "dipl_floating_image",
+        "frequency": 0.306,
+        "count": 33
+      },
+      {
+        "module_tag": "dipl_separator",
+        "frequency": 0.287,
+        "count": 31
       },
       {
         "module_tag": "et_pb_image",
-        "frequency": 0.244,
-        "count": 10
+        "frequency": 0.241,
+        "count": 26
+      },
+      {
+        "module_tag": "dipl_image_accordion_item",
+        "frequency": 0.176,
+        "count": 19
       },
       {
         "module_tag": "et_pb_divider",
-        "frequency": 0.146,
-        "count": 6
-      },
-      {
-        "module_tag": "dipl_flipbox",
-        "frequency": 0.146,
-        "count": 6
+        "frequency": 0.148,
+        "count": 16
       }
     ],
     "common_sequences": [
-      {
-        "sequence": [
-          "dipl_double_color_heading",
-          "et_pb_divider",
-          "et_pb_divider",
-          "et_pb_text",
-          "dipl_button",
-          "dipl_button_item"
-        ],
-        "frequency": 0.024,
-        "count": 1
-      },
       {
         "sequence": [
           "dipl_text_highlighter",
@@ -128,8 +126,8 @@
           "dipl_floating_image_item",
           "dipl_floating_image_item"
         ],
-        "frequency": 0.024,
-        "count": 1
+        "frequency": 0.028,
+        "count": 3
       },
       {
         "sequence": [
@@ -145,8 +143,8 @@
           "dipl_button",
           "dipl_button_item"
         ],
-        "frequency": 0.024,
-        "count": 1
+        "frequency": 0.028,
+        "count": 3
       },
       {
         "sequence": [
@@ -162,28 +160,8 @@
           "dipl_image_mask_item",
           "dipl_image_mask_item"
         ],
-        "frequency": 0.024,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "dipl_image_mask",
-          "dipl_image_mask_item",
-          "dipl_image_mask_item",
-          "dipl_image_mask_item",
-          "et_pb_text",
-          "dipl_separator",
-          "dipl_double_color_heading",
-          "et_pb_text",
-          "et_pb_number_counter",
-          "et_pb_number_counter",
-          "et_pb_number_counter",
-          "et_pb_number_counter",
-          "dipl_button",
-          "dipl_button_item"
-        ],
-        "frequency": 0.024,
-        "count": 1
+        "frequency": 0.028,
+        "count": 3
       },
       {
         "sequence": [
@@ -199,8 +177,8 @@
           "dipl_button",
           "dipl_button_item"
         ],
-        "frequency": 0.024,
-        "count": 1
+        "frequency": 0.028,
+        "count": 3
       },
       {
         "sequence": [
@@ -213,8 +191,8 @@
           "et_pb_image",
           "dipl_modal"
         ],
-        "frequency": 0.024,
-        "count": 1
+        "frequency": 0.028,
+        "count": 3
       },
       {
         "sequence": [
@@ -225,8 +203,8 @@
           "dipl_button",
           "dipl_button_item"
         ],
-        "frequency": 0.024,
-        "count": 1
+        "frequency": 0.028,
+        "count": 3
       },
       {
         "sequence": [
@@ -246,122 +224,182 @@
           "et_pb_blurb",
           "et_pb_blurb"
         ],
-        "frequency": 0.024,
-        "count": 1
+        "frequency": 0.028,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_text",
+          "et_pb_divider",
+          "dipl_double_color_heading",
+          "et_pb_text",
+          "dipl_flipbox",
+          "dipl_flipbox",
+          "dipl_flipbox"
+        ],
+        "frequency": 0.028,
+        "count": 3
       },
       {
         "sequence": [
           "dipl_image_mask",
           "dipl_image_mask_item",
-          "dipl_image_mask_item",
-          "dipl_image_mask_item",
-          "dipl_double_color_heading",
-          "dipl_double_color_heading",
+          "dipl_modal",
+          "dipl_floating_image",
+          "dipl_floating_image_item",
           "et_pb_text",
-          "et_pb_number_counter",
-          "et_pb_number_counter"
+          "et_pb_text",
+          "et_pb_text",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "dipl_button",
+          "dipl_button_item",
+          "et_pb_blurb"
         ],
-        "frequency": 0.024,
-        "count": 1
-      }
-    ],
-    "decorations": {
-      "gradient_frequency": 0.195,
-      "divider_frequency": 0.024,
-      "bg_image_frequency": 0.366
-    },
-    "avg_row_count": 1.0,
-    "avg_module_count": 15.5
-  },
-  "blog": {
-    "total_samples": 22,
-    "column_structures": [
-      {
-        "structure": "1_2,1_2",
-        "frequency": 0.136,
+        "frequency": 0.028,
         "count": 3
       },
       {
+        "sequence": [
+          "dipl_floating_image",
+          "dipl_floating_image_item",
+          "dipl_floating_image_item",
+          "dipl_double_color_heading",
+          "et_pb_text",
+          "dipl_button",
+          "dipl_button_item"
+        ],
+        "frequency": 0.028,
+        "count": 3
+      }
+    ],
+    "decorations": {
+      "gradient_frequency": 0.167,
+      "divider_frequency": 0.009,
+      "bg_image_frequency": 0.37
+    },
+    "avg_row_count": 1.1,
+    "avg_module_count": 15.1
+  },
+  "blog": {
+    "total_samples": 89,
+    "column_structures": [
+      {
+        "structure": "1_2,1_2",
+        "frequency": 0.303,
+        "count": 27
+      },
+      {
         "structure": "2_5,3_5",
-        "frequency": 0.091,
-        "count": 2
+        "frequency": 0.09,
+        "count": 8
       },
       {
         "structure": "1_3,2_3",
-        "frequency": 0.045,
+        "frequency": 0.056,
+        "count": 5
+      },
+      {
+        "structure": "3_4,1_4",
+        "frequency": 0.022,
+        "count": 2
+      },
+      {
+        "structure": "2_3,1_3",
+        "frequency": 0.011,
+        "count": 1
+      },
+      {
+        "structure": "1_4,1_2,1_4",
+        "frequency": 0.011,
+        "count": 1
+      },
+      {
+        "structure": "1_3,1_3,1_3",
+        "frequency": 0.011,
+        "count": 1
+      },
+      {
+        "structure": "3_5,2_5",
+        "frequency": 0.011,
         "count": 1
       }
     ],
     "common_modules": [
       {
-        "module_tag": "dipl_blog_slider",
-        "frequency": 0.727,
-        "count": 16
+        "module_tag": "et_pb_text",
+        "frequency": 1.067,
+        "count": 95
       },
       {
-        "module_tag": "et_pb_text",
-        "frequency": 0.545,
-        "count": 12
+        "module_tag": "dipl_blog_slider",
+        "frequency": 0.461,
+        "count": 41
       },
       {
         "module_tag": "dipl_double_color_heading",
-        "frequency": 0.409,
-        "count": 9
+        "frequency": 0.382,
+        "count": 34
       },
       {
-        "module_tag": "dipl_posts_ticker",
-        "frequency": 0.182,
-        "count": 4
+        "module_tag": "dipl_list_item",
+        "frequency": 0.315,
+        "count": 28
       },
       {
-        "module_tag": "dipl_button",
-        "frequency": 0.136,
-        "count": 3
+        "module_tag": "et_pb_heading",
+        "frequency": 0.213,
+        "count": 19
       },
       {
-        "module_tag": "dipl_button_item",
-        "frequency": 0.136,
-        "count": 3
+        "module_tag": "et_pb_contact_field",
+        "frequency": 0.18,
+        "count": 16
       },
       {
-        "module_tag": "dipl_text_highlighter",
-        "frequency": 0.091,
-        "count": 2
+        "module_tag": "et_pb_social_media_follow_network",
+        "frequency": 0.112,
+        "count": 10
       },
       {
-        "module_tag": "dipl_fancy_text",
-        "frequency": 0.091,
-        "count": 2
+        "module_tag": "dipl_tabs_item",
+        "frequency": 0.112,
+        "count": 10
+      },
+      {
+        "module_tag": "dipl_team_slider",
+        "frequency": 0.112,
+        "count": 10
       },
       {
         "module_tag": "dipl_separator",
-        "frequency": 0.091,
-        "count": 2
+        "frequency": 0.101,
+        "count": 9
       },
       {
-        "module_tag": "et_pb_divider",
-        "frequency": 0.045,
-        "count": 1
+        "module_tag": "dipl_business_hours_item",
+        "frequency": 0.101,
+        "count": 9
       },
       {
-        "module_tag": "dipl_marquee_text",
-        "frequency": 0.045,
-        "count": 1
+        "module_tag": "dipl_timeline_item",
+        "frequency": 0.09,
+        "count": 8
       },
       {
-        "module_tag": "et_pb_image",
-        "frequency": 0.045,
-        "count": 1
+        "module_tag": "dipl_button",
+        "frequency": 0.079,
+        "count": 7
       },
       {
-        "module_tag": "dipl_ajax_search",
-        "frequency": 0.045,
-        "count": 1
+        "module_tag": "dipl_button_item",
+        "frequency": 0.079,
+        "count": 7
       },
       {
-        "module_tag": "et_pb_blog",
-        "frequency": 0.045,
-        "count": 1
+        "module_tag": "dipl_fancy_text",
+        "frequency": 0.079,
+        "count": 7
       }
     ],
     "common_sequences": [
@@ -369,53 +407,48 @@
         "sequence": [
           "dipl_blog_slider"
         ],
-        "frequency": 0.182,
-        "count": 4
+        "frequency": 0.067,
+        "count": 6
+      },
+      {
+        "sequence": [
+          "et_pb_text",
+          "dipl_double_color_heading",
+          "dipl_blog_slider"
+        ],
+        "frequency": 0.067,
+        "count": 6
       },
       {
         "sequence": [
           "dipl_posts_ticker"
         ],
-        "frequency": 0.182,
-        "count": 4
+        "frequency": 0.056,
+        "count": 5
       },
       {
         "sequence": [
           "dipl_text_highlighter",
           "dipl_blog_slider"
         ],
-        "frequency": 0.091,
-        "count": 2
+        "frequency": 0.045,
+        "count": 4
       },
       {
         "sequence": [
           "dipl_double_color_heading",
-          "dipl_blog_slider"
-        ],
-        "frequency": 0.091,
-        "count": 2
-      },
-      {
-        "sequence": [
-          "et_pb_text",
-          "dipl_double_color_heading",
-          "dipl_blog_slider"
-        ],
-        "frequency": 0.091,
-        "count": 2
-      },
-      {
-        "sequence": [
-          "dipl_double_color_heading",
-          "dipl_double_color_heading",
-          "et_pb_divider",
-          "et_pb_text",
-          "dipl_button",
-          "dipl_button_item",
           "dipl_blog_slider"
         ],
         "frequency": 0.045,
-        "count": 1
+        "count": 4
+      },
+      {
+        "sequence": [
+          "dipl_double_color_heading",
+          "dipl_team_slider"
+        ],
+        "frequency": 0.045,
+        "count": 4
       },
       {
         "sequence": [
@@ -423,8 +456,8 @@
           "dipl_separator",
           "dipl_blog_slider"
         ],
-        "frequency": 0.045,
-        "count": 1
+        "frequency": 0.034,
+        "count": 3
       },
       {
         "sequence": [
@@ -432,8 +465,8 @@
           "dipl_double_color_heading",
           "dipl_blog_slider"
         ],
-        "frequency": 0.045,
-        "count": 1
+        "frequency": 0.034,
+        "count": 3
       },
       {
         "sequence": [
@@ -442,8 +475,8 @@
           "et_pb_text",
           "dipl_blog_slider"
         ],
-        "frequency": 0.045,
-        "count": 1
+        "frequency": 0.034,
+        "count": 3
       },
       {
         "sequence": [
@@ -453,127 +486,132 @@
           "dipl_button_item",
           "dipl_blog_slider"
         ],
-        "frequency": 0.045,
-        "count": 1
+        "frequency": 0.034,
+        "count": 3
       }
     ],
     "decorations": {
-      "gradient_frequency": 0.182,
+      "gradient_frequency": 0.18,
       "divider_frequency": 0.0,
-      "bg_image_frequency": 0.136
+      "bg_image_frequency": 0.225
     },
     "avg_row_count": 1.3,
-    "avg_module_count": 6.5
+    "avg_module_count": 9.2
   },
   "contact": {
-    "total_samples": 25,
+    "total_samples": 82,
     "column_structures": [
       {
         "structure": "1_2,1_2",
-        "frequency": 0.36,
-        "count": 9
+        "frequency": 0.378,
+        "count": 31
       },
       {
         "structure": "1_3,2_3",
-        "frequency": 0.24,
-        "count": 6
+        "frequency": 0.159,
+        "count": 13
       },
       {
         "structure": "3_5,2_5",
-        "frequency": 0.12,
-        "count": 3
+        "frequency": 0.122,
+        "count": 10
       },
       {
         "structure": "2_5,3_5",
-        "frequency": 0.08,
-        "count": 2
-      },
-      {
-        "structure": "2_3,1_3",
-        "frequency": 0.04,
-        "count": 1
+        "frequency": 0.098,
+        "count": 8
       },
       {
         "structure": "1_3,1_3,1_3",
-        "frequency": 0.04,
-        "count": 1
+        "frequency": 0.098,
+        "count": 8
+      },
+      {
+        "structure": "2_3,1_3",
+        "frequency": 0.037,
+        "count": 3
+      },
+      {
+        "structure": "1_4,1_4,1_4,1_4",
+        "frequency": 0.037,
+        "count": 3
       }
     ],
     "common_modules": [
       {
         "module_tag": "et_pb_blurb",
-        "frequency": 1.68,
-        "count": 42
+        "frequency": 2.061,
+        "count": 169
       },
       {
         "module_tag": "et_pb_contact_field",
-        "frequency": 1.44,
-        "count": 36
+        "frequency": 1.11,
+        "count": 91
       },
       {
         "module_tag": "et_pb_text",
-        "frequency": 1.12,
-        "count": 28
+        "frequency": 1.085,
+        "count": 89
       },
       {
         "module_tag": "dipl_double_color_heading",
-        "frequency": 0.72,
-        "count": 18
+        "frequency": 0.671,
+        "count": 55
       },
       {
         "module_tag": "et_pb_social_media_follow_network",
-        "frequency": 0.6,
-        "count": 15
+        "frequency": 0.549,
+        "count": 45
       },
       {
         "module_tag": "dipl_form_styler",
-        "frequency": 0.56,
-        "count": 14
+        "frequency": 0.415,
+        "count": 34
       },
       {
         "module_tag": "et_pb_contact_form",
-        "frequency": 0.36,
-        "count": 9
+        "frequency": 0.268,
+        "count": 22
       },
       {
         "module_tag": "dipl_separator",
-        "frequency": 0.24,
-        "count": 6
-      },
-      {
-        "module_tag": "et_pb_divider",
-        "frequency": 0.2,
-        "count": 5
-      },
-      {
-        "module_tag": "dipl_faq_page_schema_item",
-        "frequency": 0.2,
-        "count": 5
-      },
-      {
-        "module_tag": "et_pb_social_media_follow",
-        "frequency": 0.16,
-        "count": 4
+        "frequency": 0.268,
+        "count": 22
       },
       {
         "module_tag": "dipl_button",
-        "frequency": 0.12,
-        "count": 3
-      },
-      {
-        "module_tag": "et_pb_image",
-        "frequency": 0.08,
-        "count": 2
+        "frequency": 0.195,
+        "count": 16
       },
       {
         "module_tag": "dipl_button_item",
-        "frequency": 0.08,
-        "count": 2
+        "frequency": 0.171,
+        "count": 14
       },
       {
-        "module_tag": "dipl_fancy_text",
-        "frequency": 0.04,
-        "count": 1
+        "module_tag": "dipl_timeline_item",
+        "frequency": 0.171,
+        "count": 14
+      },
+      {
+        "module_tag": "et_pb_divider",
+        "frequency": 0.146,
+        "count": 12
+      },
+      {
+        "module_tag": "et_pb_social_media_follow",
+        "frequency": 0.146,
+        "count": 12
+      },
+      {
+        "module_tag": "dipl_faq_page_schema_item",
+        "frequency": 0.122,
+        "count": 10
+      },
+      {
+        "module_tag": "et_pb_image",
+        "frequency": 0.11,
+        "count": 9
       }
     ],
     "common_sequences": [
@@ -586,8 +624,8 @@
           "et_pb_blurb",
           "dipl_form_styler"
         ],
-        "frequency": 0.08,
-        "count": 2
+        "frequency": 0.073,
+        "count": 6
       },
       {
         "sequence": [
@@ -598,8 +636,8 @@
           "et_pb_blurb",
           "dipl_form_styler"
         ],
-        "frequency": 0.08,
-        "count": 2
+        "frequency": 0.049,
+        "count": 4
       },
       {
         "sequence": [
@@ -609,22 +647,8 @@
           "et_pb_blurb",
           "dipl_form_styler"
         ],
-        "frequency": 0.08,
-        "count": 2
-      },
-      {
-        "sequence": [
-          "dipl_double_color_heading",
-          "et_pb_divider",
-          "et_pb_divider",
-          "et_pb_contact_form",
-          "et_pb_contact_field",
-          "et_pb_contact_field",
-          "et_pb_contact_field",
-          "et_pb_contact_field"
-        ],
-        "frequency": 0.04,
-        "count": 1
+        "frequency": 0.049,
+        "count": 4
       },
       {
         "sequence": [
@@ -637,18 +661,8 @@
           "et_pb_contact_field",
           "et_pb_contact_field"
         ],
-        "frequency": 0.04,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "dipl_double_color_heading",
-          "dipl_double_color_heading",
-          "et_pb_text",
-          "dipl_form_styler"
-        ],
-        "frequency": 0.04,
-        "count": 1
+        "frequency": 0.037,
+        "count": 3
       },
       {
         "sequence": [
@@ -662,18 +676,8 @@
           "et_pb_blurb",
           "et_pb_blurb"
         ],
-        "frequency": 0.04,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "dipl_button",
-          "dipl_double_color_heading",
-          "et_pb_text",
-          "dipl_form_styler"
-        ],
-        "frequency": 0.04,
-        "count": 1
+        "frequency": 0.037,
+        "count": 3
       },
       {
         "sequence": [
@@ -685,8 +689,8 @@
           "et_pb_blurb",
           "dipl_form_styler"
         ],
-        "frequency": 0.04,
-        "count": 1
+        "frequency": 0.037,
+        "count": 3
       },
       {
         "sequence": [
@@ -694,147 +698,184 @@
           "dipl_form_styler",
           "et_pb_image"
         ],
-        "frequency": 0.04,
-        "count": 1
-      }
-    ],
-    "decorations": {
-      "gradient_frequency": 0.48,
-      "divider_frequency": 0.0,
-      "bg_image_frequency": 0.52
-    },
-    "avg_row_count": 1.5,
-    "avg_module_count": 12.7
-  },
-  "countdown": {
-    "total_samples": 26,
-    "column_structures": [
-      {
-        "structure": "1_2,1_2",
-        "frequency": 0.308,
-        "count": 8
-      },
-      {
-        "structure": "1_3,2_3",
-        "frequency": 0.115,
+        "frequency": 0.037,
         "count": 3
       },
       {
-        "structure": "3_4,1_4",
-        "frequency": 0.077,
-        "count": 2
+        "sequence": [
+          "et_pb_text",
+          "dipl_form_styler"
+        ],
+        "frequency": 0.037,
+        "count": 3
       },
       {
-        "structure": "3_5,2_5",
-        "frequency": 0.077,
-        "count": 2
+        "sequence": [
+          "dipl_double_color_heading",
+          "dipl_separator",
+          "dipl_form_styler",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_blurb"
+        ],
+        "frequency": 0.037,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_text",
+          "dipl_double_color_heading",
+          "et_pb_contact_form",
+          "et_pb_contact_field",
+          "et_pb_contact_field",
+          "et_pb_contact_field",
+          "et_pb_contact_field",
+          "et_pb_text",
+          "dipl_double_color_heading",
+          "et_pb_text",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_social_media_follow",
+          "et_pb_social_media_follow_network",
+          "et_pb_social_media_follow_network",
+          "et_pb_social_media_follow_network",
+          "et_pb_social_media_follow_network"
+        ],
+        "frequency": 0.037,
+        "count": 3
+      }
+    ],
+    "decorations": {
+      "gradient_frequency": 0.366,
+      "divider_frequency": 0.0,
+      "bg_image_frequency": 0.463
+    },
+    "avg_row_count": 1.5,
+    "avg_module_count": 13.9
+  },
+  "countdown": {
+    "total_samples": 81,
+    "column_structures": [
+      {
+        "structure": "1_2,1_2",
+        "frequency": 0.296,
+        "count": 24
+      },
+      {
+        "structure": "1_3,2_3",
+        "frequency": 0.099,
+        "count": 8
       },
       {
         "structure": "2_5,3_5",
-        "frequency": 0.077,
-        "count": 2
+        "frequency": 0.086,
+        "count": 7
       },
       {
-        "structure": "1_4,1_4,1_2",
-        "frequency": 0.038,
-        "count": 1
+        "structure": "3_4,1_4",
+        "frequency": 0.074,
+        "count": 6
+      },
+      {
+        "structure": "1_3,1_3,1_3",
+        "frequency": 0.074,
+        "count": 6
       },
       {
         "structure": "1_4,3_4",
-        "frequency": 0.038,
-        "count": 1
+        "frequency": 0.049,
+        "count": 4
       },
       {
         "structure": "1_4,1_2,1_4",
-        "frequency": 0.038,
-        "count": 1
+        "frequency": 0.049,
+        "count": 4
+      },
+      {
+        "structure": "3_5,2_5",
+        "frequency": 0.037,
+        "count": 3
       }
     ],
     "common_modules": [
       {
         "module_tag": "et_pb_text",
-        "frequency": 0.769,
-        "count": 20
-      },
-      {
-        "module_tag": "dipl_promotion_bar",
-        "frequency": 0.5,
-        "count": 13
+        "frequency": 0.58,
+        "count": 47
       },
       {
         "module_tag": "et_pb_heading",
-        "frequency": 0.423,
-        "count": 11
-      },
-      {
-        "module_tag": "et_pb_countdown_timer",
-        "frequency": 0.385,
-        "count": 10
-      },
-      {
-        "module_tag": "dipl_button",
-        "frequency": 0.346,
-        "count": 9
+        "frequency": 0.481,
+        "count": 39
       },
       {
         "module_tag": "dipl_button_item",
-        "frequency": 0.346,
-        "count": 9
+        "frequency": 0.42,
+        "count": 34
       },
       {
-        "module_tag": "dipl_double_color_heading",
-        "frequency": 0.308,
-        "count": 8
+        "module_tag": "dipl_button",
+        "frequency": 0.407,
+        "count": 33
       },
       {
         "module_tag": "dipl_floating_image_item",
-        "frequency": 0.308,
-        "count": 8
+        "frequency": 0.407,
+        "count": 33
       },
       {
-        "module_tag": "et_pb_button",
-        "frequency": 0.269,
-        "count": 7
-      },
-      {
-        "module_tag": "et_pb_blurb",
-        "frequency": 0.231,
-        "count": 6
-      },
-      {
-        "module_tag": "dipl_woo_products",
-        "frequency": 0.192,
-        "count": 5
-      },
-      {
-        "module_tag": "dipl_floating_image",
-        "frequency": 0.192,
-        "count": 5
-      },
-      {
-        "module_tag": "dipl_woo_products_categories",
-        "frequency": 0.154,
-        "count": 4
+        "module_tag": "dipl_promotion_bar",
+        "frequency": 0.346,
+        "count": 28
       },
       {
         "module_tag": "et_pb_social_media_follow_network",
-        "frequency": 0.154,
-        "count": 4
+        "frequency": 0.284,
+        "count": 23
       },
       {
-        "module_tag": "et_pb_divider",
-        "frequency": 0.077,
-        "count": 2
+        "module_tag": "et_pb_countdown_timer",
+        "frequency": 0.272,
+        "count": 22
+      },
+      {
+        "module_tag": "dipl_floating_image",
+        "frequency": 0.259,
+        "count": 21
+      },
+      {
+        "module_tag": "et_pb_blurb",
+        "frequency": 0.247,
+        "count": 20
+      },
+      {
+        "module_tag": "dipl_woo_products_categories",
+        "frequency": 0.235,
+        "count": 19
+      },
+      {
+        "module_tag": "dipl_double_color_heading",
+        "frequency": 0.235,
+        "count": 19
+      },
+      {
+        "module_tag": "et_pb_button",
+        "frequency": 0.222,
+        "count": 18
+      },
+      {
+        "module_tag": "dipl_image_card",
+        "frequency": 0.173,
+        "count": 14
+      },
+      {
+        "module_tag": "dipl_fancy_text",
+        "frequency": 0.16,
+        "count": 13
       }
     ],
     "common_sequences": [
-      {
-        "sequence": [
-          "dipl_promotion_bar"
-        ],
-        "frequency": 0.077,
-        "count": 2
-      },
       {
         "sequence": [
           "dipl_promotion_bar",
@@ -846,18 +887,15 @@
           "dipl_promotion_bar",
           "et_pb_button"
         ],
-        "frequency": 0.038,
-        "count": 1
+        "frequency": 0.037,
+        "count": 3
       },
       {
         "sequence": [
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_text",
-          "dipl_woo_products_categories"
+          "dipl_promotion_bar"
         ],
-        "frequency": 0.038,
-        "count": 1
+        "frequency": 0.037,
+        "count": 3
       },
       {
         "sequence": [
@@ -868,8 +906,8 @@
           "et_pb_wc_add_to_cart",
           "dipl_woo_product_gallery"
         ],
-        "frequency": 0.038,
-        "count": 1
+        "frequency": 0.037,
+        "count": 3
       },
       {
         "sequence": [
@@ -880,47 +918,8 @@
           "et_pb_heading",
           "dipl_woo_products_categories"
         ],
-        "frequency": 0.038,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "dipl_woo_products_categories",
-          "et_pb_text",
-          "et_pb_heading",
-          "et_pb_divider",
-          "et_pb_countdown_timer",
-          "dipl_button",
-          "dipl_button_item"
-        ],
-        "frequency": 0.038,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "dipl_double_color_heading",
-          "et_pb_countdown_timer",
-          "dipl_woo_products_carousel",
-          "dipl_button",
-          "dipl_button_item"
-        ],
-        "frequency": 0.038,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "dipl_floating_image",
-          "dipl_floating_image_item",
-          "dipl_floating_image",
-          "dipl_floating_image_item",
-          "et_pb_heading",
-          "et_pb_heading",
-          "et_pb_heading",
-          "dipl_button",
-          "dipl_button_item"
-        ],
-        "frequency": 0.038,
-        "count": 1
+        "frequency": 0.037,
+        "count": 3
       },
       {
         "sequence": [
@@ -934,133 +933,196 @@
           "dipl_floating_image_item",
           "et_pb_countdown_timer"
         ],
-        "frequency": 0.038,
-        "count": 1
+        "frequency": 0.037,
+        "count": 3
       },
       {
         "sequence": [
+          "dipl_floating_image",
+          "dipl_floating_image_item",
+          "dipl_floating_image_item",
+          "dipl_fancy_text",
           "et_pb_text",
-          "dipl_double_color_heading",
           "et_pb_countdown_timer",
           "dipl_button",
           "dipl_button_item"
         ],
-        "frequency": 0.038,
-        "count": 1
+        "frequency": 0.037,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_image",
+          "dipl_promotion_bar"
+        ],
+        "frequency": 0.037,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "dipl_tilt_image",
+          "dipl_double_color_heading",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_blurb"
+        ],
+        "frequency": 0.037,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "dipl_image_mask",
+          "dipl_fancy_text",
+          "et_pb_text",
+          "et_pb_text",
+          "et_pb_countdown_timer",
+          "dipl_button",
+          "dipl_button_item"
+        ],
+        "frequency": 0.037,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "dipl_floating_image",
+          "dipl_floating_image_item",
+          "dipl_floating_image_item",
+          "dipl_promotion_bar"
+        ],
+        "frequency": 0.037,
+        "count": 3
       }
     ],
     "decorations": {
-      "gradient_frequency": 0.192,
+      "gradient_frequency": 0.148,
       "divider_frequency": 0.0,
-      "bg_image_frequency": 0.192
+      "bg_image_frequency": 0.16
     },
     "avg_row_count": 1.0,
-    "avg_module_count": 9.7
+    "avg_module_count": 10.3
   },
   "cta": {
-    "total_samples": 20,
+    "total_samples": 71,
     "column_structures": [
       {
         "structure": "1_2,1_2",
-        "frequency": 0.4,
-        "count": 8
+        "frequency": 0.451,
+        "count": 32
       },
       {
         "structure": "1_3,1_3,1_3",
-        "frequency": 0.1,
-        "count": 2
+        "frequency": 0.099,
+        "count": 7
+      },
+      {
+        "structure": "1_4,1_4,1_4,1_4",
+        "frequency": 0.085,
+        "count": 6
       },
       {
         "structure": "3_4,1_4",
-        "frequency": 0.05,
-        "count": 1
+        "frequency": 0.028,
+        "count": 2
       },
       {
         "structure": "3_5,2_5",
-        "frequency": 0.05,
-        "count": 1
+        "frequency": 0.028,
+        "count": 2
+      },
+      {
+        "structure": "1_4,1_2,1_4",
+        "frequency": 0.028,
+        "count": 2
       },
       {
         "structure": "1_4,1_4,1_2",
-        "frequency": 0.05,
+        "frequency": 0.014,
+        "count": 1
+      },
+      {
+        "structure": "1_6,1_6,1_6,1_6,1_6,1_6",
+        "frequency": 0.014,
         "count": 1
       }
     ],
     "common_modules": [
       {
         "module_tag": "et_pb_text",
-        "frequency": 1.85,
-        "count": 37
+        "frequency": 1.451,
+        "count": 103
       },
       {
         "module_tag": "dipl_button_item",
-        "frequency": 1.15,
-        "count": 23
+        "frequency": 0.986,
+        "count": 70
       },
       {
         "module_tag": "dipl_button",
-        "frequency": 0.8,
-        "count": 16
-      },
-      {
-        "module_tag": "dipl_tabs_item",
-        "frequency": 0.45,
-        "count": 9
-      },
-      {
-        "module_tag": "dipl_double_color_heading",
-        "frequency": 0.25,
-        "count": 5
-      },
-      {
-        "module_tag": "dipl_bar_counter",
-        "frequency": 0.2,
-        "count": 4
-      },
-      {
-        "module_tag": "et_pb_image",
-        "frequency": 0.2,
-        "count": 4
-      },
-      {
-        "module_tag": "et_pb_button",
-        "frequency": 0.15,
-        "count": 3
-      },
-      {
-        "module_tag": "dipl_floating_image",
-        "frequency": 0.1,
-        "count": 2
-      },
-      {
-        "module_tag": "dipl_floating_image_item",
-        "frequency": 0.1,
-        "count": 2
-      },
-      {
-        "module_tag": "dipl_tabs",
-        "frequency": 0.1,
-        "count": 2
+        "frequency": 0.732,
+        "count": 52
       },
       {
         "module_tag": "et_pb_blurb",
-        "frequency": 0.1,
-        "count": 2
+        "frequency": 0.676,
+        "count": 48
+      },
+      {
+        "module_tag": "et_pb_social_media_follow_network",
+        "frequency": 0.408,
+        "count": 29
+      },
+      {
+        "module_tag": "dipl_double_color_heading",
+        "frequency": 0.394,
+        "count": 28
+      },
+      {
+        "module_tag": "dipl_tabs_item",
+        "frequency": 0.324,
+        "count": 23
+      },
+      {
+        "module_tag": "et_pb_image",
+        "frequency": 0.225,
+        "count": 16
+      },
+      {
+        "module_tag": "et_pb_button",
+        "frequency": 0.127,
+        "count": 9
       },
       {
         "module_tag": "et_pb_divider",
-        "frequency": 0.1,
-        "count": 2
+        "frequency": 0.113,
+        "count": 8
+      },
+      {
+        "module_tag": "et_pb_social_media_follow",
+        "frequency": 0.099,
+        "count": 7
       },
       {
         "module_tag": "dipl_fancy_text",
-        "frequency": 0.05,
-        "count": 1
+        "frequency": 0.085,
+        "count": 6
       },
       {
-        "module_tag": "dipl_text_animator",
-        "frequency": 0.05,
-        "count": 1
+        "module_tag": "dipl_tabs",
+        "frequency": 0.07,
+        "count": 5
+      },
+      {
+        "module_tag": "dipl_masonry_gallery",
+        "frequency": 0.07,
+        "count": 5
+      },
+      {
+        "module_tag": "dipl_woo_products",
+        "frequency": 0.07,
+        "count": 5
       }
     ],
     "common_sequences": [
@@ -1072,50 +1134,19 @@
           "dipl_button_item",
           "dipl_button_item"
         ],
-        "frequency": 0.15,
+        "frequency": 0.085,
+        "count": 6
+      },
+      {
+        "sequence": [
+          "et_pb_text",
+          "dipl_button",
+          "dipl_button_item",
+          "dipl_button_item",
+          "dipl_button_item"
+        ],
+        "frequency": 0.042,
         "count": 3
-      },
-      {
-        "sequence": [
-          "et_pb_text",
-          "et_pb_text",
-          "dipl_bar_counter",
-          "dipl_bar_counter",
-          "dipl_bar_counter",
-          "dipl_bar_counter"
-        ],
-        "frequency": 0.05,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_text",
-          "dipl_button",
-          "dipl_button_item"
-        ],
-        "frequency": 0.05,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_text",
-          "dipl_button",
-          "dipl_button_item",
-          "dipl_button_item",
-          "dipl_button_item"
-        ],
-        "frequency": 0.05,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_text",
-          "dipl_fancy_text",
-          "dipl_button",
-          "dipl_button_item"
-        ],
-        "frequency": 0.05,
-        "count": 1
       },
       {
         "sequence": [
@@ -1125,18 +1156,8 @@
           "dipl_button_item",
           "dipl_button_item"
         ],
-        "frequency": 0.05,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_text",
-          "et_pb_text",
-          "dipl_button",
-          "dipl_button_item"
-        ],
-        "frequency": 0.05,
-        "count": 1
+        "frequency": 0.042,
+        "count": 3
       },
       {
         "sequence": [
@@ -1146,26 +1167,8 @@
           "et_pb_text",
           "et_pb_button"
         ],
-        "frequency": 0.05,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "dipl_floating_image",
-          "dipl_floating_image_item",
-          "et_pb_text",
-          "et_pb_text",
-          "dipl_button",
-          "dipl_button_item",
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_text"
-        ],
-        "frequency": 0.05,
-        "count": 1
+        "frequency": 0.042,
+        "count": 3
       },
       {
         "sequence": [
@@ -1181,120 +1184,160 @@
           "et_pb_text",
           "et_pb_button"
         ],
-        "frequency": 0.05,
-        "count": 1
+        "frequency": 0.042,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "dipl_double_color_heading",
+          "et_pb_divider",
+          "et_pb_divider",
+          "dipl_button",
+          "dipl_button_item",
+          "dipl_masonry_gallery"
+        ],
+        "frequency": 0.042,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "dipl_double_color_heading",
+          "dipl_button",
+          "dipl_button_item"
+        ],
+        "frequency": 0.042,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_text",
+          "dipl_button",
+          "dipl_button_item"
+        ],
+        "frequency": 0.028,
+        "count": 2
+      },
+      {
+        "sequence": [
+          "et_pb_text",
+          "dipl_fancy_text",
+          "dipl_button",
+          "dipl_button_item"
+        ],
+        "frequency": 0.028,
+        "count": 2
+      },
+      {
+        "sequence": [
+          "et_pb_text",
+          "et_pb_text",
+          "dipl_button",
+          "dipl_button_item"
+        ],
+        "frequency": 0.028,
+        "count": 2
       }
     ],
     "decorations": {
-      "gradient_frequency": 0.4,
+      "gradient_frequency": 0.437,
       "divider_frequency": 0.0,
-      "bg_image_frequency": 0.4
+      "bg_image_frequency": 0.38
     },
-    "avg_row_count": 1.1,
-    "avg_module_count": 10.2
+    "avg_row_count": 1.4,
+    "avg_module_count": 11.5
   },
   "faq": {
-    "total_samples": 12,
+    "total_samples": 26,
     "column_structures": [
       {
         "structure": "1_2,1_2",
-        "frequency": 0.333,
-        "count": 4
+        "frequency": 0.308,
+        "count": 8
+      },
+      {
+        "structure": "1_3,1_3,1_3",
+        "frequency": 0.038,
+        "count": 1
       }
     ],
     "common_modules": [
       {
         "module_tag": "dipl_faq_page_schema_item",
-        "frequency": 5.75,
-        "count": 69
-      },
-      {
-        "module_tag": "et_pb_text",
-        "frequency": 1.0,
-        "count": 12
-      },
-      {
-        "module_tag": "dipl_faq_page_schema",
-        "frequency": 0.917,
-        "count": 11
+        "frequency": 4.115,
+        "count": 107
       },
       {
         "module_tag": "dipl_double_color_heading",
-        "frequency": 0.667,
-        "count": 8
+        "frequency": 0.846,
+        "count": 22
       },
       {
-        "module_tag": "dipl_hotspot_item",
-        "frequency": 0.583,
-        "count": 7
+        "module_tag": "et_pb_text",
+        "frequency": 0.731,
+        "count": 19
       },
       {
         "module_tag": "et_pb_accordion_item",
-        "frequency": 0.5,
-        "count": 6
+        "frequency": 0.692,
+        "count": 18
       },
       {
-        "module_tag": "et_pb_divider",
-        "frequency": 0.167,
-        "count": 2
+        "module_tag": "dipl_faq_page_schema",
+        "frequency": 0.654,
+        "count": 17
       },
       {
-        "module_tag": "et_pb_image",
-        "frequency": 0.167,
-        "count": 2
+        "module_tag": "dipl_horizontal_scrolling_card_item",
+        "frequency": 0.423,
+        "count": 11
       },
       {
-        "module_tag": "dipl_image_mask_item",
-        "frequency": 0.167,
-        "count": 2
+        "module_tag": "dipl_image_card_carousel_item",
+        "frequency": 0.385,
+        "count": 10
+      },
+      {
+        "module_tag": "dipl_hotspot_item",
+        "frequency": 0.269,
+        "count": 7
+      },
+      {
+        "module_tag": "et_pb_blurb",
+        "frequency": 0.269,
+        "count": 7
       },
       {
         "module_tag": "dipl_separator",
-        "frequency": 0.083,
-        "count": 1
+        "frequency": 0.231,
+        "count": 6
+      },
+      {
+        "module_tag": "dipl_business_hours_item",
+        "frequency": 0.231,
+        "count": 6
+      },
+      {
+        "module_tag": "et_pb_image",
+        "frequency": 0.192,
+        "count": 5
       },
       {
         "module_tag": "et_pb_accordion",
-        "frequency": 0.083,
-        "count": 1
-      },
-      {
-        "module_tag": "dipl_image_mask",
-        "frequency": 0.083,
-        "count": 1
+        "frequency": 0.115,
+        "count": 3
       },
       {
         "module_tag": "dipl_fancy_text",
-        "frequency": 0.083,
-        "count": 1
+        "frequency": 0.115,
+        "count": 3
       },
       {
-        "module_tag": "dipl_hotspot",
-        "frequency": 0.083,
-        "count": 1
+        "module_tag": "et_pb_divider",
+        "frequency": 0.077,
+        "count": 2
       }
     ],
     "common_sequences": [
-      {
-        "sequence": [
-          "et_pb_text",
-          "et_pb_divider",
-          "dipl_double_color_heading",
-          "dipl_faq_page_schema",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item"
-        ],
-        "frequency": 0.167,
-        "count": 2
-      },
       {
         "sequence": [
           "et_pb_text",
@@ -1310,8 +1353,90 @@
           "et_pb_accordion_item",
           "et_pb_accordion_item"
         ],
-        "frequency": 0.083,
-        "count": 1
+        "frequency": 0.115,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "dipl_double_color_heading",
+          "dipl_faq_page_schema",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item"
+        ],
+        "frequency": 0.115,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "dipl_double_color_heading",
+          "dipl_fancy_text",
+          "dipl_faq_page_schema",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item"
+        ],
+        "frequency": 0.115,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_text",
+          "et_pb_divider",
+          "dipl_double_color_heading",
+          "dipl_faq_page_schema",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item"
+        ],
+        "frequency": 0.077,
+        "count": 2
+      },
+      {
+        "sequence": [
+          "dipl_double_color_heading",
+          "et_pb_text",
+          "dipl_faq_page_schema",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item"
+        ],
+        "frequency": 0.077,
+        "count": 2
+      },
+      {
+        "sequence": [
+          "dipl_double_color_heading",
+          "dipl_double_color_heading",
+          "dipl_faq_page_schema",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "et_pb_image"
+        ],
+        "frequency": 0.077,
+        "count": 2
       },
       {
         "sequence": [
@@ -1326,36 +1451,7 @@
           "dipl_faq_page_schema_item",
           "dipl_faq_page_schema_item"
         ],
-        "frequency": 0.083,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "dipl_double_color_heading",
-          "dipl_faq_page_schema",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item"
-        ],
-        "frequency": 0.083,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "dipl_double_color_heading",
-          "dipl_fancy_text",
-          "dipl_faq_page_schema",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item"
-        ],
-        "frequency": 0.083,
+        "frequency": 0.038,
         "count": 1
       },
       {
@@ -1368,7 +1464,7 @@
           "dipl_faq_page_schema_item",
           "dipl_faq_page_schema_item"
         ],
-        "frequency": 0.083,
+        "frequency": 0.038,
         "count": 1
       },
       {
@@ -1382,7 +1478,7 @@
           "dipl_faq_page_schema_item",
           "dipl_faq_page_schema_item"
         ],
-        "frequency": 0.083,
+        "frequency": 0.038,
         "count": 1
       },
       {
@@ -1394,170 +1490,137 @@
           "dipl_faq_page_schema_item",
           "dipl_faq_page_schema_item"
         ],
-        "frequency": 0.083,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "dipl_double_color_heading",
-          "et_pb_text",
-          "dipl_faq_page_schema",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item"
-        ],
-        "frequency": 0.083,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "dipl_double_color_heading",
-          "dipl_double_color_heading",
-          "dipl_faq_page_schema",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "dipl_faq_page_schema_item",
-          "et_pb_image"
-        ],
-        "frequency": 0.083,
+        "frequency": 0.038,
         "count": 1
       }
     ],
     "decorations": {
       "gradient_frequency": 0.0,
       "divider_frequency": 0.0,
-      "bg_image_frequency": 0.0
+      "bg_image_frequency": 0.038
     },
-    "avg_row_count": 1.4,
-    "avg_module_count": 14.5
+    "avg_row_count": 1.5,
+    "avg_module_count": 14.2
   },
   "features": {
-    "total_samples": 115,
+    "total_samples": 322,
     "column_structures": [
       {
         "structure": "1_3,1_3,1_3",
-        "frequency": 0.522,
-        "count": 60
+        "frequency": 0.419,
+        "count": 135
       },
       {
         "structure": "1_2,1_2",
-        "frequency": 0.435,
-        "count": 50
+        "frequency": 0.416,
+        "count": 134
       },
       {
         "structure": "1_4,1_4,1_4,1_4",
-        "frequency": 0.174,
-        "count": 20
+        "frequency": 0.155,
+        "count": 50
       },
       {
         "structure": "3_5,2_5",
-        "frequency": 0.035,
-        "count": 4
+        "frequency": 0.037,
+        "count": 12
       },
       {
         "structure": "2_5,3_5",
-        "frequency": 0.026,
-        "count": 3
-      },
-      {
-        "structure": "1_4,3_4",
-        "frequency": 0.017,
-        "count": 2
+        "frequency": 0.031,
+        "count": 10
       },
       {
         "structure": "1_2,1_4,1_4",
-        "frequency": 0.017,
-        "count": 2
+        "frequency": 0.025,
+        "count": 8
       },
       {
-        "structure": "1_4,1_2,1_4",
-        "frequency": 0.009,
-        "count": 1
+        "structure": "1_4,3_4",
+        "frequency": 0.019,
+        "count": 6
+      },
+      {
+        "structure": "1_3,2_3",
+        "frequency": 0.012,
+        "count": 4
       }
     ],
     "common_modules": [
       {
         "module_tag": "et_pb_blurb",
-        "frequency": 1.774,
-        "count": 204
-      },
-      {
-        "module_tag": "dipl_flipbox",
-        "frequency": 1.235,
-        "count": 142
+        "frequency": 1.528,
+        "count": 492
       },
       {
         "module_tag": "et_pb_text",
-        "frequency": 1.165,
-        "count": 134
+        "frequency": 1.317,
+        "count": 424
       },
       {
         "module_tag": "dipl_list_item",
-        "frequency": 1.087,
-        "count": 125
+        "frequency": 1.121,
+        "count": 361
+      },
+      {
+        "module_tag": "dipl_flipbox",
+        "frequency": 0.823,
+        "count": 265
       },
       {
         "module_tag": "dipl_double_color_heading",
-        "frequency": 0.539,
-        "count": 62
-      },
-      {
-        "module_tag": "dipl_button_item",
-        "frequency": 0.409,
-        "count": 47
-      },
-      {
-        "module_tag": "dipl_button",
-        "frequency": 0.391,
-        "count": 45
+        "frequency": 0.509,
+        "count": 164
       },
       {
         "module_tag": "et_pb_heading",
-        "frequency": 0.357,
-        "count": 41
+        "frequency": 0.379,
+        "count": 122
+      },
+      {
+        "module_tag": "dipl_button_item",
+        "frequency": 0.342,
+        "count": 110
+      },
+      {
+        "module_tag": "dipl_button",
+        "frequency": 0.332,
+        "count": 107
       },
       {
         "module_tag": "dipl_list",
-        "frequency": 0.252,
-        "count": 29
-      },
-      {
-        "module_tag": "dipl_interactive_image_card",
-        "frequency": 0.226,
-        "count": 26
+        "frequency": 0.264,
+        "count": 85
       },
       {
         "module_tag": "dipl_separator",
-        "frequency": 0.226,
-        "count": 26
-      },
-      {
-        "module_tag": "dipl_image_card_carousel_item",
-        "frequency": 0.217,
-        "count": 25
+        "frequency": 0.196,
+        "count": 63
       },
       {
         "module_tag": "dipl_image_card",
-        "frequency": 0.209,
-        "count": 24
+        "frequency": 0.18,
+        "count": 58
       },
       {
         "module_tag": "dipl_floating_image_item",
-        "frequency": 0.2,
-        "count": 23
+        "frequency": 0.177,
+        "count": 57
+      },
+      {
+        "module_tag": "dipl_image_card_carousel_item",
+        "frequency": 0.171,
+        "count": 55
+      },
+      {
+        "module_tag": "dipl_interactive_image_card",
+        "frequency": 0.165,
+        "count": 53
       },
       {
         "module_tag": "dipl_fancy_text",
-        "frequency": 0.174,
-        "count": 20
+        "frequency": 0.149,
+        "count": 48
       }
     ],
     "common_sequences": [
@@ -1570,8 +1633,8 @@
           "dipl_flipbox",
           "dipl_flipbox"
         ],
-        "frequency": 0.043,
-        "count": 5
+        "frequency": 0.019,
+        "count": 6
       },
       {
         "sequence": [
@@ -1583,56 +1646,8 @@
           "dipl_image_card_carousel_item",
           "dipl_image_card_carousel_item"
         ],
-        "frequency": 0.017,
-        "count": 2
-      },
-      {
-        "sequence": [
-          "dipl_flipbox",
-          "dipl_flipbox",
-          "dipl_flipbox",
-          "dipl_flipbox"
-        ],
-        "frequency": 0.017,
-        "count": 2
-      },
-      {
-        "sequence": [
-          "dipl_double_color_heading",
-          "dipl_flipbox",
-          "dipl_flipbox",
-          "dipl_flipbox"
-        ],
-        "frequency": 0.017,
-        "count": 2
-      },
-      {
-        "sequence": [
-          "dipl_fancy_text",
-          "dipl_separator",
-          "dipl_flipbox",
-          "dipl_flipbox",
-          "dipl_flipbox",
-          "dipl_flipbox",
-          "dipl_flipbox",
-          "dipl_flipbox"
-        ],
-        "frequency": 0.017,
-        "count": 2
-      },
-      {
-        "sequence": [
-          "et_pb_text",
-          "dipl_double_color_heading",
-          "et_pb_text",
-          "dipl_button",
-          "dipl_button_item",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "et_pb_blurb"
-        ],
-        "frequency": 0.009,
-        "count": 1
+        "frequency": 0.012,
+        "count": 4
       },
       {
         "sequence": [
@@ -1643,37 +1658,56 @@
           "et_pb_blurb"
         ],
         "frequency": 0.009,
-        "count": 1
+        "count": 3
       },
       {
         "sequence": [
           "et_pb_text",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "dipl_button",
-          "dipl_button_item"
-        ],
-        "frequency": 0.009,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_heading",
           "et_pb_text",
+          "dipl_image_card",
+          "dipl_image_card",
           "dipl_button",
           "dipl_button_item",
-          "dipl_button_item"
+          "dipl_image_mask",
+          "dipl_image_mask_item",
+          "dipl_image_mask_item"
         ],
         "frequency": 0.009,
-        "count": 1
+        "count": 3
       },
       {
         "sequence": [
-          "dipl_double_color_heading",
+          "et_pb_text",
+          "et_pb_text",
+          "dipl_flipbox",
+          "dipl_flipbox",
+          "dipl_flipbox",
+          "dipl_flipbox",
+          "dipl_flipbox",
+          "dipl_flipbox",
+          "dipl_flipbox",
+          "dipl_flipbox",
+          "dipl_flipbox"
+        ],
+        "frequency": 0.009,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_image",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_blurb"
+        ],
+        "frequency": 0.009,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_text",
           "dipl_image_card_carousel",
           "dipl_image_card_carousel_item",
           "dipl_image_card_carousel_item",
@@ -1682,136 +1716,214 @@
           "dipl_image_card_carousel_item"
         ],
         "frequency": 0.009,
-        "count": 1
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_heading",
+          "dipl_business_hours",
+          "dipl_business_hours_item",
+          "dipl_business_hours_item",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_social_media_follow",
+          "et_pb_social_media_follow_network",
+          "et_pb_social_media_follow_network",
+          "et_pb_social_media_follow_network",
+          "et_pb_social_media_follow_network"
+        ],
+        "frequency": 0.009,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "dipl_double_color_heading",
+          "dipl_flipbox",
+          "dipl_flipbox",
+          "dipl_flipbox",
+          "dipl_flipbox",
+          "dipl_button",
+          "dipl_button_item"
+        ],
+        "frequency": 0.009,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "dipl_double_color_heading",
+          "dipl_separator",
+          "et_pb_icon",
+          "et_pb_heading",
+          "dipl_separator",
+          "dipl_list",
+          "dipl_list_item",
+          "dipl_list_item",
+          "dipl_list_item",
+          "dipl_list_item",
+          "dipl_button",
+          "dipl_button_item",
+          "et_pb_icon",
+          "et_pb_heading",
+          "dipl_separator",
+          "dipl_list",
+          "dipl_list_item",
+          "dipl_list_item",
+          "dipl_list_item",
+          "dipl_list_item",
+          "dipl_button",
+          "dipl_button_item",
+          "et_pb_icon",
+          "et_pb_heading",
+          "dipl_separator",
+          "dipl_list",
+          "dipl_list_item",
+          "dipl_list_item",
+          "dipl_list_item",
+          "dipl_list_item",
+          "dipl_button",
+          "dipl_button_item",
+          "et_pb_icon",
+          "et_pb_heading",
+          "dipl_separator",
+          "dipl_list",
+          "dipl_list_item",
+          "dipl_list_item",
+          "dipl_list_item",
+          "dipl_list_item",
+          "dipl_button",
+          "dipl_button_item"
+        ],
+        "frequency": 0.009,
+        "count": 3
       }
     ],
     "decorations": {
-      "gradient_frequency": 0.209,
+      "gradient_frequency": 0.239,
       "divider_frequency": 0.0,
       "bg_image_frequency": 0.27
     },
     "avg_row_count": 1.7,
-    "avg_module_count": 17.3
+    "avg_module_count": 16.6
   },
   "footer": {
-    "total_samples": 24,
+    "total_samples": 62,
     "column_structures": [
       {
         "structure": "1_3,1_3,1_3",
-        "frequency": 0.375,
-        "count": 9
-      },
-      {
-        "structure": "1_4,1_4,1_4,1_4",
-        "frequency": 0.375,
-        "count": 9
+        "frequency": 0.435,
+        "count": 27
       },
       {
         "structure": "1_2,1_2",
-        "frequency": 0.25,
-        "count": 6
+        "frequency": 0.323,
+        "count": 20
       },
       {
-        "structure": "1_4,1_2,1_4",
-        "frequency": 0.125,
-        "count": 3
+        "structure": "1_4,1_4,1_4,1_4",
+        "frequency": 0.306,
+        "count": 19
       },
       {
         "structure": "3_5,2_5",
-        "frequency": 0.083,
-        "count": 2
+        "frequency": 0.081,
+        "count": 5
       },
       {
-        "structure": "1_5,1_5,1_5,1_5,1_5",
-        "frequency": 0.083,
-        "count": 2
+        "structure": "1_4,1_2,1_4",
+        "frequency": 0.081,
+        "count": 5
       },
       {
         "structure": "1_3,2_3",
-        "frequency": 0.042,
-        "count": 1
+        "frequency": 0.048,
+        "count": 3
       },
       {
-        "structure": "1_2,1_4,1_4",
-        "frequency": 0.042,
-        "count": 1
+        "structure": "1_5,1_5,1_5,1_5,1_5",
+        "frequency": 0.048,
+        "count": 3
+      },
+      {
+        "structure": "2_5,3_5",
+        "frequency": 0.048,
+        "count": 3
       }
     ],
     "common_modules": [
       {
         "module_tag": "et_pb_text",
-        "frequency": 4.417,
-        "count": 106
+        "frequency": 3.758,
+        "count": 233
       },
       {
         "module_tag": "et_pb_social_media_follow_network",
-        "frequency": 3.25,
-        "count": 78
+        "frequency": 2.742,
+        "count": 170
       },
       {
         "module_tag": "et_pb_blurb",
-        "frequency": 2.375,
-        "count": 57
+        "frequency": 2.484,
+        "count": 154
       },
       {
         "module_tag": "et_pb_social_media_follow",
-        "frequency": 0.833,
-        "count": 20
+        "frequency": 0.71,
+        "count": 44
       },
       {
         "module_tag": "et_pb_image",
-        "frequency": 0.5,
-        "count": 12
-      },
-      {
-        "module_tag": "et_pb_signup",
-        "frequency": 0.375,
-        "count": 9
+        "frequency": 0.532,
+        "count": 33
       },
       {
         "module_tag": "dipl_button_item",
-        "frequency": 0.292,
-        "count": 7
-      },
-      {
-        "module_tag": "dipl_business_hours_item",
-        "frequency": 0.292,
-        "count": 7
+        "frequency": 0.371,
+        "count": 23
       },
       {
         "module_tag": "dipl_button",
-        "frequency": 0.25,
-        "count": 6
+        "frequency": 0.339,
+        "count": 21
       },
       {
-        "module_tag": "et_pb_icon",
-        "frequency": 0.167,
-        "count": 4
+        "module_tag": "et_pb_signup",
+        "frequency": 0.274,
+        "count": 17
       },
       {
-        "module_tag": "et_pb_divider",
-        "frequency": 0.167,
-        "count": 4
-      },
-      {
-        "module_tag": "et_pb_code",
-        "frequency": 0.125,
-        "count": 3
-      },
-      {
-        "module_tag": "et_pb_sidebar",
-        "frequency": 0.125,
-        "count": 3
+        "module_tag": "dipl_business_hours_item",
+        "frequency": 0.258,
+        "count": 16
       },
       {
         "module_tag": "dipl_double_color_heading",
-        "frequency": 0.125,
-        "count": 3
+        "frequency": 0.21,
+        "count": 13
       },
       {
-        "module_tag": "dipl_business_hours",
-        "frequency": 0.083,
-        "count": 2
+        "module_tag": "et_pb_icon",
+        "frequency": 0.194,
+        "count": 12
+      },
+      {
+        "module_tag": "et_pb_divider",
+        "frequency": 0.129,
+        "count": 8
+      },
+      {
+        "module_tag": "dipl_tilt_image",
+        "frequency": 0.113,
+        "count": 7
+      },
+      {
+        "module_tag": "et_pb_heading",
+        "frequency": 0.097,
+        "count": 6
+      },
+      {
+        "module_tag": "et_pb_sidebar",
+        "frequency": 0.097,
+        "count": 6
       }
     ],
     "common_sequences": [
@@ -1829,68 +1941,8 @@
           "et_pb_social_media_follow_network",
           "et_pb_social_media_follow_network"
         ],
-        "frequency": 0.042,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_text",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_social_media_follow",
-          "et_pb_social_media_follow_network",
-          "et_pb_social_media_follow_network",
-          "et_pb_social_media_follow_network",
-          "et_pb_social_media_follow_network",
-          "et_pb_social_media_follow_network",
-          "et_pb_text",
-          "et_pb_text"
-        ],
-        "frequency": 0.042,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "et_pb_text",
-          "et_pb_social_media_follow",
-          "et_pb_social_media_follow_network",
-          "et_pb_social_media_follow_network",
-          "et_pb_social_media_follow_network",
-          "et_pb_blurb",
-          "et_pb_text",
-          "et_pb_blurb",
-          "et_pb_text",
-          "et_pb_blurb",
-          "et_pb_text",
-          "et_pb_signup",
-          "et_pb_text"
-        ],
-        "frequency": 0.042,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "et_pb_text",
-          "et_pb_image",
-          "et_pb_signup",
-          "et_pb_social_media_follow",
-          "et_pb_social_media_follow_network",
-          "et_pb_social_media_follow_network",
-          "et_pb_social_media_follow_network",
-          "et_pb_social_media_follow_network",
-          "et_pb_text",
-          "et_pb_text"
-        ],
-        "frequency": 0.042,
-        "count": 1
+        "frequency": 0.048,
+        "count": 3
       },
       {
         "sequence": [
@@ -1902,8 +1954,8 @@
           "et_pb_social_media_follow_network",
           "et_pb_text"
         ],
-        "frequency": 0.042,
-        "count": 1
+        "frequency": 0.048,
+        "count": 3
       },
       {
         "sequence": [
@@ -1919,12 +1971,32 @@
           "et_pb_blurb",
           "et_pb_blurb"
         ],
-        "frequency": 0.042,
-        "count": 1
+        "frequency": 0.048,
+        "count": 3
       },
       {
         "sequence": [
-          "et_pb_code",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_social_media_follow",
+          "et_pb_social_media_follow_network",
+          "et_pb_social_media_follow_network",
+          "et_pb_social_media_follow_network",
+          "et_pb_social_media_follow_network",
+          "et_pb_social_media_follow_network",
+          "et_pb_text",
+          "et_pb_image",
+          "et_pb_text"
+        ],
+        "frequency": 0.048,
+        "count": 3
+      },
+      {
+        "sequence": [
           "et_pb_image",
           "et_pb_text",
           "et_pb_social_media_follow",
@@ -1932,62 +2004,24 @@
           "et_pb_social_media_follow_network",
           "et_pb_social_media_follow_network",
           "et_pb_social_media_follow_network",
-          "et_pb_heading",
-          "dipl_text_highlighter",
-          "dipl_text_highlighter",
-          "et_pb_heading",
-          "et_pb_signup"
-        ],
-        "frequency": 0.042,
-        "count": 1
-      },
-      {
-        "sequence": [
           "et_pb_text",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_blurb",
           "et_pb_text",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_blurb",
           "et_pb_text",
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_text",
-          "dipl_button",
-          "dipl_button_item",
-          "dipl_button",
-          "dipl_button_item",
-          "et_pb_text",
-          "et_pb_social_media_follow",
-          "et_pb_social_media_follow_network",
-          "et_pb_social_media_follow_network",
-          "et_pb_social_media_follow_network",
-          "et_pb_social_media_follow_network",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_blurb",
           "et_pb_text"
         ],
-        "frequency": 0.042,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_signup",
-          "et_pb_code",
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "et_pb_text",
-          "et_pb_social_media_follow",
-          "et_pb_social_media_follow_network",
-          "et_pb_social_media_follow_network",
-          "et_pb_social_media_follow_network"
-        ],
-        "frequency": 0.042,
-        "count": 1
+        "frequency": 0.048,
+        "count": 3
       },
       {
         "sequence": [
@@ -1995,152 +2029,216 @@
           "et_pb_text",
           "et_pb_text",
           "et_pb_text",
-          "et_pb_sidebar",
           "et_pb_text",
           "et_pb_text",
-          "et_pb_sidebar",
           "et_pb_text",
           "et_pb_text",
-          "et_pb_sidebar",
+          "et_pb_social_media_follow",
+          "et_pb_social_media_follow_network",
+          "et_pb_social_media_follow_network",
+          "et_pb_social_media_follow_network",
+          "et_pb_social_media_follow_network",
+          "et_pb_text",
+          "et_pb_icon",
+          "et_pb_icon",
+          "et_pb_icon",
+          "et_pb_icon",
+          "et_pb_text"
+        ],
+        "frequency": 0.048,
+        "count": 3
+      },
+      {
+        "sequence": [
           "et_pb_text",
           "et_pb_signup",
+          "et_pb_image",
           "et_pb_social_media_follow",
           "et_pb_social_media_follow_network",
           "et_pb_social_media_follow_network",
           "et_pb_social_media_follow_network",
           "et_pb_text"
         ],
-        "frequency": 0.042,
-        "count": 1
+        "frequency": 0.048,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_image",
+          "dipl_double_color_heading",
+          "dipl_button",
+          "dipl_button_item",
+          "dipl_double_color_heading",
+          "dipl_button",
+          "dipl_button_item",
+          "et_pb_text",
+          "et_pb_social_media_follow",
+          "et_pb_social_media_follow_network",
+          "et_pb_social_media_follow_network",
+          "et_pb_social_media_follow_network",
+          "et_pb_text"
+        ],
+        "frequency": 0.048,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_text",
+          "et_pb_text",
+          "et_pb_image",
+          "et_pb_text"
+        ],
+        "frequency": 0.048,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_text",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_text",
+          "et_pb_text",
+          "et_pb_social_media_follow",
+          "et_pb_social_media_follow_network",
+          "et_pb_social_media_follow_network",
+          "et_pb_social_media_follow_network",
+          "et_pb_social_media_follow_network",
+          "et_pb_social_media_follow_network",
+          "et_pb_text",
+          "et_pb_text"
+        ],
+        "frequency": 0.032,
+        "count": 2
       }
     ],
     "decorations": {
-      "gradient_frequency": 0.167,
-      "divider_frequency": 0.083,
-      "bg_image_frequency": 0.208
+      "gradient_frequency": 0.177,
+      "divider_frequency": 0.065,
+      "bg_image_frequency": 0.194
     },
-    "avg_row_count": 2.2,
-    "avg_module_count": 22.3
+    "avg_row_count": 2.1,
+    "avg_module_count": 21.2
   },
   "gallery": {
-    "total_samples": 98,
+    "total_samples": 194,
     "column_structures": [
       {
         "structure": "1_2,1_2",
-        "frequency": 0.276,
-        "count": 27
+        "frequency": 0.289,
+        "count": 56
       },
       {
         "structure": "1_3,1_3,1_3",
-        "frequency": 0.235,
-        "count": 23
+        "frequency": 0.211,
+        "count": 41
       },
       {
         "structure": "2_5,3_5",
-        "frequency": 0.102,
-        "count": 10
-      },
-      {
-        "structure": "1_4,1_4,1_4,1_4",
-        "frequency": 0.092,
-        "count": 9
+        "frequency": 0.119,
+        "count": 23
       },
       {
         "structure": "3_5,2_5",
-        "frequency": 0.061,
-        "count": 6
+        "frequency": 0.077,
+        "count": 15
       },
       {
-        "structure": "1_2,1_4,1_4",
-        "frequency": 0.041,
-        "count": 4
+        "structure": "1_4,1_4,1_4,1_4",
+        "frequency": 0.072,
+        "count": 14
       },
       {
         "structure": "2_3,1_3",
-        "frequency": 0.041,
-        "count": 4
+        "frequency": 0.057,
+        "count": 11
       },
       {
         "structure": "1_4,1_2,1_4",
-        "frequency": 0.031,
-        "count": 3
+        "frequency": 0.036,
+        "count": 7
+      },
+      {
+        "structure": "1_2,1_4,1_4",
+        "frequency": 0.026,
+        "count": 5
       }
     ],
     "common_modules": [
       {
         "module_tag": "et_pb_text",
-        "frequency": 0.806,
-        "count": 79
-      },
-      {
-        "module_tag": "dipl_image_card",
-        "frequency": 0.622,
-        "count": 61
+        "frequency": 0.943,
+        "count": 183
       },
       {
         "module_tag": "et_pb_image",
-        "frequency": 0.602,
-        "count": 59
+        "frequency": 0.649,
+        "count": 126
+      },
+      {
+        "module_tag": "dipl_image_card",
+        "frequency": 0.454,
+        "count": 88
       },
       {
         "module_tag": "dipl_double_color_heading",
-        "frequency": 0.388,
-        "count": 38
+        "frequency": 0.407,
+        "count": 79
       },
       {
         "module_tag": "dipl_button_item",
-        "frequency": 0.306,
-        "count": 30
-      },
-      {
-        "module_tag": "dipl_image_accordion_item",
-        "frequency": 0.286,
-        "count": 28
+        "frequency": 0.376,
+        "count": 73
       },
       {
         "module_tag": "dipl_button",
-        "frequency": 0.276,
-        "count": 27
-      },
-      {
-        "module_tag": "dipl_interactive_image_card",
-        "frequency": 0.214,
-        "count": 21
+        "frequency": 0.34,
+        "count": 66
       },
       {
         "module_tag": "dipl_list_item",
-        "frequency": 0.194,
-        "count": 19
+        "frequency": 0.247,
+        "count": 48
       },
       {
         "module_tag": "dipl_business_hours_item",
-        "frequency": 0.184,
-        "count": 18
+        "frequency": 0.216,
+        "count": 42
       },
       {
-        "module_tag": "dipl_scroll_text",
-        "frequency": 0.184,
-        "count": 18
+        "module_tag": "dipl_image_accordion_item",
+        "frequency": 0.211,
+        "count": 41
+      },
+      {
+        "module_tag": "dipl_interactive_image_card",
+        "frequency": 0.186,
+        "count": 36
       },
       {
         "module_tag": "et_pb_heading",
-        "frequency": 0.173,
-        "count": 17
+        "frequency": 0.155,
+        "count": 30
+      },
+      {
+        "module_tag": "dipl_scroll_text",
+        "frequency": 0.139,
+        "count": 27
       },
       {
         "module_tag": "dipl_woo_products_categories",
-        "frequency": 0.133,
-        "count": 13
+        "frequency": 0.129,
+        "count": 25
+      },
+      {
+        "module_tag": "et_pb_blurb",
+        "frequency": 0.124,
+        "count": 24
       },
       {
         "module_tag": "dipl_masonry_gallery",
-        "frequency": 0.122,
-        "count": 12
-      },
-      {
-        "module_tag": "dipl_tabs_item",
-        "frequency": 0.112,
-        "count": 11
+        "frequency": 0.119,
+        "count": 23
       }
     ],
     "common_sequences": [
@@ -2150,7 +2248,7 @@
           "dipl_image_card",
           "dipl_image_card"
         ],
-        "frequency": 0.041,
+        "frequency": 0.021,
         "count": 4
       },
       {
@@ -2164,31 +2262,8 @@
           "dipl_image_card",
           "dipl_image_card"
         ],
-        "frequency": 0.02,
-        "count": 2
-      },
-      {
-        "sequence": [
-          "dipl_double_color_heading",
-          "et_pb_text",
-          "dipl_image_accordion",
-          "dipl_image_accordion_item",
-          "dipl_image_accordion_item",
-          "dipl_image_accordion_item",
-          "dipl_image_accordion_item"
-        ],
-        "frequency": 0.02,
-        "count": 2
-      },
-      {
-        "sequence": [
-          "et_pb_text",
-          "dipl_image_card",
-          "dipl_image_card",
-          "dipl_image_card"
-        ],
-        "frequency": 0.02,
-        "count": 2
+        "frequency": 0.021,
+        "count": 4
       },
       {
         "sequence": [
@@ -2196,200 +2271,215 @@
           "dipl_woo_products_categories",
           "et_pb_image"
         ],
-        "frequency": 0.02,
-        "count": 2
+        "frequency": 0.021,
+        "count": 4
       },
       {
         "sequence": [
           "et_pb_text",
-          "dipl_tabs",
-          "dipl_tabs_item",
-          "dipl_tabs_item",
-          "dipl_tabs_item",
-          "dipl_tabs_item",
+          "et_pb_text",
+          "dipl_ajax_search",
+          "et_pb_text",
           "et_pb_image",
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_text"
+          "et_pb_image",
+          "et_pb_image",
+          "et_pb_image",
+          "et_pb_image",
+          "et_pb_image"
         ],
-        "frequency": 0.01,
-        "count": 1
+        "frequency": 0.015,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_text",
+          "dipl_double_color_heading",
+          "et_pb_gallery"
+        ],
+        "frequency": 0.015,
+        "count": 3
       },
       {
         "sequence": [
           "et_pb_image",
           "dipl_double_color_heading",
-          "dipl_list",
-          "dipl_list_item",
-          "dipl_list_item",
-          "dipl_list_item",
-          "dipl_list_item",
-          "dipl_list_item",
-          "dipl_list_item",
-          "et_pb_image"
+          "et_pb_text",
+          "et_pb_text",
+          "dipl_button",
+          "dipl_button_item",
+          "dipl_button_item"
         ],
-        "frequency": 0.01,
-        "count": 1
+        "frequency": 0.015,
+        "count": 3
       },
       {
         "sequence": [
-          "dipl_image_card",
-          "dipl_image_card",
-          "dipl_image_card",
-          "dipl_image_card"
+          "et_pb_text",
+          "et_pb_heading",
+          "et_pb_image",
+          "et_pb_text",
+          "dipl_button",
+          "dipl_button_item",
+          "dipl_woo_products"
         ],
-        "frequency": 0.01,
-        "count": 1
+        "frequency": 0.015,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "dipl_tilt_image",
+          "dipl_image_card_carousel",
+          "dipl_image_card_carousel_item",
+          "dipl_image_card_carousel_item",
+          "dipl_image_card_carousel_item",
+          "dipl_image_card_carousel_item"
+        ],
+        "frequency": 0.015,
+        "count": 3
       },
       {
         "sequence": [
           "dipl_double_color_heading",
-          "dipl_image_card",
-          "dipl_image_card",
-          "dipl_image_card"
+          "dipl_masonry_gallery"
         ],
-        "frequency": 0.01,
-        "count": 1
+        "frequency": 0.015,
+        "count": 3
       },
       {
         "sequence": [
-          "dipl_fancy_text",
-          "et_pb_cta",
-          "et_pb_image",
-          "et_pb_image"
+          "dipl_masonry_gallery"
         ],
-        "frequency": 0.01,
-        "count": 1
+        "frequency": 0.015,
+        "count": 3
       }
     ],
     "decorations": {
-      "gradient_frequency": 0.265,
-      "divider_frequency": 0.02,
-      "bg_image_frequency": 0.143
+      "gradient_frequency": 0.258,
+      "divider_frequency": 0.031,
+      "bg_image_frequency": 0.139
     },
     "avg_row_count": 1.4,
-    "avg_module_count": 11.2
+    "avg_module_count": 11.5
   },
   "generic": {
-    "total_samples": 117,
+    "total_samples": 185,
     "column_structures": [
       {
         "structure": "1_2,1_2",
-        "frequency": 0.282,
-        "count": 33
+        "frequency": 0.292,
+        "count": 54
       },
       {
         "structure": "1_3,1_3,1_3",
-        "frequency": 0.145,
-        "count": 17
+        "frequency": 0.135,
+        "count": 25
       },
       {
         "structure": "1_4,1_4,1_4,1_4",
-        "frequency": 0.068,
-        "count": 8
+        "frequency": 0.076,
+        "count": 14
       },
       {
         "structure": "3_5,2_5",
-        "frequency": 0.051,
-        "count": 6
-      },
-      {
-        "structure": "1_4,1_4,1_2",
-        "frequency": 0.034,
-        "count": 4
-      },
-      {
-        "structure": "2_5,3_5",
-        "frequency": 0.034,
-        "count": 4
+        "frequency": 0.059,
+        "count": 11
       },
       {
         "structure": "1_4,1_2,1_4",
-        "frequency": 0.026,
-        "count": 3
+        "frequency": 0.043,
+        "count": 8
       },
       {
-        "structure": "1_3,2_3",
-        "frequency": 0.026,
-        "count": 3
+        "structure": "2_5,3_5",
+        "frequency": 0.038,
+        "count": 7
+      },
+      {
+        "structure": "1_4,1_4,1_2",
+        "frequency": 0.032,
+        "count": 6
+      },
+      {
+        "structure": "1_2,1_4,1_4",
+        "frequency": 0.022,
+        "count": 4
       }
     ],
     "common_modules": [
       {
         "module_tag": "et_pb_text",
-        "frequency": 0.872,
-        "count": 102
+        "frequency": 0.897,
+        "count": 166
       },
       {
         "module_tag": "dipl_double_color_heading",
-        "frequency": 0.53,
-        "count": 62
+        "frequency": 0.535,
+        "count": 99
       },
       {
         "module_tag": "dipl_price_list_item",
-        "frequency": 0.427,
-        "count": 50
+        "frequency": 0.432,
+        "count": 80
       },
       {
         "module_tag": "et_pb_social_media_follow_network",
-        "frequency": 0.393,
-        "count": 46
+        "frequency": 0.395,
+        "count": 73
       },
       {
         "module_tag": "dipl_button_item",
-        "frequency": 0.359,
-        "count": 42
+        "frequency": 0.389,
+        "count": 72
       },
       {
         "module_tag": "dipl_button",
-        "frequency": 0.35,
-        "count": 41
+        "frequency": 0.378,
+        "count": 70
       },
       {
         "module_tag": "dipl_interactive_image_card",
-        "frequency": 0.274,
-        "count": 32
+        "frequency": 0.292,
+        "count": 54
       },
       {
         "module_tag": "dipl_tilt_image",
-        "frequency": 0.214,
-        "count": 25
-      },
-      {
-        "module_tag": "dipl_horizontal_scrolling_card_item",
-        "frequency": 0.197,
-        "count": 23
-      },
-      {
-        "module_tag": "dipl_faq_page_schema_item",
-        "frequency": 0.197,
-        "count": 23
-      },
-      {
-        "module_tag": "dipl_price_list",
-        "frequency": 0.179,
-        "count": 21
-      },
-      {
-        "module_tag": "dipl_business_hours_item",
-        "frequency": 0.171,
-        "count": 20
+        "frequency": 0.243,
+        "count": 45
       },
       {
         "module_tag": "dipl_floating_image_item",
-        "frequency": 0.145,
-        "count": 17
+        "frequency": 0.195,
+        "count": 36
       },
       {
-        "module_tag": "dipl_star_rating",
-        "frequency": 0.145,
-        "count": 17
+        "module_tag": "dipl_horizontal_scrolling_card_item",
+        "frequency": 0.189,
+        "count": 35
+      },
+      {
+        "module_tag": "dipl_faq_page_schema_item",
+        "frequency": 0.178,
+        "count": 33
+      },
+      {
+        "module_tag": "dipl_business_hours_item",
+        "frequency": 0.141,
+        "count": 26
+      },
+      {
+        "module_tag": "dipl_price_list",
+        "frequency": 0.141,
+        "count": 26
       },
       {
         "module_tag": "dipl_separator",
-        "frequency": 0.137,
-        "count": 16
+        "frequency": 0.135,
+        "count": 25
+      },
+      {
+        "module_tag": "dipl_fancy_text",
+        "frequency": 0.13,
+        "count": 24
       }
     ],
     "common_sequences": [
@@ -2400,7 +2490,7 @@
           "dipl_hero_slider_item",
           "dipl_hero_slider_item"
         ],
-        "frequency": 0.034,
+        "frequency": 0.022,
         "count": 4
       },
       {
@@ -2411,23 +2501,58 @@
           "dipl_button_item",
           "dipl_mystery_image"
         ],
-        "frequency": 0.017,
-        "count": 2
+        "frequency": 0.016,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "dipl_separator",
+          "dipl_double_color_heading",
+          "dipl_background_switcher",
+          "dipl_background_switcher_item",
+          "dipl_background_switcher_item",
+          "et_pb_text",
+          "dipl_button",
+          "dipl_button_item"
+        ],
+        "frequency": 0.016,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "dipl_double_color_heading",
+          "et_pb_text",
+          "dipl_button",
+          "dipl_button_item",
+          "dipl_image_mask"
+        ],
+        "frequency": 0.016,
+        "count": 3
       },
       {
         "sequence": [
           "et_pb_text",
-          "dipl_business_hours",
-          "dipl_business_hours_item",
-          "dipl_business_hours_item",
-          "dipl_business_hours_item",
-          "dipl_business_hours_item",
-          "dipl_business_hours_item",
-          "dipl_business_hours_item",
-          "dipl_business_hours_item"
+          "dipl_floating_image",
+          "dipl_floating_image_item",
+          "dipl_floating_image_item",
+          "dipl_floating_image_item",
+          "dipl_testimonial_slider",
+          "dipl_floating_image",
+          "dipl_floating_image_item",
+          "dipl_floating_image_item",
+          "dipl_floating_image_item"
         ],
-        "frequency": 0.017,
-        "count": 2
+        "frequency": 0.016,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "dipl_fancy_text",
+          "et_pb_text",
+          "dipl_before_after_slider"
+        ],
+        "frequency": 0.016,
+        "count": 3
       },
       {
         "sequence": [
@@ -2436,8 +2561,27 @@
           "dipl_ajax_search",
           "et_pb_text"
         ],
-        "frequency": 0.017,
-        "count": 2
+        "frequency": 0.016,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_text",
+          "dipl_double_color_heading",
+          "dipl_faq_page_schema",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_faq_page_schema_item",
+          "dipl_mystery_image",
+          "dipl_double_color_heading",
+          "et_pb_text",
+          "dipl_button",
+          "dipl_button_item"
+        ],
+        "frequency": 0.016,
+        "count": 3
       },
       {
         "sequence": [
@@ -2447,218 +2591,182 @@
           "dipl_hotspot_item",
           "dipl_hotspot_item"
         ],
-        "frequency": 0.017,
-        "count": 2
+        "frequency": 0.016,
+        "count": 3
       },
       {
         "sequence": [
-          "dipl_star_rating",
-          "dipl_star_rating",
-          "dipl_star_rating"
-        ],
-        "frequency": 0.017,
-        "count": 2
-      },
-      {
-        "sequence": [
-          "dipl_fancy_text",
-          "dipl_separator",
-          "et_pb_text",
-          "et_pb_social_media_follow",
-          "et_pb_social_media_follow_network",
-          "et_pb_social_media_follow_network",
-          "et_pb_social_media_follow_network",
-          "et_pb_social_media_follow_network",
-          "et_pb_social_media_follow_network"
-        ],
-        "frequency": 0.017,
-        "count": 2
-      },
-      {
-        "sequence": [
-          "dipl_tilt_image",
-          "dipl_text_highlighter",
+          "dipl_image_mask",
+          "dipl_image_mask_item",
+          "dipl_image_mask_item",
+          "dipl_double_color_heading",
           "et_pb_text",
           "dipl_button",
           "dipl_button_item"
         ],
-        "frequency": 0.009,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "dipl_tilt_image",
-          "dipl_fancy_text",
-          "dipl_separator",
-          "et_pb_text",
-          "et_pb_social_media_follow",
-          "et_pb_social_media_follow_network",
-          "et_pb_social_media_follow_network",
-          "et_pb_social_media_follow_network",
-          "et_pb_social_media_follow_network",
-          "et_pb_social_media_follow_network",
-          "dipl_button",
-          "dipl_button_item"
-        ],
-        "frequency": 0.009,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_text",
-          "et_pb_text",
-          "dipl_tilt_image",
-          "dipl_tilt_image",
-          "dipl_tilt_image",
-          "dipl_tilt_image"
-        ],
-        "frequency": 0.009,
-        "count": 1
+        "frequency": 0.016,
+        "count": 3
       }
     ],
     "decorations": {
-      "gradient_frequency": 0.265,
-      "divider_frequency": 0.009,
-      "bg_image_frequency": 0.291
+      "gradient_frequency": 0.276,
+      "divider_frequency": 0.011,
+      "bg_image_frequency": 0.27
     },
     "avg_row_count": 1.4,
     "avg_module_count": 11.8
   },
   "hero": {
-    "total_samples": 173,
+    "total_samples": 459,
     "column_structures": [
       {
         "structure": "1_2,1_2",
-        "frequency": 0.329,
-        "count": 57
+        "frequency": 0.349,
+        "count": 160
       },
       {
         "structure": "1_3,1_3,1_3",
-        "frequency": 0.127,
-        "count": 22
+        "frequency": 0.15,
+        "count": 69
       },
       {
         "structure": "3_5,2_5",
-        "frequency": 0.075,
-        "count": 13
+        "frequency": 0.07,
+        "count": 32
       },
       {
         "structure": "1_4,1_2,1_4",
-        "frequency": 0.058,
-        "count": 10
+        "frequency": 0.065,
+        "count": 30
       },
       {
         "structure": "2_3,1_3",
-        "frequency": 0.052,
-        "count": 9
+        "frequency": 0.044,
+        "count": 20
       },
       {
         "structure": "3_4,1_4",
-        "frequency": 0.035,
-        "count": 6
+        "frequency": 0.037,
+        "count": 17
       },
       {
         "structure": "2_5,3_5",
-        "frequency": 0.029,
-        "count": 5
+        "frequency": 0.035,
+        "count": 16
       },
       {
-        "structure": "1_5,1_5,1_5,1_5,1_5",
-        "frequency": 0.023,
-        "count": 4
+        "structure": "1_4,1_4,1_4,1_4",
+        "frequency": 0.028,
+        "count": 13
       }
     ],
     "common_modules": [
       {
         "module_tag": "et_pb_text",
-        "frequency": 0.908,
-        "count": 157
+        "frequency": 1.024,
+        "count": 470
       },
       {
         "module_tag": "dipl_button_item",
-        "frequency": 0.861,
-        "count": 149
+        "frequency": 0.959,
+        "count": 440
       },
       {
         "module_tag": "dipl_button",
-        "frequency": 0.682,
-        "count": 118
+        "frequency": 0.782,
+        "count": 359
       },
       {
         "module_tag": "et_pb_social_media_follow_network",
-        "frequency": 0.457,
-        "count": 79
+        "frequency": 0.501,
+        "count": 230
       },
       {
         "module_tag": "dipl_double_color_heading",
-        "frequency": 0.439,
-        "count": 76
+        "frequency": 0.458,
+        "count": 210
       },
       {
         "module_tag": "et_pb_blurb",
-        "frequency": 0.289,
-        "count": 50
-      },
-      {
-        "module_tag": "et_pb_heading",
-        "frequency": 0.254,
-        "count": 44
-      },
-      {
-        "module_tag": "dipl_text_animator",
-        "frequency": 0.249,
-        "count": 43
+        "frequency": 0.349,
+        "count": 160
       },
       {
         "module_tag": "et_pb_image",
-        "frequency": 0.225,
-        "count": 39
+        "frequency": 0.268,
+        "count": 123
+      },
+      {
+        "module_tag": "dipl_text_animator",
+        "frequency": 0.209,
+        "count": 96
+      },
+      {
+        "module_tag": "et_pb_heading",
+        "frequency": 0.183,
+        "count": 84
       },
       {
         "module_tag": "dipl_floating_image_item",
-        "frequency": 0.133,
-        "count": 23
+        "frequency": 0.129,
+        "count": 59
       },
       {
         "module_tag": "et_pb_code",
-        "frequency": 0.116,
-        "count": 20
+        "frequency": 0.124,
+        "count": 57
       },
       {
         "module_tag": "et_pb_menu",
-        "frequency": 0.116,
-        "count": 20
-      },
-      {
-        "module_tag": "dipl_separator",
-        "frequency": 0.11,
-        "count": 19
+        "frequency": 0.122,
+        "count": 56
       },
       {
         "module_tag": "et_pb_social_media_follow",
-        "frequency": 0.11,
-        "count": 19
+        "frequency": 0.12,
+        "count": 55
+      },
+      {
+        "module_tag": "dipl_separator",
+        "frequency": 0.115,
+        "count": 53
       },
       {
         "module_tag": "dipl_floating_image",
-        "frequency": 0.092,
-        "count": 16
+        "frequency": 0.094,
+        "count": 43
       }
     ],
     "common_sequences": [
       {
         "sequence": [
+          "dipl_text_animator",
+          "et_pb_text",
+          "dipl_button",
+          "dipl_button_item",
+          "dipl_button_item"
+        ],
+        "frequency": 0.013,
+        "count": 6
+      },
+      {
+        "sequence": [
           "dipl_double_color_heading"
         ],
-        "frequency": 0.029,
+        "frequency": 0.011,
         "count": 5
       },
       {
         "sequence": [
-          "dipl_text_animator"
+          "dipl_woo_products_categories",
+          "et_pb_heading",
+          "et_pb_text",
+          "dipl_button",
+          "dipl_button_item",
+          "dipl_woo_products_categories"
         ],
-        "frequency": 0.023,
-        "count": 4
+        "frequency": 0.011,
+        "count": 5
       },
       {
         "sequence": [
@@ -2668,15 +2776,8 @@
           "dipl_button_item",
           "dipl_button_item"
         ],
-        "frequency": 0.017,
-        "count": 3
-      },
-      {
-        "sequence": [
-          "dipl_posts_ticker"
-        ],
-        "frequency": 0.017,
-        "count": 3
+        "frequency": 0.011,
+        "count": 5
       },
       {
         "sequence": [
@@ -2685,8 +2786,8 @@
           "dipl_button",
           "dipl_button_item"
         ],
-        "frequency": 0.012,
-        "count": 2
+        "frequency": 0.009,
+        "count": 4
       },
       {
         "sequence": [
@@ -2696,8 +2797,8 @@
           "dipl_button_item",
           "et_pb_image"
         ],
-        "frequency": 0.012,
-        "count": 2
+        "frequency": 0.009,
+        "count": 4
       },
       {
         "sequence": [
@@ -2710,19 +2811,8 @@
           "et_pb_social_media_follow_network",
           "et_pb_social_media_follow_network"
         ],
-        "frequency": 0.012,
-        "count": 2
-      },
-      {
-        "sequence": [
-          "dipl_text_animator",
-          "et_pb_text",
-          "dipl_button",
-          "dipl_button_item",
-          "dipl_button_item"
-        ],
-        "frequency": 0.012,
-        "count": 2
+        "frequency": 0.009,
+        "count": 4
       },
       {
         "sequence": [
@@ -2734,129 +2824,144 @@
           "dipl_button_item",
           "dipl_button_item"
         ],
-        "frequency": 0.012,
-        "count": 2
-      },
-      {
-        "sequence": [
-          "dipl_woo_products_categories",
-          "et_pb_heading",
-          "et_pb_text",
-          "dipl_button",
-          "dipl_button_item",
-          "dipl_woo_products_categories"
-        ],
-        "frequency": 0.012,
-        "count": 2
-      }
-    ],
-    "decorations": {
-      "gradient_frequency": 0.451,
-      "divider_frequency": 0.017,
-      "bg_image_frequency": 0.549
-    },
-    "avg_row_count": 1.3,
-    "avg_module_count": 11.1
-  },
-  "logos": {
-    "total_samples": 16,
-    "column_structures": [
-      {
-        "structure": "1_2,1_2",
-        "frequency": 0.25,
+        "frequency": 0.009,
         "count": 4
       },
       {
+        "sequence": [
+          "dipl_text_animator"
+        ],
+        "frequency": 0.009,
+        "count": 4
+      },
+      {
+        "sequence": [
+          "dipl_text_animator",
+          "dipl_button",
+          "dipl_button_item",
+          "dipl_button_item"
+        ],
+        "frequency": 0.009,
+        "count": 4
+      }
+    ],
+    "decorations": {
+      "gradient_frequency": 0.462,
+      "divider_frequency": 0.024,
+      "bg_image_frequency": 0.521
+    },
+    "avg_row_count": 1.3,
+    "avg_module_count": 11.9
+  },
+  "logos": {
+    "total_samples": 53,
+    "column_structures": [
+      {
+        "structure": "1_2,1_2",
+        "frequency": 0.245,
+        "count": 13
+      },
+      {
         "structure": "1_3,1_3,1_3",
-        "frequency": 0.125,
-        "count": 2
+        "frequency": 0.17,
+        "count": 9
       },
       {
         "structure": "2_5,3_5",
-        "frequency": 0.062,
-        "count": 1
+        "frequency": 0.094,
+        "count": 5
       },
       {
         "structure": "1_4,3_4",
-        "frequency": 0.062,
+        "frequency": 0.057,
+        "count": 3
+      },
+      {
+        "structure": "3_5,2_5",
+        "frequency": 0.038,
+        "count": 2
+      },
+      {
+        "structure": "1_4,1_4,1_4,1_4",
+        "frequency": 0.019,
         "count": 1
       }
     ],
     "common_modules": [
       {
         "module_tag": "dipl_logo_slider_item",
-        "frequency": 4.625,
-        "count": 74
+        "frequency": 3.717,
+        "count": 197
       },
       {
         "module_tag": "et_pb_text",
-        "frequency": 0.938,
-        "count": 15
+        "frequency": 0.792,
+        "count": 42
+      },
+      {
+        "module_tag": "dipl_faq_page_schema_item",
+        "frequency": 0.642,
+        "count": 34
       },
       {
         "module_tag": "dipl_logo_slider",
-        "frequency": 0.75,
-        "count": 12
+        "frequency": 0.623,
+        "count": 33
       },
       {
         "module_tag": "dipl_double_color_heading",
-        "frequency": 0.375,
-        "count": 6
-      },
-      {
-        "module_tag": "et_pb_blurb",
-        "frequency": 0.375,
-        "count": 6
+        "frequency": 0.377,
+        "count": 20
       },
       {
         "module_tag": "et_pb_image",
-        "frequency": 0.312,
-        "count": 5
+        "frequency": 0.358,
+        "count": 19
       },
       {
-        "module_tag": "et_pb_heading",
-        "frequency": 0.25,
-        "count": 4
+        "module_tag": "dipl_price_list_item",
+        "frequency": 0.34,
+        "count": 18
       },
       {
         "module_tag": "dipl_tilt_image",
-        "frequency": 0.25,
-        "count": 4
+        "frequency": 0.264,
+        "count": 14
       },
       {
-        "module_tag": "dipl_hero_slider_item",
-        "frequency": 0.188,
-        "count": 3
+        "module_tag": "et_pb_blurb",
+        "frequency": 0.245,
+        "count": 13
       },
       {
-        "module_tag": "dipl_button",
-        "frequency": 0.125,
-        "count": 2
-      },
-      {
-        "module_tag": "dipl_button_item",
-        "frequency": 0.125,
-        "count": 2
+        "module_tag": "et_pb_heading",
+        "frequency": 0.226,
+        "count": 12
       },
       {
         "module_tag": "dipl_separator",
-        "frequency": 0.125,
-        "count": 2
+        "frequency": 0.17,
+        "count": 9
+      },
+      {
+        "module_tag": "dipl_scroll_text",
+        "frequency": 0.17,
+        "count": 9
       },
       {
         "module_tag": "dipl_floating_image_item",
-        "frequency": 0.125,
-        "count": 2
+        "frequency": 0.132,
+        "count": 7
       },
       {
-        "module_tag": "dipl_fancy_text",
-        "frequency": 0.062,
-        "count": 1
+        "module_tag": "dipl_business_hours_item",
+        "frequency": 0.132,
+        "count": 7
       },
       {
-        "module_tag": "et_pb_code",
-        "frequency": 0.062,
-        "count": 1
+        "module_tag": "dipl_timeline_item",
+        "frequency": 0.132,
+        "count": 7
       }
     ],
     "common_sequences": [
@@ -2872,8 +2977,8 @@
           "dipl_logo_slider_item",
           "dipl_logo_slider_item"
         ],
-        "frequency": 0.062,
-        "count": 1
+        "frequency": 0.057,
+        "count": 3
       },
       {
         "sequence": [
@@ -2892,8 +2997,8 @@
           "dipl_logo_slider_item",
           "dipl_logo_slider_item"
         ],
-        "frequency": 0.062,
-        "count": 1
+        "frequency": 0.057,
+        "count": 3
       },
       {
         "sequence": [
@@ -2911,18 +3016,8 @@
           "dipl_tilt_image",
           "et_pb_text"
         ],
-        "frequency": 0.062,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "dipl_hero_slider",
-          "dipl_hero_slider_item",
-          "dipl_hero_slider_item",
-          "dipl_hero_slider_item"
-        ],
-        "frequency": 0.062,
-        "count": 1
+        "frequency": 0.057,
+        "count": 3
       },
       {
         "sequence": [
@@ -2933,8 +3028,8 @@
           "dipl_logo_slider_item",
           "dipl_logo_slider_item"
         ],
-        "frequency": 0.062,
-        "count": 1
+        "frequency": 0.057,
+        "count": 3
       },
       {
         "sequence": [
@@ -2949,24 +3044,8 @@
           "dipl_logo_slider_item",
           "dipl_logo_slider_item"
         ],
-        "frequency": 0.062,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_text",
-          "et_pb_divider",
-          "dipl_double_color_heading",
-          "dipl_logo_slider",
-          "dipl_logo_slider_item",
-          "dipl_logo_slider_item",
-          "dipl_logo_slider_item",
-          "dipl_logo_slider_item",
-          "dipl_logo_slider_item",
-          "dipl_logo_slider_item"
-        ],
-        "frequency": 0.062,
-        "count": 1
+        "frequency": 0.057,
+        "count": 3
       },
       {
         "sequence": [
@@ -2981,8 +3060,8 @@
           "dipl_logo_slider_item",
           "dipl_logo_slider_item"
         ],
-        "frequency": 0.062,
-        "count": 1
+        "frequency": 0.057,
+        "count": 3
       },
       {
         "sequence": [
@@ -2993,8 +3072,8 @@
           "dipl_logo_slider_item",
           "dipl_logo_slider_item"
         ],
-        "frequency": 0.062,
-        "count": 1
+        "frequency": 0.057,
+        "count": 3
       },
       {
         "sequence": [
@@ -3009,217 +3088,170 @@
           "dipl_logo_slider_item",
           "dipl_logo_slider_item"
         ],
-        "frequency": 0.062,
-        "count": 1
+        "frequency": 0.057,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_image",
+          "dipl_double_color_heading",
+          "dipl_separator",
+          "et_pb_text",
+          "et_pb_image",
+          "et_pb_image",
+          "et_pb_image",
+          "et_pb_image"
+        ],
+        "frequency": 0.057,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "dipl_double_color_heading",
+          "dipl_logo_slider",
+          "dipl_logo_slider_item",
+          "dipl_logo_slider_item",
+          "dipl_logo_slider_item",
+          "dipl_logo_slider_item",
+          "dipl_logo_slider_item"
+        ],
+        "frequency": 0.057,
+        "count": 3
       }
     ],
     "decorations": {
-      "gradient_frequency": 0.25,
+      "gradient_frequency": 0.208,
       "divider_frequency": 0.0,
-      "bg_image_frequency": 0.188
+      "bg_image_frequency": 0.17
     },
-    "avg_row_count": 1.1,
-    "avg_module_count": 14.1
+    "avg_row_count": 1.3,
+    "avg_module_count": 14.7
   },
   "pricing": {
-    "total_samples": 12,
+    "total_samples": 37,
     "column_structures": [
       {
         "structure": "1_3,1_3,1_3",
-        "frequency": 0.583,
-        "count": 7
+        "frequency": 0.486,
+        "count": 18
       },
       {
         "structure": "1_2,1_2",
-        "frequency": 0.167,
-        "count": 2
-      },
-      {
-        "structure": "3_5,2_5",
-        "frequency": 0.083,
-        "count": 1
-      },
-      {
-        "structure": "1_3,2_3",
-        "frequency": 0.083,
-        "count": 1
+        "frequency": 0.189,
+        "count": 7
       },
       {
         "structure": "1_4,1_4,1_4,1_4",
-        "frequency": 0.083,
+        "frequency": 0.135,
+        "count": 5
+      },
+      {
+        "structure": "3_5,2_5",
+        "frequency": 0.081,
+        "count": 3
+      },
+      {
+        "structure": "1_3,2_3",
+        "frequency": 0.081,
+        "count": 3
+      },
+      {
+        "structure": "2_5,3_5",
+        "frequency": 0.054,
+        "count": 2
+      },
+      {
+        "structure": "2_3,1_3",
+        "frequency": 0.054,
+        "count": 2
+      },
+      {
+        "structure": "1_4,1_4,1_2",
+        "frequency": 0.027,
         "count": 1
       }
     ],
     "common_modules": [
       {
         "module_tag": "dipl_price_list_item",
-        "frequency": 2.083,
-        "count": 25
+        "frequency": 1.703,
+        "count": 63
       },
       {
         "module_tag": "et_pb_text",
-        "frequency": 1.583,
-        "count": 19
+        "frequency": 1.405,
+        "count": 52
       },
       {
         "module_tag": "dipl_button_item",
-        "frequency": 0.833,
-        "count": 10
+        "frequency": 0.946,
+        "count": 35
       },
       {
         "module_tag": "et_pb_blurb",
-        "frequency": 0.833,
-        "count": 10
-      },
-      {
-        "module_tag": "dipl_price_list",
-        "frequency": 0.833,
-        "count": 10
+        "frequency": 0.919,
+        "count": 34
       },
       {
         "module_tag": "dipl_button",
-        "frequency": 0.75,
-        "count": 9
+        "frequency": 0.892,
+        "count": 33
+      },
+      {
+        "module_tag": "dipl_price_list",
+        "frequency": 0.757,
+        "count": 28
       },
       {
         "module_tag": "et_pb_pricing_tables",
-        "frequency": 0.75,
-        "count": 9
+        "frequency": 0.568,
+        "count": 21
       },
       {
         "module_tag": "et_pb_pricing_table",
-        "frequency": 0.75,
-        "count": 9
-      },
-      {
-        "module_tag": "dipl_flipbox",
-        "frequency": 0.5,
-        "count": 6
-      },
-      {
-        "module_tag": "et_pb_divider",
-        "frequency": 0.333,
-        "count": 4
+        "frequency": 0.568,
+        "count": 21
       },
       {
         "module_tag": "dipl_double_color_heading",
-        "frequency": 0.333,
-        "count": 4
+        "frequency": 0.378,
+        "count": 14
+      },
+      {
+        "module_tag": "dipl_list_item",
+        "frequency": 0.378,
+        "count": 14
       },
       {
         "module_tag": "dipl_timeline_item",
-        "frequency": 0.333,
-        "count": 4
+        "frequency": 0.324,
+        "count": 12
       },
       {
         "module_tag": "et_pb_icon",
-        "frequency": 0.25,
-        "count": 3
+        "frequency": 0.243,
+        "count": 9
       },
       {
-        "module_tag": "dipl_separator",
-        "frequency": 0.25,
-        "count": 3
+        "module_tag": "dipl_image_accordion_item",
+        "frequency": 0.216,
+        "count": 8
       },
       {
-        "module_tag": "dipl_floating_image",
-        "frequency": 0.083,
-        "count": 1
+        "module_tag": "et_pb_divider",
+        "frequency": 0.162,
+        "count": 6
+      },
+      {
+        "module_tag": "dipl_flipbox",
+        "frequency": 0.162,
+        "count": 6
       }
     ],
     "common_sequences": [
       {
         "sequence": [
           "et_pb_text",
-          "et_pb_divider",
-          "et_pb_text",
-          "dipl_button",
-          "dipl_button_item",
-          "dipl_button_item",
-          "dipl_floating_image",
-          "dipl_floating_image_item"
-        ],
-        "frequency": 0.083,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_text",
-          "et_pb_divider",
-          "dipl_double_color_heading",
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "dipl_button",
-          "dipl_button_item",
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "dipl_button",
-          "dipl_button_item",
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "dipl_button",
-          "dipl_button_item"
-        ],
-        "frequency": 0.083,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "dipl_double_color_heading",
-          "et_pb_divider",
-          "et_pb_divider",
-          "dipl_price_list",
-          "dipl_price_list_item",
-          "dipl_price_list_item",
-          "dipl_price_list_item",
-          "dipl_price_list_item",
-          "dipl_price_list_item",
-          "dipl_price_list_item",
-          "dipl_button",
-          "dipl_button_item"
-        ],
-        "frequency": 0.083,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_pricing_tables",
-          "et_pb_pricing_table",
-          "et_pb_pricing_tables",
-          "et_pb_pricing_table",
-          "et_pb_pricing_tables",
-          "et_pb_pricing_table"
-        ],
-        "frequency": 0.083,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "dipl_flipbox",
-          "dipl_flipbox",
-          "dipl_flipbox",
-          "dipl_flipbox",
-          "dipl_flipbox",
-          "dipl_flipbox"
-        ],
-        "frequency": 0.083,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_text",
           "et_pb_text",
           "et_pb_icon",
           "et_pb_text",
@@ -3246,8 +3278,8 @@
           "dipl_button",
           "dipl_button_item"
         ],
-        "frequency": 0.083,
-        "count": 1
+        "frequency": 0.081,
+        "count": 3
       },
       {
         "sequence": [
@@ -3262,17 +3294,8 @@
           "dipl_timeline_item",
           "dipl_timeline_item"
         ],
-        "frequency": 0.083,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "dipl_separator",
-          "dipl_double_color_heading",
-          "dipl_blog_slider"
-        ],
-        "frequency": 0.083,
-        "count": 1
+        "frequency": 0.081,
+        "count": 3
       },
       {
         "sequence": [
@@ -3286,8 +3309,8 @@
           "dipl_price_list",
           "dipl_price_list_item"
         ],
-        "frequency": 0.083,
-        "count": 1
+        "frequency": 0.081,
+        "count": 3
       },
       {
         "sequence": [
@@ -3305,132 +3328,241 @@
           "et_pb_pricing_tables",
           "et_pb_pricing_table"
         ],
-        "frequency": 0.083,
+        "frequency": 0.081,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_text",
+          "dipl_price_list",
+          "dipl_price_list_item",
+          "dipl_price_list_item",
+          "dipl_price_list_item",
+          "dipl_price_list",
+          "dipl_price_list_item",
+          "dipl_price_list_item",
+          "dipl_price_list_item"
+        ],
+        "frequency": 0.081,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_text",
+          "et_pb_divider",
+          "et_pb_text",
+          "dipl_button",
+          "dipl_button_item",
+          "dipl_button_item",
+          "dipl_floating_image",
+          "dipl_floating_image_item"
+        ],
+        "frequency": 0.054,
+        "count": 2
+      },
+      {
+        "sequence": [
+          "et_pb_text",
+          "et_pb_divider",
+          "dipl_double_color_heading",
+          "et_pb_text",
+          "et_pb_text",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "dipl_button",
+          "dipl_button_item",
+          "et_pb_text",
+          "et_pb_text",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "dipl_button",
+          "dipl_button_item",
+          "et_pb_text",
+          "et_pb_text",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "et_pb_blurb",
+          "dipl_button",
+          "dipl_button_item"
+        ],
+        "frequency": 0.054,
+        "count": 2
+      },
+      {
+        "sequence": [
+          "dipl_double_color_heading",
+          "et_pb_divider",
+          "et_pb_divider",
+          "dipl_price_list",
+          "dipl_price_list_item",
+          "dipl_price_list_item",
+          "dipl_price_list_item",
+          "dipl_price_list_item",
+          "dipl_price_list_item",
+          "dipl_price_list_item",
+          "dipl_button",
+          "dipl_button_item"
+        ],
+        "frequency": 0.027,
+        "count": 1
+      },
+      {
+        "sequence": [
+          "et_pb_text",
+          "et_pb_text",
+          "et_pb_pricing_tables",
+          "et_pb_pricing_table",
+          "et_pb_pricing_tables",
+          "et_pb_pricing_table",
+          "et_pb_pricing_tables",
+          "et_pb_pricing_table"
+        ],
+        "frequency": 0.027,
+        "count": 1
+      },
+      {
+        "sequence": [
+          "dipl_flipbox",
+          "dipl_flipbox",
+          "dipl_flipbox",
+          "dipl_flipbox",
+          "dipl_flipbox",
+          "dipl_flipbox"
+        ],
+        "frequency": 0.027,
         "count": 1
       }
     ],
     "decorations": {
-      "gradient_frequency": 0.167,
+      "gradient_frequency": 0.243,
       "divider_frequency": 0.0,
-      "bg_image_frequency": 0.417
+      "bg_image_frequency": 0.27
     },
-    "avg_row_count": 1.9,
-    "avg_module_count": 17.8
+    "avg_row_count": 1.7,
+    "avg_module_count": 18.2
   },
   "product": {
-    "total_samples": 48,
+    "total_samples": 241,
     "column_structures": [
       {
         "structure": "1_2,1_2",
-        "frequency": 0.208,
-        "count": 10
-      },
-      {
-        "structure": "1_4,1_4,1_4,1_4",
-        "frequency": 0.104,
-        "count": 5
-      },
-      {
-        "structure": "1_4,1_2,1_4",
-        "frequency": 0.104,
-        "count": 5
-      },
-      {
-        "structure": "2_5,3_5",
-        "frequency": 0.104,
-        "count": 5
+        "frequency": 0.253,
+        "count": 61
       },
       {
         "structure": "1_3,1_3,1_3",
-        "frequency": 0.104,
-        "count": 5
+        "frequency": 0.199,
+        "count": 48
+      },
+      {
+        "structure": "1_4,1_4,1_4,1_4",
+        "frequency": 0.116,
+        "count": 28
+      },
+      {
+        "structure": "2_5,3_5",
+        "frequency": 0.066,
+        "count": 16
+      },
+      {
+        "structure": "1_4,1_2,1_4",
+        "frequency": 0.058,
+        "count": 14
       },
       {
         "structure": "3_5,2_5",
-        "frequency": 0.083,
-        "count": 4
+        "frequency": 0.054,
+        "count": 13
+      },
+      {
+        "structure": "2_3,1_3",
+        "frequency": 0.025,
+        "count": 6
       },
       {
         "structure": "1_3,2_3",
         "frequency": 0.021,
-        "count": 1
+        "count": 5
       }
     ],
     "common_modules": [
       {
-        "module_tag": "dipl_list_item",
-        "frequency": 0.958,
-        "count": 46
-      },
-      {
         "module_tag": "et_pb_text",
-        "frequency": 0.521,
-        "count": 25
-      },
-      {
-        "module_tag": "et_pb_heading",
-        "frequency": 0.417,
-        "count": 20
-      },
-      {
-        "module_tag": "et_pb_blurb",
-        "frequency": 0.375,
-        "count": 18
-      },
-      {
-        "module_tag": "dipl_woo_products_categories",
-        "frequency": 0.333,
-        "count": 16
+        "frequency": 0.693,
+        "count": 167
       },
       {
         "module_tag": "dipl_double_color_heading",
-        "frequency": 0.312,
-        "count": 15
+        "frequency": 0.419,
+        "count": 101
+      },
+      {
+        "module_tag": "dipl_list_item",
+        "frequency": 0.407,
+        "count": 98
       },
       {
         "module_tag": "dipl_flipbox",
-        "frequency": 0.271,
-        "count": 13
+        "frequency": 0.39,
+        "count": 94
       },
       {
-        "module_tag": "dipl_list",
-        "frequency": 0.25,
-        "count": 12
+        "module_tag": "et_pb_heading",
+        "frequency": 0.378,
+        "count": 91
       },
       {
-        "module_tag": "dipl_woo_products_carousel",
-        "frequency": 0.208,
-        "count": 10
+        "module_tag": "dipl_interactive_image_card",
+        "frequency": 0.245,
+        "count": 59
       },
       {
-        "module_tag": "et_pb_social_media_follow_network",
-        "frequency": 0.208,
-        "count": 10
+        "module_tag": "dipl_woo_products_categories",
+        "frequency": 0.237,
+        "count": 57
       },
       {
-        "module_tag": "dipl_tilt_image",
-        "frequency": 0.188,
-        "count": 9
-      },
-      {
-        "module_tag": "et_pb_image",
-        "frequency": 0.146,
-        "count": 7
+        "module_tag": "dipl_image_card",
+        "frequency": 0.199,
+        "count": 48
       },
       {
         "module_tag": "dipl_button",
-        "frequency": 0.146,
-        "count": 7
+        "frequency": 0.195,
+        "count": 47
       },
       {
         "module_tag": "dipl_button_item",
-        "frequency": 0.146,
-        "count": 7
+        "frequency": 0.195,
+        "count": 47
+      },
+      {
+        "module_tag": "et_pb_social_media_follow_network",
+        "frequency": 0.187,
+        "count": 45
+      },
+      {
+        "module_tag": "et_pb_blurb",
+        "frequency": 0.17,
+        "count": 41
+      },
+      {
+        "module_tag": "et_pb_image",
+        "frequency": 0.149,
+        "count": 36
       },
       {
         "module_tag": "dipl_floating_image_item",
-        "frequency": 0.146,
-        "count": 7
+        "frequency": 0.141,
+        "count": 34
+      },
+      {
+        "module_tag": "dipl_tilt_image",
+        "frequency": 0.133,
+        "count": 32
       }
     ],
     "common_sequences": [
@@ -3439,23 +3571,23 @@
           "et_pb_text",
           "dipl_woo_products_carousel"
         ],
-        "frequency": 0.083,
-        "count": 4
+        "frequency": 0.021,
+        "count": 5
       },
       {
         "sequence": [
           "et_pb_text",
           "dipl_woo_products_categories"
         ],
-        "frequency": 0.042,
-        "count": 2
+        "frequency": 0.017,
+        "count": 4
       },
       {
         "sequence": [
           "dipl_woo_products_categories"
         ],
-        "frequency": 0.042,
-        "count": 2
+        "frequency": 0.017,
+        "count": 4
       },
       {
         "sequence": [
@@ -3463,46 +3595,8 @@
           "dipl_woo_products_categories",
           "dipl_woo_products_categories"
         ],
-        "frequency": 0.042,
-        "count": 2
-      },
-      {
-        "sequence": [
-          "et_pb_heading",
-          "et_pb_divider",
-          "dipl_woo_products_carousel"
-        ],
-        "frequency": 0.021,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_text",
-          "et_pb_text",
-          "dipl_woo_products_accordion",
-          "et_pb_image",
-          "et_pb_text"
-        ],
-        "frequency": 0.021,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_text",
-          "dipl_double_color_heading",
-          "dipl_interactive_image_card",
-          "dipl_interactive_image_card",
-          "dipl_interactive_image_card",
-          "dipl_interactive_image_card",
-          "dipl_button",
-          "dipl_button_item",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "et_pb_blurb"
-        ],
-        "frequency": 0.021,
-        "count": 1
+        "frequency": 0.017,
+        "count": 4
       },
       {
         "sequence": [
@@ -3532,143 +3626,179 @@
           "dipl_list_item",
           "dipl_list_item"
         ],
-        "frequency": 0.021,
-        "count": 1
+        "frequency": 0.012,
+        "count": 3
       },
       {
         "sequence": [
-          "dipl_tilt_image",
-          "dipl_woo_products_carousel",
-          "dipl_text_animator",
-          "et_pb_text"
+          "dipl_woo_products_categories",
+          "dipl_woo_products_categories",
+          "dipl_woo_products_categories"
         ],
-        "frequency": 0.021,
-        "count": 1
+        "frequency": 0.012,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "dipl_woo_product_gallery",
+          "et_pb_wc_title",
+          "et_pb_wc_price",
+          "et_pb_wc_description",
+          "et_pb_wc_add_to_cart"
+        ],
+        "frequency": 0.012,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "dipl_text_animator",
+          "et_pb_text",
+          "dipl_flipbox",
+          "dipl_flipbox",
+          "dipl_flipbox",
+          "dipl_flipbox"
+        ],
+        "frequency": 0.012,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_heading",
+          "dipl_double_color_heading",
+          "dipl_tilt_image",
+          "dipl_woo_products"
+        ],
+        "frequency": 0.012,
+        "count": 3
       },
       {
         "sequence": [
           "dipl_double_color_heading",
-          "et_pb_text",
-          "dipl_button",
-          "dipl_button_item",
-          "dipl_woo_products_accordion"
+          "dipl_tilt_image",
+          "dipl_woo_products",
+          "dipl_tilt_image"
         ],
-        "frequency": 0.021,
-        "count": 1
+        "frequency": 0.012,
+        "count": 3
       }
     ],
     "decorations": {
-      "gradient_frequency": 0.104,
-      "divider_frequency": 0.0,
-      "bg_image_frequency": 0.167
+      "gradient_frequency": 0.191,
+      "divider_frequency": 0.008,
+      "bg_image_frequency": 0.22
     },
-    "avg_row_count": 1.3,
-    "avg_module_count": 10.6
+    "avg_row_count": 1.4,
+    "avg_module_count": 11.3
   },
   "stats": {
-    "total_samples": 17,
+    "total_samples": 62,
     "column_structures": [
       {
         "structure": "1_2,1_2",
-        "frequency": 0.412,
-        "count": 7
+        "frequency": 0.565,
+        "count": 35
       },
       {
         "structure": "1_3,1_3,1_3",
-        "frequency": 0.353,
-        "count": 6
+        "frequency": 0.323,
+        "count": 20
       },
       {
         "structure": "1_4,1_4,1_4,1_4",
-        "frequency": 0.235,
-        "count": 4
-      },
-      {
-        "structure": "1_2,1_4,1_4",
-        "frequency": 0.059,
-        "count": 1
+        "frequency": 0.177,
+        "count": 11
       },
       {
         "structure": "1_4,1_2,1_4",
-        "frequency": 0.059,
-        "count": 1
+        "frequency": 0.048,
+        "count": 3
+      },
+      {
+        "structure": "3_5,2_5",
+        "frequency": 0.048,
+        "count": 3
+      },
+      {
+        "structure": "1_2,1_4,1_4",
+        "frequency": 0.032,
+        "count": 2
       }
     ],
     "common_modules": [
       {
         "module_tag": "et_pb_number_counter",
-        "frequency": 2.118,
-        "count": 36
+        "frequency": 2.113,
+        "count": 131
       },
       {
         "module_tag": "et_pb_text",
-        "frequency": 1.294,
-        "count": 22
+        "frequency": 1.371,
+        "count": 85
       },
       {
         "module_tag": "dipl_bar_counter",
-        "frequency": 0.824,
-        "count": 14
+        "frequency": 1.081,
+        "count": 67
       },
       {
         "module_tag": "dipl_double_color_heading",
-        "frequency": 0.588,
-        "count": 10
+        "frequency": 0.677,
+        "count": 42
       },
       {
         "module_tag": "dipl_floating_image_item",
-        "frequency": 0.353,
-        "count": 6
-      },
-      {
-        "module_tag": "dipl_button",
-        "frequency": 0.294,
-        "count": 5
+        "frequency": 0.581,
+        "count": 36
       },
       {
         "module_tag": "dipl_button_item",
-        "frequency": 0.294,
-        "count": 5
+        "frequency": 0.355,
+        "count": 22
       },
       {
-        "module_tag": "et_pb_contact_field",
-        "frequency": 0.294,
-        "count": 5
-      },
-      {
-        "module_tag": "et_pb_divider",
-        "frequency": 0.235,
-        "count": 4
-      },
-      {
-        "module_tag": "dipl_timeline_item",
-        "frequency": 0.235,
-        "count": 4
-      },
-      {
-        "module_tag": "et_pb_blurb",
-        "frequency": 0.235,
-        "count": 4
-      },
-      {
-        "module_tag": "et_pb_counter",
-        "frequency": 0.235,
-        "count": 4
-      },
-      {
-        "module_tag": "dipl_image_mask_item",
-        "frequency": 0.235,
-        "count": 4
-      },
-      {
-        "module_tag": "et_pb_heading",
-        "frequency": 0.176,
-        "count": 3
+        "module_tag": "dipl_button",
+        "frequency": 0.339,
+        "count": 21
       },
       {
         "module_tag": "dipl_floating_image",
-        "frequency": 0.176,
-        "count": 3
+        "frequency": 0.29,
+        "count": 18
+      },
+      {
+        "module_tag": "dipl_image_mask_item",
+        "frequency": 0.258,
+        "count": 16
+      },
+      {
+        "module_tag": "et_pb_divider",
+        "frequency": 0.194,
+        "count": 12
+      },
+      {
+        "module_tag": "et_pb_counter",
+        "frequency": 0.194,
+        "count": 12
+      },
+      {
+        "module_tag": "dipl_separator",
+        "frequency": 0.177,
+        "count": 11
+      },
+      {
+        "module_tag": "et_pb_contact_field",
+        "frequency": 0.161,
+        "count": 10
+      },
+      {
+        "module_tag": "et_pb_heading",
+        "frequency": 0.145,
+        "count": 9
+      },
+      {
+        "module_tag": "dipl_timeline_item",
+        "frequency": 0.145,
+        "count": 9
       }
     ],
     "common_sequences": [
@@ -3681,22 +3811,8 @@
           "dipl_bar_counter",
           "dipl_bar_counter"
         ],
-        "frequency": 0.059,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_number_counter",
-          "et_pb_number_counter",
-          "et_pb_number_counter",
-          "et_pb_number_counter"
-        ],
-        "frequency": 0.059,
-        "count": 1
+        "frequency": 0.048,
+        "count": 3
       },
       {
         "sequence": [
@@ -3709,8 +3825,8 @@
           "et_pb_number_counter",
           "et_pb_number_counter"
         ],
-        "frequency": 0.059,
-        "count": 1
+        "frequency": 0.048,
+        "count": 3
       },
       {
         "sequence": [
@@ -3720,8 +3836,8 @@
           "dipl_button",
           "dipl_button_item"
         ],
-        "frequency": 0.059,
-        "count": 1
+        "frequency": 0.048,
+        "count": 3
       },
       {
         "sequence": [
@@ -3735,53 +3851,8 @@
           "dipl_floating_image_item",
           "dipl_floating_image_item"
         ],
-        "frequency": 0.059,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "dipl_double_color_heading",
-          "et_pb_text",
-          "dipl_bar_counter",
-          "et_pb_text",
-          "dipl_bar_counter",
-          "et_pb_text",
-          "dipl_bar_counter",
-          "et_pb_text",
-          "dipl_bar_counter",
-          "et_pb_text",
-          "dipl_bar_counter",
-          "et_pb_text",
-          "dipl_bar_counter",
-          "et_pb_text"
-        ],
-        "frequency": 0.059,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_text",
-          "dipl_timeline",
-          "dipl_timeline_item",
-          "dipl_timeline_item",
-          "dipl_timeline_item",
-          "dipl_timeline_item"
-        ],
-        "frequency": 0.059,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_text",
-          "et_pb_divider",
-          "dipl_double_color_heading",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "et_pb_blurb"
-        ],
-        "frequency": 0.059,
-        "count": 1
+        "frequency": 0.048,
+        "count": 3
       },
       {
         "sequence": [
@@ -3797,138 +3868,212 @@
           "dipl_floating_image_item",
           "et_pb_text"
         ],
-        "frequency": 0.059,
-        "count": 1
+        "frequency": 0.048,
+        "count": 3
       },
       {
         "sequence": [
           "et_pb_text",
-          "et_pb_contact_form",
-          "et_pb_contact_field",
-          "et_pb_contact_field",
-          "et_pb_contact_field",
-          "et_pb_contact_field",
-          "et_pb_contact_field",
+          "dipl_double_color_heading",
+          "et_pb_text",
+          "et_pb_number_counter",
+          "et_pb_number_counter",
+          "et_pb_number_counter",
+          "dipl_image_mask",
+          "dipl_image_mask_item",
+          "dipl_image_mask_item",
+          "et_pb_number_counter"
+        ],
+        "frequency": 0.048,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_video",
+          "et_pb_heading",
+          "dipl_double_color_heading",
+          "et_pb_number_counter",
+          "et_pb_number_counter",
+          "et_pb_number_counter",
+          "dipl_button",
+          "dipl_button_item"
+        ],
+        "frequency": 0.048,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "dipl_double_color_heading",
+          "et_pb_text",
+          "et_pb_number_counter",
+          "et_pb_number_counter",
+          "et_pb_number_counter",
+          "dipl_button",
+          "dipl_button_item",
+          "dipl_floating_image",
+          "dipl_floating_image_item",
+          "dipl_floating_image_item"
+        ],
+        "frequency": 0.048,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_text",
+          "et_pb_text",
+          "et_pb_text",
+          "et_pb_text",
+          "et_pb_number_counter",
           "et_pb_number_counter",
           "et_pb_number_counter",
           "et_pb_number_counter"
         ],
-        "frequency": 0.059,
-        "count": 1
+        "frequency": 0.032,
+        "count": 2
+      },
+      {
+        "sequence": [
+          "dipl_double_color_heading",
+          "et_pb_text",
+          "dipl_bar_counter",
+          "et_pb_text",
+          "dipl_bar_counter",
+          "et_pb_text",
+          "dipl_bar_counter",
+          "et_pb_text",
+          "dipl_bar_counter",
+          "et_pb_text",
+          "dipl_bar_counter",
+          "et_pb_text",
+          "dipl_bar_counter",
+          "et_pb_text"
+        ],
+        "frequency": 0.032,
+        "count": 2
       }
     ],
     "decorations": {
-      "gradient_frequency": 0.235,
-      "divider_frequency": 0.059,
-      "bg_image_frequency": 0.059
+      "gradient_frequency": 0.242,
+      "divider_frequency": 0.048,
+      "bg_image_frequency": 0.097
     },
-    "avg_row_count": 1.1,
-    "avg_module_count": 15.4
+    "avg_row_count": 1.0,
+    "avg_module_count": 16.2
   },
   "team": {
-    "total_samples": 27,
+    "total_samples": 62,
     "column_structures": [
       {
         "structure": "1_2,1_2",
-        "frequency": 0.185,
-        "count": 5
+        "frequency": 0.242,
+        "count": 15
       },
       {
         "structure": "1_4,1_4,1_4,1_4",
-        "frequency": 0.074,
+        "frequency": 0.097,
+        "count": 6
+      },
+      {
+        "structure": "3_5,2_5",
+        "frequency": 0.065,
+        "count": 4
+      },
+      {
+        "structure": "1_3,2_3",
+        "frequency": 0.065,
+        "count": 4
+      },
+      {
+        "structure": "1_3,1_3,1_3",
+        "frequency": 0.032,
         "count": 2
       },
       {
         "structure": "2_5,3_5",
-        "frequency": 0.037,
+        "frequency": 0.016,
         "count": 1
       },
       {
-        "structure": "3_5,2_5",
-        "frequency": 0.037,
-        "count": 1
-      },
-      {
-        "structure": "1_3,2_3",
-        "frequency": 0.037,
+        "structure": "1_4,1_2,1_4",
+        "frequency": 0.016,
         "count": 1
       }
     ],
     "common_modules": [
       {
         "module_tag": "et_pb_text",
-        "frequency": 0.778,
-        "count": 21
-      },
-      {
-        "module_tag": "dipl_team_slider",
-        "frequency": 0.444,
-        "count": 12
-      },
-      {
-        "module_tag": "dipl_team_grid",
-        "frequency": 0.37,
-        "count": 10
-      },
-      {
-        "module_tag": "dipl_double_color_heading",
-        "frequency": 0.333,
-        "count": 9
-      },
-      {
-        "module_tag": "dipl_flipbox",
-        "frequency": 0.259,
-        "count": 7
-      },
-      {
-        "module_tag": "dipl_faq_page_schema_item",
-        "frequency": 0.222,
-        "count": 6
-      },
-      {
-        "module_tag": "dipl_image_stack_item",
-        "frequency": 0.148,
-        "count": 4
-      },
-      {
-        "module_tag": "dipl_separator",
-        "frequency": 0.111,
-        "count": 3
-      },
-      {
-        "module_tag": "et_pb_heading",
-        "frequency": 0.111,
-        "count": 3
-      },
-      {
-        "module_tag": "dipl_button_item",
-        "frequency": 0.111,
-        "count": 3
+        "frequency": 1.242,
+        "count": 77
       },
       {
         "module_tag": "et_pb_blurb",
-        "frequency": 0.074,
-        "count": 2
+        "frequency": 0.5,
+        "count": 31
       },
       {
-        "module_tag": "dipl_text_animator",
-        "frequency": 0.074,
-        "count": 2
+        "module_tag": "dipl_double_color_heading",
+        "frequency": 0.387,
+        "count": 24
+      },
+      {
+        "module_tag": "dipl_team_grid",
+        "frequency": 0.29,
+        "count": 18
+      },
+      {
+        "module_tag": "dipl_faq_page_schema_item",
+        "frequency": 0.29,
+        "count": 18
+      },
+      {
+        "module_tag": "dipl_button_item",
+        "frequency": 0.29,
+        "count": 18
+      },
+      {
+        "module_tag": "dipl_team_slider",
+        "frequency": 0.258,
+        "count": 16
+      },
+      {
+        "module_tag": "et_pb_social_media_follow_network",
+        "frequency": 0.242,
+        "count": 15
       },
       {
         "module_tag": "dipl_button",
-        "frequency": 0.074,
-        "count": 2
+        "frequency": 0.226,
+        "count": 14
       },
       {
-        "module_tag": "dipl_testimonial_grid",
-        "frequency": 0.074,
-        "count": 2
+        "module_tag": "dipl_horizontal_scrolling_card_item",
+        "frequency": 0.226,
+        "count": 14
       },
       {
-        "module_tag": "et_pb_divider",
-        "frequency": 0.037,
-        "count": 1
+        "module_tag": "dipl_flipbox",
+        "frequency": 0.177,
+        "count": 11
+      },
+      {
+        "module_tag": "et_pb_heading",
+        "frequency": 0.145,
+        "count": 9
+      },
+      {
+        "module_tag": "dipl_timeline_item",
+        "frequency": 0.129,
+        "count": 8
+      },
+      {
+        "module_tag": "dipl_separator",
+        "frequency": 0.097,
+        "count": 6
+      },
+      {
+        "module_tag": "et_pb_image",
+        "frequency": 0.097,
+        "count": 6
       }
     ],
     "common_sequences": [
@@ -3936,35 +4081,8 @@
         "sequence": [
           "dipl_team_slider"
         ],
-        "frequency": 0.185,
-        "count": 5
-      },
-      {
-        "sequence": [
-          "dipl_double_color_heading",
-          "dipl_team_slider"
-        ],
-        "frequency": 0.111,
-        "count": 3
-      },
-      {
-        "sequence": [
-          "et_pb_text",
-          "et_pb_divider",
-          "dipl_double_color_heading",
-          "dipl_team_grid"
-        ],
-        "frequency": 0.037,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "dipl_before_after_slider",
-          "et_pb_text",
-          "et_pb_text"
-        ],
-        "frequency": 0.037,
-        "count": 1
+        "frequency": 0.113,
+        "count": 7
       },
       {
         "sequence": [
@@ -3974,8 +4092,8 @@
           "et_pb_blurb",
           "dipl_mystery_image"
         ],
-        "frequency": 0.037,
-        "count": 1
+        "frequency": 0.048,
+        "count": 3
       },
       {
         "sequence": [
@@ -3988,8 +4106,49 @@
           "dipl_faq_page_schema_item",
           "dipl_faq_page_schema_item"
         ],
-        "frequency": 0.037,
-        "count": 1
+        "frequency": 0.048,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "dipl_double_color_heading",
+          "dipl_team_slider"
+        ],
+        "frequency": 0.048,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_heading",
+          "dipl_team_slider"
+        ],
+        "frequency": 0.048,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_heading",
+          "et_pb_text",
+          "dipl_button",
+          "dipl_button_item",
+          "dipl_team_grid"
+        ],
+        "frequency": 0.048,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "dipl_image_mask",
+          "dipl_double_color_heading",
+          "dipl_separator",
+          "et_pb_text",
+          "dipl_button",
+          "dipl_button_item",
+          "dipl_button_item",
+          "et_pb_image"
+        ],
+        "frequency": 0.048,
+        "count": 3
       },
       {
         "sequence": [
@@ -4000,156 +4159,155 @@
           "dipl_flipbox",
           "dipl_flipbox"
         ],
-        "frequency": 0.037,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "dipl_separator",
-          "dipl_double_color_heading",
-          "dipl_image_stack",
-          "dipl_image_stack_item",
-          "dipl_image_stack_item",
-          "dipl_image_stack_item",
-          "dipl_image_stack_item"
-        ],
-        "frequency": 0.037,
-        "count": 1
+        "frequency": 0.032,
+        "count": 2
       },
       {
         "sequence": [
           "et_pb_text",
           "dipl_team_grid"
         ],
-        "frequency": 0.037,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_heading",
-          "dipl_team_slider"
-        ],
-        "frequency": 0.037,
-        "count": 1
-      }
-    ],
-    "decorations": {
-      "gradient_frequency": 0.111,
-      "divider_frequency": 0.0,
-      "bg_image_frequency": 0.074
-    },
-    "avg_row_count": 1.2,
-    "avg_module_count": 7.4
-  },
-  "testimonials": {
-    "total_samples": 43,
-    "column_structures": [
-      {
-        "structure": "1_2,1_2",
-        "frequency": 0.419,
-        "count": 18
-      },
-      {
-        "structure": "2_5,3_5",
-        "frequency": 0.093,
-        "count": 4
-      },
-      {
-        "structure": "1_5,3_5,1_5",
-        "frequency": 0.07,
-        "count": 3
-      },
-      {
-        "structure": "1_3,1_3,1_3",
-        "frequency": 0.047,
+        "frequency": 0.032,
         "count": 2
       },
       {
-        "structure": "3_4,1_4",
-        "frequency": 0.023,
-        "count": 1
+        "sequence": [
+          "et_pb_text",
+          "dipl_double_color_heading",
+          "et_pb_text",
+          "dipl_team_grid"
+        ],
+        "frequency": 0.032,
+        "count": 2
+      }
+    ],
+    "decorations": {
+      "gradient_frequency": 0.242,
+      "divider_frequency": 0.0,
+      "bg_image_frequency": 0.129
+    },
+    "avg_row_count": 1.3,
+    "avg_module_count": 9.9
+  },
+  "testimonials": {
+    "total_samples": 139,
+    "column_structures": [
+      {
+        "structure": "1_2,1_2",
+        "frequency": 0.446,
+        "count": 62
       },
       {
         "structure": "1_4,1_4,1_4,1_4",
-        "frequency": 0.023,
-        "count": 1
+        "frequency": 0.079,
+        "count": 11
+      },
+      {
+        "structure": "2_5,3_5",
+        "frequency": 0.065,
+        "count": 9
+      },
+      {
+        "structure": "1_5,3_5,1_5",
+        "frequency": 0.065,
+        "count": 9
+      },
+      {
+        "structure": "1_3,1_3,1_3",
+        "frequency": 0.065,
+        "count": 9
+      },
+      {
+        "structure": "3_5,2_5",
+        "frequency": 0.036,
+        "count": 5
+      },
+      {
+        "structure": "3_4,1_4",
+        "frequency": 0.022,
+        "count": 3
+      },
+      {
+        "structure": "1_4,1_2,1_4",
+        "frequency": 0.014,
+        "count": 2
       }
     ],
     "common_modules": [
       {
         "module_tag": "dipl_logo_slider_item",
-        "frequency": 1.256,
-        "count": 54
+        "frequency": 1.065,
+        "count": 148
       },
       {
         "module_tag": "et_pb_text",
-        "frequency": 0.651,
-        "count": 28
-      },
-      {
-        "module_tag": "dipl_testimonial_slider",
-        "frequency": 0.488,
-        "count": 21
+        "frequency": 0.993,
+        "count": 138
       },
       {
         "module_tag": "dipl_double_color_heading",
-        "frequency": 0.372,
-        "count": 16
+        "frequency": 0.439,
+        "count": 61
       },
       {
-        "module_tag": "dipl_star_rating",
-        "frequency": 0.349,
-        "count": 15
-      },
-      {
-        "module_tag": "dipl_separator",
-        "frequency": 0.256,
-        "count": 11
-      },
-      {
-        "module_tag": "dipl_floating_image_item",
-        "frequency": 0.209,
-        "count": 9
+        "module_tag": "dipl_testimonial_slider",
+        "frequency": 0.36,
+        "count": 50
       },
       {
         "module_tag": "et_pb_social_media_follow_network",
-        "frequency": 0.186,
-        "count": 8
+        "frequency": 0.259,
+        "count": 36
       },
       {
-        "module_tag": "et_pb_heading",
-        "frequency": 0.163,
-        "count": 7
+        "module_tag": "dipl_star_rating",
+        "frequency": 0.259,
+        "count": 36
       },
       {
-        "module_tag": "dipl_logo_slider",
-        "frequency": 0.163,
-        "count": 7
+        "module_tag": "dipl_separator",
+        "frequency": 0.216,
+        "count": 30
+      },
+      {
+        "module_tag": "dipl_floating_image_item",
+        "frequency": 0.201,
+        "count": 28
+      },
+      {
+        "module_tag": "dipl_flipbox",
+        "frequency": 0.201,
+        "count": 28
+      },
+      {
+        "module_tag": "dipl_tilt_image",
+        "frequency": 0.194,
+        "count": 27
       },
       {
         "module_tag": "dipl_floating_image",
-        "frequency": 0.163,
-        "count": 7
+        "frequency": 0.173,
+        "count": 24
       },
       {
-        "module_tag": "dipl_button_item",
-        "frequency": 0.14,
-        "count": 6
+        "module_tag": "dipl_list_item",
+        "frequency": 0.173,
+        "count": 24
       },
       {
-        "module_tag": "dipl_fancy_text",
-        "frequency": 0.116,
-        "count": 5
+        "module_tag": "et_pb_heading",
+        "frequency": 0.144,
+        "count": 20
       },
       {
-        "module_tag": "dipl_button",
-        "frequency": 0.116,
-        "count": 5
+        "module_tag": "dipl_logo_slider",
+        "frequency": 0.137,
+        "count": 19
       },
       {
         "module_tag": "et_pb_contact_field",
-        "frequency": 0.116,
-        "count": 5
+        "frequency": 0.137,
+        "count": 19
       }
     ],
     "common_sequences": [
@@ -4158,33 +4316,22 @@
           "et_pb_text",
           "dipl_testimonial_slider"
         ],
-        "frequency": 0.093,
-        "count": 4
+        "frequency": 0.043,
+        "count": 6
       },
       {
         "sequence": [
           "dipl_testimonial_slider"
         ],
-        "frequency": 0.07,
-        "count": 3
-      },
-      {
-        "sequence": [
-          "dipl_fancy_text",
-          "dipl_separator",
-          "dipl_star_rating",
-          "dipl_star_rating",
-          "dipl_star_rating"
-        ],
-        "frequency": 0.047,
-        "count": 2
+        "frequency": 0.029,
+        "count": 4
       },
       {
         "sequence": [
           "dipl_testimonial_grid"
         ],
-        "frequency": 0.047,
-        "count": 2
+        "frequency": 0.029,
+        "count": 4
       },
       {
         "sequence": [
@@ -4192,8 +4339,8 @@
           "dipl_testimonial_slider",
           "dipl_double_color_heading"
         ],
-        "frequency": 0.023,
-        "count": 1
+        "frequency": 0.022,
+        "count": 3
       },
       {
         "sequence": [
@@ -4206,19 +4353,8 @@
           "dipl_tilt_image",
           "dipl_tilt_image"
         ],
-        "frequency": 0.023,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_heading",
-          "et_pb_text",
-          "dipl_button",
-          "dipl_button_item",
-          "dipl_button_item"
-        ],
-        "frequency": 0.023,
-        "count": 1
+        "frequency": 0.022,
+        "count": 3
       },
       {
         "sequence": [
@@ -4235,8 +4371,8 @@
           "et_pb_social_media_follow_network",
           "et_pb_social_media_follow_network"
         ],
-        "frequency": 0.023,
-        "count": 1
+        "frequency": 0.022,
+        "count": 3
       },
       {
         "sequence": [
@@ -4250,8 +4386,8 @@
           "dipl_logo_slider_item",
           "dipl_logo_slider_item"
         ],
-        "frequency": 0.023,
-        "count": 1
+        "frequency": 0.022,
+        "count": 3
       },
       {
         "sequence": [
@@ -4267,152 +4403,171 @@
           "et_pb_text",
           "dipl_testimonial_slider"
         ],
-        "frequency": 0.023,
-        "count": 1
+        "frequency": 0.022,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_text",
+          "dipl_separator",
+          "et_pb_text",
+          "et_pb_text",
+          "dipl_testimonial_slider"
+        ],
+        "frequency": 0.022,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "dipl_floating_image",
+          "dipl_floating_image_item",
+          "dipl_floating_image",
+          "dipl_floating_image_item",
+          "dipl_floating_image",
+          "dipl_floating_image_item",
+          "dipl_fancy_text",
+          "et_pb_text",
+          "dipl_floating_image",
+          "dipl_floating_image_item",
+          "dipl_floating_image",
+          "dipl_floating_image_item",
+          "dipl_floating_image",
+          "dipl_floating_image_item"
+        ],
+        "frequency": 0.022,
+        "count": 3
       }
     ],
     "decorations": {
-      "gradient_frequency": 0.209,
-      "divider_frequency": 0.023,
-      "bg_image_frequency": 0.209
+      "gradient_frequency": 0.216,
+      "divider_frequency": 0.014,
+      "bg_image_frequency": 0.201
     },
     "avg_row_count": 1.4,
-    "avg_module_count": 10.3
+    "avg_module_count": 11.5
   },
   "timeline": {
-    "total_samples": 41,
+    "total_samples": 129,
     "column_structures": [
       {
         "structure": "1_2,1_2",
-        "frequency": 0.293,
-        "count": 12
+        "frequency": 0.302,
+        "count": 39
       },
       {
         "structure": "1_3,1_3,1_3",
-        "frequency": 0.098,
-        "count": 4
-      },
-      {
-        "structure": "1_4,1_4,1_4,1_4",
-        "frequency": 0.049,
-        "count": 2
+        "frequency": 0.124,
+        "count": 16
       },
       {
         "structure": "3_5,2_5",
-        "frequency": 0.049,
-        "count": 2
-      },
-      {
-        "structure": "1_6,1_6,1_6,1_6,1_6,1_6",
-        "frequency": 0.024,
-        "count": 1
-      },
-      {
-        "structure": "3_4,1_4",
-        "frequency": 0.024,
-        "count": 1
-      },
-      {
-        "structure": "1_2,1_4,1_4",
-        "frequency": 0.024,
-        "count": 1
+        "frequency": 0.047,
+        "count": 6
       },
       {
         "structure": "2_5,3_5",
-        "frequency": 0.024,
-        "count": 1
+        "frequency": 0.047,
+        "count": 6
+      },
+      {
+        "structure": "1_4,1_4,1_4,1_4",
+        "frequency": 0.031,
+        "count": 4
+      },
+      {
+        "structure": "1_6,1_6,1_6,1_6,1_6,1_6",
+        "frequency": 0.023,
+        "count": 3
+      },
+      {
+        "structure": "1_2,1_4,1_4",
+        "frequency": 0.023,
+        "count": 3
+      },
+      {
+        "structure": "3_4,1_4",
+        "frequency": 0.016,
+        "count": 2
       }
     ],
     "common_modules": [
       {
         "module_tag": "dipl_timeline_item",
-        "frequency": 3.439,
-        "count": 141
+        "frequency": 2.543,
+        "count": 328
       },
       {
         "module_tag": "et_pb_text",
-        "frequency": 1.244,
-        "count": 51
+        "frequency": 1.124,
+        "count": 145
       },
       {
         "module_tag": "dipl_timeline",
-        "frequency": 0.805,
-        "count": 33
+        "frequency": 0.605,
+        "count": 78
       },
       {
         "module_tag": "dipl_double_color_heading",
-        "frequency": 0.512,
-        "count": 21
+        "frequency": 0.558,
+        "count": 72
       },
       {
         "module_tag": "et_pb_image",
-        "frequency": 0.366,
-        "count": 15
+        "frequency": 0.395,
+        "count": 51
       },
       {
         "module_tag": "dipl_price_list_item",
-        "frequency": 0.22,
-        "count": 9
+        "frequency": 0.295,
+        "count": 38
       },
       {
         "module_tag": "dipl_floating_image_item",
-        "frequency": 0.195,
-        "count": 8
+        "frequency": 0.225,
+        "count": 29
+      },
+      {
+        "module_tag": "et_pb_blurb",
+        "frequency": 0.171,
+        "count": 22
       },
       {
         "module_tag": "dipl_floating_image",
         "frequency": 0.171,
-        "count": 7
+        "count": 22
+      },
+      {
+        "module_tag": "dipl_faq_page_schema_item",
+        "frequency": 0.163,
+        "count": 21
+      },
+      {
+        "module_tag": "dipl_image_card_carousel_item",
+        "frequency": 0.14,
+        "count": 18
+      },
+      {
+        "module_tag": "dipl_image_mask_item",
+        "frequency": 0.132,
+        "count": 17
+      },
+      {
+        "module_tag": "dipl_list_item",
+        "frequency": 0.132,
+        "count": 17
       },
       {
         "module_tag": "et_pb_heading",
-        "frequency": 0.171,
-        "count": 7
+        "frequency": 0.124,
+        "count": 16
       },
       {
-        "module_tag": "et_pb_blurb",
-        "frequency": 0.146,
-        "count": 6
-      },
-      {
-        "module_tag": "dipl_interactive_image_card",
-        "frequency": 0.146,
-        "count": 6
-      },
-      {
-        "module_tag": "dipl_bar_counter",
-        "frequency": 0.122,
-        "count": 5
-      },
-      {
-        "module_tag": "dipl_separator",
-        "frequency": 0.098,
-        "count": 4
-      },
-      {
-        "module_tag": "dipl_mystery_image",
-        "frequency": 0.098,
-        "count": 4
-      },
-      {
-        "module_tag": "dipl_tilt_image",
-        "frequency": 0.073,
-        "count": 3
+        "module_tag": "dipl_price_list",
+        "frequency": 0.124,
+        "count": 16
       }
     ],
     "common_sequences": [
-      {
-        "sequence": [
-          "et_pb_text",
-          "dipl_timeline",
-          "dipl_timeline_item",
-          "dipl_timeline_item",
-          "dipl_timeline_item",
-          "dipl_timeline_item"
-        ],
-        "frequency": 0.098,
-        "count": 4
-      },
       {
         "sequence": [
           "dipl_double_color_heading",
@@ -4422,8 +4577,20 @@
           "dipl_timeline_item",
           "dipl_timeline_item"
         ],
-        "frequency": 0.073,
-        "count": 3
+        "frequency": 0.054,
+        "count": 7
+      },
+      {
+        "sequence": [
+          "et_pb_text",
+          "dipl_timeline",
+          "dipl_timeline_item",
+          "dipl_timeline_item",
+          "dipl_timeline_item",
+          "dipl_timeline_item"
+        ],
+        "frequency": 0.047,
+        "count": 6
       },
       {
         "sequence": [
@@ -4433,8 +4600,8 @@
           "dipl_timeline_item",
           "dipl_timeline_item"
         ],
-        "frequency": 0.049,
-        "count": 2
+        "frequency": 0.031,
+        "count": 4
       },
       {
         "sequence": [
@@ -4446,8 +4613,8 @@
           "dipl_timeline_item",
           "dipl_timeline_item"
         ],
-        "frequency": 0.024,
-        "count": 1
+        "frequency": 0.023,
+        "count": 3
       },
       {
         "sequence": [
@@ -4459,44 +4626,8 @@
           "dipl_timeline_item",
           "dipl_timeline_item"
         ],
-        "frequency": 0.024,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_text",
-          "dipl_separator",
-          "dipl_text_animator",
-          "et_pb_text",
-          "et_pb_image",
-          "et_pb_text",
-          "et_pb_blurb",
-          "et_pb_blurb",
-          "et_pb_text",
-          "et_pb_blurb",
-          "et_pb_text",
-          "et_pb_blurb",
-          "et_pb_text",
-          "et_pb_blurb"
-        ],
-        "frequency": 0.024,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "et_pb_text",
-          "dipl_separator",
-          "et_pb_text",
-          "et_pb_text",
-          "et_pb_video",
-          "dipl_timeline",
-          "dipl_timeline_item",
-          "dipl_timeline_item",
-          "dipl_timeline_item",
-          "dipl_timeline_item"
-        ],
-        "frequency": 0.024,
-        "count": 1
+        "frequency": 0.023,
+        "count": 3
       },
       {
         "sequence": [
@@ -4512,22 +4643,8 @@
           "et_pb_image",
           "et_pb_image"
         ],
-        "frequency": 0.024,
-        "count": 1
-      },
-      {
-        "sequence": [
-          "dipl_text_animator",
-          "dipl_double_color_heading",
-          "et_pb_text",
-          "dipl_timeline",
-          "dipl_timeline_item",
-          "dipl_timeline_item",
-          "dipl_timeline_item",
-          "dipl_timeline_item"
-        ],
-        "frequency": 0.024,
-        "count": 1
+        "frequency": 0.023,
+        "count": 3
       },
       {
         "sequence": [
@@ -4540,16 +4657,61 @@
           "dipl_interactive_image_card",
           "dipl_interactive_image_card"
         ],
-        "frequency": 0.024,
-        "count": 1
+        "frequency": 0.023,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "et_pb_text",
+          "et_pb_text",
+          "dipl_floating_image",
+          "dipl_floating_image_item",
+          "dipl_floating_image",
+          "dipl_floating_image_item",
+          "dipl_floating_image",
+          "dipl_floating_image_item",
+          "dipl_timeline",
+          "dipl_timeline_item",
+          "dipl_timeline_item",
+          "dipl_timeline_item"
+        ],
+        "frequency": 0.023,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "dipl_double_color_heading",
+          "dipl_tilt_image",
+          "dipl_timeline",
+          "dipl_timeline_item",
+          "dipl_timeline_item",
+          "dipl_timeline_item",
+          "dipl_timeline_item",
+          "dipl_tilt_image"
+        ],
+        "frequency": 0.023,
+        "count": 3
+      },
+      {
+        "sequence": [
+          "dipl_double_color_heading",
+          "et_pb_image",
+          "dipl_timeline",
+          "dipl_timeline_item",
+          "dipl_timeline_item",
+          "dipl_timeline_item",
+          "dipl_timeline_item"
+        ],
+        "frequency": 0.023,
+        "count": 3
       }
     ],
     "decorations": {
-      "gradient_frequency": 0.146,
+      "gradient_frequency": 0.163,
       "divider_frequency": 0.0,
-      "bg_image_frequency": 0.171
+      "bg_image_frequency": 0.194
     },
     "avg_row_count": 1.4,
-    "avg_module_count": 13.6
+    "avg_module_count": 13.8
   }
 }

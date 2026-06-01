@@ -1,0 +1,147 @@
+{
+  "cluster_0": {
+    "padding_top": {
+      "mean": 16.9,
+      "std": 26.3,
+      "min": 0.0,
+      "max": 180.0,
+      "count": 260,
+      "p10": 0.0,
+      "p90": 40.0
+    },
+    "padding_bottom": {
+      "mean": 16.9,
+      "std": 27.0,
+      "min": 0.0,
+      "max": 250.0,
+      "count": 282,
+      "p10": 0.0,
+      "p90": 40.0
+    }
+  },
+  "cluster_1": {
+    "padding_top": {
+      "mean": 20.6,
+      "std": 30.2,
+      "min": 0.0,
+      "max": 370.0,
+      "count": 1352,
+      "p10": 0.0,
+      "p90": 50.0
+    },
+    "padding_bottom": {
+      "mean": 19.6,
+      "std": 30.6,
+      "min": 0.0,
+      "max": 370.0,
+      "count": 1354,
+      "p10": 0.0,
+      "p90": 50.0
+    }
+  },
+  "cluster_2": {
+    "padding_top": {
+      "mean": 33.3,
+      "std": 57.7,
+      "min": 0.0,
+      "max": 100.0,
+      "count": 3,
+      "p10": 0.0,
+      "p90": 100.0
+    },
+    "padding_bottom": {
+      "mean": 26.7,
+      "std": 46.2,
+      "min": 0.0,
+      "max": 80.0,
+      "count": 3,
+      "p10": 0.0,
+      "p90": 80.0
+    }
+  },
+  "cluster_3": {
+    "padding_top": {
+      "mean": 27.0,
+      "std": 42.4,
+      "min": 0.0,
+      "max": 180.0,
+      "count": 91,
+      "p10": 1.6,
+      "p90": 60.0
+    },
+    "padding_bottom": {
+      "mean": 23.2,
+      "std": 37.5,
+      "min": 0.0,
+      "max": 180.0,
+      "count": 103,
+      "p10": 0.0,
+      "p90": 50.0
+    }
+  },
+  "cluster_4": {
+    "padding_top": {
+      "mean": 0.1,
+      "std": 0.2,
+      "min": 0.0,
+      "max": 0.5,
+      "count": 4,
+      "p10": 0.0,
+      "p90": 0.5
+    },
+    "padding_bottom": {
+      "mean": 0.1,
+      "std": 0.2,
+      "min": 0.0,
+      "max": 0.5,
+      "count": 4,
+      "p10": 0.0,
+      "p90": 0.5
+    }
+  },
+  "cluster_5": {
+    "padding_top": {
+      "mean": 16.9,
+      "std": 31.2,
+      "min": 0.0,
+      "max": 80.0,
+      "count": 6,
+      "p10": 0.0,
+      "p90": 80.0
+    },
+    "padding_bottom": {
+      "mean": 16.9,
+      "std": 31.2,
+      "min": 0.0,
+      "max": 80.0,
+      "count": 6,
+      "p10": 0.0,
+      "p90": 80.0
+    }
+  },
+  "cluster_6": {
+    "padding_top": {
+      "mean": 19.7,
+      "std": 31.6,
+      "min": 0.0,
+      "max": 200.0,
+      "count": 105,
+      "p10": 0.0,
+      "p90": 60.0
+    },
+    "padding_bottom": {
+      "mean": 19.8,
+      "std": 30.8,
+      "min": 0.0,
+      "max": 200.0,
+      "count": 105,
+      "p10": 0.0,
+      "p90": 51.0
+    }
+  },
+  "_meta": {
+    "source": "dataset.jsonl (877 templates, custom_padding from raw_shortcode)",
+    "clusters": 7,
+    "cluster_labels_kmeans": "kmeans.labels_ aligned by dataset index"
+  }
+}

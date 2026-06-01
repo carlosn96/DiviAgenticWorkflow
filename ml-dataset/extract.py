@@ -19,7 +19,7 @@ from collections import Counter
 from html import unescape
 
 DAW_ROOT = Path(__file__).resolve().parent.parent
-RAW_DIR = DAW_ROOT / "DAW_bundle" / "workspace" / "catalog" / "jsons"
+RAW_DIR = DAW_ROOT / "workspace" / "catalog" / "jsons"
 OUT_DIR = Path(__file__).resolve().parent
 
 TAG_RE = re.compile(r'\[(\w+)([^\]]*)\](.*?)\[\/\1\]', re.DOTALL)
@@ -106,6 +106,7 @@ def walk_nodes(nodes: list, collector: list | None = None) -> list:
 
 
 def process_raw_file(json_path: Path) -> dict | None:
+    folder_name = json_path.parent.name
     try:
         raw = json_path.read_text("utf-8")
         data = json.loads(raw)
@@ -127,17 +128,122 @@ def process_raw_file(json_path: Path) -> dict | None:
     all_colors = []
     all_texts = []
     all_module_types = []
+    
+    slots_offered = {
+        "titles": 0,
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": 0,
+        "features": 0,
+        "testimonials": 0,
+        "stats": 0,
+        "logos": 0,
+        "items": 0
+    }
+
+    # Slot categorization: tags grouped by semantic slot type
+    TAG_SLOTS = {
+        "buttons": {
+            "et_pb_button", "dipl_button_item", "dipl_button",
+            "et_pb_cta", "et_pb_signup",
+        },
+        "images": {
+            "et_pb_image", "dipl_image_mask", "dipl_floating_image",
+            "dipl_featured_image", "et_pb_video_slider_item",
+        },
+        "logos": {
+            # Logos use image tags but with logo-related semantic context
+            # Detected via folder name OR image attrs containing logo/brand/client
+        },
+        "features": {
+            "et_pb_blurb", "et_pb_team_member", "et_pb_toggle",
+            "et_pb_accordion_item", "dipl_faq", "dipl_faq_item",
+        },
+        "testimonials": {
+            "et_pb_testimonial", "dipl_testimonial", "dipl_testimonial_slider",
+            "dipl_testimonial_slider_item",
+        },
+        "stats": {
+            "et_pb_number_counter", "et_pb_circle_counter",
+            "et_pb_counter", "dipl_counter", "dipl_bar_counter",
+        },
+        "titles": {
+            "dipl_double_color_heading", "dipl_text_animator",
+            "dipl_text_highlighter", "dipl_advanced_heading",
+            "dipl_fancy_heading",
+        },
+        "items": {
+            "dipl_timeline_item", "dipl_floating_image_item",
+            "dipl_hover_box", "dipl_content_toggle",
+            "et_pb_pricing_table", "et_pb_portfolio",
+        },
+    }
+
+    _logo_keywords = {"logo", "brand", "partner", "sponsor", "client", "patrocinador", "cliente", "marca"}
+
     for node in flat:
-        all_colors.extend(extract_colors(node["attrs"]))
+        tag = node["tag"]
+        attrs = node.get("attrs", {})
+        all_colors.extend(extract_colors(attrs))
         txt = node.get("content_text", "")
+        
+        cleaned = ""
         if txt:
             cleaned = re.sub(r'<[^>]+>', ' ', txt)
+            cleaned = re.sub(r'\[.*?\]', ' ', cleaned)
             cleaned = re.sub(r'\s+', ' ', cleaned).strip()
             if cleaned:
-                all_texts.append({"tag": node["tag"], "text": cleaned[:500]})
-        all_module_types.append(node["tag"])
+                all_texts.append({"tag": tag, "text": cleaned[:500]})
+                
+        all_module_types.append(tag)
+        
+        # Categorize into slots — check named slot sets first
+        assigned = False
+        for slot_name, slot_tags in TAG_SLOTS.items():
+            if not slot_tags:
+                continue
+            if tag in slot_tags:
+                slots_offered[slot_name] += 1
+                assigned = True
+                break
+        
+        if assigned:
+            continue
 
-    folder_name = json_path.parent.name
+        # Image-or-logo: check folder name and image src attributes
+        if tag in ("et_pb_image", "dipl_image_mask", "dipl_floating_image", "dipl_featured_image"):
+            is_logo = False
+            folder_lower = folder_name.lower()
+            if any(kw in folder_lower for kw in _logo_keywords):
+                is_logo = True
+            else:
+                img_attrs = json.dumps(attrs).lower()
+                if any(kw in img_attrs for kw in _logo_keywords):
+                    is_logo = True
+            if is_logo:
+                slots_offered["logos"] += 1
+            else:
+                slots_offered["images"] += 1
+            continue
+
+        # et_pb_text: title if short or has heading tags, else paragraph
+        if tag == "et_pb_text":
+            if cleaned:
+                if ("<h1" in txt.lower() or "<h2" in txt.lower() or
+                    "<h3" in txt.lower() or "<h4" in txt.lower() or
+                    len(cleaned) < 80):
+                    slots_offered["titles"] += 1
+                else:
+                    slots_offered["paragraphs"] += 1
+            continue
+        
+        # Unmatched modules that contain repeatable items → items slot
+        if tag.endswith("_item") or tag.endswith("_slider") or "pricing" in tag:
+            slots_offered["items"] += 1
+            continue
+
+    # Count total columns in template structure
+    columns_count = len([n for n in flat if n["tag"] in ("et_pb_column", "et_pb_column_inner")])
 
     return {
         "source": folder_name,
@@ -145,6 +251,8 @@ def process_raw_file(json_path: Path) -> dict | None:
         "raw_shortcode": shortcode_text[:5000],
         "module_types": sorted(set(all_module_types)),
         "module_count": len([t for t in all_module_types if t not in SKIP_TAGS]),
+        "slots_offered": slots_offered,
+        "columns_count": columns_count,
         "colors": all_colors[:100],
         "content_texts": all_texts[:50],
         "tag_count": len(flat),

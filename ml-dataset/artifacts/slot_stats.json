@@ -1,0 +1,89 @@
+{
+  "title": {
+    "mean": 80.4,
+    "std": 83.1,
+    "min": 3,
+    "max": 500,
+    "count": 359,
+    "p10": 12,
+    "p90": 176,
+    "source_tags": [
+      "dipl_double_color_heading",
+      "dipl_image_card",
+      "et_pb_blurb",
+      "et_pb_pricing_table"
+    ]
+  },
+  "eyebrow": {
+    "mean": 103.0,
+    "std": 117.2,
+    "min": 2,
+    "max": 500,
+    "count": 925,
+    "p10": 8,
+    "p90": 244,
+    "source_tags": [
+      "et_pb_text"
+    ]
+  },
+  "body": {
+    "mean": 103.0,
+    "std": 117.2,
+    "min": 2,
+    "max": 500,
+    "count": 925,
+    "p10": 8,
+    "p90": 244,
+    "source_tags": [
+      "et_pb_text"
+    ]
+  },
+  "btn_primary_text": {
+    "mean": 0,
+    "std": 0,
+    "min": 0,
+    "max": 0,
+    "count": 0,
+    "p10": 0,
+    "p90": 0,
+    "source_tags": [
+      "dipl_button"
+    ]
+  },
+  "btn_secondary_text": {
+    "mean": 0,
+    "std": 0,
+    "min": 0,
+    "max": 0,
+    "count": 0,
+    "p10": 0,
+    "p90": 0,
+    "source_tags": [
+      "dipl_button"
+    ]
+  },
+  "_meta": {
+    "source": "dataset.jsonl (877 templates, content_texts field)",
+    "note": "All text values were truncated at 500 chars during extraction; max_observed=500 is an under-estimate for longer texts.",
+    "slot_to_tags": {
+      "title": [
+        "dipl_double_color_heading",
+        "dipl_image_card",
+        "et_pb_blurb",
+        "et_pb_pricing_table"
+      ],
+      "eyebrow": [
+        "et_pb_text"
+      ],
+      "body": [
+        "et_pb_text"
+      ],
+      "btn_primary_text": [
+        "dipl_button"
+      ],
+      "btn_secondary_text": [
+        "dipl_button"
+      ]
+    }
+  }
+}
