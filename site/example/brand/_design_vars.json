@@ -17,8 +17,14 @@
   "color_error": "#8B3A3A",
 
   "font_display": "'Cormorant Garamond', Georgia, serif",
-  "font_body": "'Crimson Pro', Georgia, serif",
-  "font_ui": "'DM Sans', system-ui, sans-serif",
+  "font_body": "'IBM Plex Sans', system-ui, sans-serif",
+  "font_ui": "'IBM Plex Sans', system-ui, sans-serif",
+
+  "customizer_primary": "accent",
+  "customizer_secondary": "premium",
+  "customizer_heading": "ink",
+  "customizer_body": "ink",
+  "customizer_link": "premium",
 
   "radius_sm": "2px",
   "radius_md": "4px",
