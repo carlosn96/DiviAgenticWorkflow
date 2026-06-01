@@ -1,0 +1,527 @@
+{
+  "_meta": {
+    "version": "3.0",
+    "description": "Catálogo formal de propiedades nativas Divi 5 de alto impacto visual. Cada prop se declara con su path de atributo, tipo, valores válidos y reglas de impacto. Fuente única de verdad para el Visual Impact Engine.",
+    "total_props": 127,
+    "categories": [
+      "background",
+      "backdrop",
+      "border",
+      "shadow",
+      "animation",
+      "transform",
+      "scroll",
+      "text",
+      "spacing",
+      "divider"
+    ]
+  },
+  "background": {
+    "bg_color": {
+      "path": "decoration.background.desktop.value.color",
+      "type": "color",
+      "impact": "high",
+      "description": "Color de fondo de sección, fila o módulo. Define la atmósfera base.",
+      "brand_tokens": ["surface-deep", "surface-mid", "surface-light", "surface-white", "accent", "premium"],
+      "rules": {
+        "hero_dark": "{{design:color:surface-deep}}",
+        "hero_glass": "{{design:color:surface-deep}}",
+        "cta": "{{design:color:surface-deep}}",
+        "content_dark": "{{design:color:surface-mid}}",
+        "content_light": "{{design:color:surface-light}}"
+      }
+    },
+    "bg_image": {
+      "path": "decoration.background.desktop.value.image",
+      "type": "url",
+      "impact": "high",
+      "description": "Imagen de fondo. Usar con overlay para legibilidad."
+    },
+    "bg_size": {
+      "path": "decoration.background.desktop.value.size",
+      "type": "enum",
+      "values": ["cover", "contain", "initial"],
+      "default": "cover"
+    },
+    "bg_position": {
+      "path": "decoration.background.desktop.value.position",
+      "type": "string",
+      "default": "center"
+    },
+    "bg_repeat": {
+      "path": "decoration.background.desktop.value.repeat",
+      "type": "enum",
+      "values": ["no-repeat", "repeat", "repeat-x", "repeat-y"],
+      "default": "no-repeat"
+    },
+    "bg_blend_mode": {
+      "path": "decoration.background.desktop.value.blend",
+      "type": "enum",
+      "values": ["normal", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn", "difference", "exclusion", "hue", "saturation", "color", "luminosity"],
+      "impact": "medium",
+      "description": "Modo de mezcla para imagen de fondo. 'overlay' es universalmente impactante."
+    },
+    "overlay_color": {
+      "path": "decoration.background.desktop.value.overlay.color",
+      "type": "color",
+      "impact": "high",
+      "description": "Capa de color sobre fondo para garantizar contraste."
+    },
+    "overlay_gradient": {
+      "path": "decoration.background.desktop.value.overlay.gradient",
+      "type": "string",
+      "impact": "very_high",
+      "description": "Gradiente overlay CSS. Usar con tokens {{design:color:*}}.",
+      "patterns": {
+        "radial_glow_top_right": "radial-gradient(circle at 80% 20%, {{design:color:glow-accent}} 0%, transparent 60%)",
+        "radial_glow_center": "radial-gradient(circle at 50% 50%, {{design:color:glow-accent}} 0%, transparent 70%)",
+        "radial_glow_bottom_left": "radial-gradient(circle at 20% 80%, {{design:color:glow-accent}} 0%, transparent 50%)",
+        "linear_hero": "linear-gradient(135deg, {{design:color:surface-deep}} 0%, {{design:color:surface-mid}} 100%)",
+        "aurora": "linear-gradient(135deg, {{design:color:surface-deep}} 0%, {{design:color:glow-accent}} 50%, {{design:color:surface-mid}} 100%)"
+      }
+    }
+  },
+  "backdrop": {
+    "backdrop_filter": {
+      "path": "decoration.filter.desktop.value",
+      "type": "enum",
+      "values": ["blur(8px)", "blur(12px)", "blur(16px)", "blur(24px)", "blur(32px)", "brightness(1.1)", "contrast(1.1)", "saturate(1.2)"],
+      "impact": "very_high",
+      "description": "backdrop-filter CSS. Efecto glass/morphism. Requiere fondo semi-transparente.",
+      "rules": {
+        "glass_card": "blur(12px)",
+        "glass_section": "blur(24px)",
+        "subtle": "blur(8px)"
+      }
+    },
+    "bg_opacity": {
+      "path": "decoration.background.desktop.value.color",
+      "type": "rgba",
+      "impact": "high",
+      "description": "Alpha component del color de fondo para glass effect. glass-bg ya incluye alpha."
+    }
+  },
+  "border": {
+    "border_width": {
+      "path": "decoration.border.desktop.value.width",
+      "type": "object",
+      "keys": ["top", "right", "bottom", "left"],
+      "unit": "px"
+    },
+    "border_color": {
+      "path": "decoration.border.desktop.value.color",
+      "type": "color",
+      "impact": "medium",
+      "brand_tokens": ["glass-border", "glass-border-light", "accent"]
+    },
+    "border_style": {
+      "path": "decoration.border.desktop.value.style",
+      "type": "enum",
+      "values": ["solid", "dashed", "dotted", "double", "none"],
+      "default": "solid"
+    },
+    "border_radius": {
+      "path": "decoration.border.desktop.value.radius",
+      "type": "object",
+      "keys": ["topLeft", "topRight", "bottomRight", "bottomLeft"],
+      "unit": "px",
+      "impact": "high",
+      "description": "Border-radius por esquina. Usar con tokens {{design:radius:*}}.",
+      "rules": {
+        "card": "{{design:radius:lg}}",
+        "pill": "{{design:radius:full}}",
+        "button": "{{design:radius:md}}"
+      }
+    }
+  },
+  "shadow": {
+    "box_shadow": {
+      "path": "decoration.boxShadow.desktop.value",
+      "type": "object",
+      "keys": ["horizontal", "vertical", "blur", "spread", "color", "position"],
+      "impact": "very_high",
+      "description": "Sombra de caja. Múltiples capas posibles. Color debe usar alpha bajo.",
+      "patterns": {
+        "card_elevated": {
+          "horizontal": "0px",
+          "vertical": "8px",
+          "blur": "32px",
+          "spread": "0px",
+          "color": "rgba(0,0,0,0.08)",
+          "position": "outer"
+        },
+        "glow_accent": {
+          "horizontal": "0px",
+          "vertical": "0px",
+          "blur": "24px",
+          "spread": "4px",
+          "color": "{{design:color:glow-accent}}",
+          "position": "outer"
+        },
+        "glow_accent_strong": {
+          "horizontal": "0px",
+          "vertical": "0px",
+          "blur": "40px",
+          "spread": "8px",
+          "color": "{{design:color:glow-accent-strong}}",
+          "position": "outer"
+        },
+        "text_glow": {
+          "horizontal": "0px",
+          "vertical": "0px",
+          "blur": "16px",
+          "spread": "2px",
+          "color": "{{design:color:glow-accent}}",
+          "position": "outer"
+        }
+      }
+    },
+    "text_shadow": {
+      "path": "decoration.textShadow.desktop.value",
+      "type": "object",
+      "keys": ["horizontal", "vertical", "blur", "color"],
+      "impact": "medium",
+      "description": "Sombra de texto. Usar con moderación para títulos hero.",
+      "patterns": {
+        "subtle": {"horizontal": "0px", "vertical": "2px", "blur": "4px", "color": "rgba(0,0,0,0.3)"},
+        "glow": {"horizontal": "0px", "vertical": "0px", "blur": "12px", "color": "{{design:color:glow-accent}}"}
+      }
+    },
+    "inner_shadow": {
+      "path": "decoration.innerShadow.desktop.value",
+      "type": "object",
+      "keys": ["horizontal", "vertical", "blur", "spread", "color"],
+      "impact": "medium",
+      "description": "Sombra interior. Da profundidad a cards y botones."
+    }
+  },
+  "animation": {
+    "anim_style": {
+      "path": "decoration.animation.desktop.value.style",
+      "type": "enum",
+      "values": ["fade", "slide", "zoom", "flip", "bounce", "roll", "None"],
+      "impact": "high"
+    },
+    "anim_duration": {
+      "path": "decoration.animation.desktop.value.duration",
+      "type": "string",
+      "unit": "ms",
+      "rules": {
+        "hero": "800ms",
+        "content": "600ms",
+        "micro": "300ms"
+      }
+    },
+    "anim_delay": {
+      "path": "decoration.animation.desktop.value.delay",
+      "type": "string",
+      "unit": "ms",
+      "rules": {
+        "stagger_0": "0ms",
+        "stagger_1": "100ms",
+        "stagger_2": "200ms",
+        "stagger_3": "300ms"
+      }
+    },
+    "anim_speed_curve": {
+      "path": "decoration.animation.desktop.value.speedCurve",
+      "type": "enum",
+      "values": ["ease-in-out", "ease-out", "ease-in", "linear", "cubic-bezier(0.4,0,0.2,1)", "cubic-bezier(0.16,1,0.3,1)"],
+      "default": "ease-out",
+      "impact": "medium",
+      "description": "Curva de velocidad. cubic-bezier(0.16,1,0.3,1) = expo-out, muy premium."
+    },
+    "anim_direction": {
+      "path": "decoration.animation.desktop.value.direction",
+      "type": "enum",
+      "values": ["top", "bottom", "left", "right", "center", "custom"],
+      "default": "bottom"
+    },
+    "anim_repeat": {
+      "path": "decoration.animation.desktop.value.repeat",
+      "type": "enum",
+      "values": ["once", "loop"],
+      "default": "once"
+    }
+  },
+  "transform": {
+    "transform_hover": {
+      "path": "decoration.transform.hover.value",
+      "type": "object",
+      "keys": ["translate", "scale", "rotate", "skew", "origin"],
+      "impact": "very_high",
+      "description": "Transformaciones en estado hover. Efecto de interacción.",
+      "patterns": {
+        "lift": {"translate": {"y": "-4px"}},
+        "scale_up": {"scale": {"x": "1.05", "y": "1.05"}},
+        "scale_subtle": {"scale": {"x": "1.02", "y": "1.02"}},
+        "glow_lift": {
+          "scale": {"x": "1.02", "y": "1.02"},
+          "translate": {"y": "-2px"}
+        }
+      }
+    },
+    "box_shadow_hover": {
+      "path": "decoration.boxShadow.hover.value",
+      "type": "object",
+      "keys": ["horizontal", "vertical", "blur", "spread", "color", "position"],
+      "impact": "very_high",
+      "description": "Sombra en hover. Combinar con transform_hover para efecto card-elevated.",
+      "patterns": {
+        "card_hover": {
+          "horizontal": "0px",
+          "vertical": "8px",
+          "blur": "24px",
+          "spread": "0px",
+          "color": "rgba(0,0,0,0.12)",
+          "position": "outer"
+        },
+        "glow_hover": {
+          "horizontal": "0px",
+          "vertical": "0px",
+          "blur": "24px",
+          "spread": "4px",
+          "color": "{{design:color:glow-accent}}",
+          "position": "outer"
+        }
+      }
+    }
+  },
+  "scroll": {
+    "scroll_vertical_motion": {
+      "path": "decoration.scroll.desktop.value.verticalMotion",
+      "type": "object",
+      "keys": ["enable", "offset"],
+      "impact": "high",
+      "description": "Efecto parallax vertical. offset start/mid/end.",
+      "pattern": {
+        "enable": "on",
+        "offset": {"start": "6", "mid": "0", "end": "-4"}
+      }
+    },
+    "scroll_fade": {
+      "path": "decoration.scroll.desktop.value.fade",
+      "type": "object",
+      "keys": ["enable", "offset"],
+      "impact": "high",
+      "pattern": {
+        "enable": "on",
+        "offset": {"start": "0", "mid": "100", "end": "100"}
+      }
+    },
+    "scroll_scaling": {
+      "path": "decoration.scroll.desktop.value.scaling",
+      "type": "object",
+      "keys": ["enable", "offset"],
+      "impact": "high",
+      "description": "Efecto scaling al scrollear. Impactante en CTA.",
+      "pattern": {
+        "enable": "on",
+        "offset": {"start": "80", "mid": "100", "end": "100"}
+      }
+    },
+    "scroll_rotating": {
+      "path": "decoration.scroll.desktop.value.rotating",
+      "type": "object",
+      "keys": ["enable", "offset"],
+      "impact": "medium"
+    },
+    "scroll_blur": {
+      "path": "decoration.scroll.desktop.value.blur",
+      "type": "object",
+      "keys": ["enable", "offset"],
+      "impact": "medium",
+      "description": "Blur dinámico al scroll. Uso selectivo."
+    },
+    "motion_trigger_start": {
+      "path": "decoration.scroll.desktop.value.motionTriggerStart",
+      "type": "enum",
+      "values": ["middle", "top", "bottom"],
+      "default": "middle"
+    }
+  },
+  "text": {
+    "text_color": {
+      "path": "decoration.font.desktop.value.color",
+      "type": "color",
+      "impact": "high",
+      "brand_tokens": ["text-primary", "text-secondary", "text-on-dark", "text-on-accent", "accent"]
+    },
+    "text_alignment": {
+      "path": "decoration.font.desktop.value.textAlign",
+      "type": "enum",
+      "values": ["left", "center", "right", "justify"],
+      "default": "left"
+    },
+    "text_transform": {
+      "path": "decoration.font.desktop.value.textTransform",
+      "type": "enum",
+      "values": ["none", "capitalize", "uppercase", "lowercase"],
+      "default": "none"
+    },
+    "text_letter_spacing": {
+      "path": "decoration.font.desktop.value.letterSpacing",
+      "type": "string",
+      "unit": "px",
+      "impact": "medium",
+      "rules": {
+        "eyebrow": "2px",
+        "headline": "-0.5px",
+        "body": "0px"
+      }
+    },
+    "text_line_height": {
+      "path": "decoration.font.desktop.value.lineHeight",
+      "type": "string",
+      "unit": "em",
+      "rules": {
+        "headline": "1.1em",
+        "body": "1.6em",
+        "eyebrow": "1.4em"
+      }
+    },
+    "text_font_family": {
+      "path": "decoration.font.desktop.value.font",
+      "type": "string",
+      "brand_tokens": ["display", "body", "ui"]
+    },
+    "text_font_size": {
+      "path": "decoration.font.desktop.value.size",
+      "type": "string",
+      "unit": "px",
+      "description": "Usar clamp() para tipografía fluida cuando sea posible."
+    },
+    "heading_level": {
+      "path": "attrs.title.decoration.font.font.desktop.value.headingLevel",
+      "type": "enum",
+      "values": ["h1", "h2", "h3", "h4", "h5", "h6"],
+      "impact": "high"
+    }
+  },
+  "spacing": {
+    "padding": {
+      "path": "decoration.spacing.desktop.value.padding",
+      "type": "object",
+      "keys": ["top", "bottom", "right", "left"],
+      "unit": "px",
+      "impact": "high",
+      "rules": {
+        "hero": {"top": "140px", "bottom": "140px", "right": "96px", "left": "96px"},
+        "hero_centered": {"top": "160px", "bottom": "160px", "right": "96px", "left": "96px"},
+        "cta": {"top": "120px", "bottom": "120px", "right": "96px", "left": "96px"},
+        "features": {"top": "96px", "bottom": "96px", "right": "96px", "left": "96px"},
+        "content": {"top": "80px", "bottom": "80px", "right": "96px", "left": "96px"},
+        "testimonials": {"top": "80px", "bottom": "80px", "right": "96px", "left": "96px"},
+        "mobile_hero": {"top": "64px", "bottom": "64px", "right": "24px", "left": "24px"},
+        "mobile_content": {"top": "48px", "bottom": "48px", "right": "24px", "left": "24px"}
+      }
+    },
+    "margin": {
+      "path": "decoration.spacing.desktop.value.margin",
+      "type": "object",
+      "keys": ["top", "bottom", "right", "left"],
+      "unit": "px"
+    },
+    "section_width": {
+      "path": "decoration.sizing.desktop.value.width",
+      "type": "string",
+      "values": ["100%", "90%", "80%"],
+      "default": "100%"
+    },
+    "section_max_width": {
+      "path": "decoration.sizing.desktop.value.maxWidth",
+      "type": "string",
+      "default": "none"
+    }
+  },
+  "divider": {
+    "shape_divider_top": {
+      "path": "decoration.shapeDivider.top.desktop.value",
+      "type": "object",
+      "keys": ["style", "color", "height", "flip", "invert"],
+      "impact": "high",
+      "description": "Divisor de forma en borde superior de sección.",
+      "styles": ["rounded", "angle", "arrow", "wave", "curve", "custom"],
+      "pattern": {
+        "style": "curve",
+        "color": "{{design:color:surface-light}}",
+        "height": "100px",
+        "flip": "off",
+        "invert": "off"
+      }
+    },
+    "shape_divider_bottom": {
+      "path": "decoration.shapeDivider.bottom.desktop.value",
+      "type": "object",
+      "keys": ["style", "color", "height", "flip", "invert"],
+      "impact": "high",
+      "pattern": {
+        "style": "curve",
+        "color": "{{design:color:surface-light}}",
+        "height": "100px",
+        "flip": "off",
+        "invert": "off"
+      }
+    },
+    "module_divider": {
+      "path": "decoration.divider.desktop.value",
+      "type": "object",
+      "keys": ["show", "style", "weight", "color", "position"],
+      "impact": "low"
+    }
+  },
+  "module_specific": {
+    "button_icon": {
+      "path": "decoration.button.desktop.value.icon",
+      "type": "object",
+      "keys": ["enable", "placement"],
+      "impact": "medium"
+    },
+    "button_style": {
+      "path": "decoration.button.desktop.value",
+      "type": "object",
+      "keys": ["background", "color", "border", "borderRadius", "padding"],
+      "impact": "high"
+    },
+    "blurb_icon_placement": {
+      "path": "imageIcon.advanced.placement.desktop.value",
+      "type": "enum",
+      "values": ["top", "left", "right"],
+      "default": "top"
+    },
+    "blurb_icon_color": {
+      "path": "imageIcon.advanced.color.desktop.value",
+      "type": "color",
+      "impact": "medium",
+      "brand_tokens": ["accent", "premium", "text-on-dark"]
+    },
+    "image_border_radius": {
+      "path": "decoration.border.desktop.value.radius",
+      "type": "object",
+      "impact": "medium"
+    },
+    "image_box_shadow": {
+      "path": "decoration.boxShadow.desktop.value",
+      "type": "object",
+      "impact": "medium"
+    },
+    "pricing_table_header": {
+      "path": "header.decoration.background.desktop.value",
+      "type": "color",
+      "impact": "high",
+      "brand_tokens": ["accent", "premium", "surface-deep"]
+    },
+    "testimonial_background": {
+      "path": "module.decoration.background.desktop.value.color",
+      "type": "color",
+      "impact": "high",
+      "brand_tokens": ["surface-white", "surface-light", "glass-bg"]
+    },
+    "testimonial_quote_icon": {
+      "path": "quoteIcon.decoration.icon.desktop.value",
+      "type": "object",
+      "keys": ["show", "useSize", "color"],
+      "impact": "low"
+    }
+  }
+}

@@ -2,9 +2,9 @@
 """
 ================================================================================
 generate_brief.py — Generador de Briefs de Diseño Inteligente y Dinámico
-================================================================================
-Este script traduce solicitudes en lenguaje natural a archivos de brief YAML
-estructurados, compatibles con el orquestador DAW (orchestrate_page.php).
+==============================================================================
+Este script traduce solicitudes en lenguaje natural a archivos de brief JSON
+estructurados, compatibles con el DIE (design_intelligence.py).
 
 Diseñado para ser ultra robusto, económico y libre de dependencias externas.
 
@@ -38,7 +38,7 @@ El script busca automáticamente credenciales en el siguiente orden de costo:
 --------------------------------------------------------------------------------
 3. Argumentos de Línea de Comandos:
 --------------------------------------------------------------------------------
-    --query "texto"       Query/brief inicial que el modelo optimiza internamente antes de generar el YAML final
+    --query "texto"       Query/brief inicial que el modelo optimiza internamente antes de generar el JSON final
     --prompt "texto"      Alias compatible de --query
   --out "archivo"       Nombre del archivo de salida (slug)
   --provider "nombre"   Fuerza un proveedor específico (groq, gemini, etc.)
@@ -116,6 +116,24 @@ def build_schema_prompt(schema: dict) -> str:
             lines.append(f"    variants: {vnames}")
     return '\n'.join(lines)
 
+def _extract_json(raw: str) -> str:
+    """Extract and normalize JSON from LLM output."""
+    raw = raw.strip()
+    # Strip markdown fences
+    for fence in ("```json", "```"):
+        if fence in raw:
+            parts = raw.split(fence, 1)
+            raw = parts[1]
+            if "```" in raw:
+                raw = raw.split("```", 1)[0]
+    raw = raw.strip()
+    # Try to find outermost { ... }
+    start = raw.find("{")
+    end = raw.rfind("}")
+    if start >= 0 and end > start:
+        raw = raw[start:end+1]
+    return raw
+
 def normalize_yaml_structure(raw: str) -> str:
     """Ensure the YAML follows the expected single-document sections[] format.
     Handles multi-document YAML (--- separated) by merging into sections: list."""
@@ -182,12 +200,34 @@ def normalize_yaml_structure(raw: str) -> str:
     
     return '\n'.join(result_lines)
 
+def build_json_example():
+    return {
+        "title": "<Page Title>",
+        "slug": "<page-slug>",
+        "tone": "<editorial|modern|premium|minimal|dramatic>",
+        "description": "<Brief description>",
+        "sections": [
+            {
+                "section_type": "hero",
+                "eyebrow": "<Uppercase kicker>",
+                "title": "<Section heading>",
+                "text": "<Description paragraph>",
+                "body": "<Long-form plain text>",
+                "btn_primary_text": "<Button label>",
+                "btn_primary_url": "<Button URL>",
+                "features": [
+                    {"title": "<Item title>", "icon": "<Divi unicode>", "text": "<Item description>"}
+                ]
+            }
+        ]
+    }
+
 def build_system_prompt(brand_vars, section_schema):
     brand_name = brand_vars.get('brand_name', 'Nueva Marca')
     brand_desc = brand_vars.get('brand_description', 'Un proyecto premium')
     schema_guide = build_schema_prompt(section_schema) if section_schema else "(no schema available)"
     return f"""You are the Lead Content Architect for '{brand_name}' ({brand_desc}).
-Generate a design brief in YAML. Work in a single pass: first, internally rewrite the user query into a richer, clearer, more specific design prompt; then use that improved prompt to generate the final brief. Do not output the rewritten prompt. Return STRICTLY VALID YAML only.
+Generate a design brief in JSON. Work in a single pass: first, internally rewrite the user query into a richer, clearer, more specific design prompt; then use that improved prompt to generate the final brief. Do not output the rewritten prompt. Return STRICTLY VALID JSON only.
 
 SECTION TYPES — use the EXACT value after "section_type:" below. Do NOT invent other values:
 
@@ -227,37 +267,52 @@ section_type: "cta"     (template: cta-centered, centered CTA)
   fields: eyebrow, title, text, btn_primary_text, btn_primary_url
   optional: btn_secondary_text, btn_secondary_url
 
-VALID section_type values (use ONE of these EXACTLY): hero, hero-centered, features, content, content-list, stats, testimonials, logos, cta
+section_type: "icon-list"     (template: content-split-icon-list, text + icon list)
+  fields: eyebrow, title, text, body
+  items (field: 'items'): each with title, icon
 
-OUTPUT FORMAT:
-title: <Page Title>
-slug: <page-slug>
-tone: <editorial|modern|premium|minimal|dramatic|playful>
-description: <Brief description>
-sections:
-  - section_type: hero      # ← use EXACT one-word value from the list above
-    eyebrow: <Uppercase kicker>
-    title: <Section heading>
-    text: <Description paragraph>
-    body: <Long-form plain text>
-    btn_primary_text: <Button label>
-    btn_primary_url: <Button URL>
-    features:   # only for section_type: features
-      - title: <Item title>
-        icon: <Divi unicode>
-        text: <Item description>
-    # or stats:, testimonials:, logos:, items: (same list pattern, use correct per-type fields listed above)
+section_type: "timeline"     (template: timeline-tabs, horizontal phases)
+  fields: eyebrow, title, text
+  items (field: 'phases'): each with title, text
+
+section_type: "faq"     (template: faq-accordion, split text + accordion)
+  fields: eyebrow, title, text
+  items (field: 'faqs'): each with question, answer
+
+section_type: "pricing"     (template: pricing-tables, 3-column cards)
+  fields: eyebrow, title, text
+  items (field: 'features'): each with title, text
+
+section_type: "contact"     (template: contact-split, text + form)
+  fields: eyebrow, title, text, body
+  items (field: 'items'): each with title, icon
+
+section_type: "process"     (template: process-steps, vertical steps)
+  fields: eyebrow, title, text
+  items (field: 'features'): each with title, text
+
+VALID section_type values (use ONE of these EXACTLY): hero, hero-centered, features, content, content-list, stats, testimonials, logos, cta, icon-list, timeline, faq, pricing, contact, process, gallery
+
+""" + json.dumps(build_json_example(), indent=2, ensure_ascii=False) + """
+
+Use these keys for repeatable items depending on section_type:
+  features    -> [title, icon, text]
+  stats       -> [number, label]
+  testimonials -> [text, name, role]
+  logos       -> [icon, name]
+  items       -> [title, icon]  (for content-list)
 
 CRITICAL RULES:
 - section_type MUST be one of: hero, hero-centered, features, content, content-list, stats, testimonials, logos, cta. NEVER invent other values.
 - Use EXACTLY the field names listed above. NEVER use template names as section_type.
-- Use 'body:' for body text. NEVER use 'body_text:', 'description:', or 'content:'.
-- Icons use Divi unicode: &#xe000;-&#xf800; (e.g. &#xe03a;, &#xe065;, &#xe0bf;).
-- Every repeat item MUST include ALL required fields for its type (e.g. stats need number AND label; features need title, icon, AND text).
+- Use "body" for body text. NEVER use "body_text", "description", or "content".
+- Icons use Divi unicode strings like "&#xe03a;", "&#xe065;", "&#xe0bf;".
+- Every repeat item MUST include ALL required fields for its type.
 - Do NOT use HTML tags, markdown, or inline formatting. Plain text only.
 - Each section must have exactly ONE section_type key. No duplicate keys.
 - Omit optional fields entirely instead of leaving them empty.
-- Output ONLY raw YAML. No markdown fences, no code blocks, no explanations.
+- Output ONLY raw JSON. No markdown fences, no code blocks, no explanations.
+- Ensure valid JSON: double quotes only, no trailing commas.
 
 DYNAMIC SCHEMA (reference, use field names from above):
 {schema_guide}
@@ -553,17 +608,18 @@ class ProviderFactory:
 
         return resolved
 
-def generate_brief_yaml(prompt, provider, system_prompt, tone=None, verbose=False):
-    tone_instruction = f"\nFuerza a que el campo `tone` en el archivo YAML sea exactamente: {tone}." if tone else ""
+def generate_brief_json(prompt, provider, system_prompt, tone=None, verbose=False):
+    tone_instruction = f"\nForce the 'tone' field in the JSON output to be exactly: {tone}." if tone else ""
     user_prompt = (
-        "Toma este query inicial y conviértelo mentalmente en un prompt de alto nivel más claro, completo y útil para diseño. "
-        "Después genera directamente el brief YAML final usando ese prompt mejorado. No muestres el prompt intermedio ni expliques tu proceso. "
-        "Construye una estructura coherente y estrictamente válida, con una sola clave `section_type` por sección y sin duplicar campos. "
-        "Usa únicamente los nombres de campo exactos indicados en el prompt de sistema. Para párrafos largos usa `body`, nunca inventes campos nuevos.\n\n"
-        f"Query inicial: {prompt}\n"
+        "Take this initial query and mentally convert it into a clearer, more complete, high-level design prompt. "
+        "Then directly generate the final JSON brief using that improved prompt. Do not show the intermediate prompt or explain your process. "
+        "Build a coherent and strictly valid JSON structure, with exactly one 'section_type' per section and no duplicate keys. "
+        "Use only the exact field names indicated in the system prompt. For long paragraphs use 'body', never invent new fields.\n\n"
+        f"Initial query: {prompt}\n"
         f"{tone_instruction}\n"
-        "Recuerda devolver únicamente el archivo YAML limpio, respetando el esquema e indicaciones del prompt de sistema. "
-        "Si una idea puede expresarse con menos claves, prioriza la validez del YAML y la claridad del brief."
+        "Return only clean JSON output, respecting the schema and instructions in the system prompt. "
+        "If an idea can be expressed with fewer keys, prioritize JSON validity and brief clarity. "
+        "Ensure valid JSON: use double quotes, no trailing commas, no comments."
     )
     return provider.generate(system_prompt, user_prompt, verbose=verbose)
 
@@ -628,6 +684,114 @@ def strip_html_from_yaml(yaml_content):
 
     return "\n".join(cleaned_lines).strip()
 
+GENERIC_PATTERNS = [
+    r'bienvenido\s+a',
+    r'welcome\s+to',
+    r'somos\s+l[íi]deres',
+    r'we\s+are\s+leaders',
+    r'conoce\s+nuestro',
+    r'descubre\s+nuestro',
+    r'explora\s+nuestro',
+    r'get\s+in\s+touch',
+    r'contactanos?\s+para',
+    r'contact\s+us\s+(for|today)',
+    r'learn\s+more\s+about',
+    r's[áa]bemos?\s+que',
+    r'we\s+know\s+that',
+    r'en\s+esta\s+p[áa]gina',
+    r'on\s+this\s+page',
+    r'ofrecemos\s+una\s+amplia',
+    r'we\s+offer\s+a\s+wide',
+    r'nuestro\s+equipo\s+de\s+profesionales',
+    r'our\s+team\s+of\s+professionals',
+]
+
+VALID_SECTION_TYPES = {"hero", "hero-centered", "features", "content",
+                        "content-list", "stats", "testimonials", "logos", "cta",
+                        "icon-list", "timeline", "faq", "pricing", "contact", "process", "gallery"}
+
+VALID_TONES = {"editorial", "modern", "premium", "minimal", "dramatic", "playful"}
+
+def validate_brief(parsed, section_schema):
+    """Validate brief JSON before accepting it as DIE input.
+
+    Raises ValueError on failure.
+    """
+    if not isinstance(parsed, dict):
+        raise ValueError("Brief must be a JSON object")
+
+    title = parsed.get("title", "")
+    if not title or not title.strip():
+        raise ValueError("Brief must have a non-empty 'title'")
+
+    slug = parsed.get("slug", "")
+    if not slug:
+        raise ValueError("Brief must have a 'slug'")
+
+    sections = parsed.get("sections", [])
+    if not sections or not isinstance(sections, list):
+        raise ValueError("Brief must have a non-empty 'sections' array")
+
+    tone = parsed.get("tone", "")
+    if tone and tone not in VALID_TONES:
+        raise ValueError(f"Invalid tone '{tone}'. Must be one of: {', '.join(sorted(VALID_TONES))}")
+
+    for i, sec in enumerate(sections):
+        if not isinstance(sec, dict):
+            raise ValueError(f"Sections[{i}] must be a JSON object")
+
+        st = sec.get("section_type", "")
+        if not st:
+            raise ValueError(f"Sections[{i}] missing 'section_type'")
+        if st not in VALID_SECTION_TYPES:
+            raise ValueError(f"Sections[{i}] invalid section_type '{st}'")
+
+        has_content = False
+        for field in ("title", "text", "body", "eyebrow"):
+            val = sec.get(field, "")
+            if val and val.strip():
+                has_content = True
+                if len(val) > 15:
+                    for pattern in GENERIC_PATTERNS:
+                        if re.search(pattern, val, re.IGNORECASE):
+                            raise ValueError(
+                                f"Sections[{i}].{field} contains generic placeholder: "
+                                f"'{val[:60]}...' matches '{pattern}'"
+                            )
+        for field in ("btn_primary_text", "btn_secondary_text"):
+            if sec.get(field, ""):
+                has_content = True
+
+        if not has_content:
+            item_fields = {
+                "features": sec.get("features", []),
+                "testimonials": sec.get("testimonials", []),
+                "stats": sec.get("stats", []),
+                "logos": sec.get("logos", []),
+                "items": sec.get("items", []),
+            }
+            if not any(item_fields.values()):
+                raise ValueError(
+                    f"Sections[{i}] ({st}) has no content fields and no item arrays"
+                )
+
+        # Validate item arrays
+        for arr_name in ("features", "testimonials", "stats", "logos", "items"):
+            items = sec.get(arr_name, [])
+            if items:
+                if not isinstance(items, list):
+                    raise ValueError(f"Sections[{i}].{arr_name} must be an array")
+                for j, item in enumerate(items):
+                    if not isinstance(item, dict):
+                        raise ValueError(f"Sections[{i}].{arr_name}[{j}] must be an object")
+                    if not any(item.values()):
+                        raise ValueError(
+                            f"Sections[{i}].{arr_name}[{j}] is empty"
+                        )
+
+    return True
+
+
 def validate_yaml_output(yaml_content):
     """Apply lightweight guardrails to keep the brief structurally clean."""
     yaml_content = re.sub(r'```(?:yaml)?', '', yaml_content)
@@ -636,7 +800,7 @@ def validate_yaml_output(yaml_content):
     return yaml_content
 
 def main():
-    parser = argparse.ArgumentParser(description="Generate a brief YAML using a dynamic and cheap LLM.")
+    parser = argparse.ArgumentParser(description="Generate a brief JSON using a dynamic and cheap LLM.")
     parser.add_argument("--query", help="Initial query to refine internally before generating the brief (e.g. 'página de contacto')")
     parser.add_argument("--prompt", help="Alias compatible de --query")
     parser.add_argument("--out", help="Output filename (optional, e.g. 'contacto')")
@@ -680,59 +844,64 @@ def main():
     else:
         print("[GENERATE] No brand vars found — using generic system prompt")
 
-    yaml_content = None
+    raw_output = None
     last_error = None
     chosen_provider_name = None
     chosen_model = None
-    
+
     # Iterate through all available providers until one works
     for name, provider in providers:
         try:
             print(f"[GENERATE] Attempting to call LLM via provider '{name}' using model '{provider.model}'...")
-            yaml_content = generate_brief_yaml(prompt, provider, system_prompt, tone=args.tone, verbose=args.verbose)
+            raw_output = generate_brief_json(prompt, provider, system_prompt, tone=args.tone, verbose=args.verbose)
             chosen_provider_name = name
             chosen_model = provider.model
-            break  # Success!
+            break
         except Exception as e:
             print(f"Warning: Provider '{name}' failed: {e}", file=sys.stderr)
             last_error = e
 
-    if not yaml_content:
+    if not raw_output:
         print(f"Error: All configured providers failed. Last error: {last_error}", file=sys.stderr)
         return 1
-        
-    # Clean the YAML content using robust cleanup rules
-    yaml_content = clean_yaml_output(yaml_content)
-    
-    # Normalize multi-document YAML to single-document sections[] format
-    yaml_content = normalize_yaml_structure(yaml_content)
 
-    # Strip leftover HTML and normalize scalar text
-    yaml_content = validate_yaml_output(yaml_content)
-    
+    # Extract JSON from LLM output (strip fences, trim preamble)
+    json_str = _extract_json(raw_output)
+    if not json_str:
+        print("Error: Could not extract JSON from LLM output.", file=sys.stderr)
+        return 1
+
+    # Parse to validate; catch bad JSON with retry hint
+    try:
+        parsed = json.loads(json_str)
+    except json.decoder.JSONDecodeError as e:
+        print(f"Error: Invalid JSON from LLM: {e}", file=sys.stderr)
+        return 1
+
+    # Validate brief content before accepting
+    try:
+        validate_brief(parsed, section_schema)
+    except ValueError as e:
+        print(f"Error: Brief validation failed: {e}", file=sys.stderr)
+        return 1
+
     # Override slug if --out was provided
     if args.out:
-        forced_slug = sanitize_slug(args.out)
-        yaml_content = re.sub(r'^slug:.*', f'slug: {forced_slug}', yaml_content, flags=re.MULTILINE)
-    
-    # Try to parse the slug from the YAML content
-    slug = None
-    slug_match = re.search(r'^slug:\s*(.*)', yaml_content, re.MULTILINE)
-    if slug_match:
-        slug = sanitize_slug(slug_match.group(1))
-        
+        parsed["slug"] = sanitize_slug(args.out)
+
+    slug = parsed.get("slug")
     if not slug:
         slug = "dynamic-brief"
-    
+
     # Use dynamic brand-aware output directory
     briefs_dir = get_briefs_dir()
-    out_path = briefs_dir / f"{slug}.yml"
+    out_path = briefs_dir / f"{slug}.json"
     briefs_dir.mkdir(parents=True, exist_ok=True)
-    
+
     with open(out_path, "w", encoding="utf-8") as f:
-        f.write(yaml_content)
-        
-    print(f"[GENERATE] Success! Brief YAML generated and written to: {out_path}")
+        json.dump(parsed, f, indent=2, ensure_ascii=False)
+
+    print(f"[GENERATE] Success! Brief JSON written to: {out_path}")
     print(f"[GENERATE] Provider: {chosen_provider_name} | Model: {chosen_model}")
     print(f"[GENERATE] Slug: {slug}")
     return 0

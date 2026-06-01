@@ -135,6 +135,17 @@
       }
     }
   },
+  "timeline": {
+    "section_type": "timeline",
+    "template": "timeline-horizontal",
+    "slots": ["eyebrow", "icon", "text", "title"],
+    "section_fields": ["eyebrow", "title", "text"],
+    "item_fields": {"items": ["title", "icon", "text", "year"]},
+    "repeat_sources": ["items"],
+    "presets": ["section:light"],
+    "design_tokens": [],
+    "variants": {}
+  },
   "testimonials": {
     "section_type": "testimonials",
     "template": "testimonials-3col",
@@ -151,5 +162,115 @@
         "design_tokens": ["color:surface-light", "radius:md"]
       }
     }
+  },
+  "gallery": {
+    "section_type": "gallery",
+    "template": "gallery-grid",
+    "slots": ["icon", "text", "title"],
+    "section_fields": ["eyebrow", "title", "text"],
+    "item_fields": {"items": ["icon", "title", "text"]},
+    "repeat_sources": ["items"],
+    "presets": ["section:light"],
+    "design_tokens": [],
+    "variants": {}
+  },
+  "generic": {
+    "section_type": "generic",
+    "template": "content-split",
+    "slots": ["body", "btn_primary_text", "btn_primary_url", "eyebrow", "text", "title"],
+    "section_fields": ["eyebrow", "title", "text", "body", "btn_primary_text", "btn_primary_url"],
+    "item_fields": {},
+    "repeat_sources": [],
+    "presets": ["section:light"],
+    "design_tokens": [],
+    "variants": {}
+  },
+  "about": {
+    "section_type": "about",
+    "template": "content-split",
+    "slots": ["body", "btn_primary_text", "btn_primary_url", "eyebrow", "text", "title"],
+    "section_fields": ["eyebrow", "title", "text", "body", "btn_primary_text", "btn_primary_url"],
+    "item_fields": {},
+    "repeat_sources": [],
+    "presets": ["section:light"],
+    "design_tokens": [],
+    "variants": {}
+  },
+  "blog": {
+    "section_type": "blog",
+    "template": "blog-grid",
+    "slots": ["eyebrow", "icon", "text", "title"],
+    "section_fields": ["eyebrow", "title", "text"],
+    "item_fields": {"items": ["icon", "title", "text"]},
+    "repeat_sources": ["items"],
+    "presets": ["section:light"],
+    "design_tokens": [],
+    "variants": {}
+  },
+  "contact": {
+    "section_type": "contact",
+    "template": "contact-split",
+    "slots": ["body", "btn_primary_text", "btn_primary_url", "eyebrow", "icon", "text", "title"],
+    "section_fields": ["eyebrow", "title", "text", "body", "btn_primary_text", "btn_primary_url"],
+    "item_fields": {"items": ["title", "icon", "text"]},
+    "repeat_sources": ["items"],
+    "presets": ["section:light"],
+    "design_tokens": [],
+    "variants": {}
+  },
+  "countdown": {
+    "section_type": "countdown",
+    "template": "countdown-centered",
+    "slots": ["btn_primary_text", "btn_primary_url", "eyebrow", "text", "title"],
+    "section_fields": ["eyebrow", "title", "text", "btn_primary_text", "btn_primary_url"],
+    "item_fields": {},
+    "repeat_sources": [],
+    "presets": ["section:cta-epic"],
+    "design_tokens": [],
+    "variants": {}
+  },
+  "faq": {
+    "section_type": "faq",
+    "template": "faq-accordion",
+    "slots": ["body", "eyebrow", "text", "title"],
+    "section_fields": ["eyebrow", "title", "text"],
+    "item_fields": {"items": ["title", "text"]},
+    "repeat_sources": ["items"],
+    "presets": ["section:light"],
+    "design_tokens": [],
+    "variants": {}
+  },
+  "pricing": {
+    "section_type": "pricing",
+    "template": "pricing-table",
+    "slots": ["btn_primary_text", "btn_primary_url", "eyebrow", "text", "title"],
+    "section_fields": ["eyebrow", "title", "text"],
+    "item_fields": {"items": ["title", "text", "btn_primary_text", "btn_primary_url"]},
+    "repeat_sources": ["items"],
+    "presets": ["section:light"],
+    "design_tokens": [],
+    "variants": {}
+  },
+  "product": {
+    "section_type": "product",
+    "template": "product-grid",
+    "slots": ["btn_primary_text", "btn_primary_url", "eyebrow", "icon", "text", "title"],
+    "section_fields": ["eyebrow", "title", "text"],
+    "item_fields": {"items": ["icon", "title", "text", "btn_primary_text", "btn_primary_url"]},
+    "repeat_sources": ["items"],
+    "presets": ["section:light"],
+    "design_tokens": [],
+    "variants": {}
+  },
+  "team": {
+    "section_type": "team",
+    "template": "team-grid",
+    "slots": ["eyebrow", "icon", "name", "role", "text", "title"],
+    "section_fields": ["eyebrow", "title", "text"],
+    "item_fields": {"items": ["icon", "name", "role", "text"]},
+    "repeat_sources": ["items"],
+    "presets": ["section:light"],
+    "design_tokens": [],
+    "variants": {}
   }
 }

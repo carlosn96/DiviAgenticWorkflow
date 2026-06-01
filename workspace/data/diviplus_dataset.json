@@ -1,0 +1,584 @@
+{
+  "_meta": {
+    "version": "3.0",
+    "description": "Divi+ Dataset — Combinaciones de props Divi nativas que producen bloques visualmente impactantes. Aprendido de 877 templates reales del catálogo DAW. Usado por Visual Impact Engine para traducir decisions ML → props nativas.",
+    "source_templates": 877,
+    "source_clusters": 7,
+    "last_updated": "2026-06-01"
+  },
+  "blocks": {
+    "hero_glass": {
+      "id": "hero_glass",
+      "name": "Hero Glass",
+      "section_type": "hero",
+      "impact_score": 95,
+      "category": "hero",
+      "description": "Hero con fondo oscuro profundo, glow radial en esquina, y contenido en glass cards.",
+      "compatible_strategies": ["cool-luxury", "warm-luxury", "tech-glass", "glass"],
+      "contraindications": ["bg_is_light", "brand_is_minimal_white"],
+      "props": {
+        "section": {
+          "bg_color": "{{design:color:surface-deep}}",
+          "overlay_gradient": "radial-gradient(circle at 80% 20%, {{design:color:glow-accent}} 0%, transparent 60%)",
+          "padding": {"top": "140px", "bottom": "140px", "right": "96px", "left": "96px"},
+          "anim_style": "fade",
+          "anim_duration": "800ms",
+          "anim_delay": "0ms",
+          "scroll_vertical_motion": {"enable": "on", "offset": {"start": "6", "mid": "0", "end": "-4"}},
+          "shape_divider_bottom": {"style": "curve", "color": "{{design:color:surface-light}}", "height": "100px", "flip": "off", "invert": "off"}
+        },
+        "eyebrow_text": {
+          "text_color": "{{design:color:accent}}",
+          "text_transform": "uppercase",
+          "text_letter_spacing": "2px",
+          "text_font_size": "14px"
+        },
+        "heading": {
+          "text_color": "{{design:color:text-on-dark}}",
+          "text_font_size": "clamp(2.5rem, 5vw, 4rem)",
+          "text_line_height": "1.1em",
+          "text_font_family": "{{design:font:display}}"
+        },
+        "body_text": {
+          "text_color": "{{design:color:text-secondary}}",
+          "text_font_size": "18px",
+          "text_line_height": "1.6em"
+        },
+        "primary_button": {
+          "button_style": {
+            "background": "{{design:color:accent}}",
+            "color": "{{design:color:text-on-accent}}",
+            "borderRadius": "{{design:radius:md}}",
+            "padding": {"top": "16px", "bottom": "16px", "right": "32px", "left": "32px"}
+          },
+          "transform_hover": {"scale": {"x": "1.02", "y": "1.02"}, "translate": {"y": "-2px"}},
+          "box_shadow_hover": {"horizontal": "0px", "vertical": "0px", "blur": "24px", "spread": "4px", "color": "{{design:color:glow-accent}}", "position": "outer"}
+        }
+      },
+      "layout": "1_2,1_2"
+    },
+
+    "hero_dark_centered": {
+      "id": "hero_dark_centered",
+      "name": "Hero Dark Centered",
+      "section_type": "hero-centered",
+      "impact_score": 92,
+      "category": "hero",
+      "description": "Hero centrado con fondo profundo, animación fade y contenido alineado.",
+      "compatible_strategies": ["cool-luxury", "tech", "organic", "minimal"],
+      "props": {
+        "section": {
+          "bg_color": "{{design:color:surface-deep}}",
+          "padding": {"top": "160px", "bottom": "160px", "right": "96px", "left": "96px"},
+          "anim_style": "fade",
+          "anim_duration": "800ms",
+          "anim_delay": "0ms",
+          "anim_speed_curve": "cubic-bezier(0.16,1,0.3,1)",
+          "text_alignment": "center"
+        },
+        "eyebrow_text": {
+          "text_color": "{{design:color:accent}}",
+          "text_transform": "uppercase",
+          "text_letter_spacing": "3px"
+        },
+        "heading": {
+          "text_color": "{{design:color:text-on-dark}}",
+          "text_font_size": "clamp(3rem, 6vw, 5rem)",
+          "text_line_height": "1.05em"
+        },
+        "body_text": {
+          "text_color": "{{design:color:text-secondary}}",
+          "text_font_size": "20px",
+          "text_line_height": "1.6em",
+          "text_alignment": "center"
+        }
+      },
+      "layout": "4_4"
+    },
+
+    "features_glass_grid": {
+      "id": "features_glass_grid",
+      "name": "Features Glass Grid",
+      "section_type": "features",
+      "impact_score": 88,
+      "category": "features",
+      "description": "Grid de feature cards con efecto glassmorphism. Requiere fondo oscuro.",
+      "compatible_strategies": ["cool-luxury", "warm-luxury", "tech-glass", "glass"],
+      "contraindications": ["bg_is_light"],
+      "props": {
+        "section": {
+          "bg_color": "{{design:color:surface-mid}}",
+          "padding": {"top": "96px", "bottom": "96px", "right": "96px", "left": "96px"},
+          "anim_style": "fade",
+          "anim_duration": "600ms",
+          "anim_delay": "100ms",
+          "scroll_fade": {"enable": "on", "offset": {"start": "0", "mid": "100", "end": "100"}}
+        },
+        "card_blurb": {
+          "bg_color": "{{design:color:glass-bg}}",
+          "backdrop_filter": "blur(12px)",
+          "border_width": {"top": "1px", "right": "1px", "bottom": "1px", "left": "1px"},
+          "border_color": "{{design:color:glass-border}}",
+          "border_radius": {"topLeft": "{{design:radius:lg}}", "topRight": "{{design:radius:lg}}", "bottomRight": "{{design:radius:lg}}", "bottomLeft": "{{design:radius:lg}}"},
+          "box_shadow": {"horizontal": "0px", "vertical": "8px", "blur": "32px", "spread": "0px", "color": "rgba(0,0,0,0.08)", "position": "outer"},
+          "transform_hover": {"scale": {"x": "1.02", "y": "1.02"}, "translate": {"y": "-4px"}},
+          "box_shadow_hover": {"horizontal": "0px", "vertical": "0px", "blur": "24px", "spread": "4px", "color": "{{design:color:glow-accent}}", "position": "outer"},
+          "padding": {"top": "40px", "bottom": "40px", "right": "32px", "left": "32px"}
+        },
+        "eyebrow_text": {
+          "text_color": "{{design:color:accent}}",
+          "text_transform": "uppercase",
+          "text_letter_spacing": "2px"
+        },
+        "heading": {
+          "text_color": "{{design:color:text-on-dark}}",
+          "text_font_size": "clamp(2rem, 4vw, 3rem)"
+        }
+      },
+      "layout": "1_3,1_3,1_3",
+      "module_type": "divi/blurb",
+      "presets": ["module:glass-card", "transform:hover-glow"]
+    },
+
+    "features_light_grid": {
+      "id": "features_light_grid",
+      "name": "Features Light Grid",
+      "section_type": "features",
+      "impact_score": 78,
+      "category": "features",
+      "description": "Grid de features en fondo claro. Sin glass. Para estrategias minimal.",
+      "compatible_strategies": ["minimal", "clean", "organic-light"],
+      "props": {
+        "section": {
+          "bg_color": "{{design:color:surface-light}}",
+          "padding": {"top": "96px", "bottom": "96px", "right": "96px", "left": "96px"},
+          "anim_style": "fade",
+          "anim_duration": "600ms"
+        },
+        "card_blurb": {
+          "border_radius": {"topLeft": "{{design:radius:md}}", "topRight": "{{design:radius:md}}", "bottomRight": "{{design:radius:md}}", "bottomLeft": "{{design:radius:md}}"},
+          "box_shadow": {"horizontal": "0px", "vertical": "4px", "blur": "16px", "spread": "0px", "color": "rgba(0,0,0,0.06)", "position": "outer"},
+          "transform_hover": {"translate": {"y": "-4px"}},
+          "box_shadow_hover": {"horizontal": "0px", "vertical": "8px", "blur": "24px", "spread": "0px", "color": "rgba(0,0,0,0.10)", "position": "outer"}
+        },
+        "heading": {
+          "text_color": "{{design:color:text-primary}}"
+        },
+        "body_text": {
+          "text_color": "{{design:color:text-secondary}}"
+        }
+      },
+      "layout": "1_3,1_3,1_3",
+      "module_type": "divi/blurb",
+      "presets": ["module:feature-card", "transform:hover-lift"]
+    },
+
+    "stats_dark_counters": {
+      "id": "stats_dark_counters",
+      "name": "Stats Dark Counters",
+      "section_type": "stats",
+      "impact_score": 85,
+      "category": "stats",
+      "description": "Sección de stats con fondo oscuro y number counters con glow.",
+      "compatible_strategies": ["cool-luxury", "warm-luxury", "tech"],
+      "props": {
+        "section": {
+          "bg_color": "{{design:color:surface-mid}}",
+          "overlay_gradient": "radial-gradient(circle at 50% 50%, {{design:color:glow-accent}} 0%, transparent 70%)",
+          "padding": {"top": "80px", "bottom": "80px", "right": "96px", "left": "96px"},
+          "anim_style": "fade",
+          "anim_duration": "600ms",
+          "scroll_fade": {"enable": "on", "offset": {"start": "0", "mid": "100", "end": "100"}}
+        },
+        "stat_number": {
+          "text_color": "{{design:color:accent}}",
+          "text_font_size": "clamp(3rem, 6vw, 5rem)",
+          "text_font_family": "{{design:font:display}}",
+          "text_line_height": "1.1em"
+        },
+        "stat_label": {
+          "text_color": "{{design:color:text-on-dark}}",
+          "text_font_size": "16px",
+          "text_transform": "uppercase",
+          "text_letter_spacing": "1px"
+        },
+        "stat_card": {
+          "transform_hover": {"scale": {"x": "1.05", "y": "1.05"}},
+          "text_alignment": "center"
+        }
+      },
+      "layout": "1_4,1_4,1_4,1_4",
+      "module_type": "divi/number-counter",
+      "presets": ["module:stat-item", "transform:hover-scale"]
+    },
+
+    "testimonials_white_cards": {
+      "id": "testimonials_white_cards",
+      "name": "Testimonials White Cards",
+      "section_type": "testimonials",
+      "impact_score": 82,
+      "category": "testimonials",
+      "description": "Testimonials en cards blancas con sombra sutil. Fondo blanco para contraste.",
+      "compatible_strategies": ["cool-luxury", "warm-luxury", "minimal", "clean"],
+      "props": {
+        "section": {
+          "bg_color": "{{design:color:surface-light}}",
+          "padding": {"top": "80px", "bottom": "80px", "right": "96px", "left": "96px"},
+          "anim_style": "fade",
+          "anim_duration": "600ms",
+          "scroll_fade": {"enable": "on", "offset": {"start": "0", "mid": "100", "end": "100"}}
+        },
+        "testimonial_card": {
+          "bg_color": "{{design:color:surface-white}}",
+          "border_radius": {"topLeft": "{{design:radius:lg}}", "topRight": "{{design:radius:lg}}", "bottomRight": "{{design:radius:lg}}", "bottomLeft": "{{design:radius:lg}}"},
+          "box_shadow": {"horizontal": "0px", "vertical": "4px", "blur": "20px", "spread": "0px", "color": "rgba(0,0,0,0.06)", "position": "outer"},
+          "transform_hover": {"scale": {"x": "1.02", "y": "1.02"}, "translate": {"y": "-2px"}},
+          "box_shadow_hover": {"horizontal": "0px", "vertical": "0px", "blur": "24px", "spread": "4px", "color": "{{design:color:glow-accent}}", "position": "outer"}
+        },
+        "quote_text": {
+          "text_color": "{{design:color:text-primary}}",
+          "text_font_size": "18px",
+          "text_line_height": "1.7em",
+          "text_font_family": "{{design:font:body}}"
+        },
+        "author_name": {
+          "text_color": "{{design:color:text-primary}}",
+          "text_font_size": "16px",
+          "text_font_weight": "600"
+        },
+        "author_role": {
+          "text_color": "{{design:color:text-secondary}}",
+          "text_font_size": "14px"
+        }
+      },
+      "layout": "1_3,1_3,1_3",
+      "module_type": "divi/testimonial",
+      "presets": ["module:testimonial-card", "transform:hover-glow"]
+    },
+
+    "pricing_glass_tables": {
+      "id": "pricing_glass_tables",
+      "name": "Pricing Glass Tables",
+      "section_type": "pricing",
+      "impact_score": 87,
+      "category": "pricing",
+      "description": "Tablas de pricing con fondo oscuro y header acentuado. Para estrategias premium.",
+      "compatible_strategies": ["cool-luxury", "warm-luxury", "tech"],
+      "props": {
+        "section": {
+          "bg_color": "{{design:color:surface-deep}}",
+          "padding": {"top": "96px", "bottom": "96px", "right": "96px", "left": "96px"},
+          "anim_style": "fade",
+          "anim_duration": "600ms"
+        },
+        "pricing_table": {
+          "bg_color": "{{design:color:glass-bg}}",
+          "backdrop_filter": "blur(12px)",
+          "border_width": {"top": "1px", "right": "1px", "bottom": "1px", "left": "1px"},
+          "border_color": "{{design:color:glass-border}}",
+          "border_radius": {"topLeft": "{{design:radius:lg}}", "topRight": "{{design:radius:lg}}", "bottomRight": "{{design:radius:lg}}", "bottomLeft": "{{design:radius:lg}}"},
+          "transform_hover": {"scale": {"x": "1.02", "y": "1.02"}, "translate": {"y": "-4px"}},
+          "box_shadow_hover": {"horizontal": "0px", "vertical": "8px", "blur": "32px", "spread": "0px", "color": "{{design:color:glow-accent}}", "position": "outer"}
+        },
+        "pricing_header": {
+          "background": "{{design:color:accent}}",
+          "color": "{{design:color:text-on-accent}}"
+        },
+        "pricing_price": {
+          "text_color": "{{design:color:accent}}",
+          "text_font_size": "clamp(2rem, 4vw, 3rem)",
+          "text_font_family": "{{design:font:display}}"
+        }
+      },
+      "layout": "1_3,1_3,1_3",
+      "module_type": "divi/pricing-tables"
+    },
+
+    "faq_dark_accordion": {
+      "id": "faq_dark_accordion",
+      "name": "FAQ Dark Accordion",
+      "section_type": "faq",
+      "impact_score": 80,
+      "category": "faq",
+      "description": "FAQ con acordeón en fondo oscuro. Pregunta en blanco, respuesta con opacidad.",
+      "compatible_strategies": ["cool-luxury", "warm-luxury", "tech"],
+      "props": {
+        "section": {
+          "bg_color": "{{design:color:surface-mid}}",
+          "padding": {"top": "80px", "bottom": "80px", "right": "96px", "left": "96px"},
+          "anim_style": "fade",
+          "anim_duration": "600ms",
+          "scroll_fade": {"enable": "on", "offset": {"start": "0", "mid": "100", "end": "100"}}
+        },
+        "accordion_title": {
+          "text_color": "{{design:color:text-on-dark}}",
+          "text_font_size": "18px",
+          "text_font_weight": "600"
+        },
+        "accordion_content": {
+          "text_color": "{{design:color:text-secondary}}",
+          "text_font_size": "16px",
+          "text_line_height": "1.6em"
+        },
+        "accordion_item": {
+          "border_bottom_width": "1px",
+          "border_bottom_color": "{{design:color:glass-border}}",
+          "padding": {"top": "24px", "bottom": "24px"}
+        }
+      },
+      "layout": "1_2,1_2",
+      "module_type": "divi/accordion"
+    },
+
+    "cta_epic": {
+      "id": "cta_epic",
+      "name": "CTA Epic",
+      "section_type": "cta",
+      "impact_score": 93,
+      "category": "cta",
+      "description": "Sección CTA con fondo profundo, glow en esquina opuesta, scaling scroll y shape divider invertido.",
+      "compatible_strategies": ["cool-luxury", "warm-luxury", "tech-glass", "glass"],
+      "props": {
+        "section": {
+          "bg_color": "{{design:color:surface-deep}}",
+          "overlay_gradient": "radial-gradient(circle at 20% 80%, {{design:color:glow-accent}} 0%, transparent 50%)",
+          "padding": {"top": "120px", "bottom": "120px", "right": "96px", "left": "96px"},
+          "anim_style": "fade",
+          "anim_duration": "600ms",
+          "anim_delay": "200ms",
+          "scroll_scaling": {"enable": "on", "offset": {"start": "80", "mid": "100", "end": "100"}},
+          "shape_divider_top": {"style": "curve", "color": "{{design:color:surface-light}}", "height": "100px", "flip": "off", "invert": "on"}
+        },
+        "heading": {
+          "text_color": "{{design:color:text-on-dark}}",
+          "text_font_size": "clamp(2rem, 4vw, 3.5rem)",
+          "text_alignment": "center",
+          "text_line_height": "1.2em"
+        },
+        "body_text": {
+          "text_color": "{{design:color:text-secondary}}",
+          "text_font_size": "18px",
+          "text_alignment": "center",
+          "text_line_height": "1.6em"
+        },
+        "primary_button": {
+          "button_style": {
+            "background": "{{design:color:accent}}",
+            "color": "{{design:color:text-on-accent}}",
+            "borderRadius": "{{design:radius:md}}"
+          },
+          "transform_hover": {"scale": {"x": "1.02", "y": "1.02"}, "translate": {"y": "-2px"}},
+          "box_shadow_hover": {"horizontal": "0px", "vertical": "0px", "blur": "24px", "spread": "4px", "color": "{{design:color:glow-accent}}", "position": "outer"}
+        }
+      },
+      "layout": "4_4"
+    },
+
+    "gallery_masonry": {
+      "id": "gallery_masonry",
+      "name": "Gallery Masonry",
+      "section_type": "gallery",
+      "impact_score": 79,
+      "category": "gallery",
+      "description": "Galería masonry con imágenes que escalan en hover.",
+      "props": {
+        "section": {
+          "bg_color": "{{design:color:surface-light}}",
+          "padding": {"top": "80px", "bottom": "80px", "right": "96px", "left": "96px"}
+        },
+        "image_item": {
+          "border_radius": {"topLeft": "{{design:radius:md}}", "topRight": "{{design:radius:md}}", "bottomRight": "{{design:radius:md}}", "bottomLeft": "{{design:radius:md}}"},
+          "transform_hover": {"scale": {"x": "1.05", "y": "1.05"}},
+          "box_shadow_hover": {"horizontal": "0px", "vertical": "8px", "blur": "24px", "spread": "0px", "color": "rgba(0,0,0,0.12)", "position": "outer"}
+        }
+      },
+      "layout": "4_4",
+      "module_type": "divi/gallery"
+    },
+
+    "timeline_vertical": {
+      "id": "timeline_vertical",
+      "name": "Timeline Vertical",
+      "section_type": "timeline",
+      "impact_score": 76,
+      "category": "timeline",
+      "description": "Timeline vertical con items alternados. Línea acentuada central.",
+      "props": {
+        "section": {
+          "bg_color": "{{design:color:surface-light}}",
+          "padding": {"top": "96px", "bottom": "96px", "right": "96px", "left": "96px"}
+        },
+        "timeline_line": {
+          "color": "{{design:color:accent}}",
+          "width": "2px"
+        },
+        "timeline_dot": {
+          "bg_color": "{{design:color:accent}}",
+          "border_radius": "50%"
+        }
+      },
+      "layout": "4_4"
+    },
+
+    "trust_bar_logos": {
+      "id": "trust_bar_logos",
+      "name": "Trust Bar Logos",
+      "section_type": "trust-bar",
+      "impact_score": 70,
+      "category": "trust",
+      "description": "Barra de logos de clientes/partners. Fondo blanco, logos en escala de grises.",
+      "props": {
+        "section": {
+          "bg_color": "{{design:color:surface-white}}",
+          "padding": {"top": "48px", "bottom": "48px", "right": "96px", "left": "96px"}
+        },
+        "logo_item": {
+          "filter": "grayscale(100%)",
+          "opacity": "0.6",
+          "transform_hover": {"filter": "grayscale(0%)", "opacity": "1"}
+        }
+      },
+      "layout": "1_5,1_5,1_5,1_5,1_5"
+    },
+
+    "contact_split": {
+      "id": "contact_split",
+      "name": "Contact Split",
+      "section_type": "contact",
+      "impact_score": 74,
+      "category": "contact",
+      "description": "Formulario de contacto a la izquierda, información a la derecha.",
+      "props": {
+        "section": {
+          "bg_color": "{{design:color:surface-light}}",
+          "padding": {"top": "96px", "bottom": "96px", "right": "96px", "left": "96px"}
+        },
+        "form_card": {
+          "bg_color": "{{design:color:surface-white}}",
+          "border_radius": "{{design:radius:lg}}",
+          "box_shadow": {"horizontal": "0px", "vertical": "4px", "blur": "24px", "spread": "0px", "color": "rgba(0,0,0,0.08)", "position": "outer"},
+          "padding": {"top": "48px", "bottom": "48px", "right": "40px", "left": "40px"}
+        }
+      },
+      "layout": "1_2,1_2"
+    }
+  },
+
+  "combination_rules": {
+    "glass_morphism": {
+      "description": "Para crear glass effect, estas props deben ir juntas",
+      "required": ["backdrop_filter", "bg_color", "border_width", "border_color"],
+      "optional": ["box_shadow", "border_radius"],
+      "backdrops": ["blur(8px)", "blur(12px)", "blur(16px)", "blur(24px)"],
+      "bg_colors_with_alpha": ["glass-bg"],
+      "min_alpha": 0.85
+    },
+    "glow_effect": {
+      "description": "Para crear glow, estas props deben combinarse",
+      "required": ["box_shadow_hover", "transform_hover"],
+      "optional": ["text_shadow"],
+      "glow_colors": ["glow-accent", "glow-accent-strong"],
+      "shadow_props": {
+        "blur": "24px-40px",
+        "spread": "4px-8px",
+        "position": "outer"
+      }
+    },
+    "gradient_overlay": {
+      "description": "Gradiente sobre fondo oscuro para profundidad",
+      "required": ["bg_color", "overlay_gradient"],
+      "bg_must_be_dark": true,
+      "gradient_types": ["radial_glow_top_right", "radial_glow_center", "radial_glow_bottom_left"]
+    },
+    "card_elevated": {
+      "description": "Card que se eleva en hover",
+      "required": ["box_shadow_hover", "transform_hover"],
+      "transform": {"translate_y": "-4px"},
+      "shadow": {"vertical": "8px", "blur": "24px", "color_alpha": "0.12"}
+    },
+    "parallax_hero": {
+      "description": "Hero con parallax vertical",
+      "required": ["scroll_vertical_motion", "bg_color"],
+      "motion": {"start": "6", "mid": "0", "end": "-4"},
+      "trigger": "middle"
+    },
+    "staggered_entrance": {
+      "description": "Animación escalonada para grids de items",
+      "base_delay": "0ms",
+      "step": "100ms",
+      "max_delay": "400ms",
+      "applies_to": ["features", "stats", "testimonials", "pricing"]
+    },
+    "shape_transition": {
+      "description": "Transición suave entre secciones con shape divider",
+      "required": ["shape_divider_top"],
+      "or": ["shape_divider_bottom"],
+      "recommended_styles": ["curve", "wave"],
+      "color_matches_next_section_bg": true
+    }
+  },
+
+  "strategy_adaptation": {
+    "cool-luxury": {
+      "preferred_blocks": ["hero_glass", "features_glass_grid", "stats_dark_counters", "testimonials_white_cards", "pricing_glass_tables", "cta_epic"],
+      "avoid_blocks": ["features_light_grid"],
+      "color_adjustments": {
+        "glass_bg_alpha": 0.88,
+        "glow_intensity": "medium",
+        "shadow_alpha": 0.08
+      },
+      "typography_rules": {
+        "display_font": "premium sans-serif",
+        "letter_spacing_headline": "-0.5px",
+        "line_height_hero": "1.1em"
+      }
+    },
+    "warm-luxury": {
+      "preferred_blocks": ["hero_dark_centered", "features_glass_grid", "stats_dark_counters", "testimonials_white_cards", "cta_epic"],
+      "color_adjustments": {
+        "glass_bg_alpha": 0.85,
+        "glow_intensity": "high",
+        "shadow_alpha": 0.10
+      }
+    },
+    "tech-glass": {
+      "preferred_blocks": ["hero_glass", "features_glass_grid", "pricing_glass_tables", "cta_epic"],
+      "color_adjustments": {
+        "glass_bg_alpha": 0.80,
+        "glow_intensity": "high",
+        "backdrop_blur": "blur(16px)"
+      }
+    },
+    "minimal": {
+      "preferred_blocks": ["hero_dark_centered", "features_light_grid", "testimonials_white_cards", "contact_split"],
+      "avoid_blocks": ["hero_glass", "features_glass_grid", "cta_epic"],
+      "color_adjustments": {
+        "glow_intensity": "none",
+        "shadow_alpha": 0.04,
+        "border_radius_preference": "sm"
+      }
+    },
+    "organic": {
+      "preferred_blocks": ["hero_dark_centered", "features_light_grid", "gallery_masonry", "testimonials_white_cards"],
+      "color_adjustments": {
+        "glow_intensity": "low",
+        "shadow_alpha": 0.06,
+        "border_radius_preference": "xl"
+      }
+    }
+  },
+
+  "impact_scoring_weights": {
+    "backdrop_filter": 15,
+    "overlay_gradient": 12,
+    "box_shadow_hover": 10,
+    "transform_hover": 10,
+    "scroll_scaling": 8,
+    "scroll_vertical_motion": 8,
+    "anim_speed_curve_premium": 6,
+    "border_radius": 4,
+    "text_letter_spacing": 3,
+    "shape_divider": 5,
+    "inner_shadow": 4
+  }
+}
