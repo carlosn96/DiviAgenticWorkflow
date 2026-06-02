@@ -21,7 +21,7 @@ Usage:
     python build_design_system.py --validate-only     # check only
 """
 
-import json, os, re, copy, math, argparse
+import json, os, re, copy, math, argparse, sys
 from typing import Dict, List, Tuple, Any, Optional
 
 # --- Optional colour-science for perceptual color ---
@@ -36,32 +36,71 @@ except Exception:
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DAW_ROOT = os.path.dirname(SCRIPT_DIR)
 
-def _load_daw_site() -> str:
-    site = os.environ.get('DAW_SITE')
-    if site:
-        return site
-    env_path = os.path.join(os.path.dirname(DAW_ROOT), '.env')
-    if os.path.exists(env_path):
-        try:
-            with open(env_path, 'r', encoding='utf-8') as f:
-                for line in f:
-                    line = line.strip()
-                    if line.startswith('DAW_SITE='):
-                        val = line[9:].strip().strip('"').strip("'")
-                        if val:
-                            return val
-        except Exception:
-            pass
-    if '-h' in sys.argv or '--help' in sys.argv:
-        return 'example'
-    print("[ERROR] DAW_SITE no está definido en el entorno ni en el archivo .env.", file=sys.stderr)
-    print("El pipeline requiere una marca activa para operar (ej: DAW_SITE=aletheia).", file=sys.stderr)
-    sys.exit(1)
+# Lazy site resolver — defers DAW_SITE / SITE_DIR / BRAND_DIR / OUT_PATH until used,
+# so importing this module no longer triggers ConfigError at import time.
+sys.path.insert(0, DAW_ROOT)
+from daw.cfg import (  # noqa: E402
+    load_daw_site as _load_daw_site,
+    get_site_dir as _get_site_dir,
+    get_brand_dir as _get_brand_dir,
+    get_design_system_path as _get_design_system_path,
+)
 
-DAW_SITE = _load_daw_site()
-SITE_DIR = os.path.join(DAW_ROOT, 'site', DAW_SITE)
-BRAND_DIR = os.path.join(SITE_DIR, 'brand')
-OUT_PATH = os.path.join(SITE_DIR, 'design-system', 'divitheme.json')
+
+def _site_paths():
+    site = _load_daw_site()
+    site_dir = os.path.join(DAW_ROOT, 'site', site)
+    return {
+        'DAW_SITE': site,
+        'SITE_DIR': site_dir,
+        'BRAND_DIR': os.path.join(site_dir, 'brand'),
+        'OUT_PATH': os.path.join(site_dir, 'design-system', 'divitheme.json'),
+    }
+
+
+def _maybe_site_paths():
+    """Resolve site paths only when explicitly called (main(), functions, etc).
+
+    The module-level constants DAW_SITE/SITE_DIR/BRAND_DIR/OUT_PATH below are
+    kept as None placeholders so legacy code reading them at import time does
+    not break — they will be populated by `init_site_paths()` or directly when
+    `main()` runs.
+    """
+    try:
+        return _site_paths()
+    except Exception:
+        if '-h' in sys.argv or '--help' in sys.argv:
+            return {
+                'DAW_SITE': 'example',
+                'SITE_DIR': os.path.join(DAW_ROOT, 'site', 'example'),
+                'BRAND_DIR': os.path.join(DAW_ROOT, 'site', 'example', 'brand'),
+                'OUT_PATH': os.path.join(DAW_ROOT, 'site', 'example', 'design-system', 'divitheme.json'),
+            }
+        raise
+
+DAW_SITE = None
+SITE_DIR = None
+BRAND_DIR = None
+OUT_PATH = None
+
+
+def init_site_paths():
+    """Populate module-level DAW_SITE / SITE_DIR / BRAND_DIR / OUT_PATH.
+
+    Call this from main() (and from any legacy helper that needs them) to
+    keep import-time side-effect-free.
+    """
+    global DAW_SITE, SITE_DIR, BRAND_DIR, OUT_PATH
+    paths = _maybe_site_paths()
+    DAW_SITE = paths['DAW_SITE']
+    SITE_DIR = paths['SITE_DIR']
+    BRAND_DIR = paths['BRAND_DIR']
+    OUT_PATH = paths['OUT_PATH']
+
+
+# Backwards-compat alias: legacy code may still call _load_daw_site() directly.
+def _legacy_load_daw_site() -> str:  # pragma: no cover - legacy shim
+    return _load_daw_site()
 
 
 PRESET_CATEGORIES = {'section', 'text', 'module', 'divider', 'animation', 'scroll', 'transform'}
@@ -1230,6 +1269,8 @@ def main():
     parser.add_argument('--substitute-colors', action='store_true',
                         help='Replace tokens with hex values in output')
     args = parser.parse_args()
+
+    init_site_paths()
 
     # Load variables
     user_vars = {}

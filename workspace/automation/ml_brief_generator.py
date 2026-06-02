@@ -11,24 +11,14 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 DAW_ROOT = SCRIPT_DIR.parent.parent
 WEIGHTS_PATH = DAW_ROOT / "ml-dataset" / "module_weights.json"
 
-# Content filler dictionaries to avoid LLM token costs
+sys.path.insert(0, str(DAW_ROOT))
+from daw.constants import CONTENT_BANK as _DAW_CONTENT_BANK  # noqa: E402
+
+# ML variant: same shared titles/paragraphs/features, but pricing_tiers and
+# testimonials keep the original ML schema (with "tier"/"role" fields) to
+# preserve byte-identical output for downstream consumers.
 CONTENT_BANK = {
-    "titles": [
-        "Elevating Your Experience", "Discover The Difference", "Premium Services",
-        "Our Core Values", "What We Do", "Innovating The Future", "Unmatched Quality"
-    ],
-    "paragraphs": [
-        "We are dedicated to providing the highest quality of service. Our team of experts works tirelessly to ensure your satisfaction.",
-        "Experience the next generation of solutions designed specifically for your needs. We blend technology with craftsmanship.",
-        "Our approach is simple: we put our clients first. By understanding your goals, we create strategies that deliver measurable results.",
-        "Join thousands of satisfied customers who have transformed their workflow with our premium suite of tools."
-    ],
-    "features": [
-        {"title": "Fast Execution", "text": "Lightning fast delivery of all services."},
-        {"title": "Premium Support", "text": "24/7 dedicated assistance for our clients."},
-        {"title": "Secure Infrastructure", "text": "Enterprise-grade security protocols."},
-        {"title": "Global Reach", "text": "Operating in over 50 countries worldwide."}
-    ],
+    **_DAW_CONTENT_BANK,
     "pricing_tiers": [
         {"tier": "Basic", "price": "$99", "features": "1 User, Basic Support, 10GB Storage"},
         {"tier": "Pro", "price": "$199", "features": "5 Users, Priority Support, 50GB Storage"},

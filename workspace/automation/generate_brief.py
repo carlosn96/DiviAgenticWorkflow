@@ -75,16 +75,21 @@ ENV_PATH = DAW_ROOT / ".env"
 if not ENV_PATH.exists() and DAW_ROOT.parent.joinpath(".env").exists():
     ENV_PATH = DAW_ROOT.parent / ".env"
 
+sys.path.insert(0, str(DAW_ROOT))
+from daw.cfg import load_daw_site  # noqa: E402
+
+
 def get_briefs_dir():
-    site_name = os.environ.get('DAW_SITE') or 'bibliotheca'
+    site_name = load_daw_site()
     return DAW_ROOT / "site" / site_name / "briefs"
 
+
 def get_brand_vars():
-    site_name = os.environ.get('DAW_SITE') or 'bibliotheca'
+    site_name = load_daw_site()
     vars_path = DAW_ROOT / "site" / site_name / "brand" / "_design_vars.json"
     if vars_path.exists():
         try:
-            with open(vars_path, encoding='utf-8') as f:
+            with open(vars_path, encoding="utf-8") as f:
                 return json.load(f)
         except Exception:
             pass

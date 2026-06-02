@@ -17,6 +17,7 @@ Usage:
 Output:
     site/<site>/brand/_design_vars.json      (brand variables)
     site/<site>/brand/_design_presets.json   (64 base presets)
+    site/<site>/brand/_content_bank.json     (copied from site/example/brand/ template)
 
 Dependencies:
     pip install colour-science pyyaml
@@ -28,19 +29,23 @@ from pathlib import Path
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DAW_ROOT = os.path.dirname(SCRIPT_DIR)
 
-# Reuse build_design_system classes
-def import_build_system():
+# Make DAW_bundle and the workspace itself importable so we can load
+# build_design_system.py as a module without side effects (its
+# DAW_SITE / SITE_DIR / BRAND_DIR / OUT_PATH are now lazy).
+if DAW_ROOT not in sys.path:
+    sys.path.insert(0, DAW_ROOT)
+if SCRIPT_DIR not in sys.path:
     sys.path.insert(0, SCRIPT_DIR)
-    import build_design_system as bds
-    return bds
+
+import build_design_system as bds  # noqa: E402
 
 
 def generate_design_vars(site_name: str, brand_name: str, accent: str,
                          tone: str = None, description: str = "",
                          fonts: dict = None) -> dict:
     """Generate complete _design_vars.json from minimal input."""
-    bds = import_build_system()
-    
+    bds.init_site_paths()
+
     # Strategy detection
     strategy = bds.BrandStrategy.analyze(accent, brand_name)
     if tone:
@@ -235,6 +240,21 @@ def generate_design_presets() -> dict:
     }
 
 
+def _copy_content_bank(src: str, dst: str) -> bool:
+    """Copy _content_bank.json from example template if source exists."""
+    example_path = os.path.join(DAW_ROOT, 'site', 'example', 'brand', '_content_bank.json')
+    if os.path.exists(example_path):
+        with open(example_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        with open(dst, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+        print(f"[OK] Copied content bank from template: {dst} ({len(data)} content keys)")
+        print(f"     Edit this file to customize copy for your brand.")
+        return True
+    print(f"[SKIP] No template found at {example_path}. Create {dst} manually.")
+    return False
+
+
 def parse_design_md(path: str) -> dict:
     """Parse DESIGN.md with YAML frontmatter."""
     try:
@@ -327,6 +347,7 @@ def main():
     brand_dir = os.path.join(site_dir, 'brand')
     vars_path = os.path.join(brand_dir, '_design_vars.json')
     presets_path = os.path.join(brand_dir, '_design_presets.json')
+    content_path = os.path.join(brand_dir, '_content_bank.json')
     
     # Check existing
     if os.path.exists(vars_path) and not args.yes:
@@ -352,6 +373,12 @@ def main():
     with open(presets_path, 'w', encoding='utf-8') as f:
         json.dump(presets_dict, f, indent=2, ensure_ascii=False)
     print(f"[OK] Written: {presets_path} ({sum(len(v) for v in presets_dict.values())} presets)")
+    
+    # Copy content bank from example template if it doesn't exist
+    if not os.path.exists(content_path):
+        _copy_content_bank(DAW_ROOT, content_path)
+    else:
+        print(f"[SKIP] {content_path} already exists — edit manually to customize brand copy.")
     
     print(f"\n[NEXT] Run design system builder:")
     print(f"  python DAW_bundle/workspace/build_design_system.py --vars {vars_path}")

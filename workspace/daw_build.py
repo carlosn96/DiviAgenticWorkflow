@@ -1,31 +1,15 @@
 """
-DAW Build Orchestrator — Unified Brand + Design System Generator
-=================================================================
-Single command that:
-  1. Generates brand files (_design_vars.json + _design_presets.json) if missing
-  2. Builds enriched design system (divitheme.json) — ONE-SHOT, only rebuilds if stale
-  3. Optionally continues to brief → DIE → deploy
+DAW Build Orchestrator — brand + design + page → deploy
 
 Usage:
-    # First time: create brand + design system (one-shot)
-    python daw_build.py --site aletheia --name "Aletheia" --accent "#CA8A04"
+    # First time (creates brand + design system)
+    python daw_build.py --name "Aletheia" --accent "#CA8A04"
 
-    # After brand exists: just build a page
-    python daw_build.py --site aletheia --full --prompt "home page"
+    # Every page after that (auto-detects site from .env)
+    python daw_build.py --prompt "pagina de instalaciones"
 
-    # Force rebuild design system (after editing brand files)
-    python daw_build.py --site aletheia --force-design-system
-
-    # Full pipeline from scratch
-    python daw_build.py --site aletheia --name "Aletheia" --accent "#CA8A04" --full --prompt "home page"
-
-Dependencies:
-    pip install colour-science
-
-One-shot artefacts:
-    - _design_vars.json: brand variables (manual edits persist)
-    - _design_presets.json: base presets (manual edits persist)
-    - divitheme.json: compiled design system (auto-generated from above, do NOT edit)
+    # Different site
+    python daw_build.py --site otra-marca --prompt "home"
 """
 
 import os, sys, json, subprocess, argparse
@@ -45,20 +29,17 @@ if hasattr(sys.stderr, "reconfigure"):
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DAW_ROOT = os.path.dirname(SCRIPT_DIR)
+sys.path.insert(0, DAW_ROOT)
+
+from daw.cfg import load_daw_site  # noqa: E402
 
 
 def load_env_site():
-    """Read DAW_SITE from .env in project root."""
-    env_path = os.path.join(os.path.dirname(DAW_ROOT), '.env')
-    if os.path.exists(env_path):
-        with open(env_path, 'r', encoding='utf-8') as f:
-            for line in f:
-                line = line.strip()
-                if line.startswith('DAW_SITE='):
-                    val = line[9:].strip().strip('"').strip("'")
-                    if val:
-                        return val
-    return os.environ.get('DAW_SITE', '')
+    """Read DAW_SITE from env or .env (delegates to daw.cfg)."""
+    try:
+        return load_daw_site()
+    except Exception:
+        return os.environ.get('DAW_SITE', '')
 
 
 def brand_files_exist(site_dir: str) -> bool:
@@ -152,95 +133,77 @@ def build_design_system(site: str, vars_path: str, presets_path: str,
     return True
 
 
-def generate_brief(site: str, prompt: str, tone: str = "editorial") -> str:
-    """Generate brief.json. Returns path to brief file."""
-    brief_script = os.path.join(DAW_ROOT, 'workspace', 'automation', 'generate_brief.py')
-    if not os.path.exists(brief_script):
-        print(f"[WARN] generate_brief.py not found — skipping brief generation")
-        return ""
-
+def generate_brief(site: str, prompt: str) -> str:
+    """Generate brief.json via UX-Pro deterministic engine (incl. design_direction)."""
     site_dir = os.path.join(DAW_ROOT, 'site', site)
     briefs_dir = os.path.join(site_dir, 'briefs')
     os.makedirs(briefs_dir, exist_ok=True)
 
-    # Generate slug from prompt
     slug = prompt.lower().replace(' ', '-').replace('á', 'a').replace('é', 'e')[:30]
+    brief_path = os.path.join(briefs_dir, f"{slug}.json")
 
-    # Pass DAW_SITE to subprocess so generate_brief.py knows the correct site
+    brief_script = os.path.join(DAW_ROOT, 'workspace', 'automation', 'ux_pro_brief_generator.py')
+    if not os.path.exists(brief_script):
+        print(f"[WARN] ux_pro_brief_generator.py not found")
+        return ""
+
     env = os.environ.copy()
     env['DAW_SITE'] = site
 
-    cmd = [
-        sys.executable, brief_script,
-        '--prompt', prompt,
-        '--tone', tone,
-        '--out', slug,
-    ]
-
+    cmd = [sys.executable, brief_script, '--query', prompt, '--out', brief_path]
     result = subprocess.run(cmd, capture_output=True, text=True, env=env, encoding="utf-8")
     if result.returncode != 0:
         print(f"[WARN] Brief generation failed:\n{result.stderr}")
         return ""
 
-    brief_path = os.path.join(briefs_dir, f"{slug}.json")
-    print(f"[OK] Brief generated: {brief_path}")
+    print(f"Brief: {brief_path}")
     return brief_path
 
 
 def run_vie(brief_path: str, site: str) -> str:
-    """Run Visual Impact Engine to produce rich page-def. Returns plan path."""
-    vie_script = os.path.join(DAW_ROOT, 'ml-dataset', 'artifacts', 'visual_impact_engine.py')
-    if not os.path.exists(vie_script):
-        print(f"[WARN] visual_impact_engine.py not found — falling back to DIE")
+    """Run Visual Impact Engine (v3.0 — vie/ package) to produce rich page-def.
+
+    Replaces the legacy subprocess call to ml-dataset/artifacts/visual_impact_engine.py
+    with a direct Python function call to vie.factory.create_vie(). This uses the new
+    architecture (vie/ package) instead of the monolith shim.
+    """
+    plans_dir = os.path.join(DAW_ROOT, 'site', site, 'plans')
+    os.makedirs(plans_dir, exist_ok=True)
+    slug = os.path.splitext(os.path.basename(brief_path))[0]
+    plan_path = os.path.join(plans_dir, f"{slug}.json")
+
+    # Resolve design-system path
+    design_system_path = os.path.join(DAW_ROOT, 'site', site, 'design-system', 'divitheme.json')
+    if not os.path.exists(design_system_path):
+        print(f"[WARN] Design system not found: {design_system_path}")
         return run_die(brief_path, site)
 
-    plans_dir = os.path.join(DAW_ROOT, 'site', site, 'plans')
-    os.makedirs(plans_dir, exist_ok=True)
-    slug = os.path.splitext(os.path.basename(brief_path))[0]
-    plan_path = os.path.join(plans_dir, f"{slug}.json")
+    try:
+        # Bootstrap sys.path so vie/ is importable from daw_build.py
+        if DAW_ROOT not in sys.path:
+            sys.path.insert(0, DAW_ROOT)
+        if os.path.join(DAW_ROOT, 'workspace') not in sys.path:
+            sys.path.insert(0, os.path.join(DAW_ROOT, 'workspace'))
 
-    cmd = [
-        sys.executable, vie_script,
-        '--brief-file', brief_path,
-        '--site', site,
-        '--output', plan_path,
-    ]
+        import json
+        from vie.factory import create_vie
 
-    result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8")
-    if result.returncode != 0:
-        print(f"[WARN] VIE failed:\n{result.stderr}")
+        with open(brief_path, 'r', encoding='utf-8') as f:
+            brief = json.load(f)
+        with open(design_system_path, 'r', encoding='utf-8') as f:
+            design_system = json.load(f)
+
+        engine = create_vie(design_system)
+        page_def = engine.translate_brief(brief)
+
+        with open(plan_path, 'w', encoding='utf-8') as f:
+            json.dump(page_def, f, indent=2, ensure_ascii=False)
+
+        print(f"[OK] Rich plan generated (vie/): {plan_path}")
+        return plan_path
+    except Exception as e:
+        print(f"[WARN] VIE failed: {e}")
         return ""
-
-    print(f"[OK] Rich plan generated (VIE): {plan_path}")
-    return plan_path
-
-
-def run_die(brief_path: str, site: str) -> str:
-    """Run DIE to produce plan.json. Returns plan path."""
-    die_script = os.path.join(DAW_ROOT, 'ml-dataset', 'artifacts', 'design_intelligence.py')
-    if not os.path.exists(die_script):
-        print(f"[WARN] design_intelligence.py not found — skipping DIE")
-        return ""
-
-    plans_dir = os.path.join(DAW_ROOT, 'site', site, 'plans')
-    os.makedirs(plans_dir, exist_ok=True)
-    slug = os.path.splitext(os.path.basename(brief_path))[0]
-    plan_path = os.path.join(plans_dir, f"{slug}.json")
-
-    cmd = [
-        sys.executable, die_script,
-        '--brief-file', brief_path,
-        '--output', plan_path,
-        '--skip-quality-gate'
-    ]
-
-    result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8")
-    if result.returncode != 0:
-        print(f"[WARN] DIE failed:\n{result.stderr}")
-        return ""
-
-    print(f"[OK] Plan generated: {plan_path}")
-    return plan_path
 
 
 def deploy_page(plan_path: str, site: str) -> bool:
@@ -267,38 +230,20 @@ def deploy_page(plan_path: str, site: str) -> bool:
 
 def main():
     parser = argparse.ArgumentParser(
-        description='DAW Build Orchestrator — Unified brand + design system pipeline',
-        epilog='''One-shot artefacts (do not regenerate unless changed):
-  - divitheme.json: compiled design system (skip with --no-design-system)
-  - _design_vars.json: brand variables (only regenerate with --regenerate)
-  - _design_presets.json: base presets (only regenerate with --regenerate)
-'''
+        description='DAW Build Orchestrator — brand + design + page → deploy',
     )
     parser.add_argument('--site', '-s', type=str, default=None,
                         help='Site name (defaults to DAW_SITE from .env)')
-    parser.add_argument('--regenerate', '-r', action='store_true',
-                        help='Force regeneration of brand files')
-    parser.add_argument('--force-design-system', action='store_true',
-                        help='Force rebuild of divitheme.json even if not stale')
-    parser.add_argument('--no-design-system', action='store_true',
-                        help='Skip design system build (assume up-to-date)')
-    parser.add_argument('--name', '-n', type=str, help='Brand name (for regeneration)')
-    parser.add_argument('--accent', '-a', type=str, help='Accent color (for regeneration)')
+    parser.add_argument('--name', '-n', type=str,
+                        help='Brand name (only needed first time)')
+    parser.add_argument('--accent', '-a', type=str,
+                        help='Accent color hex (only needed first time)')
     parser.add_argument('--tone', '-t', type=str, choices=['luxury', 'tech', 'organic', 'minimal'],
-                        help='Brand tone (for regeneration)')
-    parser.add_argument('--full', '-f', action='store_true',
-                        help='Full pipeline: brand → design → brief → deploy')
-    parser.add_argument('--vie', action='store_true',
-                        help='Use Visual Impact Engine (deterministic rich presets) instead of ML DIE')
+                        default='luxury', help='Brand tone (default: luxury)')
     parser.add_argument('--prompt', '-p', type=str,
-                        help='Page prompt (for --full mode)')
-    parser.add_argument('--brief-only', action='store_true',
-                        help='Stop after brief generation')
-    parser.add_argument('--plan-only', action='store_true',
-                        help='Stop after DIE plan generation')
+                        help='Page prompt. If given, runs full pipeline: brief → VIE → deploy')
     args = parser.parse_args()
 
-    # Determine site
     site = args.site or load_env_site()
     if not site:
         print("[ERROR] DAW_SITE not defined. Set in .env or pass --site")
@@ -314,82 +259,42 @@ def main():
     os.makedirs(brand_dir, exist_ok=True)
     os.makedirs(ds_dir, exist_ok=True)
 
-    print(f"[ORCHESTRATOR] Site: {site}")
-    print(f"[ORCHESTRATOR] Brand dir: {brand_dir}")
+    print(f"Site: {site}")
 
-    # ── Phase 1: Brand Files (one-shot, only if missing or --regenerate) ─
-    if args.regenerate or not brand_files_exist(site_dir):
-        if not args.regenerate and brand_files_exist(site_dir):
-            print("[OK] Brand files exist — skipping generation")
-        else:
-            if not args.name or not args.accent:
-                print("[ERROR] Brand files missing. Provide --name and --accent to generate")
-                sys.exit(1)
+    # ── Brand files (one-shot, only if missing) ─────────────────────────
+    if not brand_files_exist(site_dir):
+        if not args.name or not args.accent:
+            print("[ERROR] Brand files missing. Provide --name and --accent to generate")
+            sys.exit(1)
+        print(f"Generating brand files...")
+        ok = generate_brand(site=site, name=args.name, accent=args.accent, tone=args.tone)
+        if not ok:
+            sys.exit(1)
 
-            print(f"[PHASE 1] Generating brand files...")
-            ok = generate_brand(
-                site=site,
-                name=args.name,
-                accent=args.accent,
-                tone=args.tone,
-                fonts={'display': args.name, 'body': args.name}  # simplified
-            )
-            if not ok:
-                sys.exit(1)
-    else:
-        print("[OK] Brand files already exist (one-shot)")
-
-    # ── Phase 2: Design System (one-shot, only if stale or forced) ──
-    if args.no_design_system:
-        print("[SKIP] Design system build (--no-design-system)")
-    elif design_system_needs_rebuild(vars_path, presets_path, ds_path,
-                                     force=args.force_design_system):
-        print(f"[PHASE 2] Building design system (one-shot)...")
+    # ── Design system (auto-build if stale) ─────────────────────────────
+    if design_system_needs_rebuild(vars_path, presets_path, ds_path):
+        print(f"Building design system...")
         ok = build_design_system(site, vars_path, presets_path, ds_path)
         if not ok:
             sys.exit(1)
-        print(f"[OK] Design system ready: {ds_path}")
-    else:
-        print(f"[SKIP] Design system up-to-date: {ds_path}")
-        print("        (Use --force-design-system to rebuild, or --no-design-system to skip)")
+        print(f"Design system ready: {ds_path}")
 
-    # ── Phase 3+: Full Pipeline (page generation) ──────────────────────
-    if not args.full:
-        print("\n[DONE] Brand + Design System verified")
-        if not brand_files_exist(site_dir):
-            print(f"    To generate a page next time:")
-            print(f"      python daw_build.py --site {site} --full --prompt \"...\"")
+    # ── Page pipeline (only if --prompt given) ──────────────────────────
+    if not args.prompt:
+        print("Done. Pass --prompt to generate a page.")
         return
 
-    if not args.prompt:
-        print("[ERROR] --full requires --prompt")
-        sys.exit(1)
-
-    # Brief
-    print(f"[PHASE 3] Generating brief...")
+    print(f"Full pipeline: brief → VIE → deploy")
     brief_path = generate_brief(site, args.prompt)
     if not brief_path:
         sys.exit(1)
-    if args.brief_only:
-        return
 
-    # Page generation: VIE (deterministic) or DIE (ML)
-    if args.vie:
-        print(f"[PHASE 4] Running Visual Impact Engine (deterministic)...")
-        plan_path = run_vie(brief_path, site)
-    else:
-        print(f"[PHASE 4] Running DIE (ML pipeline)...")
-        plan_path = run_die(brief_path, site)
+    plan_path = run_vie(brief_path, site)
     if not plan_path:
         sys.exit(1)
-    if args.plan_only:
-        return
 
-    # Deploy
-    print(f"[PHASE 5] Deploying...")
     deploy_page(plan_path, site)
-
-    print("\n[DONE] Full pipeline completed successfully")
+    print("Done.")
 
 
 if __name__ == '__main__':
