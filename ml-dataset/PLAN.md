@@ -50,7 +50,7 @@ Los siguientes archivos ya no existen ni se usan:
 - `compose_page.php` — eliminado en la migración a DIE
 - `post_compose.php` — eliminado en la migración a DIE
 
-La carpeta `site/<DAW_SITE>/compositions/` es legacy y no se usa en el pipeline activo.
+La carpeta `site/<DAW_SITE>/compositions/` fue eliminada (no se usaba en el pipeline activo).
 
 ---
 
@@ -59,7 +59,7 @@ La carpeta `site/<DAW_SITE>/compositions/` es legacy y no se usa en el pipeline 
 | Archivo | Estado | Nota |
 |---------|--------|------|
 | `workspace/compositions/` | ✅ Eliminado | Sustituido por `plans/` |
-| `site/<DAW_SITE>/compositions/` | ⚠️ Legacy | No se usa; contiene datos históricos |
+| ~~`site/<DAW_SITE>/compositions/`~~ | ❌ Eliminado | No contenía datos; reemplazado por `plans/` |
 | `workspace/sections/catalog/*.section.json` (877) | ✅ En uso | Consumido por `e_page_mapper.py` vía `_load_template()` |
 | `ml-dataset/artifacts/decoration-rules.json` | ✅ En ml-dataset/artifacts/ | No en workspace/data/ |
 

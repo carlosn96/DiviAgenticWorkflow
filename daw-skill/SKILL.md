@@ -23,9 +23,9 @@ Los colores registrados como `gcid-*` son visibles y seleccionables en el **colo
 
 | Cuándo | Comando |
 |--------|---------|
-| **Una vez, al crear el design system** | `wp agentic global_colors sync --design-system="DAW_bundle/site/bibliotheca/design-system/divitheme.json"` |
+| **Una vez, al crear el design system** | `wp agentic global_colors sync --design-system="DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json"` |
 | **Cada vez que cambien los colores en el JSON** | Mismo comando. El sistema detecta cambios vía hash. |
-| **Para verificar estado** | `wp agentic global_colors status --design-system="DAW_bundle/site/bibliotheca/design-system/divitheme.json"` |
+| **Para verificar estado** | `wp agentic global_colors status --design-system="DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json"` |
 
 ### Señal de estado
 - El sistema almacena un **hash MD5** de los colores sincronizados en la opción `_dac_gcid_hash`.
@@ -39,19 +39,20 @@ Los colores registrados como `gcid-*` son visibles y seleccionables en el **colo
 
 Toda tarea DEBE pasar por estas cuatro fases en orden. Cada fase produce un artefacto concreto. La siguiente fase no comienza hasta que el artefacto esté escrito.
 
-### ⚡ Pipeline Activo: VIE v2.0 + SchemaRegistry (Recomendado)
+### ⚡ Pipeline Activo: VIE v3.0 + Registry OCP (Recomendado)
 
-El DAW usa el **Visual Impact Engine (VIE v2.0)** como motor determinístico de producción. Lee un brief JSON rico y construye `plans/<slug>.json` usando `SchemaRegistry` (auto-descubrimiento de 102 módulos Divi 5) + `ModuleBuilder` (reglas visuales determinísticas).
+El DAW usa el **Visual Impact Engine (VIE v3.0)** como motor determinístico de producción. Lee un brief JSON rico y construye `plans/<slug>.json` usando 13 módulos colaborativos en `DAW_bundle/vie/` (engine, factory, cli, protocols, adapters, resolver, analysis, selection, director, building, module, section, design_director) más un **registry OCP** de 12 section handlers en `vie/handlers/`. Los nuevos section types se añaden creando 1 archivo (no se toca código existente).
 
 El antiguo pipeline DIE (ML, 877 templates, clasificador TF-IDF) fue archivado en `_archive/die_pipeline/`.
 
-**Flujo automático UX-Pro → VIE v2.0 (recomendado para páginas nuevas):**
+**Flujo automático UX-Pro → VIE v3.0 (recomendado para páginas nuevas):**
 ```powershell
-# 1. Generar brief rico con arrays de contenido real (Fase 1)
+# 1. Generar brief rico con arrays de contenido real + design_direction automático (Fase 1)
 python DAW_bundle/workspace/automation/ux_pro_brief_generator.py --query "SaaS Landing Page" --out site/<DAW_SITE>/briefs/<slug>.json
 
 # 2. VIE mapea secciones → módulos Divi 5 nativos (Fases 2-3)
-python -B DAW_bundle/ml-dataset/artifacts/visual_impact_engine.py --brief-file=site/<DAW_SITE>/briefs/<slug>.json --site <DAW_SITE> --output=site/<DAW_SITE>/plans/<slug>.json
+#    El brief ya incluye design_direction → PATH A (diseño calculado por mood)
+python DAW_bundle/vie/cli.py --brief-file=site/<DAW_SITE>/briefs/<slug>.json --design-system=site/<DAW_SITE>/design-system/divitheme.json --output=site/<DAW_SITE>/plans/<slug>.json
 
 # 3. Build + Deploy (Fase 4)
 .\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php --def=site/<DAW_SITE>/plans/<slug>.json --deploy
@@ -59,11 +60,12 @@ python -B DAW_bundle/ml-dataset/artifacts/visual_impact_engine.py --brief-file=s
 
 | Escenario | Flujo |
 |-----------|-------|
-| Nueva página desde prompt | `ux_pro_brief_generator.py` → `visual_impact_engine.py` → `build_page.php` |
+| Nueva página desde prompt (default) | `ux_pro_brief_generator.py` → `vie/cli.py` → `build_page.php` |
+| Brief con LLM (opcional) | `generate_brief.py --llm` → `vie/cli.py` → `build_page.php` |
 | Página con diseño muy específico | Skill manual 4 fases (abajo) |
 | Iteración sobre plan existente | Editar `plans/<slug>.json` → `build_page.php` |
 
-**Cuándo usar cada flujo:** Si el usuario da un prompt natural sin textos definidos, usar el pipeline automático UX-Pro → VIE. Si entrega textos exactos, wireframes o requiere control fino, usar las 4 fases manuales abajo.
+**Cuándo usar cada flujo:** Por defecto se usa `ux_pro_brief_generator.py` (determinístico, incluye `design_direction` automático → PATH A en VIE). Si necesitas contenido generado por LLM, pasar `--llm` en `daw_build.py`. Si entrega textos exactos, wireframes o requiere control fino, usar las 4 fases manuales abajo.
 
 ---
 
@@ -73,11 +75,11 @@ python -B DAW_bundle/ml-dataset/artifacts/visual_impact_engine.py --brief-file=s
 - *Leer*: [`references/architect.md`](references/architect.md)
 - *Meta*: Definir estructura semántica y objetivos de negocio. Para cada sección, elegir el bloque Divi 5 correcto consultando el diccionario.
 
-#### 💡 Criterio de uso del Generador de Briefs (`generate_brief.py`):
-El uso de `generate_brief.py` (con LLM) y de `ux_pro_brief_generator.py` (determinístico BM25) se rige por:
-1. **Usar `ux_pro_brief_generator.py` para páginas nuevas** que no tienen estructura definida. Genera briefs ricos con arrays de datos: `items[]`, `testimonials[]`, `phases[]`, `features[]`.
-2. **No usar si ya existe un brief** en `site/<DAW_SITE>/briefs/<slug>.json`.
-3. **Ir directo al plan** si el usuario entrega textos exactos, wireframes o estructura definida.
+#### 💡 Criterio de uso de los Generadores de Briefs:
+1. **Usar `ux_pro_brief_generator.py` (default)** — determinístico BM25, sin API keys, genera `design_direction` automático → PATH A en VIE.
+2. **Usar `generate_brief.py` (opcional, con `--llm`)** — si necesitas contenido generado por LLM. No produce `design_direction`.
+3. **No usar si ya existe un brief** en `site/<DAW_SITE>/briefs/<slug>.json` — editarlo directamente.
+4. **Ir directo al plan** si el usuario entrega textos exactos, wireframes o estructura definida.
 
 **Artefacto obligatorio — Brief JSON** (escribirlo antes de continuar):
 ```json
@@ -91,7 +93,10 @@ El uso de `generate_brief.py` (con LLM) y de `ux_pro_brief_generator.py` (determ
   ]
 }
 ```
-Tipos de `section_type` soportados por VIE v2.0: `hero`, `hero-centered`, `features`, `content`, `content-list`, `stats`, `testimonials`, `pricing`, `faq`, `icon-list`, `timeline`, `contact`, `process`, `team`, `gallery`, `logos`, `cta`.
+Tipos de `section_type` soportados por VIE v3.0 (12 actuales, ver `DAW_bundle/vie/handlers/`):
+`hero`, `hero-split`, `hero-centered`, `features`, `stats`, `testimonials`, `pricing`, `faq`, `cta`, `gallery`, `contact`, `timeline`, `trust-bar`, `content`.
+
+> Para añadir un section type nuevo, crear `DAW_bundle/vie/handlers/<tipo>.py` con `@register("<tipo>")` + import en `vie/handlers/__init__.py`. **No** se modifica `SectionBuilder._build_rows()` (es registry-backed). Ver `DAW_bundle/vie/README.md`.
 
 > ⛔ **STOP**: si el Brief JSON no está escrito, NO iniciar Fase 2.
 
@@ -171,7 +176,7 @@ Verificación antes de entregar a Fase 4:
 - *Meta*: Desplegar con un solo comando:
   ```powershell
   .\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php ^
-    --def=DAW_bundle/site/bibliotheca/page-defs/<slug>.json ^
+    --def=DAW_bundle/site/<DAW_SITE>/plans/<slug>.json ^
     --deploy --verify
   ```
   `build_page.php` construye el schema (resuelve tokens, expande presets) y llama a `wp agentic deploy_page`. El Layout Engine convierte `var(--gcid-*)` → `$variable()` syntax en post_content.
@@ -200,6 +205,10 @@ Este skill es **100% autocontenido** para el proyecto local `divitheme`. Prioriz
 | Dirección de Diseño | [`references/design-lead.md`](references/design-lead.md) | **Leyes de calidad autónoma (bloqueante), investigación UX/UI, decisiones** |
 | Índice de Bloques Divi 5 | [`references/blocks-index.json`](references/blocks-index.json) | Índice ligero (16 KB): slug, nombre, categoría, children de los 102 bloques. Para atributos detallados: `php DAW_bundle/divi-agentic-core/bin/extract-module-meta.php <slug>` |
 | Metadata completa (on-demand) | `DAW_bundle/divi-agentic-core/data/_all_modules_metadata.php` (2.6 MB) | Schema oficial completo de Divi 5. No se carga en sesión DAW a menos que se necesite. |
+| Shared Kernel del DAW | `DAW_bundle/daw/README.md` | Capa 1: cfg, types, tokens, constants, exc. Sin side effects al importar. |
+| VIE package | `DAW_bundle/vie/README.md` | Capa 2: Visual Impact Engine (13 módulos + handlers/registry + strategies/). Entry point: `python -m vie.cli`. |
+| Plan anti-patrones | `PLAN_RESOLVE_ANTIPATRONES.md` (raíz proyecto) | Refactor arquitectónico ejecutado 2026-06-01: monolito 1,480 L → 13 módulos; switch 12 section types → registry OCP. |
+| Tareas anti-patrones | `TASKS_RESOLVE_ANTIPATRONES.md` (raíz proyecto) | 65/65 tareas completadas, hash MD5 byte-idéntico al baseline. |
 
 ---
 
@@ -223,12 +232,12 @@ python DAW_bundle/workspace/build_design_system.py
 
 # 3. Sincronizar colores globales:
 .\wp.bat agentic global_colors sync `
-  --design-system="DAW_bundle/site/bibliotheca/design-system/divitheme.json"
+  --design-system="DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json"
 ```
 
 El generador auto-descubre tokens por prefijo (`color_`, `font_`, `radius_`, `space_`) de cualquier archivo de variables — no hay nombres hardcodeados en Python. Funciona con cualquier marca sin modificar el script.
 
-El archivo generado `DAW_bundle/site/bibliotheca/design-system/divitheme.json` es la referencia estricta de estilo, tokens y patrones visuales.
+El archivo generado `DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json` es la referencia estricta de estilo, tokens y patrones visuales.
 
 - **Contenedores**: usar decoration nativa (background, spacing) en vez de clases.
 - **Tipografía**: usar `headingFont` y `bodyFont` con tokens `{{design:font:*}}`.

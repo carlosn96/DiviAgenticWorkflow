@@ -16,7 +16,7 @@ DAW_bundle/
 ├── .gitignore                     <- Reglas git del framework
 ├── wp.bat, php.bat, mysql.bat     <- Wrappers genéricos (delegan a raíz del proyecto)
 ├── site/                          <- ⭐ DATOS DE PROYECTO (separados del framework)
-│   ├── aletheia/                  <-    Marca activa: Aletheia Institute
+│   ├── aletheia/                  <-    Marca actual (ejemplo, ver .env DAW_SITE)
 │   │   ├── brand/                 <-       _design_vars.json + _design_presets.json
 │   │   ├── page-defs/             <-       ⭐ ENTRADA: JSON semántico del diseñador (tokens {{design:*}}, presets)
 │   │   ├── pages/                 <-       SALIDA OPCIONAL: schema resuelto por build_page.php (--out, solo debug)
@@ -24,11 +24,54 @@ DAW_bundle/
 │   │   ├── design-system/         <-       divitheme.json generado (64 presets + color derivación + contraste validado)
 │   │   ├── briefs/                <-       Briefs de diseño
 │   │   ├── content_state/         <-       Estado entre fases (local/ + remote/)
-│   │   └── compositions/          <-       Composición intermedia (legacy)
+│   │   └── (compositions/ eliminado, usar plans/)
 │   └── example/                   <-    Template para nuevas marcas (brand/, plans/, page-defs/, etc.)
-├── _archive/                      <- Archivos legacy deprecados (b_semantic_index, compile_catalog, etc.)
+├── _archive/                      <- Archivos legacy deprecados (b_semantic_index, compile_catalog,
+│   └── die_pipeline/              <-    DIE (ML) pipeline archivado: design_intelligence.py,
+│                                      a_section_patterns.py, b_slot_assigner.py,
+│                                      c_module_affinities.py, d_content_classifier.py,
+│                                      e_decorator.py, e_page_mapper.py, design_director.py)
 ├── ui-ux-pro-max/                 <- Skill de diseño UI/UX (opcional)
 ├── daw-skill/SKILL.md             <- FLUJO PRINCIPAL: orquestación de 4 fases
+├── daw/                           <- ⭐ SHARED KERNEL (capa 1, sin side effects)
+│   ├── cfg.py                     <-    .env parser único + load_daw_site() + path resolvers
+│   ├── types.py                   <-    SectionType, Strategy, ImpactLevel (enums str-based)
+│   ├── tokens.py                  <-    TokenResolver (resuelve {{design:*}} recursivamente)
+│   ├── constants.py               <-    FRONTEND_PRINCIPLES + CONTENT_BANK (single source of truth)
+│   └── exc.py                     <-    DawError, ConfigError, SectionTypeNotRegisteredError, ...
+├── vie/                           <- ⭐ VISUAL IMPACT ENGINE package (capa 2)
+│   ├── __init__.py                <-    Re-exports: VisualImpactEngine, create_vie, ...
+│   ├── engine.py                  <-    VisualImpactEngine (orquestador, DI opcional)
+│   ├── factory.py                 <-    create_vie() — preferred entry point
+│   ├── cli.py                     <-    CLI: --brief-file --design-system --output --seed
+│   ├── protocols.py               <-    BlockSelector, PropAdapter, ImpactEvaluator, SectionHandler
+│   ├── adapters.py                <-    CatalogLoader + DatasetLoader
+│   ├── resolver.py                <-    BrandResolver (token resolution)
+│   ├── analysis.py                <-    PageProfileAnalyzer (narrative + contrast plan)
+│   ├── selection.py               <-    BlockSelectionEngine (4D scoring + harmony matrix)
+│   ├── director.py                <-    ImpactDirector (frontend-design → Divi params)
+│   ├── building.py                <-    DecorationBuilder + RowBuilder
+│   ├── module.py                  <-    ModuleBuilder
+│   ├── section.py                 <-    SectionBuilder (PATH A: design_direction → calculado;
+│   │                                     PATH B: original → presets fijos)
+│   ├── design_director.py         <-    ⭐ DesignDirector: 5 moods predefinidos + helpers decoration
+│   │                                     (academic_night, cool_luxury, warm_minimal,
+│   │                                      tech_glass, organic_modern)
+│   ├── handlers/                  <-    ⭐ SectionHandler registry (OCP)
+│   │   ├── _registry.py           <-       SectionHandler Protocol + register()/get_handler()
+│   │   ├── hero.py                <-       HeroSectionHandler + HeroCenteredSectionHandler
+│   │   ├── features.py            <-       FeaturesSectionHandler
+│   │   ├── stats.py               <-       StatsSectionHandler
+│   │   ├── testimonials.py        <-       TestimonialsSectionHandler
+│   │   ├── pricing.py             <-       PricingSectionHandler
+│   │   ├── faq.py                 <-       FaqSectionHandler
+│   │   ├── cta.py                 <-       CtaSectionHandler
+│   │   ├── gallery.py             <-       GallerySectionHandler
+│   │   ├── contact.py             <-       ContactSectionHandler
+│   │   ├── timeline.py            <-       TimelineSectionHandler
+│   │   ├── trust_bar.py           <-       TrustBarSectionHandler
+│   │   └── content.py             <-       ContentSectionHandler
+│   └── strategies/                <-    StrategyProfile (datos + predicates) por estrategia
 ├── workspace/                     <- Scripts principales y datos
 │   ├── daw_build.py               <- ⭐ ORQUESTADOR UNIFICADO: brand → design → brief → VIE/DIE → deploy
 │   ├── brand_generator.py         <- Generador automático de _design_vars.json + _design_presets.json
@@ -41,17 +84,9 @@ DAW_bundle/
 │   ├── dataset.jsonl              <-    877 registros limpios con contenido real
 │   ├── PLAN.md, TASKS.md          <-    Arquitectura y tracking
 │   └── artifacts/                 <-    Scripts + modelos del DIE
-│       ├── visual_impact_engine.py<-       ⭐ VIE: generador determinístico (glass/glow/aura contextual)
-│       ├── design_intelligence.py <-       Orquestador DIE (ML pipeline)
-│       ├── design_director.py     <-       Stacking ensemble: clasificación + template + decoración
-│       ├── e_page_mapper.py       <-       Mapea planes → page-def (section/rows/columns/modules)
-│       ├── a_section_patterns.py  <-       Artefacto A: patrones de sección
-│       ├── b_slot_assigner.py     <-       Artefacto B2: Hungarian slot assigner
-│       ├── c_module_affinities.py <-       Artefacto C: afinidades PMI
-│       ├── d_content_classifier.py<-       Artefacto D: clasificador de contenido
-│       ├── e_decorator.py         <-       Artefacto E: K-means decoration clusters
+│       ├── visual_impact_engine.py<-       ⭐ SHIM: re-exports desde vie/ (backwards compat)
 │       ├── ux_pro_bridge.py       <-       Puente a ui-ux-pro-max (clasificador de estilo)
-│       ├── section-patterns.json  <-       Output A (18 tipos)
+│       ├── section-patterns.json  <-       Output A (18 tipos, del DIE archivado)
 │       ├── slot-catalog.pkl       <-       Output B2
 │       ├── module-affinities.json <-       Output C
 │       └── content-classifier.pkl <-       Output D
@@ -92,8 +127,12 @@ python DAW_bundle/workspace/build_design_system.py
 python DAW_bundle/workspace/daw_build.py --site $env:DAW_SITE --full --vie --prompt "descripción breve"
 
 # Alternativa: pipeline manual paso a paso
+#   Brief (UX-Pro deterministic — incluye design_direction automático)
+python DAW_bundle/workspace/automation/ux_pro_brief_generator.py --query "descripción breve" --out site/<DAW_SITE>/briefs/<slug>.json
+#   O brief con LLM (opcional: --llm en daw_build.py o usar generate_brief.py directamente)
 python DAW_bundle/workspace/automation/generate_brief.py --prompt "descripción breve" --tone editorial --out <slug>
-python DAW_bundle/ml-dataset/artifacts/design_intelligence.py --brief-file=DAW_bundle/site/<DAW_SITE>/briefs/<slug>.json --output=DAW_bundle/site/<DAW_SITE>/plans/<slug>.json
+#   VIE → plan.json
+python DAW_bundle/vie/cli.py --brief-file=DAW_bundle/site/<DAW_SITE>/briefs/<slug>.json --design-system=DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json --output=DAW_bundle/site/<DAW_SITE>/plans/<slug>.json
 .\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php --def=DAW_bundle/site/<DAW_SITE>/plans/<slug>.json --deploy
 ```
 
@@ -114,29 +153,23 @@ Capa 1 — Design System (build_design_system.py v4.0)
   → site/<DAW_SITE>/design-system/divitheme.json
     (54 presets enriquecidos: section/text/module/divider/animation/scroll/transform)
 
-Capa 2a — DIE → plan.json (RECOMENDADO)
-  python ml-dataset/artifacts/design_intelligence.py --brief-file=site/<DAW_SITE>/briefs/<slug>.json --output=site/<DAW_SITE>/plans/<slug>.json
+Capa 2a — VIE → plan.json (RECOMENDADO — pipeline activo)
+  python vie/cli.py --brief-file=site/<DAW_SITE>/briefs/<slug>.json --design-system=site/<DAW_SITE>/design-system/divitheme.json --output=site/<DAW_SITE>/plans/<slug>.json
 
-  design_intelligence.py (DIE v3.0) hace TODO en un solo proceso:
-    • Carga A+B+C+D+E como módulos Python (sin archivos intermedios)
-    • Lee brief JSON con tone, product_type, sections[]
-    • Clasifica cada sección con D (content classifier)
-    • Asigna templates globalmente con B2 (Hungarian + IDF + slot coverage F1)
-    • B2 parsea dataset.jsonl (slots_offered por extract.py con 9 slot types),
-      mapea slots_needed del brief via get_slots_needed_from_brief_section():
-      titles, paragraphs, buttons, images + listas discriminadas: features, testimonials, stats, logos, items
-      • Tie-breaker: +0.02 F1 si el template tiene el mismo nº de columnas que el esperado
-        (items → N columnas, hero/content split → 2 cols, resto → 1 col)
-      • Categorías desde embeddings.pkl + fallback keyword para 100% compatibilidad
-    • Fallback: B (semantic index legacy) si B2 no encuentra match
-    • Determina estructura de columnas con A (section patterns)
-    • Recomienda módulos complementarios con C (module affinities)
-    • Genera decoration blocks con E (decoration engine):
-      - Gradients, shadows, animations, hover/scroll effects
-      - Shape dividers, border-radius, masks
-      - Todo con tokens {{design:color:*}}, nunca hex
-    • Ensambla plan.json completo listo para build_page.php
-    • Output: plan.json sin PHP intermedio, listo para consumir
+  El Visual Impact Engine (VIE) es un generador determinístico (sin ML) que:
+    • Lee el brief JSON con secciones semánticas y design_direction opcional
+    • Analiza el perfil narrativo del contenido
+    • Selecciona bloques Divi 5 óptimos vía 4D scoring + matriz de armonía
+    • Construye decoration blocks contextuales: glass, glow, gradients, dividers
+    • Resuelve tokens {{design:color:*}} contra el design system
+    • Sin design_direction: usa presets fijos predefinidos (PATH B)
+    • Con design_direction: genera diseño calculado por mood (PATH A)
+
+Capa 2b — DIE → plan.json (ARCHIVADO — ver §4)
+  El pipeline DIE (ML: 877 templates, clasificador TF-IDF, Hungarian slot assigner)
+  fue archivado en _archive/die_pipeline/. No usar para páginas nuevas.
+  Los artefactos de datos (section-patterns.json, module-affinities.json, etc.)
+  permanecen en ml-dataset/artifacts/ como referencia.
 
 Capa 2b — Page Schema + Deploy (build_page.php — ÚNICO SCRIPT)
   php divi-agentic-core/bin/build_page.php --def=plans/mipagina.json --deploy
@@ -163,7 +196,7 @@ Capa 2b — Page Schema + Deploy (build_page.php — ÚNICO SCRIPT)
 
 | Carpeta | Rol | Quién escribe | Git |
 |---------|-----|---------------|-----|
-| `plans/` | **Entrada** — plan.json generado por el DIE con decoration blocks + estructura + tokens `{{design:*}}`. El pipeline lee de aquí. | DIE (`design_intelligence.py`) | Trackeado |
+| `plans/` | **Entrada** — plan.json generado por el VIE con decoration blocks + estructura + tokens `{{design:*}}`. El pipeline lee de aquí. | VIE (`vie/cli.py`) | Trackeado |
 | `pages/` | **Salida opcional** — Schema completo con tokens resueltos, presets expandidos inline. `build_page.php` genera esto solo si se pasa `--out`. NO es necesario para el deploy (`--deploy` trabaja en memoria). | `build_page.php` | Ignorado |
 
 > El flujo normal es `brief.json → DIE → plans/<slug>.json → build_page.php --deploy`. `pages/` existe únicamente para debug.
@@ -218,28 +251,86 @@ Estas clasificaciones se mapean a opciones Divi-nativas:
 
 ### frontend-design → principios de diseño
 
-`_FRONTEND_PRINCIPLES` en `DesignDirector` adapta las reglas del skill:
+`_FRONTEND_PRINCIPLES` en `ImpactDirector` adapta las reglas del skill:
 - **Typography**: penaliza fonts genéricos (Inter, Arial, Roboto) en scoring
 - **Motion**: delays progresivos de 150ms en animaciones
 - **Spacing**: padding mínimo de 80px (generous whitespace)
 - **Color**: prefiere alto contraste sobre paletas planas
 - **Aesthetic**: variantes más distintivas, no rotación genérica
 
+---
+
+## 3c. DesignDirector — Diseño Calculado por Perfil
+
+El VIE tiene dos caminos de diseño, bifurcados en `SectionBuilder.build()`:
+
+### PATH A — diseño calculado (con `design_direction`)
+
+Si el brief incluye un campo `design_direction`, el `DesignDirector` (`vie/design_director.py`)
+genera decisiones de diseño concretas a partir de 5 perfiles predefinidos (moods):
+
+| Mood | Fondo oscuro | Acento | Tipografía | Layout | Uso típico |
+|------|-------------|-------|-----------|--------|------------|
+| `academic_night` | `#0A0E1A` azul marino | `#C9A962` dorado antiguo | Crimson Pro + Space Grotesk | Asimétrico 2/5+3/5 | Campus, educación, institucional |
+| `cool_luxury` | `#1C1C1E` gris oscuro | `#0071E3` azul brillante | SF Pro + SF Mono | Centrado, espaciado generoso | SaaS premium, tecnología |
+| `warm_minimal` | `#1C1917` crema oscuro | `#C2410C` terracota | Palatino + Inter | Grid simétrico | Restaurantes, lifestyle |
+| `tech_glass` | `#0A0A0F` negro | `#00F0FF` cian neón | JetBrains Mono + Inter | Full-bleed, glassmorphism | Startups, tech |
+| `organic_modern` | `#1A2E1A` verde bosque | `#F5F5DC` crema | Cormorant Garamond + Inter | Grid masonry | Naturaleza, wellness |
+
+El `DesignProfile` generado incluye 30+ decisiones: colores (bg, texto, acento, divider),
+tipografía (display, body, UI), espaciado (hero, section, container), layout rhythm
+(centered, asymmetric, grid_3, masonry), motion (none, subtle, dramatic), dividers
+(curve, angle, arrow, wave), botones (filled/outline, radius, letter-spacing), y
+cards (glass, solid, outline, border-radius).
+
+### PATH B — presets fijos (comportamiento original)
+
+Sin `design_direction`, el VIE usa el comportamiento original: selecciona bloques del
+dataset, aplica presets predefinidos (`hero-dark`, `glass-card`, `cta-epic`) y genera
+el plan con decoration blocks genéricos. Este camino produce exactamente el mismo
+output que antes del refactor (verificado con `verify_regression.py`).
+
+### Cómo usar
+
+En el brief JSON, añadir el campo `design_direction`:
+
+```json
+{
+  "title": "Nuestros Planteles",
+  "slug": "nuestros-planteles",
+  "design_direction": {
+    "mood": "academic_night",
+    "color_temperature": "warm_on_dark",
+    "typography_style": "serif_display_plus_sans_ui",
+    "layout_rhythm": "dramatic_asymmetric",
+    "spacing_density": "generous",
+    "accent_material": "gold_antique",
+    "motion_intensity": "subtle_parallax"
+  },
+  "sections": [...]
+}
+```
+
+El VIE detecta `design_direction` en `engine.py:56` y recrea el `SectionBuilder` con
+el profile correspondiente. Todas las secciones se construyen con PATH A.
+
 ### Flujo
 
 ```
-brief.json → design_intelligence.py
-  → director._classify_page_style(tone, product_type)
-      → UXProBridge.classify() → {variant_hint, atmosphere_hint, ...}
-  → director.compose_page(brief, sections)
-      → usa variant_hint → variante preferida en variant_map
-      → usa atmosphere_hint → atmósfera en decoration
-  → director.generate_section_plan()
-      → decide_decoration()
-          → recommend_typography() penaliza fonts genéricos
-          → _apply_design_inspiration() usa animation_profile,
-              contrast_level, effects_tags como hints internos
-          → NO inyecta hex, font names ni CSS al output
+brief.json (con o sin design_direction)
+  │
+  ├─ sin design_direction → VIE (PATH B)
+  │     → SectionBuilder.build()
+  │         → ImpactDirector.select_block() → blocks + presets
+  │         → plan.json con decoration genérica
+  │
+  └─ con design_direction → VIE (PATH A)
+        → engine.py: detecta design_direction
+        → SectionBuilder(pass design_direction)
+            → DesignDirector.get_profile(mood) → DesignProfile
+            → SectionBuilder._build_designer_section()
+                → get_hero_decoration(), get_features_decoration(), ...
+                → plan.json con diseño calculado
 ```
 
 ### Regla fundamental
@@ -253,7 +344,7 @@ brief.json → design_intelligence.py
 | Archivo | Rol |
 |---------|-----|
 | `ml-dataset/artifacts/ux_pro_bridge.py` | Clasificador: `UXProBridge.classify()` retorna solo clasificaciones Divi-nativas |
-| `ml-dataset/artifacts/design_director.py` | `_classify_page_style()`, `_apply_design_inspiration()`, `_FRONTEND_PRINCIPLES` |
+| `vie/design_director.py` | `DesignDirector`: 5 moods predefinidos + helpers decoration (PATH A) |
 | `~/.agents/skills/ui-ux-pro-max/scripts/` | Fuente: DesignSystemGenerator (BM25 sobre 5 dominios CSV) |
 | `~/.agents/skills/frontend-design/SKILL.md` | Principios de diseño (leídos como inspiración, no como código) |
 
@@ -271,7 +362,7 @@ UX-Pro Brief Generator  →  Brief JSON  →  VIE v3.0  →  build_page.php --de
 |------|------------------|-------|--------|
 | 0. Brand + Design System* | `workspace/brand_generator.py` → `workspace/build_design_system.py` | Color, nombre, tone | `site/<DAW_SITE>/brand/` + `design-system/divitheme.json` |
 | 1. Brief | `workspace/automation/ux_pro_brief_generator.py --query "..."` | Query semántico | `site/<DAW_SITE>/briefs/<slug>.json` |
-| 2. Plan | `ml-dataset/artifacts/visual_impact_engine.py --brief-file ... --design-system ...` | Brief JSON + Design System | `site/<DAW_SITE>/plans/<slug>.json` RICO |
+| 2. Plan | `vie/cli.py --brief-file ... --design-system ...` (o `python -m vie.cli`) | Brief JSON + Design System | `site/<DAW_SITE>/plans/<slug>.json` RICO |
 | 3. Deploy | `divi-agentic-core/bin/build_page.php --def=... --deploy` | Plan JSON | Página WP viva |
 
 **VIE v3.0 — Arquitectura de 3 capas (determinística, sin LLMs):**
@@ -310,32 +401,38 @@ Catálogo Divi   Dataset diviplus   Brand vars
 ```powershell
 # 0. (una vez por marca) Brand + Design System
 python DAW_bundle/workspace/brand_generator.py `
-  --site aletheia `
-  --name "Aletheia Institute" `
-  --accent "#CA8A04" `
-  --tone luxury
+  --site <DAW_SITE> `
+  --name "<Brand Name>" `
+  --accent "<#hex>" `
+  --tone luxury  # luxury|tech|organic|minimal
 
 python DAW_bundle/workspace/build_design_system.py
 
 # Sincronizar colores globales
 .\wp.bat agentic global_colors sync `
-  --design-system="DAW_bundle/site/aletheia/design-system/divitheme.json"
+  --design-system="DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json"
 
 # 1. Generar brief rico desde UX-Pro
 python DAW_bundle/workspace/automation/ux_pro_brief_generator.py `
   --query "about us" `
-  --out DAW_bundle/site/aletheia/briefs/about-us.json
+  --out DAW_bundle/site/<DAW_SITE>/briefs/<slug>.json
 
 # 2. Brief → Plan (VIE v3.0 — determinístico, catálogo + dataset)
-python DAW_bundle/ml-dataset/artifacts/visual_impact_engine.py `
-  --brief-file="DAW_bundle/site/aletheia/briefs/about-us.json" `
-  --design-system="DAW_bundle/site/aletheia/design-system/divitheme.json" `
-  --output="DAW_bundle/site/aletheia/plans/about-us.json" `
+python DAW_bundle/vie/cli.py `
+  --brief-file="DAW_bundle/site/<DAW_SITE>/briefs/<slug>.json" `
+  --design-system="DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json" `
+  --output="DAW_bundle/site/<DAW_SITE>/plans/<slug>.json" `
   --evaluate  # opcional: muestra impact score
+
+# 2b. (equivalente — el monolito original es ahora un shim que re-exporta desde vie/)
+python DAW_bundle/ml-dataset/artifacts/visual_impact_engine.py `
+  --brief-file="DAW_bundle/site/<DAW_SITE>/briefs/<slug>.json" `
+  --design-system="DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json" `
+  --output="DAW_bundle/site/<DAW_SITE>/plans/<slug>.json"
 
 # 3. Plan → WordPress
 .\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php `
-  --def=DAW_bundle/site/aletheia/plans/about-us.json `
+  --def=DAW_bundle/site/<DAW_SITE>/plans/<slug>.json `
   --deploy
 ```
 
@@ -355,14 +452,14 @@ python DAW_bundle/workspace/daw_build.py `
 ### Pipeline Activo: VIE (Determinístico) — Recomendado
 
 ```
-Site/UX-Pro BM25  →  Brief JSON (riche)  →  VIE v2.0  →  build_page.php --deploy
+Site/UX-Pro BM25  →  Brief JSON (riche)  →  VIE v3.0 (vie/)  →  build_page.php --deploy
 ```
 
 | Paso | Script | Output |
 |------|--------|--------|
 | 1. Brand + Design System | `workspace/brand_generator.py` + `workspace/build_design_system.py` | `site/<DAW_SITE>/brand/` + `design-system/divitheme.json` |
 | 2. Brief | `workspace/automation/ux_pro_brief_generator.py --query "..."` | `site/<DAW_SITE>/briefs/<slug>.json` |
-| 3. Plan | `ml-dataset/artifacts/visual_impact_engine.py --brief-file ...` | `site/<DAW_SITE>/plans/<slug>.json` |
+| 3. Plan | `vie/cli.py --brief-file ...` (preferred) | `site/<DAW_SITE>/plans/<slug>.json` |
 | 4. Deploy | `divi-agentic-core/bin/build_page.php --def=... --deploy` | Página WP viva |
 
 ### Pipeline Legacy: DIE (ML) — Archivado
@@ -519,28 +616,26 @@ Si no hay gcids sincronizados, `deploy_page` emite warning y resuelve a hex.
 | Diccionario de bloques | `daw-skill/references/blocks-dictionary.md` | Guía de 102 módulos Divi 5 |
 | Lógica del Diseñador | `daw-skill/references/designer.md` | Mapeo semántico → bloques, tokens, decoration |
 | Lógica del Ingeniero | `daw-skill/references/engineer.md` | Comandos CLI, deploy, verificación |
-| DIE (Design Intelligence Engine) | `ml-dataset/artifacts/design_intelligence.py` | ⭐ A+B+C+D+E: brief → plan.json con decoration blocks |
 | Build page | `divi-agentic-core/bin/build_page.php` | Único script PHP: lee plan → resuelve tokens → deploy (usa `DAW_SITE` env) |
-| Decoration Engine | `ml-dataset/artifacts/e_decorator.py` | ⭐ K-means sobre 877 templates + 4 CSVs → decoration blocks |
 | Design system (generado) | `site/<DAW_SITE>/design-system/divitheme.json` | 64 presets, fuente de verdad de tokens |
 | Variables de entrada | `site/<DAW_SITE>/brand/_design_vars.json` | Colores, fonts, radios, espacio |
 | Presets de diseño | `site/<DAW_SITE>/brand/_design_presets.json` | 64 presets (section/text/module/divider/animation/scroll/hover) |
 | Definiciones de página | `site/<DAW_SITE>/page-defs/` | JSON de entrada (home.json, about.json...) |
-| Briefs de diseño | `site/<DAW_SITE>/briefs/` | YAML de entrada para el orquestador |
+| Briefs de diseño | `site/<DAW_SITE>/briefs/` | JSON de entrada para el orquestador (ej: home.json) |
 | Templates de sección | `workspace/sections/` | _base.section.json + *.variant.json + catalog/*.section.json |
-| Catálogo de templates | `workspace/sections/catalog/` | 877 templates compilados como .section.json (usados por DIE) |
+| Catálogo de templates | `workspace/sections/catalog/` | 877 templates compilados como .section.json |
 | Patrones de diseño | `ml-dataset/artifacts/section-patterns.json` | 18 tipos de sección, composición + module affinity |
-| DIE — Design Intelligence Engine | `ml-dataset/artifacts/design_intelligence.py` | ⭐ Orquestador ML: clasifica + busca + recomienda + decora (A+B+C+D+E) |
-| DIE — Artefacto A | `ml-dataset/artifacts/a_section_patterns.py` | Patrones estructurales de 877 templates |
-| DIE — Artefacto B2 | `ml-dataset/artifacts/b_slot_assigner.py` | Hungarian + IDF + col tie-breaker: 9 slot types, 877 templates, 18 categorías |
-| DIE — Artefacto C | `ml-dataset/artifacts/c_module_affinities.py` | Matriz PMI de co-ocurrencia de módulos |
-| DIE — Artefacto D | `ml-dataset/artifacts/d_content_classifier.py` | Clasificador TF-IDF + Naive Bayes (98.2% acc) |
-| DIE — Artefacto E | `ml-dataset/artifacts/e_decorator.py` | Decoration Engine: K-means clusters + 4 CSVs → decoration blocks |
-| VIE (Visual Impact Engine) | `ml-dataset/artifacts/visual_impact_engine.py` | ⭐ Generador determinístico contextual: glass/glow/aura por tipo de sección |
+| VIE (Visual Impact Engine) | `vie/` (package) | ⭐ Generador determinístico contextual: glass/glow/aura por tipo de sección. Entry: `python -m vie.cli` |
+| VIE — DesignDirector | `vie/design_director.py` | ⭐ 5 moods predefinidos (academic_night, cool_luxury, warm_minimal, tech_glass, organic_modern) + helpers decoration |
+| VIE — shim legacy | `ml-dataset/artifacts/visual_impact_engine.py` | Backwards-compat shim (1,480L → 50L) desde `vie/`. Conserva la API antigua. |
+| VIE — sección handlers | `vie/handlers/` | ⭐ Registry OCP: 12 handlers. Añadir section_type = 1 archivo. |
+| VIE — estrategias | `vie/strategies/` | StrategyProfile (datos + predicates). 5 impls: cool-luxury, warm-luxury, tech-glass, minimal, organic. |
+| Shared Kernel | `daw/` | Capa 1: cfg, types, tokens, constants, exc. Sin side effects al importar. |
 | Brand Generator | `workspace/brand_generator.py` | Genera _design_vars.json + _design_presets.json desde CLI |
-| Orquestador | `workspace/daw_build.py` | ⭐ Un comando: brand → design → brief → VIE/DIE → deploy |
+| Orquestador | `workspace/daw_build.py` | ⭐ Un comando: brand → design → brief → VIE → deploy |
 | UXProBridge | `ml-dataset/artifacts/ux_pro_bridge.py` | Puente a ui-ux-pro-max: color, tipografía, patrones, efectos |
-| Dataset DIE | `ml-dataset/dataset.jsonl` | 877 registros limpios con contenido real |
+| Dataset DIE | `ml-dataset/dataset.jsonl` | 877 registros (archivado, sólo referencia) |
+| DIE pipeline (archivado) | `_archive/die_pipeline/` | 8 scripts: design_intelligence.py, a_section_patterns.py, b_slot_assigner.py, c_module_affinities.py, d_content_classifier.py, e_decorator.py, e_page_mapper.py, design_director.py |
 | Plugin WordPress | `divi-agentic-core/` | Layout Engine, CLI, metadata |
 
 ---
@@ -552,23 +647,28 @@ Cada tipo de archivo tiene su carpeta asignada. No crear archivos fuera de su ub
 | Carpeta | Contenido |
 |---------|-----------|
 | `site/<DAW_SITE>/brand/` | ⭐ Datos de marca: `_design_vars.json` + `_design_presets.json` |
-| `site/<DAW_SITE>/plans/` | ⭐ plan.json generado por DIE (entrada de build_page.php) |
+| `site/<DAW_SITE>/plans/` | ⭐ plan.json generado por VIE (entrada de build_page.php) |
 | `site/<DAW_SITE>/pages/` | Schemas resueltos (output opcional de `build_page.php --out`, solo para debug/inspección) |
 | `site/<DAW_SITE>/design-system/` | `divitheme.json` generado (output, gitignored) |
-| `site/<DAW_SITE>/briefs/` | ⭐ Briefs YAML de diseño (entrada del orquestador) |
-| `site/<DAW_SITE>/compositions/` | (legacy — eliminado, usar plans/) |
+| `site/<DAW_SITE>/briefs/` | ⭐ Briefs JSON de diseño (entrada del orquestador) |
+| ~~`site/<DAW_SITE>/compositions/`~~ | ❌ Eliminado (usar `plans/`) |
 | `site/<DAW_SITE>/content_state/` | Estado de contenido entre fases (local/ + remote/) |
 | `site/example/` | Template de estructura para nuevas marcas |
+| `daw/` | ⭐ Shared kernel (capa 1). `cfg.py` (`.env` parser único), `types.py` (Enums), `tokens.py` (TokenResolver), `constants.py` (FRONTEND_PRINCIPLES + CONTENT_BANK), `exc.py`. Sin side effects al importar. |
+| `vie/` | ⭐ Visual Impact Engine package (capa 2). 13 módulos: `engine.py`, `factory.py`, `cli.py`, `protocols.py`, `adapters.py`, `resolver.py`, `analysis.py`, `selection.py`, `director.py`, `building.py`, `module.py`, `section.py`, `design_director.py`. |
+| `vie/handlers/` | ⭐ SectionHandler registry (OCP). 12 handlers (1 archivo cada uno). Para añadir un section_type nuevo = crear archivo + añadir 1 import. |
+| `vie/strategies/` | StrategyProfile: cool-luxury, warm-luxury, tech-glass, minimal, organic. |
 | `workspace/sections/` | ⭐ Templates de sección con variantes de decoración |
-| `workspace/sections/catalog/` | 877 templates del catálogo compilados como .section.json (usados por DIE) |
-| `ml-dataset/artifacts/section-patterns.json` | ⭐ Output A: 18 tipos de sección |
+| `workspace/sections/catalog/` | 877 templates compilados como .section.json (referencia histórica) |
+| `ml-dataset/artifacts/section-patterns.json` | Output A del DIE archivado: 18 tipos de sección |
 | `workspace/data/modules/` | Schemas de módulos Divi 5 (103, generados por PHP) |
 | `workspace/automation/` | Scripts de automatización |
-| `workspace/daw_build.py` | ⭐ Orquestador unificado: brand → design → brief → VIE/DIE → deploy |
+| `workspace/daw_build.py` | ⭐ Orquestador unificado: brand → design → brief → VIE → deploy |
 | `workspace/brand_generator.py` | Generador automático de brand files desde CLI |
 | `workspace/build_design_system.py` | Visual Intelligence Engine v4.0 (CIELCH, glass/glow/aura) |
-| `ml-dataset/` | ⭐ Dataset + artefactos ML del DIE |
-| `ml-dataset/artifacts/` | Scripts + modelos del DIE (A, B, C, D + orquestador) |
+| `ml-dataset/` | Dataset + artefactos ML del DIE (archivado, solo referencia) |
+| `ml-dataset/artifacts/` | Outputs de datos del DIE: section-patterns.json, module-affinities.json, etc. |
+| `_archive/die_pipeline/` | ⚠️ Pipeline ML archivado: design_intelligence.py + artefactos A/B/C/D/E |
 | `divi-agentic-core/bin/` | ⭐ build_page.php + verify_page.php + generate-module-schema (orquestador eliminado) |
 | `daw-skill/` | Skill de orquestación y sus referencias |
 | `divi-agentic-core/` | Plugin WordPress |
@@ -585,15 +685,15 @@ Cada tipo de archivo tiene su carpeta asignada. No crear archivos fuera de su ub
 # 1. Generar brand files automáticamente desde CLI
 #    El motor detecta estrategia visual desde color_accent + brand_name
 python DAW_bundle/workspace/brand_generator.py `
-  --site minuevamarca `
-  --name "Mi Nueva Marca" `
-  --accent "#CA8A04" `
-  --tone luxury  `# opcional: luxury|tech|organic|minimal`
+  --site <nueva-marca> `
+  --name "<Brand Name>" `
+  --accent "<#hex>" `
+  --tone luxury  # luxury|tech|organic|minimal
 
 # 2. (Opcional) Crear DESIGN.md con YAML frontmatter para control avanzado
 #    El generador puede leer tokens semánticos desde markdown estructurado
 python DAW_bundle/workspace/brand_generator.py `
-  --from-design DAW_bundle/site/minuevamarca/DESIGN.md
+  --from-design DAW_bundle/site/<nueva-marca>/DESIGN.md
 
 # 3. Generar design system (usa los brand files generados automáticamente)
 python DAW_bundle/workspace/build_design_system.py
@@ -605,10 +705,10 @@ python DAW_bundle/workspace/build_design_system.py
 
 ```powershell
 # 1. Copiar template de ejemplo (incluye 64 presets premium pre-cargados)
-Copy-Item -Recurse DAW_bundle/site/example DAW_bundle/site/minuevamarca
+Copy-Item -Recurse DAW_bundle/site/example DAW_bundle/site/<nueva-marca>
 
 # 2. Editar identidad visual manualmente en:
-#      site/minuevamarca/brand/_design_vars.json
+#      site/<nueva-marca>/brand/_design_vars.json
 #    Ver site/example/brand/_design_vars.json como referencia.
 
 # 3. Generar design system
@@ -627,9 +727,10 @@ python DAW_bundle/workspace/automation/generate_brief.py `
   --prompt "pagina principal de mi nueva marca" `
   --tone editorial
 
-# DIE → plan.json → build + deploy
-python DAW_bundle/ml-dataset/artifacts/design_intelligence.py `
+# VIE → plan.json → build + deploy
+python DAW_bundle/vie/cli.py `
   --brief-file=site/<DAW_SITE>/briefs/home.json `
+  --design-system=site/<DAW_SITE>/design-system/divitheme.json `
   --output=site/<DAW_SITE>/plans/home.json
 .\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php `
   --def=site/<DAW_SITE>/plans/home.json --deploy
@@ -646,45 +747,45 @@ python DAW_bundle/ml-dataset/artifacts/design_intelligence.py `
 #   Segunda vez: salta brand + design system (stale detection)
 #   Usa Visual Impact Engine (deterministic, glass/glow/aura)
 python DAW_bundle/workspace/daw_build.py `
-  --site aletheia `
-  --name "Aletheia Institute" `
-  --accent "#CA8A04" `
+  --site <DAW_SITE> `
+  --name "<Brand Name>" `
+  --accent "<#hex>" `
   --tone luxury `
   --full --vie `
-  --prompt "home page for biohacking institute"
+  --prompt "descripción de la página"
 
 # Alternativa: usar ML DIE (template selection + ML)
 python DAW_bundle/workspace/daw_build.py `
-  --site aletheia `
+  --site <DAW_SITE> `
   --full `
-  --prompt "home page for biohacking institute"
+  --prompt "descripción de la página"
 
 # Solo brand + design system (sin deploy)
 python DAW_bundle/workspace/daw_build.py `
-  --site aletheia `
-  --name "Aletheia Institute" `
-  --accent "#CA8A04" `
+  --site <DAW_SITE> `
+  --name "<Brand Name>" `
+  --accent "<#hex>" `
   --tone luxury
 
 # Después de que brand existe: solo generar páginas
 python DAW_bundle/workspace/daw_build.py `
-  --site aletheia `
+  --site <DAW_SITE> `
   --full `
   --prompt "contact page"
 
 # Forzar regeneración de design system (después de editar brand files)
 python DAW_bundle/workspace/daw_build.py `
-  --site aletheia `
+  --site <DAW_SITE> `
   --force-design-system `
   --full --prompt "about page"
 ```
 
 # Forzar regeneración de brand files existentes
 python DAW_bundle/workspace/daw_build.py `
-  --site aletheia `
+  --site <DAW_SITE> `
   --regenerate `
-  --name "Aletheia Institute" `
-  --accent "#CA8A04" `
+  --name "<Brand Name>" `
+  --accent "<#hex>" `
   --tone luxury
 ```
 
@@ -703,19 +804,73 @@ python DAW_bundle/workspace/daw_build.py `
 6. Sin CSS inyectado en `functions.php` ni overrides en `style.css`.
 7. Posiciones de gradient sin `%` (el Layout Engine normaliza).
 8. **Frontera site/**: todo dato de proyecto va en `site/<DAW_SITE>/`. El framework DAW (skills, plugin, build scripts) no contiene datos de proyecto.
-9. **Pipeline de página**: `brief.json → DIE/VIE → plans/<slug>.json → build_page.php --deploy` → página en WP.
-10. **VIE (Visual Impact Engine)**: Generador determinístico recomendado. Aplica glass/glow/aura contextual por tipo de sección. Usar con `--vie` en el orquestador.
-11. **DIE (ML)**: Disponible como alternativa. Selecciona templates con B2 (Hungarian slot assigner + 9 slot types + column tie-breaker). La decoración la genera E.
+9. **Pipeline de página**: `brief.json → VIE → plans/<slug>.json → build_page.php --deploy` → página en WP.
+10. **VIE (Visual Impact Engine)**: Generador determinístico. Usar `--vie` en el orquestador o `python vie/cli.py` directamente.
+11. **DIE (ML)**: Archivado en `_archive/die_pipeline/`. No usar para páginas nuevas. Los artefactos de datos quedan como referencia.
 12. **Multi-marca**: definir `DAW_SITE=<nombre>` en `.env` (raíz del proyecto). Sin esta variable, el pipeline se detiene con error.
 13. **Artefactos one-shot**: `divitheme.json`, `_design_vars.json`, `_design_presets.json` se generan una sola vez por marca. El orquestador detecta staleness automáticamente.
-14. **Catálogo de templates**: `workspace/sections/catalog/*.section.json` contiene 877 templates compilados para el DIE.
+14. **Catálogo de templates**: `workspace/sections/catalog/*.section.json` contiene 877 templates (referencia histórica, no activo).
 15. **Sin fallbacks silenciosos**: Si `DAW_SITE` no está definido, el pipeline falla inmediatamente. No se usan marcas por defecto (`bibliotheca`, `aletheia`).
+16. **VIE — añadir section_type**: crear `vie/handlers/<tipo>.py` con `@register("<tipo>")` + import en `vie/handlers/__init__.py`. **No** tocar `SectionBuilder._build_rows()` (es registry-backed, OCP).
+17. **VIE — añadir estrategia**: agregar profile en `vie/strategies/__init__.py` (`COOL_LUXURY_PROFILE = {...}`) y registrar en `_PROFILE_BY_STRATEGY`. **No** agregar `if "X" in strategy` en código de aplicación.
+18. **Shared kernel**: toda nueva dependencia cross-cutting (config, types, tokens) va en `daw/`. No duplicar `.env` parsers ni TokenResolvers.
+19. **DesignDirector**: usar `design_direction` en el brief para activar PATH A (diseño calculado por mood). Sin ella, PATH B preserva el comportamiento original. 5 moods: `academic_night`, `cool_luxury`, `warm_minimal`, `tech_glass`, `organic_modern`.
 
 ---
 
-## 9. Generador de Briefs Inteligente (generate_brief.py)
+## 8b. Arquitectura en Capas (post-refactor)
 
-El script `generate_brief.py` en `DAW_bundle/workspace/automation/` automatiza el primer paso del flujo de trabajo, traduciendo requerimientos en lenguaje natural de los usuarios a briefs estructurados YAML.
+El DAW_bundle está organizado en 3 capas con un **Shared Kernel**:
+
+```
+┌──────────────────────────────────────────────────────────────────────┐
+│ CAPA 3 — CLI / Orquestador                                          │
+│   workspace/daw_build.py · workspace/brand_generator.py             │
+│   workspace/build_design_system.py · vie/cli.py                     │
+│   workspace/automation/{ux_pro,m}_brief_generator.py                 │
+│   divi-agentic-core/bin/build_page.php (PHP — único subprocess real)│
+├──────────────────────────────────────────────────────────────────────┤
+│ CAPA 2 — Aplicación                                                  │
+│   vie/                — Visual Impact Engine (13 módulos)            │
+│   └── vie/handlers/   — SectionHandler registry (OCP, 12 entries)   │
+│   └── vie/strategies/ — StrategyProfile (5 implementaciones)         │
+│   └── vie/design_director.py — DesignDirector (5 moods PATH A)      │
+│   (dsgn/, briefgen/ son ROADMAP — ver PLAN §5.3; no implementados)  │
+├──────────────────────────────────────────────────────────────────────┤
+│ CAPA 1 — Shared Kernel (sin side effects al importar)               │
+│   daw/cfg.py       — load_daw_site(), get_*_dir(), .env parser       │
+│   daw/types.py     — SectionType, Strategy (Enums str-based)         │
+│   daw/tokens.py    — TokenResolver (recursivo, único)                │
+│   daw/constants.py — FRONTEND_PRINCIPLES, CONTENT_BANK               │
+│   daw/exc.py       — DawError, ConfigError, etc.                     │
+└──────────────────────────────────────────────────────────────────────┘
+```
+
+**Reglas de dependencia:** capa N puede importar de capa N-1 y N-2, nunca de capa N+1. En particular:
+- Capa 3 importa de Capa 2 y Capa 1 (ej: `daw_build.py → vie.factory.create_vie()` y `daw.cfg.load_daw_site()`).
+- Capa 2 importa de Capa 1 (ej: `vie.resolver.BrandResolver → daw.tokens.TokenResolver`).
+- Capa 1 **no** importa de Capa 2 ni de Capa 3. Test: `python -c "import daw"` debe ser silencioso (sin .env, sin sys.exit, sin stdout).
+
+**Estado real vs roadmap:**
+- ✅ Implementado: `daw/` (shared kernel), `vie/` (engine), `vie/handlers/` (registry), `vie/strategies/` (profiles).
+- 📋 Roadmap: `dsgn/` (extraer lógica de `workspace/build_design_system.py` a paquete) y `briefgen/` (extraer lógica de `workspace/automation/{ux_pro,m}_brief_generator.py`). No hay tareas abiertas para esto en TASKS_RESOLVE_ANTIPATRONES.md; son ideas de una futura iteración del refactor.
+
+**Beneficios medibles del refactor (PLAN_RESOLVE_ANTIPATRONES.md):**
+- `_load_daw_site()`: 3 implementaciones → 1
+- Parsers de `.env`: 6 implementaciones → 1
+- Token resolvers: 3 implementaciones → 1
+- Switch de section types (12 casos): → registry OCP
+- `visual_impact_engine.py`: 1,480 L monolito → 13 módulos (<350 L c/u) + shim legacy de 50 L
+- `import daw` y `import vie` son silenciosos (no leen `.env`, no `sys.exit()`, no stdout)
+
+Verificación de regresión: `python _tools/verify_regression.py --seed 42` debe producir `0ba2d6e76ea62607942064b982c85694` byte-idéntico al baseline (ejecutar desde raíz del proyecto).
+
+---
+
+## 9. Generador de Briefs por LLM (generate_brief.py — opcional)
+
+El script `generate_brief.py` en `DAW_bundle/workspace/automation/` es el **generador opcional por LLM**. Por defecto se usa `ux_pro_brief_generator.py` (determinístico, BM25, incluye `design_direction` automático).
+Para usar el LLM, pasar `--llm` en `daw_build.py` o ejecutar `generate_brief.py` directamente.
 
 ### Características y Operación:
 0. **Brand-Aware (nuevo)**: Lee `DAW_SITE` del entorno y construye el `SYSTEM_PROMPT` dinámicamente desde `site/<DAW_SITE>/brand/_design_vars.json`. Si no encuentra vars de marca, usa un prompt genérico premium. Los briefs se guardan en `site/<DAW_SITE>/briefs/`.
@@ -730,7 +885,7 @@ El script `generate_brief.py` en `DAW_bundle/workspace/automation/` automatiza e
 3. **Bypass de Bloqueos Cloudflare**: Envía un User-Agent de navegador para evitar errores `403 Forbidden (error 1010)` al conectarse a APIs como Groq.
 4. **Auto-Mapeo de Modelos Deprecados**: Traduce automáticamente modelos antiguos de Groq (como `llama3-8b-8192`) a sus sucesores activos (`llama-3.1-8b-instant`).
 5. **Modo Interactivo**: Si no pasas `--prompt`, te solicitará el requerimiento directamente en la consola interactiva.
-6. **Limpieza de Preámbulo de IA**: Limpia el output eliminando explicaciones conversacionales previas y posteriores al bloque YAML.
+6. **Limpieza de Preámbulo de IA**: Limpia el output eliminando explicaciones conversacionales previas y posteriores al bloque JSON.
 
 ### Ejemplos de Comandos:
 ```powershell
