@@ -157,6 +157,18 @@ class Layout_Engine {
                 }
                 $bg_val =& $attrs['module']['decoration']['background']['desktop']['value'];
 
+                // Normalize: VIE puts gradient in overlay.gradient (CSS string), but Divi 5
+                // expects gradient as a structured object {type, direction, stops, overlaysImage}.
+                if ( isset( $bg_val['overlay']['gradient'] ) && is_string( $bg_val['overlay']['gradient'] ) ) {
+                    $gradient_str = $bg_val['overlay']['gradient'];
+                    $parsed = self::parse_css_gradient( $gradient_str );
+                    if ( $parsed ) {
+                        $parsed['overlaysImage'] = 'on';
+                        $bg_val['gradient'] = $parsed;
+                    }
+                    unset( $bg_val['overlay'] );
+                }
+
                 // Shorthand: background_image key in schema root
                 if ( ! empty( $data['background_image'] ) ) {
                     $bg_val['image'] = [
@@ -279,7 +291,7 @@ class Layout_Engine {
                 // Fix: divi/heading needs title.innerContent + headingLevel for Divi 5
                 if ( $slug === 'divi/heading' && isset( $data['content'] ) ) {
                     $heading_text = $data['content'];
-                    $heading_level = 'h2';
+                    $heading_level = $data['level'] ?? 'h2';
                     if ( preg_match( '/<h([1-6])>/', $heading_text, $m ) ) {
                         $heading_level = 'h' . $m[1];
                         $heading_text = strip_tags( $heading_text );
@@ -288,6 +300,19 @@ class Layout_Engine {
                     }
                     $attrs['title']['innerContent'] = [ 'desktop' => [ 'value' => $heading_text ] ];
                     $attrs['title']['decoration']['font']['font']['desktop']['value']['headingLevel'] = $heading_level;
+                }
+
+                // Fix: VIE puts font in module.decoration.font, but Divi 5 expects:
+                //   divi/text    → content.decoration.bodyFont
+                //   divi/heading → title.decoration.font.font
+                $font_src = $attrs['module']['decoration']['font'] ?? null;
+                if ( $font_src ) {
+                    if ( $slug === 'divi/text' ) {
+                        $attrs['content']['decoration']['bodyFont'] = $font_src;
+                    } elseif ( $slug === 'divi/heading' ) {
+                        $attrs['title']['decoration']['font']['font'] = $font_src;
+                    }
+                    unset( $attrs['module']['decoration']['font'] );
                 }
             }
 
@@ -346,19 +371,33 @@ class Layout_Engine {
                             $state      = 'hover';
                         }
                         
+                        $val = $vals; // shorthand
+
                         // 1. Background Color
-                        if ( isset( $vals['backgroundColor'] ) ) {
-                            $target_dec['background'][ $breakpoint ][ $state ]['color'] = $vals['backgroundColor'];
+                        if ( isset( $val['backgroundColor'] ) ) {
+                            $target_dec['background'][ $breakpoint ][ $state ]['color'] = $val['backgroundColor'];
                         }
-                        
-                        // 2. Text Color
-                        if ( isset( $vals['textColor'] ) ) {
-                            $target_dec['font']['font'][ $breakpoint ][ $state ]['color'] = $vals['textColor'];
+
+                        // 2. Text Color (accept both 'color' (VIE) and 'textColor')
+                        $btn_color = $val['textColor'] ?? $val['color'] ?? null;
+                        if ( $btn_color !== null ) {
+                            $target_dec['font']['font'][ $breakpoint ][ $state ]['color'] = $btn_color;
                         }
-                        
+
+                        // 2b. Hover state from VIE's hover-prefixed keys in desktop.value
+                        if ( $state_key === 'desktop' ) {
+                            if ( isset( $val['hoverBackgroundColor'] ) ) {
+                                $target_dec['background']['desktop']['hover']['color'] = $val['hoverBackgroundColor'];
+                            }
+                            $hover_color = $val['hoverColor'] ?? $val['hoverTextColor'] ?? null;
+                            if ( $hover_color !== null ) {
+                                $target_dec['font']['font']['desktop']['hover']['color'] = $hover_color;
+                            }
+                        }
+
                         // 3. Border Radius
-                        if ( isset( $vals['borderRadius'] ) ) {
-                            $rad = $vals['borderRadius'];
+                        if ( isset( $val['borderRadius'] ) ) {
+                            $rad = $val['borderRadius'];
                             $target_dec['border'][ $breakpoint ][ $state ]['radius'] = [
                                 'topLeft'     => $rad,
                                 'topRight'    => $rad,
@@ -367,10 +406,10 @@ class Layout_Engine {
                                 'sync'        => 'on'
                             ];
                         }
-                        
-                        // 4. Padding
-                        if ( isset( $vals['padding'] ) ) {
-                            $pad = $vals['padding'];
+
+                        // 4. Padding (accept both object and string)
+                        if ( isset( $val['padding'] ) ) {
+                            $pad = $val['padding'];
                             if ( is_string( $pad ) ) {
                                 $parts = preg_split( '/\s+/', trim( $pad ) );
                                 if ( count( $parts ) === 2 ) {
@@ -401,43 +440,42 @@ class Layout_Engine {
                                 $target_dec['spacing'][ $breakpoint ][ $state ]['padding'] = $pad;
                             }
                         }
-                        
-                        // 5. Font Styles (family, weight, size, letterSpacing, textTransform)
-                        if ( isset( $vals['fontFamily'] ) ) {
-                            $target_dec['font']['font'][ $breakpoint ][ $state ]['fontFamily'] = $vals['fontFamily'];
+
+                        // 5. Font Styles (VIE uses 'font' and 'size'; handler expects 'fontFamily'/'fontSize')
+                        $btn_family = $val['fontFamily'] ?? $val['font'] ?? null;
+                        if ( $btn_family !== null ) {
+                            $target_dec['font']['font'][ $breakpoint ][ $state ]['fontFamily'] = $btn_family;
                         }
-                        if ( isset( $vals['fontWeight'] ) ) {
-                            $target_dec['font']['font'][ $breakpoint ][ $state ]['fontWeight'] = $vals['fontWeight'];
+                        if ( isset( $val['fontWeight'] ) ) {
+                            $target_dec['font']['font'][ $breakpoint ][ $state ]['fontWeight'] = $val['fontWeight'];
                         }
-                        if ( isset( $vals['fontSize'] ) ) {
-                            $target_dec['font']['font'][ $breakpoint ][ $state ]['size'] = $vals['fontSize'];
+                        $btn_size = $val['fontSize'] ?? $val['size'] ?? null;
+                        if ( $btn_size !== null ) {
+                            $target_dec['font']['font'][ $breakpoint ][ $state ]['size'] = $btn_size;
                         }
-                        if ( isset( $vals['letterSpacing'] ) ) {
-                            $target_dec['font']['font'][ $breakpoint ][ $state ]['letterSpacing'] = $vals['letterSpacing'];
+                        if ( isset( $val['letterSpacing'] ) ) {
+                            $target_dec['font']['font'][ $breakpoint ][ $state ]['letterSpacing'] = $val['letterSpacing'];
                         }
-                        if ( isset( $vals['textTransform'] ) ) {
-                            $target_dec['font']['font'][ $breakpoint ][ $state ]['textTransform'] = $vals['textTransform'];
+                        if ( isset( $val['textTransform'] ) ) {
+                            $target_dec['font']['font'][ $breakpoint ][ $state ]['textTransform'] = $val['textTransform'];
                         }
-                        
-                        // 6. Border Styles (color, width, style)
-                        if ( isset( $vals['borderColor'] ) || isset( $vals['borderWidth'] ) || isset( $vals['borderStyle'] ) ) {
-                            $b_color = $vals['borderColor'] ?? '';
-                            $b_width = $vals['borderWidth'] ?? '';
-                            $b_style = $vals['borderStyle'] ?? 'solid';
-                            
-                            $border_all = [];
-                            if ( $b_color !== '' ) {
-                                $border_all['color'] = $b_color;
-                            }
-                            if ( $b_width !== '' ) {
-                                $border_all['width'] = $b_width;
-                            }
-                            if ( $b_style !== '' ) {
-                                $border_all['style'] = $b_style;
-                            }
-                            
-                            if ( ! empty( $border_all ) ) {
-                                $target_dec['border'][ $breakpoint ][ $state ]['styles']['all'] = $border_all;
+
+                        // 6. Border Styles (accept both flat keys and structured 'border' object)
+                        if ( isset( $val['border'] ) && is_array( $val['border'] ) ) {
+                            $b_all = $val['border']['all'] ?? [];
+                            $target_dec['border'][ $breakpoint ][ $state ]['styles']['all'] = $b_all;
+                        } else {
+                            if ( isset( $val['borderColor'] ) || isset( $val['borderWidth'] ) || isset( $val['borderStyle'] ) ) {
+                                $b_color = $val['borderColor'] ?? '';
+                                $b_width = $val['borderWidth'] ?? '';
+                                $b_style = $val['borderStyle'] ?? 'solid';
+                                $border_all = [];
+                                if ( $b_color !== '' ) $border_all['color'] = $b_color;
+                                if ( $b_width !== '' ) $border_all['width'] = $b_width;
+                                if ( $b_style !== '' ) $border_all['style'] = $b_style;
+                                if ( ! empty( $border_all ) ) {
+                                    $target_dec['border'][ $breakpoint ][ $state ]['styles']['all'] = $border_all;
+                                }
                             }
                         }
                     }
@@ -814,16 +852,41 @@ class Layout_Engine {
                 if ( isset( $data['title'] ) ) {
                     $attrs['title']['innerContent'] = [ 'desktop' => ['value' => $data['title']] ];
                 }
+                if ( isset( $data['subtitle'] ) ) {
+                    $attrs['subtitle']['innerContent'] = [ 'desktop' => ['value' => $data['subtitle']] ];
+                }
+                if ( isset( $data['price'] ) ) {
+                    $attrs['price']['innerContent'] = [ 'desktop' => ['value' => $data['price']] ];
+                }
+                if ( isset( $data['currencyFrequency'] ) ) {
+                    $cf_raw = $data['currencyFrequency'];
+                    if ( is_array( $cf_raw ) ) {
+                        $attrs['currencyFrequency']['innerContent'] = [ 'desktop' => ['value' => $cf_raw] ];
+                    } else {
+                        $attrs['currencyFrequency']['innerContent'] = [ 'desktop' => ['value' => [
+                            'currency' => [ 'innerContent' => [ 'desktop' => ['value' => $cf_raw] ] ],
+                            'per'      => [ 'innerContent' => [ 'desktop' => ['value' => ''] ] ],
+                        ] ] ];
+                    }
+                }
                 if ( isset( $data['content'] ) ) {
                     $attrs['content']['innerContent'] = [ 'desktop' => ['value' => $data['content']] ];
                 }
-                if ( isset( $data['pricing'] ) ) {
-                    $attrs['pricing'] = $data['pricing']; // price, currency, sum, etc.
+                if ( isset( $data['excluded'] ) ) {
+                    $attrs['excluded']['innerContent'] = [ 'desktop' => ['value' => $data['excluded']] ];
                 }
-                if ( isset( $data['button_text'] ) ) {
+                if ( isset( $data['featured'] ) ) {
+                    if ( ! isset( $attrs['module']['advanced'] ) ) {
+                        $attrs['module']['advanced'] = [];
+                    }
+                    $attrs['module']['advanced']['featured'] = [ 'desktop' => ['value' => $data['featured']] ];
+                }
+                if ( isset( $data['button_text'] ) || isset( $data['button_url'] ) ) {
                     $attrs['button']['innerContent'] = [ 'desktop' => ['value' => [
-                        'text' => $data['button_text'], 'linkUrl' => $data['button_url'] ?? '#'
+                        'text' => $data['button_text'] ?? 'Select', 'linkUrl' => $data['button_url'] ?? '#'
                     ]] ];
+                } elseif ( isset( $data['button'] ) && is_array( $data['button'] ) ) {
+                    $attrs['button'] = $data['button'];
                 }
             }
 
@@ -1084,6 +1147,80 @@ class Layout_Engine {
      * format in block attributes to recognize global color references. The frontend resolver
      * converts it back to var(--gcid-*) during CSS rendering.
      */
+    /**
+     * Parse a CSS gradient string ("linear-gradient(165deg, #hex 0%, ...)")
+     * into a Divi 5 structured gradient object.
+     *
+     * Supports linear and radial gradients.
+     */
+    private static function parse_css_gradient( string $gradient ): ?array {
+        $gradient = trim( $gradient );
+        if ( ! preg_match( '/^(linear|radial)-gradient\s*\((.+)\)$/s', $gradient, $m ) ) {
+            return null;
+        }
+        $type = $m[1] === 'radial' ? 'radial' : 'linear';
+        $body = $m[2];
+
+        // Split stops/args respecting parens
+        $parts = [];
+        $depth = 0;
+        $buf = '';
+        for ( $i = 0, $len = strlen( $body ); $i < $len; $i++ ) {
+            $ch = $body[$i];
+            if ( $ch === '(' ) { $depth++; $buf .= $ch; }
+            elseif ( $ch === ')' ) { $depth--; $buf .= $ch; }
+            elseif ( $ch === ',' && $depth === 0 ) {
+                $parts[] = trim( $buf );
+                $buf = '';
+            } else {
+                $buf .= $ch;
+            }
+        }
+        if ( $buf !== '' ) $parts[] = trim( $buf );
+        if ( empty( $parts ) ) return null;
+
+        // First part may be direction for linear
+        $direction = '180deg';
+        $stops = [];
+        $offset = 0;
+
+        if ( $type === 'linear' ) {
+            $first = $parts[0];
+            // Check if first part looks like a direction
+            if ( preg_match( '/^\d+deg$/', $first ) || in_array( $first, [ 'to top', 'to bottom', 'to left', 'to right', 'to top left', 'to top right', 'to bottom left', 'to bottom right' ], true ) ) {
+                $direction = $first;
+                $offset = 1;
+            } elseif ( preg_match( '/^(to\s+\S+(?:\s+\S+)?)$/i', $first ) ) {
+                $direction = $first;
+                $offset = 1;
+            }
+        } elseif ( $type === 'radial' ) {
+            // Radial has shape/size/position before stops; skip for now
+            $offset = 1;
+        }
+
+        for ( $i = $offset; $i < count( $parts ); $i++ ) {
+            $stop = trim( $parts[ $i ] );
+            if ( preg_match( '/(#[0-9a-fA-F]+|[a-zA-Z]+\([^)]*\)|rgba?\([^)]*\)|hsla?\([^)]*\))/', $stop, $c_match ) ) {
+                $color = $c_match[1];
+                $rest = trim( substr( $stop, strlen( $c_match[0] ) ) );
+                $position = '50';
+                if ( preg_match( '/([\d.]+)%/', $rest, $p_match ) ) {
+                    $position = $p_match[1];
+                }
+                $stops[] = [ 'color' => $color, 'position' => $position ];
+            }
+        }
+
+        if ( empty( $stops ) ) return null;
+
+        return [
+            'type'      => $type,
+            'direction' => $direction,
+            'stops'     => $stops,
+        ];
+    }
+
     private function convert_gcid_to_variable_syntax( $value ) {
         if ( is_string( $value ) && preg_match( '/^var\(--(gcid-[0-9a-z-]+)\)$/', $value, $m ) ) {
             $json = wp_json_encode( [

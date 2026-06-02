@@ -208,6 +208,14 @@ function apply_presets(array $node, array $preset_list, array $design_system, st
 function extract_motion_presets(array &$attrs): void {
     foreach (['animation', 'scroll', 'transform'] as $key) {
         if (isset($attrs[$key])) {
+            // Skip decoration dicts with hover states (structured decoration, not preset refs)
+            if (is_array($attrs[$key]) && isset($attrs[$key]['hover'])) {
+                continue;
+            }
+            // Skip structured decoration dicts (desktop.value structure)
+            if (is_array($attrs[$key]) && isset($attrs[$key]['desktop'])) {
+                continue;
+            }
             $preset_ref = "{$key}:{$attrs[$key]}";
             unset($attrs[$key]);
             if (!in_array($preset_ref, $attrs['presets'] ?? [])) {
@@ -225,15 +233,25 @@ function build_module(array $def, array $design_system, bool $resolved, string $
         $module_type = 'divi/text';
         // Auto-wrap content in proper header tag if it's plain text
         if (isset($def['content']) && is_string($def['content']) && !str_starts_with(trim($def['content']), '<h')) {
-            $level = 'h2';
-            foreach ($def['presets'] ?? [] as $preset_ref) {
-                if (str_contains($preset_ref, 'display-xl') || str_contains($preset_ref, 'hero-title')) {
-                    $level = 'h1';
-                } elseif (str_contains($preset_ref, 'display-md') || str_contains($preset_ref, 'headline')) {
-                    $level = 'h2';
+            // Use explicit level attribute from VIE first (e.g., "h1", "h2", "h3")
+            if (!empty($def['level']) && preg_match('/^h[1-6]$/', $def['level'])) {
+                $level = $def['level'];
+            } else {
+                // Fall back to preset-based inference
+                $level = 'h2';
+                foreach ($def['presets'] ?? [] as $preset_ref) {
+                    if (str_contains($preset_ref, 'display-xl') || str_contains($preset_ref, 'hero-title')) {
+                        $level = 'h1';
+                    } elseif (str_contains($preset_ref, 'display-md') || str_contains($preset_ref, 'headline')) {
+                        $level = 'h2';
+                    }
                 }
             }
             $def['content'] = "<{$level}>" . $def['content'] . "</{$level}>";
+        }
+        // Remove level attribute since it's now encoded in the HTML content
+        if (isset($def['level'])) {
+            unset($def['level']);
         }
     }
 
@@ -270,8 +288,8 @@ function build_module(array $def, array $design_system, bool $resolved, string $
         $result['children'] = $children;
     }
 
-    // For divi/text blocks that were originally divi/heading, headingLevel is already
-    // handled via content auto-wrapping in the <h1>/<h2> tag above.
+    // For divi/text blocks converted from divi/heading, the heading level is
+    // already encoded in the content via <h1>/<h2>/<h3> wrapper above.
 
     $tokens = $design_system['tokens'] ?? [];
 
@@ -368,6 +386,12 @@ function build_section(array $def, array $design_system, bool $resolved, string 
 
     $result = deep_merge($result, $def);
     $result['rows'] = $rows;
+
+    // Convert section_type to CSS class for targeted styling
+    if (isset($result['section_type']) && !isset($result['module_class'])) {
+        $result['module_class'] = $result['section_type'] . '-section';
+    }
+    unset($result['section_type']);
 
     return $result;
 }
@@ -557,6 +581,16 @@ if ($do_deploy) {
         exit($exit_code);
     }
     echo "[OK] Page deployed successfully.\n";
+
+    // Sync brand CSS + design tokens to WordPress Custom CSS (DB)
+    $sync_cmd = '"' . WP_BAT . '" agentic sync-css';
+    echo "[SYNC-CSS] Running: {$sync_cmd}\n";
+    passthru($sync_cmd . ' 2>NUL', $sync_code);
+    if ($sync_code !== 0) {
+        fwrite(STDERR, "[WARN] Brand CSS sync failed (non-fatal). Run: wp agentic sync-css\n");
+    } else {
+        echo "[OK] Brand CSS synced to database.\n";
+    }
 
     // Post-deploy verification
     $do_verify = isset($opts['verify']) || isset($opts['url']);

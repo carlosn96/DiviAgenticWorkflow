@@ -457,6 +457,75 @@ class Agentic_Command {
     }
 
     /**
+     * Syncs brand CSS + design tokens to WordPress Custom CSS (wp_update_custom_css_post).
+     *
+     * Reads brand.css from the active brand directory, generates CSS custom properties
+     * from divitheme.json, concatenates both, and stores them in the WordPress database
+     * via the Customizer API. This survives production deploys — no filesystem dependency.
+     *
+     * ## OPTIONS
+     *
+     * [--site=<site>]
+     * : Brand site name (defaults to DAW_SITE env).
+     *
+     * @when after_wp_load
+     */
+    public function sync_css( $args, $assoc_args ) {
+        $site = $assoc_args['site'] ?? ( function_exists( 'daw_get_active_site' ) ? \daw_get_active_site() : getenv( 'DAW_SITE' ) );
+        if ( empty( $site ) ) {
+            \WP_CLI::error( 'DAW_SITE not set. Pass --site=<name> or set DAW_SITE env.' );
+        }
+
+        $daw_root = dirname( DIVI_AGENTIC_CORE_DIR );
+
+        // 1. Read brand.css
+        $brand_css_path = $daw_root . '/site/' . $site . '/brand/assets/css/brand.css';
+        $brand_css = '';
+        if ( file_exists( $brand_css_path ) ) {
+            $brand_css = file_get_contents( $brand_css_path );
+            \WP_CLI::log( "Loaded brand CSS (" . strlen( $brand_css ) . " chars) from: {$brand_css_path}" );
+        } else {
+            \WP_CLI::warning( "brand.css not found at: {$brand_css_path}" );
+        }
+
+        // 2. Generate CSS vars from design system
+        $ds_path = $daw_root . '/site/' . $site . '/design-system/divitheme.json';
+        $css_vars = '';
+        if ( file_exists( $ds_path ) ) {
+            $vars = \daw_generate_css_vars( $ds_path );
+            if ( $vars ) {
+                $css_vars = $vars;
+            }
+        } else {
+            \WP_CLI::warning( "Design system not found at: {$ds_path}" );
+        }
+
+        // 3. Concatenate: brand.css first, then CSS vars (CSS vars override via :root specificity)
+        $combined = '';
+        if ( $brand_css ) {
+            $combined .= "/*** DAW Brand CSS ***/\n" . $brand_css . "\n\n";
+        }
+        if ( $css_vars ) {
+            $combined .= "/*** DAW Design Tokens ***/\n" . $css_vars . "\n";
+        }
+
+        if ( empty( $combined ) ) {
+            \WP_CLI::error( 'Nothing to sync — no brand.css and no design system found.' );
+        }
+
+        // 4. Store in WordPress Custom CSS (wp_update_custom_css_post)
+        if ( function_exists( 'wp_update_custom_css_post' ) ) {
+            $result = wp_update_custom_css_post( $combined );
+            if ( is_wp_error( $result ) ) {
+                \WP_CLI::error( 'Failed to update custom CSS: ' . $result->get_error_message() );
+            }
+            \WP_CLI::success( 'Brand CSS + design tokens synced to WordPress Custom CSS (' . strlen( $combined ) . ' chars).' );
+        } else {
+            \WP_CLI::error( 'wp_update_custom_css_post() not available. Are you on WP 4.7+?' );
+        }
+    }
+
+    /**
      * Exports a WordPress page of Divi 5 blocks into a schema JSON.
      *
      * ## OPTIONS
