@@ -865,12 +865,12 @@ class PresetBuilder:
             'btn-primary': {
                 'decoration': {
                     'button': {'desktop': {'value': {
-                        'background': {'style': 'solid', 'color': palette['accent']},
+                        'backgroundColor': palette['accent'],
                         'color':  palette['surface-deep'],
-                        'border': {'radius': {
+                        'border': {'all': {'radius': {
                             'topLeft': '9999px', 'topRight': '9999px',
                             'bottomRight': '9999px', 'bottomLeft': '9999px', 'sync': 'on',
-                        }},
+                        }}},
                     }}},
                     'spacing':   {'desktop': {'value': {'padding': {
                         'top': '14px', 'right': '32px', 'bottom': '14px', 'left': '32px', 'sync': 'on',
@@ -893,11 +893,10 @@ class PresetBuilder:
             'btn-outline': {
                 'decoration': {
                     'button': {'desktop': {'value': {
-                        'background': {'style': 'none'},
                         'color':  palette['surface-white'],
-                        'border': {'styles': {'all': {
+                        'border': {'all': {
                             'style': 'solid', 'width': '1.5px', 'color': 'rgba(255,255,255,0.25)',
-                        }}},
+                        }},
                     }}},
                     'spacing':   {'desktop': {'value': {'padding': {
                         'top': '14px', 'right': '32px', 'bottom': '14px', 'left': '32px', 'sync': 'on',
@@ -911,13 +910,49 @@ class PresetBuilder:
             'btn-ghost': {
                 'decoration': {
                     'button': {'desktop': {'value': {
-                        'background': {'style': 'none'},
                         'color':  palette['text-primary'],
-                        'border': {'radius': {'sync': 'off'}},
                     }}},
                     'transform': {'hover': {'value': {
                         'translateY': '0px',
                         'color': palette['accent'],
+                    }}},
+                }
+            },
+            'btn-primary-gradient': {
+                'decoration': {
+                    'button': {'desktop': {'value': {
+                        'background': {'style': 'gradient', 'color': palette['accent'],
+                                       'gradient': {'type': 'linear', 'direction': '135deg',
+                                                    'stops': [{'color': palette['accent-hover'], 'position': '0'},
+                                                              {'color': palette['accent'], 'position': '100'}]}},
+                        'color':  palette['surface-deep'],
+                        'border': {'radius': {
+                            'topLeft': '9999px', 'topRight': '9999px',
+                            'bottomRight': '9999px', 'bottomLeft': '9999px', 'sync': 'on',
+                        }},
+                    }}},
+                    'spacing':   {'desktop': {'value': {'padding': {
+                        'top': '18px', 'right': '44px', 'bottom': '18px', 'left': '44px', 'sync': 'on',
+                    }}}},
+                    'boxShadow': {'desktop': {'value': {
+                        'horizontal': '0px', 'vertical': '6px',
+                        'blur': '20px', 'spread': '-4px',
+                        'color': palette['glow-accent'],
+                    }}},
+                    'hover': {'desktop': {'value': {
+                        'translateY': '-4px',
+                        'boxShadow': {
+                            'horizontal': '0px', 'vertical': '16px',
+                            'blur': '40px', 'spread': '-8px',
+                            'color': palette['glow-accent-strong'],
+                        },
+                    }}},
+                }
+            },
+            'heading-shadow': {
+                'decoration': {
+                    'font': {'desktop': {'value': {
+                        'textShadow': f'0 2px 12px {palette["glow-accent"]}',
                     }}},
                 }
             },
@@ -929,7 +964,7 @@ class PresetBuilder:
             'decoration': {
                 'background': {'desktop': {'value': {
                     'color':                    palette['surface-white'] + 'D9',
-                    'backdropFilter':           'blur(20px)',
+                    'backdropFilter':           'blur(20px) saturate(1.4)',
                     'backdropFilterSupported':  'on',
                 }}},
                 'border': {'desktop': {'value': {
@@ -1040,6 +1075,8 @@ class PresetBuilder:
             'zoom-in':      {'decoration': {'animation': {'desktop': {'value': {'style': 'zoom',   'direction': 'in',     'duration': '600ms', 'startingOpacity': '0%', 'speedCurve': 'ease-out'}}}}},
             'bounce-up':    {'decoration': {'animation': {'desktop': {'value': {'style': 'bounce', 'direction': 'bottom', 'duration': '800ms', 'speedCurve': 'ease-out'}}}}},
             'flip':         {'decoration': {'animation': {'desktop': {'value': {'style': 'flip',   'direction': 'bottom', 'duration': '600ms', 'speedCurve': 'ease-out'}}}}},
+            'stagger-reveal': {'decoration': {'animation': {'desktop': {'value': {'style': 'fade', 'duration': '900ms', 'delay': '100ms', 'speedCurve': 'cubic-bezier(0.22, 1, 0.36, 1)'}}}, 'css': {'desktop': {'value': {'freeForm': '.selector { animation: revealUp 900ms cubic-bezier(0.16,1,0.3,1) 100ms both; }'}}}}},
+            'blur-reveal': {'decoration': {'animation': {'desktop': {'value': {'style': 'fade', 'duration': '800ms', 'delay': '0ms', 'speedCurve': 'ease-out'}}}, 'css': {'desktop': {'value': {'freeForm': '.selector { filter: blur(4px); animation: revealUp 900ms cubic-bezier(0.16,1,0.3,1) 0ms both; }'}}}}},
         }
 
     @classmethod
@@ -1306,10 +1343,10 @@ def main():
     with open(out_path, 'w', encoding='utf-8') as f:
         json.dump(schema, f, indent=2, ensure_ascii=False)
 
-    # Generate brand.css for premium utilities
-    plugin_css_dir = os.path.join(DAW_ROOT, 'divi-agentic-core', 'assets', 'css')
-    os.makedirs(plugin_css_dir, exist_ok=True)
-    brand_css_path = os.path.join(plugin_css_dir, 'brand.css')
+    # Generate brand.css for premium utilities (brand-specific path)
+    brand_css_dir = os.path.join(BRAND_DIR, 'assets', 'css')
+    os.makedirs(brand_css_dir, exist_ok=True)
+    brand_css_path = os.path.join(brand_css_dir, 'brand.css')
     with open(brand_css_path, 'w', encoding='utf-8') as f:
         f.write("/* Auto-generated Brand CSS for Premium Visuals */\n")
         f.write(":root {\n")
@@ -1333,7 +1370,15 @@ def main():
         f.write(".daw-hero-aura {\n")
         f.write("  background: var(--daw-color-surface-deep);\n")
         f.write("  background-image: var(--daw-color-aura-gradient);\n")
-        f.write("}\n")
+        f.write("}\n\n")
+
+        # Append brand effects CSS if _effects.css exists in brand dir
+        effects_path = os.path.join(BRAND_DIR, '_effects.css')
+        if os.path.isfile(effects_path):
+            with open(effects_path, 'r', encoding='utf-8') as ef:
+                f.write(ef.read())
+            if not args.quiet:
+                print(f'[OK] Appended effects CSS from {effects_path}')
 
     if not args.quiet:
         tokens = schema.get('tokens', {})

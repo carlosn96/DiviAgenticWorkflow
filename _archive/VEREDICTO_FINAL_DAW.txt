@@ -1,0 +1,409 @@
+=============================================================================
+  VEREDICTO FINAL — DAW v4.1: CÓMO GENERAR PÁGINAS DE VERDAD
+=============================================================================
+  Última actualización: 2026-05-29 (post-fix orquestación)
+  Basado en: RESUMEN.txt + REPORTE_AUDITORIA_DAW.md + cambios v4.1
+  Audiencia: agente que ejecuta el DAW de cero
+=============================================================================
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECCIÓN 0 — QUÉ SE ARREGLÓ EN v4.1
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PROBLEMA RAÍZ (confirmado en auditoría):
+  El pipeline PHP es sólido. El problema siempre estuvo en el INPUT:
+  el agente ejecutaba las 4 fases como checklist mental sin producir
+  artefactos entre ellas. La Fase 2 (Design Lead) se saltaba o se hacía
+  superficialmente → el JSON llegaba al build sin dirección visual real.
+
+QUÉ CAMBIÓ:
+
+  DAW_bundle/daw-skill/SKILL.md (v4.0 → v4.1):
+    + Cada fase tiene un artefacto de salida obligatorio con formato exacto
+    + Fase 2 es ahora un ⛔ BLOQUEANTE: sin Design Brief escrito, no hay JSON
+    + El catálogo semántico redefinido: solo para proporciones de spacing,
+      NUNCA como fuente de estructura ni colores
+    + Checklist de 6 puntos en Fase 3 antes de entregar a Fase 4
+
+  DAW_bundle/daw-skill/references/design-lead.md:
+    + Las 6 Leyes de Calidad Autónoma movidas al INICIO del documento
+      como prerequisito de handoff (⛔ BLOQUEANTE por ley)
+    + Formato de Design Brief obligatorio con template exacto
+    + Anti-patrón añadido: divi/text para H1 (debe ser divi/heading)
+    + Ejemplo completo de Design Brief con las 6 leyes confirmadas
+
+  Lo que NO cambió:
+    - build_page.php (sólido, no tocar)
+    - El pipeline PHP completo (funciona)
+    - Los presets, tokens, design system (sin cambios)
+    - La estructura de directorios
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECCIÓN 1 — PREREQUISITOS (ejecutar una sola vez por entorno)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PASO 1.1 — Plugin activo en WordPress
+  WP Admin → Plugins → "Divi Agentic Core" → ACTIVADO
+  Junction link: DAW_bundle/divi-agentic-core/ → app/public/wp-content/plugins/divi-agentic-core/
+  Si no existe: mklink /J "app\public\wp-content\plugins\divi-agentic-core" "DAW_bundle\divi-agentic-core"
+
+PASO 1.2 — .env en la raíz del proyecto
+  Archivo: divitheme/.env
+  Variables mínimas:
+    WP_PATH=C:\Users\CORE I9\Local Sites\divitheme\app\public
+    WP_URL=http://divitheme.local
+    DAW_SITE=bibliotheca
+  Si no existe: Copy-Item DAW_bundle/.env.example .env → editar
+
+PASO 1.3 — Module schemas (si no existen o Divi se actualizó)
+  Verificar: DAW_bundle/workspace/data/modules/ → debe tener 102+ archivos .json
+  Si faltan:
+    .\php.bat DAW_bundle/divi-agentic-core/bin/generate-module-schema.php --all
+
+PASO 1.4 — Design system (si divitheme.json no existe o brand cambió)
+  Verificar: DAW_bundle/site/bibliotheca/design-system/divitheme.json
+  Si falta o cambió brand:
+    $env:DAW_SITE="bibliotheca"
+    python DAW_bundle/workspace/build_design_system.py
+
+PASO 1.5 — Sincronizar Global Colors (una vez por proyecto)
+  .\wp.bat agentic global_colors sync ^
+    --design-system="DAW_bundle/site/bibliotheca/design-system/divitheme.json"
+  Verificar:
+    .\wp.bat agentic global_colors status ^
+      --design-system="DAW_bundle/site/bibliotheca/design-system/divitheme.json"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECCIÓN 2 — LAS 4 FASES (el flujo correcto post-v4.1)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+REGLA FUNDAMENTAL: cada fase produce un artefacto escrito antes de que
+la siguiente comience. Sin artefacto, la fase no terminó.
+
+─────────────────────────────────────────────────────────────────────────────
+FASE 1 — ANÁLISIS SEMÁNTICO (El Arquitecto)
+─────────────────────────────────────────────────────────────────────────────
+Referencia: DAW_bundle/daw-skill/references/architect.md
+Consultar:  DAW_bundle/daw-skill/references/blocks-dictionary.md
+
+Qué hace: Define qué comunica cada sección, cuál es su objetivo de negocio,
+          y qué bloque Divi 5 le corresponde semánticamente.
+
+Artefacto obligatorio (escribirlo antes de continuar):
+  Página: <nombre>
+  Objetivo de negocio: <qué debe lograr el visitante>
+  Secciones:
+    1. hero           — objetivo: impacto inmediato, CTA principal   — bloque: divi/section
+    2. trust-bar      — objetivo: credibilidad con números           — bloque: divi/number-counter
+    3. features-grid  — objetivo: mostrar propuesta de valor         — bloque: divi/blurb
+    ...
+
+⛔ STOP: sin Plan Semántico escrito, no comenzar Fase 2.
+
+─────────────────────────────────────────────────────────────────────────────
+FASE 2 — DESIGN LEAD (⛔ BLOQUEANTE — las 6 leyes deben estar en verde)
+─────────────────────────────────────────────────────────────────────────────
+Referencia: DAW_bundle/daw-skill/references/design-lead.md (leer COMPLETO)
+
+Las 6 Leyes de Calidad Autónoma (cada una es un bloqueante):
+
+  LEY 1 — ALTERNANCIA DE FONDOS
+    Nunca 2 secciones consecutivas del mismo color de fondo.
+    Documentar la secuencia completa ANTES de escribir JSON:
+      sec-1: section:hero-dark
+      sec-2: section:light
+      sec-3: section:white
+      sec-4: section:dark
+      ...
+    Si el plan tiene secciones iguales consecutivas → DETENER y corregir.
+
+  LEY 2 — TITULAR DOMINANTE
+    H1 del hero SIEMPRE con divi/heading + preset text:display-xl o text:hero-title.
+    72px mínimo en desktop. Sin esto no hay hero, hay una sección genérica.
+    Si el plan no lo incluye → AGREGAR uno antes de continuar.
+
+  LEY 3 — ESPACIO NEGATIVO MÍNIMO
+    Secciones: padding top/bottom mínimo {{design:space:2xl}} (96px)
+    Cards: padding interno mínimo {{design:space:lg}} (40px)
+    Declararlo en decoration.spacing de cada sección y card en el JSON.
+
+  LEY 4 — MICRO-INTERACCIÓN EN ELEMENTOS CLICKEABLES
+    Documentar hover de CADA elemento interactivo antes del handoff:
+      Botones primarios  → module:btn-primary + transform:hover-lift
+      Feature cards      → module:feature-card + transform:hover-lift
+      Glass cards        → module:glass-card + transform:hover-lift
+      Imágenes enlazadas → transform:hover-scale
+    Si el plan tiene tarjetas sin hover → AGREGAR preset de transform.
+
+  LEY 5 — ANCLAJE VISUAL POR SECCIÓN
+    Cada sección tiene UN elemento dominante identificado:
+      Hero         → titular display-xl
+      Stats        → número en stat-num (48px+)
+      Features     → ícono del blurb
+      Testimonial  → cita en quote-serif
+      CTA          → botón grande aislado con padding masivo
+    Si una sección no tiene ancla → DEFINIR una antes de continuar.
+
+  LEY 6 — ESCALA RESPONSIVA DECLARADA
+    Tipografía hero con los 3 breakpoints:
+      H1: desktop 72px / tablet 44px / mobile 30px
+      H2: desktop 40px / tablet 30px / mobile 24px
+    El Diseñador implementa en headingFont.desktop/tablet/phone.value.size.
+
+Artefacto obligatorio — Design Brief:
+  === DESIGN BRIEF: <nombre de página> ===
+  Estilo visual: <editorial / modern / premium / minimal>
+  ALTERNANCIA DE FONDOS (Ley 1 ✓): sec-1: X / sec-2: Y / ...
+  TITULAR HERO (Ley 2 ✓): divi/heading, preset: text:hero-title
+  ESPACIO NEGATIVO (Ley 3 ✓): secciones 96px / cards 40px
+  HOVER (Ley 4 ✓): botones → hover-lift / cards → hover-lift
+  ANCLAS (Ley 5 ✓): hero → titular / stats → números / ...
+  ESCALA RESPONSIVA (Ley 6 ✓): H1 72/44/30px / H2 40/30/24px
+  DECISIONES: <decisión>: <fundamento>
+  RESTRICCIONES: no hex / no placeholder / no catálogo como estructura
+
+⛔ STOP: sin Design Brief escrito con las 6 leyes en verde, no comenzar Fase 3.
+
+─────────────────────────────────────────────────────────────────────────────
+FASE 3 — MAPEO VISUAL (El Diseñador)
+─────────────────────────────────────────────────────────────────────────────
+Referencia: DAW_bundle/daw-skill/references/designer.md
+Consultar:  DAW_bundle/daw-skill/references/blocks-dictionary.md
+
+Qué hace: Escribe el page-def JSON implementando exactamente el Design Brief.
+
+Regla del catálogo semántico (search_catalog.py):
+  El catálogo de 877 templates sirve ÚNICAMENTE como referencia de
+  proporciones: extraer valores de spacing, márgenes, decisiones de
+  anidación de layouts complejos.
+  NUNCA copiar estructura, colores, imágenes ni módulos del catálogo.
+  Todo lo que venga del catálogo → traducir a tokens {{design:*}} y
+  bloques divi/* antes de entrar al JSON.
+
+Verificación antes de entregar a Fase 4:
+  [ ] Ningún tipo et_pb_* en el JSON
+  [ ] Ningún hex hardcodeado — todo {{design:color:*}}
+  [ ] Ningún button_text: "" ni src: "" — contenido real
+  [ ] Ningún preset inexistente (verificar contra _design_presets.json)
+  [ ] Posiciones de gradient sin %
+  [ ] Las 6 leyes del Design Brief reflejadas en el JSON
+  [ ] divi/heading para H1/H2 (no divi/text)
+  [ ] Hover documentado en cada elemento clickeable
+
+Artefacto obligatorio:
+  DAW_bundle/site/bibliotheca/page-defs/<slug>.json
+
+⛔ STOP: si el JSON no pasa la verificación, NO entregar a Fase 4.
+
+─────────────────────────────────────────────────────────────────────────────
+FASE 4 — EJECUCIÓN CLI (El Ingeniero)
+─────────────────────────────────────────────────────────────────────────────
+Referencia: DAW_bundle/daw-skill/references/engineer.md
+
+Comando estándar:
+  .\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php ^
+    --def=DAW_bundle/site/bibliotheca/page-defs/<slug>.json ^
+    --deploy --verify
+
+Comando para portada:
+  .\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php ^
+    --def=DAW_bundle/site/bibliotheca/page-defs/home.json ^
+    --deploy --front --verify
+
+Debug antes de deploy (inspecionar schema resuelto):
+  .\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php ^
+    --def=DAW_bundle/site/bibliotheca/page-defs/<slug>.json ^
+    --out=DAW_bundle/site/bibliotheca/pages/<slug>.json
+  → Verificar: tokens resueltos, presets expandidos, sin {{design:*}} restantes
+
+Lo que hace build_page.php en orden:
+  1. Carga divitheme.json (design system)
+  2. Carga schemas de módulos (workspace/data/modules/ — 102 archivos)
+  3. Resuelve {{design:color:name}} → var(--gcid-name)
+  4. Resuelve {{design:font|radius|space:name}} → literales
+  5. Resuelve {{SITE_URL}} → URL del sitio
+  6. Expande presets[] inline via deep_merge()
+  7. Normaliza gradient stops (quita %)
+  8. Valida jerarquía: sections → rows → columns → modules
+  9. Con --deploy: wp agentic deploy_page → Layout Engine → bloques Divi 5
+  10. Con --verify: verify_page.php comprueba gcids, estructura, tokens
+
+Artefacto obligatorio:
+  WP Post ID: <id>
+  URL confirmada: <http://...>
+  Verificación: bloques Divi 5 ✓ / gcids resueltos ✓ / sin tokens sin resolver ✓
+
+⛔ STOP: si el deploy falla o la verificación reporta errores, diagnosticar
+         y re-ejecutar antes de declarar la tarea completa.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECCIÓN 3 — REGLAS DEL PAGE-DEF (obligatorias)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+R1. ESTRUCTURA:  sections → rows → columns → modules (jerarquía estricta)
+R2. MÓDULOS:     solo divi/* (nunca et_pb_*, nunca divi/placeholder)
+R3. TITULARES:   H1/H2 siempre divi/heading (no divi/text)
+R4. COLORES:     {{design:color:name}} siempre (nunca hex hardcodeado)
+R5. PRESETS:     solo nombres que existen en _design_presets.json
+R6. CONTENIDO:   real en todos los campos (no "", no "placeholder")
+R7. GRADIENTES:  posiciones sin % (0 y 100, no 0% y 100%)
+R8. MOTION:      string (ej: "animation": "fade-in"), no objeto
+R9. HOVER:       declarado con presets transform:hover-* en cada card/botón
+R10. RESPONSIVE: headingFont con .desktop, .tablet, .phone declarados en hero
+
+Presets confirmados (extraídos de _design_presets.json):
+  section:  hero-dark, hero-image-dark, hero-video, trust-bar, cta-epic, light, dark, white
+  text:     eyebrow, eyebrow-dark, hero-title, display-xl, display-md, display-md-light,
+            headline, headline-light, headline-3, lead, lead-dark, body-md, stat-num,
+            stat-label, quote-serif, caption
+  module:   card, feature-card, glass-card, stat-item, testimonial-card, image-shadow,
+            accent-line, btn-primary, btn-ghost, btn-outline-light, btn-cta-dark
+  divider:  curve-top, curve-bottom, wave-top, wave-bottom, tilt-top
+  animation: fade-in, fade-in-fast, slide-up, slide-down, slide-left, slide-right,
+             reveal-up, zoom-in, bounce-up, flip, fold, roll
+  scroll:   fade-in, parallax-up, parallax-down, scale-in, reveal, rotate, blur-in
+  transform: hover-lift, hover-scale, hover-glow, hover-slide-up, hover-expand
+
+Referencia premium: DAW_bundle/site/bibliotheca/page-defs/home.json (933L)
+NO usar como referencia: acerca-de.json (paradigma legacy ROTO)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECCIÓN 4 — VERIFICACIÓN POST-DEPLOY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+verify_page.php comprueba automáticamente (con --verify):
+  ✓ La página existe en WordPress (wp_posts)
+  ✓ El contenido contiene bloques Divi 5 (<!-- wp:divi/*)
+  ✓ Variables var(--gcid-*) presentes
+  ✓ Sin tokens {{design:*}} sin resolver
+  ✓ Estructura coincide con schema (si se pasa --schema)
+
+Verificación manual:
+  1. WP Admin → Páginas → buscar slug → tiene contenido (no vacía)
+  2. Abrir URL en navegador → renderiza con Divi y diseño correcto
+  3. Si colores incorrectos: ejecutar sync de global colors (Paso 1.5)
+
+Errores comunes:
+  - Página en blanco: Layout Engine falló → revisar plugin activo, revisar logs
+  - Colores hex en vez de design system: gcids no sincronizados → Paso 1.5
+  - Módulos no aparecen: tipo divi/* incorrecto → verificar blocks-dictionary.md
+  - Preset ignorado silenciosamente: nombre no existe → verificar _design_presets.json
+  - Build falla silencioso: usar --out para ver schema raw antes de deploy
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECCIÓN 5 — EL CATÁLOGO: CÓMO USARLO BIEN Y CÓMO NO USARLO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Los 877 templates del catálogo (workspace/sections/catalog/) son layouts de
+Divi Plus probados en producción — una mina de oro de composiciones reales.
+El problema nunca fue el catálogo: fue cómo orchestrate_page.php los inyecta.
+
+USO CORRECTO (por el agente, manualmente):
+
+  1. Buscar layouts relevantes:
+       python DAW_bundle/workspace/automation/search_catalog.py --query "timeline" --limit 3
+     Devuelve paths con score semántico. Abrir el JSON de la coincidencia.
+
+  2. Inspeccionar el JSON:
+       - Estructura de filas y columnas (column_structure, anidación)
+       - Proporciones de spacing (márgenes, paddings, alturas)
+       - Patrones de composición de módulos (qué tipos se combinan cómo)
+       - Ritmo visual (qué elemento domina cada fila)
+
+  3. Extraer lo útil y TRADUCIR OBLIGATORIAMENTE:
+       Hex hardcodeados         → {{design:color:ink}}, {{design:color:accent}}, etc.
+       Imágenes de demo         → assets reales del cliente o {{SITE_URL}}/wp-content/uploads/...
+       et_pb_* shortcodes       → módulos divi/* equivalentes
+       Clases CSS personalizadas → decoration nativa (spacing, border, boxShadow)
+       Valores de spacing en %  → {{design:space:lg}}, {{design:space:2xl}}, etc.
+
+  4. El resultado es JSON propio con tokens, no una copia del catálogo.
+
+USO INCORRECTO (genera resultados rotos):
+
+  ✗ Dejar que orchestrate_page.php elija e inyecte del catálogo automáticamente
+    → trae colores RGB mapeados incorrectamente, imágenes de guardería en sitio
+      de biblioteca, slots vacíos (button_text: ""), parser YAML frágil
+
+  ✗ Copiar el JSON del catálogo directo al page-def sin traducir
+    → hex hardcodeados, imágenes de demo ajenas, et_pb_* que no compila
+
+  ✗ compose_page.php directamente
+    → fill_slots() rellena con "" los slots no resueltos
+
+  ✗ acerca-de.json como plantilla
+    → paradigma legacy ROTO: divi/placeholder, slots vacíos, catálogo sin traducir
+
+  ✗ mysql_remote.bat → deshabilitado
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECCIÓN 6 — CHECKLIST COMPLETO DE CERO A PÁGINA PUBLICADA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PREREQUISITOS (una vez):
+[ ] Plugin "Divi Agentic Core" activo en WP Admin
+[ ] .env existe con WP_PATH, WP_URL, DAW_SITE
+[ ] workspace/data/modules/ tiene 102+ archivos .json
+[ ] site/bibliotheca/design-system/divitheme.json existe
+[ ] Global colors sincronizados
+
+FASE 1 — Plan Semántico escrito:
+[ ] Objetivo de negocio definido
+[ ] Secciones listadas con bloque raíz asignado a cada una
+
+FASE 2 — Design Brief escrito con 6 leyes en verde:
+[ ] Ley 1: alternancia de fondos documentada sección por sección
+[ ] Ley 2: titular hero con divi/heading + text:display-xl o text:hero-title
+[ ] Ley 3: padding mínimo 96px en secciones / 40px en cards
+[ ] Ley 4: hover documentado en cada botón y card
+[ ] Ley 5: ancla visual identificada en cada sección
+[ ] Ley 6: escala responsiva declarada (desktop/tablet/mobile)
+
+FASE 3 — page-def JSON creado y verificado:
+[ ] Archivo en site/bibliotheca/page-defs/<slug>.json
+[ ] Sin et_pb_*, sin hex, sin placeholder, sin campos vacíos
+[ ] divi/heading para H1/H2
+[ ] Presets existentes
+[ ] Hover en cards y botones
+[ ] Gradient sin %
+
+FASE 4 — Deploy y confirmación:
+[ ] .\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php
+      --def=site/bibliotheca/page-defs/<slug>.json --deploy --verify
+[ ] WP Post ID obtenido
+[ ] URL abre en navegador con diseño correcto
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECCIÓN 7 — REFERENCIAS RÁPIDAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+¿Qué módulos existen?        → daw-skill/references/blocks-dictionary.md
+¿Atributos de un módulo?     → php divi-agentic-core/bin/extract-module-meta.php <slug>
+¿Qué tokens de color?        → site/bibliotheca/brand/_design_vars.json
+¿Qué presets existen?        → site/bibliotheca/brand/_design_presets.json (1868L)
+¿Design system generado?     → site/bibliotheca/design-system/divitheme.json
+¿Ejemplo premium completo?   → site/bibliotheca/page-defs/home.json (933L) ← COPIAR DE AQUÍ
+¿Reglas del Diseñador?       → daw-skill/references/designer.md
+¿6 Leyes de calidad?         → daw-skill/references/design-lead.md (inicio del doc)
+¿Comandos CLI?               → daw-skill/references/engineer.md
+¿Build step a step?          → divi-agentic-core/bin/build_page.php (572L)
+¿Pitfall number-counter?     → workspace/sections/STATS.md
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECCIÓN 8 — RESUMEN EN 3 LÍNEAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Pasar por las 4 fases en orden, produciendo un artefacto escrito en cada
+   una. Sin artefacto de la fase anterior, la siguiente no arranca.
+
+2. La Fase 2 (Design Lead) es el filtro de calidad real: las 6 Leyes deben
+   estar en verde antes de escribir el JSON. Sin esto, el resultado es genérico
+   sin importar cuán sólido sea el pipeline.
+
+3. Escribir el page-def con las 10 reglas de la Sección 3, deployar con
+   build_page.php --deploy --verify, confirmar en WP Admin y en el navegador.
+
+=============================================================================
+  FIN DEL VEREDICTO v4.1 — El DAW genera páginas de verdad cuando las 4
+  fases producen artefactos reales. El engine no falla. El proceso sí.
+=============================================================================

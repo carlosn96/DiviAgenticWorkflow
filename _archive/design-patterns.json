@@ -1,0 +1,3165 @@
+{
+  "meta": {
+    "total_sections_analyzed": 877,
+    "error_count": 2,
+    "description": "Design patterns extracted from Divi 4 catalog templates. Use as reference for section composition, not as transcoding source."
+  },
+  "composition_archetypes": {
+    "hero": {
+      "section_type": "hero",
+      "total_samples": 179,
+      "common_module_sequences": [
+        {
+          "modules": [
+            "other"
+          ],
+          "count": 7
+        },
+        {
+          "modules": [
+            "text-animator",
+            "other"
+          ],
+          "count": 5
+        },
+        {
+          "modules": [
+            "double-heading"
+          ],
+          "count": 5
+        }
+      ],
+      "common_column_structures": [
+        {
+          "structure": "4_4",
+          "count": 111
+        },
+        {
+          "structure": "1_2,1_2",
+          "count": 52
+        },
+        {
+          "structure": "1_3,1_3,1_3",
+          "count": 12
+        },
+        {
+          "structure": "3_5,2_5",
+          "count": 10
+        },
+        {
+          "structure": "2_3,1_3",
+          "count": 7
+        }
+      ],
+      "divider_frequency": 0.04,
+      "gradient_frequency": 0.21,
+      "avg_modules": 6.4,
+      "avg_rows": 1.2
+    },
+    "features": {
+      "section_type": "features",
+      "total_samples": 172,
+      "common_module_sequences": [
+        {
+          "modules": [
+            "flipbox",
+            "flipbox",
+            "flipbox",
+            "flipbox",
+            "flipbox",
+            "flipbox"
+          ],
+          "count": 6
+        },
+        {
+          "modules": [
+            "text",
+            "text",
+            "blurb",
+            "blurb",
+            "blurb",
+            "other"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "text",
+            "text",
+            "text",
+            "blurb",
+            "blurb",
+            "blurb",
+            "other"
+          ],
+          "count": 2
+        }
+      ],
+      "common_column_structures": [
+        {
+          "structure": "4_4",
+          "count": 94
+        },
+        {
+          "structure": "1_3,1_3,1_3",
+          "count": 75
+        },
+        {
+          "structure": "1_2,1_2",
+          "count": 43
+        },
+        {
+          "structure": "1_4,1_4,1_4,1_4",
+          "count": 35
+        },
+        {
+          "structure": "3_5,2_5",
+          "count": 8
+        }
+      ],
+      "divider_frequency": 0.01,
+      "gradient_frequency": 0.06,
+      "avg_modules": 10.2,
+      "avg_rows": 1.7
+    },
+    "gallery": {
+      "section_type": "gallery",
+      "total_samples": 142,
+      "common_module_sequences": [
+        {
+          "modules": [
+            "image-card",
+            "image-card",
+            "image-card"
+          ],
+          "count": 4
+        },
+        {
+          "modules": [
+            "text",
+            "other",
+            "image"
+          ],
+          "count": 3
+        },
+        {
+          "modules": [
+            "double-heading",
+            "text",
+            "dipl-button",
+            "dipl-button-item",
+            "image"
+          ],
+          "count": 2
+        }
+      ],
+      "common_column_structures": [
+        {
+          "structure": "4_4",
+          "count": 76
+        },
+        {
+          "structure": "1_2,1_2",
+          "count": 37
+        },
+        {
+          "structure": "1_3,1_3,1_3",
+          "count": 36
+        },
+        {
+          "structure": "2_5,3_5",
+          "count": 14
+        },
+        {
+          "structure": "3_5,2_5",
+          "count": 13
+        }
+      ],
+      "divider_frequency": 0.04,
+      "gradient_frequency": 0.11,
+      "avg_modules": 7.2,
+      "avg_rows": 1.4
+    },
+    "generic": {
+      "section_type": "generic",
+      "total_samples": 105,
+      "common_module_sequences": [
+        {
+          "modules": [
+            "other",
+            "other",
+            "other",
+            "other"
+          ],
+          "count": 7
+        },
+        {
+          "modules": [
+            "double-heading",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other"
+          ],
+          "count": 3
+        },
+        {
+          "modules": [
+            "text",
+            "text",
+            "other",
+            "text"
+          ],
+          "count": 3
+        }
+      ],
+      "common_column_structures": [
+        {
+          "structure": "4_4",
+          "count": 76
+        },
+        {
+          "structure": "1_2,1_2",
+          "count": 29
+        },
+        {
+          "structure": "1_3,1_3,1_3",
+          "count": 15
+        },
+        {
+          "structure": "1_4,1_4,1_4,1_4",
+          "count": 8
+        },
+        {
+          "structure": "3_5,2_5",
+          "count": 5
+        }
+      ],
+      "divider_frequency": 0.04,
+      "gradient_frequency": 0.06,
+      "avg_modules": 7.0,
+      "avg_rows": 1.4
+    },
+    "cta": {
+      "section_type": "cta",
+      "total_samples": 40,
+      "common_module_sequences": [
+        {
+          "modules": [
+            "text",
+            "text",
+            "dipl-button",
+            "dipl-button-item",
+            "dipl-button-item"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "text",
+            "text",
+            "other",
+            "other",
+            "other",
+            "other"
+          ],
+          "count": 1
+        },
+        {
+          "modules": [
+            "other",
+            "button",
+            "other",
+            "button",
+            "other",
+            "button",
+            "other",
+            "button"
+          ],
+          "count": 1
+        }
+      ],
+      "common_column_structures": [
+        {
+          "structure": "4_4",
+          "count": 15
+        },
+        {
+          "structure": "1_2,1_2",
+          "count": 12
+        },
+        {
+          "structure": "1_3,1_3,1_3",
+          "count": 4
+        },
+        {
+          "structure": "2_5,3_5",
+          "count": 3
+        },
+        {
+          "structure": "3_5,2_5",
+          "count": 3
+        }
+      ],
+      "divider_frequency": 0.03,
+      "gradient_frequency": 0.12,
+      "avg_modules": 7.2,
+      "avg_rows": 1.1
+    },
+    "timeline": {
+      "section_type": "timeline",
+      "total_samples": 39,
+      "common_module_sequences": [
+        {
+          "modules": [
+            "text",
+            "timeline",
+            "timeline-item",
+            "timeline-item",
+            "timeline-item",
+            "timeline-item"
+          ],
+          "count": 5
+        },
+        {
+          "modules": [
+            "double-heading",
+            "timeline",
+            "timeline-item",
+            "timeline-item",
+            "timeline-item",
+            "timeline-item"
+          ],
+          "count": 3
+        },
+        {
+          "modules": [
+            "timeline",
+            "timeline-item",
+            "timeline-item",
+            "timeline-item",
+            "timeline-item"
+          ],
+          "count": 2
+        }
+      ],
+      "common_column_structures": [
+        {
+          "structure": "4_4",
+          "count": 30
+        },
+        {
+          "structure": "1_2,1_2",
+          "count": 11
+        },
+        {
+          "structure": "1_3,1_3,1_3",
+          "count": 2
+        },
+        {
+          "structure": "3_5,2_5",
+          "count": 2
+        },
+        {
+          "structure": "3_4,1_4",
+          "count": 1
+        }
+      ],
+      "divider_frequency": 0.0,
+      "gradient_frequency": 0.03,
+      "avg_modules": 8.3,
+      "avg_rows": 1.3
+    },
+    "testimonials": {
+      "section_type": "testimonials",
+      "total_samples": 29,
+      "common_module_sequences": [
+        {
+          "modules": [
+            "other"
+          ],
+          "count": 4
+        },
+        {
+          "modules": [
+            "text",
+            "other"
+          ],
+          "count": 4
+        },
+        {
+          "modules": [
+            "double-heading",
+            "text",
+            "other"
+          ],
+          "count": 2
+        }
+      ],
+      "common_column_structures": [
+        {
+          "structure": "4_4",
+          "count": 26
+        },
+        {
+          "structure": "1_2,1_2",
+          "count": 9
+        },
+        {
+          "structure": "1_5,3_5,1_5",
+          "count": 3
+        },
+        {
+          "structure": "2_5,3_5",
+          "count": 2
+        },
+        {
+          "structure": "1_3,1_3,1_3",
+          "count": 2
+        }
+      ],
+      "divider_frequency": 0.0,
+      "gradient_frequency": 0.1,
+      "avg_modules": 4.3,
+      "avg_rows": 1.5
+    },
+    "stats": {
+      "section_type": "stats",
+      "total_samples": 24,
+      "common_module_sequences": [
+        {
+          "modules": [
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "text",
+            "other",
+            "double-heading",
+            "text",
+            "other",
+            "other",
+            "number-counter",
+            "number-counter",
+            "other",
+            "number-counter",
+            "number-counter",
+            "other",
+            "other",
+            "dipl-button",
+            "dipl-button-item"
+          ],
+          "count": 1
+        },
+        {
+          "modules": [
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "double-heading",
+            "double-heading",
+            "text",
+            "other",
+            "other",
+            "number-counter",
+            "other",
+            "number-counter",
+            "other"
+          ],
+          "count": 1
+        },
+        {
+          "modules": [
+            "text",
+            "divider",
+            "double-heading",
+            "other",
+            "other",
+            "other"
+          ],
+          "count": 1
+        }
+      ],
+      "common_column_structures": [
+        {
+          "structure": "1_2,1_2",
+          "count": 7
+        },
+        {
+          "structure": "1_4,1_4,1_4,1_4",
+          "count": 4
+        },
+        {
+          "structure": "4_4",
+          "count": 3
+        },
+        {
+          "structure": "1_3,1_3,1_3",
+          "count": 2
+        },
+        {
+          "structure": "1_2,1_4,1_4",
+          "count": 1
+        }
+      ],
+      "divider_frequency": 0.04,
+      "gradient_frequency": 0.04,
+      "avg_modules": 11.1,
+      "avg_rows": 0.8
+    },
+    "product": {
+      "section_type": "product",
+      "total_samples": 24,
+      "common_module_sequences": [
+        {
+          "modules": [
+            "text",
+            "other"
+          ],
+          "count": 6
+        },
+        {
+          "modules": [
+            "other",
+            "other",
+            "other"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "other"
+          ],
+          "count": 2
+        }
+      ],
+      "common_column_structures": [
+        {
+          "structure": "4_4",
+          "count": 16
+        },
+        {
+          "structure": "2_5,3_5",
+          "count": 5
+        },
+        {
+          "structure": "3_5,2_5",
+          "count": 4
+        },
+        {
+          "structure": "1_4,1_2,1_4",
+          "count": 4
+        },
+        {
+          "structure": "1_2,1_2",
+          "count": 1
+        }
+      ],
+      "divider_frequency": 0.0,
+      "gradient_frequency": 0.0,
+      "avg_modules": 4.5,
+      "avg_rows": 1.2
+    },
+    "blog": {
+      "section_type": "blog",
+      "total_samples": 21,
+      "common_module_sequences": [
+        {
+          "modules": [
+            "other"
+          ],
+          "count": 8
+        },
+        {
+          "modules": [
+            "other",
+            "other"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "text",
+            "double-heading",
+            "other"
+          ],
+          "count": 2
+        }
+      ],
+      "common_column_structures": [
+        {
+          "structure": "4_4",
+          "count": 20
+        },
+        {
+          "structure": "1_2,1_2",
+          "count": 2
+        },
+        {
+          "structure": "2_5,3_5",
+          "count": 2
+        },
+        {
+          "structure": "1_3,2_3",
+          "count": 1
+        }
+      ],
+      "divider_frequency": 0.0,
+      "gradient_frequency": 0.14,
+      "avg_modules": 2.4,
+      "avg_rows": 1.2
+    },
+    "team": {
+      "section_type": "team",
+      "total_samples": 20,
+      "common_module_sequences": [
+        {
+          "modules": [
+            "other"
+          ],
+          "count": 4
+        },
+        {
+          "modules": [
+            "double-heading",
+            "other"
+          ],
+          "count": 3
+        },
+        {
+          "modules": [
+            "text",
+            "text",
+            "other",
+            "other"
+          ],
+          "count": 2
+        }
+      ],
+      "common_column_structures": [
+        {
+          "structure": "4_4",
+          "count": 17
+        },
+        {
+          "structure": "1_2,1_2",
+          "count": 5
+        },
+        {
+          "structure": "1_3,1_3,1_3",
+          "count": 2
+        },
+        {
+          "structure": "2_5,3_5",
+          "count": 1
+        },
+        {
+          "structure": "1_4,1_4,1_4,1_4",
+          "count": 1
+        }
+      ],
+      "divider_frequency": 0.05,
+      "gradient_frequency": 0.0,
+      "avg_modules": 3.8,
+      "avg_rows": 1.3
+    },
+    "countdown": {
+      "section_type": "countdown",
+      "total_samples": 19,
+      "common_module_sequences": [
+        {
+          "modules": [
+            "other"
+          ],
+          "count": 3
+        },
+        {
+          "modules": [
+            "other",
+            "other",
+            "other",
+            "other"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "text",
+            "other"
+          ],
+          "count": 1
+        }
+      ],
+      "common_column_structures": [
+        {
+          "structure": "4_4",
+          "count": 10
+        },
+        {
+          "structure": "1_3,2_3",
+          "count": 3
+        },
+        {
+          "structure": "2_5,3_5",
+          "count": 3
+        },
+        {
+          "structure": "3_4,1_4",
+          "count": 1
+        },
+        {
+          "structure": "1_3,1_3,1_3",
+          "count": 1
+        }
+      ],
+      "divider_frequency": 0.0,
+      "gradient_frequency": 0.0,
+      "avg_modules": 4.4,
+      "avg_rows": 1.1
+    },
+    "about": {
+      "section_type": "about",
+      "total_samples": 18,
+      "common_module_sequences": [
+        {
+          "modules": [
+            "double-heading",
+            "divider",
+            "divider",
+            "text",
+            "dipl-button",
+            "dipl-button-item"
+          ],
+          "count": 1
+        },
+        {
+          "modules": [
+            "other",
+            "text",
+            "dipl-button",
+            "dipl-button-item",
+            "other",
+            "other",
+            "other"
+          ],
+          "count": 1
+        },
+        {
+          "modules": [
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "double-heading",
+            "text",
+            "text",
+            "dipl-button",
+            "dipl-button-item"
+          ],
+          "count": 1
+        }
+      ],
+      "common_column_structures": [
+        {
+          "structure": "1_2,1_2",
+          "count": 11
+        },
+        {
+          "structure": "4_4",
+          "count": 5
+        },
+        {
+          "structure": "3_5,2_5",
+          "count": 2
+        },
+        {
+          "structure": "1_3,1_3,1_3",
+          "count": 2
+        },
+        {
+          "structure": "2_5,3_5",
+          "count": 2
+        }
+      ],
+      "divider_frequency": 0.06,
+      "gradient_frequency": 0.11,
+      "avg_modules": 7.9,
+      "avg_rows": 1.2
+    },
+    "logos": {
+      "section_type": "logos",
+      "total_samples": 18,
+      "common_module_sequences": [
+        {
+          "modules": [
+            "logo-slider",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "heading",
+            "text",
+            "logo-slider",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other"
+          ],
+          "count": 1
+        },
+        {
+          "modules": [
+            "heading",
+            "text",
+            "logo-slider",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "logo-slider",
+            "other",
+            "other",
+            "other",
+            "other"
+          ],
+          "count": 1
+        }
+      ],
+      "common_column_structures": [
+        {
+          "structure": "4_4",
+          "count": 17
+        },
+        {
+          "structure": "2_5,3_5",
+          "count": 2
+        },
+        {
+          "structure": "1_3,1_3,1_3",
+          "count": 2
+        },
+        {
+          "structure": "1_2,1_2",
+          "count": 1
+        },
+        {
+          "structure": "1_4,3_4",
+          "count": 1
+        }
+      ],
+      "divider_frequency": 0.0,
+      "gradient_frequency": 0.0,
+      "avg_modules": 9.6,
+      "avg_rows": 1.3
+    },
+    "faq": {
+      "section_type": "faq",
+      "total_samples": 11,
+      "common_module_sequences": [
+        {
+          "modules": [
+            "text",
+            "divider",
+            "double-heading",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "text",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "text",
+            "other",
+            "text",
+            "image",
+            "text",
+            "accordion",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other"
+          ],
+          "count": 1
+        }
+      ],
+      "common_column_structures": [
+        {
+          "structure": "4_4",
+          "count": 14
+        },
+        {
+          "structure": "1_2,1_2",
+          "count": 3
+        }
+      ],
+      "divider_frequency": 0.0,
+      "gradient_frequency": 0.0,
+      "avg_modules": 9.5,
+      "avg_rows": 1.5
+    },
+    "pricing": {
+      "section_type": "pricing",
+      "total_samples": 10,
+      "common_module_sequences": [
+        {
+          "modules": [
+            "text",
+            "divider",
+            "text",
+            "dipl-button",
+            "dipl-button-item",
+            "dipl-button-item",
+            "other",
+            "other"
+          ],
+          "count": 1
+        },
+        {
+          "modules": [
+            "text",
+            "divider",
+            "double-heading",
+            "text",
+            "text",
+            "blurb",
+            "blurb",
+            "blurb",
+            "dipl-button",
+            "dipl-button-item",
+            "text",
+            "text",
+            "blurb",
+            "blurb",
+            "blurb",
+            "blurb",
+            "dipl-button",
+            "dipl-button-item",
+            "text",
+            "text",
+            "blurb",
+            "blurb",
+            "blurb",
+            "dipl-button",
+            "dipl-button-item"
+          ],
+          "count": 1
+        },
+        {
+          "modules": [
+            "double-heading",
+            "divider",
+            "divider",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "other",
+            "dipl-button",
+            "dipl-button-item"
+          ],
+          "count": 1
+        }
+      ],
+      "common_column_structures": [
+        {
+          "structure": "4_4",
+          "count": 12
+        },
+        {
+          "structure": "1_3,1_3,1_3",
+          "count": 5
+        },
+        {
+          "structure": "3_5,2_5",
+          "count": 1
+        },
+        {
+          "structure": "1_4,1_4,1_4,1_4",
+          "count": 1
+        },
+        {
+          "structure": "1_2,1_2",
+          "count": 1
+        }
+      ],
+      "divider_frequency": 0.0,
+      "gradient_frequency": 0.2,
+      "avg_modules": 11.5,
+      "avg_rows": 2.0
+    },
+    "contact": {
+      "section_type": "contact",
+      "total_samples": 4,
+      "common_module_sequences": [
+        {
+          "modules": [
+            "double-heading",
+            "other",
+            "blurb",
+            "blurb",
+            "blurb",
+            "other"
+          ],
+          "count": 1
+        },
+        {
+          "modules": [
+            "text-animator",
+            "other",
+            "social-follow",
+            "social-network",
+            "social-network",
+            "social-network",
+            "blurb",
+            "blurb",
+            "blurb"
+          ],
+          "count": 1
+        },
+        {
+          "modules": [
+            "text",
+            "blurb",
+            "blurb",
+            "blurb",
+            "other"
+          ],
+          "count": 1
+        }
+      ],
+      "common_column_structures": [
+        {
+          "structure": "1_2,1_2",
+          "count": 2
+        },
+        {
+          "structure": "4_4",
+          "count": 2
+        },
+        {
+          "structure": "3_5,2_5",
+          "count": 1
+        },
+        {
+          "structure": "1_3,2_3",
+          "count": 1
+        }
+      ],
+      "divider_frequency": 0.0,
+      "gradient_frequency": 0.25,
+      "avg_modules": 9.5,
+      "avg_rows": 1.5
+    }
+  },
+  "module_affinity": {
+    "hero": {
+      "section_type": "hero",
+      "total_samples": 179,
+      "top_modules": [
+        {
+          "module": "other",
+          "count": 120
+        },
+        {
+          "module": "text",
+          "count": 97
+        },
+        {
+          "module": "dipl-button-item",
+          "count": 96
+        },
+        {
+          "module": "dipl-button",
+          "count": 96
+        },
+        {
+          "module": "double-heading",
+          "count": 65
+        },
+        {
+          "module": "heading",
+          "count": 64
+        },
+        {
+          "module": "text-animator",
+          "count": 48
+        },
+        {
+          "module": "countdown",
+          "count": 13
+        },
+        {
+          "module": "divider",
+          "count": 10
+        },
+        {
+          "module": "social-follow",
+          "count": 9
+        },
+        {
+          "module": "social-network",
+          "count": 9
+        },
+        {
+          "module": "image",
+          "count": 4
+        },
+        {
+          "module": "icon",
+          "count": 4
+        },
+        {
+          "module": "blurb",
+          "count": 4
+        },
+        {
+          "module": "logo-slider",
+          "count": 2
+        }
+      ],
+      "top_pairs": [
+        {
+          "modules": [
+            "dipl-button",
+            "dipl-button-item"
+          ],
+          "count": 96
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "text"
+          ],
+          "count": 74
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "text"
+          ],
+          "count": 74
+        },
+        {
+          "modules": [
+            "other",
+            "text"
+          ],
+          "count": 59
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "other"
+          ],
+          "count": 55
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "other"
+          ],
+          "count": 55
+        },
+        {
+          "modules": [
+            "heading",
+            "other"
+          ],
+          "count": 53
+        },
+        {
+          "modules": [
+            "double-heading",
+            "text"
+          ],
+          "count": 45
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "double-heading"
+          ],
+          "count": 44
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "double-heading"
+          ],
+          "count": 44
+        }
+      ]
+    },
+    "features": {
+      "section_type": "features",
+      "total_samples": 172,
+      "top_modules": [
+        {
+          "module": "other",
+          "count": 110
+        },
+        {
+          "module": "blurb",
+          "count": 109
+        },
+        {
+          "module": "text",
+          "count": 92
+        },
+        {
+          "module": "double-heading",
+          "count": 72
+        },
+        {
+          "module": "dipl-button-item",
+          "count": 55
+        },
+        {
+          "module": "dipl-button",
+          "count": 55
+        },
+        {
+          "module": "flipbox",
+          "count": 39
+        },
+        {
+          "module": "image",
+          "count": 30
+        },
+        {
+          "module": "social-follow",
+          "count": 25
+        },
+        {
+          "module": "social-network",
+          "count": 25
+        },
+        {
+          "module": "code",
+          "count": 17
+        },
+        {
+          "module": "menu",
+          "count": 14
+        },
+        {
+          "module": "divider",
+          "count": 8
+        },
+        {
+          "module": "signup",
+          "count": 5
+        },
+        {
+          "module": "heading",
+          "count": 5
+        }
+      ],
+      "top_pairs": [
+        {
+          "modules": [
+            "blurb",
+            "other"
+          ],
+          "count": 76
+        },
+        {
+          "modules": [
+            "blurb",
+            "text"
+          ],
+          "count": 64
+        },
+        {
+          "modules": [
+            "other",
+            "text"
+          ],
+          "count": 57
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "dipl-button-item"
+          ],
+          "count": 55
+        },
+        {
+          "modules": [
+            "double-heading",
+            "other"
+          ],
+          "count": 53
+        },
+        {
+          "modules": [
+            "blurb",
+            "double-heading"
+          ],
+          "count": 43
+        },
+        {
+          "modules": [
+            "blurb",
+            "dipl-button-item"
+          ],
+          "count": 41
+        },
+        {
+          "modules": [
+            "blurb",
+            "dipl-button"
+          ],
+          "count": 41
+        },
+        {
+          "modules": [
+            "double-heading",
+            "text"
+          ],
+          "count": 40
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "other"
+          ],
+          "count": 36
+        }
+      ]
+    },
+    "gallery": {
+      "section_type": "gallery",
+      "total_samples": 142,
+      "top_modules": [
+        {
+          "module": "other",
+          "count": 98
+        },
+        {
+          "module": "text",
+          "count": 82
+        },
+        {
+          "module": "image",
+          "count": 79
+        },
+        {
+          "module": "double-heading",
+          "count": 62
+        },
+        {
+          "module": "dipl-button-item",
+          "count": 50
+        },
+        {
+          "module": "dipl-button",
+          "count": 50
+        },
+        {
+          "module": "image-card",
+          "count": 28
+        },
+        {
+          "module": "heading",
+          "count": 13
+        },
+        {
+          "module": "image-accordion",
+          "count": 9
+        },
+        {
+          "module": "divider",
+          "count": 8
+        },
+        {
+          "module": "text-animator",
+          "count": 6
+        },
+        {
+          "module": "social-network",
+          "count": 5
+        },
+        {
+          "module": "social-follow",
+          "count": 5
+        },
+        {
+          "module": "code",
+          "count": 5
+        },
+        {
+          "module": "countdown",
+          "count": 4
+        }
+      ],
+      "top_pairs": [
+        {
+          "modules": [
+            "image",
+            "other"
+          ],
+          "count": 55
+        },
+        {
+          "modules": [
+            "other",
+            "text"
+          ],
+          "count": 52
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "dipl-button-item"
+          ],
+          "count": 50
+        },
+        {
+          "modules": [
+            "image",
+            "text"
+          ],
+          "count": 48
+        },
+        {
+          "modules": [
+            "double-heading",
+            "other"
+          ],
+          "count": 40
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "text"
+          ],
+          "count": 38
+        },
+        {
+          "modules": [
+            "double-heading",
+            "text"
+          ],
+          "count": 38
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "text"
+          ],
+          "count": 38
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "image"
+          ],
+          "count": 37
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "image"
+          ],
+          "count": 37
+        }
+      ]
+    },
+    "generic": {
+      "section_type": "generic",
+      "total_samples": 105,
+      "top_modules": [
+        {
+          "module": "other",
+          "count": 101
+        },
+        {
+          "module": "text",
+          "count": 64
+        },
+        {
+          "module": "double-heading",
+          "count": 57
+        },
+        {
+          "module": "dipl-button",
+          "count": 33
+        },
+        {
+          "module": "dipl-button-item",
+          "count": 33
+        },
+        {
+          "module": "social-follow",
+          "count": 10
+        },
+        {
+          "module": "social-network",
+          "count": 10
+        },
+        {
+          "module": "divider",
+          "count": 5
+        },
+        {
+          "module": "countdown",
+          "count": 5
+        },
+        {
+          "module": "search",
+          "count": 1
+        },
+        {
+          "module": "contact-form",
+          "count": 1
+        },
+        {
+          "module": "icon",
+          "count": 1
+        }
+      ],
+      "top_pairs": [
+        {
+          "modules": [
+            "other",
+            "text"
+          ],
+          "count": 61
+        },
+        {
+          "modules": [
+            "double-heading",
+            "other"
+          ],
+          "count": 53
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "dipl-button-item"
+          ],
+          "count": 33
+        },
+        {
+          "modules": [
+            "double-heading",
+            "text"
+          ],
+          "count": 33
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "other"
+          ],
+          "count": 32
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "other"
+          ],
+          "count": 32
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "text"
+          ],
+          "count": 22
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "text"
+          ],
+          "count": 22
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "double-heading"
+          ],
+          "count": 21
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "double-heading"
+          ],
+          "count": 21
+        }
+      ]
+    },
+    "cta": {
+      "section_type": "cta",
+      "total_samples": 40,
+      "top_modules": [
+        {
+          "module": "text",
+          "count": 31
+        },
+        {
+          "module": "other",
+          "count": 26
+        },
+        {
+          "module": "double-heading",
+          "count": 15
+        },
+        {
+          "module": "dipl-button",
+          "count": 14
+        },
+        {
+          "module": "dipl-button-item",
+          "count": 13
+        },
+        {
+          "module": "button",
+          "count": 11
+        },
+        {
+          "module": "image",
+          "count": 8
+        },
+        {
+          "module": "signup",
+          "count": 7
+        },
+        {
+          "module": "heading",
+          "count": 5
+        },
+        {
+          "module": "social-follow",
+          "count": 5
+        },
+        {
+          "module": "social-network",
+          "count": 5
+        },
+        {
+          "module": "divider",
+          "count": 4
+        },
+        {
+          "module": "contact-form",
+          "count": 3
+        },
+        {
+          "module": "code",
+          "count": 2
+        },
+        {
+          "module": "logo-slider",
+          "count": 1
+        }
+      ],
+      "top_pairs": [
+        {
+          "modules": [
+            "other",
+            "text"
+          ],
+          "count": 18
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "dipl-button-item"
+          ],
+          "count": 13
+        },
+        {
+          "modules": [
+            "double-heading",
+            "other"
+          ],
+          "count": 11
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "text"
+          ],
+          "count": 10
+        },
+        {
+          "modules": [
+            "button",
+            "other"
+          ],
+          "count": 9
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "text"
+          ],
+          "count": 9
+        },
+        {
+          "modules": [
+            "button",
+            "text"
+          ],
+          "count": 9
+        },
+        {
+          "modules": [
+            "double-heading",
+            "text"
+          ],
+          "count": 9
+        },
+        {
+          "modules": [
+            "image",
+            "text"
+          ],
+          "count": 8
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "other"
+          ],
+          "count": 6
+        }
+      ]
+    },
+    "timeline": {
+      "section_type": "timeline",
+      "total_samples": 39,
+      "top_modules": [
+        {
+          "module": "timeline-item",
+          "count": 36
+        },
+        {
+          "module": "timeline",
+          "count": 36
+        },
+        {
+          "module": "text",
+          "count": 24
+        },
+        {
+          "module": "double-heading",
+          "count": 17
+        },
+        {
+          "module": "other",
+          "count": 16
+        },
+        {
+          "module": "image",
+          "count": 5
+        },
+        {
+          "module": "dipl-button-item",
+          "count": 4
+        },
+        {
+          "module": "dipl-button",
+          "count": 4
+        },
+        {
+          "module": "video",
+          "count": 2
+        },
+        {
+          "module": "text-animator",
+          "count": 2
+        },
+        {
+          "module": "divider",
+          "count": 2
+        },
+        {
+          "module": "heading",
+          "count": 2
+        },
+        {
+          "module": "blurb",
+          "count": 1
+        }
+      ],
+      "top_pairs": [
+        {
+          "modules": [
+            "timeline",
+            "timeline-item"
+          ],
+          "count": 36
+        },
+        {
+          "modules": [
+            "text",
+            "timeline-item"
+          ],
+          "count": 21
+        },
+        {
+          "modules": [
+            "text",
+            "timeline"
+          ],
+          "count": 21
+        },
+        {
+          "modules": [
+            "double-heading",
+            "timeline-item"
+          ],
+          "count": 17
+        },
+        {
+          "modules": [
+            "double-heading",
+            "timeline"
+          ],
+          "count": 17
+        },
+        {
+          "modules": [
+            "other",
+            "timeline"
+          ],
+          "count": 13
+        },
+        {
+          "modules": [
+            "other",
+            "timeline-item"
+          ],
+          "count": 13
+        },
+        {
+          "modules": [
+            "other",
+            "text"
+          ],
+          "count": 11
+        },
+        {
+          "modules": [
+            "double-heading",
+            "text"
+          ],
+          "count": 7
+        },
+        {
+          "modules": [
+            "double-heading",
+            "other"
+          ],
+          "count": 7
+        }
+      ]
+    },
+    "testimonials": {
+      "section_type": "testimonials",
+      "total_samples": 29,
+      "top_modules": [
+        {
+          "module": "other",
+          "count": 29
+        },
+        {
+          "module": "text",
+          "count": 16
+        },
+        {
+          "module": "double-heading",
+          "count": 11
+        },
+        {
+          "module": "dipl-button",
+          "count": 2
+        },
+        {
+          "module": "dipl-button-item",
+          "count": 2
+        },
+        {
+          "module": "contact-form",
+          "count": 1
+        },
+        {
+          "module": "image",
+          "count": 1
+        },
+        {
+          "module": "blurb",
+          "count": 1
+        },
+        {
+          "module": "text-animator",
+          "count": 1
+        }
+      ],
+      "top_pairs": [
+        {
+          "modules": [
+            "other",
+            "text"
+          ],
+          "count": 16
+        },
+        {
+          "modules": [
+            "double-heading",
+            "other"
+          ],
+          "count": 11
+        },
+        {
+          "modules": [
+            "double-heading",
+            "text"
+          ],
+          "count": 5
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "dipl-button-item"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "other"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "other"
+          ],
+          "count": 2
+        }
+      ]
+    },
+    "stats": {
+      "section_type": "stats",
+      "total_samples": 24,
+      "top_modules": [
+        {
+          "module": "other",
+          "count": 21
+        },
+        {
+          "module": "number-counter",
+          "count": 18
+        },
+        {
+          "module": "text",
+          "count": 16
+        },
+        {
+          "module": "double-heading",
+          "count": 14
+        },
+        {
+          "module": "dipl-button-item",
+          "count": 9
+        },
+        {
+          "module": "dipl-button",
+          "count": 9
+        },
+        {
+          "module": "heading",
+          "count": 3
+        },
+        {
+          "module": "image",
+          "count": 3
+        },
+        {
+          "module": "divider",
+          "count": 2
+        },
+        {
+          "module": "counter",
+          "count": 1
+        },
+        {
+          "module": "contact-form",
+          "count": 1
+        },
+        {
+          "module": "video",
+          "count": 1
+        },
+        {
+          "module": "text-animator",
+          "count": 1
+        }
+      ],
+      "top_pairs": [
+        {
+          "modules": [
+            "other",
+            "text"
+          ],
+          "count": 15
+        },
+        {
+          "modules": [
+            "number-counter",
+            "other"
+          ],
+          "count": 15
+        },
+        {
+          "modules": [
+            "number-counter",
+            "text"
+          ],
+          "count": 13
+        },
+        {
+          "modules": [
+            "double-heading",
+            "other"
+          ],
+          "count": 13
+        },
+        {
+          "modules": [
+            "double-heading",
+            "number-counter"
+          ],
+          "count": 11
+        },
+        {
+          "modules": [
+            "double-heading",
+            "text"
+          ],
+          "count": 10
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "dipl-button-item"
+          ],
+          "count": 9
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "other"
+          ],
+          "count": 8
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "number-counter"
+          ],
+          "count": 8
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "other"
+          ],
+          "count": 8
+        }
+      ]
+    },
+    "product": {
+      "section_type": "product",
+      "total_samples": 24,
+      "top_modules": [
+        {
+          "module": "other",
+          "count": 23
+        },
+        {
+          "module": "text",
+          "count": 14
+        },
+        {
+          "module": "double-heading",
+          "count": 9
+        },
+        {
+          "module": "dipl-button-item",
+          "count": 6
+        },
+        {
+          "module": "dipl-button",
+          "count": 6
+        },
+        {
+          "module": "social-follow",
+          "count": 2
+        },
+        {
+          "module": "social-network",
+          "count": 2
+        },
+        {
+          "module": "flipbox",
+          "count": 1
+        }
+      ],
+      "top_pairs": [
+        {
+          "modules": [
+            "other",
+            "text"
+          ],
+          "count": 14
+        },
+        {
+          "modules": [
+            "double-heading",
+            "other"
+          ],
+          "count": 8
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "dipl-button-item"
+          ],
+          "count": 6
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "text"
+          ],
+          "count": 5
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "text"
+          ],
+          "count": 5
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "other"
+          ],
+          "count": 5
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "other"
+          ],
+          "count": 5
+        },
+        {
+          "modules": [
+            "double-heading",
+            "text"
+          ],
+          "count": 3
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "double-heading"
+          ],
+          "count": 3
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "double-heading"
+          ],
+          "count": 3
+        }
+      ]
+    },
+    "blog": {
+      "section_type": "blog",
+      "total_samples": 21,
+      "top_modules": [
+        {
+          "module": "other",
+          "count": 20
+        },
+        {
+          "module": "text",
+          "count": 8
+        },
+        {
+          "module": "double-heading",
+          "count": 6
+        },
+        {
+          "module": "dipl-button-item",
+          "count": 2
+        },
+        {
+          "module": "dipl-button",
+          "count": 2
+        },
+        {
+          "module": "divider",
+          "count": 1
+        },
+        {
+          "module": "blog",
+          "count": 1
+        }
+      ],
+      "top_pairs": [
+        {
+          "modules": [
+            "other",
+            "text"
+          ],
+          "count": 7
+        },
+        {
+          "modules": [
+            "double-heading",
+            "other"
+          ],
+          "count": 6
+        },
+        {
+          "modules": [
+            "double-heading",
+            "text"
+          ],
+          "count": 4
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "text"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "text"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "other"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "dipl-button-item"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "other"
+          ],
+          "count": 2
+        }
+      ]
+    },
+    "team": {
+      "section_type": "team",
+      "total_samples": 20,
+      "top_modules": [
+        {
+          "module": "other",
+          "count": 19
+        },
+        {
+          "module": "text",
+          "count": 12
+        },
+        {
+          "module": "double-heading",
+          "count": 9
+        },
+        {
+          "module": "divider",
+          "count": 1
+        },
+        {
+          "module": "flipbox",
+          "count": 1
+        }
+      ],
+      "top_pairs": [
+        {
+          "modules": [
+            "other",
+            "text"
+          ],
+          "count": 11
+        },
+        {
+          "modules": [
+            "double-heading",
+            "other"
+          ],
+          "count": 9
+        },
+        {
+          "modules": [
+            "double-heading",
+            "text"
+          ],
+          "count": 5
+        }
+      ]
+    },
+    "countdown": {
+      "section_type": "countdown",
+      "total_samples": 19,
+      "top_modules": [
+        {
+          "module": "other",
+          "count": 17
+        },
+        {
+          "module": "text",
+          "count": 8
+        },
+        {
+          "module": "dipl-button-item",
+          "count": 7
+        },
+        {
+          "module": "dipl-button",
+          "count": 7
+        },
+        {
+          "module": "countdown",
+          "count": 6
+        },
+        {
+          "module": "double-heading",
+          "count": 5
+        },
+        {
+          "module": "social-network",
+          "count": 1
+        },
+        {
+          "module": "social-follow",
+          "count": 1
+        },
+        {
+          "module": "image",
+          "count": 1
+        }
+      ],
+      "top_pairs": [
+        {
+          "modules": [
+            "dipl-button",
+            "dipl-button-item"
+          ],
+          "count": 7
+        },
+        {
+          "modules": [
+            "other",
+            "text"
+          ],
+          "count": 6
+        },
+        {
+          "modules": [
+            "countdown",
+            "dipl-button-item"
+          ],
+          "count": 6
+        },
+        {
+          "modules": [
+            "countdown",
+            "dipl-button"
+          ],
+          "count": 6
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "text"
+          ],
+          "count": 6
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "text"
+          ],
+          "count": 6
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "other"
+          ],
+          "count": 5
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "other"
+          ],
+          "count": 5
+        },
+        {
+          "modules": [
+            "countdown",
+            "text"
+          ],
+          "count": 5
+        },
+        {
+          "modules": [
+            "countdown",
+            "other"
+          ],
+          "count": 4
+        }
+      ]
+    },
+    "about": {
+      "section_type": "about",
+      "total_samples": 18,
+      "top_modules": [
+        {
+          "module": "text",
+          "count": 15
+        },
+        {
+          "module": "other",
+          "count": 15
+        },
+        {
+          "module": "dipl-button-item",
+          "count": 11
+        },
+        {
+          "module": "double-heading",
+          "count": 11
+        },
+        {
+          "module": "dipl-button",
+          "count": 11
+        },
+        {
+          "module": "divider",
+          "count": 2
+        },
+        {
+          "module": "social-follow",
+          "count": 2
+        },
+        {
+          "module": "social-network",
+          "count": 2
+        },
+        {
+          "module": "contact-form",
+          "count": 1
+        },
+        {
+          "module": "blurb",
+          "count": 1
+        }
+      ],
+      "top_pairs": [
+        {
+          "modules": [
+            "other",
+            "text"
+          ],
+          "count": 12
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "dipl-button-item"
+          ],
+          "count": 11
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "text"
+          ],
+          "count": 10
+        },
+        {
+          "modules": [
+            "double-heading",
+            "text"
+          ],
+          "count": 10
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "text"
+          ],
+          "count": 10
+        },
+        {
+          "modules": [
+            "double-heading",
+            "other"
+          ],
+          "count": 9
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "other"
+          ],
+          "count": 8
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "other"
+          ],
+          "count": 8
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "double-heading"
+          ],
+          "count": 7
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "double-heading"
+          ],
+          "count": 7
+        }
+      ]
+    },
+    "logos": {
+      "section_type": "logos",
+      "total_samples": 18,
+      "top_modules": [
+        {
+          "module": "other",
+          "count": 18
+        },
+        {
+          "module": "logo-slider",
+          "count": 15
+        },
+        {
+          "module": "text",
+          "count": 8
+        },
+        {
+          "module": "double-heading",
+          "count": 5
+        },
+        {
+          "module": "heading",
+          "count": 4
+        },
+        {
+          "module": "dipl-button-item",
+          "count": 1
+        },
+        {
+          "module": "dipl-button",
+          "count": 1
+        },
+        {
+          "module": "code",
+          "count": 1
+        },
+        {
+          "module": "divider",
+          "count": 1
+        },
+        {
+          "module": "button",
+          "count": 1
+        },
+        {
+          "module": "image",
+          "count": 1
+        }
+      ],
+      "top_pairs": [
+        {
+          "modules": [
+            "logo-slider",
+            "other"
+          ],
+          "count": 15
+        },
+        {
+          "modules": [
+            "other",
+            "text"
+          ],
+          "count": 8
+        },
+        {
+          "modules": [
+            "logo-slider",
+            "text"
+          ],
+          "count": 6
+        },
+        {
+          "modules": [
+            "double-heading",
+            "other"
+          ],
+          "count": 5
+        },
+        {
+          "modules": [
+            "heading",
+            "other"
+          ],
+          "count": 4
+        },
+        {
+          "modules": [
+            "heading",
+            "logo-slider"
+          ],
+          "count": 4
+        },
+        {
+          "modules": [
+            "double-heading",
+            "logo-slider"
+          ],
+          "count": 4
+        },
+        {
+          "modules": [
+            "heading",
+            "text"
+          ],
+          "count": 3
+        },
+        {
+          "modules": [
+            "double-heading",
+            "text"
+          ],
+          "count": 2
+        }
+      ]
+    },
+    "faq": {
+      "section_type": "faq",
+      "total_samples": 11,
+      "top_modules": [
+        {
+          "module": "other",
+          "count": 11
+        },
+        {
+          "module": "text",
+          "count": 9
+        },
+        {
+          "module": "double-heading",
+          "count": 6
+        },
+        {
+          "module": "divider",
+          "count": 2
+        },
+        {
+          "module": "accordion",
+          "count": 1
+        },
+        {
+          "module": "image",
+          "count": 1
+        }
+      ],
+      "top_pairs": [
+        {
+          "modules": [
+            "other",
+            "text"
+          ],
+          "count": 9
+        },
+        {
+          "modules": [
+            "double-heading",
+            "other"
+          ],
+          "count": 6
+        },
+        {
+          "modules": [
+            "double-heading",
+            "text"
+          ],
+          "count": 4
+        },
+        {
+          "modules": [
+            "divider",
+            "text"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "divider",
+            "other"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "divider",
+            "double-heading"
+          ],
+          "count": 2
+        }
+      ]
+    },
+    "pricing": {
+      "section_type": "pricing",
+      "total_samples": 10,
+      "top_modules": [
+        {
+          "module": "other",
+          "count": 8
+        },
+        {
+          "module": "text",
+          "count": 6
+        },
+        {
+          "module": "dipl-button-item",
+          "count": 4
+        },
+        {
+          "module": "dipl-button",
+          "count": 4
+        },
+        {
+          "module": "divider",
+          "count": 3
+        },
+        {
+          "module": "double-heading",
+          "count": 3
+        },
+        {
+          "module": "pricing",
+          "count": 2
+        },
+        {
+          "module": "pricing-table",
+          "count": 2
+        },
+        {
+          "module": "blurb",
+          "count": 1
+        },
+        {
+          "module": "icon",
+          "count": 1
+        }
+      ],
+      "top_pairs": [
+        {
+          "modules": [
+            "other",
+            "text"
+          ],
+          "count": 4
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "dipl-button-item"
+          ],
+          "count": 4
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "text"
+          ],
+          "count": 3
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "text"
+          ],
+          "count": 3
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "other"
+          ],
+          "count": 3
+        },
+        {
+          "modules": [
+            "dipl-button-item",
+            "divider"
+          ],
+          "count": 3
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "other"
+          ],
+          "count": 3
+        },
+        {
+          "modules": [
+            "dipl-button",
+            "divider"
+          ],
+          "count": 3
+        },
+        {
+          "modules": [
+            "divider",
+            "text"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "divider",
+            "other"
+          ],
+          "count": 2
+        }
+      ]
+    },
+    "contact": {
+      "section_type": "contact",
+      "total_samples": 4,
+      "top_modules": [
+        {
+          "module": "other",
+          "count": 4
+        },
+        {
+          "module": "blurb",
+          "count": 4
+        },
+        {
+          "module": "double-heading",
+          "count": 2
+        },
+        {
+          "module": "social-follow",
+          "count": 2
+        },
+        {
+          "module": "social-network",
+          "count": 2
+        },
+        {
+          "module": "text",
+          "count": 2
+        },
+        {
+          "module": "text-animator",
+          "count": 1
+        },
+        {
+          "module": "contact-form",
+          "count": 1
+        },
+        {
+          "module": "image",
+          "count": 1
+        },
+        {
+          "module": "divider",
+          "count": 1
+        }
+      ],
+      "top_pairs": [
+        {
+          "modules": [
+            "blurb",
+            "other"
+          ],
+          "count": 4
+        },
+        {
+          "modules": [
+            "double-heading",
+            "other"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "blurb",
+            "double-heading"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "blurb",
+            "social-follow"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "other",
+            "social-follow"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "social-follow",
+            "social-network"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "blurb",
+            "social-network"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "other",
+            "social-network"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "other",
+            "text"
+          ],
+          "count": 2
+        },
+        {
+          "modules": [
+            "blurb",
+            "text"
+          ],
+          "count": 2
+        }
+      ]
+    }
+  },
+  "color_palettes": {
+    "most_common_bg": [
+      {
+        "color": "#000000",
+        "count": 31
+      },
+      {
+        "color": "#FFFFFF",
+        "count": 9
+      },
+      {
+        "color": "#f7f7f7",
+        "count": 7
+      },
+      {
+        "color": "#eaeaea",
+        "count": 7
+      },
+      {
+        "color": "#ffffff",
+        "count": 6
+      },
+      {
+        "color": "#f8f8f8",
+        "count": 6
+      },
+      {
+        "color": "#f9f9f9",
+        "count": 6
+      },
+      {
+        "color": "#170837",
+        "count": 5
+      },
+      {
+        "color": "#eeeeee",
+        "count": 5
+      },
+      {
+        "color": "#0f2633",
+        "count": 5
+      },
+      {
+        "color": "#171717",
+        "count": 5
+      },
+      {
+        "color": "#f2f2f2",
+        "count": 5
+      },
+      {
+        "color": "rgba(255,255,255,0)",
+        "count": 4
+      },
+      {
+        "color": "#F7F7F7",
+        "count": 4
+      },
+      {
+        "color": "#f1f1f1",
+        "count": 4
+      },
+      {
+        "color": "#f8f7ef",
+        "count": 4
+      },
+      {
+        "color": "#212121",
+        "count": 4
+      },
+      {
+        "color": "#faefec",
+        "count": 3
+      },
+      {
+        "color": "rgba(0,0,0,0.6)",
+        "count": 3
+      },
+      {
+        "color": "#fcfcfc",
+        "count": 3
+      },
+      {
+        "color": "rgba(0,69,122,0.06)",
+        "count": 3
+      },
+      {
+        "color": "#f3f3f3",
+        "count": 3
+      },
+      {
+        "color": "#f6f6f6",
+        "count": 3
+      },
+      {
+        "color": "#232d35",
+        "count": 3
+      },
+      {
+        "color": "#f4f2f2",
+        "count": 3
+      },
+      {
+        "color": "#f6f5f5",
+        "count": 3
+      },
+      {
+        "color": "rgba(0,0,0,0.3)",
+        "count": 2
+      },
+      {
+        "color": "rgba(255,255,255,0.64)",
+        "count": 2
+      },
+      {
+        "color": "#040e27",
+        "count": 2
+      },
+      {
+        "color": "rgba(255,255,255,0.9)",
+        "count": 2
+      }
+    ],
+    "total_unique": 165
+  }
+}

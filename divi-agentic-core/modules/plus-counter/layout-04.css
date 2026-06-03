@@ -1,0 +1,40 @@
+/* Layout 04 — Icon above Number (Dark bold) */
+{{selector}}.layout-04 {
+  padding: 48px 32px;
+  position: relative;
+}
+{{selector}}.layout-04::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--daw-accent, #D4956A), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+{{selector}}.layout-04:hover::before {
+  opacity: 1;
+}
+{{selector}}.layout-04 .et_pb_module:first-child .et-pb-icon {
+  font-size: 48px;
+  margin-bottom: 24px;
+  display: inline-block;
+  color: var(--daw-accent, #D4956A);
+}
+{{selector}}.layout-04 .et_pb_number_counter .percent {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--daw-text-on-dark, #F5F5F7);
+}
+{{selector}}.layout-04 .et_pb_number_counter .title {
+  font-size: 14px;
+  color: rgba(245,245,247,0.7);
+  margin-top: 8px;
+}
+{{selector}}.layout-04:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.25);
+}

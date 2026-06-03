@@ -1,0 +1,1948 @@
+{
+    "sections": [
+        {
+            "decoration": {
+                "background": {
+                    "desktop": {
+                        "value": {
+                            "color": "var(--gcid-surface-deep)",
+                            "overlay": {
+                                "gradient": "radial-gradient(circle at 80% 20%, rgba(166,124,64,0.06) 0%, transparent 60%)"
+                            }
+                        }
+                    }
+                },
+                "spacing": {
+                    "desktop": {
+                        "value": {
+                            "padding": {
+                                "top": "180px",
+                                "bottom": "140px",
+                                "right": "96px",
+                                "left": "96px"
+                            }
+                        }
+                    },
+                    "tablet": {
+                        "value": {
+                            "padding": {
+                                "top": "120px",
+                                "bottom": "100px",
+                                "right": "48px",
+                                "left": "48px"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "value": {
+                            "padding": {
+                                "top": "80px",
+                                "bottom": "80px",
+                                "right": "24px",
+                                "left": "24px"
+                            }
+                        }
+                    }
+                },
+                "animation": {
+                    "desktop": {
+                        "value": {
+                            "style": "fade",
+                            "duration": "800ms",
+                            "delay": "0ms"
+                        }
+                    }
+                },
+                "scroll": {
+                    "desktop": {
+                        "value": "reveal"
+                    }
+                }
+            },
+            "rows": [
+                {
+                    "column_structure": "3_5,2_5",
+                    "columns": [
+                        {
+                            "type": "3_5",
+                            "modules": [
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p>CONTACTANOS</p>",
+                                    "bodyFont": {
+                                        "body": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'DM Sans', system-ui, sans-serif",
+                                                        "weight": "500",
+                                                        "textTransform": "uppercase",
+                                                        "letterSpacing": "0.2em",
+                                                        "color": "var(--gcid-sepia-300)",
+                                                        "size": "12px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide-up",
+                                                    "duration": "600ms",
+                                                    "delay": "0ms"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/text",
+                                    "content": "<h1>Página de Contacto de Bibliotheca</h1>",
+                                    "headingFont": {
+                                        "h1": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'Cormorant Garamond', Georgia, serif",
+                                                        "color": "var(--gcid-ink)",
+                                                        "size": "clamp(2.25rem, 4.5vw + 0.45rem, 4.5rem)",
+                                                        "weight": "300",
+                                                        "lineHeight": "1.0",
+                                                        "letterSpacing": "-0.02em"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide-up",
+                                                    "duration": "600ms",
+                                                    "delay": "150ms"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p>¡Estamos aquí para ayudarte! Si tienes alguna pregunta o inquietud, no dudes en contactarnos.</p>",
+                                    "bodyFont": {
+                                        "body": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'Crimson Pro', Georgia, serif",
+                                                        "color": "var(--gcid-parchment-200)",
+                                                        "size": "20px",
+                                                        "lineHeight": "1.7"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "40px"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide-up",
+                                                    "duration": "600ms",
+                                                    "delay": "300ms"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/button",
+                                    "button": {
+                                        "decoration": {
+                                            "button": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "icon": {
+                                                            "enable": "on"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "decoration": {
+                                        "button": {
+                                            "desktop": {
+                                                "value": {
+                                                    "backgroundColor": "transparent",
+                                                    "textColor": "var(--gcid-parchment-50)",
+                                                    "borderColor": "var(--gcid-parchment-50)",
+                                                    "borderWidth": "1px",
+                                                    "borderRadius": "100px",
+                                                    "fontFamily": "'DM Sans', system-ui, sans-serif",
+                                                    "fontWeight": "500",
+                                                    "padding": "15px 38px",
+                                                    "letterSpacing": "0.08em",
+                                                    "textTransform": "uppercase",
+                                                    "fontSize": "13px"
+                                                }
+                                            },
+                                            "hover": {
+                                                "value": {
+                                                    "backgroundColor": "var(--gcid-parchment-50)",
+                                                    "textColor": "var(--gcid-ink)",
+                                                    "borderColor": "var(--gcid-parchment-50)"
+                                                }
+                                            }
+                                        },
+                                        "transition": {
+                                            "desktop": {
+                                                "value": {
+                                                    "duration": "300ms",
+                                                    "delay": "0ms"
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide-up",
+                                                    "duration": "600ms",
+                                                    "delay": "450ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "button_text": "Enviar Mensaje",
+                                    "button_url": "/contacto/enviar"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "2_5",
+                            "modules": [
+                                {
+                                    "imageIcon": {
+                                        "innerContent": {
+                                            "desktop": {
+                                                "value": {
+                                                    "useIcon": "off"
+                                                }
+                                            }
+                                        },
+                                        "advanced": {
+                                            "color": {
+                                                "desktop": {
+                                                    "value": "$variable({\"type\":\"color\",\"value\":{\"name\":\"gcid-primary-color\",\"settings\":{}}})$"
+                                                }
+                                            },
+                                            "placement": {
+                                                "desktop": {
+                                                    "value": "top"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "module": "divi/blurb",
+                                    "title": "",
+                                    "content": "<p style='font-size: 1.5rem; line-height: 1.8; font-style: italic; color: var(--gcid-parchment-200); text-align: center; padding: 2rem;'>\"El diálogo es el camino para llegar a la verdad, revelando lo que yace en el silencio del pensamiento.\"<br><span style='font-size: 0.9rem; color: var(--gcid-sepia-300);'>— Umberto Eco</span></p>",
+                                    "contentContainer": [],
+                                    "decoration": {
+                                        "background": {
+                                            "desktop": {
+                                                "value": {
+                                                    "color": "rgba(253,251,247,0.12)",
+                                                    "backdropFilter": "blur(12px)",
+                                                    "backdropFilterSupported": "on"
+                                                }
+                                            }
+                                        },
+                                        "border": {
+                                            "desktop": {
+                                                "value": {
+                                                    "radius": {
+                                                        "topLeft": "8px",
+                                                        "topRight": "8px",
+                                                        "bottomRight": "8px",
+                                                        "bottomLeft": "8px",
+                                                        "sync": "on"
+                                                    },
+                                                    "styles": {
+                                                        "all": {
+                                                            "style": "solid",
+                                                            "width": "1px",
+                                                            "color": "rgba(253,251,247,0.2)"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "boxShadow": {
+                                            "desktop": {
+                                                "value": {
+                                                    "horizontal": "0px",
+                                                    "vertical": "8px",
+                                                    "blur": "32px",
+                                                    "spread": "0px",
+                                                    "color": "rgba(26,24,20,0.08)"
+                                                }
+                                            }
+                                        },
+                                        "transform": {
+                                            "hover": {
+                                                "value": {
+                                                    "translateY": "-6px",
+                                                    "scale": {
+                                                        "x": "1.05",
+                                                        "y": "1.05"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "top": "40px",
+                                                        "right": "40px",
+                                                        "bottom": "40px",
+                                                        "left": "40px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "zoom-in",
+                                                    "duration": "800ms",
+                                                    "delay": "300ms"
+                                                }
+                                            }
+                                        },
+                                        "scroll": {
+                                            "desktop": {
+                                                "value": "parallax-up"
+                                            }
+                                        }
+                                    },
+                                    "icon": "&#x1F5E8;"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "decoration": {
+                "background": {
+                    "desktop": {
+                        "value": {
+                            "color": "var(--gcid-surface-deep)",
+                            "overlay": {
+                                "gradient": "radial-gradient(circle at 80% 20%, rgba(166,124,64,0.06) 0%, transparent 60%)"
+                            }
+                        }
+                    }
+                },
+                "spacing": {
+                    "desktop": {
+                        "value": {
+                            "padding": {
+                                "top": "140px",
+                                "bottom": "140px",
+                                "right": "96px",
+                                "left": "96px"
+                            }
+                        }
+                    },
+                    "tablet": {
+                        "value": {
+                            "padding": {
+                                "top": "96px",
+                                "bottom": "96px",
+                                "right": "48px",
+                                "left": "48px"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "value": {
+                            "padding": {
+                                "top": "64px",
+                                "bottom": "64px",
+                                "right": "24px",
+                                "left": "24px"
+                            }
+                        }
+                    }
+                },
+                "animation": {
+                    "desktop": {
+                        "value": {
+                            "style": "fade",
+                            "duration": "800ms",
+                            "delay": "0ms"
+                        }
+                    }
+                },
+                "scroll": {
+                    "desktop": {
+                        "value": "reveal"
+                    }
+                }
+            },
+            "rows": [
+                {
+                    "column_structure": "3_5,2_5",
+                    "columns": [
+                        {
+                            "type": "3_5",
+                            "modules": [
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p>INFORMACIÓN DE CONTACTO</p>",
+                                    "bodyFont": {
+                                        "body": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'DM Sans', system-ui, sans-serif",
+                                                        "weight": "500",
+                                                        "textTransform": "uppercase",
+                                                        "letterSpacing": "0.2em",
+                                                        "color": "var(--gcid-sepia-300)",
+                                                        "size": "12px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide-up",
+                                                    "duration": "600ms",
+                                                    "delay": "0ms"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/text",
+                                    "content": "<h2>Información de Contacto</h2>",
+                                    "headingFont": {
+                                        "h2": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'Cormorant Garamond', Georgia, serif",
+                                                        "color": "var(--gcid-parchment-50)",
+                                                        "size": "clamp(2rem, 3vw + 0.8rem, 3.5rem)",
+                                                        "weight": "300",
+                                                        "lineHeight": "1.0",
+                                                        "letterSpacing": "-0.015em"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "24px"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide-up",
+                                                    "duration": "600ms",
+                                                    "delay": "150ms"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p>Nuestra biblioteca se encuentra ubicada en el corazón de la ciudad. Puedes visitarnos en persona o contactarnos a través de nuestro formulario de contacto.</p>",
+                                    "bodyFont": {
+                                        "body": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'Crimson Pro', Georgia, serif",
+                                                        "color": "var(--gcid-parchment-200)",
+                                                        "size": "20px",
+                                                        "lineHeight": "1.7"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "24px"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide-up",
+                                                    "duration": "600ms",
+                                                    "delay": "300ms"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p></p>",
+                                    "bodyFont": {
+                                        "body": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'Crimson Pro', Georgia, serif",
+                                                        "color": "var(--gcid-text-on-dark)",
+                                                        "size": "16px",
+                                                        "lineHeight": "1.6"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide-up",
+                                                    "duration": "600ms",
+                                                    "delay": "450ms"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/button",
+                                    "button": {
+                                        "decoration": {
+                                            "button": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "icon": {
+                                                            "enable": "on"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "decoration": {
+                                        "button": {
+                                            "desktop": {
+                                                "value": {
+                                                    "backgroundColor": "transparent",
+                                                    "textColor": "var(--gcid-parchment-50)",
+                                                    "borderColor": "var(--gcid-parchment-50)",
+                                                    "borderWidth": "1px",
+                                                    "borderRadius": "100px",
+                                                    "fontFamily": "'DM Sans', system-ui, sans-serif",
+                                                    "fontWeight": "500",
+                                                    "padding": "15px 38px",
+                                                    "letterSpacing": "0.08em",
+                                                    "textTransform": "uppercase",
+                                                    "fontSize": "13px"
+                                                }
+                                            },
+                                            "hover": {
+                                                "value": {
+                                                    "backgroundColor": "var(--gcid-parchment-50)",
+                                                    "textColor": "var(--gcid-ink)",
+                                                    "borderColor": "var(--gcid-parchment-50)"
+                                                }
+                                            }
+                                        },
+                                        "transition": {
+                                            "desktop": {
+                                                "value": {
+                                                    "duration": "300ms",
+                                                    "delay": "0ms"
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide-up",
+                                                    "duration": "600ms",
+                                                    "delay": "600ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "button_text": "",
+                                    "button_url": ""
+                                }
+                            ]
+                        },
+                        {
+                            "type": "2_5",
+                            "modules": [
+                                {
+                                    "imageIcon": {
+                                        "innerContent": {
+                                            "desktop": {
+                                                "value": {
+                                                    "useIcon": "off"
+                                                }
+                                            }
+                                        },
+                                        "advanced": {
+                                            "color": {
+                                                "desktop": {
+                                                    "value": "$variable({\"type\":\"color\",\"value\":{\"name\":\"gcid-primary-color\",\"settings\":{}}})$"
+                                                }
+                                            },
+                                            "placement": {
+                                                "desktop": {
+                                                    "value": "top"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "module": "divi/blurb",
+                                    "title": "",
+                                    "content": "<p>Bibliotheca</p>",
+                                    "contentContainer": [],
+                                    "decoration": {
+                                        "background": {
+                                            "desktop": {
+                                                "value": {
+                                                    "color": "rgba(253,251,247,0.12)",
+                                                    "backdropFilter": "blur(12px)",
+                                                    "backdropFilterSupported": "on"
+                                                }
+                                            }
+                                        },
+                                        "border": {
+                                            "desktop": {
+                                                "value": {
+                                                    "radius": {
+                                                        "topLeft": "8px",
+                                                        "topRight": "8px",
+                                                        "bottomRight": "8px",
+                                                        "bottomLeft": "8px",
+                                                        "sync": "on"
+                                                    },
+                                                    "styles": {
+                                                        "all": {
+                                                            "style": "solid",
+                                                            "width": "1px",
+                                                            "color": "rgba(253,251,247,0.2)"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "boxShadow": {
+                                            "desktop": {
+                                                "value": {
+                                                    "horizontal": "0px",
+                                                    "vertical": "8px",
+                                                    "blur": "32px",
+                                                    "spread": "0px",
+                                                    "color": "rgba(26,24,20,0.08)"
+                                                }
+                                            }
+                                        },
+                                        "transform": {
+                                            "hover": {
+                                                "value": {
+                                                    "translateY": "-6px",
+                                                    "scale": {
+                                                        "x": "1.05",
+                                                        "y": "1.05"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "top": "40px",
+                                                        "right": "40px",
+                                                        "bottom": "40px",
+                                                        "left": "40px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "fade",
+                                                    "duration": "600ms",
+                                                    "delay": "60ms"
+                                                }
+                                            }
+                                        },
+                                        "scroll": {
+                                            "desktop": {
+                                                "value": "parallax-up"
+                                            }
+                                        }
+                                    },
+                                    "icon": "&#xe065;"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "decoration": {
+                "background": {
+                    "desktop": {
+                        "value": {
+                            "color": "var(--gcid-surface-light)"
+                        }
+                    }
+                },
+                "spacing": {
+                    "desktop": {
+                        "value": {
+                            "padding": {
+                                "top": "96px",
+                                "bottom": "96px",
+                                "right": "96px",
+                                "left": "96px"
+                            }
+                        }
+                    },
+                    "tablet": {
+                        "value": {
+                            "padding": {
+                                "top": "64px",
+                                "bottom": "64px",
+                                "right": "48px",
+                                "left": "48px"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "value": {
+                            "padding": {
+                                "top": "40px",
+                                "bottom": "40px",
+                                "right": "24px",
+                                "left": "24px"
+                            }
+                        }
+                    }
+                },
+                "animation": {
+                    "desktop": {
+                        "value": {
+                            "style": "fade",
+                            "duration": "600ms",
+                            "delay": "50ms"
+                        }
+                    }
+                }
+            },
+            "rows": [
+                {
+                    "column_structure": "1_1",
+                    "columns": [
+                        {
+                            "type": "1_1",
+                            "modules": [
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p>FORMULARIO DE CONTACTO</p>",
+                                    "bodyFont": {
+                                        "body": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'DM Sans', system-ui, sans-serif",
+                                                        "weight": "500",
+                                                        "textTransform": "uppercase",
+                                                        "letterSpacing": "0.2em",
+                                                        "color": "var(--gcid-sepia-300)",
+                                                        "size": "12px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "8px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/text",
+                                    "content": "<h2>Formulario de Contacto</h2>",
+                                    "headingFont": {
+                                        "h2": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'Cormorant Garamond', Georgia, serif",
+                                                        "color": "var(--gcid-ink)",
+                                                        "size": "clamp(2rem, 3vw + 0.8rem, 3.5rem)",
+                                                        "weight": "400",
+                                                        "lineHeight": "1.1",
+                                                        "letterSpacing": "-0.015em"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p>Por favor, completa el siguiente formulario para ponerte en contacto con nosotros.</p>",
+                                    "bodyFont": {
+                                        "body": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'Crimson Pro', Georgia, serif",
+                                                        "color": "var(--gcid-parchment-700)",
+                                                        "size": "18px",
+                                                        "lineHeight": "1.65"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "column_structure": "1_3,1_3,1_3",
+                    "columns": [
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "imageIcon": {
+                                        "innerContent": {
+                                            "desktop": {
+                                                "value": {
+                                                    "useIcon": "off"
+                                                }
+                                            }
+                                        },
+                                        "advanced": {
+                                            "color": {
+                                                "desktop": {
+                                                    "value": "$variable({\"type\":\"color\",\"value\":{\"name\":\"gcid-primary-color\",\"settings\":{}}})$"
+                                                }
+                                            },
+                                            "placement": {
+                                                "desktop": {
+                                                    "value": "top"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "module": "divi/blurb",
+                                    "title": "Nombre",
+                                    "content": "<p>Ingresa tu nombre completo</p>",
+                                    "contentContainer": [],
+                                    "decoration": {
+                                        "background": {
+                                            "desktop": {
+                                                "value": {
+                                                    "color": "var(--gcid-surface-white)"
+                                                }
+                                            }
+                                        },
+                                        "border": {
+                                            "desktop": {
+                                                "value": {
+                                                    "radius": {
+                                                        "topLeft": "8px",
+                                                        "topRight": "8px",
+                                                        "bottomRight": "8px",
+                                                        "bottomLeft": "8px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "boxShadow": {
+                                            "desktop": {
+                                                "value": {
+                                                    "horizontal": "0px",
+                                                    "vertical": "4px",
+                                                    "blur": "16px",
+                                                    "spread": "0px",
+                                                    "color": "rgba(26,24,20,0.08)"
+                                                }
+                                            }
+                                        },
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "top": "24px",
+                                                        "right": "24px",
+                                                        "bottom": "24px",
+                                                        "left": "24px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "transform": {
+                                            "hover": {
+                                                "value": {
+                                                    "translateY": "-4px",
+                                                    "translate": {
+                                                        "y": "-4px"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide",
+                                                    "direction": "bottom",
+                                                    "duration": "480ms",
+                                                    "delay": "60ms",
+                                                    "intensity": "10%"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "icon": "&#xe03a;"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "imageIcon": {
+                                        "innerContent": {
+                                            "desktop": {
+                                                "value": {
+                                                    "useIcon": "off"
+                                                }
+                                            }
+                                        },
+                                        "advanced": {
+                                            "color": {
+                                                "desktop": {
+                                                    "value": "$variable({\"type\":\"color\",\"value\":{\"name\":\"gcid-primary-color\",\"settings\":{}}})$"
+                                                }
+                                            },
+                                            "placement": {
+                                                "desktop": {
+                                                    "value": "top"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "module": "divi/blurb",
+                                    "title": "Correo Electrónico",
+                                    "content": "<p>Ingresa tu dirección de correo electrónico</p>",
+                                    "contentContainer": [],
+                                    "decoration": {
+                                        "background": {
+                                            "desktop": {
+                                                "value": {
+                                                    "color": "var(--gcid-surface-white)"
+                                                }
+                                            }
+                                        },
+                                        "border": {
+                                            "desktop": {
+                                                "value": {
+                                                    "radius": {
+                                                        "topLeft": "8px",
+                                                        "topRight": "8px",
+                                                        "bottomRight": "8px",
+                                                        "bottomLeft": "8px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "boxShadow": {
+                                            "desktop": {
+                                                "value": {
+                                                    "horizontal": "0px",
+                                                    "vertical": "4px",
+                                                    "blur": "16px",
+                                                    "spread": "0px",
+                                                    "color": "rgba(26,24,20,0.08)"
+                                                }
+                                            }
+                                        },
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "top": "24px",
+                                                        "right": "24px",
+                                                        "bottom": "24px",
+                                                        "left": "24px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "transform": {
+                                            "hover": {
+                                                "value": {
+                                                    "translateY": "-4px",
+                                                    "translate": {
+                                                        "y": "-4px"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide",
+                                                    "direction": "bottom",
+                                                    "duration": "480ms",
+                                                    "delay": "60ms",
+                                                    "intensity": "10%"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "icon": "&#xe0bf;"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "imageIcon": {
+                                        "innerContent": {
+                                            "desktop": {
+                                                "value": {
+                                                    "useIcon": "off"
+                                                }
+                                            }
+                                        },
+                                        "advanced": {
+                                            "color": {
+                                                "desktop": {
+                                                    "value": "$variable({\"type\":\"color\",\"value\":{\"name\":\"gcid-primary-color\",\"settings\":{}}})$"
+                                                }
+                                            },
+                                            "placement": {
+                                                "desktop": {
+                                                    "value": "top"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "module": "divi/blurb",
+                                    "title": "Mensaje",
+                                    "content": "<p>Ingresa tu mensaje o consulta</p>",
+                                    "contentContainer": [],
+                                    "decoration": {
+                                        "background": {
+                                            "desktop": {
+                                                "value": {
+                                                    "color": "var(--gcid-surface-white)"
+                                                }
+                                            }
+                                        },
+                                        "border": {
+                                            "desktop": {
+                                                "value": {
+                                                    "radius": {
+                                                        "topLeft": "8px",
+                                                        "topRight": "8px",
+                                                        "bottomRight": "8px",
+                                                        "bottomLeft": "8px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "boxShadow": {
+                                            "desktop": {
+                                                "value": {
+                                                    "horizontal": "0px",
+                                                    "vertical": "4px",
+                                                    "blur": "16px",
+                                                    "spread": "0px",
+                                                    "color": "rgba(26,24,20,0.08)"
+                                                }
+                                            }
+                                        },
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "top": "24px",
+                                                        "right": "24px",
+                                                        "bottom": "24px",
+                                                        "left": "24px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "transform": {
+                                            "hover": {
+                                                "value": {
+                                                    "translateY": "-4px",
+                                                    "translate": {
+                                                        "y": "-4px"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide",
+                                                    "direction": "bottom",
+                                                    "duration": "480ms",
+                                                    "delay": "60ms",
+                                                    "intensity": "10%"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "icon": "&#xe049;"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "decoration": {
+                "background": {
+                    "desktop": {
+                        "value": {
+                            "color": "var(--gcid-surface-deep)",
+                            "overlay": {
+                                "gradient": "radial-gradient(ellipse at 30% 20%, rgba(120,100,80,0.15) 0%, transparent 60%)"
+                            }
+                        }
+                    }
+                },
+                "spacing": {
+                    "desktop": {
+                        "value": {
+                            "padding": {
+                                "top": "120px",
+                                "bottom": "120px",
+                                "right": "96px",
+                                "left": "96px"
+                            }
+                        }
+                    },
+                    "tablet": {
+                        "value": {
+                            "padding": {
+                                "top": "80px",
+                                "bottom": "80px",
+                                "right": "48px",
+                                "left": "48px"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "value": {
+                            "padding": {
+                                "top": "56px",
+                                "bottom": "56px",
+                                "right": "24px",
+                                "left": "24px"
+                            }
+                        }
+                    }
+                },
+                "animation": {
+                    "desktop": {
+                        "value": {
+                            "style": "fade",
+                            "duration": "800ms",
+                            "delay": "0ms"
+                        }
+                    }
+                },
+                "scroll": {
+                    "desktop": {
+                        "value": "reveal"
+                    }
+                }
+            },
+            "rows": [
+                {
+                    "column_structure": "1_2,1_2",
+                    "columns": [
+                        {
+                            "type": "1_2",
+                            "modules": [
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p>UBICACIÓN FÍSICA</p>",
+                                    "bodyFont": {
+                                        "body": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'DM Sans', system-ui, sans-serif",
+                                                        "weight": "500",
+                                                        "textTransform": "uppercase",
+                                                        "letterSpacing": "0.2em",
+                                                        "color": "var(--gcid-sepia-300)",
+                                                        "size": "12px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/text",
+                                    "content": "<h2>Ubicación Física</h2>",
+                                    "headingFont": {
+                                        "h2": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'Cormorant Garamond', Georgia, serif",
+                                                        "color": "var(--gcid-parchment-50)",
+                                                        "size": "clamp(2rem, 3vw + 0.8rem, 3.5rem)",
+                                                        "weight": "300",
+                                                        "lineHeight": "1.0",
+                                                        "letterSpacing": "-0.015em"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "24px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p>Nuestra biblioteca se encuentra ubicada en la siguiente dirección:</p>",
+                                    "bodyFont": {
+                                        "body": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'Crimson Pro', Georgia, serif",
+                                                        "color": "var(--gcid-parchment-200)",
+                                                        "size": "20px",
+                                                        "lineHeight": "1.7"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "24px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p>Calle Principal, 123, Ciudad, País</p>",
+                                    "bodyFont": {
+                                        "body": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'Crimson Pro', Georgia, serif",
+                                                        "color": "var(--gcid-text-on-dark)",
+                                                        "size": "16px",
+                                                        "lineHeight": "1.6"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_2",
+                            "modules": [
+                                {
+                                    "module": "divi/icon-list",
+                                    "icon": {
+                                        "advanced": {
+                                            "color": {
+                                                "desktop": {
+                                                    "value": "var(--gcid-sepia-300)"
+                                                }
+                                            },
+                                            "size": {
+                                                "desktop": {
+                                                    "value": "18px"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "listItem": [],
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "fade",
+                                                    "duration": "600ms",
+                                                    "delay": "400ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "modules": [
+                                        {
+                                            "title": "Ubicación Física",
+                                            "icon": {
+                                                "unicode": ""
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "decoration": {
+                "background": {
+                    "desktop": {
+                        "value": {
+                            "color": "var(--gcid-surface-light)",
+                            "overlay": {
+                                "gradient": "radial-gradient(circle at 50% 50%, rgba(166,124,64,0.04) 0%, transparent 70%)"
+                            }
+                        }
+                    }
+                },
+                "spacing": {
+                    "desktop": {
+                        "value": {
+                            "padding": {
+                                "top": "100px",
+                                "bottom": "100px",
+                                "right": "96px",
+                                "left": "96px"
+                            }
+                        }
+                    },
+                    "tablet": {
+                        "value": {
+                            "padding": {
+                                "top": "64px",
+                                "bottom": "64px",
+                                "right": "48px",
+                                "left": "48px"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "value": {
+                            "padding": {
+                                "top": "48px",
+                                "bottom": "48px",
+                                "right": "24px",
+                                "left": "24px"
+                            }
+                        }
+                    }
+                },
+                "animation": {
+                    "desktop": {
+                        "value": {
+                            "style": "fade",
+                            "duration": "600ms",
+                            "delay": "50ms"
+                        }
+                    }
+                },
+                "scroll": {
+                    "desktop": {
+                        "value": "reveal"
+                    }
+                }
+            },
+            "rows": [
+                {
+                    "column_structure": "1_3,1_3,1_3",
+                    "columns": [
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "module": "divi/number-counter",
+                                    "title": {
+                                        "decoration": {
+                                            "font": {
+                                                "font": {
+                                                    "desktop": {
+                                                        "value": {
+                                                            "headingLevel": "h3"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "number": "9:00 am - 5:00 pm",
+                                    "decoration": {
+                                        "background": {
+                                            "desktop": {
+                                                "value": {
+                                                    "color": "rgba(253,251,247,0.12)",
+                                                    "backdropFilter": "blur(12px)",
+                                                    "backdropFilterSupported": "on"
+                                                }
+                                            }
+                                        },
+                                        "border": {
+                                            "desktop": {
+                                                "value": {
+                                                    "radius": {
+                                                        "topLeft": "8px",
+                                                        "topRight": "8px",
+                                                        "bottomRight": "8px",
+                                                        "bottomLeft": "8px",
+                                                        "sync": "on"
+                                                    },
+                                                    "styles": {
+                                                        "all": {
+                                                            "style": "solid",
+                                                            "width": "1px",
+                                                            "color": "rgba(253,251,247,0.2)"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "boxShadow": {
+                                            "desktop": {
+                                                "value": {
+                                                    "horizontal": "0px",
+                                                    "vertical": "8px",
+                                                    "blur": "32px",
+                                                    "spread": "0px",
+                                                    "color": "rgba(26,24,20,0.08)"
+                                                }
+                                            }
+                                        },
+                                        "transform": {
+                                            "hover": {
+                                                "value": {
+                                                    "translateY": "-6px"
+                                                }
+                                            }
+                                        },
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "top": "40px",
+                                                        "right": "40px",
+                                                        "bottom": "40px",
+                                                        "left": "40px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "fade",
+                                                    "duration": "600ms",
+                                                    "delay": "100ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "label": "Lunes a Viernes",
+                                    "enablePercentSign": "off"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "module": "divi/number-counter",
+                                    "title": {
+                                        "decoration": {
+                                            "font": {
+                                                "font": {
+                                                    "desktop": {
+                                                        "value": {
+                                                            "headingLevel": "h3"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "number": "9:00 am - 1:00 pm",
+                                    "decoration": {
+                                        "background": {
+                                            "desktop": {
+                                                "value": {
+                                                    "color": "rgba(253,251,247,0.12)",
+                                                    "backdropFilter": "blur(12px)",
+                                                    "backdropFilterSupported": "on"
+                                                }
+                                            }
+                                        },
+                                        "border": {
+                                            "desktop": {
+                                                "value": {
+                                                    "radius": {
+                                                        "topLeft": "8px",
+                                                        "topRight": "8px",
+                                                        "bottomRight": "8px",
+                                                        "bottomLeft": "8px",
+                                                        "sync": "on"
+                                                    },
+                                                    "styles": {
+                                                        "all": {
+                                                            "style": "solid",
+                                                            "width": "1px",
+                                                            "color": "rgba(253,251,247,0.2)"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "boxShadow": {
+                                            "desktop": {
+                                                "value": {
+                                                    "horizontal": "0px",
+                                                    "vertical": "8px",
+                                                    "blur": "32px",
+                                                    "spread": "0px",
+                                                    "color": "rgba(26,24,20,0.08)"
+                                                }
+                                            }
+                                        },
+                                        "transform": {
+                                            "hover": {
+                                                "value": {
+                                                    "translateY": "-6px"
+                                                }
+                                            }
+                                        },
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "top": "40px",
+                                                        "right": "40px",
+                                                        "bottom": "40px",
+                                                        "left": "40px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "fade",
+                                                    "duration": "600ms",
+                                                    "delay": "100ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "label": "Sábado",
+                                    "enablePercentSign": "off"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "module": "divi/number-counter",
+                                    "title": {
+                                        "decoration": {
+                                            "font": {
+                                                "font": {
+                                                    "desktop": {
+                                                        "value": {
+                                                            "headingLevel": "h3"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "number": "Cerrado",
+                                    "decoration": {
+                                        "background": {
+                                            "desktop": {
+                                                "value": {
+                                                    "color": "rgba(253,251,247,0.12)",
+                                                    "backdropFilter": "blur(12px)",
+                                                    "backdropFilterSupported": "on"
+                                                }
+                                            }
+                                        },
+                                        "border": {
+                                            "desktop": {
+                                                "value": {
+                                                    "radius": {
+                                                        "topLeft": "8px",
+                                                        "topRight": "8px",
+                                                        "bottomRight": "8px",
+                                                        "bottomLeft": "8px",
+                                                        "sync": "on"
+                                                    },
+                                                    "styles": {
+                                                        "all": {
+                                                            "style": "solid",
+                                                            "width": "1px",
+                                                            "color": "rgba(253,251,247,0.2)"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "boxShadow": {
+                                            "desktop": {
+                                                "value": {
+                                                    "horizontal": "0px",
+                                                    "vertical": "8px",
+                                                    "blur": "32px",
+                                                    "spread": "0px",
+                                                    "color": "rgba(26,24,20,0.08)"
+                                                }
+                                            }
+                                        },
+                                        "transform": {
+                                            "hover": {
+                                                "value": {
+                                                    "translateY": "-6px"
+                                                }
+                                            }
+                                        },
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "top": "40px",
+                                                        "right": "40px",
+                                                        "bottom": "40px",
+                                                        "left": "40px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "fade",
+                                                    "duration": "600ms",
+                                                    "delay": "100ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "label": "Domingo",
+                                    "enablePercentSign": "off"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "decoration": {
+                "background": {
+                    "desktop": {
+                        "value": {
+                            "color": "var(--gcid-surface-deep)",
+                            "overlay": {
+                                "gradient": "radial-gradient(ellipse at 30% 20%, rgba(120,100,80,0.15) 0%, transparent 60%)"
+                            }
+                        }
+                    }
+                },
+                "spacing": {
+                    "desktop": {
+                        "value": {
+                            "padding": {
+                                "top": "120px",
+                                "bottom": "120px",
+                                "right": "96px",
+                                "left": "96px"
+                            }
+                        }
+                    },
+                    "tablet": {
+                        "value": {
+                            "padding": {
+                                "top": "80px",
+                                "bottom": "80px",
+                                "right": "48px",
+                                "left": "48px"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "value": {
+                            "padding": {
+                                "top": "56px",
+                                "bottom": "56px",
+                                "right": "24px",
+                                "left": "24px"
+                            }
+                        }
+                    }
+                },
+                "animation": {
+                    "desktop": {
+                        "value": {
+                            "style": "fade",
+                            "duration": "800ms",
+                            "delay": "0ms"
+                        }
+                    }
+                },
+                "scroll": {
+                    "desktop": {
+                        "value": "reveal"
+                    }
+                }
+            },
+            "rows": [
+                {
+                    "column_structure": "1_2,1_2",
+                    "columns": [
+                        {
+                            "type": "1_2",
+                            "modules": [
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p>SECCIÓN DE AYUDA</p>",
+                                    "bodyFont": {
+                                        "body": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'DM Sans', system-ui, sans-serif",
+                                                        "weight": "500",
+                                                        "textTransform": "uppercase",
+                                                        "letterSpacing": "0.2em",
+                                                        "color": "var(--gcid-sepia-300)",
+                                                        "size": "12px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/text",
+                                    "content": "<h2>Sección de Ayuda</h2>",
+                                    "headingFont": {
+                                        "h2": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'Cormorant Garamond', Georgia, serif",
+                                                        "color": "var(--gcid-parchment-50)",
+                                                        "size": "clamp(2rem, 3vw + 0.8rem, 3.5rem)",
+                                                        "weight": "300",
+                                                        "lineHeight": "1.0",
+                                                        "letterSpacing": "-0.015em"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "24px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p>¿Necesitas ayuda con algo? Por favor, consulta nuestra sección de ayuda para obtener más información.</p>",
+                                    "bodyFont": {
+                                        "body": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'Crimson Pro', Georgia, serif",
+                                                        "color": "var(--gcid-parchment-200)",
+                                                        "size": "20px",
+                                                        "lineHeight": "1.7"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "24px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p></p>",
+                                    "bodyFont": {
+                                        "body": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'Crimson Pro', Georgia, serif",
+                                                        "color": "var(--gcid-text-on-dark)",
+                                                        "size": "16px",
+                                                        "lineHeight": "1.6"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_2",
+                            "modules": [
+                                {
+                                    "module": "divi/icon-list",
+                                    "icon": {
+                                        "advanced": {
+                                            "color": {
+                                                "desktop": {
+                                                    "value": "var(--gcid-sepia-300)"
+                                                }
+                                            },
+                                            "size": {
+                                                "desktop": {
+                                                    "value": "18px"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "listItem": [],
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "fade",
+                                                    "duration": "600ms",
+                                                    "delay": "400ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "modules": [
+                                        {
+                                            "title": "Sección de Ayuda",
+                                            "icon": {
+                                                "unicode": ""
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

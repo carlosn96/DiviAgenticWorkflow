@@ -1,0 +1,1962 @@
+{
+    "sections": [
+        {
+            "rows": [
+                {
+                    "column_structure": "1_2,1_2",
+                    "columns": [
+                        {
+                            "type": "1_2",
+                            "modules": [
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p>BIENVENIDO A BIBLIOTHECA</p>",
+                                    "headingFont": {
+                                        "p": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'DM Sans', system-ui, sans-serif",
+                                                        "weight": "500",
+                                                        "textTransform": "uppercase",
+                                                        "letterSpacing": "0.2em",
+                                                        "color": "var(--gcid-sepia-300)",
+                                                        "size": "12px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/heading",
+                                    "title": {
+                                        "decoration": {
+                                            "font": {
+                                                "font": {
+                                                    "desktop": {
+                                                        "value": {
+                                                            "headingLevel": "h1"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<h1>El Silencio del Conocimiento</h1>",
+                                    "headingFont": {
+                                        "h1": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'Cormorant Garamond', Georgia, serif",
+                                                        "color": "var(--gcid-parchment-50)",
+                                                        "size": "clamp(2.5rem, 5vw + 0.5rem, 5rem)",
+                                                        "weight": "300",
+                                                        "lineHeight": "1.0",
+                                                        "letterSpacing": "-0.02em"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p>Un universo de m&aacute;s de 50,000 t&iacute;tulos te espera. Desde cl&aacute;sicos universales hasta las voces m&aacute;s contempor&aacute;neas de la literatura, la ciencia y el pensamiento.</p>",
+                                    "bodyFont": {
+                                        "body": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'Crimson Pro', Georgia, serif",
+                                                        "color": "var(--gcid-parchment-200)",
+                                                        "size": "20px",
+                                                        "lineHeight": "1.7"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/button",
+                                    "button": {
+                                        "decoration": {
+                                            "button": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "icon": {
+                                                            "enable": "on"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "button_text": "Explorar Cat&aacute;logo",
+                                    "button_url": "/catalogo",
+                                    "decoration": {
+                                        "button": {
+                                            "desktop": {
+                                                "value": {
+                                                    "backgroundColor": "var(--gcid-accent)",
+                                                    "textColor": "var(--gcid-parchment-50)",
+                                                    "borderRadius": "100px",
+                                                    "fontFamily": "'DM Sans', system-ui, sans-serif",
+                                                    "fontWeight": "600",
+                                                    "padding": "16px 40px",
+                                                    "letterSpacing": "0.08em",
+                                                    "textTransform": "uppercase",
+                                                    "fontSize": "13px"
+                                                }
+                                            },
+                                            "hover": {
+                                                "value": {
+                                                    "backgroundColor": "var(--gcid-accent-hover)",
+                                                    "textColor": "var(--gcid-parchment-50)"
+                                                }
+                                            }
+                                        },
+                                        "transition": {
+                                            "desktop": {
+                                                "value": {
+                                                    "duration": "300ms",
+                                                    "delay": "0ms"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/button",
+                                    "button": {
+                                        "decoration": {
+                                            "button": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "icon": {
+                                                            "enable": "on"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "button_text": "Conocer M&aacute;s",
+                                    "button_url": "/nosotros",
+                                    "decoration": {
+                                        "button": {
+                                            "desktop": {
+                                                "value": {
+                                                    "backgroundColor": "transparent",
+                                                    "textColor": "var(--gcid-parchment-50)",
+                                                    "borderColor": "var(--gcid-parchment-50)",
+                                                    "borderWidth": "1px",
+                                                    "borderRadius": "100px",
+                                                    "fontFamily": "'DM Sans', system-ui, sans-serif",
+                                                    "fontWeight": "500",
+                                                    "padding": "15px 38px",
+                                                    "letterSpacing": "0.08em",
+                                                    "textTransform": "uppercase",
+                                                    "fontSize": "13px"
+                                                }
+                                            },
+                                            "hover": {
+                                                "value": {
+                                                    "backgroundColor": "var(--gcid-parchment-50)",
+                                                    "textColor": "var(--gcid-ink)",
+                                                    "borderColor": "var(--gcid-parchment-50)"
+                                                }
+                                            }
+                                        },
+                                        "transition": {
+                                            "desktop": {
+                                                "value": {
+                                                    "duration": "300ms",
+                                                    "delay": "0ms"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_2",
+                            "modules": [
+                                {
+                                    "imageIcon": {
+                                        "innerContent": {
+                                            "desktop": {
+                                                "value": {
+                                                    "useIcon": "off"
+                                                }
+                                            }
+                                        },
+                                        "advanced": {
+                                            "color": {
+                                                "desktop": {
+                                                    "value": "$variable({\"type\":\"color\",\"value\":{\"name\":\"gcid-primary-color\",\"settings\":{}}})$"
+                                                }
+                                            },
+                                            "placement": {
+                                                "desktop": {
+                                                    "value": "top"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "module": "divi/blurb",
+                                    "title": "",
+                                    "content": "<p style='font-size: 1.5rem; line-height: 1.8; font-style: italic; color: var(--gcid-parchment-200); text-align: center; padding: 2rem;'>&ldquo;Un libro es un sue&ntilde;o que tienes en tus manos.&rdquo;<br><span style='font-size: 0.9rem; color: var(--gcid-sepia-300);'>&mdash; Neil Gaiman</span></p>",
+                                    "contentContainer": [],
+                                    "icon": "&#x1F4DA;",
+                                    "decoration": {
+                                        "background": {
+                                            "desktop": {
+                                                "value": {
+                                                    "color": "rgba(253,251,247,0.12)",
+                                                    "backdropFilter": "blur(12px)",
+                                                    "backdropFilterSupported": "on"
+                                                }
+                                            }
+                                        },
+                                        "border": {
+                                            "desktop": {
+                                                "value": {
+                                                    "radius": {
+                                                        "topLeft": "8px",
+                                                        "topRight": "8px",
+                                                        "bottomRight": "8px",
+                                                        "bottomLeft": "8px",
+                                                        "sync": "on"
+                                                    },
+                                                    "styles": {
+                                                        "all": {
+                                                            "style": "solid",
+                                                            "width": "1px",
+                                                            "color": "rgba(253,251,247,0.2)"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "boxShadow": {
+                                            "desktop": {
+                                                "value": {
+                                                    "horizontal": "0px",
+                                                    "vertical": "8px",
+                                                    "blur": "32px",
+                                                    "spread": "0px",
+                                                    "color": "rgba(26,24,20,0.08)"
+                                                }
+                                            }
+                                        },
+                                        "transform": {
+                                            "hover": {
+                                                "value": {
+                                                    "translateY": "-6px"
+                                                }
+                                            }
+                                        },
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "top": "40px",
+                                                        "right": "40px",
+                                                        "bottom": "40px",
+                                                        "left": "40px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "fade",
+                                                    "duration": "600ms",
+                                                    "delay": "60ms"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "decoration": {
+                "background": {
+                    "desktop": {
+                        "value": {
+                            "color": "var(--gcid-surface-deep)"
+                        }
+                    }
+                },
+                "spacing": {
+                    "desktop": {
+                        "value": {
+                            "padding": {
+                                "top": "160px",
+                                "bottom": "160px",
+                                "right": "96px",
+                                "left": "96px"
+                            }
+                        }
+                    },
+                    "tablet": {
+                        "value": {
+                            "padding": {
+                                "top": "96px",
+                                "bottom": "96px",
+                                "right": "48px",
+                                "left": "48px"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "value": {
+                            "padding": {
+                                "top": "64px",
+                                "bottom": "64px",
+                                "right": "24px",
+                                "left": "24px"
+                            }
+                        }
+                    }
+                },
+                "animation": {
+                    "desktop": {
+                        "value": {
+                            "style": "fade",
+                            "duration": "800ms",
+                            "delay": "0ms"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "rows": [
+                {
+                    "column_structure": "1_4,1_4,1_4,1_4",
+                    "columns": [
+                        {
+                            "type": "1_4",
+                            "modules": [
+                                {
+                                    "module": "divi/number-counter",
+                                    "title": "Libros",
+                                    "number": "50K+",
+                                    "enablePercentSign": "off",
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "top": "16px",
+                                                        "bottom": "16px"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "transform": {
+                                            "hover": {
+                                                "value": {
+                                                    "translateY": "-2px"
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "fade",
+                                                    "duration": "800ms",
+                                                    "delay": "0ms"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_4",
+                            "modules": [
+                                {
+                                    "module": "divi/number-counter",
+                                    "title": "Autores",
+                                    "number": "12K+",
+                                    "enablePercentSign": "off",
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "top": "16px",
+                                                        "bottom": "16px"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "transform": {
+                                            "hover": {
+                                                "value": {
+                                                    "translateY": "-2px"
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "fade",
+                                                    "duration": "800ms",
+                                                    "delay": "0ms"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_4",
+                            "modules": [
+                                {
+                                    "module": "divi/number-counter",
+                                    "title": "Idiomas",
+                                    "number": "8",
+                                    "enablePercentSign": "off",
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "top": "16px",
+                                                        "bottom": "16px"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "transform": {
+                                            "hover": {
+                                                "value": {
+                                                    "translateY": "-2px"
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "fade",
+                                                    "duration": "800ms",
+                                                    "delay": "0ms"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_4",
+                            "modules": [
+                                {
+                                    "module": "divi/number-counter",
+                                    "title": "Lectores",
+                                    "number": {
+                                        "innerContent": {
+                                            "desktop": {
+                                                "value": "100K+"
+                                            }
+                                        },
+                                        "advanced": {
+                                            "enablePercentSign": {
+                                                "desktop": {
+                                                    "value": "off"
+                                                }
+                                            }
+                                        },
+                                        "decoration": {
+                                            "font": {
+                                                "font": {
+                                                    "desktop": {
+                                                        "value": {
+                                                            "color": "$variable({\"type\":\"color\",\"value\":{\"name\":\"gcid-primary-color\",\"settings\":{}}})$"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "enablePercentSign": "off",
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "top": "16px",
+                                                        "bottom": "16px"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "transform": {
+                                            "hover": {
+                                                "value": {
+                                                    "translateY": "-2px"
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "fade",
+                                                    "duration": "800ms",
+                                                    "delay": "0ms"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "decoration": {
+                "background": {
+                    "desktop": {
+                        "value": {
+                            "color": "var(--gcid-surface-light)"
+                        }
+                    }
+                },
+                "border": {
+                    "desktop": {
+                        "value": {
+                            "styles": {
+                                "top": {
+                                    "style": "solid",
+                                    "width": "1px",
+                                    "color": "var(--gcid-parchment-200)"
+                                }
+                            }
+                        }
+                    }
+                },
+                "spacing": {
+                    "desktop": {
+                        "value": {
+                            "padding": {
+                                "top": "40px",
+                                "bottom": "40px",
+                                "right": "96px",
+                                "left": "96px"
+                            }
+                        }
+                    },
+                    "tablet": {
+                        "value": {
+                            "padding": {
+                                "top": "40px",
+                                "bottom": "40px",
+                                "right": "48px",
+                                "left": "48px"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "value": {
+                            "padding": {
+                                "top": "24px",
+                                "bottom": "24px",
+                                "right": "24px",
+                                "left": "24px"
+                            }
+                        }
+                    }
+                },
+                "animation": {
+                    "desktop": {
+                        "value": {
+                            "style": "fade",
+                            "duration": "600ms",
+                            "delay": "100ms"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "rows": [
+                {
+                    "column_structure": "4_4",
+                    "columns": [
+                        {
+                            "type": "4_4",
+                            "modules": [
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p>COLECCIONES</p>",
+                                    "headingFont": {
+                                        "p": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'DM Sans', system-ui, sans-serif",
+                                                        "weight": "500",
+                                                        "textTransform": "uppercase",
+                                                        "letterSpacing": "0.12em",
+                                                        "color": "var(--gcid-sepia-500)",
+                                                        "size": "12px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/heading",
+                                    "title": {
+                                        "decoration": {
+                                            "font": {
+                                                "font": {
+                                                    "desktop": {
+                                                        "value": {
+                                                            "headingLevel": "h1"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<h2>Explora Nuestras Colecciones</h2>",
+                                    "headingFont": {
+                                        "h2": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'Cormorant Garamond', Georgia, serif",
+                                                        "color": "var(--gcid-ink)",
+                                                        "size": "clamp(2rem, 3vw + 0.8rem, 3.5rem)",
+                                                        "weight": "400",
+                                                        "lineHeight": "1.1",
+                                                        "letterSpacing": "-0.015em"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p>Tres grandes pilares que abarcan desde la imaginaci&oacute;n sin l&iacute;mites hasta el rigor del conocimiento especializado.</p>",
+                                    "bodyFont": {
+                                        "body": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'Crimson Pro', Georgia, serif",
+                                                        "color": "var(--gcid-parchment-700)",
+                                                        "size": "18px",
+                                                        "lineHeight": "1.65"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "column_structure": "1_3,1_3,1_3",
+                    "columns": [
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "imageIcon": {
+                                        "innerContent": {
+                                            "desktop": {
+                                                "value": {
+                                                    "useIcon": "off"
+                                                }
+                                            }
+                                        },
+                                        "advanced": {
+                                            "color": {
+                                                "desktop": {
+                                                    "value": "$variable({\"type\":\"color\",\"value\":{\"name\":\"gcid-primary-color\",\"settings\":{}}})$"
+                                                }
+                                            },
+                                            "placement": {
+                                                "desktop": {
+                                                    "value": "top"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "module": "divi/blurb",
+                                    "title": "Ficci&oacute;n",
+                                    "content": "<p>Novelas, cuentos, poes&iacute;a y narrativa de los mejores autores del mundo. Cl&aacute;sicos imperecederos y descubrimientos contempor&aacute;neos.</p>",
+                                    "contentContainer": [],
+                                    "icon": "&#x1F4D6;",
+                                    "decoration": {
+                                        "background": {
+                                            "desktop": {
+                                                "value": {
+                                                    "color": "var(--gcid-surface-white)"
+                                                }
+                                            }
+                                        },
+                                        "border": {
+                                            "desktop": {
+                                                "value": {
+                                                    "radius": {
+                                                        "topLeft": "8px",
+                                                        "topRight": "8px",
+                                                        "bottomRight": "8px",
+                                                        "bottomLeft": "8px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "boxShadow": {
+                                            "desktop": {
+                                                "value": {
+                                                    "horizontal": "0px",
+                                                    "vertical": "4px",
+                                                    "blur": "16px",
+                                                    "spread": "0px",
+                                                    "color": "rgba(26,24,20,0.08)"
+                                                }
+                                            }
+                                        },
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "top": "24px",
+                                                        "right": "24px",
+                                                        "bottom": "24px",
+                                                        "left": "24px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "transform": {
+                                            "hover": {
+                                                "value": {
+                                                    "translateY": "-4px",
+                                                    "translate": {
+                                                        "y": "-4px"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide",
+                                                    "direction": "bottom",
+                                                    "duration": "480ms",
+                                                    "delay": "60ms",
+                                                    "intensity": "10%"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "imageIcon": {
+                                        "innerContent": {
+                                            "desktop": {
+                                                "value": {
+                                                    "useIcon": "off"
+                                                }
+                                            }
+                                        },
+                                        "advanced": {
+                                            "color": {
+                                                "desktop": {
+                                                    "value": "$variable({\"type\":\"color\",\"value\":{\"name\":\"gcid-primary-color\",\"settings\":{}}})$"
+                                                }
+                                            },
+                                            "placement": {
+                                                "desktop": {
+                                                    "value": "top"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "module": "divi/blurb",
+                                    "title": "No Ficci&oacute;n",
+                                    "content": "<p>Historia, ciencia, filosof&iacute;a y ensayo. Obras que transforman la manera en que entendemos el mundo y nuestro lugar en &eacute;l.</p>",
+                                    "contentContainer": [],
+                                    "icon": "&#x1F4D0;",
+                                    "decoration": {
+                                        "background": {
+                                            "desktop": {
+                                                "value": {
+                                                    "color": "var(--gcid-surface-white)"
+                                                }
+                                            }
+                                        },
+                                        "border": {
+                                            "desktop": {
+                                                "value": {
+                                                    "radius": {
+                                                        "topLeft": "8px",
+                                                        "topRight": "8px",
+                                                        "bottomRight": "8px",
+                                                        "bottomLeft": "8px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "boxShadow": {
+                                            "desktop": {
+                                                "value": {
+                                                    "horizontal": "0px",
+                                                    "vertical": "4px",
+                                                    "blur": "16px",
+                                                    "spread": "0px",
+                                                    "color": "rgba(26,24,20,0.08)"
+                                                }
+                                            }
+                                        },
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "top": "24px",
+                                                        "right": "24px",
+                                                        "bottom": "24px",
+                                                        "left": "24px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "transform": {
+                                            "hover": {
+                                                "value": {
+                                                    "translateY": "-4px",
+                                                    "translate": {
+                                                        "y": "-4px"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide",
+                                                    "direction": "bottom",
+                                                    "duration": "480ms",
+                                                    "delay": "60ms",
+                                                    "intensity": "10%"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "imageIcon": {
+                                        "innerContent": {
+                                            "desktop": {
+                                                "value": {
+                                                    "useIcon": "off"
+                                                }
+                                            }
+                                        },
+                                        "advanced": {
+                                            "color": {
+                                                "desktop": {
+                                                    "value": "$variable({\"type\":\"color\",\"value\":{\"name\":\"gcid-primary-color\",\"settings\":{}}})$"
+                                                }
+                                            },
+                                            "placement": {
+                                                "desktop": {
+                                                    "value": "top"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "module": "divi/blurb",
+                                    "title": "Acad&eacute;mico",
+                                    "content": "<p>Publicaciones especializadas, papers de investigaci&oacute;n y recursos educativos para estudiantes, acad&eacute;micos y profesionales.</p>",
+                                    "contentContainer": [],
+                                    "icon": "&#x1F393;",
+                                    "decoration": {
+                                        "background": {
+                                            "desktop": {
+                                                "value": {
+                                                    "color": "var(--gcid-surface-white)"
+                                                }
+                                            }
+                                        },
+                                        "border": {
+                                            "desktop": {
+                                                "value": {
+                                                    "radius": {
+                                                        "topLeft": "8px",
+                                                        "topRight": "8px",
+                                                        "bottomRight": "8px",
+                                                        "bottomLeft": "8px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "boxShadow": {
+                                            "desktop": {
+                                                "value": {
+                                                    "horizontal": "0px",
+                                                    "vertical": "4px",
+                                                    "blur": "16px",
+                                                    "spread": "0px",
+                                                    "color": "rgba(26,24,20,0.08)"
+                                                }
+                                            }
+                                        },
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "top": "24px",
+                                                        "right": "24px",
+                                                        "bottom": "24px",
+                                                        "left": "24px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "transform": {
+                                            "hover": {
+                                                "value": {
+                                                    "translateY": "-4px",
+                                                    "translate": {
+                                                        "y": "-4px"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide",
+                                                    "direction": "bottom",
+                                                    "duration": "480ms",
+                                                    "delay": "60ms",
+                                                    "intensity": "10%"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "decoration": {
+                "background": {
+                    "desktop": {
+                        "value": {
+                            "color": "var(--gcid-surface-light)"
+                        }
+                    }
+                },
+                "spacing": {
+                    "desktop": {
+                        "value": {
+                            "padding": {
+                                "top": "96px",
+                                "bottom": "96px",
+                                "right": "96px",
+                                "left": "96px"
+                            }
+                        }
+                    },
+                    "tablet": {
+                        "value": {
+                            "padding": {
+                                "top": "64px",
+                                "bottom": "64px",
+                                "right": "48px",
+                                "left": "48px"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "value": {
+                            "padding": {
+                                "top": "40px",
+                                "bottom": "40px",
+                                "right": "24px",
+                                "left": "24px"
+                            }
+                        }
+                    }
+                },
+                "animation": {
+                    "desktop": {
+                        "value": {
+                            "style": "fade",
+                            "duration": "600ms",
+                            "delay": "50ms"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "rows": [
+                {
+                    "column_structure": "1_2,1_2",
+                    "columns": [
+                        {
+                            "type": "1_2",
+                            "modules": [
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p>NUESTRA FILOSOF&Iacute;A</p>",
+                                    "headingFont": {
+                                        "p": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'DM Sans', system-ui, sans-serif",
+                                                        "weight": "500",
+                                                        "textTransform": "uppercase",
+                                                        "letterSpacing": "0.2em",
+                                                        "color": "var(--gcid-sepia-300)",
+                                                        "size": "12px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/heading",
+                                    "title": {
+                                        "decoration": {
+                                            "font": {
+                                                "font": {
+                                                    "desktop": {
+                                                        "value": {
+                                                            "headingLevel": "h1"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<h2>El Conocimiento como Refugio</h2>",
+                                    "headingFont": {
+                                        "h2": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'Cormorant Garamond', Georgia, serif",
+                                                        "color": "var(--gcid-parchment-50)",
+                                                        "size": "clamp(2rem, 3vw + 0.8rem, 3.5rem)",
+                                                        "weight": "300",
+                                                        "lineHeight": "1.0",
+                                                        "letterSpacing": "-0.015em"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p>Creemos que el acceso al conocimiento es un derecho fundamental. Bibliotheca nace del prop&oacute;sito de crear un espacio donde las ideas trascienden fronteras, idiomas y &eacute;pocas.</p>",
+                                    "bodyFont": {
+                                        "body": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'Crimson Pro', Georgia, serif",
+                                                        "color": "var(--gcid-parchment-200)",
+                                                        "size": "20px",
+                                                        "lineHeight": "1.7"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p>Cada t&iacute;tulo en nuestro cat&aacute;logo ha sido seleccionado con el criterio de la excelencia intelectual. No buscamos la cantidad, sino la potencia transformadora de cada obra.</p>",
+                                    "bodyFont": {
+                                        "body": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "color": "var(--gcid-parchment-200)",
+                                                        "size": "16px",
+                                                        "lineHeight": "1.8"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_2",
+                            "modules": [
+                                {
+                                    "module": "divi/icon-list",
+                                    "icon": {
+                                        "advanced": {
+                                            "color": {
+                                                "desktop": {
+                                                    "value": "var(--gcid-primary-color)"
+                                                }
+                                            },
+                                            "size": {
+                                                "desktop": {
+                                                    "value": "16px"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "listItem": [],
+                                    "children": [
+                                        {
+                                            "module": "divi/icon-list-item",
+                                            "content": {
+                                                "innerContent": {
+                                                    "desktop": {
+                                                        "value": "List item text"
+                                                    }
+                                                }
+                                            },
+                                            "icon": "&#x2714;",
+                                            "title": "Cat&aacute;logo curado por expertos independientes",
+                                            "bodyFont": {
+                                                "body": {
+                                                    "font": {
+                                                        "desktop": {
+                                                            "value": {
+                                                                "color": "var(--gcid-parchment-200)",
+                                                                "size": "16px",
+                                                                "fontFamily": "'Crimson Pro', Georgia, serif"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "module": "divi/icon-list-item",
+                                            "content": {
+                                                "innerContent": {
+                                                    "desktop": {
+                                                        "value": "List item text"
+                                                    }
+                                                }
+                                            },
+                                            "icon": "&#x2714;",
+                                            "title": "Acceso multidispositivo sin restricciones",
+                                            "bodyFont": {
+                                                "body": {
+                                                    "font": {
+                                                        "desktop": {
+                                                            "value": {
+                                                                "color": "var(--gcid-parchment-200)",
+                                                                "size": "16px",
+                                                                "fontFamily": "'Crimson Pro', Georgia, serif"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "module": "divi/icon-list-item",
+                                            "content": {
+                                                "innerContent": {
+                                                    "desktop": {
+                                                        "value": "List item text"
+                                                    }
+                                                }
+                                            },
+                                            "icon": "&#x2714;",
+                                            "title": "Preservaci&oacute;n digital de obras en riesgo de extinci&oacute;n",
+                                            "bodyFont": {
+                                                "body": {
+                                                    "font": {
+                                                        "desktop": {
+                                                            "value": {
+                                                                "color": "var(--gcid-parchment-200)",
+                                                                "size": "16px",
+                                                                "fontFamily": "'Crimson Pro', Georgia, serif"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "module": "divi/icon-list-item",
+                                            "content": {
+                                                "innerContent": {
+                                                    "desktop": {
+                                                        "value": "List item text"
+                                                    }
+                                                }
+                                            },
+                                            "icon": "&#x2714;",
+                                            "title": "Comunidad global de lectores y creadores",
+                                            "bodyFont": {
+                                                "body": {
+                                                    "font": {
+                                                        "desktop": {
+                                                            "value": {
+                                                                "color": "var(--gcid-parchment-200)",
+                                                                "size": "16px",
+                                                                "fontFamily": "'Crimson Pro', Georgia, serif"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "decoration": {
+                "background": {
+                    "desktop": {
+                        "value": {
+                            "color": "var(--gcid-surface-mid)"
+                        }
+                    }
+                },
+                "spacing": {
+                    "desktop": {
+                        "value": {
+                            "padding": {
+                                "top": "96px",
+                                "bottom": "96px",
+                                "right": "96px",
+                                "left": "96px"
+                            }
+                        }
+                    },
+                    "tablet": {
+                        "value": {
+                            "padding": {
+                                "top": "64px",
+                                "bottom": "64px",
+                                "right": "48px",
+                                "left": "48px"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "value": {
+                            "padding": {
+                                "top": "40px",
+                                "bottom": "40px",
+                                "right": "24px",
+                                "left": "24px"
+                            }
+                        }
+                    }
+                },
+                "animation": {
+                    "desktop": {
+                        "value": {
+                            "style": "fade",
+                            "duration": "600ms",
+                            "delay": "50ms"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "rows": [
+                {
+                    "column_structure": "4_4",
+                    "columns": [
+                        {
+                            "type": "4_4",
+                            "modules": [
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p>TESTIMONIOS</p>",
+                                    "headingFont": {
+                                        "p": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'DM Sans', system-ui, sans-serif",
+                                                        "weight": "500",
+                                                        "textTransform": "uppercase",
+                                                        "letterSpacing": "0.12em",
+                                                        "color": "var(--gcid-sepia-500)",
+                                                        "size": "12px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/heading",
+                                    "title": {
+                                        "decoration": {
+                                            "font": {
+                                                "font": {
+                                                    "desktop": {
+                                                        "value": {
+                                                            "headingLevel": "h1"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<h2>Lo Que Dicen Nuestros Lectores</h2>",
+                                    "headingFont": {
+                                        "h2": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'Cormorant Garamond', Georgia, serif",
+                                                        "color": "var(--gcid-ink)",
+                                                        "size": "clamp(1.5rem, 2vw + 0.7rem, 2.5rem)",
+                                                        "weight": "500",
+                                                        "lineHeight": "1.2",
+                                                        "letterSpacing": "-0.01em"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "column_structure": "1_3,1_3,1_3",
+                    "columns": [
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "module": "divi/testimonial",
+                                    "company": {
+                                        "innerContent": {
+                                            "desktop": {
+                                                "value": {
+                                                    "linkTarget": "off"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "quoteIcon": {
+                                        "decoration": {
+                                            "icon": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "show": "on",
+                                                        "useSize": "off"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p>Bibliotheca ha transformado mi relaci&oacute;n con la lectura. La curadur&iacute;a es impecable; cada recomendaci&oacute;n ha sido un descubrimiento valioso.</p>",
+                                    "author": "Ana Luc&iacute;a Herrera",
+                                    "jobTitle": [],
+                                    "portrait": [],
+                                    "testimonialDescription": [],
+                                    "src": "",
+                                    "decoration": {
+                                        "background": {
+                                            "desktop": {
+                                                "value": {
+                                                    "color": "var(--gcid-surface-white)"
+                                                }
+                                            }
+                                        },
+                                        "border": {
+                                            "desktop": {
+                                                "value": {
+                                                    "radius": {
+                                                        "topLeft": "4px",
+                                                        "topRight": "4px",
+                                                        "bottomRight": "4px",
+                                                        "bottomLeft": "4px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "boxShadow": {
+                                            "desktop": {
+                                                "value": {
+                                                    "horizontal": "0px",
+                                                    "vertical": "1px",
+                                                    "blur": "3px",
+                                                    "spread": "0px",
+                                                    "color": "rgba(26,24,20,0.06)"
+                                                }
+                                            }
+                                        },
+                                        "transform": {
+                                            "hover": {
+                                                "value": {
+                                                    "translateY": "-4px",
+                                                    "translate": {
+                                                        "y": "-4px"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "top": "40px",
+                                                        "right": "40px",
+                                                        "bottom": "40px",
+                                                        "left": "40px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "fade",
+                                                    "duration": "800ms",
+                                                    "delay": "100ms"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "module": "divi/testimonial",
+                                    "company": {
+                                        "innerContent": {
+                                            "desktop": {
+                                                "value": {
+                                                    "linkTarget": "off"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "quoteIcon": {
+                                        "decoration": {
+                                            "icon": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "show": "on",
+                                                        "useSize": "off"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p>Como investigador, valoro enormemente la secci&oacute;n acad&eacute;mica. Tener acceso a papers y publicaciones especializadas en un solo lugar me ahorra horas de b&uacute;squeda.</p>",
+                                    "author": "Dr. Ricardo Mendoza",
+                                    "jobTitle": [],
+                                    "portrait": [],
+                                    "testimonialDescription": [],
+                                    "src": "",
+                                    "decoration": {
+                                        "background": {
+                                            "desktop": {
+                                                "value": {
+                                                    "color": "var(--gcid-surface-white)"
+                                                }
+                                            }
+                                        },
+                                        "border": {
+                                            "desktop": {
+                                                "value": {
+                                                    "radius": {
+                                                        "topLeft": "4px",
+                                                        "topRight": "4px",
+                                                        "bottomRight": "4px",
+                                                        "bottomLeft": "4px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "boxShadow": {
+                                            "desktop": {
+                                                "value": {
+                                                    "horizontal": "0px",
+                                                    "vertical": "1px",
+                                                    "blur": "3px",
+                                                    "spread": "0px",
+                                                    "color": "rgba(26,24,20,0.06)"
+                                                }
+                                            }
+                                        },
+                                        "transform": {
+                                            "hover": {
+                                                "value": {
+                                                    "translateY": "-4px",
+                                                    "translate": {
+                                                        "y": "-4px"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "top": "40px",
+                                                        "right": "40px",
+                                                        "bottom": "40px",
+                                                        "left": "40px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "fade",
+                                                    "duration": "800ms",
+                                                    "delay": "100ms"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "module": "divi/testimonial",
+                                    "company": {
+                                        "innerContent": {
+                                            "desktop": {
+                                                "value": {
+                                                    "linkTarget": "off"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "quoteIcon": {
+                                        "decoration": {
+                                            "icon": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "show": "on",
+                                                        "useSize": "off"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p>Mis hijos crecen explorando la colecci&oacute;n infantil. Es maravilloso verlos descubrir el placer de la lectura en un entorno digital tan cuidado y hermoso.</p>",
+                                    "author": "Carmen Vald&eacute;s",
+                                    "jobTitle": [],
+                                    "portrait": [],
+                                    "testimonialDescription": [],
+                                    "src": "",
+                                    "decoration": {
+                                        "background": {
+                                            "desktop": {
+                                                "value": {
+                                                    "color": "var(--gcid-surface-white)"
+                                                }
+                                            }
+                                        },
+                                        "border": {
+                                            "desktop": {
+                                                "value": {
+                                                    "radius": {
+                                                        "topLeft": "4px",
+                                                        "topRight": "4px",
+                                                        "bottomRight": "4px",
+                                                        "bottomLeft": "4px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "boxShadow": {
+                                            "desktop": {
+                                                "value": {
+                                                    "horizontal": "0px",
+                                                    "vertical": "1px",
+                                                    "blur": "3px",
+                                                    "spread": "0px",
+                                                    "color": "rgba(26,24,20,0.06)"
+                                                }
+                                            }
+                                        },
+                                        "transform": {
+                                            "hover": {
+                                                "value": {
+                                                    "translateY": "-4px",
+                                                    "translate": {
+                                                        "y": "-4px"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "top": "40px",
+                                                        "right": "40px",
+                                                        "bottom": "40px",
+                                                        "left": "40px",
+                                                        "sync": "on"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "fade",
+                                                    "duration": "800ms",
+                                                    "delay": "100ms"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "decoration": {
+                "background": {
+                    "desktop": {
+                        "value": {
+                            "color": "var(--gcid-surface-light)"
+                        }
+                    }
+                },
+                "spacing": {
+                    "desktop": {
+                        "value": {
+                            "padding": {
+                                "top": "96px",
+                                "bottom": "96px",
+                                "right": "96px",
+                                "left": "96px"
+                            }
+                        }
+                    },
+                    "tablet": {
+                        "value": {
+                            "padding": {
+                                "top": "64px",
+                                "bottom": "64px",
+                                "right": "48px",
+                                "left": "48px"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "value": {
+                            "padding": {
+                                "top": "40px",
+                                "bottom": "40px",
+                                "right": "24px",
+                                "left": "24px"
+                            }
+                        }
+                    }
+                },
+                "animation": {
+                    "desktop": {
+                        "value": {
+                            "style": "fade",
+                            "duration": "600ms",
+                            "delay": "50ms"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "decoration": {
+                "background": {
+                    "desktop": {
+                        "value": {
+                            "color": "var(--gcid-surface-deep)"
+                        }
+                    }
+                },
+                "spacing": {
+                    "desktop": {
+                        "value": {
+                            "padding": {
+                                "top": "128px",
+                                "bottom": "128px",
+                                "right": "96px",
+                                "left": "96px"
+                            }
+                        }
+                    },
+                    "tablet": {
+                        "value": {
+                            "padding": {
+                                "top": "96px",
+                                "bottom": "96px",
+                                "right": "48px",
+                                "left": "48px"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "value": {
+                            "padding": {
+                                "top": "64px",
+                                "bottom": "64px",
+                                "right": "24px",
+                                "left": "24px"
+                            }
+                        }
+                    }
+                }
+            },
+            "rows": [
+                {
+                    "column_structure": "4_4",
+                    "columns": [
+                        {
+                            "type": "4_4",
+                            "modules": [
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p>&Uacute;NETE</p>",
+                                    "headingFont": {
+                                        "p": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'DM Sans', system-ui, sans-serif",
+                                                        "weight": "500",
+                                                        "textTransform": "uppercase",
+                                                        "letterSpacing": "0.2em",
+                                                        "color": "var(--gcid-sepia-300)",
+                                                        "size": "12px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/heading",
+                                    "title": {
+                                        "decoration": {
+                                            "font": {
+                                                "font": {
+                                                    "desktop": {
+                                                        "value": {
+                                                            "headingLevel": "h1"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<h2>Comienza Tu Viaje</h2>",
+                                    "headingFont": {
+                                        "h2": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'Cormorant Garamond', Georgia, serif",
+                                                        "color": "var(--gcid-parchment-50)",
+                                                        "size": "clamp(2rem, 3vw + 0.8rem, 3.5rem)",
+                                                        "weight": "300",
+                                                        "lineHeight": "1.0",
+                                                        "letterSpacing": "-0.015em"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/text",
+                                    "content": "<p style='text-align: center; max-width: 640px; margin: 0 auto;'>Accede a m&aacute;s de 50,000 t&iacute;tulos, colecciones curadas y una comunidad apasionada por el conocimiento. Tu primera semana es gratuita.</p>",
+                                    "bodyFont": {
+                                        "body": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "fontFamily": "'Crimson Pro', Georgia, serif",
+                                                        "color": "var(--gcid-parchment-200)",
+                                                        "size": "20px",
+                                                        "lineHeight": "1.7"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/button",
+                                    "button": {
+                                        "decoration": {
+                                            "button": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "icon": {
+                                                            "enable": "on"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "button_text": "Suscribirme Ahora",
+                                    "button_url": "/suscripcion",
+                                    "decoration": {
+                                        "button": {
+                                            "desktop": {
+                                                "value": {
+                                                    "backgroundColor": "var(--gcid-accent)",
+                                                    "textColor": "var(--gcid-parchment-50)",
+                                                    "borderRadius": "100px",
+                                                    "fontFamily": "'DM Sans', system-ui, sans-serif",
+                                                    "fontWeight": "600",
+                                                    "padding": "16px 40px",
+                                                    "letterSpacing": "0.08em",
+                                                    "textTransform": "uppercase",
+                                                    "fontSize": "13px"
+                                                }
+                                            },
+                                            "hover": {
+                                                "value": {
+                                                    "backgroundColor": "var(--gcid-accent-hover)",
+                                                    "textColor": "var(--gcid-parchment-50)"
+                                                }
+                                            }
+                                        },
+                                        "transition": {
+                                            "desktop": {
+                                                "value": {
+                                                    "duration": "300ms",
+                                                    "delay": "0ms"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "module": "divi/button",
+                                    "button": {
+                                        "decoration": {
+                                            "button": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "icon": {
+                                                            "enable": "on"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "button_text": "Ver Planes",
+                                    "button_url": "/planes",
+                                    "decoration": {
+                                        "button": {
+                                            "desktop": {
+                                                "value": {
+                                                    "backgroundColor": "transparent",
+                                                    "textColor": "var(--gcid-parchment-50)",
+                                                    "borderColor": "var(--gcid-parchment-50)",
+                                                    "borderWidth": "1px",
+                                                    "borderRadius": "100px",
+                                                    "fontFamily": "'DM Sans', system-ui, sans-serif",
+                                                    "fontWeight": "500",
+                                                    "padding": "15px 38px",
+                                                    "letterSpacing": "0.08em",
+                                                    "textTransform": "uppercase",
+                                                    "fontSize": "13px"
+                                                }
+                                            },
+                                            "hover": {
+                                                "value": {
+                                                    "backgroundColor": "var(--gcid-parchment-50)",
+                                                    "textColor": "var(--gcid-ink)",
+                                                    "borderColor": "var(--gcid-parchment-50)"
+                                                }
+                                            }
+                                        },
+                                        "transition": {
+                                            "desktop": {
+                                                "value": {
+                                                    "duration": "300ms",
+                                                    "delay": "0ms"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

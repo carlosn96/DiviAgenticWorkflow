@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Divi Agentic Core (DAW)
  * Description: Core engine for the Divi Agentic Workflow — Layout_Engine, Design_Resolver, Module_Metadata, and WP-CLI commands.
- * Version:     4.0.0
+ * Version:     4.1.0
  * Author:      DAW Bundle (Local)
  * Requires PHP: 8.0
  */
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) && ! defined( 'WP_CLI' ) ) {
 }
 
 define( 'DIVI_AGENTIC_CORE_DIR', __DIR__ );
-define( 'DIVI_AGENTIC_CORE_VERSION', '4.0.0' );
+define( 'DIVI_AGENTIC_CORE_VERSION', '4.1.0' );
 
 require_once __DIR__ . '/inc/loader.php';
 
@@ -139,20 +139,74 @@ function daw_generate_css_vars(?string $ds_path = null): string {
 }
 
 /**
- * Sync brand CSS + design tokens to WordPress Custom CSS.
- *
- * Run this after deploying pages so brand styles live in the database
- * (wp_custom_css post type), not in the filesystem.
- *
- *   wp agentic sync-css
+ * All module asset enqueuing and block registration delegated to Module_Registry.
+ * Add a folder to modules/ with module.json or manifest.json — no core edits needed.
  */
 if ( function_exists( 'add_action' ) ) {
 	add_action( 'wp_enqueue_scripts', function () {
+		$deps = [];
+
+		// Load brand fonts from design system dynamically
+		$ds_path = daw_get_design_system_path();
+		if ( $ds_path ) {
+			$ds = json_decode( file_get_contents( $ds_path ), true );
+			if ( $ds && isset( $ds['tokens']['font'] ) ) {
+				$google_font_map = [
+					'Cinzel'         => 'Cinzel:wght@400;500;600;700',
+					'Jost'           => 'Jost:wght@300;400;500;600;700',
+					'Fredoka'        => 'Fredoka:wght@400;500;600;700',
+					'Nunito'         => 'Nunito:wght@300;400;500;600;700',
+					'Inter'          => 'Inter:wght@300;400;500;600;700',
+					'Space Grotesk'  => 'Space+Grotesk:wght@400;500;600;700',
+					'Playfair Display' => 'Playfair+Display:wght@400;500;600;700',
+					'Cormorant Garamond' => 'Cormorant+Garamond:wght@400;500;600;700',
+				];
+				$seen = [];
+				foreach ( $ds['tokens']['font'] as $key => $family_full ) {
+					preg_match( "/'([^']+)'/", $family_full, $m );
+					$base = $m[1] ?? '';
+					if ( ! $base || isset( $seen[ $base ] ) ) continue;
+					if ( isset( $google_font_map[ $base ] ) ) {
+						$handle = 'daw-font-' . sanitize_title( $base );
+						$url    = 'https://fonts.googleapis.com/css2?family=' . $google_font_map[ $base ] . '&display=swap';
+						wp_enqueue_style( $handle, $url, [], null );
+						$deps[] = $handle;
+						$seen[ $base ] = true;
+					}
+				}
+			}
+		}
+
+		// Fallback: ensure at least one font is loaded
+		if ( empty( $deps ) ) {
+			wp_enqueue_style( 'daw-font-inter', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap', [], null );
+			$deps[] = 'daw-font-inter';
+		}
+
 		$vars = daw_generate_css_vars();
 		if ( $vars ) {
-			wp_register_style( 'daw-design-tokens', false, [], DIVI_AGENTIC_CORE_VERSION );
+			wp_register_style( 'daw-design-tokens', false, $deps, DIVI_AGENTIC_CORE_VERSION );
 			wp_enqueue_style( 'daw-design-tokens' );
 			wp_add_inline_style( 'daw-design-tokens', $vars );
 		}
+
+		// Enqueue brand.css from disk (single source of truth — no DB duplication)
+		$root = daw_find_project_root();
+		$site = daw_get_active_site();
+		if ( $root && $site ) {
+			$brand_css_path = $root . '/DAW_bundle/divi-agentic-core/assets/css/brand.css';
+			// Check for brand-specific override
+			$brand_site_path = $root . '/DAW_bundle/site/' . $site . '/brand/assets/css/brand.css';
+			if ( file_exists( $brand_site_path ) ) {
+				$brand_css_path = $brand_site_path;
+			}
+			if ( file_exists( $brand_css_path ) ) {
+				$brand_css_url = home_url( str_replace( $root, '', $brand_css_path ) );
+				$brand_css_deps = [ 'daw-design-tokens' ];
+				wp_enqueue_style( 'daw-brand-css', $brand_css_url, $brand_css_deps, DIVI_AGENTIC_CORE_VERSION );
+			}
+		}
 	} );
+
+	\DAC\Core\Module_Registry::init();
 }

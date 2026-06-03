@@ -1,0 +1,391 @@
+/* =========================================================
+   Plus Counter — Container Wrapper for Native Divi Modules
+   6 professional layouts inspired by DiviPlus Advanced Counter
+   ========================================================= */
+
+/* ── Base ── */
+.daw-plus-counter {
+  text-align: center;
+  position: relative;
+  padding: 40px 24px;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ── Child module normalization ── */
+.daw-plus-counter .et_pb_module {
+  margin-bottom: 0;
+}
+
+/* ── Icon module override ── */
+.daw-plus-counter .et-pb-icon {
+  line-height: 1;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* ── Number counter module override ── */
+.daw-plus-counter .et_pb_number_counter .percent {
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  transition: color 0.3s ease;
+}
+
+.daw-plus-counter .et_pb_number_counter .title {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+/* ── Text module override (description) ── */
+.daw-plus-counter .et_pb_text {
+  font-size: 13px;
+  opacity: 0.8;
+  line-height: 1.5;
+}
+
+/* ── Divider line (shared) ── */
+.daw-pc-divider {
+  display: block;
+  width: 40px;
+  height: 2px;
+  margin: 0 auto;
+  border-radius: 2px;
+  background: var(--daw-accent, #D4956A);
+  transition: width 0.3s ease;
+}
+
+.daw-plus-counter:hover .daw-pc-divider {
+  width: 60px;
+}
+
+
+/* ════════════════════════════════════════════════════════
+   LAYOUT 01 — Icon → Number → Title (Dark background)
+   ════════════════════════════════════════════════════════ */
+.daw-plus-counter.layout-01 {
+  padding: 48px 32px;
+}
+
+.daw-plus-counter.layout-01 .et_pb_module:first-child .et-pb-icon {
+  font-size: 44px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.daw-plus-counter.layout-01 .et_pb_number_counter .percent {
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.daw-plus-counter.layout-01 .et_pb_number_counter .title {
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.daw-plus-counter.layout-01:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+
+/* ════════════════════════════════════════════════════════
+   LAYOUT 02 — Number → Icon → Title + Desc (Light bg)
+   ════════════════════════════════════════════════════════ */
+.daw-plus-counter.layout-02 {
+  background: var(--daw-surface-white, #FFFBF7);
+  border: 1px solid var(--daw-glass-border, rgba(212,149,106,0.12));
+  border-radius: var(--daw-radius-lg, 14px);
+  padding: 40px 28px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+}
+
+.daw-plus-counter.layout-02 .et_pb_number_counter .percent {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--daw-accent, #D4956A);
+}
+
+.daw-plus-counter.layout-02 .et-pb-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+  display: inline-block;
+  color: var(--daw-accent, #D4956A);
+}
+
+.daw-plus-counter.layout-02 .et_pb_number_counter .title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--daw-text-primary, #1D1D1F);
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.daw-plus-counter.layout-02:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+  border-color: var(--daw-glass-border-strong, rgba(212,149,106,0.25));
+}
+
+
+/* ════════════════════════════════════════════════════════
+   LAYOUT 03 — Icon above Number (Light card)
+   ════════════════════════════════════════════════════════ */
+.daw-plus-counter.layout-03 {
+  background: #FFFBF7;
+  padding: 48px 32px;
+  position: relative;
+}
+
+.daw-plus-counter.layout-03::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: var(--daw-accent, #D4956A);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.daw-plus-counter.layout-03:hover::after {
+  width: 100px;
+}
+
+.daw-plus-counter.layout-03 .et_pb_module:first-child .et-pb-icon {
+  font-size: 36px;
+  margin-bottom: 20px;
+  display: inline-block;
+  color: var(--daw-accent, #D4956A);
+}
+
+.daw-plus-counter.layout-03 .et_pb_number_counter .percent {
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-weight: 700;
+  color: var(--daw-text-primary, #1D1D1F);
+}
+
+.daw-plus-counter.layout-03 .et_pb_number_counter .title {
+  font-size: 13px;
+  color: #6E6E73;
+}
+
+.daw-plus-counter.layout-03:hover {
+  transform: translateY(-4px);
+}
+
+
+/* ════════════════════════════════════════════════════════
+   LAYOUT 04 — Icon above Number (Dark bold)
+   ════════════════════════════════════════════════════════ */
+.daw-plus-counter.layout-04 {
+  padding: 48px 32px;
+  position: relative;
+}
+
+.daw-plus-counter.layout-04::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--daw-accent, #D4956A), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.daw-plus-counter.layout-04:hover::before {
+  opacity: 1;
+}
+
+.daw-plus-counter.layout-04 .et_pb_module:first-child .et-pb-icon {
+  font-size: 48px;
+  margin-bottom: 24px;
+  display: inline-block;
+  color: var(--daw-accent, #D4956A);
+}
+
+.daw-plus-counter.layout-04 .et_pb_number_counter .percent {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--daw-text-on-dark, #F5F5F7);
+}
+
+.daw-plus-counter.layout-04 .et_pb_number_counter .title {
+  font-size: 14px;
+  color: rgba(245,245,247,0.7);
+  margin-top: 8px;
+}
+
+.daw-plus-counter.layout-04:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.25);
+}
+
+
+/* ════════════════════════════════════════════════════════
+   LAYOUT 05 — Number above Icon (3-col card)
+   ════════════════════════════════════════════════════════ */
+.daw-plus-counter.layout-05 {
+  background: var(--daw-surface-white, #FFFBF7);
+  border-radius: var(--daw-radius-xl, 20px);
+  padding: 48px 32px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+  border: 1px solid var(--daw-glass-border, rgba(212,149,106,0.12));
+  position: relative;
+  overflow: hidden;
+}
+
+.daw-plus-counter.layout-05::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--daw-accent, #D4956A), #e8c4a0);
+  border-radius: 20px 20px 0 0;
+}
+
+.daw-plus-counter.layout-05 .et_pb_number_counter .percent {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--daw-accent, #D4956A);
+  margin-bottom: 12px;
+}
+
+.daw-plus-counter.layout-05 .et-pb-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+  display: inline-block;
+  color: var(--daw-accent, #D4956A);
+}
+
+.daw-plus-counter.layout-05 .et_pb_number_counter .title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--daw-text-primary, #1D1D1F);
+  text-transform: none;
+}
+
+.daw-plus-counter.layout-05:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+  border-color: var(--daw-glass-border-strong, rgba(212,149,106,0.3));
+}
+
+
+/* ════════════════════════════════════════════════════════
+   LAYOUT 06 — Number above Icon (Dark card)
+   ════════════════════════════════════════════════════════ */
+.daw-plus-counter.layout-06 {
+  padding: 48px 32px;
+  position: relative;
+  border: 1px solid rgba(245,245,247,0.1);
+  border-radius: var(--daw-radius-lg, 14px);
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.daw-plus-counter.layout-06::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(212,149,106,0.3), transparent 50%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.daw-plus-counter.layout-06 .et_pb_number_counter .percent {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--daw-accent, #D4956A);
+  margin-bottom: 12px;
+}
+
+.daw-plus-counter.layout-06 .et-pb-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+  display: inline-block;
+  color: var(--daw-accent, #D4956A);
+}
+
+.daw-plus-counter.layout-06 .et_pb_number_counter .title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--daw-text-on-dark, #F5F5F7);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.daw-plus-counter.layout-06:hover {
+  background: rgba(255,255,255,0.06);
+  transform: translateY(-4px);
+  border-color: rgba(212,149,106,0.25);
+}
+
+
+/* ── Staggered entrance animation ── */
+@keyframes dawCounterFadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.daw-plus-counter {
+  animation: dawCounterFadeUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.daw-plus-counter:nth-child(2) { animation-delay: 0.1s; }
+.daw-plus-counter:nth-child(3) { animation-delay: 0.2s; }
+.daw-plus-counter:nth-child(4) { animation-delay: 0.3s; }
+.daw-plus-counter:nth-child(5) { animation-delay: 0.4s; }
+.daw-plus-counter:nth-child(6) { animation-delay: 0.5s; }
+
+
+/* ── Responsive ── */
+@media (max-width: 980px) {
+  .daw-plus-counter {
+    padding: 32px 20px;
+  }
+  .daw-plus-counter.layout-01,
+  .daw-plus-counter.layout-04 {
+    padding: 36px 24px;
+  }
+  .daw-plus-counter.layout-05,
+  .daw-plus-counter.layout-06 {
+    padding: 36px 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .daw-plus-counter {
+    margin-bottom: 24px;
+    padding: 28px 20px;
+  }
+  .daw-plus-counter:last-child {
+    margin-bottom: 0;
+  }
+  .daw-plus-counter .et_pb_number_counter .percent {
+    font-size: clamp(2rem, 8vw, 3rem) !important;
+  }
+  .daw-plus-counter .et-pb-icon {
+    font-size: 32px !important;
+  }
+  .daw-plus-counter.layout-05,
+  .daw-plus-counter.layout-06 {
+    border-radius: var(--daw-radius-md, 10px);
+  }
+}

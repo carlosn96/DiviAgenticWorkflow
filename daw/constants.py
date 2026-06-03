@@ -13,6 +13,16 @@ FRONTEND_PRINCIPLES = {
         "body_line_height": "1.6em",
         "eyebrow_letter_spacing": "2px",
         "eyebrow_transform": "uppercase",
+        "heading_text_shadow": {
+            "glow": "0 0 80px {accent}12",
+            "depth": "0 4px 60px rgba(0,0,0,0.4)",
+        },
+        "eyebrow_line": {
+            "width": "32px",
+            "height": "1px",
+            "gradient": "90deg, {accent}, transparent",
+            "position": "before",
+        },
     },
     "motion": {
         "stagger_step_ms": 100,
@@ -21,6 +31,13 @@ FRONTEND_PRINCIPLES = {
         "micro_duration_ms": 300,
         "preferred_easing": "cubic-bezier(0.16,1,0.3,1)",
         "fallback_easing": "ease-out",
+        "blur_reveal": {
+            "initial_blur": "4px",
+            "initial_translateY": "40px",
+            "duration": "900ms",
+            "easing": "cubic-bezier(0.16,1,0.3,1)",
+            "keyframe_name": "revealUp",
+        },
     },
     "spacing": {
         "section_padding_min": "80px",
@@ -28,6 +45,11 @@ FRONTEND_PRINCIPLES = {
         "section_padding_cta": "120px",
         "container_padding_x": "96px",
         "mobile_padding_x": "24px",
+        "responsive": {
+            "hero": {"desktop": "200px", "tablet": "140px", "phone": "120px"},
+            "section": {"desktop": "160px", "tablet": "100px", "phone": "80px"},
+            "cta": {"desktop": "180px", "tablet": "120px", "phone": "100px"},
+        },
     },
     "color": {
         "prefers_high_contrast": True,
@@ -37,6 +59,64 @@ FRONTEND_PRINCIPLES = {
         "prefers_distinctive": True,
         "glass_alpha_min": 0.80,
         "glow_intensity_map": {"none": 0, "low": 0.1, "medium": 0.15, "high": 0.25},
+        "glass": {
+            "blur": "20px",
+            "saturate": 1.4,
+            "border_opacity": 0.08,
+            "border_color": "{accent}",
+        },
+        "grain": {
+            "base_frequency": "0.65",
+            "octaves": 3,
+            "opacity_section": 0.02,
+            "opacity_card": 0.03,
+            "stitch": "stitch",
+        },
+        "multi_shadow": {
+            "ambient": {"spread": "-12px", "blur": "48px", "color": "{accent}0.08"},
+            "hover_ambient": {"spread": "-16px", "blur": "64px", "color": "{accent}0.14"},
+            "button_ambient": {"y": "8px", "blur": "32px", "spread": "-4px", "color": "{accent}0.25"},
+            "button_directional": {"y": "2px", "blur": "8px", "color": "{accent}0.15"},
+            "button_inset": {"y": "1px", "color": "rgba(255,255,255,0.2)"},
+        },
+        "button_gradient": {
+            "angle": "135deg",
+            "stops": ["{accent} 0%", "{accent_light} 40%", "{accent_muted} 100%"],
+        },
+        "icon_container": {
+            "size": "64px",
+            "radius": "16px",
+            "bg_opacity": 0.08,
+            "hover_bg_opacity": 0.14,
+            "hover_scale": 1.1,
+            "hover_translateY": "-4px",
+        },
+        "column_divider": {
+            "width": "1px",
+            "gradient": "180deg, transparent 0%, {accent}0.15 50%, transparent 100%",
+            "top_crop": "20%",
+            "bottom_crop": "20%",
+        },
+        "quote_mark": {
+            "char": "\u201C",
+            "font_family": "serif",
+            "size": "72px",
+            "opacity": 0.1,
+            "position_top": "20px",
+            "position_left": "28px",
+        },
+        "orb_glow": {
+            "size": "80%",
+            "opacity_center": 0.14,
+            "opacity_edge": 0.04,
+            "fade_to_transparent": "60%",
+        },
+        "fade_overlay": {
+            "height": "120px",
+            "direction": "0deg",
+            "from_color": "{bg_dark}",
+            "to_color": "transparent",
+        },
     },
 }
 

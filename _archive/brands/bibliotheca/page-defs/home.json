@@ -1,0 +1,599 @@
+{
+    "title": "Bibliotheca - Biblioteca Digital Premium",
+    "slug": "home",
+    "description": "Descubre el mundo de la lectura con Bibliotheca, la biblioteca digital premium que te ofrece acceso a una amplia variedad de títulos y autores.",
+    "sections": [
+        {
+            "presets": [
+                "section:hero-dark"
+            ],
+            "decoration": {
+                "spacing": {
+                    "desktop": {
+                        "value": {
+                            "padding": {
+                                "top": "180px",
+                                "bottom": "140px",
+                                "right": "96px",
+                                "left": "96px"
+                            }
+                        }
+                    },
+                    "tablet": {
+                        "value": {
+                            "padding": {
+                                "top": "120px",
+                                "bottom": "100px",
+                                "right": "48px",
+                                "left": "48px"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "value": {
+                            "padding": {
+                                "top": "80px",
+                                "bottom": "80px",
+                                "right": "24px",
+                                "left": "24px"
+                            }
+                        }
+                    }
+                },
+                "animation": {
+                    "desktop": {
+                        "value": {
+                            "style": "fade",
+                            "duration": "800ms",
+                            "delay": "0ms"
+                        }
+                    }
+                },
+                "scroll": {
+                    "desktop": {
+                        "value": "reveal"
+                    }
+                }
+            },
+            "rows": [
+                {
+                    "column_structure": "3_5,2_5",
+                    "columns": [
+                        {
+                            "type": "3_5",
+                            "decoration": {
+                                "spacing": {
+                                    "desktop": {
+                                        "value": {
+                                            "padding": {
+                                                "right": "64px"
+                                            }
+                                        }
+                                    },
+                                    "tablet": {
+                                        "value": {
+                                            "padding": {
+                                                "right": "0"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "modules": [
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:eyebrow-dark"
+                                    ],
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide-up",
+                                                    "duration": "600ms",
+                                                    "delay": "0ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p>BIENVENIDO A BIBLIOTHECA</p>"
+                                },
+                                {
+                                    "type": "divi/heading",
+                                    "presets": [
+                                        "text:display-xl"
+                                    ],
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide-up",
+                                                    "duration": "600ms",
+                                                    "delay": "150ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<h1>Explora el mundo de la lectura</h1>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:lead"
+                                    ],
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "40px"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide-up",
+                                                    "duration": "600ms",
+                                                    "delay": "300ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p>Descubre nuevos títulos y autores, y accede a una amplia variedad de contenido digital de alta calidad.</p>"
+                                },
+                                {
+                                    "type": "divi/button",
+                                    "presets": [
+                                        "module:btn-outline-light"
+                                    ],
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide-up",
+                                                    "duration": "600ms",
+                                                    "delay": "450ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "button_text": "Explorar ahora",
+                                    "button_url": "/explorar"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "2_5",
+                            "decoration": {
+                                "animation": {
+                                    "desktop": {
+                                        "value": {
+                                            "style": "fade",
+                                            "duration": "1000ms",
+                                            "delay": "200ms"
+                                        }
+                                    }
+                                }
+                            },
+                            "modules": [
+                                {
+                                    "type": "divi/blurb",
+                                    "presets": [
+                                        "module:glass-card",
+                                        "transform:hover-scale"
+                                    ],
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "zoom-in",
+                                                    "duration": "800ms",
+                                                    "delay": "300ms"
+                                                }
+                                            }
+                                        },
+                                        "scroll": {
+                                            "desktop": {
+                                                "value": "parallax-up"
+                                            }
+                                        }
+                                    },
+                                    "title": "",
+                                    "icon": "&#x1F4D6;",
+                                    "content": "<p style='font-size: 1.5rem; line-height: 1.8; font-style: italic; color: var(--gcid-parchment-200); text-align: center; padding: 2rem;'>\"El universo (que otros llaman la Biblioteca) se compone de un número indefinido, y tal vez infinito, de galerías hexagonales...\"<br><span style='font-size: 0.9rem; color: var(--gcid-sepia-300);'>— Jorge Luis Borges</span></p>"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "presets": [
+                "section:light"
+            ],
+            "rows": [
+                {
+                    "column_structure": "1_1",
+                    "columns": [
+                        {
+                            "type": "1_1",
+                            "decoration": {
+                                "spacing": {
+                                    "desktop": {
+                                        "value": {
+                                            "max_width": "700px",
+                                            "align": "center",
+                                            "padding": {
+                                                "bottom": "64px"
+                                            }
+                                        }
+                                    },
+                                    "tablet": {
+                                        "value": {
+                                            "padding": {
+                                                "bottom": "40px"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "modules": [
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:eyebrow-dark"
+                                    ],
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "8px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p>CARACTERÍSTICAS</p>"
+                                },
+                                {
+                                    "type": "divi/heading",
+                                    "presets": [
+                                        "text:display-md"
+                                    ],
+                                    "content": "<h2>¿Qué te ofrece Bibliotheca?</h2>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:lead-dark"
+                                    ],
+                                    "content": "<p>Accede a una amplia variedad de títulos y autores, y disfruta de una experiencia de lectura personalizada.</p>"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "column_structure": "1_3,1_3,1_3",
+                    "columns": [
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "type": "divi/blurb",
+                                    "presets": [
+                                        "module:feature-card",
+                                        "transform:hover-lift"
+                                    ],
+                                    "decoration": [],
+                                    "title": "Acceso a una amplia variedad de títulos",
+                                    "icon": "&#xe03a;",
+                                    "content": "<p>Descubre nuevos títulos y autores, y accede a una amplia variedad de contenido digital de alta calidad.</p>"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "type": "divi/blurb",
+                                    "presets": [
+                                        "module:feature-card",
+                                        "transform:hover-lift"
+                                    ],
+                                    "decoration": [],
+                                    "title": "Experiencia de lectura personalizada",
+                                    "icon": "&#xe065;",
+                                    "content": "<p>Ajusta la fuente, el tamaño y la iluminación para crear una experiencia de lectura cómoda y personalizada.</p>"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "type": "divi/blurb",
+                                    "presets": [
+                                        "module:feature-card",
+                                        "transform:hover-lift"
+                                    ],
+                                    "decoration": [],
+                                    "title": "Acceso offline",
+                                    "icon": "&#xe0bf;",
+                                    "content": "<p>Descarga tus títulos favoritos y accede a ellos sin conexión a Internet.</p>"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "presets": [
+                "section:light"
+            ],
+            "decoration": {
+                "background": {
+                    "desktop": {
+                        "value": {
+                            "color": "{{design:color:surface-light}}",
+                            "overlay": {
+                                "gradient": "radial-gradient(ellipse at 20% 80%, rgba(193,171,144,0.08) 0%, transparent 60%)"
+                            }
+                        }
+                    }
+                },
+                "spacing": {
+                    "desktop": {
+                        "value": {
+                            "padding": {
+                                "top": "120px",
+                                "bottom": "120px",
+                                "right": "96px",
+                                "left": "96px"
+                            }
+                        }
+                    },
+                    "tablet": {
+                        "value": {
+                            "padding": {
+                                "top": "80px",
+                                "bottom": "80px",
+                                "right": "48px",
+                                "left": "48px"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "value": {
+                            "padding": {
+                                "top": "56px",
+                                "bottom": "56px",
+                                "right": "24px",
+                                "left": "24px"
+                            }
+                        }
+                    }
+                }
+            },
+            "rows": [
+                {
+                    "column_structure": "1_1",
+                    "columns": [
+                        {
+                            "type": "1_1",
+                            "decoration": {
+                                "spacing": {
+                                    "desktop": {
+                                        "value": {
+                                            "max_width": "700px",
+                                            "align": "center",
+                                            "padding": {
+                                                "bottom": "64px"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "modules": [
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:eyebrow-dark"
+                                    ],
+                                    "content": "<p>LO QUE NUESTROS USUARIOS DICEN</p>"
+                                },
+                                {
+                                    "type": "divi/heading",
+                                    "presets": [
+                                        "text:display-md"
+                                    ],
+                                    "content": "<h2>Opiniones de nuestros usuarios</h2>"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "column_structure": "1_2,1_2",
+                    "columns": [
+                        {
+                            "type": "1_2",
+                            "modules": [
+                                {
+                                    "type": "divi/testimonial",
+                                    "presets": [
+                                        "module:testimonial-card",
+                                        "transform:hover-lift"
+                                    ],
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "fade",
+                                                    "duration": "600ms",
+                                                    "delay": "100ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p>Me ha sido muy útil para mis estudios y me ha permitido descubrir nuevos autores y géneros.</p>",
+                                    "author": "María G.",
+                                    "jobTitle": "Estudiante",
+                                    "portrait": ""
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_2",
+                            "modules": [
+                                {
+                                    "type": "divi/testimonial",
+                                    "presets": [
+                                        "module:testimonial-card",
+                                        "transform:hover-lift"
+                                    ],
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "fade",
+                                                    "duration": "600ms",
+                                                    "delay": "100ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p>Me gusta que pueda ajustar la fuente y el tamaño para crear una experiencia de lectura cómoda y personalizada.</p>",
+                                    "author": "Juan P.",
+                                    "jobTitle": "Profesor",
+                                    "portrait": ""
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "presets": [
+                "section:cta-epic"
+            ],
+            "rows": [
+                {
+                    "column_structure": "1_1",
+                    "columns": [
+                        {
+                            "type": "1_1",
+                            "decoration": {
+                                "spacing": {
+                                    "desktop": {
+                                        "value": {
+                                            "max_width": "750px",
+                                            "align": "center"
+                                        }
+                                    }
+                                }
+                            },
+                            "modules": [
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:eyebrow-dark"
+                                    ],
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "8px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p>¡ÚNETE A BIBLIOTHECA HOY!</p>"
+                                },
+                                {
+                                    "type": "divi/heading",
+                                    "presets": [
+                                        "text:display-md-light"
+                                    ],
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "24px"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide",
+                                                    "direction": "bottom",
+                                                    "duration": "600ms",
+                                                    "delay": "100ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<h2>Accede a una amplia variedad de títulos y autores</h2>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:lead"
+                                    ],
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "40px"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "fade",
+                                                    "duration": "600ms",
+                                                    "delay": "200ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p>Descubre el mundo de la lectura con Bibliotheca, la biblioteca digital premium que te ofrece acceso a una amplia variedad de títulos y autores.</p>"
+                                },
+                                {
+                                    "type": "divi/button",
+                                    "presets": [
+                                        "module:btn-cta-dark"
+                                    ],
+                                    "button_text": "Unirse ahora",
+                                    "button_url": "/unirse"
+                                },
+                                {
+                                    "type": "divi/button",
+                                    "presets": [
+                                        "module:btn-outline-light"
+                                    ],
+                                    "button_text": "Conoce más sobre nosotros",
+                                    "button_url": "/about"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

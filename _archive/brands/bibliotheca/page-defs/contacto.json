@@ -1,0 +1,1093 @@
+{
+    "title": "Página de Contacto de Bibliotheca",
+    "slug": "contacto",
+    "description": "Página de contacto para Bibliotheca digital premium, incluyendo un formulario de contacto refinado, información de ubicación física en la biblioteca y un mapa o sección de ayuda.",
+    "sections": [
+        {
+            "presets": [
+                "section:hero-dark"
+            ],
+            "decoration": {
+                "spacing": {
+                    "desktop": {
+                        "value": {
+                            "padding": {
+                                "top": "180px",
+                                "bottom": "140px",
+                                "right": "96px",
+                                "left": "96px"
+                            }
+                        }
+                    },
+                    "tablet": {
+                        "value": {
+                            "padding": {
+                                "top": "120px",
+                                "bottom": "100px",
+                                "right": "48px",
+                                "left": "48px"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "value": {
+                            "padding": {
+                                "top": "80px",
+                                "bottom": "80px",
+                                "right": "24px",
+                                "left": "24px"
+                            }
+                        }
+                    }
+                },
+                "animation": {
+                    "desktop": {
+                        "value": {
+                            "style": "fade",
+                            "duration": "800ms",
+                            "delay": "0ms"
+                        }
+                    }
+                },
+                "scroll": {
+                    "desktop": {
+                        "value": "reveal"
+                    }
+                }
+            },
+            "rows": [
+                {
+                    "column_structure": "3_5,2_5",
+                    "columns": [
+                        {
+                            "type": "3_5",
+                            "decoration": {
+                                "spacing": {
+                                    "desktop": {
+                                        "value": {
+                                            "padding": {
+                                                "right": "64px"
+                                            }
+                                        }
+                                    },
+                                    "tablet": {
+                                        "value": {
+                                            "padding": {
+                                                "right": "0"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "modules": [
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:eyebrow-dark"
+                                    ],
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide-up",
+                                                    "duration": "600ms",
+                                                    "delay": "0ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p>CONTACTANOS</p>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:hero-title"
+                                    ],
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide-up",
+                                                    "duration": "600ms",
+                                                    "delay": "150ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<h1>Página de Contacto de Bibliotheca</h1>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:lead"
+                                    ],
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "40px"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide-up",
+                                                    "duration": "600ms",
+                                                    "delay": "300ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p>¡Estamos aquí para ayudarte! Si tienes alguna pregunta o inquietud, no dudes en contactarnos.</p>"
+                                },
+                                {
+                                    "type": "divi/button",
+                                    "presets": [
+                                        "module:btn-outline-light"
+                                    ],
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide-up",
+                                                    "duration": "600ms",
+                                                    "delay": "450ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "button_text": "Enviar Mensaje",
+                                    "button_url": "/contacto/enviar"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "2_5",
+                            "decoration": {
+                                "animation": {
+                                    "desktop": {
+                                        "value": {
+                                            "style": "fade",
+                                            "duration": "1000ms",
+                                            "delay": "200ms"
+                                        }
+                                    }
+                                }
+                            },
+                            "modules": [
+                                {
+                                    "type": "divi/blurb",
+                                    "presets": [
+                                        "module:glass-card",
+                                        "transform:hover-scale"
+                                    ],
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "zoom-in",
+                                                    "duration": "800ms",
+                                                    "delay": "300ms"
+                                                }
+                                            }
+                                        },
+                                        "scroll": {
+                                            "desktop": {
+                                                "value": "parallax-up"
+                                            }
+                                        }
+                                    },
+                                    "title": "",
+                                    "icon": "&#x1F5E8;",
+                                    "content": "<p style='font-size: 1.5rem; line-height: 1.8; font-style: italic; color: var(--gcid-parchment-200); text-align: center; padding: 2rem;'>\"El diálogo es el camino para llegar a la verdad, revelando lo que yace en el silencio del pensamiento.\"<br><span style='font-size: 0.9rem; color: var(--gcid-sepia-300);'>— Umberto Eco</span></p>"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "presets": [
+                "section:hero-dark"
+            ],
+            "decoration": {
+                "spacing": {
+                    "desktop": {
+                        "value": {
+                            "padding": {
+                                "top": "140px",
+                                "bottom": "140px",
+                                "right": "96px",
+                                "left": "96px"
+                            }
+                        }
+                    },
+                    "tablet": {
+                        "value": {
+                            "padding": {
+                                "top": "96px",
+                                "bottom": "96px",
+                                "right": "48px",
+                                "left": "48px"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "value": {
+                            "padding": {
+                                "top": "64px",
+                                "bottom": "64px",
+                                "right": "24px",
+                                "left": "24px"
+                            }
+                        }
+                    }
+                },
+                "scroll": {
+                    "desktop": {
+                        "value": "reveal"
+                    }
+                }
+            },
+            "rows": [
+                {
+                    "column_structure": "3_5,2_5",
+                    "columns": [
+                        {
+                            "type": "3_5",
+                            "decoration": {
+                                "spacing": {
+                                    "desktop": {
+                                        "value": {
+                                            "padding": {
+                                                "right": "64px"
+                                            }
+                                        }
+                                    },
+                                    "tablet": {
+                                        "value": {
+                                            "padding": {
+                                                "right": "0"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "modules": [
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:eyebrow-dark"
+                                    ],
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide-up",
+                                                    "duration": "600ms",
+                                                    "delay": "0ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p>INFORMACIÓN DE CONTACTO</p>"
+                                },
+                                {
+                                    "type": "divi/heading",
+                                    "presets": [
+                                        "text:display-md-light"
+                                    ],
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "24px"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide-up",
+                                                    "duration": "600ms",
+                                                    "delay": "150ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<h2>Información de Contacto</h2>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:lead"
+                                    ],
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "24px"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide-up",
+                                                    "duration": "600ms",
+                                                    "delay": "300ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p>Nuestra biblioteca se encuentra ubicada en el corazón de la ciudad. Puedes visitarnos en persona o contactarnos a través de nuestro formulario de contacto.</p>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:body-md"
+                                    ],
+                                    "bodyFont": {
+                                        "body": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "color": "{{design:color:text-on-dark}}"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide-up",
+                                                    "duration": "600ms",
+                                                    "delay": "450ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p></p>"
+                                },
+                                {
+                                    "type": "divi/button",
+                                    "presets": [
+                                        "module:btn-outline-light"
+                                    ],
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "slide-up",
+                                                    "duration": "600ms",
+                                                    "delay": "600ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "button_text": "",
+                                    "button_url": ""
+                                }
+                            ]
+                        },
+                        {
+                            "type": "2_5",
+                            "decoration": {
+                                "animation": {
+                                    "desktop": {
+                                        "value": {
+                                            "style": "fade",
+                                            "duration": "1000ms",
+                                            "delay": "200ms"
+                                        }
+                                    }
+                                }
+                            },
+                            "modules": [
+                                {
+                                    "type": "divi/blurb",
+                                    "presets": [
+                                        "module:glass-card",
+                                        "transform:hover-scale"
+                                    ],
+                                    "bodyFont": {
+                                        "body": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "color": "{{design:color:text-on-dark}}"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "decoration": {
+                                        "scroll": {
+                                            "desktop": {
+                                                "value": "parallax-up"
+                                            }
+                                        }
+                                    },
+                                    "title": "",
+                                    "icon": "&#xe065;",
+                                    "content": "<p>Bibliotheca</p>"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "presets": [
+                "section:light"
+            ],
+            "rows": [
+                {
+                    "column_structure": "1_1",
+                    "columns": [
+                        {
+                            "type": "1_1",
+                            "decoration": {
+                                "spacing": {
+                                    "desktop": {
+                                        "value": {
+                                            "max_width": "700px",
+                                            "align": "center",
+                                            "padding": {
+                                                "bottom": "64px"
+                                            }
+                                        }
+                                    },
+                                    "tablet": {
+                                        "value": {
+                                            "padding": {
+                                                "bottom": "40px"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "modules": [
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:eyebrow"
+                                    ],
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "8px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p>FORMULARIO DE CONTACTO</p>"
+                                },
+                                {
+                                    "type": "divi/heading",
+                                    "presets": [
+                                        "text:display-md"
+                                    ],
+                                    "content": "<h2>Formulario de Contacto</h2>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:lead-dark"
+                                    ],
+                                    "content": "<p>Por favor, completa el siguiente formulario para ponerte en contacto con nosotros.</p>"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "column_structure": "1_3,1_3,1_3",
+                    "columns": [
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "type": "divi/blurb",
+                                    "presets": [
+                                        "module:feature-card",
+                                        "transform:hover-lift"
+                                    ],
+                                    "decoration": [],
+                                    "title": "Nombre",
+                                    "icon": "&#xe03a;",
+                                    "content": "<p>Ingresa tu nombre completo</p>"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "type": "divi/blurb",
+                                    "presets": [
+                                        "module:feature-card",
+                                        "transform:hover-lift"
+                                    ],
+                                    "decoration": [],
+                                    "title": "Correo Electrónico",
+                                    "icon": "&#xe0bf;",
+                                    "content": "<p>Ingresa tu dirección de correo electrónico</p>"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "type": "divi/blurb",
+                                    "presets": [
+                                        "module:feature-card",
+                                        "transform:hover-lift"
+                                    ],
+                                    "decoration": [],
+                                    "title": "Mensaje",
+                                    "icon": "&#xe049;",
+                                    "content": "<p>Ingresa tu mensaje o consulta</p>"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "presets": [
+                "section:hero-dark"
+            ],
+            "rows": [
+                {
+                    "column_structure": "1_2,1_2",
+                    "columns": [
+                        {
+                            "type": "1_2",
+                            "decoration": {
+                                "animation": {
+                                    "desktop": {
+                                        "value": {
+                                            "style": "slide",
+                                            "direction": "left",
+                                            "duration": "800ms",
+                                            "delay": "100ms"
+                                        }
+                                    }
+                                }
+                            },
+                            "modules": [
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:eyebrow-dark"
+                                    ],
+                                    "content": "<p>UBICACIÓN FÍSICA</p>"
+                                },
+                                {
+                                    "type": "divi/heading",
+                                    "presets": [
+                                        "text:display-md-light"
+                                    ],
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "24px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<h2>Ubicación Física</h2>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:lead"
+                                    ],
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "24px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p>Nuestra biblioteca se encuentra ubicada en la siguiente dirección:</p>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:body-md"
+                                    ],
+                                    "bodyFont": {
+                                        "body": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "color": "{{design:color:text-on-dark}}"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p>Calle Principal, 123, Ciudad, País</p>"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_2",
+                            "decoration": {
+                                "animation": {
+                                    "desktop": {
+                                        "value": {
+                                            "style": "slide",
+                                            "direction": "right",
+                                            "duration": "800ms",
+                                            "delay": "200ms"
+                                        }
+                                    }
+                                }
+                            },
+                            "modules": [
+                                {
+                                    "type": "divi/icon-list",
+                                    "presets": [],
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "fade",
+                                                    "duration": "600ms",
+                                                    "delay": "400ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "icon": {
+                                        "advanced": {
+                                            "color": {
+                                                "desktop": {
+                                                    "value": "var(--gcid-sepia-300)"
+                                                }
+                                            },
+                                            "size": {
+                                                "desktop": {
+                                                    "value": "18px"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "modules": [
+                                        {
+                                            "title": "Ubicación Física",
+                                            "icon": {
+                                                "unicode": ""
+                                            }
+                                        }
+                                    ],
+                                    "children": []
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "decoration": {
+                "background": {
+                    "desktop": {
+                        "value": {
+                            "overlay": {
+                                "gradient": "radial-gradient(ellipse at 30% 20%, rgba(120,100,80,0.15) 0%, transparent 60%)"
+                            }
+                        }
+                    }
+                },
+                "spacing": {
+                    "desktop": {
+                        "value": {
+                            "padding": {
+                                "top": "120px",
+                                "bottom": "120px",
+                                "right": "96px",
+                                "left": "96px"
+                            }
+                        }
+                    },
+                    "tablet": {
+                        "value": {
+                            "padding": {
+                                "top": "80px",
+                                "bottom": "80px",
+                                "right": "48px",
+                                "left": "48px"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "value": {
+                            "padding": {
+                                "top": "56px",
+                                "bottom": "56px",
+                                "right": "24px",
+                                "left": "24px"
+                            }
+                        }
+                    }
+                },
+                "scroll": {
+                    "desktop": {
+                        "value": "reveal"
+                    }
+                }
+            }
+        },
+        {
+            "presets": [
+                "section:dark"
+            ],
+            "decoration": {
+                "background": {
+                    "desktop": {
+                        "value": {
+                            "color": "{{design:color:surface-light}}"
+                        }
+                    }
+                },
+                "spacing": {
+                    "desktop": {
+                        "value": {
+                            "padding": {
+                                "top": "100px",
+                                "bottom": "100px",
+                                "right": "96px",
+                                "left": "96px"
+                            }
+                        }
+                    },
+                    "tablet": {
+                        "value": {
+                            "padding": {
+                                "top": "64px",
+                                "bottom": "64px",
+                                "right": "48px",
+                                "left": "48px"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "value": {
+                            "padding": {
+                                "top": "48px",
+                                "bottom": "48px",
+                                "right": "24px",
+                                "left": "24px"
+                            }
+                        }
+                    }
+                },
+                "scroll": {
+                    "desktop": {
+                        "value": "reveal"
+                    }
+                }
+            },
+            "rows": [
+                {
+                    "column_structure": "1_3,1_3,1_3",
+                    "columns": [
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "type": "divi/number-counter",
+                                    "presets": [
+                                        "module:glass-card"
+                                    ],
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "fade",
+                                                    "duration": "600ms",
+                                                    "delay": "100ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "number": "9:00 am - 5:00 pm",
+                                    "label": "Lunes a Viernes",
+                                    "enablePercentSign": "off"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "type": "divi/number-counter",
+                                    "presets": [
+                                        "module:glass-card"
+                                    ],
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "fade",
+                                                    "duration": "600ms",
+                                                    "delay": "100ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "number": "9:00 am - 1:00 pm",
+                                    "label": "Sábado",
+                                    "enablePercentSign": "off"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "type": "divi/number-counter",
+                                    "presets": [
+                                        "module:glass-card"
+                                    ],
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "fade",
+                                                    "duration": "600ms",
+                                                    "delay": "100ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "number": "Cerrado",
+                                    "label": "Domingo",
+                                    "enablePercentSign": "off"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "presets": [
+                "section:hero-dark"
+            ],
+            "rows": [
+                {
+                    "column_structure": "1_2,1_2",
+                    "columns": [
+                        {
+                            "type": "1_2",
+                            "decoration": {
+                                "animation": {
+                                    "desktop": {
+                                        "value": {
+                                            "style": "slide",
+                                            "direction": "left",
+                                            "duration": "800ms",
+                                            "delay": "100ms"
+                                        }
+                                    }
+                                }
+                            },
+                            "modules": [
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:eyebrow-dark"
+                                    ],
+                                    "content": "<p>SECCIÓN DE AYUDA</p>"
+                                },
+                                {
+                                    "type": "divi/heading",
+                                    "presets": [
+                                        "text:display-md-light"
+                                    ],
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "24px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<h2>Sección de Ayuda</h2>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:lead"
+                                    ],
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "24px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p>¿Necesitas ayuda con algo? Por favor, consulta nuestra sección de ayuda para obtener más información.</p>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:body-md"
+                                    ],
+                                    "bodyFont": {
+                                        "body": {
+                                            "font": {
+                                                "desktop": {
+                                                    "value": {
+                                                        "color": "{{design:color:text-on-dark}}"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p></p>"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_2",
+                            "decoration": {
+                                "animation": {
+                                    "desktop": {
+                                        "value": {
+                                            "style": "slide",
+                                            "direction": "right",
+                                            "duration": "800ms",
+                                            "delay": "200ms"
+                                        }
+                                    }
+                                }
+                            },
+                            "modules": [
+                                {
+                                    "type": "divi/icon-list",
+                                    "presets": [],
+                                    "decoration": {
+                                        "animation": {
+                                            "desktop": {
+                                                "value": {
+                                                    "style": "fade",
+                                                    "duration": "600ms",
+                                                    "delay": "400ms"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "icon": {
+                                        "advanced": {
+                                            "color": {
+                                                "desktop": {
+                                                    "value": "var(--gcid-sepia-300)"
+                                                }
+                                            },
+                                            "size": {
+                                                "desktop": {
+                                                    "value": "18px"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "modules": [
+                                        {
+                                            "title": "Sección de Ayuda",
+                                            "icon": {
+                                                "unicode": ""
+                                            }
+                                        }
+                                    ],
+                                    "children": []
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "decoration": {
+                "background": {
+                    "desktop": {
+                        "value": {
+                            "overlay": {
+                                "gradient": "radial-gradient(ellipse at 30% 20%, rgba(120,100,80,0.15) 0%, transparent 60%)"
+                            }
+                        }
+                    }
+                },
+                "spacing": {
+                    "desktop": {
+                        "value": {
+                            "padding": {
+                                "top": "120px",
+                                "bottom": "120px",
+                                "right": "96px",
+                                "left": "96px"
+                            }
+                        }
+                    },
+                    "tablet": {
+                        "value": {
+                            "padding": {
+                                "top": "80px",
+                                "bottom": "80px",
+                                "right": "48px",
+                                "left": "48px"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "value": {
+                            "padding": {
+                                "top": "56px",
+                                "bottom": "56px",
+                                "right": "24px",
+                                "left": "24px"
+                            }
+                        }
+                    }
+                },
+                "scroll": {
+                    "desktop": {
+                        "value": "reveal"
+                    }
+                }
+            }
+        }
+    ]
+}

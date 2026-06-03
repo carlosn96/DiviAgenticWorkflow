@@ -1,0 +1,37 @@
+{
+  "presets": ["section:dark"],
+  "decoration": {
+    "spacing": {
+      "desktop": { "value": { "padding": { "top": "100px", "bottom": "100px", "right": "96px", "left": "96px" } } },
+      "tablet": { "value": { "padding": { "top": "64px", "bottom": "64px", "right": "48px", "left": "48px" } } },
+      "phone": { "value": { "padding": { "top": "48px", "bottom": "48px", "right": "24px", "left": "24px" } } }
+    },
+    "scroll": {
+      "desktop": { "value": "reveal" }
+    }
+  },
+  "rows": [
+    {
+      "column_structure": "1_4,1_4,1_4,1_4",
+      "_repeat": {
+        "source": "stats",
+        "target": "columns",
+        "column_type": "1_4"
+      },
+      "modules": [
+        {
+          "type": "divi/number-counter",
+          "presets": ["module:glass-card"],
+          "decoration": {
+            "animation": {
+              "desktop": { "value": { "style": "fade", "duration": "600ms", "delay": "100ms" } }
+            }
+          },
+          "number": "{{slot:number}}",
+          "label": "{{slot:label}}",
+          "enablePercentSign": "off"
+        }
+      ]
+    }
+  ]
+}

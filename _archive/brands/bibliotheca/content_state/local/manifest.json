@@ -1,0 +1,27 @@
+[
+    {
+        "id": 64,
+        "slug": "contacto",
+        "modified": "2026-05-30 23:45:52"
+    },
+    {
+        "id": 59,
+        "slug": "sucursales",
+        "modified": "2026-05-30 23:24:47"
+    },
+    {
+        "id": 53,
+        "slug": "home-ai",
+        "modified": "2026-05-30 22:44:42"
+    },
+    {
+        "id": 50,
+        "slug": "home-v1",
+        "modified": "2026-05-30 22:25:08"
+    },
+    {
+        "id": 1,
+        "slug": "hello-world",
+        "modified": "2026-05-23 16:31:32"
+    }
+]

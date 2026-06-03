@@ -1,0 +1,99 @@
+{
+  "decoration": {
+    "spacing": {
+      "desktop": { "value": { "padding": { "top": "180px", "bottom": "140px", "right": "96px", "left": "96px" } } },
+      "tablet": { "value": { "padding": { "top": "120px", "bottom": "100px", "right": "48px", "left": "48px" } } },
+      "phone": { "value": { "padding": { "top": "80px", "bottom": "80px", "right": "24px", "left": "24px" } } }
+    },
+    "scroll": {
+      "desktop": { "value": "reveal" }
+    }
+  },
+  "rows": [
+    {
+      "column_structure": "3_5,2_5",
+      "columns": [
+        {
+          "type": "3_5",
+          "decoration": {
+            "spacing": {
+              "desktop": { "value": { "padding": { "right": "64px" } } },
+              "tablet": { "value": { "padding": { "right": "0" } } }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/text",
+              "presets": ["text:eyebrow-dark"],
+              "decoration": {
+                "animation": {
+                  "desktop": { "value": { "style": "slide-up", "duration": "600ms", "delay": "0ms" } }
+                }
+              },
+              "content": "<p>{{slot:eyebrow}}</p>"
+            },
+            {
+              "type": "divi/heading",
+              "presets": ["text:display-xl"],
+              "decoration": {
+                "animation": {
+                  "desktop": { "value": { "style": "slide-up", "duration": "600ms", "delay": "150ms" } }
+                }
+              },
+              "content": "<h1>{{slot:title}}</h1>"
+            },
+            {
+              "type": "divi/text",
+              "presets": ["text:lead"],
+              "decoration": {
+                "spacing": {
+                  "desktop": { "value": { "padding": { "bottom": "40px" } } }
+                },
+                "animation": {
+                  "desktop": { "value": { "style": "slide-up", "duration": "600ms", "delay": "300ms" } }
+                }
+              },
+              "content": "<p>{{slot:text}}</p>"
+            },
+            {
+              "type": "divi/button",
+              "presets": ["module:btn-outline-light"],
+              "decoration": {
+                "animation": {
+                  "desktop": { "value": { "style": "slide-up", "duration": "600ms", "delay": "450ms" } }
+                }
+              },
+              "button_text": "{{slot:btn_primary_text}}",
+              "button_url": "{{slot:btn_primary_url}}"
+            }
+          ]
+        },
+        {
+          "type": "2_5",
+          "decoration": {
+            "animation": {
+              "desktop": { "value": { "style": "fade", "duration": "1000ms", "delay": "200ms" } }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/blurb",
+              "presets": ["module:glass-card", "transform:hover-scale"],
+              "decoration": {
+                "animation": {
+                  "desktop": { "value": { "style": "zoom-in", "duration": "800ms", "delay": "300ms" } }
+                },
+                "scroll": {
+                  "desktop": { "value": "parallax-up" }
+                }
+              },
+              "title": "",
+              "icon": "{{slot:decorative_icon}}",
+              "content": "<p style='font-size: 1.5rem; line-height: 1.8; font-style: italic; color: var(--gcid-parchment-200); text-align: center; padding: 2rem;'>{{slot:decorative_text}}<br><span style='font-size: 0.9rem; color: var(--gcid-sepia-300);'>{{slot:decorative_attribution}}</span></p>"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+<!-- wp:divi/section {"builderVersion":"5.5.0","module":{"decoration":{"background":{"desktop":{"value":{"color":"$variable({\"type\":\"color\",\"value\":{\"name\":\"gcid-success\",\"settings\":{}}})$"}}},"spacing":{"desktop":{"value":{"padding":{"top":"10%","bottom":"10%"}}}}},"advanced":{"type":{"desktop":{"value":"regular"}}}}} -->
+<!-- wp:divi/row {"builderVersion":"5.5.0","module":{"advanced":{"columnStructure":{"desktop":{"value":"4_4"}}},"decoration":{"layout":{"desktop":{"value":{"flexWrap":"wrap"}}}}}} -->
+<!-- wp:divi/column {"builderVersion":"5.5.0","module":{"advanced":{"type":{"desktop":{"value":"4_4"}}},"decoration":{"sizing":{"desktop":{"value":{"flexType":"24_24"}}}}}} -->
+<!-- wp:divi/text {"builderVersion":"5.5.0","module":{},"content":{"innerContent":{"desktop":{"value":"En Bibliotheca, nos apasiona preservar y compartir el conocimiento con el mundo. Nuestra misión es brindar acceso a manuscritos raros y valiosos, restaurados con tecnología de vanguardia."}}}} -->
+<!-- /wp:divi/text -->
+<!-- /wp:divi/column -->
+<!-- /wp:divi/row -->
+<!-- wp:divi/row {"builderVersion":"5.5.0","module":{"advanced":{"columnStructure":{"desktop":{"value":"4_4"}}},"decoration":{"layout":{"desktop":{"value":{"flexWrap":"wrap"}}}}}} -->
+<!-- wp:divi/column {"builderVersion":"5.5.0","module":{"advanced":{"type":{"desktop":{"value":"4_4"}}},"decoration":{"sizing":{"desktop":{"value":{"flexType":"24_24"}}}}}} -->
+<!-- wp:divi/button {"builderVersion":"5.5.0","module":{},"button":{"innerContent":{"desktop":{"value":{"text":"Explora nuestra colección","linkUrl":"/colección","linkTarget":"off","rel":[]}}}}} -->
+<!-- /wp:divi/button -->
+<!-- /wp:divi/column -->
+<!-- /wp:divi/row -->
+<!-- /wp:divi/section -->
+<!-- wp:divi/section {"builderVersion":"5.5.0","module":{"decoration":{"background":{"desktop":{"value":{"image":{"url":"https://diviplus.io/wp-content/uploads/2019/11/day_care_img_16.png","size":"cover","position":"center center","repeat":"no-repeat","parallax":{"enabled":"off"}}}}}},"advanced":{"type":{"desktop":{"value":"regular"}}}}} -->
+<!-- wp:divi/row {"builderVersion":"5.5.0","module":{"advanced":{"columnStructure":{"desktop":{"value":"1_2,1_2"}}},"decoration":{"layout":{"desktop":{"value":{"flexWrap":"wrap"}}}}}} -->
+<!-- wp:divi/column {"builderVersion":"5.5.0","module":{"advanced":{"type":{"desktop":{"value":"1_2"},"phone":{"value":"vertical"},"tablet":{"value":"1_2"}}},"decoration":{"sizing":{"desktop":{"value":{"flexType":"12_24"}},"tablet":{"value":{"flexType":"12_24"}},"phone":{"value":{"flexType":"24_24"}}}}}} -->
+<!-- wp:divi/placeholder {"builderVersion":"5.5.0","module":{}} -->
+<!-- /wp:divi/placeholder -->
+<!-- /wp:divi/column -->
+<!-- wp:divi/column {"builderVersion":"5.5.0","module":{"advanced":{"type":{"desktop":{"value":"1_2"},"phone":{"value":"vertical"},"tablet":{"value":"1_2"}}},"decoration":{"sizing":{"desktop":{"value":{"flexType":"12_24"}},"tablet":{"value":{"flexType":"12_24"}},"phone":{"value":{"flexType":"24_24"}}}}}} -->
+<!-- wp:divi/placeholder {"builderVersion":"5.5.0","module":{}} -->
+<!-- /wp:divi/placeholder -->
+<!-- wp:divi/text {"builderVersion":"5.5.0","module":{},"content":{"innerContent":{"desktop":{"value":"En Bibliotheca, creemos que el conocimiento es el pilar fundamental de la sociedad. Por eso, nos esforzamos por preservar y compartir manuscritos raros y valiosos con la comunidad académica y el público en general."}},"decoration":{"bodyFont":{"desktop":{"value":{"fontFamily":"'Crimson Pro', Georgia, serif","size":"22px"}}}}}} -->
+<!-- /wp:divi/text -->
+<!-- wp:divi/text {"builderVersion":"5.5.0","module":{},"content":{"innerContent":{"desktop":{"value":"En Bibliotheca, creemos que el conocimiento es el pilar fundamental de la sociedad. Por eso, nos esforzamos por preservar y compartir manuscritos raros y valiosos con la comunidad académica y el público en general."}},"decoration":{"bodyFont":{"desktop":{"value":{"fontFamily":"'Crimson Pro', Georgia, serif","size":"22px"}}}}}} -->
+<!-- /wp:divi/text -->
+<!-- wp:divi/button {"builderVersion":"5.5.0","module":{"decoration":{"spacing":{"desktop":{"value":{"margin":{"top":"40px"}}}}}},"button":{"innerContent":{"desktop":{"value":{"text":"","linkUrl":"","linkTarget":"off","rel":[]}}}}} -->
+<!-- /wp:divi/button -->
+<!-- /wp:divi/column -->
+<!-- /wp:divi/row -->
+<!-- /wp:divi/section -->
+<!-- wp:divi/section {"builderVersion":"5.5.0","module":{"decoration":{"background":{"desktop":{"value":{"color":"$variable({\"type\":\"color\",\"value\":{\"name\":\"gcid-ink-soft\",\"settings\":{}}})$"}}},"spacing":{"desktop":{"value":{"padding":{"top":"20px"}}}}},"advanced":{"type":{"desktop":{"value":"regular"}}}}} -->
+<!-- wp:divi/row {"builderVersion":"5.5.0","module":{"decoration":{"spacing":{"desktop":{"value":{"padding":{"top":"0px"}}}},"layout":{"desktop":{"value":{"flexWrap":"wrap"}}}},"advanced":{"columnStructure":{"desktop":{"value":"4_4"}}}}} -->
+<!-- wp:divi/column {"builderVersion":"5.5.0","module":{"advanced":{"type":{"desktop":{"value":"4_4"}}},"decoration":{"sizing":{"desktop":{"value":{"flexType":"24_24"}}}}}} -->
+<!-- wp:divi/heading {"builderVersion":"5.5.0","module":{},"content":{"innerContent":{"desktop":{"value":"¿Qué ofrecemos?"}}}} -->
+<!-- /wp:divi/heading -->
+<!-- wp:divi/text {"builderVersion":"5.5.0","module":{},"content":{"innerContent":{"desktop":{"value":""}}}} -->
+<!-- /wp:divi/text -->
+<!-- /wp:divi/column -->
+<!-- /wp:divi/row -->
+<!-- wp:divi/row {"builderVersion":"5.5.0","module":{"decoration":{"spacing":{"desktop":{"value":{"padding":{"bottom":"180px"}}}},"layout":{"desktop":{"value":{"flexWrap":"wrap"}}}},"advanced":{"columnStructure":{"desktop":{"value":"1_2,1_2"}}}}} -->
+<!-- wp:divi/column {"builderVersion":"5.5.0","module":{"decoration":{"background":{"desktop":{"value":{"color":"$variable({\"type\":\"color\",\"value\":{\"name\":\"gcid-parchment-50\",\"settings\":{}}})$"}}},"spacing":{"desktop":{"value":{"padding":{"top":"50px","right":"50px","bottom":"50px","left":"50px"}}}},"sizing":{"desktop":{"value":{"flexType":"12_24"}},"tablet":{"value":{"flexType":"12_24"}},"phone":{"value":{"flexType":"24_24"}}}},"advanced":{"type":{"desktop":{"value":"1_2"},"phone":{"value":"vertical"},"tablet":{"value":"1_2"}}}}} -->
+<!-- wp:divi/heading {"builderVersion":"5.5.0","module":{},"content":{"innerContent":{"desktop":{"value":"Digitización de manuscritos"}}}} -->
+<!-- /wp:divi/heading -->
+<!-- wp:divi/text {"builderVersion":"5.5.0","module":{"decoration":{"spacing":{"desktop":{"value":{"padding":{"top":"30px"},"margin":{"bottom":"0px"}}}}}},"content":{"innerContent":{"desktop":{"value":"Utilizamos tecnología de vanguardia para digitalizar manuscritos raros y valiosos, preservando su contenido para las generaciones futuras."}}}} -->
+<!-- /wp:divi/text -->
+<!-- /wp:divi/column -->
+<!-- wp:divi/column {"builderVersion":"5.5.0","module":{"advanced":{"type":{"desktop":{"value":"1_2"},"phone":{"value":"vertical"},"tablet":{"value":"1_2"}}},"decoration":{"sizing":{"desktop":{"value":{"flexType":"12_24"}},"tablet":{"value":{"flexType":"12_24"}},"phone":{"value":{"flexType":"24_24"}}}}}} -->
+<!-- wp:divi/image {"builderVersion":"5.5.0","module":{},"image":{"innerContent":{"desktop":{"value":{"src":"","alt":""}}}}} -->
+<!-- /wp:divi/image -->
+<!-- wp:divi/button {"builderVersion":"5.5.0","module":{"decoration":{"spacing":{"desktop":{"value":{"padding":{"top":"30px"}}}}}},"button":{"innerContent":{"desktop":{"value":{"text":"","linkUrl":"","linkTarget":"off","rel":[]}}}}} -->
+<!-- /wp:divi/button -->
+<!-- /wp:divi/column -->
+<!-- /wp:divi/row -->
+<!-- wp:divi/row {"builderVersion":"5.5.0","module":{"decoration":{"spacing":{"desktop":{"value":{"padding":{"bottom":"180px"}}}},"layout":{"desktop":{"value":{"flexWrap":"wrap"}}}},"advanced":{"columnStructure":{"desktop":{"value":"1_2,1_2"}}}}} -->
+<!-- wp:divi/column {"builderVersion":"5.5.0","module":{"advanced":{"type":{"desktop":{"value":"1_2"},"phone":{"value":"vertical"},"tablet":{"value":"1_2"}}},"decoration":{"sizing":{"desktop":{"value":{"flexType":"12_24"}},"tablet":{"value":{"flexType":"12_24"}},"phone":{"value":{"flexType":"24_24"}}}}}} -->
+<!-- wp:divi/image {"builderVersion":"5.5.0","module":{},"image":{"innerContent":{"desktop":{"value":{"src":"","alt":""}}}}} -->
+<!-- /wp:divi/image -->
+<!-- wp:divi/button {"builderVersion":"5.5.0","module":{"decoration":{"spacing":{"desktop":{"value":{"padding":{"top":"30px"}}}}}},"button":{"innerContent":{"desktop":{"value":{"text":"","linkUrl":"","linkTarget":"off","rel":[]}}}}} -->
+<!-- /wp:divi/button -->
+<!-- /wp:divi/column -->
+<!-- wp:divi/column {"builderVersion":"5.5.0","module":{"decoration":{"background":{"desktop":{"value":{"color":"$variable({\"type\":\"color\",\"value\":{\"name\":\"gcid-parchment-50\",\"settings\":{}}})$"}}},"spacing":{"desktop":{"value":{"padding":{"top":"50px","right":"50px","bottom":"50px","left":"50px"}}}},"sizing":{"desktop":{"value":{"flexType":"12_24"}},"tablet":{"value":{"flexType":"12_24"}},"phone":{"value":{"flexType":"24_24"}}}},"advanced":{"type":{"desktop":{"value":"1_2"},"phone":{"value":"vertical"},"tablet":{"value":"1_2"}}}}} -->
+<!-- wp:divi/heading {"builderVersion":"5.5.0","module":{},"content":{"innerContent":{"desktop":{"value":"Restauración espectral"}}}} -->
+<!-- /wp:divi/heading -->
+<!-- wp:divi/text {"builderVersion":"5.5.0","module":{"decoration":{"spacing":{"desktop":{"value":{"padding":{"top":"30px"},"margin":{"bottom":"0px"}}}}}},"content":{"innerContent":{"desktop":{"value":"Nuestro equipo de expertos utiliza técnicas de restauración espectral para recuperar y preservar la integridad de los manuscritos."}}}} -->
+<!-- /wp:divi/text -->
+<!-- /wp:divi/column -->
+<!-- /wp:divi/row -->
+<!-- wp:divi/row {"builderVersion":"5.5.0","module":{"decoration":{"spacing":{"desktop":{"value":{"padding":{"bottom":"180px"}}}},"layout":{"desktop":{"value":{"flexWrap":"wrap"}}}},"advanced":{"columnStructure":{"desktop":{"value":"1_2,1_2"}}}}} -->
+<!-- wp:divi/column {"builderVersion":"5.5.0","module":{"decoration":{"background":{"desktop":{"value":{"color":"$variable({\"type\":\"color\",\"value\":{\"name\":\"gcid-parchment-50\",\"settings\":{}}})$"}}},"spacing":{"desktop":{"value":{"padding":{"top":"50px","right":"50px","bottom":"50px","left":"50px"}}}},"sizing":{"desktop":{"value":{"flexType":"12_24"}},"tablet":{"value":{"flexType":"12_24"}},"phone":{"value":{"flexType":"24_24"}}}},"advanced":{"type":{"desktop":{"value":"1_2"},"phone":{"value":"vertical"},"tablet":{"value":"1_2"}}}}} -->
+<!-- wp:divi/heading {"builderVersion":"5.5.0","module":{},"content":{"innerContent":{"desktop":{"value":"Acceso en línea"}}}} -->
+<!-- /wp:divi/heading -->
+<!-- wp:divi/text {"builderVersion":"5.5.0","module":{"decoration":{"spacing":{"desktop":{"value":{"padding":{"top":"30px"},"margin":{"bottom":"0px"}}}}}},"content":{"innerContent":{"desktop":{"value":"Nuestra plataforma en línea ofrece acceso a nuestra colección de manuscritos digitales, permitiendo a los usuarios explorar y estudiar desde cualquier lugar del mundo."}}}} -->
+<!-- /wp:divi/text -->
+<!-- /wp:divi/column -->
+<!-- wp:divi/column {"builderVersion":"5.5.0","module":{"advanced":{"type":{"desktop":{"value":"1_2"},"phone":{"value":"vertical"},"tablet":{"value":"1_2"}}},"decoration":{"sizing":{"desktop":{"value":{"flexType":"12_24"}},"tablet":{"value":{"flexType":"12_24"}},"phone":{"value":{"flexType":"24_24"}}}}}} -->
+<!-- wp:divi/image {"builderVersion":"5.5.0","module":{},"image":{"innerContent":{"desktop":{"value":{"src":"","alt":""}}}}} -->
+<!-- /wp:divi/image -->
+<!-- wp:divi/button {"builderVersion":"5.5.0","module":{"decoration":{"spacing":{"desktop":{"value":{"padding":{"top":"30px"}}}}}},"button":{"innerContent":{"desktop":{"value":{"text":"","linkUrl":"","linkTarget":"off","rel":[]}}}}} -->
+<!-- /wp:divi/button -->
+<!-- /wp:divi/column -->
+<!-- /wp:divi/row -->
+<!-- /wp:divi/section -->
+<!-- wp:divi/section {"builderVersion":"5.5.0","module":{"decoration":{"spacing":{"desktop":{"value":{"padding":{"top":"0px"}}}},"background":{"desktop":{"value":[]}}},"advanced":{"type":{"desktop":{"value":"regular"}}}}} -->
+<!-- wp:divi/row {"builderVersion":"5.5.0","module":{"advanced":{"columnStructure":{"desktop":{"value":"1_2"}}},"decoration":{"layout":{"desktop":{"value":{"flexWrap":"wrap"}}}}}} -->
+<!-- wp:divi/column {"builderVersion":"5.5.0","module":{"advanced":{"type":{"desktop":{"value":"1_2"},"phone":{"value":"vertical"},"tablet":{"value":"1_2"}}},"decoration":{"sizing":{"desktop":{"value":{"flexType":"12_24"}},"tablet":{"value":{"flexType":"12_24"}},"phone":{"value":{"flexType":"24_24"}}}}}} -->
+<!-- wp:divi/placeholder {"builderVersion":"5.5.0","module":{}} -->
+<!-- /wp:divi/placeholder -->
+<!-- wp:divi/placeholder {"builderVersion":"5.5.0","module":{}} -->
+<!-- /wp:divi/placeholder -->
+<!-- wp:divi/placeholder {"builderVersion":"5.5.0","module":{}} -->
+<!-- /wp:divi/placeholder -->
+<!-- /wp:divi/column -->
+<!-- /wp:divi/row -->
+<!-- /wp:divi/section -->
+<!-- wp:divi/section {"builderVersion":"5.5.0","module":{"advanced":{"type":{"desktop":{"value":"regular"}}},"decoration":{"background":{"desktop":{"value":[]}}}}} -->
+<!-- wp:divi/row {"builderVersion":"5.5.0","module":{"advanced":{"columnStructure":{"desktop":{"value":"4_4"}}},"decoration":{"layout":{"desktop":{"value":{"flexWrap":"wrap"}}}}}} -->
+<!-- wp:divi/column {"builderVersion":"5.5.0","module":{"advanced":{"type":{"desktop":{"value":"4_4"}}},"decoration":{"sizing":{"desktop":{"value":{"flexType":"24_24"}}}}}} -->
+<!-- wp:divi/text {"builderVersion":"5.5.0","module":{},"content":{"innerContent":{"desktop":{"value":""}}}} -->
+<!-- /wp:divi/text -->
+<!-- wp:divi/divider {"builderVersion":"5.5.0","module":{}} -->
+<!-- /wp:divi/divider -->
+<!-- /wp:divi/column -->
+<!-- /wp:divi/row -->
+<!-- /wp:divi/section -->

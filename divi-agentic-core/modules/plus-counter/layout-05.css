@@ -1,0 +1,44 @@
+/* Layout 05 — Number above Icon (3-col card) */
+{{selector}}.layout-05 {
+  background: var(--daw-surface-white, #FFFBF7);
+  border-radius: var(--daw-radius-xl, 20px);
+  padding: 48px 32px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+  border: 1px solid var(--daw-glass-border, rgba(212,149,106,0.12));
+  position: relative;
+  overflow: hidden;
+}
+{{selector}}.layout-05::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--daw-accent, #D4956A), #e8c4a0);
+  border-radius: 20px 20px 0 0;
+}
+{{selector}}.layout-05 .et_pb_number_counter .percent {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--daw-accent, #D4956A);
+  margin-bottom: 12px;
+}
+{{selector}}.layout-05 .et-pb-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+  display: inline-block;
+  color: var(--daw-accent, #D4956A);
+}
+{{selector}}.layout-05 .et_pb_number_counter .title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--daw-text-primary, #1D1D1F);
+  text-transform: none;
+}
+{{selector}}.layout-05:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+  border-color: var(--daw-glass-border-strong, rgba(212,149,106,0.3));
+}

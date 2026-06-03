@@ -1,0 +1,688 @@
+{
+    "title": "Crónicas & Relatos - El Blog de Bibliotheca",
+    "slug": "blog",
+    "description": "Explora el universo de los libros a través de crónicas, análisis literarios y reflexiones profundas en el blog minimalista de Bibliotheca.",
+    "sections": [
+        {
+            "presets": [
+                "section:hero-dark"
+            ],
+            "decoration": {
+                "spacing": {
+                    "desktop": {
+                        "value": {
+                            "padding": {
+                                "top": "140px",
+                                "bottom": "140px"
+                            }
+                        }
+                    }
+                }
+            },
+            "rows": [
+                {
+                    "column_structure": "3_5,2_5",
+                    "columns": [
+                        {
+                            "type": "3_5",
+                            "decoration": {
+                                "spacing": {
+                                    "desktop": {
+                                        "value": {
+                                            "padding": {
+                                                "right": "64px"
+                                            }
+                                        }
+                                    },
+                                    "tablet": {
+                                        "value": {
+                                            "padding": {
+                                                "right": "0"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "modules": [
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:eyebrow-dark"
+                                    ],
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "8px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p>NUESTRO BLOG</p>"
+                                },
+                                {
+                                    "type": "divi/heading",
+                                    "presets": [
+                                        "text:hero-title"
+                                    ],
+                                    "content": "<h1>El eco de las palabras</h1>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:lead"
+                                    ],
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "40px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p>Un espacio dedicado al análisis literario, crónicas de Bibliotheca y reflexiones íntimas sobre el infinito universo de los libros y sus creadores.</p>"
+                                },
+                                {
+                                    "type": "divi/button",
+                                    "presets": [
+                                        "module:btn-outline-light"
+                                    ],
+                                    "button_text": "Comenzar lectura",
+                                    "button_url": "#destacado"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "2_5",
+                            "modules": [
+                                {
+                                    "type": "divi/image",
+                                    "presets": [
+                                        "module:image-shadow"
+                                    ],
+                                    "src": "{{SITE_URL}}/wp-content/uploads/2026/05/blog_hero_book_1780094345329.jpg",
+                                    "alt": "El eco de las palabras"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "presets": [
+                "section:light"
+            ],
+            "id": "destacado",
+            "rows": [
+                {
+                    "column_structure": "1_2,1_2",
+                    "columns": [
+                        {
+                            "type": "1_2",
+                            "decoration": {
+                                "spacing": {
+                                    "desktop": {
+                                        "value": {
+                                            "padding": {
+                                                "right": "40px"
+                                            }
+                                        }
+                                    },
+                                    "tablet": {
+                                        "value": {
+                                            "padding": {
+                                                "right": "0"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "modules": [
+                                {
+                                    "type": "divi/image",
+                                    "presets": [
+                                        "module:image-shadow"
+                                    ],
+                                    "src": "{{SITE_URL}}/wp-content/uploads/2026/05/blog_featured_post_1780094388273.jpg",
+                                    "alt": "La inmortalidad de los libros"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_2",
+                            "modules": [
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:eyebrow"
+                                    ],
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "8px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p>ARTÍCULO DESTACADO</p>"
+                                },
+                                {
+                                    "type": "divi/heading",
+                                    "presets": [
+                                        "text:display-md"
+                                    ],
+                                    "content": "<h2>La inmortalidad de los libros en la era de los algoritmos</h2>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "content": "<p style=\"font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; color: var(--gcid-sepia-700); text-transform: uppercase; letter-spacing: 0.1em; margin: 16px 0 24px 0;\">Por Umberto Eco — 29 de Mayo, 2026</p>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:lead-dark"
+                                    ],
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "32px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p>¿Puede una secuencia binaria reemplazar el tacto y el aroma de las páginas impresas? Una reflexión profunda sobre cómo la literatura analógica sobrevive y resiste en los tiempos de la automatización digital.</p>"
+                                },
+                                {
+                                    "type": "divi/button",
+                                    "presets": [
+                                        "module:btn-cta-dark"
+                                    ],
+                                    "button_text": "Leer artículo",
+                                    "button_url": "#"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "presets": [
+                "section:dark"
+            ],
+            "rows": [
+                {
+                    "column_structure": "1_1",
+                    "columns": [
+                        {
+                            "type": "1_1",
+                            "decoration": {
+                                "spacing": {
+                                    "desktop": {
+                                        "value": {
+                                            "max_width": "750px",
+                                            "align": "center",
+                                            "padding": {
+                                                "bottom": "48px"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "modules": [
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:eyebrow-dark"
+                                    ],
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "8px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p style=\"text-align: center;\">GÉNEROS Y ESTILOS</p>"
+                                },
+                                {
+                                    "type": "divi/heading",
+                                    "presets": [
+                                        "text:display-md-light"
+                                    ],
+                                    "content": "<h2 style=\"text-align: center;\">Explorar por Categorías</h2>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:lead"
+                                    ],
+                                    "content": "<p style=\"text-align: center;\">Selecciona tu género literario favorito y sumérgete en una selección curada de nuestras mejores crónicas y reseñas.</p>"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "column_structure": "1_3,1_3,1_3",
+                    "columns": [
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "type": "divi/blurb",
+                                    "presets": [
+                                        "module:glass-card",
+                                        "transform:hover-scale"
+                                    ],
+                                    "title": "Fantasía",
+                                    "headingFont": {
+                                        "h4": {
+                                            "desktop": {
+                                                "value": {
+                                                    "color": "var(--gcid-text-on-dark)"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "icon": "&#x1F4D6;",
+                                    "content": "<p style=\"color: var(--gcid-parchment-200); font-family: 'Crimson Pro', Georgia, serif; font-size: 15px; line-height: 1.5;\">Crónicas sobre mundos lejanos, magia ancestral y mitos olvidados.</p>"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "type": "divi/blurb",
+                                    "presets": [
+                                        "module:glass-card",
+                                        "transform:hover-scale"
+                                    ],
+                                    "title": "Romance",
+                                    "headingFont": {
+                                        "h4": {
+                                            "desktop": {
+                                                "value": {
+                                                    "color": "var(--gcid-text-on-dark)"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "icon": "&#x270D;&#xFE0F;",
+                                    "content": "<p style=\"color: var(--gcid-parchment-200); font-family: 'Crimson Pro', Georgia, serif; font-size: 15px; line-height: 1.5;\">El estudio de las pasiones humanas, la novela epistolar y la poesía clásica.</p>"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "type": "divi/blurb",
+                                    "presets": [
+                                        "module:glass-card",
+                                        "transform:hover-scale"
+                                    ],
+                                    "title": "Ciencia Ficción",
+                                    "headingFont": {
+                                        "h4": {
+                                            "desktop": {
+                                                "value": {
+                                                    "color": "var(--gcid-text-on-dark)"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "icon": "&#x1F30C;",
+                                    "content": "<p style=\"color: var(--gcid-parchment-200); font-family: 'Crimson Pro', Georgia, serif; font-size: 15px; line-height: 1.5;\">Exploraciones tecnológicas, distopías y el destino de la humanidad.</p>"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "column_structure": "1_3,1_3,1_3",
+                    "columns": [
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "type": "divi/blurb",
+                                    "presets": [
+                                        "module:glass-card",
+                                        "transform:hover-scale"
+                                    ],
+                                    "title": "Historia",
+                                    "headingFont": {
+                                        "h4": {
+                                            "desktop": {
+                                                "value": {
+                                                    "color": "var(--gcid-text-on-dark)"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "icon": "&#x1F4DC;",
+                                    "content": "<p style=\"color: var(--gcid-parchment-200); font-family: 'Crimson Pro', Georgia, serif; font-size: 15px; line-height: 1.5;\">Análisis de documentos antiguos, biografías y crónicas del pasado.</p>"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "type": "divi/blurb",
+                                    "presets": [
+                                        "module:glass-card",
+                                        "transform:hover-scale"
+                                    ],
+                                    "title": "Terror",
+                                    "headingFont": {
+                                        "h4": {
+                                            "desktop": {
+                                                "value": {
+                                                    "color": "var(--gcid-text-on-dark)"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "icon": "&#x1F56F;&#xFE0F;",
+                                    "content": "<p style=\"color: var(--gcid-parchment-200); font-family: 'Crimson Pro', Georgia, serif; font-size: 15px; line-height: 1.5;\">Ensayos sobre literatura gótica, suspenso psicológico y horror clásico.</p>"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "type": "divi/blurb",
+                                    "presets": [
+                                        "module:glass-card",
+                                        "transform:hover-scale"
+                                    ],
+                                    "title": "Desarrollo Personal",
+                                    "headingFont": {
+                                        "h4": {
+                                            "desktop": {
+                                                "value": {
+                                                    "color": "var(--gcid-text-on-dark)"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "icon": "&#x1F9ED;",
+                                    "content": "<p style=\"color: var(--gcid-parchment-200); font-family: 'Crimson Pro', Georgia, serif; font-size: 15px; line-height: 1.5;\">Guías y reflexiones sobre el crecimiento intelectual, la filosofía y la sabiduría.</p>"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "presets": [
+                "section:white"
+            ],
+            "id": "articulos",
+            "rows": [
+                {
+                    "column_structure": "1_1",
+                    "columns": [
+                        {
+                            "type": "1_1",
+                            "decoration": {
+                                "spacing": {
+                                    "desktop": {
+                                        "value": {
+                                            "max_width": "750px",
+                                            "align": "center",
+                                            "padding": {
+                                                "bottom": "48px"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "modules": [
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:eyebrow"
+                                    ],
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "8px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p style=\"text-align: center;\">CRÓNICAS LITERARIAS</p>"
+                                },
+                                {
+                                    "type": "divi/heading",
+                                    "presets": [
+                                        "text:display-md"
+                                    ],
+                                    "content": "<h2 style=\"text-align: center;\">Últimas Crónicas de la Biblioteca</h2>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:lead-dark"
+                                    ],
+                                    "content": "<p style=\"text-align: center;\">Exploraciones de textos antiguos, reseñas de novedades contemporáneas e investigaciones de la historia del libro.</p>"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "column_structure": "1_3,1_3,1_3",
+                    "columns": [
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "type": "divi/image",
+                                    "presets": [
+                                        "module:image-shadow"
+                                    ],
+                                    "src": "{{SITE_URL}}/wp-content/uploads/2026/05/blog_post_stack_1780094427879.jpg",
+                                    "alt": "Fantasía"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "content": "<p style=\"font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--gcid-sepia-700); letter-spacing: 0.1em; margin: 20px 0 10px 0;\">FANTASÍA</p>"
+                                },
+                                {
+                                    "type": "divi/heading",
+                                    "presets": [
+                                        "text:headline-3"
+                                    ],
+                                    "content": "<h3>El resurgir de los mapas fantásticos medievales</h3>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "content": "<p style=\"font-family: 'Crimson Pro', Georgia, serif; font-size: 15px; color: var(--gcid-parchment-700); line-height: 1.5; margin-bottom: 16px;\">Un análisis cartográfico sobre cómo los mundos literarios actuales continúan bebiendo de la cosmografía del siglo XII.</p>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "content": "<p style=\"font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--gcid-text-secondary);\">28 de Mayo, 2026</p>"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "type": "divi/image",
+                                    "presets": [
+                                        "module:image-shadow"
+                                    ],
+                                    "src": "{{SITE_URL}}/wp-content/uploads/2026/05/blog_post_page_1780094467612.jpg",
+                                    "alt": "Romance"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "content": "<p style=\"font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--gcid-sepia-700); letter-spacing: 0.1em; margin: 20px 0 10px 0;\">ROMANCE</p>"
+                                },
+                                {
+                                    "type": "divi/heading",
+                                    "presets": [
+                                        "text:headline-3"
+                                    ],
+                                    "content": "<h3>La nostalgia y la hoja marchita en Keats</h3>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "content": "<p style=\"font-family: 'Crimson Pro', Georgia, serif; font-size: 15px; color: var(--gcid-parchment-700); line-height: 1.5; margin-bottom: 16px;\">Cómo la lírica del romanticismo inglés utilizaba la naturaleza marchita para encapsular la melancolía amorosa.</p>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "content": "<p style=\"font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--gcid-text-secondary);\">25 de Mayo, 2026</p>"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "1_3",
+                            "modules": [
+                                {
+                                    "type": "divi/image",
+                                    "presets": [
+                                        "module:image-shadow"
+                                    ],
+                                    "src": "{{SITE_URL}}/wp-content/uploads/2026/05/blog_post_lamp_1780094500996.jpg",
+                                    "alt": "Terror"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "content": "<p style=\"font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--gcid-sepia-700); letter-spacing: 0.1em; margin: 20px 0 10px 0;\">TERROR</p>"
+                                },
+                                {
+                                    "type": "divi/heading",
+                                    "presets": [
+                                        "text:headline-3"
+                                    ],
+                                    "content": "<h3>Sombras proyectadas: horror gótico y suspenso</h3>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "content": "<p style=\"font-family: 'Crimson Pro', Georgia, serif; font-size: 15px; color: var(--gcid-parchment-700); line-height: 1.5; margin-bottom: 16px;\">Un recorrido por la evolución de las atmósferas oscuras, desde castillos góticos hasta el suspenso moderno.</p>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "content": "<p style=\"font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--gcid-text-secondary);\">20 de Mayo, 2026</p>"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "presets": [
+                "section:hero-dark"
+            ],
+            "decoration": {
+                "spacing": {
+                    "desktop": {
+                        "value": {
+                            "padding": {
+                                "top": "120px",
+                                "bottom": "120px"
+                            }
+                        }
+                    }
+                }
+            },
+            "rows": [
+                {
+                    "column_structure": "1_1",
+                    "columns": [
+                        {
+                            "type": "1_1",
+                            "decoration": {
+                                "spacing": {
+                                    "desktop": {
+                                        "value": {
+                                            "max_width": "650px",
+                                            "align": "center"
+                                        }
+                                    }
+                                }
+                            },
+                            "modules": [
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:eyebrow-dark"
+                                    ],
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "8px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p style=\"text-align: center;\">BOLETÍN LITERARIO</p>"
+                                },
+                                {
+                                    "type": "divi/heading",
+                                    "presets": [
+                                        "text:display-md-light"
+                                    ],
+                                    "content": "<h2 style=\"text-align: center;\">Las cartas de la biblioteca</h2>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "presets": [
+                                        "text:lead"
+                                    ],
+                                    "decoration": {
+                                        "spacing": {
+                                            "desktop": {
+                                                "value": {
+                                                    "padding": {
+                                                        "bottom": "32px"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "content": "<p style=\"text-align: center;\">Únete a nuestra comunidad y recibe cada semana reflexiones, críticas literarias exclusivas y las novedades del catálogo de Bibliotheca directo en tu bandeja de entrada.</p>"
+                                },
+                                {
+                                    "type": "divi/text",
+                                    "content": "<div style=\"max-width: 500px; margin: 0 auto; text-align: center;\"><form style=\"display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 16px;\" onsubmit=\"event.preventDefault(); alert('¡Gracias por suscribirte!');\"><input type=\"email\" placeholder=\"Tu correo electrónico\" required style=\"flex-grow: 1; min-width: 250px; padding: 14px 24px; border: 1px solid rgba(253,251,247,0.2); border-radius: 100px; font-family: 'Crimson Pro', Georgia, serif; font-size: 15px; background: rgba(253,251,247,0.08); color: #FDFBF7; outline: none; transition: border-color 0.3s;\" onfocus=\"this.style.borderColor='rgba(166,124,64,0.8)'\" onblur=\"this.style.borderColor='rgba(253,251,247,0.2)'\" /><button type=\"submit\" style=\"padding: 14px 36px; background: #A67C40; color: #1A1814; border: none; border-radius: 100px; font-family: 'DM Sans', system-ui, sans-serif; font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 0.1em; cursor: pointer; transition: background 0.3s, color 0.3s;\" onmouseover=\"this.style.background='#7A5A28'; this.style.color='#FDFBF7';\" onmouseout=\"this.style.background='#A67C40'; this.style.color='#1A1814';\">Suscribirse</button></form></div>"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

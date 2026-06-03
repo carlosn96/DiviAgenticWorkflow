@@ -1,0 +1,71 @@
+{
+  "presets": ["section:dark"],
+  "rows": [
+    {
+      "column_structure": "1_2,1_2",
+      "columns": [
+        {
+          "type": "1_2",
+          "modules": [
+            {
+              "type": "divi/text",
+              "presets": ["text:eyebrow-dark"],
+              "content": "<p>{{slot:eyebrow}}</p>"
+            },
+            {
+              "type": "divi/heading",
+              "presets": ["text:display-md-light"],
+              "decoration": {
+                "spacing": {
+                  "desktop": { "value": { "padding": { "bottom": "24px" } } }
+                }
+              },
+              "content": "<h2>{{slot:title}}</h2>"
+            },
+            {
+              "type": "divi/text",
+              "presets": ["text:lead"],
+              "decoration": {
+                "spacing": {
+                  "desktop": { "value": { "padding": { "bottom": "24px" } } }
+                }
+              },
+              "content": "<p>{{slot:text}}</p>"
+            },
+            {
+              "type": "divi/text",
+              "presets": ["text:body-md"],
+              "content": "<p>{{slot:body}}</p>"
+            }
+          ]
+        },
+        {
+          "type": "1_2",
+          "modules": [
+            {
+              "type": "divi/icon-list",
+              "presets": [],
+              "icon": {
+                "advanced": {
+                  "color": { "desktop": { "value": "var(--gcid-accent)" } },
+                  "size": { "desktop": { "value": "18px" } }
+                }
+              },
+              "_repeat": {
+                "source": "items",
+                "target": "children",
+                "module_type": "divi/icon-list-item"
+              },
+              "modules": [
+                {
+                  "title": "{{slot:title}}",
+                  "icon": { "unicode": "{{slot:icon}}" }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

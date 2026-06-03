@@ -1,63 +1,46 @@
-# DAW Knowledge & Standards — Agnostic Core
+# DAW — Ground Truth (Estándares Técnicos)
 
-Este archivo es la **Verdad Absoluta (Ground Truth)** del proyecto. Todo agente debe seguir estas directrices para asegurar la integridad de la arquitectura.
-
----
-
-## 1. Arquitectura de Orquestación (DAW v4.0)
-
-Para la creación de cualquier página o componente, se DEBE seguir el flujo **Divi Agentic Workflow (DAW)** de cuatro fases:
-
-| Fase | Rol | Responsabilidad | Entregable |
-| :--- | :--- | :--- | :--- |
-| **1. Análisis** | Arquitecto | Define la estructura semántica y objetivos de negocio | Plan Semántico (JSON) |
-| **2. Dirección** | Design Lead | Investiga dirección visual, valida UX, documenta decisiones | Documento de dirección visual |
-| **3. Mapeo** | Diseñador | Traduce el plan + dirección a bloques `divi/*` nativos y tokens `{{design:*}}` | JSON Schema listo para el Layout_Engine |
-| **4. Ejecución** | Ingeniero | Ejecuta el comando WP-CLI y verifica la persistencia | WP Post ID confirmado |
-
-**Prohibición:** No se permite la creación manual de contenido HTML/CSS ad-hoc que ignore el sistema nativo de WordPress.
+Este archivo contiene las reglas técnicas inmutables del proyecto.
 
 ---
 
-## 2. Dependencia del Sistema de Diseño (Obligatorio)
+## Directorios Clave
 
-Todo proyecto DAW depende **estrictamente** de un archivo de sistema de diseño precargado en la ruta `site/<DAW_SITE>/design-system/divitheme.json`.
-
-**Prohibición Absoluta:** Ningún agente (ni el Design Lead ni el Designer) puede inventar, asumir o hardcodear colores, fuentes, radios o tokens que no estén explícitamente declarados en el archivo del proyecto actual.
-
-- **Tokens Semánticos `{{design:*}}`**: El archivo JSON define los tokens exactos disponibles bajo los nodos `color`, `font`, `radius`, `space`. Por ejemplo, si el JSON expone `{{design:color:ink}}` o `{{design:color:primary}}`, solo esos pueden usarse. No se permite inventar `{{design:color:magenta}}` si no existe.
-- **Presets de Diseño (`presets`)**: El archivo JSON incluye configuraciones pre-fabricadas (ej. `section.hero-dark`, `module.card`). 
-- **Estándar de Calidad Ultra-Premium Universal**: Independientemente de los colores de la marca, los componentes deben mantener un estándar premium. Esto significa usar los valores de `radius` más grandes, sombras difusas (alta difusión, baja opacidad) para el `boxShadow`, y tokens de espaciado masivos (`space.xl`, `space.3xl`) para asegurar que el diseño respire (whitespace abundante).
-
-> [!IMPORTANT]
-> El Layout_Engine reemplaza los tokens `{{design:*}}` en el JSON generado por el Designer *antes* de compilar a bloques Divi. Para variables de entorno, también soporta `{{SITE_URL}}` y `{{SITE_NAME}}`.
+| Path | Propósito |
+|------|-----------|
+| `DAW_bundle/site/<DAW_SITE>/page-defs/` | Page-defs de entrada (manifiesto + secciones) |
+| `DAW_bundle/site/<DAW_SITE>/design-system/` | `divitheme.json` generado |
+| `DAW_bundle/site/<DAW_SITE>/brand/` | `_design_vars.json`, `_design_presets.json` |
+| `DAW_bundle/site/<DAW_SITE>/brand/assets/css/` | `brand.css` generado (único por marca) |
+| `DAW_bundle/divi-agentic-core/` | Plugin WordPress (junction link) |
 
 ---
 
-## 3. Estándares Técnicos
+## Flujo de CSS (Actual)
 
-- **Motor:** Divi 5.5.0 Native (bloques Gutenberg `<!-- wp:divi/... -->`).
-- **CLI:** Uso mandatorio de `./wp.bat agentic deploy_page` (wrapper local de WP-CLI).
-- **Namespace bloques:** SIEMPRE usar `divi/section`, `divi/row`, `divi/column`, `divi/text`, `divi/code`, `divi/image`, `divi/button`, `divi/menu`. **NUNCA** usar `et_pb_*`.
-- **Estilos:** Usar configuraciones nativas de WordPress, `theme.json`, patrones, estilos de bloque y atributos permitidos por el bloque.
-- **Híbrido:** El código debe ser 100% editable en el Visual Builder. Evitar `!important` globales.
-- **CSS Prohibido:** No añadir CSS a `style.css` del child theme. Todo CSS debe resolverse de forma nativa en WordPress.
-- **Versión de meta:** El motor fija automáticamente `_et_pb_built_with_d5 = 1` y `_et_builder_version = 5.5.0`.
+- **brand.css** se escribe a `site/<DAW_SITE>/brand/assets/css/brand.css` por `build_design_system.py`
+- **No se usa** `wp_update_custom_css_post()` — el CSS se encola desde disco
+- **No se usa** `et_custom_css` — fue eliminado
+- **`sync_css`** solo limpia legacy, no escribe
 
 ---
 
-## 4. Directorios Clave del Proyecto
+## Reglas Técnicas
 
-| Directorio / Archivo | Propósito |
-| :--- | :--- |
-| `site/<DAW_SITE>/page-defs/*.json` | **⭐ Entrada del pipeline**: JSON semántico del diseñador con tokens `{{design:*}}`. Único punto de entrada para construir páginas. |
-| `site/<DAW_SITE>/pages/*.json` | **Salida opcional** de `build_page.php --out`. Schemas resueltos para debug/inspección. No participa en el pipeline normal. |
-| `workspace/automation/` | Scripts PHP/PS para sincronización, snapshot local y despliegue |
-| `site/<DAW_SITE>/content_state/local/` | Volcados de DB local en `.txt` (fuente de verdad de contenido existente) |
-| `DAW_bundle/divi-agentic-core/inc/core/class-layout-engine.php` | Motor compilador JSON → bloques Divi 5 |
-| `DAW_bundle/divi-agentic-core/inc/cli/class-agentic-command.php` | Registro de comandos `wp agentic` y validador de esquemas nativos |
-| `DAW_bundle/daw-skill/` | Este skill (fuente de verdad del flujo DAW) |
+- No añadir CSS a `style.css` del tema
+- No inyectar CSS en `functions.php`
+- Usar decoration nativa de Divi 5 (`spacing`, `background`, `border`, `boxShadow`, etc.)
+- Colores siempre como `{{design:color:*}}`
+- Fonts siempre como `{{design:font:*}}`
+- Border radius como objeto per-side (`{topLeft, topRight, bottomRight, bottomLeft, sync}`)
+- Border width como string plano (`"1px"`), no objeto
+- `backgroundColor` como string plano, no `background: {color: ...}`
+- Usar entidades HTML para caracteres especiales en contenidos
 
 ---
 
-*Última actualización: 2026-05-20 — DAW-Skill Local v2.1*
+## Referencias
+
+- `AGENTS.md` (raíz proyecto) — reglas de operación
+- `DAW_bundle/AGENTS.md` — pipeline DAW completo
+- `daw-skill/SKILL.md` — 4 fases

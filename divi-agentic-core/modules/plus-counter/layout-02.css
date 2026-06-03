@@ -1,0 +1,32 @@
+/* Layout 02 — Number → Icon → Title + Desc (Light bg) */
+{{selector}}.layout-02 {
+  background: var(--daw-surface-white, #FFFBF7);
+  border: 1px solid var(--daw-glass-border, rgba(212,149,106,0.12));
+  border-radius: var(--daw-radius-lg, 14px);
+  padding: 40px 28px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+}
+{{selector}}.layout-02 .et_pb_number_counter .percent {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--daw-accent, #D4956A);
+}
+{{selector}}.layout-02 .et-pb-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+  display: inline-block;
+  color: var(--daw-accent, #D4956A);
+}
+{{selector}}.layout-02 .et_pb_number_counter .title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--daw-text-primary, #1D1D1F);
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+{{selector}}.layout-02:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+  border-color: var(--daw-glass-border-strong, rgba(212,149,106,0.25));
+}

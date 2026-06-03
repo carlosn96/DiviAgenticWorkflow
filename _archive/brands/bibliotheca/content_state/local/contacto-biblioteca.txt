@@ -1,0 +1,36 @@
+<!-- wp:divi/section {"builderVersion":"5.5.0","module":{"decoration":{"background":{"desktop":{"value":{"gradient":{"enabled":"on","type":"linear","direction":"360deg","overlaysImage":"on","stops":[{"color":"$variable({\"type\":\"color\",\"value\":{\"name\":\"gcid-ink-soft\",\"settings\":{}}})$","position":"0"},{"color":"rgba(61,107,79,0.0)","position":"100"}]},"image":{"url":"https://diviplus.io/wp-content/uploads/2020/11/collection-03-painting.jpg","size":"cover","position":"center center","repeat":"no-repeat","parallax":{"enabled":"off"}}}}},"spacing":{"desktop":{"value":{"padding":{"top":"8%","bottom":"8%"}}}}},"advanced":{"type":{"desktop":{"value":"regular"}}}}} -->
+<!-- wp:divi/row {"builderVersion":"5.5.0","module":{"advanced":{"columnStructure":{"desktop":{"value":"4_4"}}},"decoration":{"layout":{"desktop":{"value":{"flexWrap":"wrap"}}}}}} -->
+<!-- wp:divi/column {"builderVersion":"5.5.0","module":{"advanced":{"type":{"desktop":{"value":"4_4"}}},"decoration":{"sizing":{"desktop":{"value":{"flexType":"24_24"}}}}}} -->
+<!-- wp:divi/heading {"builderVersion":"5.5.0","module":{},"content":{"innerContent":{"desktop":{"value":"Ponte en Contacto con Bibliotheca"}}}} -->
+<!-- /wp:divi/heading -->
+<!-- /wp:divi/column -->
+<!-- /wp:divi/row -->
+<!-- /wp:divi/section -->
+<!-- wp:divi/section {"builderVersion":"5.5.0","module":{"decoration":{"background":{"desktop":{"value":{"color":"$variable({\"type\":\"color\",\"value\":{\"name\":\"gcid-parchment-50\",\"settings\":{}}})$"}}}},"advanced":{"type":{"desktop":{"value":"regular"}}}}} -->
+<!-- wp:divi/row {"builderVersion":"5.5.0","module":{"advanced":{"columnStructure":{"desktop":{"value":"1_2,1_2"}}},"decoration":{"layout":{"desktop":{"value":{"flexWrap":"wrap"}}}}}} -->
+<!-- wp:divi/column {"builderVersion":"5.5.0","module":{"decoration":{"background":{"desktop":{"value":{"color":"$variable({\"type\":\"color\",\"value\":{\"name\":\"gcid-parchment-200\",\"settings\":{}}})$"}}},"spacing":{"desktop":{"value":{"padding":{"top":"80px","right":"50px","bottom":"80px","left":"50px"}}}},"border":{"desktop":{"value":{"radius":{"topLeft":"5px","topRight":"5px","bottomRight":"5px","bottomLeft":"5px"}}}},"boxShadow":{"desktop":{"value":{"style":"preset1","color":"rgba(26,24,20,0.1)"}}},"sizing":{"desktop":{"value":{"flexType":"12_24"}},"tablet":{"value":{"flexType":"12_24"}},"phone":{"value":{"flexType":"24_24"}}}},"advanced":{"type":{"desktop":{"value":"1_2"},"phone":{"value":"vertical"},"tablet":{"value":"1_2"}}}}} -->
+<!-- wp:divi/text {"builderVersion":"5.5.0","module":{"decoration":{"spacing":{"desktop":{"value":{"margin":{"bottom":"5px"}}}}}},"content":{"innerContent":{"desktop":{"value":"Av. del Conocimiento 123, Colonia Centro, CDMX."}},"decoration":{"bodyFont":{"desktop":{"value":{"fontFamily":"'Crimson Pro', Georgia, serif","size":"15px"}}}}}} -->
+<!-- /wp:divi/text -->
+<!-- wp:divi/heading {"builderVersion":"5.5.0","module":{},"content":{"innerContent":{"desktop":{"value":"Dirección Física"}}}} -->
+<!-- /wp:divi/heading -->
+<!-- wp:divi/placeholder {"builderVersion":"5.5.0","module":{"decoration":{"border":{"desktop":{"value":{"radius":{"topLeft":"3px","topRight":"3px","bottomRight":"3px","bottomLeft":"3px"}}}},"boxShadow":{"desktop":{"value":{"style":"preset1","color":"rgba(166,124,64,0.07)"}}}}}} -->
+<!-- /wp:divi/placeholder -->
+<!-- /wp:divi/column -->
+<!-- wp:divi/column {"builderVersion":"5.5.0","module":{"decoration":{"spacing":{"desktop":{"value":{"padding":{"top":"80px","right":"80px","bottom":"80px","left":"80px"}}}},"sizing":{"desktop":{"value":{"flexType":"12_24"}},"tablet":{"value":{"flexType":"12_24"}},"phone":{"value":{"flexType":"24_24"}}}},"advanced":{"type":{"desktop":{"value":"1_2"},"phone":{"value":"vertical"},"tablet":{"value":"1_2"}}}}} -->
+<!-- wp:divi/text {"builderVersion":"5.5.0","module":{"decoration":{"spacing":{"desktop":{"value":{"margin":{"bottom":"5px"}}}}}},"content":{"innerContent":{"desktop":{"value":"contacto@bibliotheca.mx"}},"decoration":{"bodyFont":{"desktop":{"value":{"fontFamily":"'Crimson Pro', Georgia, serif","size":"15px"}}}}}} -->
+<!-- /wp:divi/text -->
+<!-- wp:divi/heading {"builderVersion":"5.5.0","module":{},"content":{"innerContent":{"desktop":{"value":"Correo Electrónico"}}}} -->
+<!-- /wp:divi/heading -->
+<!-- wp:divi/text {"builderVersion":"5.5.0","module":{},"content":{"innerContent":{"desktop":{"value":"contacto@bibliotheca.mx"}}}} -->
+<!-- /wp:divi/text -->
+<!-- wp:divi/blurb {"builderVersion":"5.5.0","module":{},"title":{"innerContent":{"desktop":{"value":{"text":"Correo Electrónico"}}}},"content":{"innerContent":{"desktop":{"value":"<p><span> Street, City, State, Country</span></p>"}}}} -->
+<!-- /wp:divi/blurb -->
+<!-- wp:divi/blurb {"builderVersion":"5.5.0","module":{},"title":{"innerContent":{"desktop":{"value":{"text":"Correo Electrónico"}}}},"content":{"innerContent":{"desktop":{"value":"<p>info@example.com</p>"}}}} -->
+<!-- /wp:divi/blurb -->
+<!-- wp:divi/blurb {"builderVersion":"5.5.0","module":{},"title":{"innerContent":{"desktop":{"value":{"text":"Correo Electrónico"}}}},"content":{"innerContent":{"desktop":{"value":"<p>000-000-0000</p>"}}}} -->
+<!-- /wp:divi/blurb -->
+<!-- wp:divi/placeholder {"builderVersion":"5.5.0","module":{}} -->
+<!-- /wp:divi/placeholder -->
+<!-- /wp:divi/column -->
+<!-- /wp:divi/row -->
+<!-- /wp:divi/section -->

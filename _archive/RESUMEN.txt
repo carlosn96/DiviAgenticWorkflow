@@ -1,0 +1,621 @@
+=============================================================================
+  DAW — DIVI AGENTIC WORKFLOW · AUDITORÍA ARQUITECTÓNICA + MAPA COMPLETO
+=============================================================================
+  Última actualización: 2026-05-29
+  Propósito: Este archivo es la fuente de verdad única para cualquier agente
+  que necesite entender el DAW completo sin re-leer los ~2000+ archivos.
+=============================================================================
+
+╔══════════════════════════════════════════════════════════════════════════╗
+║               PARTE 1: DIAGNÓSTICO DE DEFICIENCIAS                      ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+---------------------------------------------------------------------------
+DEF #1: EL CATÁLOGO SE USA LITERAL, NO COMO INSPIRACIÓN (crítica)
+---------------------------------------------------------------------------
+El flujo search_catalog.py → .section.json → compose_page.php inyecta el
+archivo completo del catálogo en el page-def con TODOS sus estilos originales
+embebidos (imágenes de demo, colores mapeados por RGB forzado, spacing).
+
+Evidencia en acerca-de.json:76:
+  "url": "https://diviplus.io/wp-content/uploads/2019/11/day_care_img_16.png"
+  → Imagen de guardería en sitio de biblioteca académica
+
+Evidencia en acerca-de.json:13:
+  "color": "{{design:color:success}}"  → Verde éxito sobre diseño sepia
+
+El orquestador (orchestrate_page.php:296-300) PREFIERE el catálogo sobre las
+bases locales si el score semántico > 0.60. Pero las bases locales tienen
+diseño premium con variantes (editorial-grid, liquid-glass, monochrome-brutalist)
+mientras que el catálogo trae estilos genéricos de demos Divi 4.
+
+Ruta crítica: orchestrate_page.php:268-310, compile_catalog.py:180-255
+
+---------------------------------------------------------------------------
+DEF #2: COLOR MAPPING RGB — PERCEPTUALMENTE INCORRECTO
+---------------------------------------------------------------------------
+compile_catalog.py:118-133 usa distancia euclidiana en espacio RGB.
+RGB no es perceptualmente uniforme — el ojo humano no percibe diferencias
+lineales en RGB. CIEDE2000 o al menos Lab sería correcto.
+
+Un color #4A7C59 (verde bosque) puede quedar más cerca de "success" que de
+"sepia-500" en RGB, aunque visualmente no tenga relación. Esto produce:
+  - Fondos verdes en sitios sepia
+  - Colores de acento incorrectos
+  - Paletas rotas sistemáticamente
+
+Ruta crítica: compile_catalog.py:107-158
+
+---------------------------------------------------------------------------
+DEF #3: DOS PARADIGMAS EN GUERRA DENTRO DEL MISMO PAGE-DEF
+---------------------------------------------------------------------------
+Paradigma Premium (home.json):
+  "presets": ["section:hero-dark", "text:display-xl", "module:glass-card"]
+  Usa tokens {{design:color:*}}, decoration semántica, responsive spacing,
+  animaciones encadenadas, variantes de diseño.
+
+Paradigma Legacy (acerca-de.json):
+  "type": "regular", "module": "divi/section"
+  "type": "divi/placeholder", "module": "divi/placeholder"
+  Estilos embebidos del catálogo, spacing en %, imágenes de demo,
+  color mapping forzado, placeholders Divi 4 no migrados.
+
+El orquestador mezcla ambos porque elige entre catálogo (legacy) y base
+(premium) según threshold semántico, SIN considerar calidad del diseño.
+
+---------------------------------------------------------------------------
+DEF #4: SOLO 3 VARIANTES DE DECORACIÓN PARA 14+ TIPOS DE SECCIÓN
+---------------------------------------------------------------------------
+Variantes existentes:
+  - hero-split@editorial-grid     (asymmetric 3_5,2_5 + stagger + reveal)
+  - hero-centered@liquid-glass    (glassmorphism + fluid)
+  - features-3col@monochrome-brutalist (0 radius + high contrast)
+
+Tipos de sección SIN variantes premium:
+  stats-4col, testimonials-3col, cta-centered, content-split,
+  content-split-icon-list, logos-4col, contact, about, gallery, faq
+
+→ Son .section.json standalone con decoration genérica. No compiten con
+  el nivel "premium" que el pipeline debería garantizar.
+
+Ruta: workspace/sections/ (14 archivos, solo 4 con subdirectorio)
+
+---------------------------------------------------------------------------
+DEF #5: compose_page.php NO VALIDA NADA — SLOTS HUÉRFANOS
+---------------------------------------------------------------------------
+compose_page.php:124-143 → fill_slots() reemplaza slots no resueltos con "".
+Esto produce en page-defs:
+  - divi/button con button_text: "" → botón invisible (acerca-de.json:152)
+  - divi/image con src: "" → imagen rota (acerca-de.json:293-294)
+  - divi/heading sin contenido → título vacío (modern-test.json:137-138)
+  - Slots {{slot:role}} y {{slot:avatar}} sin resolver en testimonials
+
+No hay validación post-composición, ni asignación de decoration por defecto.
+
+---------------------------------------------------------------------------
+DEF #6: design-patterns.json NO SE APLICA (dead weight)
+---------------------------------------------------------------------------
+extract_patterns.py analiza 892 templates y produce design-patterns.json
+(~10KB). Pero orchestrate_page.php:77-85 solo lo LOGUEA, nunca modifica
+la composición real basada en estos patrones. Es código muerto.
+
+Ruta: workspace/design-patterns.json → orchestrate_page.php:68-86
+
+---------------------------------------------------------------------------
+DEF #7: NO HAY CAPA DE "DISEÑO PREMIUM POST-COMPOSICIÓN"
+---------------------------------------------------------------------------
+El pipeline termina en compose_page.php → page-defs/ → build_page.php.
+NO hay un paso intermedio que:
+  - Elimine decoration heredada del catálogo
+  - Inyecte presets de la marca en módulos que no los tienen
+  - Reemplace imágenes de demo con assets abstractos de alta calidad
+  - Valide coherencia visual contra el tone del brief
+
+---------------------------------------------------------------------------
+DEF #8: generate_brief.py NO USA EL DESIGN SYSTEM REAL
+---------------------------------------------------------------------------
+generate_brief.py:114-159 tiene SYSTEM_PROMPT hardcodeado para Bibliotheca
+("sepia/parchment colors", "Cormorant Garamond"). Para otra marca, el LLM
+genera briefs inconsistentes. Además la IA no sabe qué section_type tienen
+template asociado — puede generar "pricing" o "timeline" que no existen.
+
+Ruta: workspace/automation/generate_brief.py
+
+---------------------------------------------------------------------------
+DEF #9: search_catalog.py ES UN CAÑÓN PARA MOSQUITOS
+---------------------------------------------------------------------------
+Dependencia de SentenceTransformers + torch CPU (~500MB) para hacer
+búsqueda coseno contra 892 embeddings de 384 dimensiones. Se resuelve
+con numpy puro + embeddings precomputados sin torch.
+
+Además el modelo all-MiniLM-L6-v2 es genérico, no fine-tuned para
+terminología de diseño web ni dominios específicos.
+
+Ruta: workspace/automation/search_catalog.py + requirements.txt
+
+---------------------------------------------------------------------------
+DEF #10: EL PAGE-DEF NO GARANTIZA DISEÑO PREMIUM (la clave del problema)
+---------------------------------------------------------------------------
+El contrato fundamental es: "page-def perfecto → despliegue perfecto".
+Pero hoy un page-def puede contener:
+  - divi/placeholder → cajas vacías en frontend
+  - Colores mapeados incorrectamente → paleta rota
+  - Imágenes de catálogo ajeno → contexto visual equivocado
+  - Slots sin resolver → módulos huérfanos
+  - Presets inexistentes (text:eyebrow-light) → silent failure
+  - Spacing hardcodeado del catálogo → inconsistencias responsive
+
+NO EXISTE UN ESTÁNDAR MÍNIMO DE CALIDAD PARA PAGE-DEF.
+
+
+
+╔══════════════════════════════════════════════════════════════════════════╗
+║           PARTE 2: MAPA COMPLETO DEL PROYECTO (ahorra tokens)          ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+==================================
+2.1 ESTRUCTURA DE DIRECTORIOS
+==================================
+
+divitheme/
+├── RESUMEN.txt                          ← ESTE ARCHIVO
+├── AGENTS.md                            ← Punto de entrada envolvente
+├── .env                                 ← DB credenciales, API keys LLM
+├── wp.bat, php.bat, mysql.bat           ← Wrappers WP-CLI/PHP/MySQL local
+├── mysql_remote.bat                     ← DESHABILITADO
+│
+├── app/public/                          ← Raíz pública WordPress
+│   ├── wp-config.php
+│   ├── wp-content/plugins/divi-agentic-core/  ← Junction link a DAW_bundle/
+│   └── wp-admin/, wp-includes/
+│
+├── DAW_bundle/                          ← ★ NÚCLEO DEL PROYECTO
+│   ├── AGENTS.md                        ←   Fuente de verdad del pipeline (473 líneas)
+│   ├── README.md                        ←   Quickstart
+│   ├── .env.example                     ←   Template .env
+│   │
+│   ├── site/                            ← ★ DATOS DE PROYECTO (frontera)
+│   │   ├── bibliotheca/                 ←   Marca activa (San Pablo MX)
+│   │   │   ├── brand/
+│   │   │   │   ├── _design_vars.json       41 líneas, colores/fonts/radios
+│   │   │   │   └── _design_presets.json    1868 líneas, 64 presets en 7 categorías
+│   │   │   ├── briefs/                 ←   YAML de entrada para orquestador
+│   │   │   │   ├── home.yml               77 líneas (ej: 6 secciones)
+│   │   │   │   ├── acerca-de.yml          50 líneas
+│   │   │   │   ├── contacto.yml           40 líneas
+│   │   │   │   ├── contacto-biblioteca.yml 19 líneas
+│   │   │   │   ├── modern.yml             56 líneas
+│   │   │   │   └── home.md                58 líneas (brief estratégico)
+│   │   │   ├── compositions/          ←   Salida del orquestador
+│   │   │   │   ├── home.page.json         126 líneas
+│   │   │   │   ├── acerca-de.page.json    88 líneas
+│   │   │   │   ├── contacto.page.json     63 líneas
+│   │   │   │   ├── contacto-biblioteca.page.json 36 líneas
+│   │   │   │   └── modern-test.page.json  94 líneas
+│   │   │   ├── page-defs/             ← ★ ENTRADA DEL DISEÑADOR (JSON semántico)
+│   │   │   │   ├── home.json              933 líneas ★ Paradigma Premium
+│   │   │   │   ├── acerca-de.json         589 líneas ★ Paradigma Legacy (ROTO)
+│   │   │   │   ├── colecciones.json       990 líneas ★ Premium + glass cards
+│   │   │   │   ├── contacto.json          435 líneas
+│   │   │   │   ├── contacto-biblioteca.json 280 líneas
+│   │   │   │   ├── modern-test.json       954 líneas ★ Premium + variantes
+│   │   │   │   └── inicio-test.json        41 líneas (bosquejo)
+│   │   │   ├── pages/                 ←   Salida opcional de build_page.php
+│   │   │   │   ├── home.json              106KB (schema resuelto)
+│   │   │   │   └── colecciones.json       66KB
+│   │   │   ├── design-system/
+│   │   │   │   └── divitheme.json         1940 líneas (generado por build_design_system.py)
+│   │   │   └── content_state/
+│   │   │
+│   │   └── example/                   ←   Template para nuevas marcas
+│   │       ├── brand/_design_vars.json     940 líneas
+│   │       └── brand/_design_presets.json  104 líneas (solo estructura vacía)
+│   │
+│   ├── divi-agentic-core/             ← ★ PLUGIN WORDPRESS
+│   │   ├── divi-agentic-core.php          21 líneas (plugin bootstrap)
+│   │   ├── inc/
+│   │   │   ├── loader.php                 42 líneas
+│   │   │   ├── cli/
+│   │   │   │   ├── class-agentic-command.php  576 líneas ★ WP-CLI comando principal
+│   │   │   │   └── Agentic_Command.php        2 líneas (alias)
+│   │   │   └── core/
+│   │   │       ├── class-layout-engine.php    932 líneas ★ Compilador Divi 5 blocks
+│   │   │       ├── class-design-resolver.php  184 líneas ★ Resuelve tokens/colores
+│   │   │       ├── class-blocks-to-schema.php 411 líneas ★ Reverse: DB → schema JSON
+│   │   │       └── trait-module-metadata.php  179 líneas ★ Metadata de módulos Divi 5
+│   │   ├── bin/                       ← ★ SCRIPTS DEL PIPELINE
+│   │   │   ├── build_page.php             572 líneas ★ PUNTO ÚNICO build+deploy
+│   │   │   ├── compose_page.php           248 líneas ★ Arma page-def desde templates
+│   │   │   ├── orchestrate_page.php       419 líneas ★ ORQUESTADOR completo
+│   │   │   ├── verify_page.php            172 líneas ★ Verificación post-deploy
+│   │   │   ├── generate-module-schema.php  162 líneas ★ Genera schemas de módulos
+│   │   │   ├── extract-module-meta.php      84 líneas
+│   │   │   ├── inspect-module.php           52 líneas
+│   │   │   └── inspect-metadata-group.php   29 líneas
+│   │   └── data/
+│   │       ├── _all_modules_metadata.php          2.6MB ★ Metadata oficial Divi 5
+│   │       └── _all_modules_default_render_attributes.php  155KB
+│   │
+│   ├── workspace/                     ← ★ CACHÉ, DATOS EXTRAÍDOS, SCRIPTS
+│   │   ├── sections/                  ← ★ TEMPLATES DE SECCIÓN
+│   │   │   ├── catalog/                  877 archivos .section.json ★ Catálogo Divi 4→5
+│   │   │   ├── hero-split/
+│   │   │   │   ├── _base.section.json        105 líneas (estructura base)
+│   │   │   │   └── editorial-grid.variant.json 99 líneas ★ asimétrico + reveal
+│   │   │   ├── hero-centered/
+│   │   │   │   ├── _base.section.json         (sin variante pública)
+│   │   │   │   └── liquid-glass.variant.json  ★ glassmorphism
+│   │   │   ├── features-3col/
+│   │   │   │   ├── _base.section.json
+│   │   │   │   └── monochrome-brutalist.variant.json ★ 0 radius + high contrast
+│   │   │   ├── content-split/
+│   │   │   │   └── _base.section.json         (sin variante)
+│   │   │   ├── content-split-icon-list.section.json
+│   │   │   ├── cta-centered.section.json
+│   │   │   ├── testimonials-3col.section.json
+│   │   │   ├── logos-4col.section.json
+│   │   │   ├── stats-4col.section.json
+│   │   │   └── STATS.md                       ★ Fix para number-counter pitfall
+│   │   │
+│   │   ├── build_design_system.py       786 líneas ★ Genera divitheme.json v3.0
+│   │   ├── extract_patterns.py          467 líneas ★ One-time: 892 templates → patrones
+│   │   ├── design-patterns.json         3165 líneas ★ O(1) keyed (NO USADO realmente)
+│   │   ├── data/modules/                107 archivos ★ Schemas de módulos Divi 5
+│   │   ├── catalog/
+│   │   │   ├── embeddings.pkl           ★ Índice semántico (binario, ~3-5MB)
+│   │   │   └── jsons/                   892 carpetas con JSONs Divi 4 originales
+│   │   └── automation/
+│   │       ├── compile_catalog.py       596 líneas ★ Traduce 892 catálogos Divi 4→5
+│   │       ├── search_catalog.py        102 líneas ★ Búsqueda semántica (torch)
+│   │       ├── generate_embeddings.py   149 líneas ★ Genera embeddings.pkl
+│   │       ├── generate_brief.py        485 líneas ★ LLM → brief YAML
+│   │       ├── test_categorization.py   115 líneas ★ Valida mapeo de categorías
+│   │       ├── requirements.txt         ← sentence-transformers, torch, numpy
+│   │       ├── manage_content.php        51 líneas
+│   │       ├── update_db_from_dumps.php  95 líneas
+│   │       ├── push_to_remote.php        73 líneas
+│   │       ├── pull_remote_page.php      53 líneas
+│   │       ├── create_page_remote.php    48 líneas
+│   │       └── universal_clean.php       87 líneas
+│   │
+│   ├── daw-skill/                      ← ★ SKILL DE ORQUESTACIÓN (4 fases)
+│   │   ├── SKILL.md                        140 líneas (Fase 1-4)
+│   │   ├── references/
+│   │   │   ├── architect.md                13KB ★ Análisis semántico
+│   │   │   ├── design-lead.md              12KB ★ Investigación de diseño
+│   │   │   ├── designer.md                 23KB ★ Mapeo visual
+│   │   │   ├── engineer.md                 10KB ★ Ejecución CLI
+│   │   │   ├── blocks-dictionary.md        21KB ★ 102 módulos Divi 5
+│   │   │   ├── blocks-index.json           16KB ★ Índice de bloques
+│   │   │   └── knowledge.md                 5KB ★ Conocimiento base
+│   │   └── scripts/
+│   │       └── deploy_page.ps1             2510 líneas?? (2.5KB)
+│   │
+│   ├── ui-ux-pro-max/                 ← ★ SKILL UI/UX AUXILIAR
+│   │   ├── SKILL.md                        292 líneas
+│   │   ├── scripts/
+│   │   │   ├── core.py                     253 líneas
+│   │   │   ├── design_system.py           1067 líneas
+│   │   │   └── search.py                   114 líneas
+│   │   └── data/                          ← CSVs de diseño: colors, typography, etc.
+│   │
+│   └── _archive/                       ←   Código legacy (no usar)
+│       ├── class-ai-bridge.php
+│       ├── class-customizer-engine.php
+│       ├── class-page-brain.php
+│       ├── class-ux-engine.php
+│       ├── deploy_header.ps1, deploy_footer.ps1
+│       └── intelligence/db/            ←   CSVs duplicados de ui-ux-pro-max
+
+==================================
+2.2 FLUJO DEL PIPELINE (end-to-end)
+==================================
+
+┌─────────────────────────────────────────────────────────────────────┐
+│  FASE 1: BRIEF (entrada en lenguaje natural)                       │
+├─────────────────────────────────────────────────────────────────────┤
+│ generate_brief.py (Python)                                          │
+│   --prompt "descripción" --tone editorial                           │
+│   → site/<marca>/briefs/<slug>.yml                                  │
+│   Dependencia: LLM API (DeepSeek/Gemini/Groq/OpenAI)               │
+│   Archivo: DAW_bundle/workspace/automation/generate_brief.py:485L   │
+└─────────────────────────────────────────────────────────────────────┘
+                               │
+                               ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│  FASE 2: ORQUESTACIÓN (brief → composición)                        │
+├─────────────────────────────────────────────────────────────────────┤
+│ orchestrate_page.php (PHP)                                          │
+│   --brief=slug --deploy                                              │
+│   1. Parsea YAML (parse_brief, parser manual sin librería YAML)     │
+│   2. Consulta design-patterns.json (solo log, no aplica)            │
+│   3. Busca en catálogo: search_catalog.py (semántico, Python)       │
+│      - Si score ≥ 0.60 y no blacklist → usa template del catálogo   │
+│      - Si no → fallback a base template + variant por tone          │
+│   4. Mapea tone → variant (6 tones, solo 3 variantes reales)        │
+│   5. Escribe .page.json en compositions/                            │
+│   Archivo: DAW_bundle/divi-agentic-core/bin/orchestrate_page.php    │
+│   helper: DAW_bundle/workspace/automation/search_catalog.py:102L    │
+└─────────────────────────────────────────────────────────────────────┘
+                               │
+                               ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│  FASE 3: COMPOSICIÓN (template + slots → page-def)                 │
+├─────────────────────────────────────────────────────────────────────┤
+│ compose_page.php (PHP)                                              │
+│   --page=slug.page.json                                             │
+│   1. Carga template de workspace/sections/                          │
+│      - Si template@variant: deep_merge(_base, variant)              │
+│      - Si catalog/<name>: carga literal del catálogo (877 opciones) │
+│   2. fill_slots(): reemplaza {{slot:*}} con contenido del brief     │
+│      - Slots no resueltos → "" (string vacío)                       │
+│      - _repeat blocks → expande listas (features, testimonials)     │
+│   3. Escribe page-defs/<slug>.json                                  │
+│   Archivo: DAW_bundle/divi-agentic-core/bin/compose_page.php:248L   │
+│   Templates: DAW_bundle/workspace/sections/ (14 + 877 catálogo)    │
+└─────────────────────────────────────────────────────────────────────┘
+                               │
+                               ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│  FASE 4: BUILD + DEPLOY (page-def → WordPress DB)                  │
+├─────────────────────────────────────────────────────────────────────┤
+│ build_page.php (PHP)                                                │
+│   --def=slug.json --deploy                                          │
+│   1. Carga design system (divitheme.json)                           │
+│   2. Carga module schemas (workspace/data/modules/ 107 archivos)    │
+│   3. build_section → build_row → build_module recursivo             │
+│   4. apply_presets(): expande presets inline vía deep_merge         │
+│   5. resolve_tokens_recursive():                                    │
+│      - {{design:color:x}} → var(--gcid-x)                           │
+│      - {{design:font|x}} → literal                                  │
+│   6. validate_page(): estructura básica (sections→rows→columns)     │
+│   7. Escribe pages/<slug>.json (schema resuelto)                    │
+│   8. --deploy: wp agentic deploy_page → class-agentic-command.php  │
+│      → Layout_Engine.compile()                                      │
+│      → Convierte var(--gcid-x) a $variable({"type":"color",...})$  │
+│      → Renderiza blocks Divi 5: <!-- wp:divi/section {...} -->     │
+│      → Escribe post en wp_posts                                    │
+│   Archivo: DAW_bundle/divi-agentic-core/bin/build_page.php:572L    │
+│   Layout Engine: inc/core/class-layout-engine.php:932L              │
+│   CLI Command: inc/cli/class-agentic-command.php:576L               │
+└─────────────────────────────────────────────────────────────────────┘
+
+==================================
+2.3 MAPA DE ARCHIVOS CRÍTICOS (los que realmente importan)
+==================================
+
+Pipeline principal (PHP, ~30 archivos):
+  bin/orchestrate_page.php   419L  ★ Orquestador (Parser YAML manual + search)
+  bin/compose_page.php       248L  ★ Compositor (templates + slots)
+  bin/build_page.php         572L  ★ Constructor + deploy (punto único)
+  bin/verify_page.php        172L  ★ Verificación post-deploy
+  bin/generate-module-schema.php 162L ★ Genera schemas de módulos
+
+Plugin WordPress:
+  inc/cli/class-agentic-command.php  576L  ★ WP-CLI agentic deploy_page
+  inc/core/class-layout-engine.php    932L  ★ Compila schema → blocks Divi 5
+  inc/core/class-design-resolver.php  184L  ★ Resuelve tokens/colores globales
+  inc/core/class-blocks-to-schema.php 411L  ★ Reverse: DB → schema JSON
+  inc/core/trait-module-metadata.php  179L  ★ Metadata de módulos
+
+Pipeline de datos (Python, ~10 archivos):
+  automation/compile_catalog.py    596L  ★ Traduce 892 catálogos Divi 4→5
+  automation/search_catalog.py     102L  ★ Búsqueda semántica (torch)
+  automation/generate_embeddings.py 149L ★ Genera embeddings.pkl
+  automation/generate_brief.py     485L  ★ LLM → brief YAML
+  automation/test_categorization.py 115L ★ Valida mapeo categorías
+
+Diseño:
+  build_design_system.py           786L  ★ Genera divitheme.json v3.0
+  extract_patterns.py              467L  ★ One-time: 892 → design-patterns.json
+
+Templates de sección (14 + 877):
+  sections/hero-split/_base.section.json + editorial-grid.variant.json
+  sections/hero-centered/_base.section.json + liquid-glass.variant.json
+  sections/features-3col/_base.section.json + monochrome-brutalist.variant.json
+  sections/content-split/_base.section.json (sin variante)
+  sections/*.section.json (standalone: cta, testimonials, stats, etc.)
+  sections/catalog/*.section.json (877 archivos compilados)
+
+==================================
+2.4 MAPA DE CONCEPTOS CLAVE
+==================================
+
+TÉRMINO              | DESCRIPCIÓN
+---------------------|----------------------------------------------------
+page-def             | ★ JSON semántico de entrada (tokens {{design:*}}, presets)
+                     |   Es el CONTRATO: si es perfecto, el deploy es perfecto
+                     |   Ruta: site/<marca>/page-defs/<slug>.json
+.page.json           | Composición intermedia (brief → templates + slots)
+                     |   Ruta: site/<marca>/compositions/<slug>.page.json
+brief                | YAML de entrada con tone + secciones + slots
+                     |   Ruta: site/<marca>/briefs/<slug>.yml
+presets              | 64 templates de decoration reutilizables
+                     |   Categorías: section, text, module, divider,
+                     |   animation, scroll, transform
+                     |   Ruta: brand/_design_presets.json (1868L)
+tokens               | {{design:color:name}}, {{design:font:name}},
+                     |   {{design:radius:name}}, {{design:space:name}}
+                     |   Resuelto en build_page.php → var(--gcid-*) o literal
+variants             | Decoraciones que sobreescriben _base.section.json
+                     |   Sintaxis: template@variant (ej. hero-split@editorial-grid)
+                     |   Solo 3 existentes: editorial-grid, liquid-glass,
+                     |   monochrome-brutalist
+gcid                 | Global Colors ID (var(--gcid-*)) en Divi 5
+                     |   Sincronizar con: wp agentic global_colors sync
+tone                 | Dirección visual: editorial, modern, premium, minimal,
+                     |   dramatic, playful
+                     |   Determina qué variante de decoración se aplica
+DAW_SITE             | Variable de entorno para seleccionar marca activa
+                     |   Default: bibliotheca
+
+==================================
+2.5 CATEGORÍAS DE PRESETS (64 total)
+==================================
+
+section (8):    hero-dark, hero-image-dark, hero-video, trust-bar,
+                cta-epic, light, dark, white
+text (16):      eyebrow, eyebrow-dark, hero-title, display-xl,
+                display-md, display-md-light, headline, headline-light,
+                headline-3, lead, lead-dark, body-md, stat-num,
+                stat-label, quote-serif, caption
+module (12):    card, feature-card, stat-item, testimonial-card,
+                image-shadow, accent-line, btn-primary, btn-ghost,
+                btn-outline-light, btn-cta-dark, glass-card
+divider (6):    curve-top, curve-bottom, wave-top, wave-bottom, tilt-top
+animation (12): fade-in, fade-in-fast, slide-up/down/left/right,
+                reveal-up, zoom-in, bounce-up, flip, fold, roll
+scroll (8):     fade-in, parallax-up/down, scale-in, reveal, rotate,
+                blur-in
+transform (6):  hover-lift, hover-scale, hover-glow, hover-slide-up,
+                hover-expand
+
+==================================
+2.6 MÓDULOS DIVI 5 SOPORTADOS (107)
+==================================
+(workspace/data/modules/)
+
+Estructurales: section, row, column, row-inner, column-inner, group,
+group-carousel, global-layout
+Contenido: text, heading, image, button, blurb, icon, divider, code,
+testimonial, team-member, pricing-table, pricing-tables, cta
+Listas: icon-list, icon-list-item, social-media-follow, social-media-follow-network
+Sliders: slider, slide, fullwidth-slider, video-slider, video-slider-item
+Acordeones: accordion, accordion-item, toggle, tabs, tab
+Formularios: contact-form, contact-field, signup, signup-custom-field,
+contact-form-7, login, search
+Contadores: number-counter, counter, circle-counter, countdown-timer
+Media: video, audio, lottie, map, map-pin, before-after-image,
+canvas-portal
+Dinámicos: blog, post-title, post-content, post-slider, post-nav,
+comments, portfolio, filterable-portfolio
+WooCommerce (22): shop, breadcrumb, cart-notice, cart-products,
+cart-totals, checkout-*, product-*, cross-sells, related-products,
+upsell
+Fullwidth: fullwidth-header, fullwidth-image, fullwidth-code,
+fullwidth-menu, fullwidth-portfolio, fullwidth-slider,
+fullwidth-post-title, fullwidth-post-content
+Otros: menu, dropdown, sidebar, breadcrumbs, link, video-slider,
+video-slider-item, woocommerce-*
+
+==================================
+2.7 RUTAS DE REFERENCIA RÁPIDA
+==================================
+
+Qué buscar              | Ruta
+------------------------|---------------------------------------------------
+Design vars activas     | site/bibliotheca/brand/_design_vars.json
+Design presets activos  | site/bibliotheca/brand/_design_presets.json
+Design system generado  | site/bibliotheca/design-system/divitheme.json
+Page-defs activos       | site/bibliotheca/page-defs/ (7 archivos)
+Briefs activos          | site/bibliotheca/briefs/ (5 YAML + 1 MD)
+Templates base          | workspace/sections/*.section.json
+Catálogo compilado      | workspace/sections/catalog/ (877 archivos)
+Catálogo raw            | workspace/catalog/jsons/ (892 carpetas)
+Patrones de diseño      | workspace/design-patterns.json (3165L)
+Module schemas          | workspace/data/modules/ (107 archivos)
+Metadata Divi 5         | divi-agentic-core/data/_all_modules_metadata.php
+Pipeline PHP            | divi-agentic-core/bin/
+Plugin core             | divi-agentic-core/inc/core/
+WP-CLI command          | divi-agentic-core/inc/cli/class-agentic-command.php
+Automation Python       | workspace/automation/
+docs diseño             | daw-skill/references/ (7 archivos MD)
+
+==================================
+2.8 ESTADO ACTUAL ~ TAMBIÉN CONOCIDO COMO: DATOS DUROS
+==================================
+
+- 877 templates de sección compilados a Divi 5 (catalog/)
+- 14 templates base (standalone + _base + variants)
+- 3 variantes de decoración (editorial-grid, liquid-glass, monochrome-brutalist)
+- 7 page-defs (solo 2-3 con calidad premium real)
+- 5 briefs YAML
+- 64 presets en design system
+- 107 schemas de módulos Divi 5
+- 2.6MB de metadata oficial Divi 5
+- 26 colores tokenizados en divitheme.json
+- 3 fuentes: Cormorant Garamond (display), Crimson Pro (body), DM Sans (UI)
+- 5 radios, 9 espacios
+- Embeddings semánticos: 892 items × 384 dimensiones (all-MiniLM-L6-v2)
+- 2 pipeline paths: PHP puro y PHP+Python (search catalog)
+
+==================================
+2.9 ERRORES CONOCIDOS Y PITFALLS
+==================================
+
+1. number-counter crash: Si title es objeto en vez de string, strpos()
+   en layout-engine.php:436 crashea. Fix: if(is_array($title_text)) fallback.
+   Documentado en workspace/sections/STATS.md
+
+2. Presets inexistentes: build_page.php no valida que un preset exista.
+   get_preset() devuelve [] silentemente. Ej: text:eyebrow-light no existe
+   pero se referencias sin error en modern-test.json:293
+
+3. Columnas sin type en catálogo: compile_catalog.py no siempre asigna
+   column_structure correctamente en rows anidados. layout-engine.php
+   infiere desde advanced.type desktop.value.
+
+4. Gradient stops con % duplicado: build_page.php normaliza quitando %
+   pero compile_catalog.py los deja con %. Layout_Engine también normaliza.
+   Error si ambos normalizan → pierde información.
+
+5. YAML parser manual sin librería: orchestrate_page.php:96-244 tiene
+   parser YAML propio. No soporta YAML complejo (anidamiento profundo,
+   arrays inline, referencias). Si el brief YAML se desvía del formato
+   esperado, el parser falla silenciosamente.
+
+6. search_catalog.py sin GPU: Force CPU con CUDA_VISIBLE_DEVICES="".
+   En hardware sin CUDA es correcto, pero en máquinas con GPU desperdicia
+   capacidad de cómputo.
+
+7. Deep merge array indexed vs asociativo: compose_page.php:47 usa
+   array_keys($value) !== range(0, count($value)-1) para detectar arrays
+   indexados. Falla si los keys numéricos no son 0-indexed consecutivos.
+
+==================================
+2.10 REGLAS DE OPERACIÓN (desde AGENTS.md)
+==================================
+1. No editar divitheme.json a mano — regenerar con build_design_system.py
+2. No usar divi/code como comodín — consultar blocks-dictionary.md
+3. No usar et_pb_* (shortcodes Divi 4) — solo namespace divi/*
+4. Colores siempre como {{design:color:*}}, nunca hex hardcodeados
+5. build_page.php con resolved=true expande presets inline
+6. Sin CSS inyectado en functions.php ni overrides en style.css
+7. Posiciones de gradient sin % (Layout Engine normaliza)
+8. Frontera site/: datos de proyecto separados del framework DAW
+9. Pipeline 100% PHP para crear páginas (sin Python)
+10. Multi-marca: cambiar $env:DAW_SITE para alternar proyectos
+11. No usar mysql_remote.bat hasta revalidar conexión remota
+
+==================================
+2.11 COMANDOS ÚTILES
+==================================
+
+# Pipeline completo (un solo comando):
+php DAW_bundle/divi-agentic-core/bin/orchestrate_page.php --brief=slug --deploy
+
+# Build directo desde page-def:
+php DAW_bundle/divi-agentic-core/bin/build_page.php --def=slug.json --deploy
+
+# Generar design system:
+$env:DAW_SITE="bibliotheca"
+python DAW_bundle/workspace/build_design_system.py
+
+# Sincronizar colores globales Divi 5:
+wp agentic global_colors sync --design-system="site/bibliotheca/design-system/divitheme.json"
+
+# Generar brief con IA:
+python DAW_bundle/workspace/automation/generate_brief.py --prompt "descripción"
+
+# Recompilar catálogo (una vez por actualización):
+python DAW_bundle/workspace/automation/compile_catalog.py
+
+# Regenerar module schemas (una vez por actualización Divi):
+php DAW_bundle/divi-agentic-core/bin/generate-module-schema.php --all
+
+# Verificar página desplegada:
+php DAW_bundle/divi-agentic-core/bin/verify_page.php --slug=slug
+
+============================================================================
+  FIN DEL MAPA — Cualquier agente que lea esto conoce el DAW completo
+============================================================================

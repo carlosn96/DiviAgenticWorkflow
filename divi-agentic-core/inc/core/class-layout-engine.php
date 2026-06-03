@@ -74,7 +74,7 @@ class Layout_Engine {
         $children_html = '';
         if ( isset( $data['children'] ) && is_array( $data['children'] ) ) {
             foreach ( $data['children'] as $child ) {
-                $child_type = $child['module'] ?? $child['type'] ?? 'divi/contact-field';
+                $child_type = $child['_type'] ?? (is_string($child['module'] ?? null) ? $child['module'] : null) ?? $child['type'] ?? 'divi/contact-field';
                 $children_html .= $this->render_block( $child_type, $child, '' );
             }
         }
@@ -92,6 +92,40 @@ class Layout_Engine {
             foreach ( $style_keys as $key ) {
                 if ( isset( $data[ $key ] ) ) {
                     $attrs['module'][ $key ] = $data[ $key ];
+                }
+            }
+
+            // Deep-merge module contents from page-def (e.g., module.decoration.background)
+            if ( isset( $data['module'] ) && is_array( $data['module'] ) ) {
+                foreach ( $data['module'] as $mk => $mv ) {
+                    if ( is_array( $mv ) && isset( $attrs['module'][ $mk ] ) && is_array( $attrs['module'][ $mk ] ) ) {
+                        $attrs['module'][ $mk ] = array_replace_recursive( $attrs['module'][ $mk ], $mv );
+                    } else {
+                        $attrs['module'][ $mk ] = $mv;
+                    }
+                }
+            }
+
+            // Custom CSS (freeForm) — top-level block attribute in Divi 5.
+            // Format: "css": { "desktop": { "value": { "freeForm": "..." } }, "tablet": ..., "phone": ... }
+            // Uses .selector as placeholder (Divi replaces with module's unique class).
+            if ( isset( $data['css'] ) ) {
+                $css = $data['css'];
+                // Allow shorthand: "css": ".selector { ... }" → wrap in desktop.value.freeForm
+                if ( is_string( $css ) ) {
+                    $attrs['css'] = [ 'desktop' => [ 'value' => [ 'freeForm' => $css ] ] ];
+                } elseif ( is_array( $css ) ) {
+                    // Full format with responsive breakpoints
+                    foreach ( [ 'desktop', 'tablet', 'phone' ] as $bp ) {
+                        if ( isset( $css[ $bp ] ) ) {
+                            $bp_css = $css[ $bp ];
+                            if ( is_string( $bp_css ) ) {
+                                $attrs['css'][ $bp ] = [ 'value' => [ 'freeForm' => $bp_css ] ];
+                            } elseif ( is_array( $bp_css ) ) {
+                                $attrs['css'][ $bp ] = $bp_css;
+                            }
+                        }
+                    }
                 }
             }
 
@@ -157,6 +191,10 @@ class Layout_Engine {
                 }
                 $bg_val =& $attrs['module']['decoration']['background']['desktop']['value'];
 
+                // If background value is still empty after all processing, remove it entirely
+                // to prevent Divi 5 from crashing on "value":[].
+                $bg_was_empty = empty( $bg_val );
+
                 // Normalize: VIE puts gradient in overlay.gradient (CSS string), but Divi 5
                 // expects gradient as a structured object {type, direction, stops, overlaysImage}.
                 if ( isset( $bg_val['overlay']['gradient'] ) && is_string( $bg_val['overlay']['gradient'] ) ) {
@@ -202,6 +240,18 @@ class Layout_Engine {
                 // If only parallax key was set without an image object, set parallax on existing image
                 if ( ! empty( $data['parallax'] ) && isset( $bg_val['image'] ) ) {
                     $bg_val['image']['parallax']['enabled'] = $parallax_val;
+                }
+
+                // Fix: Remove empty background value to prevent Divi 5 crash
+                // Divi 5 expects "value":{} or valid props, never "value":[]
+                if ( $bg_was_empty && empty( $bg_val ) ) {
+                    unset( $attrs['module']['decoration']['background']['desktop']['value'] );
+                    if ( empty( $attrs['module']['decoration']['background']['desktop'] ) ) {
+                        unset( $attrs['module']['decoration']['background']['desktop'] );
+                    }
+                    if ( empty( $attrs['module']['decoration']['background'] ) ) {
+                        unset( $attrs['module']['decoration']['background'] );
+                    }
                 }
             }
 
@@ -558,8 +608,7 @@ class Layout_Engine {
 
             // --- GROUP 9: Blurb (icon/image + title + content) ---
             elseif ( $slug === 'divi/blurb' ) {
-                // Fix: title.innerContent.desktop.value must be {text: string}, not plain string
-                $attrs['title']['innerContent'] = [ 'desktop' => ['value' => [ 'text' => $data['title'] ?? '' ] ] ];
+                $attrs['title'] = $data['title'] ?? '';
                 $attrs['content']['innerContent'] = [ 'desktop' => ['value' => $data['content'] ?? ''] ];
                 if ( isset( $data['icon'] ) ) {
                     // Fix: icon must be {unicode, type, weight} object, not plain string
@@ -575,27 +624,6 @@ class Layout_Engine {
                             'animation' => 'off'
                         ]]
                     ];
-                }
-                // Fix: Propagate headingFont to title.decoration.font without overwriting existing structure
-                if ( isset( $data['headingFont'] ) && is_array( $data['headingFont'] ) ) {
-                    $font_data = current( $data['headingFont'] );
-                    if ( isset( $font_data['font'] ) ) {
-                        $attrs['title']['decoration']['font']['font'] = array_merge(
-                            $attrs['title']['decoration']['font']['font'] ?? [],
-                            $font_data['font']
-                        );
-                    } else {
-                        $attrs['title']['decoration']['font']['font'] = array_merge(
-                            $attrs['title']['decoration']['font']['font'] ?? [],
-                            $font_data
-                        );
-                    }
-                    unset( $attrs['module']['headingFont'] );
-                }
-                // Fix: Propagate bodyFont to content.decoration.bodyFont
-                if ( isset( $data['bodyFont'] ) ) {
-                    $attrs['content']['decoration']['bodyFont'] = $data['bodyFont'];
-                    unset( $attrs['module']['bodyFont'] );
                 }
             }
 
@@ -1053,7 +1081,7 @@ class Layout_Engine {
                 if ( $meta && isset( $meta['attributes'] ) ) {
                     $auto_merged = [ 'decoration', 'boxShadow', 'spacing', 'meta', 'advanced',
                                      'headingFont', 'bodyFont', 'animation', 'transform', 'presets',
-                                     'children', 'module' ];
+                                     'children', 'module', '_type' ];
                     foreach ( $meta['attributes'] as $attr_name => $attr_def ) {
                         if ( in_array( $attr_name, $auto_merged, true ) ) continue;
                         if ( ! isset( $data[ $attr_name ] ) ) continue;
@@ -1074,13 +1102,37 @@ class Layout_Engine {
                                     ];
                                 }
                             } else {
-                                $attrs[ $attr_name ]['innerContent'] = [
-                                    'desktop' => [ 'value' => $data[ $attr_name ] ]
-                                ];
+                                $raw = $data[ $attr_name ];
+                                // If the value already has innerContent.desktop.value structure, use it directly.
+                                if ( is_array( $raw ) && isset( $raw['innerContent']['desktop']['value'] ) ) {
+                                    $attrs[ $attr_name ] = $raw;
+                                } else {
+                                    $attrs[ $attr_name ]['innerContent'] = [
+                                        'desktop' => [ 'value' => $raw ]
+                                    ];
+                                }
                             }
                         } else {
-                            $attrs[ $attr_name ] = $data[ $attr_name ];
+                            // Not an innerContent schema attribute — pass through if not already set.
+                            if ( ! isset( $attrs[ $attr_name ] ) ) {
+                                $attrs[ $attr_name ] = $data[ $attr_name ];
+                            }
                         }
+                    }
+                } else {
+                    // CATCH-ALL for custom/third-party modules without metadata.
+                    // Pass through all content attributes from $data that aren't already set.
+                    $skip_keys = [ 'module', 'presets', 'decoration', 'advanced', 'meta',
+                                   'children', 'type', '_type', 'module_class', 'module_id',
+                                   'section_type', 'adminLabel', 'css' ];
+                    foreach ( $data as $key => $val ) {
+                        if ( in_array( $key, $skip_keys, true ) ) continue;
+                        if ( isset( $attrs[ $key ] ) ) continue;
+                        $attrs[ $key ] = $val;
+                    }
+                    // Custom container modules use children_html as inner content.
+                    if ( $children_html !== '' ) {
+                        $inner_html = $children_html;
                     }
                 }
             }
@@ -1109,7 +1161,7 @@ class Layout_Engine {
                         $content .= $this->render_block( 'divi/column-inner', $item, 'modules' );
                         break;
                     case 'modules':
-                        $module_type = $item['module'] ?? $item['type'] ?? 'divi/text';
+                        $module_type = $item['_type'] ?? (is_string($item['module'] ?? null) ? $item['module'] : null) ?? $item['type'] ?? 'divi/text';
                         $content .= $this->render_block( $module_type, $item, '' );
                         break;
                 }
@@ -1133,7 +1185,24 @@ class Layout_Engine {
             unset( $stop );
         }
 
+        // Fix: Ensure no "value":[] exists in any background — Divi 5 requires {} or valid props
+        if ( isset( $attrs['module']['decoration']['background'] ) && is_array( $attrs['module']['decoration']['background'] ) ) {
+            foreach ( [ 'desktop', 'tablet', 'phone' ] as $bp ) {
+                if ( isset( $attrs['module']['decoration']['background'][$bp]['value'] ) ) {
+                    $bv = $attrs['module']['decoration']['background'][$bp]['value'];
+                    if ( is_array( $bv ) && empty( $bv ) ) {
+                        unset( $attrs['module']['decoration']['background'][$bp]['value'] );
+                    }
+                }
+            }
+            $bg_arr = $attrs['module']['decoration']['background'];
+            if ( empty( $bg_arr['desktop'] ) && empty( $bg_arr['tablet'] ) && empty( $bg_arr['phone'] ) ) {
+                unset( $attrs['module']['decoration']['background'] );
+            }
+        }
+
         if ( $attrs['module'] === [] ) { $attrs['module'] = (object)[]; }
+
         $json_attrs = json_encode( $attrs, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
 
         $inner = ( $content !== '' || $inner_html !== '' ) ? "{$content}{$inner_html}" : '';

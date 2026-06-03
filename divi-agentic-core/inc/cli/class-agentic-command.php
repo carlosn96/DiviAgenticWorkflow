@@ -9,43 +9,32 @@ namespace DAC\CLI;
  */
 class Agentic_Command {
 
-    private array $allowed_blocks = [
-        // Structure
+    private array $native_blocks = [
         'divi/section', 'divi/row', 'divi/column', 'divi/row-inner', 'divi/column-inner',
-        // Content
         'divi/text', 'divi/image', 'divi/button', 'divi/code', 'divi/video',
         'divi/audio', 'divi/heading', 'divi/icon', 'divi/link', 'divi/divider',
         'divi/gallery', 'divi/breadcrumbs',
-        // Interactive
         'divi/menu', 'divi/toggle', 'divi/accordion', 'divi/accordion-item',
         'divi/tabs', 'divi/tab', 'divi/dropdown',
         'divi/contact-form', 'divi/contact-field', 'divi/contact-form-7',
         'divi/signup', 'divi/signup-custom-field',
-        // Social
         'divi/social-media-follow', 'divi/social-media-follow-network',
-        // Dynamic
         'divi/blog', 'divi/post-title', 'divi/post-content', 'divi/post-nav',
         'divi/post-slider', 'divi/comments', 'divi/search',
-        // Design
         'divi/blurb', 'divi/cta', 'divi/pricing-table', 'divi/pricing-tables',
         'divi/team-member', 'divi/testimonial', 'divi/icon-list', 'divi/icon-list-item',
         'divi/lottie', 'divi/before-after-image', 'divi/canvas-portal', 'divi/svg',
-        // Counters
         'divi/number-counter', 'divi/counter', 'divi/counters',
         'divi/circle-counter',
-        // Sliders
         'divi/slider', 'divi/slide', 'divi/video-slider', 'divi/video-slider-item',
-        // Fullwidth
         'divi/fullwidth-code', 'divi/fullwidth-header', 'divi/fullwidth-image',
         'divi/fullwidth-map', 'divi/fullwidth-menu', 'divi/fullwidth-portfolio',
         'divi/fullwidth-post-content', 'divi/fullwidth-post-slider',
         'divi/fullwidth-post-title', 'divi/fullwidth-slider',
-        // Special
         'divi/group', 'divi/group-carousel', 'divi/global-layout',
         'divi/portfolio', 'divi/filterable-portfolio', 'divi/sidebar',
         'divi/login', 'divi/countdown-timer', 'divi/map', 'divi/map-pin',
         'divi/shortcode-module', 'divi/placeholder', 'divi/layout',
-        // WooCommerce
         'divi/shop',
         'divi/woocommerce-breadcrumb', 'divi/woocommerce-cart-notice',
         'divi/woocommerce-cart-products', 'divi/woocommerce-cart-totals',
@@ -60,6 +49,8 @@ class Agentic_Command {
         'divi/woocommerce-product-tabs', 'divi/woocommerce-product-title',
         'divi/woocommerce-product-upsell', 'divi/woocommerce-related-products',
     ];
+
+    private array $allowed_blocks = [];
 
     public static function register() {
         \WP_CLI::add_command( 'agentic', self::class );
@@ -478,51 +469,50 @@ class Agentic_Command {
 
         $daw_root = dirname( DIVI_AGENTIC_CORE_DIR );
 
-        // 1. Read brand.css
-        $brand_css_path = $daw_root . '/site/' . $site . '/brand/assets/css/brand.css';
-        $brand_css = '';
-        if ( file_exists( $brand_css_path ) ) {
-            $brand_css = file_get_contents( $brand_css_path );
-            \WP_CLI::log( "Loaded brand CSS (" . strlen( $brand_css ) . " chars) from: {$brand_css_path}" );
-        } else {
-            \WP_CLI::warning( "brand.css not found at: {$brand_css_path}" );
+        // 1. Verify brand.css exists on disk (file-based enqueue is now the source of truth)
+        $brand_css_paths = [
+            $daw_root . '/divi-agentic-core/assets/css/brand.css',
+            $daw_root . '/site/' . $site . '/brand/assets/css/brand.css',
+        ];
+        $found = false;
+        foreach ( $brand_css_paths as $p ) {
+            if ( file_exists( $p ) ) {
+                $brand_css = file_get_contents( $p );
+                \WP_CLI::log( "brand.css (" . strlen( $brand_css ) . " chars) found at: {$p}" );
+                $found = true;
+                break;
+            }
+        }
+        if ( ! $found ) {
+            \WP_CLI::warning( 'brand.css not found at any expected path — enqueue will be skipped at runtime.' );
         }
 
-        // 2. Generate CSS vars from design system
+        // Verify design tokens source exists
         $ds_path = $daw_root . '/site/' . $site . '/design-system/divitheme.json';
-        $css_vars = '';
         if ( file_exists( $ds_path ) ) {
-            $vars = \daw_generate_css_vars( $ds_path );
-            if ( $vars ) {
-                $css_vars = $vars;
-            }
+            \WP_CLI::log( "Design system found: {$ds_path}" );
         } else {
-            \WP_CLI::warning( "Design system not found at: {$ds_path}" );
+            \WP_CLI::warning( "Design system not found: {$ds_path}" );
         }
 
-        // 3. Concatenate: brand.css first, then CSS vars (CSS vars override via :root specificity)
-        $combined = '';
-        if ( $brand_css ) {
-            $combined .= "/*** DAW Brand CSS ***/\n" . $brand_css . "\n\n";
-        }
-        if ( $css_vars ) {
-            $combined .= "/*** DAW Design Tokens ***/\n" . $css_vars . "\n";
-        }
+        // 2. Clean up legacy DB storage — brand.css is now enqueued from disk
+        // Remove Divi legacy et_custom_css (stale from previous brands)
+        delete_option( 'et_custom_css' );
+        \WP_CLI::log( 'Cleaned up et_custom_css legacy option.' );
 
-        if ( empty( $combined ) ) {
-            \WP_CLI::error( 'Nothing to sync — no brand.css and no design system found.' );
-        }
-
-        // 4. Store in WordPress Custom CSS (wp_update_custom_css_post)
-        if ( function_exists( 'wp_update_custom_css_post' ) ) {
-            $result = wp_update_custom_css_post( $combined );
-            if ( is_wp_error( $result ) ) {
-                \WP_CLI::error( 'Failed to update custom CSS: ' . $result->get_error_message() );
+        // Remove WP native Custom CSS post content to avoid duplication
+        // with the file-enqueued brand.css
+        if ( function_exists( 'wp_get_custom_css_post' ) ) {
+            $post = wp_get_custom_css_post();
+            if ( $post ) {
+                // Clear the content — keep the post but remove redundant CSS
+                // (enqueued brand.css is now the source of truth)
+                wp_update_custom_css_post( '' );
+                \WP_CLI::log( 'Cleared WordPress Custom CSS post content (brand.css is now enqueued from disk).' );
             }
-            \WP_CLI::success( 'Brand CSS + design tokens synced to WordPress Custom CSS (' . strlen( $combined ) . ' chars).' );
-        } else {
-            \WP_CLI::error( 'wp_update_custom_css_post() not available. Are you on WP 4.7+?' );
         }
+
+        \WP_CLI::success( 'CSS flow synchronized: file-based enqueue is active, legacy DB storage removed.' );
     }
 
     /**
@@ -616,6 +606,16 @@ class Agentic_Command {
      */
     private function validate_schema_string( string $raw ): array {
         $errors = [];
+
+        // Build allowlist: native Divi blocks + modules registered via Module_Registry.
+        if ( empty( $this->allowed_blocks ) ) {
+            $custom_blocks = [];
+            if ( class_exists( '\DAC\Core\Module_Registry' ) ) {
+                $custom_blocks = \DAC\Core\Module_Registry::get_allowed_blocks();
+            }
+            $this->allowed_blocks = array_merge( $this->native_blocks, $custom_blocks );
+        }
+
         $schema = json_decode( $raw, true );
         if ( json_last_error() !== JSON_ERROR_NONE ) {
             return [ "Invalid JSON: " . json_last_error_msg() ];
@@ -630,9 +630,14 @@ class Agentic_Command {
                         foreach ( $row['columns'] as $col_idx => $column ) {
                             if ( isset( $column['modules'] ) && is_array( $column['modules'] ) ) {
                                 foreach ( $column['modules'] as $mod_idx => $module ) {
-                                    $block = $module['module'] ?? '';
+                                    $block = $module['_type'] ?? (is_string($module['module'] ?? null) ? $module['module'] : '');
                                     if ( $block && ! in_array( $block, $this->allowed_blocks, true ) ) {
-                                        $errors[] = "Block '{$block}' is not allowed at section {$sec_idx}, row {$row_idx}, column {$col_idx}, module {$mod_idx}";
+                                        // Allow any divi/* or dac/* prefixed block (custom modules)
+                                        if ( str_starts_with( $block, 'divi/' ) || str_starts_with( $block, 'dac/' ) ) {
+                                            $this->allowed_blocks[] = $block;
+                                        } else {
+                                            $errors[] = "Block '{$block}' is not allowed at section {$sec_idx}, row {$row_idx}, column {$col_idx}, module {$mod_idx}";
+                                        }
                                     }
                                 }
                             }

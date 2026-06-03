@@ -1,0 +1,331 @@
+{
+  "title": "Bibliotheca - El Silencio del Conocimiento",
+  "slug": "home",
+  "description": "",
+  "sections": [
+    {
+      "presets": [
+        "section:hero-dark"
+      ],
+      "decoration": {
+        "gradient": {
+          "type": "linear",
+          "direction": "135deg",
+          "stops": [
+            {
+              "color": "{{design:color:sepia-500}}",
+              "position": "0"
+            },
+            {
+              "color": "{{design:color:text-primary}}",
+              "position": "100"
+            }
+          ]
+        },
+        "motion": {
+          "duration": "300ms",
+          "easing": "ease-out"
+        }
+      },
+      "rows": [
+        {
+          "column_structure": "4_4",
+          "columns": [
+            {
+              "type": "4_4",
+              "modules": [
+                {
+                  "type": "divi/text",
+                  "presets": [
+                    "text:eyebrow-dark"
+                  ],
+                  "content": "<p>SANTUARIO DEL SABER</p>",
+                  "decoration": {
+                    "animation": {
+                      "desktop": {
+                        "value": {
+                          "style": "slide",
+                          "direction": "bottom",
+                          "duration": "600ms",
+                          "delay": "0ms"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "divi/heading",
+                  "presets": [
+                    "text:hero-title"
+                  ],
+                  "content": "<h1>El Silencio del Conocimiento</h1>",
+                  "decoration": {
+                    "animation": {
+                      "desktop": {
+                        "value": {
+                          "style": "slide",
+                          "direction": "bottom",
+                          "duration": "600ms",
+                          "delay": "150ms"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "divi/text",
+                  "presets": [
+                    "text:lead"
+                  ],
+                  "content": "<p>Explora el legado cultural de la humanidad en un espacio digital diseñado para la reflexión y el descubrimiento.</p>",
+                  "decoration": {
+                    "animation": {
+                      "desktop": {
+                        "value": {
+                          "style": "slide",
+                          "direction": "bottom",
+                          "duration": "600ms",
+                          "delay": "300ms"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "divi/button",
+                  "presets": [
+                    "module:btn-outline-light",
+                    "transform:hover-lift"
+                  ],
+                  "button_text": "Acceder a la Colección",
+                  "button_url": "/coleccion",
+                  "decoration": {
+                    "animation": {
+                      "desktop": {
+                        "value": {
+                          "style": "slide",
+                          "direction": "bottom",
+                          "duration": "600ms",
+                          "delay": "450ms"
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "presets": [
+        "section:light"
+      ],
+      "decoration": {
+        "gradient": {
+          "type": "linear",
+          "direction": "135deg",
+          "stops": [
+            {
+              "color": "{{design:color:sepia-500}}",
+              "position": "0"
+            },
+            {
+              "color": "{{design:color:text-primary}}",
+              "position": "100"
+            }
+          ]
+        },
+        "motion": {
+          "duration": "300ms",
+          "easing": "ease-out"
+        }
+      },
+      "rows": [
+        {
+          "column_structure": "1_1",
+          "columns": [
+            {
+              "type": "1_1",
+              "modules": [
+                {
+                  "type": "divi/text",
+                  "presets": [
+                    "text:eyebrow-dark"
+                  ],
+                  "content": "<p>SERVICIOS EXCLUSIVOS</p>",
+                  "decoration": {
+                    "animation": {
+                      "desktop": {
+                        "value": {
+                          "style": "slide",
+                          "direction": "bottom",
+                          "duration": "600ms",
+                          "delay": "0ms"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "divi/heading",
+                  "presets": [
+                    "text:display-md"
+                  ],
+                  "content": "<h2>Una Experiencia Única para el Lector</h2>",
+                  "decoration": {
+                    "animation": {
+                      "desktop": {
+                        "value": {
+                          "style": "slide",
+                          "direction": "bottom",
+                          "duration": "600ms",
+                          "delay": "150ms"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "divi/text",
+                  "presets": [
+                    "text:lead-dark"
+                  ],
+                  "content": "<p>Herramientas y recursos diseñados para enriquecer tu viaje intelectual.</p>",
+                  "decoration": {
+                    "animation": {
+                      "desktop": {
+                        "value": {
+                          "style": "slide",
+                          "direction": "bottom",
+                          "duration": "600ms",
+                          "delay": "300ms"
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "presets": [
+        "section:cta-epic"
+      ],
+      "decoration": {
+        "gradient": {
+          "type": "linear",
+          "direction": "135deg",
+          "stops": [
+            {
+              "color": "{{design:color:sepia-500}}",
+              "position": "0"
+            },
+            {
+              "color": "{{design:color:text-primary}}",
+              "position": "100"
+            }
+          ]
+        },
+        "motion": {
+          "duration": "300ms",
+          "easing": "ease-out"
+        }
+      },
+      "rows": [
+        {
+          "column_structure": "4_4",
+          "columns": [
+            {
+              "type": "4_4",
+              "modules": [
+                {
+                  "type": "divi/text",
+                  "presets": [
+                    "text:eyebrow-dark"
+                  ],
+                  "content": "<p>ÚNETE A NOSOTROS</p>",
+                  "decoration": {
+                    "animation": {
+                      "desktop": {
+                        "value": {
+                          "style": "slide",
+                          "direction": "bottom",
+                          "duration": "600ms",
+                          "delay": "0ms"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "divi/heading",
+                  "presets": [
+                    "text:display-md-light"
+                  ],
+                  "content": "<h2>Descubre el Conocimiento sin Límites</h2>",
+                  "decoration": {
+                    "animation": {
+                      "desktop": {
+                        "value": {
+                          "style": "slide",
+                          "direction": "bottom",
+                          "duration": "600ms",
+                          "delay": "150ms"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "divi/text",
+                  "presets": [
+                    "text:lead"
+                  ],
+                  "content": "<p>Regístrate hoy y forma parte de una comunidad dedicada a la preservación y difusión del saber.</p>",
+                  "decoration": {
+                    "animation": {
+                      "desktop": {
+                        "value": {
+                          "style": "slide",
+                          "direction": "bottom",
+                          "duration": "600ms",
+                          "delay": "300ms"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "divi/button",
+                  "presets": [
+                    "module:btn-cta-dark",
+                    "transform:hover-lift"
+                  ],
+                  "button_text": "Registrarse",
+                  "button_url": "/registro",
+                  "decoration": {
+                    "animation": {
+                      "desktop": {
+                        "value": {
+                          "style": "slide",
+                          "direction": "bottom",
+                          "duration": "600ms",
+                          "delay": "450ms"
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

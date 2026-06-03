@@ -1,0 +1,14 @@
+{
+  "type": "enhancer",
+  "name": "daw-counters",
+  "title": "DAW Counters Enhancer",
+  "description": "CSS/JS enhancer for composed native Divi counter modules (page 206)",
+  "requires": ["daw-design-tokens"],
+  "styles": ["style.css"],
+  "scripts": [
+    {
+      "src": "frontend.js",
+      "strategy": "defer"
+    }
+  ]
+}

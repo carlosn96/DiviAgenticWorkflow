@@ -1,0 +1,10 @@
+<!-- wp:divi/section {"builderVersion":"5.5.0","module":{"advanced":{"type":{"desktop":{"value":"regular"}}},"decoration":{"background":{"desktop":{"value":[]}}}}} -->
+<!-- /wp:divi/section -->
+<!-- wp:divi/section {"builderVersion":"5.5.0","module":{"advanced":{"type":{"desktop":{"value":"regular"}}},"decoration":{"background":{"desktop":{"value":[]}}}}} -->
+<!-- wp:divi/row {"builderVersion":"5.5.0","module":{"advanced":{"columnStructure":{"desktop":{"value":"4_4"}}},"decoration":{"layout":{"desktop":{"value":{"flexWrap":"wrap"}}}}}} -->
+<!-- wp:divi/column {"builderVersion":"5.5.0","module":{}} -->
+<!-- wp:divi/heading {"builderVersion":"5.5.0","module":{"advanced":{"htmlAttributes":{"desktop":{"value":{"class":"text-center"}}}}},"content":{"innerContent":{"desktop":{"value":"<h2>Últimas Adiciones</h2>"}}}} -->
+<!-- /wp:divi/heading -->
+<!-- /wp:divi/column -->
+<!-- /wp:divi/row -->
+<!-- /wp:divi/section -->

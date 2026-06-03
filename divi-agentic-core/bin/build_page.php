@@ -91,6 +91,30 @@ function load_module_schema(string $module_type): array {
     $slug = str_replace('divi/', '', $module_type);
     $path = MODULES_DIR . "/{$slug}.json";
     if (!file_exists($path)) {
+        // Try custom module's own module.json in plugin modules/ folder
+        $custom_dirs = glob(dirname(__DIR__) . '/modules/*/module.json');
+        foreach ($custom_dirs as $meta_path) {
+            $meta = json_decode(file_get_contents($meta_path), true);
+            if (($meta['name'] ?? '') === $module_type) {
+                $attrs = [];
+                foreach (($meta['attributes'] ?? []) as $attr_name => $attr_def) {
+                    $default = $attr_def['default'] ?? '';
+                    if (isset($attr_def['settings']['innerContent'])) {
+                        $attrs[$attr_name] = [
+                            'innerContent' => [
+                                'desktop' => ['value' => $default],
+                            ],
+                        ];
+                    } elseif (isset($attr_def['settings']['advanced'])) {
+                        $attrs[$attr_name] = $default;
+                    } else {
+                        $attrs[$attr_name] = $default;
+                    }
+                }
+                $cache[$module_type] = ['block' => ['name' => $module_type, 'attrs' => $attrs]];
+                return $cache[$module_type];
+            }
+        }
         fwrite(STDERR, "[WARN] Module schema not found: {$path}\n");
         fwrite(STDERR, "[HINT] Run: php " . dirname(__DIR__) . "/bin/generate-module-schema.php --all\n");
         $cache[$module_type] = ['block' => ['name' => $module_type, 'attrs' => []]];
@@ -283,7 +307,9 @@ function build_module(array $def, array $design_system, bool $resolved, string $
 
     // Merge local page overrides ($def) on top of the preset-applied structure
     $result = deep_merge($result, $def);
-    $result['module'] = $module_type;
+    if ( ! isset( $result['_type'] ) ) {
+        $result['_type'] = $module_type;
+    }
     if ($children) {
         $result['children'] = $children;
     }
@@ -430,7 +456,7 @@ function validate_page(array $schema): bool {
             }
             foreach ($columns as $c_idx => $col) {
                 foreach ($col['modules'] ?? [] as $m_idx => $mod) {
-                    $type = $mod['module'] ?? '';
+                    $type = $mod['_type'] ?? (is_string($mod['module'] ?? null) ? $mod['module'] : '');
                     if (!str_starts_with($type, 'divi/')) {
                         fwrite(STDERR, "[ERROR] S{$s_idx} R{$r_idx} C{$c_idx} M{$m_idx}: invalid module type '{$type}'\n");
                         return false;
@@ -581,16 +607,6 @@ if ($do_deploy) {
         exit($exit_code);
     }
     echo "[OK] Page deployed successfully.\n";
-
-    // Sync brand CSS + design tokens to WordPress Custom CSS (DB)
-    $sync_cmd = '"' . WP_BAT . '" agentic sync-css';
-    echo "[SYNC-CSS] Running: {$sync_cmd}\n";
-    passthru($sync_cmd . ' 2>NUL', $sync_code);
-    if ($sync_code !== 0) {
-        fwrite(STDERR, "[WARN] Brand CSS sync failed (non-fatal). Run: wp agentic sync-css\n");
-    } else {
-        echo "[OK] Brand CSS synced to database.\n";
-    }
 
     // Post-deploy verification
     $do_verify = isset($opts['verify']) || isset($opts['url']);

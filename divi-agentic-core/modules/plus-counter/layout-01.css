@@ -1,0 +1,22 @@
+/* Layout 01 — Icon → Number → Title (Dark background) */
+{{selector}}.layout-01 {
+  padding: 48px 32px;
+}
+{{selector}}.layout-01 .et_pb_module:first-child .et-pb-icon {
+  font-size: 44px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+{{selector}}.layout-01 .et_pb_number_counter .percent {
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+{{selector}}.layout-01 .et_pb_number_counter .title {
+  font-size: 13px;
+  margin-top: 8px;
+}
+{{selector}}.layout-01:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}

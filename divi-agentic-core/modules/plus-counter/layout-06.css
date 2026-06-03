@@ -1,0 +1,47 @@
+/* Layout 06 — Number above Icon (Dark card, glass border) */
+{{selector}}.layout-06 {
+  padding: 48px 32px;
+  position: relative;
+  border: 1px solid rgba(245,245,247,0.1);
+  border-radius: var(--daw-radius-lg, 14px);
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+{{selector}}.layout-06::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(212,149,106,0.3), transparent 50%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+{{selector}}.layout-06 .et_pb_number_counter .percent {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--daw-accent, #D4956A);
+  margin-bottom: 12px;
+}
+{{selector}}.layout-06 .et-pb-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+  display: inline-block;
+  color: var(--daw-accent, #D4956A);
+}
+{{selector}}.layout-06 .et_pb_number_counter .title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--daw-text-on-dark, #F5F5F7);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+{{selector}}.layout-06:hover {
+  background: rgba(255,255,255,0.06);
+  transform: translateY(-4px);
+  border-color: rgba(212,149,106,0.25);
+}

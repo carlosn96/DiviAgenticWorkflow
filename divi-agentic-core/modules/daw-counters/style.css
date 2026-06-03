@@ -1,0 +1,59 @@
+.daw-counter-item {
+  text-align: center;
+}
+.daw-counter-item .daw-counter-icon {
+  margin-bottom: 16px;
+  line-height: 1;
+}
+.daw-counter-item .daw-counter-number {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.daw-counter-item .daw-counter-label {
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.daw-counter-item .daw-counter-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.daw-counter-item .daw-counter-desc {
+  font-size: 13px;
+  opacity: 0.8;
+}
+.daw-counter-item .daw-counter-number .percent {
+  font-size: inherit;
+}
+
+.daw-counter-layout-01 .daw-counter-icon { margin-bottom: 20px; }
+.daw-counter-layout-01 .daw-counter-number { margin-bottom: 8px; }
+
+.daw-counter-layout-02 .daw-counter-number { margin-bottom: 12px; }
+.daw-counter-layout-02 .daw-counter-icon { margin-bottom: 12px; }
+
+.daw-counter-layout-03 .daw-counter-icon { margin-bottom: 20px; }
+.daw-counter-layout-03 .daw-counter-number { margin-bottom: 8px; }
+
+.daw-counter-layout-04 .daw-counter-icon { margin-bottom: 24px; }
+.daw-counter-layout-04 .daw-counter-number { margin-bottom: 8px; }
+
+.daw-counter-layout-05 .daw-counter-number { margin-bottom: 12px; }
+.daw-counter-layout-05 .daw-counter-icon { margin-bottom: 12px; }
+
+.daw-counter-layout-06 .daw-counter-number { margin-bottom: 12px; }
+.daw-counter-layout-06 .daw-counter-icon { margin-bottom: 12px; }
+
+@media (max-width: 767px) {
+  .daw-counter-item {
+    margin-bottom: 40px;
+  }
+  .daw-counter-item:last-child {
+    margin-bottom: 0;
+  }
+}
