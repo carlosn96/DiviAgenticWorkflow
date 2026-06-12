@@ -338,7 +338,14 @@ function build_row(array $def, array $design_system, bool $resolved, string $sit
             $col_type = $col_def['type'];
             $col_modules = [];
             foreach ($col_def['modules'] ?? [] as $mod_def) {
-                $col_modules[] = build_module($mod_def, $design_system, $resolved, $site_url);
+                if (isset($mod_def['column_structure']) && !isset($mod_def['type'])) {
+                    $nested = build_row($mod_def, $design_system, $resolved, $site_url);
+                    $nested['_type'] = 'divi/row-inner';
+                    unset($nested['type']);
+                    $col_modules[] = $nested;
+                } else {
+                    $col_modules[] = build_module($mod_def, $design_system, $resolved, $site_url);
+                }
             }
             $columns[] = [
                 'type' => $col_type,

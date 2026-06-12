@@ -950,7 +950,32 @@ class Layout_Engine {
             // --- GROUP 26: Countdown Timer ---
             elseif ( $slug === 'divi/countdown-timer' ) {
                 if ( isset( $data['title'] ) ) {
-                    $attrs['title']['innerContent'] = [ 'desktop' => ['value' => $data['title']] ];
+                    if ( is_array( $data['title'] ) ) {
+                        $attrs['title']['innerContent'] = [ 'desktop' => ['value' => $data['title']['innerContent']['desktop']['value'] ?? ''] ];
+                        if ( isset( $data['title']['decoration'] ) ) {
+                            $attrs['title']['decoration'] = $data['title']['decoration'];
+                        }
+                    } else {
+                        $attrs['title']['innerContent'] = [ 'desktop' => ['value' => $data['title']] ];
+                    }
+                }
+                if ( isset( $data['content'] ) && is_array( $data['content'] ) ) {
+                    $attrs['content']['innerContent'] = [ 'desktop' => ['value' => $data['content']['innerContent']['desktop']['value'] ?? ''] ];
+                    if ( isset( $data['content']['advanced'] ) ) {
+                        $attrs['content']['advanced'] = $data['content']['advanced'];
+                    }
+                    if ( isset( $data['content']['decoration'] ) ) {
+                        $attrs['content']['decoration'] = $data['content']['decoration'];
+                    }
+                }
+                foreach ( ['number', 'label', 'separator'] as $attr ) {
+                    if ( isset( $data[$attr] ) && is_array( $data[$attr] ) ) {
+                        foreach ( $data[$attr] as $k => $v ) {
+                            if ( $k !== 'innerContent' && ! isset( $attrs[$attr][$k] ) ) {
+                                $attrs[$attr][$k] = $v;
+                            }
+                        }
+                    }
                 }
             }
 
