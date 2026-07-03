@@ -21,9 +21,9 @@ Brand vars (_design_vars.json)
     → brand/assets/css/brand.css (por marca, único por DAW_SITE)
   → wp agentic global_colors sync
   → page-defs/<slug>.json (manifiesto) + sections/*.json
-  → combine.py → <slug>-combined.json
-  → build_page.php --deploy
-    → Layout Engine → post_content en WP
+  → python workspace/combine.py → <slug>-combined.json
+  → wp agentic deploy_page
+    → Layout Engine (refactorizado, renderers modulares) → post_content en WP
   → Runtime: brand.css se encola desde disco via plugin
 ```
 
@@ -129,8 +129,8 @@ Secciones con alternancia de fondo: [✓ ley 1]
 }
 ```
 2. Crear cada sección en `site/<DAW_SITE>/page-defs/sections/<slug>.json`
-3. Combinar: `python site/<DAW_SITE>/page-defs/combine.py <manifest> --out <combined>.json`
-4. El JSON combinado se pasa a `build_page.php --def=<combined>.json`
+3. Combinar: `python DAW_bundle/workspace/combine.py <manifest> --out <combined>.json`
+4. El JSON combinado se pasa a `wp agentic deploy_page`
 
 **Verificación antes de entregar a Fase 4:**
 - [ ] Ningún tipo `et_pb_*` en el JSON
@@ -151,17 +151,20 @@ Secciones con alternancia de fondo: [✓ ley 1]
 **Flujo actual:**
 ```powershell
 # 1. Combinar manifiesto + secciones
-python DAW_bundle/site/<DAW_SITE>/page-defs/combine.py `
+python DAW_bundle/workspace/combine.py `
   DAW_bundle/site/<DAW_SITE>/page-defs/<slug>.json `
   --out DAW_bundle/site/<DAW_SITE>/page-defs/<slug>-combined.json
 
-# 2. Build + Deploy
-.\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php `
-  --def="<slug>-combined.json" --deploy
+# 2. Deploy directo (Layout Engine refactorizado con renderers modulares)
+.\wp.bat agentic deploy_page `
+  --title="Título de la página" `
+  --slug="<slug>" `
+  --schema="DAW_bundle/site/<DAW_SITE>/page-defs/<slug>-combined.json" `
+  --design-system="DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json"
 ```
 
 > [!IMPORTANT]
-> `build_page.php` ya NO ejecuta `sync_css`. El CSS se sirve desde disco automáticamente.
+> `build_page.php` es **legacy**. El Layout Engine fue refactorizado a renderers modulares (`inc/core/renderers/*.php`) que soportan namespaces de terceros (`dgpc/*`, `dac/*`).
 
 **Artefacto obligatorio:**
 ```

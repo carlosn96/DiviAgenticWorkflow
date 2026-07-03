@@ -134,13 +134,15 @@ Las secciones se referencian como paths relativos al directorio `page-defs/`.
 
 ```powershell
 # Combinar manifiesto + secciones en un solo JSON
-python DAW_bundle/site/<DAW_SITE>/page-defs/combine.py `
+python DAW_bundle/workspace/combine.py `
   DAW_bundle/site/<DAW_SITE>/page-defs/<slug>.json `
   --out DAW_bundle/site/<DAW_SITE>/page-defs/<slug>-combined.json
 
-# Build + Deploy (--def es relativo a page-defs/)
-.\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php `
-  --def="<slug>-combined.json" --deploy
+# Deploy directo (Layout Engine refactorizado)
+.\wp.bat agentic deploy_page `
+  --title="Título" --slug="<slug>" `
+  --schema="DAW_bundle/site/<DAW_SITE>/page-defs/<slug>-combined.json" `
+  --design-system="DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json"
 ```
 
 ---

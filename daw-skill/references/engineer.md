@@ -26,43 +26,40 @@ Esto genera:
 El page-def se divide en manifiesto (`<slug>.json`) y secciones (`sections/*.json`):
 
 ```powershell
-python DAW_bundle/site/<DAW_SITE>/page-defs/combine.py `
+python DAW_bundle/workspace/combine.py `
   DAW_bundle/site/<DAW_SITE>/page-defs/<slug>.json `
   --out DAW_bundle/site/<DAW_SITE>/page-defs/<slug>-combined.json
 ```
 
-### Paso 2: Build + Deploy
+### Paso 2: Deploy directo (con Layout Engine refactorizado)
 
 ```powershell
-.\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php `
-  --def="<slug>-combined.json" --deploy
+.\wp.bat agentic deploy_page `
+  --title="Título de la página" `
+  --slug="<slug>" `
+  --schema="DAW_bundle/site/<DAW_SITE>/page-defs/<slug>-combined.json" `
+  --design-system="DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json"
 ```
 
-> El path de `--def` es relativo a `site/<DAW_SITE>/page-defs/`. El flag `--deploy` ejecuta el deploy automáticamente.
-
-`build_page.php` hace todo:
-- Carga la definición de página
-- Carga el design system desde `site/<DAW_SITE>/design-system/divitheme.json`
+`deploy_page` hace todo:
+- Carga design system desde `site/<DAW_SITE>/design-system/divitheme.json`
 - Resuelve `{{design:color:*}}` → `var(--gcid-*)`
-- Expande presets inline
-- Normaliza gradient stops
-- Valida estructura (sections → rows → columns → modules)
-- Ejecuta `wp agentic deploy_page`
+- Resuelve `{{design:font|radius|space:name}}` → literales
+- Compila a Divi 5 blocks via Layout Engine refactorizado
+  → Dispatcher delgado enruta a renderers modulares (`inc/core/renderers/*.php`)
+  → Namespaces de terceros (`dgpc/*`, `dac/*`) tienen renderer propio
+  → Convierte `var(--gcid-*)` → `$variable()` en post_content
 
 > [!NOTE]
-> `build_page.php` ya **no ejecuta `sync_css`** post-deploy. El CSS de marca se sirve desde disco vía el enqueue del plugin en runtime. No necesitas sincronizar nada después del deploy.
+> `build_page.php` es **legacy** y ya no se usa para deploy. No tiene schemas para módulos de terceros (`dgpc`, etc). Si el combined.json contiene tokens `{{design:*}}`, `deploy_page` los resuelve igual.
 
 ### Opciones adicionales
 
 ```powershell
 # Portada
-.\php.bat build_page.php --def="<slug>-combined.json" --deploy --front
+.\wp.bat agentic deploy_page --title="..." --slug="<slug>" --schema="..." --design-system="..." --front
 
-# Solo build (debug)
-.\php.bat build_page.php --def="<slug>-combined.json" --out=debug.json
-
-# Verificación post-deploy
-.\php.bat build_page.php --def="<slug>-combined.json" --deploy --verify
+# Si el schema tiene tokens {{design:color:*}} sin resolver, deploy_page los maneja automáticamente
 ```
 
 ---
@@ -143,5 +140,5 @@ Código relevante: `divi-agentic-core/inc/core/class-layout-engine.php:845-875`.
 | `StyleDeclarations::add('border-width', Array)` | `border.all.width` es objeto per-side en vez de string | Usar `"width": "1px"` en vez de `{top,right,bottom,left}` en page-def |
 | `UnexpectedValueException` en `MultiViewUtils` | Atributo de contenido es array en vez de string | Revisar que `innerContent.desktop.value` sea string |
 | Color no se ve en VB (sí en frontend) | Bloque usa `var(--gcid-*)` en lugar de `$variable()` | Redeployar con Layout Engine actualizado |
-| Error: WP-CLI deployment failed | Falla en `build_page.php --deploy` | Ejecutar sin `--deploy` para ver errores de build |
+| Error: WP-CLI deployment failed | Falla en `wp agentic deploy_page` | Verificar que el schema JSON sea válido y que combine.py se haya ejecutado |
 | Página no renderiza estilos | Caché de Divi | `.\wp.bat eval "et_core_clear_wp_cache();"` |
