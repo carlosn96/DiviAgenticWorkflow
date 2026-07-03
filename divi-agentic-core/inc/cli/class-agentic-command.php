@@ -2,7 +2,7 @@
 namespace DAC\CLI;
 
 /**
- * Agentic Command v3.0 — Deploys pages and global layouts with Divi 5.5.0.
+ * Agentic Command v3.1 — Deploys pages and global layouts with Divi 5.7.4.
  *
  * Validates schema blocks, resolves design tokens via Design_Resolver,
  * then compiles to Divi 5 blocks via Layout_Engine.
@@ -444,7 +444,7 @@ class Agentic_Command {
         update_post_meta( $post_id, '_et_pb_use_divi_5', 'on' );
         update_post_meta( $post_id, '_et_pb_show_page_creation', 'off' );
         update_post_meta( $post_id, '_et_pb_built_with_d5', '1' );
-        update_post_meta( $post_id, '_et_builder_version', '5.5.0' );
+        update_post_meta( $post_id, '_et_builder_version', '5.7.4' );
     }
 
     /**
@@ -632,8 +632,8 @@ class Agentic_Command {
                                 foreach ( $column['modules'] as $mod_idx => $module ) {
                                     $block = $module['_type'] ?? (is_string($module['module'] ?? null) ? $module['module'] : '');
                                     if ( $block && ! in_array( $block, $this->allowed_blocks, true ) ) {
-                                        // Allow any divi/* or dac/* prefixed block (custom modules)
-                                        if ( str_starts_with( $block, 'divi/' ) || str_starts_with( $block, 'dac/' ) ) {
+                                        // Allow any divi/*, dac/* or dgpc/* prefixed block (custom/third-party modules)
+                                        if ( str_starts_with( $block, 'divi/' ) || str_starts_with( $block, 'dac/' ) || str_starts_with( $block, 'dgpc/' ) ) {
                                             $this->allowed_blocks[] = $block;
                                         } else {
                                             $errors[] = "Block '{$block}' is not allowed at section {$sec_idx}, row {$row_idx}, column {$col_idx}, module {$mod_idx}";

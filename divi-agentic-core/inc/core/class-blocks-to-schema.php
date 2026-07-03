@@ -152,9 +152,21 @@ class BlocksToSchema {
     
     private function convert_module(array $block): ?array {
         $name = $block['blockName'];
-        if (!$name || strpos($name, 'divi/') !== 0) return null;
-        
-        $attrs = $block['attrs'];
+        if (!$name) return null;
+
+        // Native Divi 5 and known custom namespaces are preserved.
+        // Unknown third-party blocks are skipped.
+        $allowed_prefixes = ['divi/', 'dac/', 'dgpc/'];
+        $known = false;
+        foreach ($allowed_prefixes as $prefix) {
+            if (strpos($name, $prefix) === 0) {
+                $known = true;
+                break;
+            }
+        }
+        if (!$known) return null;
+
+        $attrs = $block['attrs'] ?? [];
         $module = ['type' => $name];
         
         // Extraer decoraciones comunes

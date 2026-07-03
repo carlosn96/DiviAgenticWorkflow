@@ -464,7 +464,7 @@ function validate_page(array $schema): bool {
             foreach ($columns as $c_idx => $col) {
                 foreach ($col['modules'] ?? [] as $m_idx => $mod) {
                     $type = $mod['_type'] ?? (is_string($mod['module'] ?? null) ? $mod['module'] : '');
-                    if (!str_starts_with($type, 'divi/')) {
+                    if (!str_starts_with($type, 'divi/') && !str_starts_with($type, 'dgpc/')) {
                         fwrite(STDERR, "[ERROR] S{$s_idx} R{$r_idx} C{$c_idx} M{$m_idx}: invalid module type '{$type}'\n");
                         return false;
                     }
