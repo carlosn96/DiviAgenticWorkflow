@@ -177,11 +177,11 @@ if ( function_exists( 'add_action' ) ) {
 			}
 		}
 
-		// Fallback: ensure at least one font is loaded
-		if ( empty( $deps ) ) {
-			wp_enqueue_style( 'daw-font-inter', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap', [], null );
-			$deps[] = 'daw-font-inter';
-		}
+		// Dequeue Divi's duplicate Google Fonts (our @import handles fonts via Additional CSS)
+		add_action( 'wp_enqueue_scripts', function () {
+			wp_dequeue_style( 'et-builder-googlefonts-cached' );
+			wp_dequeue_style( 'et-builder-googlefonts-cached-variable' );
+		}, 20 );
 
 		$vars = daw_generate_css_vars();
 		if ( $vars ) {

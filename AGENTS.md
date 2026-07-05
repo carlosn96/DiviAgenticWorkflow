@@ -181,22 +181,153 @@ Los paths de `sections/` son **relativos al directorio del manifiesto**.
 
 ### 4.3. Crear cada sección
 
-Cada archivo en `sections/` contiene UNA sección de Divi 5:
+Cada archivo en `sections/` contiene UNA sección de Divi 5. Sigue esta estructura:
 
 ```json
 {
   "module_class": "daw-hero",
-  "decoration": { ... },
-  "advanced": { "css": { "className": "daw-hero" } },
-  "css": ".daw-hero{min-height:100vh}...",
+  "decoration": {
+    "background": { "video": { "mp4": "..." } },
+    "spacing": {
+      "desktop": { "value": { "padding": { "top": "96px", ... } } },
+      "tablet": { "value": { "padding": { ... } } },
+      "phone": { "value": { "padding": { ... } } }
+    },
+    "sizing": {
+      "desktop": { "value": { "innerWidth": "900px", "minHeight": "100vh" } }
+    },
+    "animation": { "style": "fade", "duration": "800ms", "easing": "easeOutExpo" }
+  },
+  "advanced": {
+    "css": { "className": "daw-hero" },
+    "htmlAttributes": {
+      "desktop": { "value": { "class": "daw-hero", "id": "mi-seccion" } }
+    }
+  },
+  "css": "",    ← LO LLENA combine.py DESDE sections/css/<module>.css
   "rows": [
-    { "column_structure": "1_1", "columns": [...] }
-  ]
+    {
+      "column_structure": "1_1",
+      "decoration": {
+        "sizing": { "gutter": "0%" },
+        "spacing": { "padding": { "top": "0px", ... }, "margin": { "top": "0px", ... } },
+        "layout": { "flexWrap": "wrap" }
+      },
+      "columns": [
+        {
+          "type": "1_1",
+          "decoration": {
+            "sizing": {
+              "desktop": { "value": { "flexType": "24_24" } },
+              "tablet": { "value": { "flexType": "24_24" } },
+              "phone": { "value": { "flexType": "24_24" } }
+            }
+          },
+          "advanced": {
+            "type": {
+              "desktop": { "value": "1_1" },
+              "tablet": { "value": "1_1" },
+              "phone": { "value": "vertical" }
+            }
+          },
+          "modules": [
+            {
+              "type": "divi/text",
+              "decoration": { "animation": { ... }, "spacing": { ... } },
+              "advanced": {
+                "text": { "text": { "desktop": { "value": { "color": "light", "textAlign": "center" } } } },
+                "alignment": { "desktop": { "value": "center" } },
+                "css": { "className": "daw-hero-title" },
+                "htmlAttributes": { "desktop": { "value": { "class": "daw-hero-title" } } }
+              },
+              "module_class": "daw-hero-title",
+              "content": "<h1>Título</h1>",
+              "bodyFont": {
+                "p": {
+                  "font": {
+                    "desktop": { "value": { "fontFamily": "var(--font-ui)", "size": "16px" } }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "_section": true
 }
 ```
 
-- `"css"` (string) → CSS libre de la sección, se inyecta como `freeForm` en Divi 5
-- `"rows"` → array de rows con sus columns y modules
+**Reglas para crear secciones Divi 5 nativas:**
+
+1. Clase CSS: `advanced.css.className` + `advanced.htmlAttributes.desktop.value.class` + `module_class` — los 3 iguales.
+2. ID de sección: `advanced.htmlAttributes.desktop.value.id` + `module_id` — ambos iguales.
+3. Animaciones: Usar `decoration.animation` (fade, slide) con `style`, `duration`, `delay`, `easing`. NO CSS keyframes manuales.
+4. Responsive: `decoration.spacing`, `decoration.sizing` con 3 breakpoints (desktop, tablet, phone). Divi 5 requiere `{ "desktop": { "value": { ... } } }`.
+5. Columnas: `column_structure` en row (ej. `"1_2,1_2"`) + `type` + `flexType` en column. Phone usa `"vertical"`.
+6. Contenido: `content` string con HTML plano. NO markdown.
+7. Tipografía: `bodyFont.p.font.desktop.value` con `fontFamily`, `size`, `weight`, `color`, etc. NO CSS manual.
+8. **CSS freeForm** (campo `"css"`): Solo para lo que no tiene atributo nativo. Y **sin `<` en ninguna parte** (ver §4.6).
+9. Botones: `type: "divi/button"` con `decoration.button.desktop.value.backgroundColor`, `textColor`, etc. + `button_text`, `button_url`.
+10. El CSS de sección se almacena en `sections/css/<module>.css` y lo inyecta `combine.py`. El campo `"css"` en el JSON se deja vacío (`""`).
+
+### 4.6. ⚠️ Pipeline del freeForm CSS — peligro de `<`
+
+Divi 5 procesa el CSS de sección (freeForm) así:
+
+```
+section["css"] (en JSON)
+  → Layout Engine → attrs.css.desktop.value.freeForm (en post_content)
+  → CssStyleUtils::get_statements() (CssStyleUtils.php:381):
+    wp_strip_all_tags($modified_css_declaration)
+  → Renderizado en <style id="et-builder-module-design-...-cached-inline-styles">
+```
+
+**Problema**: `wp_strip_all_tags()` aplica PHP `strip_tags` al CSS. CUALQUIER `<` en el CSS (incluso en comentarios) activa la limpieza. Si no hay un `>` de cierre, `strip_tags` elimina todo el resto del string.
+
+**Ejemplo real**: `/* Mobile (<1024px) */`
+- `strip_tags` ve `<1024px)` como etiqueta HTML y trunca desde ese punto
+- 14,438 chars → 3,329 chars (pérdida de 11K chars de estilos)
+- Selectores después del `<` en el archivo desaparecen del frontend
+
+**Regla**: NINGÚN `<` en el CSS de sección. Ni siquiera en comentarios.
+
+**Dónde almacenar CSS de sección**:
+```
+sections/css/
+├── hero.css       ← combine.py lo lee y lo inyecta en section["css"]
+└── ...
+```
+
+**❌ NO inline `<style>` en module content**: Inyectar CSS como `<style>` tag dentro del `content` de un módulo se pierde si el usuario edita via Visual Builder y guarda. Usar exclusivamente `section["css"]` (freeForm nativo). Excepción: módulos `divi/code` específicos para CSS global que no se editan por VB.
+
+### Sanitización de `@import` — el segundo trap
+
+Además de `wp_strip_all_tags` en rendering, Divi tiene **otra sanitización en el guardado VB**: `sanitize_css()` en `SavingUtility.php:1423-1482` **siempre elimina `@import`** (línea 1444-1448). Esto aplica a `_et_pb_custom_css` (page-level CSS), no a freeForm de bloques.
+
+**Solución estándar**: separar `@import` del CSS de página:
+- `@import` → **WordPress Additional CSS** (`wp_update_custom_css_post()`)
+  - Divi no sanitiza esto (es core de WordPress)
+  - Usar delimitadores (`/* === DAW External Imports === */`) para evitar duplicación
+- CSS puro → `_et_pb_custom_css` (post meta)
+  - Sin `@import` → `sanitize_css()` no toca nada → sobrevive VB save
+
+**Ejemplo de `_sync_css.php`:**
+```php
+// Extraer @import con regex correcta (⚠️ no usar /@import[^;]+;/ — se rompe con ; dentro de url())
+preg_match_all('/@import\s+url\([^)]+\)\s*;/', $css, $matches);
+$imports = implode("\n", $matches[0]);
+$page_css = preg_replace('/@import\s+url\([^)]+\)\s*;\s*/', '', $css);
+
+// @import → WordPress Additional CSS
+$existing = wp_get_custom_css();
+$existing = preg_replace('/DAW External Imports.*?\/DAW External Imports/s', '', $existing);
+wp_update_custom_css_post($imports_block . $existing);
+
+// Resto → _et_pb_custom_css
+update_post_meta($page_id, '_et_pb_custom_css', wp_slash($page_css));
+```
 
 ### 4.4. Combinar
 
@@ -206,7 +337,7 @@ python DAW_bundle/workspace/combine.py `
   --out DAW_bundle/site/<DAW_SITE>/page-defs/<slug>-combined.json
 ```
 
-Esto resuelve los paths relativos del manifiesto, junta todas las secciones en un solo JSON, y lo escribe en `<slug>-combined.json`.
+Esto resuelve los paths relativos del manifiesto, junta todas las secciones en un solo JSON, y lo escribe en `<slug>-combined.json`. Si existe `sections/css/<section-name>.css`, `combine.py` lo inyecta automáticamente en el campo `"css"` de la sección (freeForm nativo Divi 5).
 
 ### 4.5. Desplegar
 
@@ -331,6 +462,7 @@ Si no hay gcids sincronizados, `deploy_page` emite warning y resuelve a hex.
 13. Cada directorio en `site/` tiene su propio `brand/assets/css/brand.css`. `DAW_SITE` en `.env` define cuál usar.
 14. **Sin fallbacks silenciosos:** Si `DAW_SITE` no está definido, el pipeline falla inmediatamente.
 15. **CSS de sección autocontenido:** Cada sección lleva su propio CSS inline (freeForm en el atributo `css` del JSON de sección). CSS global de página va en el Custom CSS de la página vía WordPress.
+16. **⚠️ Sin `<` en freeForm CSS:** `wp_strip_all_tags()` en `CssStyleUtils.php:381` trunca el CSS al encontrar `<`. Nunca usar `<` en el CSS de sección, ni en comentarios. Almacenar CSS en `sections/css/<module>.css` (lo inyecta `combine.py`). No usar inline `<style>` en module content (se pierde al editar por VB).
 
 ---
 
