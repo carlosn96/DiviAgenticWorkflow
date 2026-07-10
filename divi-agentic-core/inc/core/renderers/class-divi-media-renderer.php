@@ -25,13 +25,51 @@ class Divi_Media_Renderer extends Divi_Base_Renderer {
 		switch ( $slug ) {
 			case 'divi/image':
 			case 'divi/fullwidth-image':
-				if ( isset( $data['src'] ) ) {
-					$attrs['image']['innerContent'] = [
-						'desktop' => [ 'value' => [
-							'src' => $data['src'],
-							'alt' => $data['alt'] ?? '',
-						] ],
+				// Support flat src or nested image.innerContent.desktop.value.src
+				if ( isset( $data['image']['innerContent']['desktop']['value']['src'] ) ) {
+					$img_data = $data['image']['innerContent']['desktop']['value'];
+				} elseif ( isset( $data['src'] ) ) {
+					$img_data = $data;
+				}
+				if ( isset( $img_data ) ) {
+					$img = [
+						'src' => $img_data['src'],
+						'alt' => $img_data['alt'] ?? '',
 					];
+					foreach ( [ 'id', 'titleText', 'width', 'height', 'linkUrl' ] as $k ) {
+						if ( isset( $img_data[ $k ] ) ) {
+							$img[ $k ] = $img_data[ $k ];
+						}
+					}
+					$attrs['image']['innerContent'] = [
+						'desktop' => [ 'value' => $img ],
+					];
+				}
+
+				foreach ( [ 'lightbox', 'overlay', 'overlayIcon' ] as $img_attr ) {
+					if ( isset( $data[ $img_attr ] ) ) {
+						$attrs['image']['advanced'][ $img_attr ] = [
+							'desktop' => [ 'value' => $data[ $img_attr ] ],
+						];
+					}
+				}
+
+				if ( isset( $data['image']['decoration'] ) ) {
+					$img_dec = $data['image']['decoration'];
+					$dec_modes = [ 'desktop', 'tablet', 'phone', 'hover', 'sticky' ];
+					foreach ( [ 'border', 'boxShadow' ] as $dk ) {
+						if ( ! isset( $img_dec[ $dk ] ) ) { continue; }
+						$cur = $img_dec[ $dk ];
+						if ( ! is_array( $cur ) ) {
+							$img_dec[ $dk ] = [ 'desktop' => [ 'value' => $cur ] ];
+							continue;
+						}
+						$has_mode = ! empty( array_intersect( $dec_modes, array_keys( $cur ) ) );
+						if ( ! $has_mode ) {
+							$img_dec[ $dk ] = [ 'desktop' => [ 'value' => $cur ] ];
+						}
+					}
+					$attrs['image']['decoration'] = $img_dec;
 				}
 				break;
 
