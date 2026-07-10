@@ -96,6 +96,12 @@ class Divi_Form_Renderer extends Divi_Base_Renderer {
 							'desktop' => [ 'value' => $form_title ],
 						];
 					}
+
+					// Preserve title.decoration.font from input data if provided.
+					$title_decoration = $this->get_nested( $data, 'title', 'decoration' );
+					if ( is_array( $title_decoration ) ) {
+						$attrs['title']['decoration'] = $title_decoration;
+					}
 				}
 
 				// Resolve success message.

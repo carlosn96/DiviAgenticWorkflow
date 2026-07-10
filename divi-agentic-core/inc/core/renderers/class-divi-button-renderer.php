@@ -27,7 +27,7 @@ class Divi_Button_Renderer extends Divi_Base_Renderer {
 				'desktop' => [ 'value' => [
 					'text'       => $data['button_text'],
 					'linkUrl'    => $data['button_url'] ?? '#',
-					'linkTarget' => 'off',
+					'linkTarget' => $data['linkTarget'] ?? 'off',
 					'rel'        => [],
 				] ],
 			];
@@ -45,7 +45,7 @@ class Divi_Button_Renderer extends Divi_Base_Renderer {
 
 			$target_dec = &$attrs['button']['decoration'];
 
-			foreach ( [ 'desktop', 'tablet', 'phone', 'hover' ] as $state_key ) {
+			foreach ( [ 'desktop', 'tablet', 'phone', 'hover', 'sticky' ] as $state_key ) {
 				if ( ! isset( $btn_styles[ $state_key ]['value'] ) ) {
 					continue;
 				}
@@ -60,6 +60,9 @@ class Divi_Button_Renderer extends Divi_Base_Renderer {
 				} elseif ( $state_key === 'hover' ) {
 					$breakpoint = 'desktop';
 					$state      = 'hover';
+				} elseif ( $state_key === 'sticky' ) {
+					$breakpoint = 'desktop';
+					$state      = 'sticky';
 				}
 
 				$val = $vals;
@@ -83,6 +86,18 @@ class Divi_Button_Renderer extends Divi_Base_Renderer {
 					$hover_color = $val['hoverColor'] ?? $val['hoverTextColor'] ?? null;
 					if ( $hover_color !== null ) {
 						$target_dec['font']['font']['desktop']['hover']['color'] = $hover_color;
+					}
+					if ( isset( $val['hoverBorderColor'] ) ) {
+						if ( ! isset( $target_dec['border']['desktop']['hover']['styles']['all'] ) ) {
+							$target_dec['border']['desktop']['hover']['styles']['all'] = [];
+						}
+						$target_dec['border']['desktop']['hover']['styles']['all']['color'] = $val['hoverBorderColor'];
+					}
+					if ( isset( $val['hoverBorderWidth'] ) ) {
+						if ( ! isset( $target_dec['border']['desktop']['hover']['styles']['all'] ) ) {
+							$target_dec['border']['desktop']['hover']['styles']['all'] = [];
+						}
+						$target_dec['border']['desktop']['hover']['styles']['all']['width'] = $val['hoverBorderWidth'];
 					}
 				}
 

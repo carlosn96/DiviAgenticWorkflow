@@ -22,7 +22,7 @@ class Divi_ContentModule_Renderer extends Divi_Base_Renderer {
 	 * @inheritDoc
 	 */
 	public function render( string $slug, array $data, string $content_key, string $children_html ): array {
-		$attrs = $this->prepare_base_attrs( $data, $data['builderVersion'] ?? '5.7.4' );
+		$attrs = $this->prepare_base_attrs( $data, $data['builderVersion'] ?? '5.8.1' );
 
 		switch ( $slug ) {
 			case 'divi/blurb':
@@ -109,16 +109,32 @@ class Divi_ContentModule_Renderer extends Divi_Base_Renderer {
 	private function render_blurb( array $data, array &$attrs ): void {
 		$this->set_text_attrs( $data, $attrs, [ 'title', 'content' ] );
 
+		// Divi 5 blurb expects title.innerContent.desktop.value as {text: "..."}
+		if ( isset( $attrs['title']['innerContent']['desktop']['value'] ) && is_string( $attrs['title']['innerContent']['desktop']['value'] ) ) {
+			$raw = $attrs['title']['innerContent']['desktop']['value'];
+			$attrs['title']['innerContent']['desktop']['value'] = [ 'text' => $raw ];
+		}
+
 		if ( isset( $data['imageIcon'] ) ) {
 			$attrs['imageIcon'] = $data['imageIcon'];
 		} elseif ( isset( $data['icon'] ) ) {
+			$icon_data = $data['icon'];
+			if ( is_array( $icon_data ) ) {
+				$icon_unicode = $icon_data['unicode'] ?? '';
+				$icon_type    = $icon_data['type'] ?? 'divi';
+				$icon_weight  = $icon_data['weight'] ?? '400';
+			} else {
+				$icon_unicode = $icon_data;
+				$icon_type    = 'divi';
+				$icon_weight  = '400';
+			}
 			$attrs['imageIcon']['innerContent'] = [
 				'desktop' => [ 'value' => [
 					'useIcon'   => 'on',
 					'icon'      => [
-						'unicode' => $data['icon'],
-						'type'    => 'divi',
-						'weight'  => '400',
+						'unicode' => $icon_unicode,
+						'type'    => $icon_type,
+						'weight'  => $icon_weight,
 					],
 					'src'       => '',
 					'animation' => 'off',
@@ -276,11 +292,41 @@ class Divi_ContentModule_Renderer extends Divi_Base_Renderer {
 	 */
 	private function render_testimonial( array $data, array &$attrs ): void {
 		$this->set_text_attrs( $data, $attrs, [ 'content' ] );
-		if ( isset( $data['author'] ) ) {
-			$attrs['author'] = $data['author'];
+		// Preserve decoration/advanced on content and author
+		foreach ( [ 'content', 'author' ] as $key ) {
+			if ( isset( $data[ $key ] ) && is_array( $data[ $key ] ) ) {
+				foreach ( [ 'decoration', 'advanced' ] as $sub ) {
+					if ( isset( $data[ $key ][ $sub ] ) ) {
+						$attrs[ $key ][ $sub ] = $data[ $key ][ $sub ];
+					}
+				}
+			}
 		}
-		if ( isset( $data['src'] ) ) {
-			$attrs['image']['innerContent'] = [ 'desktop' => [ 'value' => [ 'src' => $data['src'], 'alt' => $data['alt'] ?? '' ] ] ];
+		// Author: support plain string or structured with innerContent
+		if ( isset( $data['author'] ) ) {
+			if ( is_string( $data['author'] ) ) {
+				$attrs['author']['innerContent'] = [ 'desktop' => [ 'value' => $data['author'] ] ];
+			} elseif ( is_array( $data['author'] ) && isset( $data['author']['innerContent'] ) ) {
+				$attrs['author']['innerContent'] = $data['author']['innerContent'];
+			}
+		}
+		// Portrait: support flat src or nested portrait.src
+		if ( isset( $data['portrait']['src'] ) ) {
+			$portrait_src = $data['portrait'];
+		} elseif ( isset( $data['src'] ) ) {
+			$portrait_src = $data;
+		}
+		if ( isset( $portrait_src ) ) {
+			$portrait_value = [ 'src' => $portrait_src['src'], 'alt' => $portrait_src['alt'] ?? '' ];
+			foreach ( [ 'id', 'titleText', 'width', 'height' ] as $meta_key ) {
+				if ( isset( $portrait_src[ $meta_key ] ) ) {
+					$portrait_value[ $meta_key ] = $portrait_src[ $meta_key ];
+				}
+			}
+			$attrs['portrait']['innerContent'] = [ 'desktop' => [ 'value' => $portrait_value ] ];
+		}
+		if ( isset( $data['quoteIcon'] ) ) {
+			$attrs['quoteIcon'] = $data['quoteIcon'];
 		}
 	}
 

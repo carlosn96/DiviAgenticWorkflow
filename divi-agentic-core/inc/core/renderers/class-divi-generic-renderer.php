@@ -152,6 +152,14 @@ class Divi_Generic_Renderer extends Divi_Base_Renderer {
 				}
 				break;
 
+			case $slug === 'divi/timeline-item':
+				foreach ( [ 'date', 'title', 'content', 'marker', 'spacer' ] as $tl_key ) {
+					if ( isset( $data[ $tl_key ] ) ) {
+						$attrs[ $tl_key ] = $data[ $tl_key ];
+					}
+				}
+				break;
+
 			case strpos( $slug, 'divi/fullwidth-' ) === 0:
 				if ( isset( $data['content'] ) ) {
 					$attrs['content']['innerContent'] = [ 'desktop' => [ 'value' => $data['content'] ] ];

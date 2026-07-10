@@ -43,6 +43,7 @@ class Divi_Structural_Renderer extends Divi_Base_Renderer {
 				break;
 
 			case 'divi/row':
+			case 'divi/row-inner':
 				$attrs = $this->render_row( $slug, $data, $attrs );
 				break;
 
@@ -205,12 +206,16 @@ class Divi_Structural_Renderer extends Divi_Base_Renderer {
 		if ( ! isset( $attrs['module']['decoration']['sizing'] ) ) {
 			$attrs['module']['decoration']['sizing'] = [];
 		}
-		$attrs['module']['decoration']['sizing']['desktop'] = [ 'value' => [ 'flexType' => $this->flex_map[ $data['type'] ] ?? '24_24' ] ];
+		if ( ! isset( $attrs['module']['decoration']['sizing']['desktop']['value']['flexType'] ) ) {
+			$attrs['module']['decoration']['sizing']['desktop'] = [ 'value' => [ 'flexType' => $this->flex_map[ $data['type'] ] ?? '24_24' ] ];
+		}
 
 		foreach ( [ 'tablet', 'phone' ] as $bp ) {
 			if ( isset( $attrs['module']['advanced']['type'][ $bp ]['value'] ) ) {
 				$bp_type = $attrs['module']['advanced']['type'][ $bp ]['value'];
-				$attrs['module']['decoration']['sizing'][ $bp ] = [ 'value' => [ 'flexType' => $this->flex_map[ $bp_type ] ?? '24_24' ] ];
+				if ( ! isset( $attrs['module']['decoration']['sizing'][ $bp ]['value']['flexType'] ) ) {
+					$attrs['module']['decoration']['sizing'][ $bp ] = [ 'value' => [ 'flexType' => $this->flex_map[ $bp_type ] ?? '24_24' ] ];
+				}
 			}
 		}
 

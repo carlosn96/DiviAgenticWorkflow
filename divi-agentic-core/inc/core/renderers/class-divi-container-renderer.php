@@ -35,6 +35,21 @@ class Divi_Container_Renderer extends Divi_Base_Renderer {
 				if ( isset( $data['menu'] ) && is_array( $data['menu'] ) ) {
 					$attrs['menu'] = array_merge( $attrs['menu'] ?? [], $data['menu'] );
 				}
+				foreach ( [ 'menuDropdown', 'menuMobile', 'hamburgerMenuIcon', 'logo', 'searchIcon', 'cartIcon', 'cartQuantity', 'menuContent' ] as $top_key ) {
+					if ( isset( $data[ $top_key ] ) && is_array( $data[ $top_key ] ) ) {
+						$attrs[ $top_key ] = $data[ $top_key ];
+					}
+				}
+				break;
+
+			case $slug === 'divi/timeline':
+				$inner_html = $children_html;
+				$tl_top_attrs = [ 'track', 'item', 'itemEven', 'spacer', 'spacerEven', 'connector', 'marker', 'card', 'cardEven', 'date', 'dateEven', 'title', 'titleEven', 'content', 'contentEven' ];
+				foreach ( $tl_top_attrs as $tl_key ) {
+					if ( isset( $data[ $tl_key ] ) ) {
+						$attrs[ $tl_key ] = $data[ $tl_key ];
+					}
+				}
 				break;
 
 			case in_array( $slug, [
