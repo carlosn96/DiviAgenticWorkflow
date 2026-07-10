@@ -166,7 +166,7 @@ class Layout_Engine {
                     case 'modules':
                         $module_type = $item['_type'] ?? (is_string($item['module'] ?? null) ? $item['module'] : null) ?? $item['type'] ?? 'divi/text';
                         $children_key = in_array( $module_type, [
-                            'divi/row-inner', 'divi/group', 'divi/group-carousel'
+                            'divi/row', 'divi/row-inner', 'divi/group', 'divi/group-carousel'
                         ], true ) ? 'columns' : '';
                         $content .= $this->render_block( $module_type, $item, $children_key );
                         break;
@@ -241,6 +241,7 @@ class Layout_Engine {
         $container_slugs = [
             'divi/menu', 'divi/fullwidth-menu',
             'divi/row-inner', 'divi/group', 'divi/group-carousel',
+            'divi/timeline',
             'divi/global-layout', 'divi/layout', 'divi/placeholder',
             'divi/slider', 'divi/video-slider', 'divi/accordion',
             'divi/tabs', 'divi/social-media-follow', 'divi/icon-list',

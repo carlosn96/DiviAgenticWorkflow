@@ -159,7 +159,10 @@ if ( function_exists( 'add_action' ) ) {
 					'Inter'          => 'Inter:wght@300;400;500;600;700',
 					'Space Grotesk'  => 'Space+Grotesk:wght@400;500;600;700',
 					'Playfair Display' => 'Playfair+Display:wght@400;500;600;700',
+					'DM Sans'        => 'DM+Sans:opsz,wght@9..40,100..1000',
 					'Cormorant Garamond' => 'Cormorant+Garamond:wght@400;500;600;700',
+					'Outfit'         => 'Outfit:wght@200;300;400;500;600;700;800;900',
+					'Work Sans'      => 'Work+Sans:wght@300;400;500;600;700',
 				];
 				$seen = [];
 				foreach ( $ds['tokens']['font'] as $key => $family_full ) {
@@ -177,11 +180,7 @@ if ( function_exists( 'add_action' ) ) {
 			}
 		}
 
-		// Dequeue Divi's duplicate Google Fonts (our @import handles fonts via Additional CSS)
-		add_action( 'wp_enqueue_scripts', function () {
-			wp_dequeue_style( 'et-builder-googlefonts-cached' );
-			wp_dequeue_style( 'et-builder-googlefonts-cached-variable' );
-		}, 20 );
+
 
 		$vars = daw_generate_css_vars();
 		if ( $vars ) {
@@ -202,7 +201,10 @@ if ( function_exists( 'add_action' ) ) {
 			}
 			if ( file_exists( $brand_css_path ) ) {
 				$brand_css_url = home_url( str_replace( $root, '', $brand_css_path ) );
-				$brand_css_deps = [ 'daw-design-tokens' ];
+				$brand_css_deps = [];
+				if ( wp_style_is( 'daw-design-tokens', 'registered' ) ) {
+					$brand_css_deps[] = 'daw-design-tokens';
+				}
 				wp_enqueue_style( 'daw-brand-css', $brand_css_url, $brand_css_deps, DIVI_AGENTIC_CORE_VERSION );
 			}
 		}
