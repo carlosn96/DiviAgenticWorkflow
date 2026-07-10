@@ -16,6 +16,12 @@ Manifest format:
 
 Each section file contains one section definition (a JSON object).
 Section paths are resolved relative to the manifest file's directory.
+
+CSS injection:
+    If a file css/<section-name>.css exists alongside the manifest,
+    its content is injected into the section's "css" field (freeForm CSS).
+    The section name is the filename of the section JSON (without .json).
+    Example: sections/01-hero.json → css/01-hero.css
 """
 
 import json
@@ -43,6 +49,13 @@ def combine(manifest_path: str) -> dict:
             continue
         with open(abs_path, "r", encoding="utf-8") as f:
             section = json.load(f)
+
+        section_name = os.path.splitext(os.path.basename(rel_path))[0]
+        css_path = os.path.join(os.path.dirname(abs_path), "..", "css", f"{section_name}.css")
+        if os.path.exists(css_path):
+            with open(css_path, "r", encoding="utf-8") as f:
+                section["css"] = f.read().strip()
+
         sections.append(section)
 
     result = {

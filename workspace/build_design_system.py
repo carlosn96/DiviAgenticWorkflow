@@ -1348,29 +1348,108 @@ def main():
     os.makedirs(brand_css_dir, exist_ok=True)
     brand_css_path = os.path.join(brand_css_dir, 'brand.css')
     with open(brand_css_path, 'w', encoding='utf-8') as f:
-        f.write("/* Auto-generated Brand CSS for Premium Visuals */\n")
+        colors = schema.get('tokens', {}).get('color', {})
+        fonts = schema.get('tokens', {}).get('font', {})
+        radii = schema.get('tokens', {}).get('radius', {})
+        btn_radius = radii.get('md', '8px')
+        card_radius = radii.get('md', '8px')
+        display_font = fonts.get('display', "'Inter', sans-serif")
+        body_font = fonts.get('body', "'Inter', sans-serif")
+        primary = colors.get('accent', '#e50914')
+
+        f.write("/* Auto-generated Brand CSS — DAW Pipeline */\n")
+
+        # :root variables
         f.write(":root {\n")
-        for k, v in schema.get('tokens', {}).get('color', {}).items():
+        for k, v in colors.items():
             f.write(f"  --daw-color-{k}: {v};\n")
+        f.write(f"  --daw-font-display: {display_font};\n")
+        f.write(f"  --daw-font-body: {body_font};\n")
+        f.write(f"  --daw-radius: {btn_radius};\n")
         f.write("}\n\n")
-        f.write(".daw-glass-card {\n")
-        f.write("  background-color: var(--daw-color-glass-bg) !important;\n")
-        f.write("  backdrop-filter: blur(16px) !important;\n")
-        f.write("  -webkit-backdrop-filter: blur(16px) !important;\n")
-        f.write("  border: 1px solid var(--daw-color-glass-border) !important;\n")
-        f.write("  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1) !important;\n")
-        f.write("}\n\n")
-        f.write(".daw-hover-glow {\n")
-        f.write("  transition: all 0.3s ease !important;\n")
-        f.write("}\n")
-        f.write(".daw-hover-glow:hover {\n")
-        f.write("  box-shadow: 0 0 24px var(--daw-color-glow-accent) !important;\n")
-        f.write("  transform: translateY(-4px) !important;\n")
-        f.write("}\n\n")
-        f.write(".daw-hero-aura {\n")
-        f.write("  background: var(--daw-color-surface-deep);\n")
-        f.write("  background-image: var(--daw-color-aura-gradient);\n")
-        f.write("}\n\n")
+
+        # Typography
+        f.write(f".daw-display {{ font-family: {display_font}; font-size: clamp(2.5rem, 5.5vw, 5rem); font-weight: 900; line-height: 1.06; letter-spacing: -0.03em; color: var(--daw-color-text-primary); }}\n")
+        f.write(f".daw-headline {{ font-family: {display_font}; font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 600; letter-spacing: -0.02em; color: var(--daw-color-text-primary); }}\n")
+        f.write(f".daw-eyebrow {{ font-family: {body_font}; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--daw-color-accent); }}\n")
+        f.write(f".daw-lead {{ max-width: 60ch; font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.8; color: var(--daw-color-text-secondary); }}\n")
+        f.write(".daw-center { text-align: center !important; }\n")
+
+        # Sections
+        f.write("body:not(.et-fb) .daw-dark { color: var(--daw-color-text-on-dark); background: var(--daw-color-surface-deep); }\n")
+        f.write("body:not(.et-fb) .daw-light { background: var(--daw-color-surface-mid); }\n")
+
+        # Buttons
+        btn_css = f'''
+body:not(.et-fb) .daw-btn-primary {{
+  background: {primary} !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: {btn_radius} !important;
+  padding: 12px 24px !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  transition: background 0.2s ease !important;
+}}
+.daw-btn-primary:hover {{ background: var(--daw-color-accent-hover, {primary}) !important; }}
+
+body:not(.et-fb) .daw-btn-ghost {{
+  background: transparent !important;
+  color: var(--daw-color-text-primary) !important;
+  border: 1px solid var(--daw-color-text-secondary) !important;
+  border-radius: {btn_radius} !important;
+  padding: 12px 24px !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+}}
+.daw-btn-ghost:hover {{ border-color: {primary} !important; color: {primary} !important; }}
+
+body:not(.et-fb) .daw-btn-ghost-light {{
+  background: transparent !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255,255,255,0.3) !important;
+  border-radius: {btn_radius} !important;
+  padding: 12px 24px !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+}}
+.daw-btn-ghost-light:hover {{ border-color: #ffffff !important; background: rgba(255,255,255,0.05) !important; }}
+'''
+        f.write(btn_css)
+
+        # Card
+        f.write(f".daw-card {{ background: var(--daw-color-surface-light); border-radius: {card_radius}; transition: transform 0.35s ease, box-shadow 0.35s ease; }}\n")
+        f.write(".daw-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }\n")
+
+        # Glass card
+        f.write(".daw-glass-card { background-color: var(--daw-color-glass-bg) !important; backdrop-filter: blur(16px) !important; border: 1px solid var(--daw-color-glass-border) !important; }\n")
+
+        # Animations
+        f.write(".daw-fade-up { animation: dawFadeUp 0.6s cubic-bezier(0,0,0.2,1) both; }\n")
+        for i, d in enumerate([0, 0.1, 0.22, 0.36, 0.48]):
+            name = '' if i == 0 else f'-d{i}'
+            f.write(f".daw-fade-up{name} {{ animation: dawFadeUp 0.6s cubic-bezier(0,0,0.2,1) {d}s both; }}\n")
+        f.write("@keyframes dawFadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }\n")
+        f.write("@keyframes dawFadeIn { from { opacity: 0; } to { opacity: 1; } }\n")
+
+        # Hover glow
+        f.write(".daw-hover-glow { transition: all 0.3s ease !important; }\n")
+        f.write(".daw-hover-glow:hover { box-shadow: 0 0 24px var(--daw-color-glow-accent) !important; transform: translateY(-4px) !important; }\n")
+
+        # Hero aura
+        f.write(".daw-hero-aura { background: var(--daw-color-surface-deep); background-image: var(--daw-color-aura-gradient); }\n")
+
+        # Append _effects.css
+        effects_path = os.path.join(BRAND_DIR, '_effects.css')
+        if os.path.isfile(effects_path):
+            with open(effects_path, 'r', encoding='utf-8') as ef:
+                f.write(ef.read())
+            if not args.quiet:
+                print(f'[OK] Appended effects CSS from {effects_path}')
+
+        if not args.quiet:
+            f_size = os.path.getsize(brand_css_path)
+            print(f'[OK] brand.css generated: {brand_css_path} ({f_size} chars)')
 
         # Append brand effects CSS if _effects.css exists in brand dir
         effects_path = os.path.join(BRAND_DIR, '_effects.css')
