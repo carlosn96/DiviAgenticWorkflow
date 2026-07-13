@@ -200,6 +200,17 @@ class BlocksToSchema {
                 if (!empty($img['src'])) {
                     $module['src'] = $img['src'];
                     $module['alt'] = $img['alt'] ?? '';
+                    foreach ( [ 'id', 'titleText', 'width', 'height', 'linkUrl', 'linkTarget' ] as $k ) {
+                        if ( isset( $img[ $k ] ) ) {
+                            $module[ $k ] = $img[ $k ];
+                        }
+                    }
+                }
+                $img_adv = $attrs['image']['advanced'] ?? [];
+                foreach ( [ 'lightbox', 'overlay', 'overlayIcon' ] as $key ) {
+                    if ( isset( $img_adv[ $key ]['desktop']['value'] ) ) {
+                        $module[ $key ] = $img_adv[ $key ]['desktop']['value'];
+                    }
                 }
                 break;
                 

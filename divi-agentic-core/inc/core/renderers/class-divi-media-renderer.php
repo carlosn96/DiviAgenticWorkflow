@@ -36,7 +36,7 @@ class Divi_Media_Renderer extends Divi_Base_Renderer {
 						'src' => $img_data['src'],
 						'alt' => $img_data['alt'] ?? '',
 					];
-					foreach ( [ 'id', 'titleText', 'width', 'height', 'linkUrl' ] as $k ) {
+					foreach ( [ 'id', 'titleText', 'width', 'height', 'linkUrl', 'linkTarget' ] as $k ) {
 						if ( isset( $img_data[ $k ] ) ) {
 							$img[ $k ] = $img_data[ $k ];
 						}
@@ -54,8 +54,22 @@ class Divi_Media_Renderer extends Divi_Base_Renderer {
 					}
 				}
 
+				// Build image.decoration: explicit $data['image']['decoration'] first,
+				// then inherit border/boxShadow from top-level decoration (common pattern in page-defs).
+				$img_dec = [];
 				if ( isset( $data['image']['decoration'] ) ) {
 					$img_dec = $data['image']['decoration'];
+				}
+				$inherited = false;
+				if ( isset( $data['decoration'] ) ) {
+					foreach ( [ 'border', 'boxShadow' ] as $dk ) {
+						if ( isset( $data['decoration'][ $dk ] ) && ! isset( $img_dec[ $dk ] ) ) {
+							$img_dec[ $dk ] = $data['decoration'][ $dk ];
+							$inherited = true;
+						}
+					}
+				}
+				if ( ! empty( $img_dec ) ) {
 					$dec_modes = [ 'desktop', 'tablet', 'phone', 'hover', 'sticky' ];
 					foreach ( [ 'border', 'boxShadow' ] as $dk ) {
 						if ( ! isset( $img_dec[ $dk ] ) ) { continue; }
@@ -70,6 +84,15 @@ class Divi_Media_Renderer extends Divi_Base_Renderer {
 						}
 					}
 					$attrs['image']['decoration'] = $img_dec;
+					// Remove inherited border/boxShadow from module.decoration to avoid duplication
+					if ( $inherited ) {
+						foreach ( [ 'border', 'boxShadow' ] as $dk ) {
+							unset( $attrs['module']['decoration'][ $dk ] );
+						}
+						if ( isset( $attrs['module']['decoration'] ) && empty( $attrs['module']['decoration'] ) ) {
+							unset( $attrs['module']['decoration'] );
+						}
+					}
 				}
 				break;
 
