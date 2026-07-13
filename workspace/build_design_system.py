@@ -296,21 +296,37 @@ class PaletteEngine:
     """Generates complete color palette from accent + strategy."""
 
     @classmethod
-    def generate(cls, accent: str, strategy: Dict[str, Any]) -> Dict[str, str]:
+    def generate(cls, accent: str, strategy: Dict[str, Any], user_vars: Dict[str, str] = None) -> Dict[str, str]:
         L, C, H = ColorSpace.hex_to_lch(accent)
         strat = strategy['strategy']
+        overrides = user_vars or {}
 
         colors = {'accent': accent}
 
         # Accent variants
-        colors['accent-hover'] = ColorSpace.adjust_lightness(accent, 0.85)
+        colors['accent-hover'] = overrides.get('color_accent_hover') or ColorSpace.adjust_lightness(accent, 0.85)
         colors['premium'] = cls._premium_from_accent(accent, strat)
 
-        # Surface scale (perceptually uniform)
-        colors['surface-deep']  = cls._surface_deep(accent, strat)
-        colors['surface-mid']   = ColorSpace.adjust_lightness(colors['surface-deep'], 1.25)
-        colors['surface-light'] = cls._surface_light(accent, strat)
-        colors['surface-white'] = ColorSpace.adjust_lightness(colors['surface-light'], 1.02)
+        # Surface scale (perceptually uniform) — respect user overrides
+        if overrides.get('color_surface_deep'):
+            colors['surface-deep'] = overrides['color_surface_deep']
+        else:
+            colors['surface-deep'] = cls._surface_deep(accent, strat)
+
+        if overrides.get('color_surface_mid'):
+            colors['surface-mid'] = overrides['color_surface_mid']
+        else:
+            colors['surface-mid'] = ColorSpace.adjust_lightness(colors['surface-deep'], 1.25)
+
+        if overrides.get('color_surface_light'):
+            colors['surface-light'] = overrides['color_surface_light']
+        else:
+            colors['surface-light'] = cls._surface_light(accent, strat)
+
+        if overrides.get('color_surface_white'):
+            colors['surface-white'] = overrides['color_surface_white']
+        else:
+            colors['surface-white'] = ColorSpace.adjust_lightness(colors['surface-light'], 1.02)
 
         # Text colors with guaranteed contrast
         colors['text-primary']   = cls._text_primary(colors['surface-light'], strat)
@@ -1189,7 +1205,7 @@ def build_complete_schema(user_vars: Dict[str, str], presets_path: str = None) -
           f'glass_viable={strategy["glass_viable"]})')
 
     # 3. Generate palette
-    palette = PaletteEngine.generate(accent, strategy)
+    palette = PaletteEngine.generate(accent, strategy, user_vars)
     print(f'[PALETTE] Generated {len(palette)} color tokens from accent')
 
     # 4. Typography
