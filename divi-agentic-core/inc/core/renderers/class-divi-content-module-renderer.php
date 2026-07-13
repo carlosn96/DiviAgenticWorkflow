@@ -292,6 +292,15 @@ class Divi_ContentModule_Renderer extends Divi_Base_Renderer {
 	 */
 	private function render_testimonial( array $data, array &$attrs ): void {
 		$this->set_text_attrs( $data, $attrs, [ 'content' ] );
+
+		// Map bodyFont/headingFont from module level → content.decoration.bodyFont
+		foreach ( [ 'bodyFont' => 'bodyFont', 'headingFont' => 'headingFont' ] as $src => $dst ) {
+			if ( isset( $attrs['module'][ $src ] ) ) {
+				$attrs['content']['decoration'][ $dst ] = $attrs['module'][ $src ];
+				unset( $attrs['module'][ $src ] );
+			}
+		}
+
 		// Preserve decoration/advanced on content and author
 		foreach ( [ 'content', 'author' ] as $key ) {
 			if ( isset( $data[ $key ] ) && is_array( $data[ $key ] ) ) {
