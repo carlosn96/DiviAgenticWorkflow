@@ -74,7 +74,7 @@ function daw_get_design_system_path(): ?string {
     $site = daw_get_active_site();
     if (!$root || !$site) return null;
 
-    $path = $root . '/DAW_bundle/site/' . $site . '/design-system/divitheme.json';
+    $path = $root . '/DiviAgenticWorkflow/site/' . $site . '/design-system/divitheme.json';
     return file_exists($path) ? $path : null;
 }
 
@@ -193,9 +193,9 @@ if ( function_exists( 'add_action' ) ) {
 		$root = daw_find_project_root();
 		$site = daw_get_active_site();
 		if ( $root && $site ) {
-			$brand_css_path = $root . '/DAW_bundle/divi-agentic-core/assets/css/brand.css';
+			$brand_css_path = $root . '/DiviAgenticWorkflow/divi-agentic-core/assets/css/brand.css';
 			// Check for brand-specific override
-			$brand_site_path = $root . '/DAW_bundle/site/' . $site . '/brand/assets/css/brand.css';
+			$brand_site_path = $root . '/DiviAgenticWorkflow/site/' . $site . '/brand/assets/css/brand.css';
 			if ( file_exists( $brand_site_path ) ) {
 				$brand_css_path = $brand_site_path;
 			}
