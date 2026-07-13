@@ -77,7 +77,13 @@ class Layout_Engine {
         if ( isset( $data['children'] ) && is_array( $data['children'] ) ) {
             foreach ( $data['children'] as $child ) {
                 $child_type = $child['_type'] ?? (is_string($child['module'] ?? null) ? $child['module'] : null) ?? $child['type'] ?? 'divi/contact-field';
-                $children_html .= $this->render_block( $child_type, $child, '' );
+                $child_key = '';
+                if ( in_array( $child_type, [ 'divi/column', 'divi/column-inner' ], true ) ) {
+                    $child_key = 'modules';
+                } elseif ( in_array( $child_type, [ 'divi/row', 'divi/row-inner', 'divi/group', 'divi/group-carousel' ], true ) ) {
+                    $child_key = 'columns';
+                }
+                $children_html .= $this->render_block( $child_type, $child, $child_key );
             }
         }
 
@@ -114,8 +120,6 @@ class Layout_Engine {
             $attrs = self::convert_gcid_to_variable_syntax( $attrs );
             $attrs = self::normalize_gradient_stops( $attrs );
             $attrs = self::normalize_empty_background( $attrs );
-
-            if ( $attrs['module'] === [] ) { $attrs['module'] = (object)[]; }
 
             $json_attrs = json_encode( $attrs, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
             return "<!-- wp:{$slug} {$json_attrs} -->\n{$inner}{$inner_html}<!-- /wp:{$slug} -->\n";
@@ -184,7 +188,7 @@ class Layout_Engine {
         // Fix: Ensure no "value":[] exists in any background.
         $attrs = self::normalize_empty_background( $attrs );
 
-        if ( $attrs['module'] === [] ) { $attrs['module'] = (object)[]; }
+        if ( $attrs['module'] === [] ) { unset( $attrs['module'] ); }
 
         $json_attrs = json_encode( $attrs, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
 
