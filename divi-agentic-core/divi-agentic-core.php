@@ -11,17 +11,6 @@ if ( ! defined( 'ABSPATH' ) && ! defined( 'WP_CLI' ) ) {
     define( 'ABSPATH', true );
 }
 
-define( 'DIVI_AGENTIC_CORE_DIR', __DIR__ );
-define( 'DIVI_AGENTIC_CORE_VERSION', '4.1.0' );
-
-require_once __DIR__ . '/inc/loader.php';
-
-if ( defined( 'WP_CLI' ) && WP_CLI ) {
-	add_action( 'cli_init', function () {
-		\DAC\CLI\Agentic_Command::register();
-	} );
-}
-
 /**
  * Resolve project root by walking up from plugin dir looking for .env
  */
@@ -39,23 +28,27 @@ function daw_find_project_root(): ?string {
 }
 
 /**
- * Get DAW_SITE from environment or .env
+ * Get environment variable from environment, $_SERVER, $_ENV or .env file
  */
-function daw_get_active_site(): ?string {
-    $site = getenv('DAW_SITE');
-    if ($site) return $site;
+function daw_get_env_var(string $key, ?string $default = null): ?string {
+    $val = getenv($key);
+    if ($val !== false) return $val;
+
+    if (isset($_ENV[$key])) return $_ENV[$key];
+    if (isset($_SERVER[$key])) return $_SERVER[$key];
 
     $root = daw_find_project_root();
-    if (!$root) return null;
+    if (!$root) return $default;
 
     $env_file = $root . '/.env';
-    if (!file_exists($env_file)) return null;
+    if (!file_exists($env_file)) return $default;
 
     $lines = file($env_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    $prefix = $key . '=';
     foreach ($lines as $line) {
         $line = trim($line);
-        if (str_starts_with($line, 'DAW_SITE=')) {
-            $val = trim(substr($line, 9));
+        if (str_starts_with($line, $prefix)) {
+            $val = trim(substr($line, strlen($prefix)));
             if ((str_starts_with($val, '"') && str_ends_with($val, '"')) ||
                 (str_starts_with($val, "'") && str_ends_with($val, "'"))) {
                 $val = substr($val, 1, -1);
@@ -63,7 +56,45 @@ function daw_get_active_site(): ?string {
             return $val;
         }
     }
-    return null;
+    return $default;
+}
+
+/**
+ * Get DAW_SITE from environment or .env
+ */
+function daw_get_active_site(): ?string {
+    return daw_get_env_var('DAW_SITE');
+}
+
+/**
+ * Get the DAW bundle directory name (e.g. 'DAW_bundle' or 'DiviAgenticWorkflow')
+ */
+function daw_get_bundle_name(): string {
+    $bundle = daw_get_env_var('DAW_BUNDLE_NAME');
+    if ($bundle) return $bundle;
+
+    $dir = realpath(__DIR__);
+    if ($dir) {
+        $parent = dirname($dir);
+        $name = basename($parent);
+        if ($name && $name !== 'plugins' && $name !== 'wp-content') {
+            return $name;
+        }
+    }
+
+    return 'DAW_bundle';
+}
+
+define( 'DIVI_AGENTIC_CORE_DIR', __DIR__ );
+define( 'DIVI_AGENTIC_CORE_VERSION', '4.1.1' );
+define( 'DIVI_AGENTIC_BUNDLE_NAME', daw_get_bundle_name() );
+
+require_once __DIR__ . '/inc/loader.php';
+
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+	add_action( 'cli_init', function () {
+		\DAC\CLI\Agentic_Command::register();
+	} );
 }
 
 /**
@@ -74,7 +105,7 @@ function daw_get_design_system_path(): ?string {
     $site = daw_get_active_site();
     if (!$root || !$site) return null;
 
-    $path = $root . '/DiviAgenticWorkflow/site/' . $site . '/design-system/divitheme.json';
+    $path = $root . '/' . DIVI_AGENTIC_BUNDLE_NAME . '/site/' . $site . '/design-system/divitheme.json';
     return file_exists($path) ? $path : null;
 }
 
@@ -193,9 +224,9 @@ if ( function_exists( 'add_action' ) ) {
 		$root = daw_find_project_root();
 		$site = daw_get_active_site();
 		if ( $root && $site ) {
-			$brand_css_path = $root . '/DiviAgenticWorkflow/divi-agentic-core/assets/css/brand.css';
+			$brand_css_path = $root . '/' . DIVI_AGENTIC_BUNDLE_NAME . '/divi-agentic-core/assets/css/brand.css';
 			// Check for brand-specific override
-			$brand_site_path = $root . '/DiviAgenticWorkflow/site/' . $site . '/brand/assets/css/brand.css';
+			$brand_site_path = $root . '/' . DIVI_AGENTIC_BUNDLE_NAME . '/site/' . $site . '/brand/assets/css/brand.css';
 			if ( file_exists( $brand_site_path ) ) {
 				$brand_css_path = $brand_site_path;
 			}
