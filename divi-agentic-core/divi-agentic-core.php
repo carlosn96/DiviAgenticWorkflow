@@ -173,6 +173,38 @@ function daw_generate_css_vars(?string $ds_path = null): string {
  * All module asset enqueuing and block registration delegated to Module_Registry.
  * Add a folder to modules/ with module.json or manifest.json — no core edits needed.
  */
+/**
+ * Newsletter subscription AJAX handler
+ */
+add_action( 'wp_ajax_daw_newsletter_subscribe', 'daw_newsletter_subscribe_handler' );
+add_action( 'wp_ajax_nopriv_daw_newsletter_subscribe', 'daw_newsletter_subscribe_handler' );
+function daw_newsletter_subscribe_handler() {
+	$email = isset( $_POST['email'] ) ? sanitize_email( $_POST['email'] ) : '';
+	if ( ! is_email( $email ) ) {
+		wp_send_json_error( [ 'message' => 'Correo electrónico inválido.' ] );
+	}
+
+	$to      = get_option( 'admin_email' );
+	$subject = 'Nueva suscripción al boletín - López Velarde';
+	$message = "Nueva suscripción al boletín:\n\nCorreo: $email";
+	wp_mail( $to, $subject, $message );
+
+	setcookie( 'daw_newsletter_subscribed', '1', time() + YEAR_IN_SECONDS, COOKIEPATH, COOKIE_DOMAIN, is_ssl() );
+	wp_send_json_success( [ 'message' => '¡Gracias por suscribirte!' ] );
+}
+
+/**
+ * Localize AJAX URL for newsletter form
+ */
+add_action( 'wp_enqueue_scripts', function () {
+	wp_register_script( 'daw-newsletter', false, [], DIVI_AGENTIC_CORE_VERSION, true );
+	wp_localize_script( 'daw-newsletter', 'dawAjax', [
+		'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+		'nonce'   => wp_create_nonce( 'daw_newsletter_nonce' ),
+	] );
+	wp_enqueue_script( 'daw-newsletter' );
+}, 100 );
+
 if ( function_exists( 'add_action' ) ) {
 	add_action( 'wp_enqueue_scripts', function () {
 		$deps = [];

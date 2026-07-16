@@ -206,7 +206,7 @@ class Divi_ContentModule_Renderer extends Divi_Base_Renderer {
 			$attrs['content']['decoration']['bodyFont'] = $data['bodyFont'];
 			unset( $attrs['module']['bodyFont'] );
 		}
-		foreach ( [ 'openToggle', 'closedToggle', 'openToggleIcon' ] as $tk ) {
+		foreach ( [ 'openToggle', 'closedToggle', 'openToggleIcon', 'closedToggleIcon' ] as $tk ) {
 			if ( isset( $data[ $tk ] ) ) {
 				$attrs[ $tk ] = $data[ $tk ];
 			}

@@ -140,9 +140,35 @@ class Divi_Generic_Renderer extends Divi_Base_Renderer {
 				}
 				break;
 
+			case $slug === 'divi/signup':
+				foreach ( [ 'title', 'content', 'button', 'field', 'success', 'formField' ] as $key ) {
+					if ( isset( $data[ $key ] ) ) {
+						$attrs[ $key ] = $data[ $key ];
+					}
+				}
+				break;
+
+			case $slug === 'divi/social-media-follow-network':
+				if ( isset( $data['social_network'] ) || isset( $data['link'] ) ) {
+					$attrs['socialNetwork']['innerContent'] = [
+						'desktop' => [ 'value' => [
+							'socialNetworkTitle'       => $data['social_network'] ?? '',
+							'socialNetworkLink'        => $data['link'] ?? '',
+							'socialNetworkSkypeUrl'    => $data['skype_url'] ?? '',
+							'socialNetworkSkypeAction' => $data['skype_action'] ?? 'call',
+						] ],
+					];
+				} elseif ( isset( $data['socialNetwork'] ) ) {
+					$attrs['socialNetwork'] = $data['socialNetwork'];
+				}
+				if ( isset( $data['icon'] ) ) {
+					$attrs['icon'] = $data['icon'];
+				}
+				break;
+
 			case in_array( $slug, [
 				'divi/before-after-image', 'divi/canvas-portal', 'divi/breadcrumbs',
-				'divi/link', 'divi/post-slider', 'divi/signup', 'divi/signup-custom-field',
+				'divi/link', 'divi/post-slider', 'divi/signup-custom-field',
 			], true ):
 				if ( isset( $data['before_src'] ) && isset( $data['after_src'] ) ) {
 					$attrs['image'] = [ 'innerContent' => [ 'desktop' => [ 'value' => [
