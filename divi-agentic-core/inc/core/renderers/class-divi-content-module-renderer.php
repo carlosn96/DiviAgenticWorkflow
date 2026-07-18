@@ -22,7 +22,7 @@ class Divi_ContentModule_Renderer extends Divi_Base_Renderer {
 	 * @inheritDoc
 	 */
 	public function render( string $slug, array $data, string $content_key, string $children_html ): array {
-		$attrs = $this->prepare_base_attrs( $data, $data['builderVersion'] ?? '5.8.1' );
+		$attrs = $this->prepare_base_attrs( $data, $data['builderVersion'] ?? DIVI_BUILDER_VERSION );
 
 		switch ( $slug ) {
 			case 'divi/blurb':

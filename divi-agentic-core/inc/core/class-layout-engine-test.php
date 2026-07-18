@@ -16,7 +16,7 @@ class Layout_Engine {
     use \Module_Metadata;
     use \Divi_Agentic_Core\Core\Renderers\Block_Helpers;
 
-    private string $d5_version = '5.7.4';
+    private string $d5_version = DIVI_BUILDER_VERSION;
 
     public function compile( $schema ): string {
         if ( is_string( $schema ) ) {

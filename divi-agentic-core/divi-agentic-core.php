@@ -89,6 +89,28 @@ define( 'DIVI_AGENTIC_CORE_DIR', __DIR__ );
 define( 'DIVI_AGENTIC_CORE_VERSION', '4.1.1' );
 define( 'DIVI_AGENTIC_BUNDLE_NAME', daw_get_bundle_name() );
 
+/**
+ * Get the active Divi theme version dynamically from style.css header.
+ * Falls back to a constant if defined (for environments without wp_get_theme).
+ */
+function daw_get_divi_version(): string {
+	if ( defined( 'DIVI_BUILDER_VERSION' ) ) {
+		return DIVI_BUILDER_VERSION;
+	}
+	if ( function_exists( 'wp_get_theme' ) ) {
+		$theme = wp_get_theme( 'Divi' );
+		if ( $theme->exists() ) {
+			$version = $theme->get( 'Version' );
+			if ( $version ) {
+				return $version;
+			}
+		}
+	}
+	return '5.7.4';
+}
+
+define( 'DIVI_BUILDER_VERSION', daw_get_divi_version() );
+
 require_once __DIR__ . '/inc/loader.php';
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {

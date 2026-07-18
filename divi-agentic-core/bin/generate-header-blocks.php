@@ -23,7 +23,9 @@ require_once $project_root . '/app/public/wp-load.php';
 
 $props = fn($arr) => json_encode($arr, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
-$version = '5.7.4';
+$version = defined('DIVI_BUILDER_VERSION')
+    ? DIVI_BUILDER_VERSION
+    : (function_exists('wp_get_theme') && ($t = wp_get_theme('Divi'))->exists() ? $t->get('Version') : '5.7.4');
 
 // Image block
 $img_logo = $props([

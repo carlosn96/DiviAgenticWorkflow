@@ -22,5 +22,5 @@ clean_post_cache($post_id);
 update_post_meta($post_id, '_et_pb_use_builder', 'on');
 update_post_meta($post_id, '_et_pb_use_divi_5', 'on');
 update_post_meta($post_id, '_et_pb_built_with_d5', '1');
-update_post_meta($post_id, '_et_builder_version', '5.5.0');
+update_post_meta($post_id, '_et_builder_version', defined('DIVI_BUILDER_VERSION') ? DIVI_BUILDER_VERSION : '5.7.4');
 WP_CLI::success('Meta restored');

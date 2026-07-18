@@ -26,7 +26,7 @@ class Dgpc_Renderer implements Block_Renderer_Interface {
 	 *
 	 * @param string $builder_version Divi builder version.
 	 */
-	public function __construct( string $builder_version = '5.7.4' ) {
+	public function __construct( string $builder_version = DIVI_BUILDER_VERSION ) {
 		$this->builder_version = $builder_version;
 	}
 

@@ -7,7 +7,7 @@ if ( ! defined( 'WP_CLI' ) ) {
 }
 
 \WP_CLI::add_command( 'agentic update_divi_version', function( $args, $assoc_args ) {
-    $version = $args[0] ?? '5.7.4';
+    $version = $args[0] ?? DIVI_BUILDER_VERSION;
     $clean_version = preg_replace( '/^VB\|Divi\|/', '', $version );
 
     $post_types = [ 'page', 'et_template', 'et_header_layout', 'et_body_layout', 'et_footer_layout', 'et_pb_layout', 'project' ];

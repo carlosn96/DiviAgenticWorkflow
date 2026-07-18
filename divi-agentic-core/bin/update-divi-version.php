@@ -9,7 +9,7 @@ if ( ! class_exists( '\WP_CLI' ) ) {
 
 require_once __DIR__ . '/../../../../app/public/wp-load.php';
 
-$version = $argv[1] ?? '5.7.4';
+$version = $argv[1] ?? ( defined( 'DIVI_BUILDER_VERSION' ) ? DIVI_BUILDER_VERSION : '5.7.4' );
 $clean_version = preg_replace( '/^VB\|Divi\|/', '', $version );
 
 $post_types = [ 'page', 'et_template', 'et_header_layout', 'et_body_layout', 'et_footer_layout', 'et_pb_layout', 'project' ];
