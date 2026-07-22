@@ -31,3 +31,12 @@ Thumbs.db
 
 # Backup copy
 workspace/automation/generate_brief copy.py
+
+# Remote scripts (zipped, not tracked)
+workspace/fix_remote.py
+workspace/ftp_remote.py
+workspace/split_export.py
+workspace/ssh_cmd.py
+workspace/ssh_test.py
+workspace/wp_remote.py
+workspace/remote-scripts.zip
