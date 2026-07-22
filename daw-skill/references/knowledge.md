@@ -10,18 +10,20 @@ Este archivo contiene las reglas técnicas inmutables del proyecto.
 |------|-----------|
 | `DAW_bundle/site/<DAW_SITE>/page-defs/` | Page-defs de entrada (manifiesto + secciones) |
 | `DAW_bundle/site/<DAW_SITE>/design-system/` | `divitheme.json` generado |
-| `DAW_bundle/site/<DAW_SITE>/brand/` | `_design_vars.json`, `_design_presets.json` |
-| `DAW_bundle/site/<DAW_SITE>/brand/assets/css/` | `brand.css` generado (único por marca) |
+| `DAW_bundle/site/<DAW_SITE>/brand/` | `_design_vars.json` (único input de marca) |
 | `DAW_bundle/divi-agentic-core/` | Plugin WordPress (junction link) |
+| `DAW_bundle/divi-agentic-core/bin/brand-sync.php` | Sincroniza `_design_vars.json` → `et_divi` |
 
 ---
 
-## Flujo de CSS (Actual)
+## Flujo de Brand (Actual)
 
-- **brand.css** se escribe a `site/<DAW_SITE>/brand/assets/css/brand.css` por `build_design_system.py`
-- **No se usa** `wp_update_custom_css_post()` — el CSS se encola desde disco
-- **No se usa** `et_custom_css` — fue eliminado
-- **`sync_css`** solo limpia legacy, no escribe
+- **brand-sync.php** lee `_design_vars.json` y sincroniza **todo**:
+  - `wp_options['et_divi']` (Customizer global)
+  - `design-system/divitheme.json` (tokens para Design_Resolver)
+  - gcids via `GlobalData::set_global_colors()` (colores vivos)
+  - gvids via `GlobalData::set_global_variables()` (radios, espacios, fuentes como variables nativas Divi 5)
+- Divi genera CSS automáticamente desde sus opciones de Customizer
 
 ---
 

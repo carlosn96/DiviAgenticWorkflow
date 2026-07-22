@@ -1,6 +1,6 @@
 # DAW Bundle — Divi Agentic Workflow
 
-Pipeline: Brief → VIE → plan.json → build_page.php → WordPress Divi 5.
+Pipeline: Brand vars → brand-sync.php → Divi Customizer → page-defs → combine.py → deploy_page → WordPress Divi 5.
 
 ---
 
@@ -8,7 +8,7 @@ Pipeline: Brief → VIE → plan.json → build_page.php → WordPress Divi 5.
 
 1. **Plugin activo**: `divi-agentic-core` como junction link desde `DAW_bundle/divi-agentic-core/` → `app/public/wp-content/plugins/divi-agentic-core/`. Activar en WP Admin > Plugins.
 2. **Archivo `.env`**: Copiar `DAW_bundle/.env.example` → `.env` en la raíz del proyecto y completar valores reales.
-3. **Design System**: `site/<DAW_SITE>/design-system/divitheme.json` (generado con `build_design_system.py` v4.0).
+3. **Brand vars**: `site/<DAW_SITE>/brand/_design_vars.json` — editar colores, fuentes, logo.
 
 ---
 
@@ -17,30 +17,22 @@ Pipeline: Brief → VIE → plan.json → build_page.php → WordPress Divi 5.
 ```powershell
 # 1. Configurar entorno y marca activa en .env (DAW_SITE=<nombre>)
 
-# 2. (una vez) Generar schemas de módulos
-.\php.bat DAW_bundle/divi-agentic-core/bin/generate-module-schema.php --all
+# 2. Sincronizar brand a Divi Customizer
+.\wp eval-file DAW_bundle/divi-agentic-core/bin/brand-sync.php `
+  DAW_bundle/site/<DAW_SITE>/brand/_design_vars.json
 
-# 3. Generar design system
-python DAW_bundle/workspace/build_design_system.py
+# 3. Crear page-defs (ver AGENTS.md §4)
+#    site/<DAW_SITE>/page-defs/<slug>.json (manifiesto)
+#    site/<DAW_SITE>/page-defs/sections/<section>.json (secciones)
 
-# 4. Sincronizar colores globales
-.\wp.bat agentic global_colors sync `
+# 4. Combinar y desplegar
+python DAW_bundle/workspace/combine.py `
+  DAW_bundle/site/<DAW_SITE>/page-defs/<slug>.json `
+  --out DAW_bundle/site/<DAW_SITE>/page-defs/<slug>-combined.json
+.\wp.bat agentic deploy_page `
+  --title="Título" --slug="<slug>" `
+  --schema="DAW_bundle/site/<DAW_SITE>/page-defs/<slug>-combined.json" `
   --design-system="DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json"
-
-# 5. Pipeline completo (orquestador)
-python DAW_bundle/workspace/daw_build.py --site $env:DAW_SITE --full --vie --prompt "descripción breve"
-
-# O paso a paso:
-#   5a. Brief
-python DAW_bundle/workspace/automation/generate_brief.py --prompt "pagina principal" --tone editorial
-#   5b. VIE → plan.json
-python DAW_bundle/vie/cli.py `
-  --brief-file=site/<DAW_SITE>/briefs/home.json `
-  --design-system=site/<DAW_SITE>/design-system/divitheme.json `
-  --output=site/<DAW_SITE>/plans/home.json
-#   5c. Build + Deploy
-.\php.bat DAW_bundle/divi-agentic-core/bin/build_page.php `
-  --def=site/<DAW_SITE>/plans/home.json --deploy
 ```
 
 ---
@@ -48,21 +40,20 @@ python DAW_bundle/vie/cli.py `
 ## Pipeline
 
 ```
-brief.json (con o sin design_direction)
+_design_vars.json
     │
     ▼
-VIE v3.0 (determinístico)
-    │  (con design_direction → PATH A: diseño calculado por mood)
-    │  (sin design_direction  → PATH B: presets fijos originales)
-    ▼
-plan.json (structure + decoration blocks + {{design:*}} tokens)
+brand-sync.php → wp_options['et_divi'] → Divi Customizer CSS engine
     │
     ▼
-build_page.php → WordPress Divi 5
+page-defs/<slug>.json (manifiesto) + sections/*.json
+    │
+    ▼
+workspace/combine.py → <slug>-combined.json
+    │
+    ▼
+wp agentic deploy_page → post_content en WP
 ```
-
-Pipeline ML anterior (DIE: 877 templates, clasificador TF-IDF, Hungarian slot assigner)
-archivado en `_archive/die_pipeline/`. Ver `AGENTS.md` para detalles.
 
 ---
 
@@ -72,7 +63,5 @@ archivado en `_archive/die_pipeline/`. Ver `AGENTS.md` para detalles.
 |---------|------|
 | Documentación completa | `AGENTS.md` |
 | Orquestación 4 fases | `daw-skill/SKILL.md` |
-| VIE package | `vie/` |
-| Build + Deploy | `divi-agentic-core/bin/build_page.php` |
-| Orquestador unificado | `workspace/daw_build.py` |
-| DIE (archivado) | `_archive/die_pipeline/` |
+| Brand Sync | `divi-agentic-core/bin/brand-sync.php` |
+| Deploy | `divi-agentic-core/inc/core/class-layout-engine.php` |

@@ -1,5 +1,7 @@
 # Design System Inputs & Outputs
 
+> ⚠️ **Legacy**: This documents the old `build_design_system.py` pipeline. The current pipeline uses `brand-sync.php` to write `_design_vars.json` content directly to `wp_options['et_divi']`, bypassing brand.css and divitheme.json generation. See `AGENTS.md` section 5 for the current pipeline.
+
 ## 1. Brand Generator (`brand_generator.py`)
 
 **Path:** `workspace/brand_generator.py`

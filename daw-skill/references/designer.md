@@ -1,7 +1,7 @@
 # DAW Module: Phase 3 — Visual Mapping (The Designer)
 
 ## Objetivo
-Traducir el Plan Semántico + Dirección Visual en definiciones de página JSON compatibles con `build_page.php`.
+Traducir el Plan Semántico + Dirección Visual en definiciones de página JSON compatibles con `deploy_page`.
 
 ---
 
@@ -169,7 +169,7 @@ Consultar `site/<DAW_SITE>/design-system/divitheme.json` para tokens disponibles
 | `{{design:color:accent}}` | `#A67C40` (hex) | `$variable({...})$` → editable en VB |
 
 **Two-Layer Resolution:**
-1. `build_page.php`: `{{design:color:*}}` → `var(--gcid-*)`
+1. `deploy_page`: `{{design:color:*}}` → `var(--gcid-*)`
 2. Layout Engine: `var(--gcid-*)` → `$variable({"type":"color","value":{"name":"gcid-*","settings":{}}})$`
 
 ---
@@ -213,22 +213,16 @@ Cuando definas estilos de botón en `decoration.button.desktop.value`:
 
 ---
 
-## 7. Sistema de Diseño
+## 7. Brand Sync
 
-El script `build_design_system.py` genera:
-
-```
-site/<DAW_SITE>/design-system/divitheme.json  (58 presets)
-site/<DAW_SITE>/brand/assets/css/brand.css     (clases daw-*, único por marca)
-```
-
-Ejecutar:
+El brand se define en `_design_vars.json` y se sincroniza a Divi Customizer:
 
 ```powershell
-python DAW_bundle/workspace/build_design_system.py
+.\wp eval-file DAW_bundle/divi-agentic-core/bin/brand-sync.php `
+  DAW_bundle/site/<DAW_SITE>/brand/_design_vars.json
 ```
 
-Esto auto-descubre tokens por prefijo (`color_`, `font_`, `radius_`, `space_`) y genera presets completos.
+Esto escribe 38+ opciones de color + fuentes a `wp_options['et_divi']`. Divi genera CSS automáticamente. No se genera `brand.css` ni se ejecuta `build_design_system.py`.
 
 ---
 

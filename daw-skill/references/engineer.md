@@ -5,17 +5,15 @@ Tomar la definición de página, construir el schema completo y desplegarlo en W
 
 ---
 
-## Prequisito: Regenerar Design System
+## Prequisito: Sincronizar Brand (único comando)
 
-Si el design system cambió (nuevos colores, fuentes, presets), regenerarlo antes de desplegar:
+Si el brand cambió (colores, fuentes, logo), sincronizar antes de desplegar:
 
 ```powershell
-python DAW_bundle/workspace/build_design_system.py
+.\wp eval-file DAW_bundle/divi-agentic-core/bin/brand-sync.php
 ```
 
-Esto genera:
-- `site/<DAW_SITE>/design-system/divitheme.json`
-- `site/<DAW_SITE>/brand/assets/css/brand.css` (por marca, único)
+Esto sincroniza **todo** en un paso: `et_divi` (Customizer) + `divitheme.json` (tokens) + gcids (colores globales vivos) + gvids (variables nativas Divi 5 para radios, espacios y fuentes).
 
 ---
 
@@ -84,27 +82,9 @@ python DAW_bundle/workspace/combine.py `
 
 ---
 
-## Flujo de CSS de Marca (sin BD)
+## Brand CSS (Pipeline Actual)
 
-El CSS de marca (`daw-*` classes, variables CSS) se sirve desde disco:
-
-```
-brand.css se encola como daw-brand-css en wp_enqueue_scripts
-design tokens se inyectan como inline styles
-module CSS se encola via Module_Registry
-```
-
-No hay escritura a la BD. `sync_css` ya no se ejecuta en deploy.
-
-Si necesitas **limpiar datos legacy** (por ejemplo después de migrar de una versión anterior):
-
-```powershell
-.\wp.bat agentic sync_css
-# → Verifica archivos en disco
-# → Limpia et_custom_css legacy
-# → Vacía custom_css CPT
-# No es necesario en el día a día
-```
+El brand se sincroniza a `wp_options['et_divi']` mediante `brand-sync.php`. Divi genera y encola el CSS automáticamente. No hay CSS propio de marca, ni encolado manual, ni archivos brand.css en disco.
 
 ---
 
@@ -117,7 +97,6 @@ Si necesitas **limpiar datos legacy** (por ejemplo después de migrar de una ver
 | `global_colors list` | Lista Global Colors registrados |
 | `deploy_page` | Crea o actualiza una página desde un JSON schema |
 | `export_page --slug=<slug>` | Exporta página WP a schema editable |
-| `sync_css` | Ya no escribe — solo limpia legacy y verifica archivos |
 
 ---
 

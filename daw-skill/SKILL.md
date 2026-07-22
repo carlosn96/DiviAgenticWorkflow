@@ -1,9 +1,9 @@
 ---
 name: daw-skill
-description: The unified source of truth for the local Divi Agentic Workflow (DAW) in divitheme. Use this for any task involving the creation, modification, or deployment of Divi 5 pages. It orchestrates the 4-phase workflow: Analysis, Design Research, Mapping, and Execution.
+description: The unified source of truth for the local Divi Agentic Workflow (DAW) in divitheme. Use this for any task involving the creation, modification, or deployment of Divi 5 pages. It orchestrates the 4-phase workflow: Analysis, Design Research, Mapping, and Execution. Brand CSS is now handled via Divi Customizer (brand-sync.php → et_divi).
 ---
 
-# DAW-Skill: Divi Agentic Workflow Orchestrator (v4.1)
+# DAW-Skill: Divi Agentic Workflow Orchestrator (v5.0)
 
 Motor definitivo para la construcción de sitios con **Divi 5.5.0 Native**. Aplica separación estricta de responsabilidades mediante una orquestación modular de **4 fases**.
 
@@ -12,60 +12,37 @@ Motor definitivo para la construcción de sitios con **Divi 5.5.0 Native**. Apli
 
 ---
 
-## ⚡ Pipeline Real (lo que realmente se ejecuta)
+## ⚡ Pipeline Real
 
 ```
 Brand vars (_design_vars.json)
-  → build_design_system.py
-    → divitheme.json (58 presets)
-    → brand/assets/css/brand.css (por marca, único por DAW_SITE)
-  → wp agentic global_colors sync
+  → brand-sync.php
+    → wp_options['et_divi'] (Customizer global)
+    → divitheme.json (tokens + presets)
+    → gcids via GlobalData::set_global_colors()
   → page-defs/<slug>.json (manifiesto) + sections/*.json
   → python workspace/combine.py → <slug>-combined.json
-  → wp agentic deploy_page
-    → Layout Engine (refactorizado, renderers modulares) → post_content en WP
-  → Runtime: brand.css se encola desde disco via plugin
+  → wp agentic deploy_page → post_content en WP
 ```
 
 ---
 
-## ⚠️ Prerrequisito: Sistema de Colores Globales (gcid)
-
-Antes de desplegar, los colores deben estar sincronizados con Divi 5 como Global Colors (`gcid-*`).
-
-| Cuándo | Comando |
-|--------|---------|
-| **Una vez, al crear el design system** | `.\wp.bat agentic global_colors sync --design-system="DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json"` |
-| **Cada vez que cambien los colores** | Mismo comando (detecta cambios vía hash) |
-| **Verificar estado** | `.\wp.bat agentic global_colors status --design-system="..."` |
-
----
-
-## ⚡ Flujo de CSS de Marca (sin BD)
-
-El CSS de marca (`daw-*` classes, variables `--daw-*`) se sirve **desde disco**, no desde la BD:
-
-| Qué | Origen | Mecanismo |
-|-----|--------|-----------|
-| `daw-*` classes | `site/<DAW_SITE>/brand/assets/css/brand.css` | `wp_enqueue_style('daw-brand-css')` |
-| `--daw-*` variables | `design-system/divitheme.json` | Inline via `wp_add_inline_style` |
-| Fonts Google | `design-system/divitheme.json` | `wp_enqueue_style` dinámico |
-| Module CSS | `modules/<slug>/style.css` | `Module_Registry` |
-
-**Lo que YA NO se usa:**
-- ❌ `wp_update_custom_css_post()` — no más dump a la BD
-- ❌ `et_custom_css` (wp_options) — legacy eliminado
-- ❌ `custom_css` CPT — vaciado
-- ❌ `sync_css` en `build_page.php` — removido
-
-**`sync_css` ahora solo limpia legacy**, no escribe:
+## ⚡ Brand Sync (único comando)
 
 ```powershell
-.\wp.bat agentic sync_css
-# → Verifica archivos en disco
-# → Limpia et_custom_css
-# → Vacía custom_css CPT
+wp eval-file divi-agentic-core/bin/brand-sync.php
 ```
+
+Sincroniza **todo** en un solo paso:
+
+| Destino | Qué |
+|---------|-----|
+| `wp_options['et_divi']` | 38+ colores, 5 fuentes, logo, font sizes/weights → tema global |
+| `divitheme.json` | Tokens actualizados para Design_Resolver |
+| Global Colors (gcids) | Colores vía `GlobalData::set_global_colors()` |
+| Global Variables (gvids) | Radios, espacios y fuentes vía `GlobalData::set_global_variables()` — variables nativas editables en VB |
+
+No necesita `global_colors sync` aparte.
 
 ---
 
@@ -180,18 +157,11 @@ URL: <http://...>
 
 ### Dependencia del Sistema de Diseño
 
-El design system se genera automáticamente. No se edita a mano.
-
 ```powershell
 # 1. Editar brand/_design_vars.json (solo lo que cambia)
-# 2. Generar design system:
-python DAW_bundle/workspace/build_design_system.py
-#    → site/<DAW_SITE>/design-system/divitheme.json
-#    → site/<DAW_SITE>/brand/assets/css/brand.css
-
-# 3. Sincronizar colores globales:
-.\wp.bat agentic global_colors sync `
-  --design-system="DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json"
+# 2. Sincronizar todo:
+.\wp eval-file DAW_bundle/divi-agentic-core/bin/brand-sync.php
+#    → et_divi (Customizer) + divitheme.json (tokens) + gcids (colores vivos)
 ```
 
 - **Contenedores**: usar decoration nativa (background, spacing) en vez de clases.
@@ -205,17 +175,13 @@ python DAW_bundle/workspace/build_design_system.py
 > [!CAUTION]
 > **PROHIBIDO** usar `et_pb_*` (shortcodes Divi 4). El Layout Engine espera únicamente `divi/*`.
 
-Cada directorio en `site/` tiene su propio `brand/assets/css/brand.css`. `DAW_SITE` en `.env` define cuál usar:
+`DAW_SITE` en `.env` define qué directorio `site/` usar. `brand-sync.php` auto-descubre la ruta:
 
 ```powershell
 # Editar .env: DAW_SITE=nueva-marca
-
-# Regenerar design system + brand.css específico
-python DAW_bundle/workspace/build_design_system.py
-
-# Sincronizar colores
-.\wp.bat agentic global_colors sync `
-  --design-system="DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json"
+# Editar site/<DAW_SITE>/brand/_design_vars.json
+# Sincronizar todo:
+.\wp eval-file DAW_bundle/divi-agentic-core/bin/brand-sync.php
 ```
 
 ---
@@ -229,6 +195,6 @@ python DAW_bundle/workspace/build_design_system.py
 | Lógica del Diseñador | `references/designer.md` | Mapeo semántico → page-defs |
 | Lógica del Ingeniero | `references/engineer.md` | CLI, deploy, verificación |
 | Pipeline DAW | `DAW_bundle/AGENTS.md` | Fuente de verdad del flujo completo |
-| Shared Kernel | `DAW_bundle/daw/README.md` | Capa 1: cfg, types, tokens |
-| Inputs/Outputs del DS | `references/design-system-inputs.md` | Formatos de `_design_vars.json`, `_design_presets.json`, brief JSON, CLI de generadores |
+| Brand Sync | `DAW_bundle/divi-agentic-core/bin/brand-sync.php` | Mapeo `_design_vars.json` → `et_divi` |
+| Inputs del Brand | `references/design-system-inputs.md` | Formatos de `_design_vars.json`, brief JSON |
 | VIE package | `DAW_bundle/vie/README.md` | Visual Impact Engine |
