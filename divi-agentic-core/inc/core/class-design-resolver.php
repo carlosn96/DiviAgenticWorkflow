@@ -2,14 +2,17 @@
 namespace DAC\Core;
 
 /**
- * Design Resolver v1.0 — Project-Agnostic Token & Preset Resolver
+ * Design Resolver v2.0 — Lee tokens desde stores nativos Divi 5
  *
- * Reads any project's design-system JSON file and resolves:
- *   - {{design:type:key}}       → scalar token value (e.g. {{design:color:red}})
- *   - "$preset" key in objects  → deep-merge of a preset definition
+ * Resuelve:
+ *   - {{design:color:key}}     → var(--gcid-*) desde Global Colors
+ *   - {{design:radius:key}}    → valor desde Global Variables (numbers)
+ *   - {{design:space:key}}     → valor desde Global Variables (numbers)
+ *   - {{design:font:key}}      → valor desde Global Variables (fonts)
+ *   - "$preset" en objetos     → deep-merge desde divitheme.json['presets']
  *
- * Zero knowledge of project-specific colors, fonts, or values.
- * All design data lives in the external DS file passed via constructor.
+ * divitheme.json solo contiene presets + metadata.
+ * Los tokens viven en los stores nativos de Divi 5.
  */
 class Design_Resolver {
 
@@ -33,52 +36,73 @@ class Design_Resolver {
         $this->flatten_tokens();
     }
 
-    /**
-     * Resolve a raw schema string: merge presets + replace {{design:*}} tokens.
-     */
     public function resolve_schema_string( string $raw_schema ): string {
         $raw_schema = ltrim( $raw_schema, "\xEF\xBB\xBF" );
 
-        // Step 1: Structural preset merge (works on decoded array)
         $schema = json_decode( $raw_schema, true );
         if ( json_last_error() === JSON_ERROR_NONE && is_array( $schema ) ) {
             $this->resolve_presets_recursive( $schema );
             $raw_schema = json_encode( $schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
         }
 
-        // Step 2: Scalar token replacement (works on string)
         $raw_schema = $this->replace_tokens( $raw_schema );
 
         return $raw_schema;
     }
 
-    /**
-     * Getter for external use (e.g., validation, inspection).
-     */
     public function get_design(): array {
         return $this->design;
     }
 
     // ---------------------------------------------------------------
-    // Token flattening & replacement
+    // Token flattening — lee desde stores nativos Divi 5
     // ---------------------------------------------------------------
 
     private function flatten_tokens(): void {
+        $this->flatten_colors_from_gcids();
+        $this->flatten_from_global_variables();
+    }
+
+    private function flatten_colors_from_gcids(): void {
         $gcid_synced = ! empty( get_option( '_dac_gcid_hash', '' ) );
+        if ( ! $gcid_synced ) return;
 
-        $groups = $this->design['tokens'] ?? [];
-        foreach ( $groups as $group => $values ) {
-            if ( is_array( $values ) ) {
-                foreach ( $values as $key => $value ) {
+        if ( ! class_exists( '\ET\Builder\Packages\GlobalData\GlobalData' ) ) return;
+
+        $global_colors = \ET\Builder\Packages\GlobalData\GlobalData::get_global_colors();
+        if ( empty( $global_colors ) ) return;
+
+        foreach ( $global_colors as $gcid => $data ) {
+            $slug = preg_replace( '/^gcid-/', '', $gcid );
+            // Skip customizer slots (gcid-primary-color, etc.)
+            if ( in_array( $slug, [ 'primary-color', 'secondary-color', 'heading-color', 'body-color', 'link-color' ], true ) ) {
+                continue;
+            }
+            $token = "{{design:color:{$slug}}}";
+            $this->flat_tokens[ $token ] = "var(--gcid-{$slug})";
+        }
+    }
+
+    private function flatten_from_global_variables(): void {
+        if ( ! class_exists( '\ET\Builder\Packages\GlobalData\GlobalData' ) ) return;
+
+        $global_vars = \ET\Builder\Packages\GlobalData\GlobalData::get_global_variables();
+        if ( empty( $global_vars ) ) return;
+
+        foreach ( $global_vars as $gvid_type => $items ) {
+            if ( ! is_array( $items ) ) continue;
+            foreach ( $items as $gvid => $item ) {
+                $value = $item['value'] ?? '';
+                if ( $value === '' ) continue;
+
+                // gvid-space-sm → {{design:space:sm}}
+                // gvid-radius-sm → {{design:radius:sm}}
+                // gvid-font-body → {{design:font:body}}
+                if ( preg_match( '/^gvid-(space|radius|font)-(.+)$/', $gvid, $m ) ) {
+                    $group = $m[1];
+                    $key   = $m[2];
                     $token = "{{design:{$group}:{$key}}}";
-
-                    // Color tokens: use var(--gcid-*) when global colors synced
-                    if ( $gcid_synced && 'color' === $group ) {
-                        $slug = sanitize_title( $key );
-                        $this->flat_tokens[ $token ] = "var(--gcid-{$slug})";
-                    } else {
-                        $this->flat_tokens[ $token ] = $value;
-                    }
+                    $this->flat_tokens[ $token ] = $value;
                 }
             }
         }
@@ -93,14 +117,11 @@ class Design_Resolver {
     }
 
     // ---------------------------------------------------------------
-    // Preset resolution (structural merge)
+    // Preset resolution (structural merge) — desde divitheme.json
     // ---------------------------------------------------------------
 
     private function resolve_presets_recursive( array &$node ): void {
-        // Merge presets if present
         if ( isset( $node['presets'] ) && is_array( $node['presets'] ) ) {
-            // Process in reverse so deep_merge_preset($preset, $node)
-            // correctly gives priority to later presets (node wins over preset).
             $reversed = array_reverse( $node['presets'] );
             foreach ( $reversed as $preset_path ) {
                 $preset = $this->get_preset_by_path( $preset_path );
@@ -111,7 +132,6 @@ class Design_Resolver {
             unset( $node['presets'] );
         }
 
-        // Recurse into structural keys
         $recurse_keys = [ 'sections', 'rows', 'columns', 'modules', 'children' ];
         foreach ( $recurse_keys as $key ) {
             if ( isset( $node[ $key ] ) && is_array( $node[ $key ] ) ) {
@@ -124,35 +144,22 @@ class Design_Resolver {
         }
     }
 
-    /**
-     * Resolve a preset path like "section:hero-dark" or "text:eyebrow" or "module:card"
-     * from the design file's "presets" section.
-     */
     private function get_preset_by_path( string $path ): ?array {
         $parts = explode( ':', $path );
-        if ( count( $parts ) < 2 ) {
-            return null;
-        }
+        if ( count( $parts ) < 2 ) return null;
 
-        $category = $parts[0];     // "section", "text", "module"
-        $name     = $parts[1];     // "hero-dark", "eyebrow", "card"
+        $category = $parts[0];
+        $name     = $parts[1];
 
         $presets_section = $this->design['presets'] ?? [];
-
         if ( ! isset( $presets_section[ $category ][ $name ] ) ) {
             \WP_CLI::warning( "Preset not found: {$category}:{$name}" );
             return null;
         }
 
-        // Deep-resolve any {{design:*}} tokens inside the preset itself
-        $resolved = $this->resolve_preset_values( $presets_section[ $category ][ $name ] );
-
-        return $resolved;
+        return $this->resolve_preset_values( $presets_section[ $category ][ $name ] );
     }
 
-    /**
-     * Recursively replace {{design:*}} tokens inside a preset definition.
-     */
     private function resolve_preset_values( $value ) {
         if ( is_string( $value ) ) {
             return $this->replace_tokens( $value );
@@ -167,17 +174,12 @@ class Design_Resolver {
         return $value;
     }
 
-    /**
-     * Merge preset into node. Preset provides defaults; explicit node keys win.
-     */
     private function deep_merge_preset( array $preset, array $node ): array {
         $merged = $preset;
         foreach ( $node as $key => $value ) {
             if ( isset( $merged[ $key ] ) && is_array( $merged[ $key ] ) && is_array( $value ) ) {
                 $merged[ $key ] = $this->deep_merge_preset( $merged[ $key ], $value );
             } elseif ( isset( $merged[ $key ] ) && is_array( $merged[ $key ] ) && is_scalar( $value ) ) {
-                // Do not destroy the preset array with a simple scalar.
-                // Divi 5 schema mappings (e.g., 'icon') are handled by Layout_Engine later.
                 continue;
             } else {
                 $merged[ $key ] = $value;
