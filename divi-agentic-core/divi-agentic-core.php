@@ -116,6 +116,7 @@ require_once __DIR__ . '/inc/loader.php';
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
 	add_action( 'cli_init', function () {
 		\DAC\CLI\Agentic_Command::register();
+		\DAC\CLI\Brand_Command::register();
 	} );
 }
 
