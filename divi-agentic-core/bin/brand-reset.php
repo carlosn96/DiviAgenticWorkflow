@@ -1,25 +1,21 @@
 <?php
 /**
- * brand-sync.php — LEGACY wrapper
+ * brand-reset.php — LEGACY wrapper
  *
- * Este script es un wrapper delgado que delega a Brand_Sync_Handler.
- * Usar: wp brand sync <slug>
+ * Este script es un wrapper delgado que delega a Brand_Reset_Handler.
+ * Usar: wp brand reset <slug>
  *
  * Mantenido por compatibilidad con flujos legacy.
  */
 
 namespace DAC\Bin;
 
-// Cargar WordPress si no está (standalone via wp eval-file)
 if (!defined('ABSPATH') && !defined('WP_CLI')) {
     exit;
 }
 
-// El autoloader del plugin ya cargó Brand_Sync_Handler.
-// Solo necesitamos encontrar el site y delegar.
 $site = null;
 
-// Posicional: wp eval-file bin/brand-sync.php netflix
 global $argv;
 $found_script = false;
 foreach ($argv as $i => $arg) {
@@ -37,9 +33,9 @@ if (!$site) {
     $site = getenv('DAW_SITE');
 }
 
-if (class_exists('\DAC\Core\Brand_Sync_Handler')) {
-    \DAC\Core\Brand_Sync_Handler::run($site);
+if (class_exists('\DAC\Core\Brand_Reset_Handler')) {
+    \DAC\Core\Brand_Reset_Handler::run($site);
 } else {
-    fwrite(STDERR, "ERROR: Brand_Sync_Handler not loaded.\n");
+    fwrite(STDERR, "ERROR: Brand_Reset_Handler not loaded.\n");
     exit(1);
 }
