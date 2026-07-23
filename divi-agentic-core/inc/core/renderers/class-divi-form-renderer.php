@@ -221,11 +221,25 @@ class Divi_Form_Renderer extends Divi_Base_Renderer {
 				break;
 
 			case 'divi/search':
+				// showButton: check various locations
+			$show_btn = $data['show_button']
+				?? $data['module']['advanced']['showButton']['desktop']['value']
+				?? $data['search']['advanced']['showButton']['desktop']['value']
+				?? 'on';
 				$attrs['search'] = [ 'advanced' => [
-					'showButton'   => [ 'desktop' => [ 'value' => $data['show_button'] ?? 'on' ] ],
+					'showButton'   => [ 'desktop' => [ 'value' => $show_btn ] ],
 					'excludePages' => [ 'desktop' => [ 'value' => $data['exclude_pages'] ?? 'off' ] ],
 					'excludePosts' => [ 'desktop' => [ 'value' => $data['exclude_posts'] ?? 'off' ] ],
 				] ];
+				if (isset($data['searchPlaceholder'])) {
+					$attrs['searchPlaceholder'] = $data['searchPlaceholder'];
+				}
+				// field, button: pass through for native input/botón styling
+				foreach (['field', 'button'] as $key) {
+					if (isset($data[$key])) {
+						$attrs[$key] = $data[$key];
+					}
+				}
 				break;
 		}
 
