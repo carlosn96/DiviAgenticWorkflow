@@ -13,9 +13,9 @@
 
 trait Module_Metadata {
 
-    private static $meta_data     = null;
-    private static $render_data   = null;
-    private static $meta_loaded   = false;
+    private static ?array $meta_data     = null;
+    private static ?array $render_data   = null;
+    private static bool   $meta_loaded   = false;
 
     /**
      * Lazy-load metadata files once.

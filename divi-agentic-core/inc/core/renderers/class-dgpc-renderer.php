@@ -19,7 +19,7 @@ class Dgpc_Renderer implements Block_Renderer_Interface {
 	use Block_Helpers;
 
 	/** @var string Divi builder version injected from dispatcher. */
-	private string $builder_version;
+	private ?string $builder_version = null;
 
 	/**
 	 * Constructor.

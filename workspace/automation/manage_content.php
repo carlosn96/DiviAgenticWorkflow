@@ -59,7 +59,7 @@ if (!is_dir($target_dir)) mkdir($target_dir, 0777, true);
 
 echo "--- MODO: LOCAL ---\n";
 echo "Extrayendo snapshot local desde WordPress...\n";
-$cmd = '.\wp.bat post list --post_type=page,post,et_pb_layout,et_header_layout,et_footer_layout --fields=ID,post_name,post_content,post_modified --format=json';
+$cmd = 'php wp-cli.phar post list --post_type=page,post,et_pb_layout,et_header_layout,et_footer_layout --fields=ID,post_name,post_content,post_modified --format=json';
 $output = shell_exec($cmd);
 
 $start = strpos($output, '[');

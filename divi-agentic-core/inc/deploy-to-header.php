@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once dirname( __DIR__ ) . '/inc/core/trait-module-metadata.php';
 require_once dirname( __DIR__ ) . '/inc/core/class-layout-engine.php';
 
-$schema_path = 'C:\\Users\\Departamento WEB\\Local Sites\\sanpablo-mx\\temp_header_schema.json';
+$schema_path = __DIR__ . '/temp_header_schema.json';
 $header_post_id = 121485;
 
 if ( ! file_exists( $schema_path ) ) {
