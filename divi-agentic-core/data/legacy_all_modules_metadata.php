@@ -203,11 +203,10 @@ return [
             'closedToggleIcon' => [
                 'type' => 'object',
                 'selector' =>
-                    '{{selector}} .et_pb_toggle_close:not(.et_pb_toggle_empty) .et_pb_toggle_title:before',
+                    '{{selector}} .et_pb_toggle_close .et_pb_toggle_title:before',
                 'styleProps' => [
                     'icon' => [
-                        'selector' =>
-                            '{{selector}} .et_pb_toggle_close:not(.et_pb_toggle_empty) .et_pb_toggle_title:before',
+                        'selector' => '{{selector}} .et_pb_toggle_title:before',
                         'important' => [
                             'desktop' => [
                                 'value' => [
@@ -604,7 +603,7 @@ return [
                     ],
                     'border' => [
                         'selector' =>
-                            '{{selectorPrefix}}.et_pb_module{{baseSelector}}.et_pb_toggle'
+                            '{{selectorPrefix}}.et_pb_accordion .et_pb_module{{baseSelector}}.et_pb_toggle'
                     ],
                     'boxShadow' => [
                         'important' => true
@@ -668,7 +667,6 @@ return [
                     'class' => 'et_pb_toggle_title'
                 ],
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'styleProps' => [
                     'font' => [
@@ -744,16 +742,16 @@ return [
             'closedToggleIcon' => [
                 'type' => 'object',
                 'selector' =>
-                    '{{selector}}.et_pb_toggle_close:not(.et_pb_toggle_empty) .et_pb_toggle_title:before',
+                    '{{selector}}.et_pb_toggle_close .et_pb_toggle_title:before',
                 'styleProps' => [
                     'icon' => [
                         'selector' =>
-                            '{{selector}}.et_pb_toggle_close:not(.et_pb_toggle_empty) .et_pb_toggle_title:before',
+                            '{{selector}}.et_pb_toggle_close .et_pb_toggle_title:before',
                         'propertySelectors' => [
                             'desktop' => [
                                 'value' => [
                                     'font-size' =>
-                                        '{{selector}}.et_pb_toggle_close:not(.et_pb_toggle_empty) .et_pb_toggle_title:before, {{selector}}.et_pb_toggle_close:not(.et_pb_toggle_empty) .et_vb_toggle_overlay'
+                                        '{{selector}}.et_pb_toggle_close .et_pb_toggle_title:before, {{selector}}.et_pb_toggle_close .et_vb_toggle_overlay'
                                 ]
                             ]
                         ],
@@ -1244,8 +1242,7 @@ return [
                         'selector' => '{{selector}}.et_pb_audio_module'
                     ],
                     'layout' => [
-                        'selector' =>
-                            '{{selector}}, {{selector}} .et_pb_audio_module_content'
+                        'selector' => '{{selector}} .et_pb_audio_module_content'
                     ]
                 ],
                 'styleComponentsProps' => [
@@ -1295,7 +1292,6 @@ return [
                     '{{selector}}.et_pb_audio_module p.et_audio_module_meta strong',
                 'tagName' => 'strong',
                 'inlineEditor' => false,
-                'allowHtml' => true,
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'settings' => [
                     'innerContent' => [
@@ -1329,7 +1325,6 @@ return [
                     '{{selector}}.et_pb_audio_module p.et_audio_module_meta span',
                 'tagName' => 'span',
                 'inlineEditor' => false,
-                'allowHtml' => true,
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'settings' => [
                     'innerContent' => [
@@ -1439,7 +1434,6 @@ return [
                 ],
                 'tagName' => 'h2',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'elementType' => 'heading',
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'styleProps' => [
@@ -1462,7 +1456,6 @@ return [
                 'type' => 'object',
                 'selector' => '{{selector}} .et_pb_audio_cover_art',
                 'supportsCustomAttributes' => true,
-                'elementType' => 'image',
                 'settings' => [
                     'innerContent' => [
                         'groupType' => 'group-item',
@@ -1493,42 +1486,57 @@ return [
                         ]
                     ],
                     'decoration' => [
-                        'image' => [
-                            'panel' => 'design',
-                            'groupType' => 'group',
-                            'groupName' => 'image',
-                            'priority' => 10,
-                            'component' => [
-                                'type' => 'group',
-                                'name' => 'divi/image',
-                                'props' => [
-                                    'attrName' => 'image',
-                                    'groupLabel' => 'Image',
-                                    'grouped' => true,
-                                    'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
+                        'border' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/border',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'boxShadow' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/box-shadow',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'filters' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/filters',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
                                 ]
                             ]
                         ]
                     ]
                 ],
                 'styleProps' => [
-                    'fit' => [
-                        'selector' => '{{selector}} .et_pb_audio_cover_art'
-                    ],
-                    'sizing' => [
-                        'propertySelectors' => [
-                            'desktop' => [
-                                'value' => [
-                                    'aspect-ratio' =>
-                                        '{{selector}} .et_pb_audio_cover_art'
-                                ]
-                            ]
-                        ]
-                    ],
-                    'border' => [
-                        'selector' => '{{selector}} .et_pb_audio_cover_art'
-                    ],
                     'boxShadow' => [
                         'useOverlay' => true
                     ]
@@ -1627,6 +1635,22 @@ return [
                             'groupLabel' => 'Image'
                         ]
                     ]
+                ],
+                'designImage' => [
+                    'panel' => 'design',
+                    'priority' => 5,
+                    'groupName' => 'imageStyle',
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Image',
+                            'dynamicSubgroupHost' => true,
+                            'dynamicSubgroupExcludedComponents' => [
+                                'divi/background'
+                            ],
+                            'clipboardCategory' => 'style'
+                        ]
+                    ]
                 ]
             ]
         ],
@@ -1700,26 +1724,6 @@ return [
                 'selector' => '{{selector}} .et_pb_before_image img',
                 'elementType' => 'image',
                 'supportsCustomAttributes' => true,
-                'styleProps' => [
-                    'selector' => '{{selector}} .et_pb_before_image',
-                    'fit' => [
-                        'selector' => '{{selector}} .et_pb_before_image img'
-                    ],
-                    'sizing' => [
-                        'propertySelectors' => [
-                            'desktop' => [
-                                'value' => [
-                                    'aspect-ratio' =>
-                                        '{{selector}} .et_pb_before_image img',
-                                    'height' =>
-                                        '{{selector}} .et_pb_before_image img',
-                                    'max-height' =>
-                                        '{{selector}} .et_pb_before_image img'
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
                 'settings' => [
                     'innerContent' => [
                         'groupType' => 'group-items',
@@ -1756,25 +1760,6 @@ return [
                                 ]
                             ]
                         ]
-                    ],
-                    'decoration' => [
-                        'image' => [
-                            'panel' => 'design',
-                            'groupType' => 'group',
-                            'groupName' => 'image',
-                            'priority' => 10,
-                            'component' => [
-                                'type' => 'group',
-                                'name' => 'divi/image',
-                                'props' => [
-                                    'attrName' => 'beforeImage',
-                                    'groupLabel' => 'Before Image',
-                                    'grouped' => true,
-                                    'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
-                                ]
-                            ]
-                        ]
                     ]
                 ]
             ],
@@ -1783,26 +1768,6 @@ return [
                 'selector' => '{{selector}} .et_pb_after_image img',
                 'elementType' => 'image',
                 'supportsCustomAttributes' => true,
-                'styleProps' => [
-                    'selector' => '{{selector}} .et_pb_after_image',
-                    'fit' => [
-                        'selector' => '{{selector}} .et_pb_after_image img'
-                    ],
-                    'sizing' => [
-                        'propertySelectors' => [
-                            'desktop' => [
-                                'value' => [
-                                    'aspect-ratio' =>
-                                        '{{selector}} .et_pb_after_image img',
-                                    'height' =>
-                                        '{{selector}} .et_pb_after_image img',
-                                    'max-height' =>
-                                        '{{selector}} .et_pb_after_image img'
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
                 'settings' => [
                     'innerContent' => [
                         'groupType' => 'group-items',
@@ -1836,25 +1801,6 @@ return [
                                             'titleText' => true
                                         ]
                                     ]
-                                ]
-                            ]
-                        ]
-                    ],
-                    'decoration' => [
-                        'image' => [
-                            'panel' => 'design',
-                            'groupType' => 'group',
-                            'groupName' => 'image',
-                            'priority' => 10,
-                            'component' => [
-                                'type' => 'group',
-                                'name' => 'divi/image',
-                                'props' => [
-                                    'attrName' => 'afterImage',
-                                    'groupLabel' => 'After Image',
-                                    'grouped' => true,
-                                    'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
                                 ]
                             ]
                         ]
@@ -2653,10 +2599,6 @@ return [
                     'filters' => [
                         'selector' =>
                             '{{selector}} img,{{selector}} .et_pb_slides,{{selector}} .et_pb_video_overlay'
-                    ],
-                    'fit' => [
-                        'selector' =>
-                            '{{selector}} .et_pb_post .entry-featured-image-url img'
                     ]
                 ],
                 'settings' => [
@@ -2684,20 +2626,48 @@ return [
                         ]
                     ],
                     'decoration' => [
-                        'image' => [
-                            'panel' => 'design',
-                            'groupType' => 'group',
-                            'groupName' => 'image',
-                            'priority' => 10,
-                            'component' => [
-                                'type' => 'group',
-                                'name' => 'divi/image',
-                                'props' => [
-                                    'attrName' => 'image',
-                                    'groupLabel' => 'Image',
-                                    'grouped' => true,
-                                    'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
+                        'border' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/border',
+                                    'props' => [
+                                        'grouped' => true
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'boxShadow' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/box-shadow',
+                                    'props' => [
+                                        'grouped' => true
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'filters' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/filters',
+                                    'props' => [
+                                        'grouped' => true
+                                    ]
                                 ]
                             ]
                         ]
@@ -3191,7 +3161,7 @@ return [
             ],
             'blogGrid' => [
                 'type' => 'object',
-                'selector' => '{{selector}} .et_pb_blog_posts',
+                'selector' => '{{selector}} .et_pb_posts',
                 'settings' => [
                     'decoration' => [
                         'layout' => [
@@ -3361,6 +3331,18 @@ return [
                         ]
                     ]
                 ],
+                'designImage' => [
+                    'panel' => 'design',
+                    'priority' => 10,
+                    'groupName' => 'designImage',
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Image',
+                            'dynamicSubgroupHost' => true
+                        ]
+                    ]
+                ],
                 'designBorder' => [
                     'panel' => 'design',
                     'priority' => 90,
@@ -3403,14 +3385,8 @@ return [
                 'type' => 'object',
                 'label' => 'Image or Icon',
                 'selector' =>
-                    '{{selector}} > .et_pb_blurb_content > .et_pb_main_blurb_image .et-pb-icon, {{selector}} > .et_pb_blurb_content > .et_pb_main_blurb_image img',
+                    '{{selector}} .et_pb_main_blurb_image .et-pb-icon, {{selector}} .et_pb_main_blurb_image img',
                 'supportsCustomAttributes' => true,
-                'scriptDataProps' => [
-                    'animation' => [
-                        'selector' =>
-                            '{{selector}} > .et_pb_blurb_content > .et_pb_main_blurb_image'
-                    ]
-                ],
                 'settings' => [
                     'innerContent' => [
                         'groupType' => 'group-items',
@@ -3499,7 +3475,7 @@ return [
                                 'description' =>
                                     'Here you can define a custom color for your icon.',
                                 'render' => true,
-                                'priority' => 2,
+                                'priority' => 10,
                                 'features' => [
                                     'dynamicContent' => [
                                         'type' => 'color'
@@ -3521,7 +3497,7 @@ return [
                                     'Here you can choose where to place the icon.',
                                 'category' => 'layout',
                                 'render' => true,
-                                'priority' => 1,
+                                'priority' => 30,
                                 'features' => [
                                     'hover' => false,
                                     'sticky' => false
@@ -3544,6 +3520,64 @@ return [
                         ]
                     ],
                     'decoration' => [
+                        'sizing' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImageIcon',
+                                'priority' => 52,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/sizing',
+                                    'props' => [
+                                        'attrName' =>
+                                            'imageIcon.decoration.sizing',
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image/Icon',
+                                        'dynamicSubgroupHostLayoutStyle' =>
+                                            'block',
+                                        'fields' => [
+                                            'iconFontSize' => [
+                                                'attrName' =>
+                                                    'imageIcon.decoration.sizing',
+                                                'subName' => 'iconFontSize',
+                                                'defaultAttr' => [
+                                                    'desktop' => [
+                                                        'value' => [
+                                                            'iconFontSize' =>
+                                                                '96px'
+                                                        ]
+                                                    ]
+                                                ],
+                                                'label' => 'Icon Font Size',
+                                                'description' =>
+                                                    'Control the size of the icon by increasing or decreasing the font size.',
+                                                'priority' => 1,
+                                                'category' => 'font_option',
+                                                'render' => true,
+                                                'features' => [
+                                                    'dynamicContent' => [
+                                                        'type' => 'number'
+                                                    ]
+                                                ],
+                                                'component' => [
+                                                    'type' => 'field',
+                                                    'name' => 'divi/range',
+                                                    'props' => [
+                                                        'cssProperty' =>
+                                                            'font-size',
+                                                        'defaultUnit' => 'px',
+                                                        'min' => 1,
+                                                        'minLimit' => 1,
+                                                        'max' => 120
+                                                    ]
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ],
                         'background' => [
                             'groupType' => 'group-item',
                             'item' => [
@@ -3562,6 +3596,22 @@ return [
                                 ]
                             ]
                         ],
+                        'border' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImageIcon',
+                                'priority' => 60,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/border',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image/Icon'
+                                    ]
+                                ]
+                            ]
+                        ],
                         'spacing' => [
                             'groupType' => 'group-item',
                             'item' => [
@@ -3571,6 +3621,38 @@ return [
                                 'component' => [
                                     'type' => 'group',
                                     'name' => 'divi/spacing',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image/Icon'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'boxShadow' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImageIcon',
+                                'priority' => 60,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/box-shadow',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'filters' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImageIcon',
+                                'priority' => 60,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/filters',
                                     'props' => [
                                         'grouped' => true,
                                         'fieldLabel' => 'Image/Icon'
@@ -3600,69 +3682,56 @@ return [
                 ],
                 'styleProps' => [
                     'selector' =>
-                        '{{selector}} > .et_pb_blurb_content > .et_pb_main_blurb_image .et-pb-icon, {{selector}} > .et_pb_blurb_content > .et_pb_main_blurb_image .et_pb_image_wrap',
-                    'fit' => [
-                        'selector' =>
-                            '{{selector}} > .et_pb_blurb_content > .et_pb_main_blurb_image img'
-                    ],
+                        '{{selector}} .et-pb-icon, {{selector}} .et_pb_image_wrap',
                     'spacing' => [
                         'selector' =>
-                            '{{selector}} > .et_pb_blurb_content > .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} > .et_pb_blurb_content > .et_pb_main_blurb_image .et-pb-icon',
+                            '{{selector}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} .et_pb_main_blurb_image .et-pb-icon',
                         'important' => true
                     ],
                     'boxShadow' => [
                         'selector' =>
-                            '{{selector}} > .et_pb_blurb_content > .et_pb_main_blurb_image .et_pb_image_wrap.et_pb_only_image_mode_wrap',
+                            '{{selector}} .et_pb_main_blurb_image .et_pb_image_wrap.et_pb_only_image_mode_wrap',
                         'useOverlay' => true
                     ],
                     'filters' => [
-                        'selector' =>
-                            '{{selector}} > .et_pb_blurb_content > .et_pb_main_blurb_image',
+                        'selector' => '{{selector}} .et_pb_main_blurb_image',
                         'selectors' => [
                             'desktop' => [
                                 'value' =>
-                                    '{{selector}} > .et_pb_blurb_content > .et_pb_main_blurb_image',
+                                    '{{selector}} .et_pb_main_blurb_image',
                                 'hover' =>
-                                    '{{selector}}{{:hover}} > .et_pb_blurb_content > .et_pb_main_blurb_image'
+                                    '{{selector}}{{:hover}} .et_pb_main_blurb_image'
                             ]
                         ]
                     ],
                     'border' => [
                         'selector' =>
-                            '{{selector}} > .et_pb_blurb_content > .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} > .et_pb_blurb_content > .et_pb_main_blurb_image .et-pb-icon',
+                            '{{selector}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} .et_pb_main_blurb_image .et-pb-icon',
                         'selectors' => [
                             'desktop' => [
                                 'value' =>
-                                    '{{selector}} > .et_pb_blurb_content > .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} > .et_pb_blurb_content > .et_pb_main_blurb_image .et-pb-icon',
+                                    '{{selector}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} .et_pb_main_blurb_image .et-pb-icon',
                                 'hover' =>
-                                    '{{selector}}{{:hover}} > .et_pb_blurb_content > .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}}{{:hover}} > .et_pb_blurb_content > .et_pb_main_blurb_image .et-pb-icon'
+                                    '{{selector}}{{:hover}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}}{{:hover}} .et_pb_main_blurb_image .et-pb-icon'
                             ]
                         ]
                     ],
                     'background' => [
                         'selector' =>
-                            '{{selector}} > .et_pb_blurb_content > .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} > .et_pb_blurb_content > .et_pb_main_blurb_image .et-pb-icon',
+                            '{{selector}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} .et_pb_main_blurb_image .et-pb-icon',
                         'selectors' => [
                             'desktop' => [
                                 'value' =>
-                                    '{{selector}} > .et_pb_blurb_content > .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} > .et_pb_blurb_content > .et_pb_main_blurb_image .et-pb-icon',
+                                    '{{selector}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} .et_pb_main_blurb_image .et-pb-icon',
                                 'hover' =>
-                                    '{{selector}}{{:hover}} > .et_pb_blurb_content > .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}}{{:hover}} > .et_pb_blurb_content > .et_pb_main_blurb_image .et-pb-icon'
+                                    '{{selector}}{{:hover}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}}{{:hover}} .et_pb_main_blurb_image .et-pb-icon'
                             ]
                         ]
                     ],
                     'sizing' => [
                         'selector' =>
-                            '{{selector}} > .et_pb_blurb_content > .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} > .et_pb_blurb_content > .et_pb_main_blurb_image .et-pb-icon',
-                        'disableAlignmentStyles' => true,
-                        'propertySelectors' => [
-                            'desktop' => [
-                                'value' => [
-                                    'aspect-ratio' =>
-                                        '{{selector}} > .et_pb_blurb_content > .et_pb_main_blurb_image img'
-                                ]
-                            ]
-                        ]
+                            '{{selector}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} .et_pb_main_blurb_image .et-pb-icon',
+                        'disableAlignmentStyles' => true
                     ]
                 ],
                 'styleComponentsProps' => [
@@ -3744,8 +3813,7 @@ return [
                         'important' => true
                     ],
                     'layout' => [
-                        'selector' =>
-                            '{{selector}}, {{selector}} .et_pb_blurb_content'
+                        'selector' => '{{selector}} .et_pb_blurb_content'
                     ]
                 ]
             ],
@@ -3771,7 +3839,6 @@ return [
                 ],
                 'tagName' => 'h4',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'elementType' => 'headingLink',
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'styleProps' => [
@@ -3919,61 +3986,11 @@ return [
                     'groupName' => 'imageIcon',
                     'multiElements' => true,
                     'component' => [
-                        'name' => 'divi/image',
+                        'name' => 'divi/composite',
                         'props' => [
                             'groupLabel' => 'Image & Icon',
-                            'attrName' => 'imageIcon',
-                            'grouped' => true,
-                            'presetGroup' => 'divi/image',
                             'dynamicSubgroupHost' => true,
-                            'clipboardCategory' => 'style',
-                            'fields' => [
-                                'sizingGroup' => [
-                                    'component' => [
-                                        'props' => [
-                                            'fields' => [
-                                                'iconFontSize' => [
-                                                    'attrName' =>
-                                                        'imageIcon.decoration.sizing',
-                                                    'subName' => 'iconFontSize',
-                                                    'defaultAttr' => [
-                                                        'desktop' => [
-                                                            'value' => [
-                                                                'iconFontSize' =>
-                                                                    '96px'
-                                                            ]
-                                                        ]
-                                                    ],
-                                                    'label' => 'Icon Font Size',
-                                                    'description' =>
-                                                        'Control the size of the icon by increasing or decreasing the font size.',
-                                                    'priority' => 1,
-                                                    'category' => 'font_option',
-                                                    'render' => true,
-                                                    'features' => [
-                                                        'dynamicContent' => [
-                                                            'type' => 'number'
-                                                        ]
-                                                    ],
-                                                    'component' => [
-                                                        'type' => 'field',
-                                                        'name' => 'divi/range',
-                                                        'props' => [
-                                                            'cssProperty' =>
-                                                                'font-size',
-                                                            'defaultUnit' =>
-                                                                'px',
-                                                            'min' => 1,
-                                                            'minLimit' => 1,
-                                                            'max' => 120
-                                                        ]
-                                                    ]
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
+                            'clipboardCategory' => 'style'
                         ]
                     ]
                 ],
@@ -4160,7 +4177,7 @@ return [
                     'groupedOptionGroup' => true
                 ],
                 'selector' =>
-                    '{{selector}} .et_pb_breadcrumbs--trail a.et_pb_breadcrumbs--breadcrumb:not(.et_pb_breadcrumbs--home)',
+                    '{{selector}} .et_pb_breadcrumbs--trail a.et_pb_breadcrumbs--breadcrumb',
                 'settings' => [
                     'decoration' => [
                         'background' => [
@@ -4378,7 +4395,7 @@ return [
                 'label' => 'Breadcrumb Link',
                 'subName' => 'breadcrumbLink',
                 'selectorSuffix' =>
-                    ' .et_pb_breadcrumbs--trail a.et_pb_breadcrumbs--breadcrumb:not(.et_pb_breadcrumbs--home)'
+                    ' .et_pb_breadcrumbs--trail a.et_pb_breadcrumbs--breadcrumb'
             ],
             'homeLink' => [
                 'label' => 'Home Link',
@@ -5106,7 +5123,6 @@ return [
                 ],
                 'tagName' => 'h3',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'elementType' => 'heading',
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'styleProps' => [
@@ -5852,7 +5868,7 @@ return [
                         'important' => true
                     ],
                     'layout' => [
-                        'selector' => '{{selector}}, {{selector}} #comment-wrap'
+                        'selector' => '{{selector}} #comment-wrap'
                     ]
                 ],
                 'settings' => [
@@ -5966,20 +5982,52 @@ return [
                         ]
                     ],
                     'decoration' => [
-                        'image' => [
-                            'panel' => 'design',
-                            'groupType' => 'group',
-                            'groupName' => 'image',
-                            'priority' => 10,
-                            'component' => [
-                                'type' => 'group',
-                                'name' => 'divi/image',
-                                'props' => [
-                                    'attrName' => 'image',
-                                    'groupLabel' => 'Image',
-                                    'grouped' => true,
-                                    'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
+                        'border' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 60,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/border',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'boxShadow' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 60,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/box-shadow',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'filters' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'attrName' => 'image.decoration.filters',
+                                'priority' => 60,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/filters',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
                                 ]
                             ]
                         ]
@@ -6337,6 +6385,20 @@ return [
                             'dynamicSubgroupHost' => true
                         ]
                     ]
+                ],
+                'designImage' => [
+                    'panel' => 'design',
+                    'priority' => 10,
+                    'groupName' => 'image',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Image',
+                            'clipboardCategory' => 'style',
+                            'dynamicSubgroupHost' => true
+                        ]
+                    ]
                 ]
             ]
         ],
@@ -6620,7 +6682,6 @@ return [
                 ],
                 'tagName' => 'label',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'settings' => [
                     'advanced' => [
@@ -7168,8 +7229,7 @@ return [
                     'border' => [],
                     'boxShadow' => [],
                     'layout' => [
-                        'selector' =>
-                            '{{selector}}, {{selector}} .et_pb_contact_form'
+                        'selector' => '{{selector}} .et_pb_contact_form'
                     ]
                 ],
                 'settings' => [
@@ -7268,7 +7328,6 @@ return [
                 ],
                 'tagName' => 'h1',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'settings' => [
                     'innerContent' => [
@@ -7621,9 +7680,8 @@ return [
             'contactButton' => [
                 'label' => 'Contact Button',
                 'subName' => 'contactButton',
-                'selector' =>
-                    '{{selector}}.et_pb_contact_form_container .et_contact_bottom_container .et_pb_contact_submit.et_pb_button',
-                'selectorSuffix' => ''
+                'selectorSuffix' =>
+                    '.et_pb_contact_form_container .et_contact_bottom_container .et_pb_contact_submit.et_pb_button'
             ],
             'contactFields' => [
                 'label' => 'Form Fields',
@@ -7782,7 +7840,7 @@ return [
                 'selector' => '{{selector}}',
                 'styleProps' => [
                     'layout' => [
-                        'selector' => '{{selector}}, {{selector}} form'
+                        'selector' => '{{selector}} form'
                     ]
                 ],
                 'settings' => [
@@ -7899,12 +7957,6 @@ return [
                 'type' => 'object',
                 'selector' => '{{selector}} .et_pb_button.wpcf7-submit',
                 'elementType' => 'button',
-                'styleProps' => [
-                    'selector' => '{{selector}} .et_pb_button.wpcf7-submit',
-                    'border' => [
-                        'important' => true
-                    ]
-                ],
                 'settings' => [
                     'advanced' => [],
                     'decoration' => [
@@ -8601,7 +8653,6 @@ return [
                 ],
                 'tagName' => 'h4',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'elementType' => 'heading',
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'styleProps' => [
@@ -9084,7 +9135,6 @@ return [
                 ],
                 'tagName' => 'span',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'styleProps' => [
                     'font' => [
@@ -9772,7 +9822,6 @@ return [
                 ],
                 'tagName' => 'h2',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'elementType' => 'heading',
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'styleProps' => [
@@ -10401,42 +10450,6 @@ return [
                                                 ],
                                                 'inline' => [
                                                     'label' => 'Inline'
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ],
-                                'horizontalMode' => [
-                                    'groupSlug' => 'designDropdown',
-                                    'priority' => 6,
-                                    'render' => true,
-                                    'visible' => 'isVisibleFields',
-                                    'attrName' => 'module.advanced.dropdown',
-                                    'subName' => 'horizontalMode',
-                                    'label' => 'Horizontal Position Mode',
-                                    'description' =>
-                                        'Choose whether floating dropdown alignment should follow the parent module, parent row, or the viewport.',
-                                    'category' => 'basic_option',
-                                    'features' => [
-                                        'responsive' => true,
-                                        'hover' => false,
-                                        'sticky' => false,
-                                        'preset' => ['script']
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/select',
-                                        'props' => [
-                                            'defaultValue' => 'trigger',
-                                            'options' => [
-                                                'trigger' => [
-                                                    'label' => 'Parent Module'
-                                                ],
-                                                'row' => [
-                                                    'label' => 'Parent Row'
-                                                ],
-                                                'viewport' => [
-                                                    'label' => 'Viewport'
                                                 ]
                                             ]
                                         ]
@@ -11099,19 +11112,6 @@ return [
                 'selector' => '{{selector}} .et_portfolio_image',
                 'supportsCustomAttributes' => true,
                 'styleProps' => [
-                    'fit' => [
-                        'selector' => '{{selector}} .et_portfolio_image img'
-                    ],
-                    'sizing' => [
-                        'propertySelectors' => [
-                            'desktop' => [
-                                'value' => [
-                                    'aspect-ratio' =>
-                                        '{{selector}} .et_portfolio_image img'
-                                ]
-                            ]
-                        ]
-                    ],
                     'border' => [
                         'selector' =>
                             '{{selector}}.et_pb_filterable_portfolio .et_portfolio_image'
@@ -11132,20 +11132,54 @@ return [
                 ],
                 'settings' => [
                     'decoration' => [
-                        'image' => [
-                            'panel' => 'design',
-                            'groupType' => 'group',
-                            'groupName' => 'image',
-                            'priority' => 10,
-                            'component' => [
-                                'type' => 'group',
-                                'name' => 'divi/image',
-                                'props' => [
-                                    'attrName' => 'image',
-                                    'groupLabel' => 'Image',
-                                    'grouped' => true,
-                                    'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
+                        'border' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'attrName' => 'image.decoration.border',
+                                'priority' => 10,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/border',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'boxShadow' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'attrName' => 'image.decoration.boxShadow',
+                                'priority' => 10,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/box-shadow',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'filters' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'attrName' => 'image.decoration.filters',
+                                'priority' => 10,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/filters',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
                                 ]
                             ]
                         ]
@@ -11350,6 +11384,17 @@ return [
                         'name' => 'divi/composite',
                         'props' => [
                             'groupLabel' => 'Overlay'
+                        ]
+                    ]
+                ],
+                'designImage' => [
+                    'panel' => 'design',
+                    'priority' => 10,
+                    'groupName' => 'designImage',
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Image'
                         ]
                     ]
                 ],
@@ -11694,8 +11739,7 @@ return [
                 ],
                 'styleProps' => [
                     'layout' => [
-                        'selector' =>
-                            '{{selector}}, {{selector}} .header-content'
+                        'selector' => '{{selector}} .header-content'
                     ]
                 ]
             ],
@@ -11708,20 +11752,6 @@ return [
                 'styleProps' => [
                     'selector' =>
                         '{{selector}} .header-logo, {{selector}} .header-image-container img',
-                    'fit' => [
-                        'selector' =>
-                            '{{selector}} .header-logo, {{selector}} .header-image-container img'
-                    ],
-                    'sizing' => [
-                        'propertySelectors' => [
-                            'desktop' => [
-                                'value' => [
-                                    'aspect-ratio' =>
-                                        '{{selector}} .header-logo, {{selector}} .header-image-container img'
-                                ]
-                            ]
-                        ]
-                    ],
                     'border' => [
                         'selector' =>
                             '{{selector}}.et_pb_fullwidth_header .header-logo, {{selector}}.et_pb_fullwidth_header .header-image-container img'
@@ -11769,7 +11799,56 @@ return [
                             ]
                         ]
                     ],
-                    'decoration' => [],
+                    'decoration' => [
+                        'border' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'attrName' => 'image.decoration.border',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/border',
+                                    'props' => [
+                                        'grouped' => true
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'boxShadow' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'attrName' => 'image.decoration.boxShadow',
+                                'priority' => 30,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/box-shadow',
+                                    'props' => [
+                                        'grouped' => true
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'filters' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'attrName' => 'image.decoration.filters',
+                                'priority' => 30,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/filters',
+                                    'props' => [
+                                        'grouped' => true
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ],
                     'advanced' => [
                         'orientation' => [
                             'groupType' => 'group-item',
@@ -11780,7 +11859,7 @@ return [
                                 'description' =>
                                     'This controls the orientation of the image within the module.',
                                 'category' => 'layout',
-                                'priority' => 1,
+                                'priority' => 10,
                                 'render' => true,
                                 'multipleChoices' => false,
                                 'features' => [
@@ -11855,7 +11934,6 @@ return [
                 ],
                 'tagName' => 'h1',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'elementType' => 'heading',
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'styleProps' => [
@@ -11925,7 +12003,6 @@ return [
                     'class' => 'et_pb_fullwidth_header_subhead'
                 ],
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'settings' => [
                     'innerContent' => [
@@ -12591,14 +12668,11 @@ return [
                     'multiElements' => true,
                     'groupName' => 'image',
                     'component' => [
-                        'name' => 'divi/image',
+                        'name' => 'divi/composite',
                         'props' => [
-                            'attrName' => 'image',
                             'clipboardCategory' => 'style',
                             'groupLabel' => 'Image',
-                            'grouped' => true,
-                            'dynamicSubgroupHost' => true,
-                            'presetGroup' => 'divi/image'
+                            'dynamicSubgroupHost' => true
                         ]
                     ]
                 ],
@@ -12733,6 +12807,7 @@ return [
                     ]
                 ],
                 'styleComponentsProps' => [
+                    'background' => false,
                     'boxShadow' => [
                         'settings' => [
                             'overlay' => true
@@ -13623,18 +13698,6 @@ return [
                                     '{{selector}}.et_pb_fullwidth_menu ul li a',
                                 'hover' =>
                                     '{{selector}}.et_pb_fullwidth_menu ul li:hover > a'
-                            ]
-                        ]
-                    ],
-                    'border' => [
-                        'selectors' => [
-                            'desktop' => [
-                                'value' =>
-                                    '{{selector}}.et_pb_fullwidth_menu .et_pb_menu__menu > nav > ul > li > a',
-                                'hover' =>
-                                    '{{selector}}.et_pb_fullwidth_menu .et_pb_menu__menu > nav > ul > li > a',
-                                'active' =>
-                                    '{{selector}}.et_pb_fullwidth_menu .et_pb_menu__menu > nav > ul > li > a'
                             ]
                         ]
                     ]
@@ -15018,7 +15081,6 @@ return [
                 ],
                 'tagName' => 'h2',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'elementType' => 'heading',
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'styleProps' => [
@@ -15190,25 +15252,7 @@ return [
             'image' => [
                 'type' => 'object',
                 'selector' => '{{selector}} .et_pb_portfolio_image',
-                'scriptDataProps' => [
-                    'animation' => [
-                        'selector' => '{{selector}} .et_pb_portfolio_image'
-                    ]
-                ],
                 'styleProps' => [
-                    'fit' => [
-                        'selector' => '{{selector}} .et_pb_portfolio_image img'
-                    ],
-                    'sizing' => [
-                        'propertySelectors' => [
-                            'desktop' => [
-                                'value' => [
-                                    'aspect-ratio' =>
-                                        '{{selector}} .et_pb_portfolio_image img'
-                                ]
-                            ]
-                        ]
-                    ],
                     'boxShadow' => [
                         'useOverlay' => true
                     ]
@@ -15223,20 +15267,54 @@ return [
                 ],
                 'settings' => [
                     'decoration' => [
-                        'image' => [
-                            'panel' => 'design',
-                            'groupType' => 'group',
-                            'groupName' => 'image',
-                            'priority' => 10,
-                            'component' => [
-                                'type' => 'group',
-                                'name' => 'divi/image',
-                                'props' => [
-                                    'attrName' => 'image',
-                                    'groupLabel' => 'Image',
-                                    'grouped' => true,
-                                    'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
+                        'border' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'attrName' => 'image.decoration.border',
+                                'priority' => 10,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/border',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'boxShadow' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'attrName' => 'image.decoration.boxShadow',
+                                'priority' => 10,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/box-shadow',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'filters' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'attrName' => 'image.decoration.filters',
+                                'priority' => 10,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/filters',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
                                 ]
                             ]
                         ]
@@ -15387,6 +15465,18 @@ return [
                         'name' => 'divi/composite',
                         'props' => [
                             'groupLabel' => 'Overlay'
+                        ]
+                    ]
+                ],
+                'designImage' => [
+                    'panel' => 'design',
+                    'priority' => 10,
+                    'groupName' => 'designImage',
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Image',
+                            'dynamicSubgroupHost' => true
                         ]
                     ]
                 ],
@@ -19304,49 +19394,57 @@ return [
                         ]
                     ],
                     'decoration' => [
-                        'image' => [
-                            'panel' => 'design',
-                            'groupType' => 'group',
-                            'groupName' => 'image',
-                            'priority' => 10,
-                            'component' => [
-                                'type' => 'group',
-                                'name' => 'divi/image',
-                                'props' => [
-                                    'attrName' => 'image',
-                                    'groupLabel' => 'Image',
-                                    'grouped' => true,
-                                    'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
+                        'border' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'render' => true,
+                                'priority' => 10,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/border',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'boxShadow' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'render' => true,
+                                'priority' => 10,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/box-shadow',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image '
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'filters' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'render' => true,
+                                'priority' => 10,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/filters',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image '
+                                    ]
                                 ]
                             ]
                         ]
                     ]
                 ],
                 'styleProps' => [
-                    'fit' => [
-                        'selector' => '{{selector}} .et_pb_gallery_image img'
-                    ],
-                    'spacing' => [
-                        'important' => [
-                            'desktop' => [
-                                'value' => [
-                                    'margin-left' => true,
-                                    'margin-right' => true
-                                ]
-                            ]
-                        ]
-                    ],
-                    'sizing' => [
-                        'propertySelectors' => [
-                            'desktop' => [
-                                'value' => [
-                                    'aspect-ratio' =>
-                                        '{{selector}} .et_pb_gallery_image img'
-                                ]
-                            ]
-                        ]
-                    ],
                     'border' => [
                         'propertySelectors' => [
                             'desktop' => [
@@ -19595,6 +19693,20 @@ return [
                             'groupLabel' => 'Border',
                             'clipboardCategory' => 'style',
                             'presetGroup' => 'divi/border'
+                        ]
+                    ]
+                ],
+                'designImage' => [
+                    'panel' => 'design',
+                    'groupName' => 'image',
+                    'priority' => 10,
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Image',
+                            'clipboardCategory' => 'style',
+                            'dynamicSubgroupHost' => true
                         ]
                     ]
                 ],
@@ -20843,7 +20955,6 @@ return [
                 ],
                 'tagName' => 'h1',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'styleProps' => [
                     'selector' =>
@@ -21167,7 +21278,7 @@ return [
             ],
             'iconLink' => [
                 'type' => 'object',
-                'selector' => '{{selector}}',
+                'selector' => '{{selector}} .et_pb_icon_wrap a',
                 'supportsCustomAttributes' => true
             ]
         ],
@@ -22335,16 +22446,12 @@ return [
                         ]
                     ],
                     'decoration' => [
-                        'fit' => [],
                         'border' => [],
                         'boxShadow' => []
                     ]
                 ],
                 'styleProps' => [
                     'selector' => '{{selector}} img, {{selector}} .et_overlay',
-                    'fit' => [
-                        'selector' => '{{selector}} .et_pb_image_wrap img'
-                    ],
                     'border' => [
                         'selector' => '{{selector}} .et_pb_image_wrap'
                     ],
@@ -22456,375 +22563,6 @@ return [
         'mousetrap' => [
             'zIndex' => [
                 'edited' => 1
-            ]
-        ]
-    ],
-    'instagram-feed' => [
-        'name' => 'divi/instagram-feed',
-        'd4Shortcode' => 'et_pb_instagram_feed',
-        'moduleClassName' => 'et_pb_instagram_feed',
-        'moduleOrderClassName' => 'et_pb_instagram_feed',
-        'title' => 'Instagram Feed',
-        'titles' => 'Instagram Feeds',
-        'moduleIcon' => 'divi/module-instagram-feed',
-        'category' => 'module',
-        'childrenName' => [],
-        'attributes' => [
-            'module' => [
-                'type' => 'object',
-                'selector' => '{{selector}}',
-                'settings' => [
-                    'meta' => [
-                        'meta' => []
-                    ],
-                    'advanced' => [
-                        'elements' => [],
-                        'html' => []
-                    ],
-                    'decoration' => [
-                        'animation' => [],
-                        'attributes' => [],
-                        'background' => [],
-                        'border' => [],
-                        'boxShadow' => [],
-                        'conditions' => [],
-                        'disabledOn' => [],
-                        'filters' => [],
-                        'interactions' => [],
-                        'layout' => [],
-                        'overflow' => [],
-                        'order' => [],
-                        'position' => [],
-                        'scroll' => [],
-                        'sizing' => [],
-                        'spacing' => [],
-                        'sticky' => [],
-                        'transform' => [],
-                        'transition' => [],
-                        'zIndex' => []
-                    ]
-                ]
-            ],
-            'feed' => [
-                'type' => 'object',
-                'label' => 'Feed',
-                'selector' => '{{selector}} .et_pb_instagram_feed__items',
-                'elementType' => 'element',
-                'elementProps' => [
-                    'groupedOptionGroup' => true
-                ],
-                'styleProps' => [
-                    'layout' => [
-                        'render' => [
-                            'display' => true
-                        ]
-                    ]
-                ],
-                'settings' => [
-                    'innerContent' => [
-                        'groupType' => 'group-items',
-                        'items' => [
-                            'account' => [
-                                'groupSlug' => 'contentInstagramAccount',
-                                'priority' => 5,
-                                'render' => true,
-                                'attrName' => 'feed.innerContent',
-                                'subName' => 'accountId',
-                                'label' => 'Account',
-                                'category' => 'configuration',
-                                'features' => [
-                                    'responsive' => false,
-                                    'hover' => false,
-                                    'sticky' => false,
-                                    'preset' => 'content'
-                                ],
-                                'component' => [
-                                    'name' => 'divi/instagram-service-account',
-                                    'type' => 'field'
-                                ]
-                            ],
-                            'postCount' => [
-                                'groupSlug' => 'contentFeed',
-                                'priority' => 10,
-                                'render' => true,
-                                'attrName' => 'feed.innerContent',
-                                'subName' => 'postCount',
-                                'label' => 'Posts',
-                                'features' => [
-                                    'responsive' => false,
-                                    'hover' => false,
-                                    'sticky' => false,
-                                    'preset' => 'content'
-                                ],
-                                'component' => [
-                                    'name' => 'divi/range',
-                                    'type' => 'field',
-                                    'props' => [
-                                        'min' => 1,
-                                        'max' => 24,
-                                        'step' => 1,
-                                        'defaultUnit' => ''
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ],
-                    'advanced' => [
-                        'link' => [
-                            'groupType' => 'group-item',
-                            'item' => [
-                                'groupSlug' => 'contentLink',
-                                'priority' => 5,
-                                'render' => true,
-                                'attrName' => 'feed.advanced.config',
-                                'subName' => 'lightbox',
-                                'label' => 'Open in Lightbox',
-                                'description' =>
-                                    'Open Instagram posts in a lightbox instead of navigating to Instagram.',
-                                'category' => 'configuration',
-                                'features' => [
-                                    'responsive' => false,
-                                    'hover' => false,
-                                    'sticky' => false,
-                                    'preset' => 'content'
-                                ],
-                                'component' => [
-                                    'name' => 'divi/toggle',
-                                    'type' => 'field'
-                                ]
-                            ]
-                        ]
-                    ],
-                    'decoration' => [
-                        'background' => [],
-                        'border' => [],
-                        'boxShadow' => [],
-                        'layout' => [],
-                        'sizing' => [],
-                        'spacing' => []
-                    ]
-                ]
-            ],
-            'item' => [
-                'type' => 'object',
-                'label' => 'Item',
-                'selector' => '{{selector}} .et_pb_instagram_feed__item',
-                'elementType' => 'element',
-                'elementProps' => [
-                    'groupedOptionGroup' => true
-                ],
-                'settings' => [
-                    'decoration' => [
-                        'background' => [
-                            'item' => [
-                                'groupSlug' => 'designItem',
-                                'component' => [
-                                    'props' => [
-                                        'hidePanels' => [
-                                            'mask',
-                                            'pattern',
-                                            'video'
-                                        ],
-                                        'fields' => [
-                                            'image' => [
-                                                'parallaxEnabled' => [
-                                                    'render' => false
-                                                ],
-                                                'parallaxMethod' => [
-                                                    'render' => false
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'border' => [],
-                        'boxShadow' => [],
-                        'sizing' => [],
-                        'spacing' => []
-                    ]
-                ]
-            ],
-            'media' => [
-                'type' => 'object',
-                'label' => 'Media',
-                'selector' => '{{selector}} .et_pb_instagram_feed__media',
-                'elementType' => 'element',
-                'elementProps' => [
-                    'groupedOptionGroup' => true
-                ],
-                'settings' => [
-                    'decoration' => [
-                        'image' => [
-                            'panel' => 'design',
-                            'groupType' => 'group',
-                            'groupName' => 'image',
-                            'priority' => 10,
-                            'component' => [
-                                'type' => 'group',
-                                'name' => 'divi/image',
-                                'props' => [
-                                    'attrName' => 'media',
-                                    'groupLabel' => 'Image',
-                                    'grouped' => true,
-                                    'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                'styleProps' => [
-                    'fit' => [
-                        'selector' =>
-                            '{{selector}} .et_pb_instagram_feed__media img'
-                    ]
-                ]
-            ],
-            'followButton' => [
-                'type' => 'object',
-                'label' => 'Follow Button',
-                'selector' =>
-                    '{{selector}} .et_pb_instagram_feed__follow_button.et_pb_button',
-                'elementType' => 'button',
-                'elementProps' => [
-                    'groupedOptionGroup' => true
-                ],
-                'settings' => [
-                    'innerContent' => [
-                        'groupType' => 'group-items',
-                        'items' => [
-                            'followButtonText' => [
-                                'groupSlug' => 'contentFollowButton',
-                                'priority' => 10,
-                                'render' => true,
-                                'attrName' => 'followButton.innerContent',
-                                'subName' => 'text',
-                                'label' => 'Follow Button Text',
-                                'features' => [
-                                    'responsive' => false,
-                                    'hover' => false,
-                                    'sticky' => false,
-                                    'dynamicContent' => [
-                                        'type' => 'text'
-                                    ],
-                                    'preset' => 'content'
-                                ],
-                                'component' => [
-                                    'name' => 'divi/text',
-                                    'type' => 'field'
-                                ]
-                            ]
-                        ]
-                    ],
-                    'advanced' => [
-                        'show' => [
-                            'groupType' => 'group-item',
-                            'item' => [
-                                'groupSlug' => 'contentFollowButton',
-                                'priority' => 5,
-                                'render' => true,
-                                'attrName' => 'followButton.advanced.show',
-                                'label' => 'Show Follow Button',
-                                'features' => [
-                                    'responsive' => false,
-                                    'hover' => false,
-                                    'sticky' => false,
-                                    'preset' => 'content'
-                                ],
-                                'component' => [
-                                    'name' => 'divi/toggle',
-                                    'type' => 'field'
-                                ]
-                            ]
-                        ]
-                    ],
-                    'decoration' => [
-                        'background' => [],
-                        'border' => [],
-                        'boxShadow' => [],
-                        'button' => [
-                            'priority' => 10,
-                            'component' => [
-                                'props' => [
-                                    'dynamicSubgroupHost' => true,
-                                    'fieldLabel' => 'Button',
-                                    'groupLabel' => 'Button'
-                                ]
-                            ]
-                        ],
-                        'font' => [],
-                        'sizing' => [],
-                        'spacing' => []
-                    ]
-                ]
-            ]
-        ],
-        'customCssFields' => [
-            'module' => [
-                'label' => 'Main Element',
-                'subName' => 'module',
-                'selectorSuffix' => ''
-            ]
-        ],
-        'settings' => [
-            'content' => 'auto',
-            'design' => 'auto',
-            'advanced' => 'auto',
-            'groups' => [
-                'contentInstagramAccount' => [
-                    'panel' => 'content',
-                    'priority' => 10,
-                    'multiElements' => true,
-                    'groupName' => 'contentInstagramAccount',
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Account',
-                            'preset' => 'content'
-                        ]
-                    ]
-                ],
-                'contentFeed' => [
-                    'panel' => 'content',
-                    'priority' => 15,
-                    'groupName' => 'contentFeed',
-                    'multiElements' => true,
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Feed',
-                            'preset' => 'content'
-                        ]
-                    ]
-                ],
-                'contentLink' => [
-                    'panel' => 'content',
-                    'priority' => 20,
-                    'groupName' => 'contentLink',
-                    'multiElements' => true,
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Link',
-                            'preset' => 'content'
-                        ]
-                    ]
-                ],
-                'contentFollowButton' => [
-                    'panel' => 'content',
-                    'priority' => 25,
-                    'groupName' => 'contentFollowButton',
-                    'multiElements' => true,
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Button',
-                            'preset' => 'content'
-                        ]
-                    ]
-                ]
             ]
         ]
     ],
@@ -23391,7 +23129,6 @@ return [
                 ],
                 'tagName' => 'h2',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'elementType' => 'heading',
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'styleProps' => [
@@ -24932,41 +24669,11 @@ return [
                 'type' => 'object',
                 'selector' => '',
                 'styleProps' => [
-                    'background' => [
-                        'selectors' => [
-                            'desktop' => [
-                                'value' => '{{selector}}.et_pb_menu ul li a',
-                                'hover' => '{{selector}}.et_pb_menu ul li > a'
-                            ]
-                        ]
-                    ],
                     'font' => [
                         'selectors' => [
                             'desktop' => [
                                 'value' => '{{selector}}.et_pb_menu ul li a',
                                 'hover' => '{{selector}}.et_pb_menu ul li > a'
-                            ]
-                        ]
-                    ],
-                    'spacing' => [
-                        'selectors' => [
-                            'desktop' => [
-                                'value' =>
-                                    '{{selector}}.et_pb_menu .et_pb_menu__menu > nav > ul > li > a',
-                                'hover' =>
-                                    '{{selector}}.et_pb_menu .et_pb_menu__menu > nav > ul > li > a'
-                            ]
-                        ]
-                    ],
-                    'border' => [
-                        'selectors' => [
-                            'desktop' => [
-                                'value' =>
-                                    '{{selector}}.et_pb_menu .et_pb_menu__menu > nav > ul > li > a',
-                                'hover' =>
-                                    '{{selector}}.et_pb_menu .et_pb_menu__menu > nav > ul > li > a',
-                                'active' =>
-                                    '{{selector}}.et_pb_menu .et_pb_menu__menu > nav > ul > li > a'
                             ]
                         ]
                     ]
@@ -26051,7 +25758,6 @@ return [
                 ],
                 'tagName' => 'h3',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'elementType' => 'heading',
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'styleProps' => [
@@ -26640,19 +26346,6 @@ return [
                 'selector' => '{{selector}} .et_portfolio_image',
                 'supportsCustomAttributes' => true,
                 'styleProps' => [
-                    'fit' => [
-                        'selector' => '{{selector}} .et_portfolio_image img'
-                    ],
-                    'sizing' => [
-                        'propertySelectors' => [
-                            'desktop' => [
-                                'value' => [
-                                    'aspect-ratio' =>
-                                        '{{selector}} .et_portfolio_image img'
-                                ]
-                            ]
-                        ]
-                    ],
                     'boxShadow' => [
                         'useOverlay' => true
                     ]
@@ -26667,20 +26360,51 @@ return [
                 ],
                 'settings' => [
                     'decoration' => [
-                        'image' => [
-                            'panel' => 'design',
-                            'groupType' => 'group',
-                            'groupName' => 'image',
-                            'priority' => 10,
-                            'component' => [
-                                'type' => 'group',
-                                'name' => 'divi/image',
-                                'props' => [
-                                    'attrName' => 'image',
-                                    'groupLabel' => 'Image',
-                                    'grouped' => true,
-                                    'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
+                        'border' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/border',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'boxShadow' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/box-shadow',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'filters' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/filters',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
                                 ]
                             ]
                         ]
@@ -26814,6 +26538,18 @@ return [
                             'groupLabel' => 'Overlay'
                         ]
                     ]
+                ],
+                'designImage' => [
+                    'panel' => 'design',
+                    'priority' => 10,
+                    'groupName' => 'designImage',
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Image',
+                            'dynamicSubgroupHost' => true
+                        ]
+                    ]
                 ]
             ]
         ]
@@ -26866,46 +26602,64 @@ return [
                 'selector' => '{{selector}} img',
                 'settings' => [
                     'decoration' => [
-                        'image' => [
-                            'panel' => 'design',
-                            'groupType' => 'group',
-                            'groupName' => 'image',
-                            'priority' => 10,
-                            'component' => [
-                                'type' => 'group',
-                                'name' => 'divi/image',
-                                'props' => [
-                                    'attrName' => 'image',
-                                    'groupLabel' => 'Image',
-                                    'grouped' => true,
-                                    'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
+                        'border' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 10,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/border',
+                                    'props' => [
+                                        'grouped' => false,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'boxShadow' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 15,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/box-shadow',
+                                    'props' => [
+                                        'grouped' => false,
+                                        'fieldLabel' => 'Image'
+                                    ]
                                 ]
                             ]
                         ]
                     ]
                 ],
-                'styleProps' => [
-                    'fit' => [
-                        'selector' => '{{selector}} img'
-                    ],
-                    'sizing' => [
-                        'propertySelectors' => [
-                            'desktop' => [
-                                'value' => [
-                                    'aspect-ratio' => '{{selector}} img'
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
+                'styleProps' => []
             ]
         ],
         'customCssFields' => [],
         'settings' => [
             'content' => 'auto',
             'design' => 'auto',
-            'advanced' => 'auto'
+            'advanced' => 'auto',
+            'groups' => [
+                'designImage' => [
+                    'panel' => 'design',
+                    'priority' => 10,
+                    'groupName' => 'imageStyle',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Image',
+                            'clipboardCategory' => 'style',
+                            'dynamicSubgroupHost' => true
+                        ]
+                    ]
+                ]
+            ]
         ],
         'd4Shortcode' => 'et_pb_post_content',
         'appearance' => [
@@ -27936,39 +27690,57 @@ return [
                         ]
                     ],
                     'decoration' => [
-                        'image' => [
-                            'panel' => 'design',
-                            'groupType' => 'group',
-                            'groupName' => 'image',
-                            'priority' => 10,
-                            'component' => [
-                                'type' => 'group',
-                                'name' => 'divi/image',
-                                'props' => [
-                                    'attrName' => 'image',
-                                    'groupLabel' => 'Image',
-                                    'grouped' => true,
-                                    'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
+                        'border' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 60,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/border',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'boxShadow' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 60,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/box-shadow',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'filters' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 60,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/filters',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
                                 ]
                             ]
                         ]
                     ]
                 ],
                 'styleProps' => [
-                    'fit' => [
-                        'selector' => '{{selector}} .et_pb_slide_image img'
-                    ],
-                    'sizing' => [
-                        'propertySelectors' => [
-                            'desktop' => [
-                                'value' => [
-                                    'aspect-ratio' =>
-                                        '{{selector}} .et_pb_slide_image img'
-                                ]
-                            ]
-                        ]
-                    ],
                     'border' => [
                         'selector' =>
                             '{{selector}} .et_pb_slide .et_pb_slide_image img'
@@ -28669,6 +28441,20 @@ return [
                         ]
                     ]
                 ],
+                'designImage' => [
+                    'panel' => 'design',
+                    'priority' => 10,
+                    'groupName' => 'image',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Image',
+                            'clipboardCategory' => 'style',
+                            'dynamicSubgroupHost' => true
+                        ]
+                    ]
+                ],
                 'designSizing' => [
                     'panel' => 'design',
                     'priority' => 60,
@@ -29130,14 +28916,27 @@ return [
                     ]
                 ]
             ],
-            'image' => [
+            'featuredImage' => [
                 'type' => 'object',
                 'selector' =>
                     '{{selector}} .et_pb_title_featured_container img',
                 'supportsCustomAttributes' => true,
                 'styleProps' => [
-                    'layout' => [
-                        'selector' => '{{selector}} .et_pb_image_wrap'
+                    'sizing' => [
+                        'propertySelectors' => [
+                            'desktop' => [
+                                'value' => [
+                                    'width' =>
+                                        '{{selector}} .et_pb_title_featured_container',
+                                    'max-width' =>
+                                        '{{selector}} .et_pb_title_featured_container',
+                                    'margin-left' =>
+                                        '{{selector}} .et_pb_title_featured_container',
+                                    'margin-right' =>
+                                        '{{selector}} .et_pb_title_featured_container'
+                                ]
+                            ]
+                        ]
                     ]
                 ],
                 'settings' => [
@@ -29155,6 +28954,27 @@ return [
                                 'features' => [
                                     'sticky' => false,
                                     'preset' => ['html']
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/toggle'
+                                ]
+                            ]
+                        ],
+                        'forceFullwidth' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designSizing',
+                                'priority' => 5,
+                                'render' => true,
+                                'label' => 'Force Fullwidth',
+                                'description' =>
+                                    'When enabled, this will force your image to extend 100% of the width of the column it\'s in.',
+                                'category' => 'layout',
+                                'features' => [
+                                    'sticky' => false,
+                                    'responsive' => false,
+                                    'hover' => false
                                 ],
                                 'component' => [
                                     'type' => 'field',
@@ -29200,20 +29020,158 @@ return [
                         ]
                     ],
                     'decoration' => [
-                        'image' => [
-                            'panel' => 'design',
-                            'groupType' => 'group',
-                            'groupName' => 'image',
-                            'priority' => 10,
-                            'component' => [
-                                'type' => 'group',
-                                'name' => 'divi/image',
-                                'props' => [
-                                    'attrName' => 'image',
-                                    'groupLabel' => 'Image',
-                                    'grouped' => true,
-                                    'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
+                        'sizing' => [
+                            'groupType' => 'group-items',
+                            'items' => [
+                                'alignment' => [
+                                    'groupSlug' => 'designImage',
+                                    'category' => 'layout',
+                                    'priority' => 5,
+                                    'render' => true,
+                                    'subName' => 'alignment',
+                                    'label' => 'Image Alignment',
+                                    'description' =>
+                                        'Align image to the left, right or center.',
+                                    'features' => [
+                                        'responsive' => false,
+                                        'hover' => false,
+                                        'sticky' => false
+                                    ],
+                                    'multipleChoices' => false,
+                                    'component' => [
+                                        'name' => 'divi/button-options',
+                                        'type' => 'field',
+                                        'props' => [
+                                            'allowClickToUnset' => false,
+                                            'options' => [
+                                                'left' => [
+                                                    'icon' => 'divi/align-left'
+                                                ],
+                                                'center' => [
+                                                    'icon' =>
+                                                        'divi/align-center'
+                                                ],
+                                                'right' => [
+                                                    'icon' => 'divi/align-right'
+                                                ]
+                                            ],
+                                            'showLabel' => false
+                                        ]
+                                    ]
+                                ],
+                                'width' => [
+                                    'groupSlug' => 'designSizing',
+                                    'category' => 'layout',
+                                    'priority' => 10,
+                                    'render' => true,
+                                    'subName' => 'width',
+                                    'label' => 'Featured Image Width',
+                                    'description' =>
+                                        'Adjust the width of the featured image.',
+                                    'features' => [
+                                        'responsive' => false,
+                                        'hover' => false,
+                                        'sticky' => false,
+                                        'dynamicContent' => [
+                                            'type' => 'number'
+                                        ]
+                                    ],
+                                    'component' => [
+                                        'name' => 'divi/range',
+                                        'type' => 'field',
+                                        'props' => [
+                                            'cssProperty' => 'width',
+                                            'defaultUnit' => '%',
+                                            'max' => 100,
+                                            'min' => 0,
+                                            'step' => 1
+                                        ]
+                                    ]
+                                ],
+                                'maxWidth' => [
+                                    'groupSlug' => 'designSizing',
+                                    'category' => 'layout',
+                                    'priority' => 15,
+                                    'render' => true,
+                                    'subName' => 'maxWidth',
+                                    'label' => 'Featured Image Max Width',
+                                    'description' =>
+                                        'Adjust the max width of the featured image.',
+                                    'features' => [
+                                        'responsive' => false,
+                                        'hover' => false,
+                                        'sticky' => false,
+                                        'dynamicContent' => [
+                                            'type' => 'number'
+                                        ]
+                                    ],
+                                    'component' => [
+                                        'name' => 'divi/range',
+                                        'type' => 'field',
+                                        'props' => [
+                                            'cssProperty' => 'max-width',
+                                            'defaultUnit' => '%',
+                                            'max' => 100,
+                                            'min' => 0,
+                                            'step' => 1
+                                        ]
+                                    ]
+                                ],
+                                'height' => [
+                                    'groupSlug' => 'designSizing',
+                                    'category' => 'layout',
+                                    'priority' => 20,
+                                    'render' => true,
+                                    'subName' => 'height',
+                                    'label' => 'Featured Image Height',
+                                    'description' =>
+                                        'Adjust the height of the featured image.',
+                                    'features' => [
+                                        'responsive' => false,
+                                        'hover' => false,
+                                        'sticky' => false,
+                                        'dynamicContent' => [
+                                            'type' => 'number'
+                                        ]
+                                    ],
+                                    'component' => [
+                                        'name' => 'divi/range',
+                                        'type' => 'field',
+                                        'props' => [
+                                            'cssProperty' => 'height',
+                                            'max' => 1000,
+                                            'min' => 0,
+                                            'step' => 1
+                                        ]
+                                    ]
+                                ],
+                                'maxHeight' => [
+                                    'groupSlug' => 'designSizing',
+                                    'category' => 'layout',
+                                    'priority' => 25,
+                                    'render' => true,
+                                    'subName' => 'maxHeight',
+                                    'label' => 'Featured Image Max Height',
+                                    'description' =>
+                                        'Adjust the max height of the featured image.',
+                                    'features' => [
+                                        'responsive' => false,
+                                        'hover' => false,
+                                        'sticky' => false,
+                                        'dynamicContent' => [
+                                            'type' => 'number'
+                                        ]
+                                    ],
+                                    'component' => [
+                                        'name' => 'divi/range',
+                                        'type' => 'field',
+                                        'props' => [
+                                            'cssProperty' => 'max-height',
+                                            'max' => 1000,
+                                            'min' => 0,
+                                            'step' => 1
+                                        ]
+                                    ]
                                 ]
                             ]
                         ]
@@ -29251,6 +29209,20 @@ return [
                         'props' => [
                             'groupLabel' => 'Elements',
                             'preset' => 'content'
+                        ]
+                    ]
+                ],
+                'designImage' => [
+                    'panel' => 'design',
+                    'priority' => 5,
+                    'groupName' => 'imageStyle',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Image',
+                            'clipboardCategory' => 'style',
+                            'dynamicSubgroupHost' => true
                         ]
                     ]
                 ],
@@ -29519,15 +29491,6 @@ return [
                                 ]
                             ]
                         ]
-                    ],
-                    'spacing' => [
-                        'important' => [
-                            'desktop' => [
-                                'value' => [
-                                    'margin-left' => true
-                                ]
-                            ]
-                        ]
                     ]
                 ]
             ],
@@ -29582,7 +29545,6 @@ return [
                 ],
                 'tagName' => 'span',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'styleProps' => [
                     'selector' => '{{selector}} .et_pb_best_value',
@@ -29681,7 +29643,6 @@ return [
                 'tagName' => 'h2',
                 'elementType' => 'heading',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'styleProps' => [
                     'selector' =>
@@ -30426,7 +30387,6 @@ return [
                 ],
                 'tagName' => 'h2',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'elementType' => 'heading',
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'styleProps' => [
@@ -30604,15 +30564,6 @@ return [
                                     'value' => [
                                         'color' => true
                                     ]
-                                ]
-                            ]
-                        ]
-                    ],
-                    'spacing' => [
-                        'important' => [
-                            'desktop' => [
-                                'value' => [
-                                    'margin-left' => true
                                 ]
                             ]
                         ]
@@ -31606,17 +31557,6 @@ return [
                                         'props' => [
                                             'grouped' => false,
                                             'fields' => [
-                                                'flexType' => [
-                                                    'component' => [
-                                                        'type' => 'field',
-                                                        'name' =>
-                                                            'divi/select-column-class',
-                                                        'props' => [
-                                                            'defaultValue' =>
-                                                                'none'
-                                                        ]
-                                                    ]
-                                                ],
                                                 'maxWidth' => [
                                                     'component' => [
                                                         'props' => [
@@ -32256,7 +32196,6 @@ return [
                                 'desktop' => [
                                     'value' => [
                                         'color' => true,
-                                        'font-weight' => true,
                                         'line-height' => true
                                     ]
                                 ]
@@ -33082,7 +33021,7 @@ return [
             'sidebar' => [
                 'type' => 'object',
                 'selector' =>
-                    '{{selector}}.et_pb_widget_area li, {{selector}}.et_pb_widget_area li:before, {{selector}}.et_pb_widget_area a, {{selector}}.et_pb_widget_area p, {{selector}}.et_pb_widget_area pre, {{selector}}.et_pb_widget_area code',
+                    '{{selector}}.et_pb_widget_area li, {{selector}}.et_pb_widget_area li:before, {{selector}}.et_pb_widget_area a',
                 'settings' => [
                     'innerContent' => [
                         'groupType' => 'group-items',
@@ -33186,7 +33125,7 @@ return [
                             'desktop' => [
                                 'value' => [
                                     'line-height' =>
-                                        '{{selector}}.et_pb_widget_area p, {{selector}}.et_pb_widget_area pre, {{selector}}.et_pb_widget_area code'
+                                        '{{selector}}.et_pb_widget_area p'
                                 ]
                             ]
                         ],
@@ -33388,7 +33327,6 @@ return [
                 ],
                 'tagName' => 'h2',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'styleProps' => [
                     'selector' =>
@@ -35376,20 +35314,6 @@ return [
                 'supportsCustomAttributes' => true,
                 'elementType' => 'image',
                 'styleProps' => [
-                    'fit' => [
-                        'selector' =>
-                            '{{selector}}.et_pb_slide .et_pb_slide_image img'
-                    ],
-                    'sizing' => [
-                        'propertySelectors' => [
-                            'desktop' => [
-                                'value' => [
-                                    'aspect-ratio' =>
-                                        '{{selector}}.et_pb_slide .et_pb_slide_image img'
-                                ]
-                            ]
-                        ]
-                    ],
                     'filters' => [
                         'selector' =>
                             '{{selector}}.et_pb_slide .et_pb_slide_image'
@@ -35440,7 +35364,7 @@ return [
                                 'description' =>
                                     'This setting determines the vertical alignment of your slide image. Your image can either be vertically centered, or aligned to the bottom of your slide.',
                                 'category' => 'layout',
-                                'priority' => 1,
+                                'priority' => 10,
                                 'render' => true,
                                 'features' => [
                                     'sticky' => false,
@@ -35463,7 +35387,53 @@ return [
                             ]
                         ]
                     ],
-                    'decoration' => []
+                    'decoration' => [
+                        'border' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/border',
+                                    'props' => [
+                                        'grouped' => true
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'boxShadow' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 30,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/box-shadow',
+                                    'props' => [
+                                        'grouped' => true
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'filters' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 40,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/filters',
+                                    'props' => [
+                                        'grouped' => true
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
                 ]
             ],
             'title' => [
@@ -35472,7 +35442,6 @@ return [
                     '{{selectorPrefix}}.et_pb_slider {{baseSelector}}.et_pb_slide .et_pb_slide_description .et_pb_slide_title',
                 'tagName' => 'h2',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'supportsCustomAttributes' => true,
                 'styleProps' => [
@@ -36053,13 +36022,10 @@ return [
                     'priority' => 30,
                     'groupName' => 'designImage',
                     'component' => [
-                        'name' => 'divi/image',
+                        'name' => 'divi/composite',
                         'props' => [
-                            'attrName' => 'image',
                             'groupLabel' => 'Image',
-                            'grouped' => true,
-                            'dynamicSubgroupHost' => true,
-                            'presetGroup' => 'divi/image'
+                            'dynamicSubgroupHost' => true
                         ]
                     ]
                 ],
@@ -36941,35 +36907,35 @@ return [
                         ]
                     ],
                     'decoration' => [
-                        'image' => [
-                            'panel' => 'design',
-                            'groupType' => 'group',
-                            'groupName' => 'image',
-                            'priority' => 10,
-                            'component' => [
-                                'type' => 'group',
-                                'name' => 'divi/image',
-                                'props' => [
-                                    'attrName' => 'image',
-                                    'groupLabel' => 'Image',
-                                    'grouped' => true,
-                                    'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
+                        'border' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 10,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/border',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
                                 ]
                             ]
-                        ]
-                    ]
-                ],
-                'styleProps' => [
-                    'fit' => [
-                        'selector' => '{{selector}} .et_pb_slide_image img'
-                    ],
-                    'sizing' => [
-                        'propertySelectors' => [
-                            'desktop' => [
-                                'value' => [
-                                    'aspect-ratio' =>
-                                        '{{selector}} .et_pb_slide_image img'
+                        ],
+                        'boxShadow' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/box-shadow',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
                                 ]
                             ]
                         ]
@@ -37094,6 +37060,18 @@ return [
                         'name' => 'divi/composite',
                         'props' => [
                             'groupLabel' => 'Navigation'
+                        ]
+                    ]
+                ],
+                'designImage' => [
+                    'panel' => 'design',
+                    'priority' => 30,
+                    'groupName' => 'designImage',
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Image',
+                            'dynamicSubgroupHost' => true
                         ]
                     ]
                 ],
@@ -37373,6 +37351,7 @@ return [
                                 'description' =>
                                     'Here you can define a custom color for the social network icon.',
                                 'features' => [
+                                    'sticky' => false,
                                     'dynamicContent' => [
                                         'type' => 'color'
                                     ]
@@ -37415,6 +37394,7 @@ return [
                                         'Control the size of the icon by increasing or decreasing the font size.',
                                     'category' => 'font_option',
                                     'features' => [
+                                        'sticky' => false,
                                         'dynamicContent' => [
                                             'type' => 'number'
                                         ]
@@ -37745,6 +37725,7 @@ return [
                                 'description' =>
                                     'Here you can define a custom color for the social network icon.',
                                 'features' => [
+                                    'sticky' => false,
                                     'dynamicContent' => [
                                         'type' => 'color'
                                     ]
@@ -37787,6 +37768,7 @@ return [
                                         'Control the size of the icon by increasing or decreasing the font size',
                                     'category' => 'font_option',
                                     'features' => [
+                                        'sticky' => false,
                                         'dynamicContent' => [
                                             'type' => 'number'
                                         ]
@@ -37914,12 +37896,6 @@ return [
                     ]
                 ]
             ],
-            'iconLink' => [
-                'type' => 'object',
-                'label' => 'Icon Link',
-                'selector' => '{{selector}} a.icon',
-                'supportsCustomAttributes' => true
-            ],
             'button' => [
                 'type' => 'object',
                 'selector' =>
@@ -38022,482 +37998,6 @@ return [
             ]
         ]
     ],
-    'svg' => [
-        'name' => 'divi/svg',
-        'd4Shortcode' => 'et_pb_svg',
-        'moduleClassName' => 'et_pb_svg',
-        'moduleOrderClassName' => 'et_pb_svg',
-        'title' => 'SVG',
-        'titles' => 'SVGs',
-        'moduleIcon' => 'divi/module-svg',
-        'category' => 'module',
-        'childrenName' => [],
-        'attributes' => [
-            'module' => [
-                'type' => 'object',
-                'selector' => '{{selector}}',
-                'styleProps' => [
-                    'spacing' => [
-                        'important' => [
-                            'desktop' => [
-                                'value' => [
-                                    'margin-bottom' => true
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                'settings' => [
-                    'meta' => [
-                        'meta' => []
-                    ],
-                    'advanced' => [
-                        'elements' => [],
-                        'html' => [],
-                        'loop' => []
-                    ],
-                    'decoration' => [
-                        'animation' => [],
-                        'attributes' => [],
-                        'background' => [],
-                        'border' => [],
-                        'boxShadow' => [],
-                        'conditions' => [],
-                        'disabledOn' => [],
-                        'filters' => [],
-                        'interactions' => [],
-                        'layout' => [],
-                        'overflow' => [],
-                        'order' => [],
-                        'position' => [],
-                        'scroll' => [],
-                        'sizing' => [],
-                        'spacing' => [],
-                        'sticky' => [],
-                        'transform' => [],
-                        'transition' => [],
-                        'zIndex' => []
-                    ]
-                ]
-            ],
-            'svg' => [
-                'type' => 'object',
-                'label' => 'SVG',
-                'selector' => '{{selector}} .et_pb_svg_inner svg',
-                'supportsCustomAttributes' => true,
-                'settings' => [
-                    'innerContent' => [
-                        'groupType' => 'group-items',
-                        'items' => [
-                            'sourceType' => [
-                                'groupSlug' => 'contentSvgSource',
-                                'subName' => 'sourceType',
-                                'label' => 'Source Type',
-                                'description' =>
-                                    'Choose whether to render SVG from pasted code or uploaded source.',
-                                'category' => 'basic_option',
-                                'priority' => 5,
-                                'render' => true,
-                                'features' => [
-                                    'responsive' => false,
-                                    'hover' => false,
-                                    'sticky' => false,
-                                    'preset' => 'content'
-                                ],
-                                'component' => [
-                                    'type' => 'field',
-                                    'name' => 'divi/select',
-                                    'props' => [
-                                        'defaultValue' => 'code',
-                                        'options' => [
-                                            'code' => [
-                                                'label' => 'SVG Code'
-                                            ],
-                                            'src' => [
-                                                'label' => 'Uploaded SVG'
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            'code' => [
-                                'groupSlug' => 'contentSvgSource',
-                                'subName' => 'code',
-                                'label' => 'SVG Code',
-                                'description' => 'Paste sanitized SVG markup.',
-                                'category' => 'basic_option',
-                                'priority' => 10,
-                                'render' => true,
-                                'features' => [
-                                    'dynamicContent' => [
-                                        'type' => 'text'
-                                    ],
-                                    'preset' => 'content'
-                                ],
-                                'component' => [
-                                    'type' => 'field',
-                                    'name' => 'divi/code',
-                                    'props' => [
-                                        'mode' => 'html'
-                                    ]
-                                ]
-                            ],
-                            'src' => [
-                                'groupSlug' => 'contentSvgSource',
-                                'subName' => 'src',
-                                'label' => 'SVG File',
-                                'description' => 'Upload an SVG file.',
-                                'category' => 'basic_option',
-                                'priority' => 15,
-                                'render' => true,
-                                'features' => [
-                                    'dynamicContent' => [
-                                        'type' => 'url'
-                                    ],
-                                    'preset' => 'content'
-                                ],
-                                'component' => [
-                                    'type' => 'field',
-                                    'name' => 'divi/upload',
-                                    'props' => [
-                                        'dataType' => 'svg',
-                                        'chooseText' => 'Choose an SVG file',
-                                        'uploadButtonText' =>
-                                            'Upload an SVG file'
-                                    ]
-                                ]
-                            ],
-                            'srcNotice' => [
-                                'groupSlug' => 'contentSvgSource',
-                                'subName' => 'srcNotice',
-                                'label' => '',
-                                'description' => '',
-                                'render' => true,
-                                'priority' => 16,
-                                'features' => [
-                                    'responsive' => false,
-                                    'sticky' => false,
-                                    'hover' => false,
-                                    'preset' => 'content'
-                                ],
-                                'component' => [
-                                    'type' => 'field',
-                                    'name' => 'divi/warning',
-                                    'props' => [
-                                        'message' =>
-                                            'You must <a href="https://help.elegantthemes.com/en/articles/11982083-how-to-upload-svg-and-json-files" target="_blank" rel="noopener">enable SVG uploads</a> before uploading svg files.'
-                                    ]
-                                ]
-                            ],
-                            'title' => [
-                                'groupSlug' => 'contentSvgSource',
-                                'subName' => 'title',
-                                'label' => 'Title',
-                                'description' => 'Optional SVG title element.',
-                                'category' => 'configuration',
-                                'priority' => 18,
-                                'render' => true,
-                                'features' => [
-                                    'responsive' => false,
-                                    'hover' => false,
-                                    'sticky' => false,
-                                    'preset' => 'content'
-                                ],
-                                'component' => [
-                                    'type' => 'field',
-                                    'name' => 'divi/text'
-                                ]
-                            ],
-                            'linkUrl' => [
-                                'groupSlug' => 'contentSvgLink',
-                                'subName' => 'linkUrl',
-                                'label' => 'Link URL',
-                                'description' =>
-                                    'Set a URL to wrap the SVG with a link.',
-                                'category' => 'basic_option',
-                                'priority' => 20,
-                                'render' => true,
-                                'features' => [
-                                    'dynamicContent' => [
-                                        'type' => 'url'
-                                    ],
-                                    'responsive' => false,
-                                    'hover' => false,
-                                    'sticky' => false,
-                                    'preset' => 'content'
-                                ],
-                                'component' => [
-                                    'type' => 'field',
-                                    'name' => 'divi/text'
-                                ]
-                            ],
-                            'linkTarget' => [
-                                'groupSlug' => 'contentSvgLink',
-                                'subName' => 'linkTarget',
-                                'label' => 'Link Target',
-                                'description' => 'Choose where the link opens.',
-                                'category' => 'configuration',
-                                'priority' => 25,
-                                'render' => true,
-                                'features' => [
-                                    'responsive' => false,
-                                    'hover' => false,
-                                    'sticky' => false,
-                                    'preset' => 'content'
-                                ],
-                                'component' => [
-                                    'type' => 'field',
-                                    'name' => 'divi/select',
-                                    'props' => [
-                                        'defaultValue' => 'off',
-                                        'options' => [
-                                            'off' => [
-                                                'label' => 'In The Current Tab'
-                                            ],
-                                            'on' => [
-                                                'label' => 'In A New Tab'
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            'rel' => [
-                                'groupSlug' => 'contentSvgLink',
-                                'subName' => 'rel',
-                                'label' => 'Link Rel',
-                                'description' =>
-                                    'Optional rel attribute for the link.',
-                                'category' => 'configuration',
-                                'priority' => 30,
-                                'render' => true,
-                                'features' => [
-                                    'responsive' => false,
-                                    'hover' => false,
-                                    'sticky' => false,
-                                    'preset' => 'content'
-                                ],
-                                'component' => [
-                                    'type' => 'field',
-                                    'name' => 'divi/text'
-                                ]
-                            ]
-                        ]
-                    ],
-                    'advanced' => [
-                        'fill' => [
-                            'groupType' => 'group-items',
-                            'items' => [
-                                'color' => [
-                                    'groupSlug' => 'designSvgFill',
-                                    'subName' => 'color',
-                                    'label' => 'Fill Color',
-                                    'description' =>
-                                        'Primary fill color for the SVG.',
-                                    'category' => 'layout',
-                                    'priority' => 10,
-                                    'render' => true,
-                                    'features' => [
-                                        'dynamicContent' => [
-                                            'type' => 'color'
-                                        ],
-                                        'preset' => ['style']
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/color-picker'
-                                    ]
-                                ],
-                                'opacity' => [
-                                    'groupSlug' => 'designSvgFill',
-                                    'subName' => 'opacity',
-                                    'label' => 'Fill Opacity',
-                                    'description' =>
-                                        'Opacity for SVG fill color.',
-                                    'className' =>
-                                        'et-vb-field-input-range-filter et-vb-field-input-range-filter--opacity',
-                                    'category' => 'layout',
-                                    'priority' => 30,
-                                    'render' => true,
-                                    'features' => [
-                                        'dynamicContent' => [
-                                            'type' => 'number'
-                                        ],
-                                        'preset' => ['style']
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/range',
-                                        'props' => [
-                                            'cssProperty' => 'fill-opacity',
-                                            'cssSliderUI' => true,
-                                            'minLimit' => 0,
-                                            'maxLimit' => 1,
-                                            'step' => 0.01,
-                                            'defaultValue' => '1',
-                                            'defaultUnit' => ''
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'stroke' => [
-                            'groupType' => 'group-items',
-                            'items' => [
-                                'color' => [
-                                    'groupSlug' => 'designSvgStroke',
-                                    'subName' => 'color',
-                                    'label' => 'Stroke Color',
-                                    'description' =>
-                                        'Stroke color for the SVG.',
-                                    'category' => 'layout',
-                                    'priority' => 10,
-                                    'render' => true,
-                                    'features' => [
-                                        'dynamicContent' => [
-                                            'type' => 'color'
-                                        ],
-                                        'preset' => ['style']
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/color-picker'
-                                    ]
-                                ],
-                                'width' => [
-                                    'groupSlug' => 'designSvgStroke',
-                                    'subName' => 'width',
-                                    'label' => 'Stroke Width',
-                                    'description' =>
-                                        'Stroke width for the SVG.',
-                                    'category' => 'layout',
-                                    'priority' => 20,
-                                    'render' => true,
-                                    'features' => [
-                                        'dynamicContent' => [
-                                            'type' => 'number'
-                                        ],
-                                        'preset' => ['style']
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/range',
-                                        'props' => [
-                                            'cssProperty' => 'stroke-width',
-                                            'minLimit' => 0,
-                                            'maxLimit' => 50,
-                                            'step' => 1,
-                                            'defaultUnit' => 'px'
-                                        ]
-                                    ]
-                                ],
-                                'opacity' => [
-                                    'groupSlug' => 'designSvgStroke',
-                                    'subName' => 'opacity',
-                                    'label' => 'Stroke Opacity',
-                                    'description' =>
-                                        'Opacity for SVG stroke color.',
-                                    'className' =>
-                                        'et-vb-field-input-range-filter et-vb-field-input-range-filter--opacity',
-                                    'category' => 'layout',
-                                    'priority' => 30,
-                                    'render' => true,
-                                    'features' => [
-                                        'dynamicContent' => [
-                                            'type' => 'number'
-                                        ],
-                                        'preset' => ['style']
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/range',
-                                        'props' => [
-                                            'cssProperty' => 'stroke-opacity',
-                                            'cssSliderUI' => true,
-                                            'minLimit' => 0,
-                                            'maxLimit' => 1,
-                                            'step' => 0.01,
-                                            'defaultValue' => '1',
-                                            'defaultUnit' => ''
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ],
-                    'decoration' => []
-                ],
-                'styleProps' => []
-            ]
-        ],
-        'customCssFields' => [
-            'module' => [
-                'label' => 'Module',
-                'subName' => 'module',
-                'selectorSuffix' => ''
-            ],
-            'svg' => [
-                'label' => 'SVG',
-                'subName' => 'svg',
-                'selectorSuffix' => ' .et_pb_svg_inner svg'
-            ]
-        ],
-        'settings' => [
-            'design' => 'auto',
-            'advanced' => 'auto',
-            'groups' => [
-                'contentSvgSource' => [
-                    'panel' => 'content',
-                    'priority' => 10,
-                    'multiElements' => true,
-                    'groupName' => 'svgSource',
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'SVG Source'
-                        ]
-                    ]
-                ],
-                'contentSvgLink' => [
-                    'panel' => 'content',
-                    'priority' => 20,
-                    'multiElements' => true,
-                    'groupName' => 'link',
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Link'
-                        ]
-                    ]
-                ],
-                'designSvgFill' => [
-                    'panel' => 'design',
-                    'priority' => 10,
-                    'multiElements' => true,
-                    'groupName' => 'designSvgFill',
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Fill',
-                            'clipboardCategory' => 'style'
-                        ]
-                    ]
-                ],
-                'designSvgStroke' => [
-                    'panel' => 'design',
-                    'priority' => 20,
-                    'multiElements' => true,
-                    'groupName' => 'stroke',
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Stroke',
-                            'clipboardCategory' => 'style'
-                        ]
-                    ]
-                ]
-            ]
-        ]
-    ],
     'tab' => [
         'name' => 'divi/tab',
         'd4Shortcode' => 'et_pb_tab',
@@ -38518,9 +38018,6 @@ return [
                     'spacing' => [
                         'selector' =>
                             '{{selectorPrefix}}.et_pb_tabs .et_pb_tab{{baseSelector}}'
-                    ],
-                    'sizing' => [
-                        'selector' => '{{selector}} .et_pb_tab_content'
                     ],
                     'layout' => [
                         'selector' => '{{selector}} .et_pb_tab_content'
@@ -38555,7 +38052,6 @@ return [
                         'overflow' => [],
                         'order' => [],
                         'position' => [],
-                        'sizing' => [],
                         'spacing' => [
                             'component' => [
                                 'props' => [
@@ -38765,647 +38261,6 @@ return [
                             'groupLabel' => 'Tab Text',
                             'presetGroup' => 'divi/font',
                             'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ]
-            ]
-        ]
-    ],
-    'table-of-contents' => [
-        'name' => 'divi/table-of-contents',
-        'd4Shortcode' => 'et_pb_table_of_contents',
-        'moduleClassName' => 'et_pb_table_of_contents',
-        'moduleOrderClassName' => 'et_pb_table_of_contents',
-        'title' => 'Table of Contents',
-        'titles' => 'Table of Contents',
-        'moduleIcon' => 'divi/module-table-of-contents',
-        'category' => 'module',
-        'childrenName' => [],
-        'videos' => [],
-        'script' => ['divi-module-library-script-table-of-contents'],
-        'attributes' => [
-            'module' => [
-                'type' => 'object',
-                'selector' => '{{selector}}',
-                'settings' => [
-                    'meta' => [
-                        'meta' => []
-                    ],
-                    'advanced' => [
-                        'elements' => [],
-                        'html' => [],
-                        'link' => [],
-                        'loop' => []
-                    ],
-                    'decoration' => [
-                        'layout' => [],
-                        'animation' => [],
-                        'attributes' => [],
-                        'background' => [],
-                        'border' => [],
-                        'boxShadow' => [],
-                        'conditions' => [],
-                        'disabledOn' => [],
-                        'filters' => [],
-                        'interactions' => [],
-                        'overflow' => [],
-                        'order' => [],
-                        'position' => [],
-                        'scroll' => [],
-                        'sizing' => [],
-                        'spacing' => [],
-                        'sticky' => [],
-                        'transform' => [],
-                        'transition' => [],
-                        'zIndex' => []
-                    ]
-                ]
-            ],
-            'title' => [
-                'type' => 'object',
-                'label' => 'Title',
-                'selector' => '{{selector}} .et_pb_table_of_contents__title',
-                'supportsCustomAttributes' => true,
-                'attributes' => [
-                    'class' => 'et_pb_table_of_contents__title'
-                ],
-                'tagName' => 'h2',
-                'inlineEditor' => 'plainText',
-                'elementType' => 'heading',
-                'childrenSanitizer' => 'et_core_esc_previously',
-                'settings' => [
-                    'innerContent' => [
-                        'groupType' => 'group-item',
-                        'item' => [
-                            'groupSlug' => 'contentContent',
-                            'priority' => 1,
-                            'render' => true,
-                            'attrName' => 'title.innerContent',
-                            'label' => 'Title',
-                            'description' =>
-                                'Set the title shown above the table of contents.',
-                            'category' => 'basic_option',
-                            'features' => [
-                                'dynamicContent' => [
-                                    'type' => 'text'
-                                ],
-                                'preset' => 'content'
-                            ],
-                            'component' => [
-                                'name' => 'divi/text',
-                                'type' => 'field'
-                            ]
-                        ]
-                    ],
-                    'decoration' => [
-                        'font' => [
-                            'component' => [
-                                'props' => [
-                                    'dynamicSubgroupHost' => true,
-                                    'fields' => [
-                                        'headingLevel' => [
-                                            'render' => true
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ],
-            'list' => [
-                'type' => 'object',
-                'label' => 'List',
-                'selector' =>
-                    '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__link',
-                'supportsCustomAttributes' => true,
-                'elementType' => 'element',
-                'attributes' => [
-                    'class' => 'et_pb_table_of_contents__nav'
-                ],
-                'settings' => [
-                    'innerContent' => [
-                        'groupType' => 'group-items',
-                        'items' => [
-                            'includedHeadings' => [
-                                'groupSlug' => 'contentContent',
-                                'priority' => 5,
-                                'render' => true,
-                                'attrName' => 'list.innerContent',
-                                'subName' => 'includedHeadings',
-                                'label' => 'Included Headings',
-                                'description' =>
-                                    'Select heading levels to include in the generated table of contents.',
-                                'category' => 'basic_option',
-                                'features' => [
-                                    'responsive' => false,
-                                    'hover' => false,
-                                    'sticky' => false,
-                                    'preset' => 'content'
-                                ],
-                                'component' => [
-                                    'name' => 'divi/checkboxes',
-                                    'type' => 'field',
-                                    'props' => [
-                                        'options' => [
-                                            [
-                                                'value' => 'h1',
-                                                'label' => 'Heading 1'
-                                            ],
-                                            [
-                                                'value' => 'h2',
-                                                'label' => 'Heading 2'
-                                            ],
-                                            [
-                                                'value' => 'h3',
-                                                'label' => 'Heading 3'
-                                            ],
-                                            [
-                                                'value' => 'h4',
-                                                'label' => 'Heading 4'
-                                            ],
-                                            [
-                                                'value' => 'h5',
-                                                'label' => 'Heading 5'
-                                            ],
-                                            [
-                                                'value' => 'h6',
-                                                'label' => 'Heading 6'
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            'includeOwnTitle' => [
-                                'groupSlug' => 'contentContent',
-                                'priority' => 10,
-                                'render' => true,
-                                'attrName' => 'list.innerContent',
-                                'subName' => 'includeOwnTitle',
-                                'label' => 'Include Module Title',
-                                'description' =>
-                                    'Include this module title as a heading in the generated table.',
-                                'category' => 'configuration',
-                                'features' => [
-                                    'responsive' => false,
-                                    'hover' => false,
-                                    'sticky' => false,
-                                    'preset' => 'content'
-                                ],
-                                'component' => [
-                                    'type' => 'field',
-                                    'name' => 'divi/toggle',
-                                    'props' => [
-                                        'options' => [
-                                            'off' => 'Off',
-                                            'on' => 'On'
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ],
-                    'decoration' => [
-                        'font' => [
-                            'component' => [
-                                'props' => [
-                                    'dynamicSubgroupHost' => true
-                                ]
-                            ]
-                        ]
-                    ],
-                    'advanced' => [
-                        'interaction' => [
-                            'groupType' => 'group-items',
-                            'items' => [
-                                'smoothScroll' => [
-                                    'groupSlug' => 'designScroll',
-                                    'priority' => 20,
-                                    'render' => true,
-                                    'attrName' => 'list.advanced.interaction',
-                                    'subName' => 'smoothScroll',
-                                    'label' => 'Smooth Scroll',
-                                    'description' =>
-                                        'Enable smooth scrolling when clicking table links.',
-                                    'category' => 'configuration',
-                                    'features' => [
-                                        'responsive' => false,
-                                        'hover' => false,
-                                        'sticky' => false,
-                                        'preset' => 'content'
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/toggle',
-                                        'props' => [
-                                            'options' => [
-                                                'off' => 'Off',
-                                                'on' => 'On'
-                                            ]
-                                        ]
-                                    ]
-                                ],
-                                'scrollOffsetPx' => [
-                                    'groupSlug' => 'designScroll',
-                                    'priority' => 25,
-                                    'render' => true,
-                                    'attrName' => 'list.advanced.interaction',
-                                    'subName' => 'scrollOffsetPx',
-                                    'label' => 'Scroll Offset',
-                                    'description' =>
-                                        'Offset in pixels used when scrolling to a section.',
-                                    'category' => 'configuration',
-                                    'features' => [
-                                        'responsive' => false,
-                                        'hover' => false,
-                                        'sticky' => false,
-                                        'preset' => 'content'
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/range',
-                                        'props' => [
-                                            'cssProperty' =>
-                                                'scroll-margin-top',
-                                            'max' => 2000,
-                                            'step' => 1,
-                                            'defaultUnit' => 'px'
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                'styleProps' => [
-                    'font' => [
-                        'propertySelectors' => [
-                            'font' => [
-                                'desktop' => [
-                                    'value' => [
-                                        'text-align' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item',
-                                        'text-decoration-line' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__link-text',
-                                        'text-decoration-color' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__link-text',
-                                        'text-decoration-style' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__link-text'
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ],
-            'list1' => [
-                'type' => 'object',
-                'label' => 'List Level 1',
-                'selector' =>
-                    '{{selector}} .et_pb_table_of_contents__list--level-1 > .et_pb_table_of_contents__link',
-                'elementType' => 'element',
-                'styleProps' => [
-                    'font' => [
-                        'propertySelectors' => [
-                            'font' => [
-                                'desktop' => [
-                                    'value' => [
-                                        'text-align' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-1',
-                                        'text-decoration-line' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-1 > .et_pb_table_of_contents__link > .et_pb_table_of_contents__link-text',
-                                        'text-decoration-color' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-1 > .et_pb_table_of_contents__link > .et_pb_table_of_contents__link-text',
-                                        'text-decoration-style' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-1 > .et_pb_table_of_contents__link > .et_pb_table_of_contents__link-text'
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                'settings' => [
-                    'decoration' => [
-                        'font' => [
-                            'component' => [
-                                'props' => [
-                                    'dynamicSubgroupHost' => true
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ],
-            'list2' => [
-                'type' => 'object',
-                'label' => 'List Level 2',
-                'selector' =>
-                    '{{selector}} .et_pb_table_of_contents__list--level-2 > .et_pb_table_of_contents__link',
-                'elementType' => 'element',
-                'styleProps' => [
-                    'font' => [
-                        'propertySelectors' => [
-                            'font' => [
-                                'desktop' => [
-                                    'value' => [
-                                        'text-align' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-2',
-                                        'text-decoration-line' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-2 > .et_pb_table_of_contents__link > .et_pb_table_of_contents__link-text',
-                                        'text-decoration-color' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-2 > .et_pb_table_of_contents__link > .et_pb_table_of_contents__link-text',
-                                        'text-decoration-style' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-2 > .et_pb_table_of_contents__link > .et_pb_table_of_contents__link-text'
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                'settings' => [
-                    'decoration' => [
-                        'font' => [
-                            'component' => [
-                                'props' => [
-                                    'dynamicSubgroupHost' => true
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ],
-            'list3' => [
-                'type' => 'object',
-                'label' => 'List Level 3',
-                'selector' =>
-                    '{{selector}} .et_pb_table_of_contents__list--level-3 > .et_pb_table_of_contents__link',
-                'elementType' => 'element',
-                'styleProps' => [
-                    'font' => [
-                        'propertySelectors' => [
-                            'font' => [
-                                'desktop' => [
-                                    'value' => [
-                                        'text-align' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-3',
-                                        'text-decoration-line' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-3 > .et_pb_table_of_contents__link > .et_pb_table_of_contents__link-text',
-                                        'text-decoration-color' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-3 > .et_pb_table_of_contents__link > .et_pb_table_of_contents__link-text',
-                                        'text-decoration-style' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-3 > .et_pb_table_of_contents__link > .et_pb_table_of_contents__link-text'
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                'settings' => [
-                    'decoration' => [
-                        'font' => [
-                            'component' => [
-                                'props' => [
-                                    'dynamicSubgroupHost' => true
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ],
-            'list4' => [
-                'type' => 'object',
-                'label' => 'List Level 4',
-                'selector' =>
-                    '{{selector}} .et_pb_table_of_contents__list--level-4 > .et_pb_table_of_contents__link',
-                'elementType' => 'element',
-                'styleProps' => [
-                    'font' => [
-                        'propertySelectors' => [
-                            'font' => [
-                                'desktop' => [
-                                    'value' => [
-                                        'text-align' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-4',
-                                        'text-decoration-line' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-4 > .et_pb_table_of_contents__link > .et_pb_table_of_contents__link-text',
-                                        'text-decoration-color' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-4 > .et_pb_table_of_contents__link > .et_pb_table_of_contents__link-text',
-                                        'text-decoration-style' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-4 > .et_pb_table_of_contents__link > .et_pb_table_of_contents__link-text'
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                'settings' => [
-                    'decoration' => [
-                        'font' => [
-                            'component' => [
-                                'props' => [
-                                    'dynamicSubgroupHost' => true
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ],
-            'list5' => [
-                'type' => 'object',
-                'label' => 'List Level 5',
-                'selector' =>
-                    '{{selector}} .et_pb_table_of_contents__list--level-5 > .et_pb_table_of_contents__link',
-                'elementType' => 'element',
-                'styleProps' => [
-                    'font' => [
-                        'propertySelectors' => [
-                            'font' => [
-                                'desktop' => [
-                                    'value' => [
-                                        'text-align' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-5',
-                                        'text-decoration-line' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-5 > .et_pb_table_of_contents__link > .et_pb_table_of_contents__link-text',
-                                        'text-decoration-color' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-5 > .et_pb_table_of_contents__link > .et_pb_table_of_contents__link-text',
-                                        'text-decoration-style' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-5 > .et_pb_table_of_contents__link > .et_pb_table_of_contents__link-text'
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                'settings' => [
-                    'decoration' => [
-                        'font' => [
-                            'component' => [
-                                'props' => [
-                                    'dynamicSubgroupHost' => true
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ],
-            'list6' => [
-                'type' => 'object',
-                'label' => 'List Level 6',
-                'selector' =>
-                    '{{selector}} .et_pb_table_of_contents__list--level-6 > .et_pb_table_of_contents__link',
-                'elementType' => 'element',
-                'styleProps' => [
-                    'font' => [
-                        'propertySelectors' => [
-                            'font' => [
-                                'desktop' => [
-                                    'value' => [
-                                        'text-align' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-6',
-                                        'text-decoration-line' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-6 > .et_pb_table_of_contents__link > .et_pb_table_of_contents__link-text',
-                                        'text-decoration-color' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-6 > .et_pb_table_of_contents__link > .et_pb_table_of_contents__link-text',
-                                        'text-decoration-style' =>
-                                            '{{selector}} .et_pb_table_of_contents__nav .et_pb_table_of_contents__item.et_pb_table_of_contents__list--level-6 > .et_pb_table_of_contents__link > .et_pb_table_of_contents__link-text'
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                'settings' => [
-                    'decoration' => [
-                        'font' => [
-                            'component' => [
-                                'props' => [
-                                    'dynamicSubgroupHost' => true
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ],
-            'marker' => [
-                'type' => 'object',
-                'label' => 'Marker',
-                'selector' => '{{selector}} .et_pb_table_of_contents__marker',
-                'elementType' => 'element',
-                'settings' => [
-                    'decoration' => [
-                        'font' => [
-                            'component' => [
-                                'props' => [
-                                    'dynamicSubgroupHost' => true
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ],
-            'emptyState' => [
-                'type' => 'object',
-                'label' => 'Empty State',
-                'selector' => '{{selector}} .et_pb_table_of_contents__empty',
-                'supportsCustomAttributes' => true,
-                'elementType' => 'content',
-                'attributes' => [
-                    'class' => 'et_pb_table_of_contents__empty'
-                ],
-                'tagName' => 'div',
-                'inlineEditor' => 'plainText',
-                'childrenSanitizer' => 'et_core_esc_previously',
-                'settings' => [
-                    'innerContent' => [
-                        'groupType' => 'group-item',
-                        'item' => [
-                            'groupSlug' => 'contentContent',
-                            'priority' => 30,
-                            'render' => true,
-                            'attrName' => 'emptyState.innerContent',
-                            'label' => 'Empty State Message',
-                            'description' =>
-                                'Message shown when no headings are found.',
-                            'category' => 'basic_option',
-                            'features' => [
-                                'dynamicContent' => [
-                                    'type' => 'text'
-                                ],
-                                'preset' => 'content'
-                            ],
-                            'component' => [
-                                'name' => 'divi/text',
-                                'type' => 'field'
-                            ]
-                        ]
-                    ],
-                    'decoration' => [
-                        'font' => [
-                            'component' => [
-                                'props' => [
-                                    'dynamicSubgroupHost' => true
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ],
-        'customCssFields' => [
-            'title' => [
-                'label' => 'Title',
-                'subName' => 'title',
-                'selectorSuffix' => ' .et_pb_table_of_contents__title'
-            ],
-            'list' => [
-                'label' => 'List',
-                'subName' => 'list',
-                'selectorSuffix' => ' .et_pb_table_of_contents__list'
-            ],
-            'link' => [
-                'label' => 'Link',
-                'subName' => 'link',
-                'selectorSuffix' => ' .et_pb_table_of_contents__link'
-            ],
-            'marker' => [
-                'label' => 'Marker',
-                'subName' => 'marker',
-                'selectorSuffix' => ' .et_pb_table_of_contents__marker'
-            ],
-            'emptyState' => [
-                'label' => 'Empty State',
-                'subName' => 'emptyState',
-                'selectorSuffix' => ' .et_pb_table_of_contents__empty'
-            ]
-        ],
-        'settings' => [
-            'content' => 'auto',
-            'design' => 'auto',
-            'advanced' => 'auto',
-            'groups' => [
-                'contentContent' => [
-                    'panel' => 'content',
-                    'priority' => 10,
-                    'groupName' => 'content',
-                    'multiElements' => true,
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Content',
-                            'preset' => 'content'
-                        ]
-                    ]
-                ],
-                'designScroll' => [
-                    'panel' => 'design',
-                    'priority' => 1,
-                    'groupName' => 'scroll',
-                    'multiElements' => true,
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Scroll',
-                            'preset' => 'content'
                         ]
                     ]
                 ]
@@ -39884,7 +38739,6 @@ return [
                 'elementType' => 'heading',
                 'tagName' => 'h4',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'settings' => [
                     'innerContent' => [
@@ -39938,7 +38792,6 @@ return [
                 ],
                 'tagName' => 'p',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'settings' => [
                     'innerContent' => [
@@ -39983,17 +38836,8 @@ return [
                 'selector' => '{{selector}} .et_pb_team_member_image img',
                 'supportsCustomAttributes' => true,
                 'elementType' => 'image',
-                'scriptDataProps' => [
-                    'animation' => [
-                        'selector' => '{{selector}} .et_pb_team_member_image'
-                    ]
-                ],
                 'styleProps' => [
                     'selector' => '{{selector}} .et_pb_team_member_image',
-                    'fit' => [
-                        'selector' =>
-                            '{{selector}} .et_pb_team_member_image img'
-                    ],
                     'border' => [
                         'propertySelectors' => [
                             'desktop' => [
@@ -40081,20 +38925,51 @@ return [
                         ]
                     ],
                     'decoration' => [
-                        'image' => [
-                            'panel' => 'design',
-                            'groupType' => 'group',
-                            'groupName' => 'image',
-                            'priority' => 10,
-                            'component' => [
-                                'type' => 'group',
-                                'name' => 'divi/image',
-                                'props' => [
-                                    'attrName' => 'image',
-                                    'groupLabel' => 'Image',
-                                    'grouped' => true,
-                                    'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
+                        'border' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 10,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/border',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'boxShadow' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 15,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/box-shadow',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'filters' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/filters',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
                                 ]
                             ]
                         ]
@@ -40324,6 +39199,20 @@ return [
                         ]
                     ]
                 ],
+                'designImage' => [
+                    'panel' => 'design',
+                    'priority' => 10,
+                    'groupName' => 'imageStyle',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'clipboardCategory' => 'style',
+                            'groupLabel' => 'Image',
+                            'dynamicSubgroupHost' => true
+                        ]
+                    ]
+                ],
                 'designAnimation' => [
                     'panel' => 'design',
                     'priority' => 150,
@@ -40373,7 +39262,7 @@ return [
                     ],
                     'layout' => [
                         'selector' =>
-                            '{{selector}}, {{selector}} .et_pb_testimonial_description'
+                            '{{selector}} .et_pb_testimonial_description'
                     ]
                 ],
                 'settings' => [
@@ -40450,7 +39339,6 @@ return [
                 ],
                 'tagName' => 'span',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'settings' => [
                     'innerContent' => [
                         'groupType' => 'group-items',
@@ -40726,7 +39614,6 @@ return [
                 ],
                 'tagName' => 'div',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'settings' => [
                     'innerContent' => [
@@ -40788,7 +39675,6 @@ return [
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'tagName' => 'span',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'settings' => [
                     'innerContent' => [
                         'groupType' => 'group-item',
@@ -40845,24 +39731,23 @@ return [
             'portrait' => [
                 'type' => 'object',
                 'selector' => '{{selector}} .et_pb_testimonial_portrait',
-                'elementType' => 'image',
-                'scriptDataProps' => [
-                    'animation' => [
-                        'selector' => '{{selector}} .et_pb_testimonial_portrait'
-                    ]
-                ],
                 'styleProps' => [
+                    'border' => [
+                        'propertySelectors' => [
+                            'desktop' => [
+                                'value' => [
+                                    'border-radius' =>
+                                        '{{selector}} .et_pb_testimonial_portrait, {{selector}} .et_pb_testimonial_portrait:before'
+                                ]
+                            ]
+                        ]
+                    ],
                     'boxShadow' => [
                         'selector' =>
-                            '{{selector}} .et_pb_testimonial_portrait',
-                        'useOverlay' => true
-                    ]
-                ],
-                'styleComponentsProps' => [
-                    'boxShadow' => [
-                        'settings' => [
-                            'overlay' => true
-                        ]
+                            '{{selector}} .et_pb_testimonial_portrait:before'
+                    ],
+                    'sizing' => [
+                        'important' => true
                     ]
                 ],
                 'settings' => [
@@ -40871,7 +39756,7 @@ return [
                         'item' => [
                             'groupSlug' => 'contentImage',
                             'attrName' => 'portrait.innerContent',
-                            'subName' => 'src',
+                            'subName' => 'url',
                             'label' => 'Image',
                             'description' =>
                                 'Upload your desired image, or type in the URL to the image you would like to display.',
@@ -40892,20 +39777,96 @@ return [
                         ]
                     ],
                     'decoration' => [
-                        'image' => [
-                            'panel' => 'design',
-                            'groupType' => 'group',
-                            'groupName' => 'image',
-                            'priority' => 10,
-                            'component' => [
-                                'type' => 'group',
-                                'name' => 'divi/image',
-                                'props' => [
-                                    'attrName' => 'portrait',
-                                    'groupLabel' => 'Image',
-                                    'grouped' => true,
-                                    'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
+                        'sizing' => [
+                            'groupType' => 'group-items',
+                            'items' => [
+                                'width' => [
+                                    'groupSlug' => 'designImage',
+                                    'attrName' => 'portrait.decoration.sizing',
+                                    'subName' => 'width',
+                                    'label' => 'Image Width',
+                                    'description' =>
+                                        'Adjust the width of the person\'s portrait photo within the testimonial.',
+                                    'category' => 'layout',
+                                    'priority' => 5,
+                                    'render' => true,
+                                    'component' => [
+                                        'type' => 'field',
+                                        'name' => 'divi/range',
+                                        'props' => [
+                                            'cssProperty' => 'width',
+                                            'min' => 1,
+                                            'max' => 200
+                                        ]
+                                    ]
+                                ],
+                                'height' => [
+                                    'groupSlug' => 'designImage',
+                                    'attrName' => 'portrait.decoration.sizing',
+                                    'subName' => 'height',
+                                    'label' => 'Image Height',
+                                    'description' =>
+                                        'Adjust the height of the person\'s portrait photo within the testimonial.',
+                                    'category' => 'layout',
+                                    'priority' => 10,
+                                    'render' => true,
+                                    'component' => [
+                                        'type' => 'field',
+                                        'name' => 'divi/range',
+                                        'props' => [
+                                            'cssProperty' => 'height',
+                                            'min' => 1,
+                                            'max' => 200
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'border' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'attrName' => 'portrait.decoration.border',
+                                'priority' => 10,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/border',
+                                    'props' => [
+                                        'grouped' => true
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'boxShadow' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'attrName' => 'portrait.decoration.boxShadow',
+                                'priority' => 10,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/box-shadow',
+                                    'props' => [
+                                        'grouped' => true
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'filters' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'attrName' => 'portrait.decoration.filters',
+                                'priority' => 10,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/filters',
+                                    'props' => [
+                                        'grouped' => true
+                                    ]
                                 ]
                             ]
                         ]
@@ -40994,6 +39955,18 @@ return [
                             'dynamicSubgroupExcludedComponents' => [
                                 'divi/animation'
                             ]
+                        ]
+                    ]
+                ],
+                'designImage' => [
+                    'panel' => 'design',
+                    'priority' => 10,
+                    'groupName' => 'designImage',
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Image',
+                            'dynamicSubgroupHost' => true
                         ]
                     ]
                 ],
@@ -41314,36 +40287,6 @@ return [
                                         ],
                                         'fields' => [
                                             'body' => [
-                                                'size' => [
-                                                    'priority' => 40
-                                                ],
-                                                'color' => [
-                                                    'priority' => 50
-                                                ],
-                                                'lineHeight' => [
-                                                    'priority' => 60
-                                                ],
-                                                'letterSpacing' => [
-                                                    'priority' => 70
-                                                ],
-                                                'capitalization' => [
-                                                    'priority' => 71
-                                                ],
-                                                'style' => [
-                                                    'priority' => 72
-                                                ],
-                                                'lineColor' => [
-                                                    'priority' => 73
-                                                ],
-                                                'lineThickness' => [
-                                                    'priority' => 74
-                                                ],
-                                                'underlineOffset' => [
-                                                    'priority' => 75
-                                                ],
-                                                'lineStyle' => [
-                                                    'priority' => 76
-                                                ],
                                                 'textAlign' => [
                                                     'render' => false
                                                 ]
@@ -41383,2093 +40326,6 @@ return [
                         'name' => 'divi/composite',
                         'props' => [
                             'groupLabel' => 'Text',
-                            'presetGroup' => 'divi/font-body',
-                            'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ]
-            ]
-        ]
-    ],
-    'timeline' => [
-        'name' => 'divi/timeline',
-        'd4Shortcode' => 'et_pb_timeline',
-        'moduleClassName' => 'et_pb_timeline',
-        'moduleOrderClassName' => 'et_pb_timeline',
-        'title' => 'Timeline',
-        'titles' => 'Timelines',
-        'moduleIcon' => 'divi/module-timeline',
-        'childModuleName' => 'divi/timeline-item',
-        'childModuleTitle' => 'Timeline Item',
-        'category' => 'module',
-        'childrenName' => ['divi/timeline-item'],
-        'attributes' => [
-            'module' => [
-                'type' => 'object',
-                'selector' => '{{selector}}',
-                'styleProps' => [
-                    'position' => [
-                        'selector' => '{{selector}} .et_pb_timeline_track'
-                    ]
-                ],
-                'settings' => [
-                    'meta' => [
-                        'meta' => []
-                    ],
-                    'advanced' => [
-                        'elements' => [
-                            'groupType' => 'group-item',
-                            'item' => [
-                                'groupSlug' => 'contentElements',
-                                'priority' => 5,
-                                'render' => true,
-                                'component' => [
-                                    'type' => 'group',
-                                    'name' => 'divi/elements',
-                                    'props' => [
-                                        'grouped' => false
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'timeline' => [
-                            'groupType' => 'group-items',
-                            'items' => [
-                                'direction' => [
-                                    'groupSlug' => 'designTimeline',
-                                    'attrName' => 'module.advanced.timeline',
-                                    'subName' => 'direction',
-                                    'label' => 'Direction',
-                                    'description' =>
-                                        'Choose timeline orientation.',
-                                    'category' => 'layout',
-                                    'priority' => 10,
-                                    'render' => true,
-                                    'features' => [
-                                        'responsive' => true,
-                                        'hover' => false,
-                                        'sticky' => false,
-                                        'preset' => 'content'
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/select',
-                                        'props' => [
-                                            'defaultValue' => 'vertical',
-                                            'options' => [
-                                                'vertical' => [
-                                                    'label' => 'Vertical'
-                                                ],
-                                                'horizontal' => [
-                                                    'label' => 'Horizontal'
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ],
-                                'verticalPosition' => [
-                                    'groupSlug' => 'designTimeline',
-                                    'attrName' => 'module.advanced.timeline',
-                                    'subName' => 'position',
-                                    'label' => 'Position',
-                                    'description' =>
-                                        'Choose card position for vertical timeline.',
-                                    'category' => 'layout',
-                                    'priority' => 20,
-                                    'render' => true,
-                                    'features' => [
-                                        'responsive' => true,
-                                        'hover' => false,
-                                        'sticky' => false,
-                                        'preset' => 'content'
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/select',
-                                        'props' => [
-                                            'defaultValue' => 'right',
-                                            'options' => [
-                                                'right' => [
-                                                    'label' => 'Right'
-                                                ],
-                                                'left' => [
-                                                    'label' => 'Left'
-                                                ],
-                                                'alternating' => [
-                                                    'label' => 'Alternating'
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ],
-                                'horizontalPosition' => [
-                                    'groupSlug' => 'designTimeline',
-                                    'attrName' => 'module.advanced.timeline',
-                                    'subName' => 'position',
-                                    'label' => 'Position',
-                                    'description' =>
-                                        'Choose card position for horizontal timeline.',
-                                    'category' => 'layout',
-                                    'priority' => 20,
-                                    'render' => true,
-                                    'features' => [
-                                        'responsive' => true,
-                                        'hover' => false,
-                                        'sticky' => false,
-                                        'preset' => 'content'
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/select',
-                                        'props' => [
-                                            'defaultValue' => 'top',
-                                            'options' => [
-                                                'top' => [
-                                                    'label' => 'Top'
-                                                ],
-                                                'bottom' => [
-                                                    'label' => 'Bottom'
-                                                ],
-                                                'alternating' => [
-                                                    'label' => 'Alternating'
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ],
-                                'verticalAlternatingStartFrom' => [
-                                    'groupSlug' => 'designTimeline',
-                                    'attrName' => 'module.advanced.timeline',
-                                    'subName' => 'startFrom',
-                                    'label' => 'Start From',
-                                    'description' =>
-                                        'Choose which side the first timeline card starts from.',
-                                    'category' => 'layout',
-                                    'priority' => 30,
-                                    'render' => true,
-                                    'features' => [
-                                        'responsive' => true,
-                                        'hover' => false,
-                                        'sticky' => false,
-                                        'preset' => 'content'
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/select',
-                                        'props' => [
-                                            'defaultValue' => 'right',
-                                            'options' => [
-                                                'right' => [
-                                                    'label' => 'Right'
-                                                ],
-                                                'left' => [
-                                                    'label' => 'Left'
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ],
-                                'horizontalAlternatingStartFrom' => [
-                                    'groupSlug' => 'designTimeline',
-                                    'attrName' => 'module.advanced.timeline',
-                                    'subName' => 'startFrom',
-                                    'label' => 'Start From',
-                                    'description' =>
-                                        'Choose which side the first timeline card starts from.',
-                                    'category' => 'layout',
-                                    'priority' => 30,
-                                    'render' => true,
-                                    'features' => [
-                                        'responsive' => true,
-                                        'hover' => false,
-                                        'sticky' => false,
-                                        'preset' => 'content'
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/select',
-                                        'props' => [
-                                            'defaultValue' => 'bottom',
-                                            'options' => [
-                                                'top' => [
-                                                    'label' => 'Top'
-                                                ],
-                                                'bottom' => [
-                                                    'label' => 'Bottom'
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ],
-                                'layout' => [
-                                    'groupSlug' => 'designTimeline',
-                                    'priority' => 40,
-                                    'render' => true,
-                                    'component' => [
-                                        'type' => 'group',
-                                        'name' => 'divi/layout',
-                                        'props' => [
-                                            'grouped' => false,
-                                            'attrName' =>
-                                                'track.decoration.layout',
-                                            'fields' => [
-                                                'display' => [
-                                                    'render' => false
-                                                ],
-                                                'flexDirection' => [
-                                                    'render' => false
-                                                ],
-                                                'justifyContent' => [
-                                                    'render' => false
-                                                ],
-                                                'alignItems' => [
-                                                    'render' => false
-                                                ],
-                                                'flexWrap' => [
-                                                    'render' => false
-                                                ],
-                                                'alignContent' => [
-                                                    'render' => false
-                                                ],
-                                                'gridColumnWidths' => [
-                                                    'render' => false
-                                                ],
-                                                'gridColumnCount' => [
-                                                    'render' => false
-                                                ],
-                                                'collapseEmptyColumns' => [
-                                                    'render' => false
-                                                ],
-                                                'gridColumnMinWidth' => [
-                                                    'render' => false
-                                                ],
-                                                'gridColumnWidth' => [
-                                                    'render' => false
-                                                ],
-                                                'gridTemplateColumns' => [
-                                                    'render' => false
-                                                ],
-                                                'gridAutoColumns' => [
-                                                    'render' => false
-                                                ],
-                                                'gridRowHeights' => [
-                                                    'render' => false
-                                                ],
-                                                'gridRowCount' => [
-                                                    'render' => false
-                                                ],
-                                                'gridRowMinHeight' => [
-                                                    'render' => false
-                                                ],
-                                                'gridRowHeight' => [
-                                                    'render' => false
-                                                ],
-                                                'gridTemplateRows' => [
-                                                    'render' => false
-                                                ],
-                                                'gridAutoRows' => [
-                                                    'render' => false
-                                                ],
-                                                'gridAutoFlow' => [
-                                                    'render' => false
-                                                ],
-                                                'gridDensity' => [
-                                                    'render' => false
-                                                ],
-                                                'gridJustifyItems' => [
-                                                    'render' => false
-                                                ],
-                                                'gridOffsetRules' => [
-                                                    'render' => false
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'html' => [],
-                        'link' => [],
-                        'loop' => []
-                    ],
-                    'decoration' => [
-                        'animation' => [],
-                        'attributes' => [],
-                        'background' => [],
-                        'border' => [],
-                        'boxShadow' => [],
-                        'conditions' => [],
-                        'disabledOn' => [],
-                        'filters' => [],
-                        'overflow' => [],
-                        'order' => [],
-                        'position' => [],
-                        'scroll' => [],
-                        'sizing' => [],
-                        'spacing' => [],
-                        'sticky' => [],
-                        'transform' => [],
-                        'transition' => [],
-                        'zIndex' => []
-                    ]
-                ]
-            ],
-            'track' => [
-                'type' => 'object',
-                'label' => 'Track',
-                'elementType' => 'element',
-                'elementProps' => [
-                    'groupedOptionGroup' => true
-                ],
-                'selector' => '{{selector}} .et_pb_timeline_track',
-                'styleProps' => [
-                    'layout' => [
-                        'selector' => '{{selector}} .et_pb_timeline_track'
-                    ],
-                    'columnGap' => [
-                        'selector' => '{{selector}} .et_pb_timeline_track'
-                    ],
-                    'rowGap' => [
-                        'selector' => '{{selector}} .et_pb_timeline_track'
-                    ]
-                ],
-                'settings' => [
-                    'decoration' => [
-                        'background' => [
-                            'item' => [
-                                'groupSlug' => 'designTrack',
-                                'component' => [
-                                    'props' => [
-                                        'hidePanels' => [
-                                            'video',
-                                            'pattern',
-                                            'mask'
-                                        ],
-                                        'fields' => [
-                                            'image' => [
-                                                'parallaxEnabled' => [
-                                                    'render' => false
-                                                ],
-                                                'parallaxMethod' => [
-                                                    'render' => false
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'border' => [],
-                        'boxShadow' => [],
-                        'sizing' => [
-                            'item' => [
-                                'groupSlug' => 'designTrack',
-                                'component' => [
-                                    'props' => [
-                                        'fields' => [
-                                            'alignSelf' => [
-                                                'render' => false
-                                            ],
-                                            'flexType' => [
-                                                'render' => false
-                                            ],
-                                            'size' => [
-                                                'render' => false
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'spacing' => []
-                    ]
-                ]
-            ],
-            'item' => [
-                'type' => 'object',
-                'label' => 'Item',
-                'elementType' => 'element',
-                'elementProps' => [
-                    'groupedOptionGroup' => true
-                ],
-                'selector' => '{{selector}} .et_pb_timeline_item',
-                'settings' => [
-                    'decoration' => [
-                        'background' => [
-                            'item' => [
-                                'groupSlug' => 'designItem',
-                                'component' => [
-                                    'props' => [
-                                        'hidePanels' => [
-                                            'video',
-                                            'pattern',
-                                            'mask'
-                                        ],
-                                        'fields' => [
-                                            'image' => [
-                                                'parallaxEnabled' => [
-                                                    'render' => false
-                                                ],
-                                                'parallaxMethod' => [
-                                                    'render' => false
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'border' => [],
-                        'boxShadow' => [],
-                        'sizing' => [
-                            'item' => [
-                                'groupSlug' => 'designItem',
-                                'component' => [
-                                    'props' => [
-                                        'fields' => [
-                                            'flexType' => [
-                                                'render' => false
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'spacing' => []
-                    ]
-                ]
-            ],
-            'itemEven' => [
-                'type' => 'object',
-                'label' => 'Item (Even)',
-                'elementType' => 'element',
-                'elementProps' => [
-                    'groupedOptionGroup' => true
-                ],
-                'selector' =>
-                    '{{selector}} :where(.et_pb_timeline_track) > :nth-child(even).et_pb_timeline_item',
-                'settings' => [
-                    'decoration' => [
-                        'background' => [
-                            'item' => [
-                                'groupSlug' => 'designItemeven',
-                                'component' => [
-                                    'props' => [
-                                        'hidePanels' => [
-                                            'video',
-                                            'pattern',
-                                            'mask'
-                                        ],
-                                        'fields' => [
-                                            'image' => [
-                                                'parallaxEnabled' => [
-                                                    'render' => false
-                                                ],
-                                                'parallaxMethod' => [
-                                                    'render' => false
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'border' => [],
-                        'boxShadow' => [],
-                        'sizing' => [
-                            'item' => [
-                                'groupSlug' => 'designItemeven',
-                                'component' => [
-                                    'props' => [
-                                        'fields' => [
-                                            'flexType' => [
-                                                'render' => false
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'spacing' => []
-                    ]
-                ]
-            ],
-            'spacer' => [
-                'type' => 'object',
-                'label' => 'Spacer',
-                'elementType' => 'element',
-                'elementProps' => [
-                    'groupedOptionGroup' => true
-                ],
-                'selector' => '{{selector}} .et_pb_timeline_spacer',
-                'settings' => [
-                    'decoration' => [
-                        'background' => [
-                            'item' => [
-                                'groupSlug' => 'designSpacer',
-                                'component' => [
-                                    'props' => [
-                                        'hidePanels' => [
-                                            'video',
-                                            'pattern',
-                                            'mask'
-                                        ],
-                                        'fields' => [
-                                            'image' => [
-                                                'parallaxEnabled' => [
-                                                    'render' => false
-                                                ],
-                                                'parallaxMethod' => [
-                                                    'render' => false
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'border' => [],
-                        'boxShadow' => [],
-                        'layout' => [],
-                        'sizing' => [
-                            'item' => [
-                                'groupSlug' => 'designSpacer',
-                                'component' => [
-                                    'props' => [
-                                        'fields' => [
-                                            'flexType' => [
-                                                'render' => false
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'spacing' => []
-                    ]
-                ]
-            ],
-            'spacerEven' => [
-                'type' => 'object',
-                'label' => 'Spacer (Even)',
-                'elementType' => 'element',
-                'elementProps' => [
-                    'groupedOptionGroup' => true
-                ],
-                'selector' =>
-                    '{{selector}} :where(.et_pb_timeline_track) > :nth-child(even) .et_pb_timeline_spacer',
-                'settings' => [
-                    'decoration' => [
-                        'background' => [
-                            'item' => [
-                                'groupSlug' => 'designSpacereven',
-                                'component' => [
-                                    'props' => [
-                                        'hidePanels' => [
-                                            'video',
-                                            'pattern',
-                                            'mask'
-                                        ],
-                                        'fields' => [
-                                            'image' => [
-                                                'parallaxEnabled' => [
-                                                    'render' => false
-                                                ],
-                                                'parallaxMethod' => [
-                                                    'render' => false
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'border' => [],
-                        'boxShadow' => [],
-                        'layout' => [],
-                        'sizing' => [
-                            'item' => [
-                                'groupSlug' => 'designSpacereven',
-                                'component' => [
-                                    'props' => [
-                                        'fields' => [
-                                            'flexType' => [
-                                                'render' => false
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'spacing' => []
-                    ]
-                ]
-            ],
-            'children' => [
-                'type' => 'object',
-                'settings' => [
-                    'advanced' => [
-                        'spacer' => [
-                            'groupType' => 'group-item',
-                            'item' => [
-                                'groupSlug' => 'designSpacer',
-                                'attrName' =>
-                                    'children.spacer.advanced.displayElementsOnSpacer',
-                                'label' => 'Display Elements On Spacer',
-                                'description' =>
-                                    'When enabled, nested Timeline Item elements are rendered inside the Spacer area.',
-                                'category' => 'configuration',
-                                'priority' => 3,
-                                'render' => true,
-                                'features' => [
-                                    'responsive' => false,
-                                    'hover' => false,
-                                    'sticky' => false,
-                                    'preset' => ['html']
-                                ],
-                                'component' => [
-                                    'type' => 'field',
-                                    'name' => 'divi/toggle'
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ],
-            'connector' => [
-                'type' => 'object',
-                'label' => 'Connector',
-                'elementType' => 'element',
-                'elementProps' => [
-                    'groupedOptionGroup' => true
-                ],
-                'selector' => '{{selector}} .et_pb_timeline_connector',
-                'settings' => [
-                    'decoration' => [
-                        'background' => [
-                            'item' => [
-                                'groupSlug' => 'designConnector',
-                                'component' => [
-                                    'props' => [
-                                        'hidePanels' => [
-                                            'video',
-                                            'pattern',
-                                            'mask'
-                                        ],
-                                        'fields' => [
-                                            'image' => [
-                                                'parallaxEnabled' => [
-                                                    'render' => false
-                                                ],
-                                                'parallaxMethod' => [
-                                                    'render' => false
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'border' => [],
-                        'boxShadow' => [],
-                        'sizing' => [
-                            'item' => [
-                                'groupSlug' => 'designConnector',
-                                'component' => [
-                                    'props' => [
-                                        'fields' => [
-                                            'alignSelf' => [
-                                                'render' => false
-                                            ],
-                                            'flexType' => [
-                                                'render' => false
-                                            ],
-                                            'size' => [
-                                                'render' => false
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'spacing' => []
-                    ]
-                ]
-            ],
-            'marker' => [
-                'type' => 'object',
-                'label' => 'Marker',
-                'elementType' => 'element',
-                'elementProps' => [
-                    'groupedOptionGroup' => true
-                ],
-                'selector' => '{{selector}} .et_pb_timeline_marker',
-                'settings' => [
-                    'advanced' => [
-                        'position' => [
-                            'groupType' => 'group-item',
-                            'item' => [
-                                'groupSlug' => 'designMarker',
-                                'attrName' => 'marker.advanced',
-                                'subName' => 'position',
-                                'label' => 'Marker Position',
-                                'description' => 'Choose marker position.',
-                                'category' => 'layout',
-                                'priority' => 5,
-                                'render' => true,
-                                'features' => [
-                                    'responsive' => false,
-                                    'hover' => false,
-                                    'sticky' => false,
-                                    'preset' => 'content'
-                                ],
-                                'component' => [
-                                    'type' => 'field',
-                                    'name' => 'divi/select',
-                                    'props' => [
-                                        'defaultValue' => 'start',
-                                        'options' => [
-                                            'start' => [
-                                                'label' => 'Start'
-                                            ],
-                                            'center' => [
-                                                'label' => 'Center'
-                                            ],
-                                            'end' => [
-                                                'label' => 'End'
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ],
-                    'decoration' => [
-                        'icon' => [
-                            'groupType' => 'group-item',
-                            'item' => [
-                                'priority' => 10,
-                                'render' => true,
-                                'groupSlug' => 'designMarker',
-                                'component' => [
-                                    'name' => 'divi/icon',
-                                    'type' => 'group',
-                                    'props' => [
-                                        'attrName' => 'marker.decoration.icon',
-                                        'groupLabel' => 'Icon',
-                                        'fields' => [
-                                            'icon' => [
-                                                'render' => false
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'background' => [
-                            'item' => [
-                                'groupSlug' => 'designMarker',
-                                'component' => [
-                                    'props' => [
-                                        'hidePanels' => [
-                                            'video',
-                                            'pattern',
-                                            'mask'
-                                        ],
-                                        'fields' => [
-                                            'image' => [
-                                                'parallaxEnabled' => [
-                                                    'render' => false
-                                                ],
-                                                'parallaxMethod' => [
-                                                    'render' => false
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'border' => [],
-                        'boxShadow' => [],
-                        'sizing' => [
-                            'item' => [
-                                'groupSlug' => 'designMarker',
-                                'component' => [
-                                    'props' => [
-                                        'fields' => [
-                                            'alignSelf' => [
-                                                'render' => false
-                                            ],
-                                            'flexType' => [
-                                                'render' => false
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'spacing' => []
-                    ]
-                ],
-                'styleProps' => [
-                    'icon' => [
-                        'selector' =>
-                            '{{selector}} .et_pb_timeline_marker .et-pb-icon'
-                    ]
-                ]
-            ],
-            'card' => [
-                'type' => 'object',
-                'label' => 'Card',
-                'elementType' => 'element',
-                'elementProps' => [
-                    'groupedOptionGroup' => true
-                ],
-                'selector' => '{{selector}} .et_pb_timeline_card',
-                'settings' => [
-                    'decoration' => [
-                        'background' => [
-                            'item' => [
-                                'groupSlug' => 'designCard',
-                                'component' => [
-                                    'props' => [
-                                        'hidePanels' => [
-                                            'video',
-                                            'pattern',
-                                            'mask'
-                                        ],
-                                        'fields' => [
-                                            'image' => [
-                                                'parallaxEnabled' => [
-                                                    'render' => false
-                                                ],
-                                                'parallaxMethod' => [
-                                                    'render' => false
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'border' => [],
-                        'boxShadow' => [],
-                        'layout' => [],
-                        'sizing' => [
-                            'item' => [
-                                'groupSlug' => 'designCard',
-                                'component' => [
-                                    'props' => [
-                                        'fields' => [
-                                            'alignSelf' => [
-                                                'render' => false
-                                            ],
-                                            'flexType' => [
-                                                'render' => false
-                                            ],
-                                            'size' => [
-                                                'render' => false
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'spacing' => []
-                    ]
-                ]
-            ],
-            'cardEven' => [
-                'type' => 'object',
-                'label' => 'Card (Even)',
-                'elementType' => 'element',
-                'elementProps' => [
-                    'groupedOptionGroup' => true
-                ],
-                'selector' =>
-                    '{{selector}} :where(.et_pb_timeline_track) > :nth-child(even) .et_pb_timeline_card',
-                'settings' => [
-                    'decoration' => [
-                        'background' => [
-                            'item' => [
-                                'groupSlug' => 'designCardeven',
-                                'component' => [
-                                    'props' => [
-                                        'hidePanels' => [
-                                            'video',
-                                            'pattern',
-                                            'mask'
-                                        ],
-                                        'fields' => [
-                                            'image' => [
-                                                'parallaxEnabled' => [
-                                                    'render' => false
-                                                ],
-                                                'parallaxMethod' => [
-                                                    'render' => false
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'border' => [],
-                        'boxShadow' => [],
-                        'layout' => [],
-                        'sizing' => [
-                            'item' => [
-                                'groupSlug' => 'designCardeven',
-                                'component' => [
-                                    'props' => [
-                                        'fields' => [
-                                            'alignSelf' => [
-                                                'render' => false
-                                            ],
-                                            'flexType' => [
-                                                'render' => false
-                                            ],
-                                            'size' => [
-                                                'render' => false
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'spacing' => []
-                    ]
-                ]
-            ],
-            'date' => [
-                'type' => 'object',
-                'label' => 'Date',
-                'elementType' => 'element',
-                'selector' => '{{selector}} .et_pb_timeline_date',
-                'settings' => [
-                    'decoration' => [
-                        'font' => [
-                            'groupType' => 'group-item',
-                            'item' => [
-                                'groupSlug' => 'designDate',
-                                'priority' => 10,
-                                'render' => true,
-                                'component' => [
-                                    'type' => 'group',
-                                    'name' => 'divi/font',
-                                    'props' => [
-                                        'grouped' => false,
-                                        'groupLabel' => 'Date Text',
-                                        'fieldLabel' => 'Date',
-                                        'dynamicSubgroupHost' => true
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ],
-            'dateEven' => [
-                'type' => 'object',
-                'label' => 'Date (Even)',
-                'elementType' => 'element',
-                'selector' =>
-                    '{{selector}} :where(.et_pb_timeline_track) > :nth-child(even) .et_pb_timeline_date',
-                'settings' => [
-                    'decoration' => [
-                        'font' => [
-                            'groupType' => 'group-item',
-                            'item' => [
-                                'groupSlug' => 'designDateeven',
-                                'priority' => 10,
-                                'render' => true,
-                                'component' => [
-                                    'type' => 'group',
-                                    'name' => 'divi/font',
-                                    'props' => [
-                                        'grouped' => false,
-                                        'groupLabel' => 'Date Text (Even)',
-                                        'fieldLabel' => 'Date',
-                                        'dynamicSubgroupHost' => true,
-                                        'fields' => [
-                                            'headingLevel' => [
-                                                'render' => false
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ],
-            'title' => [
-                'type' => 'object',
-                'label' => 'Title',
-                'elementType' => 'element',
-                'selector' =>
-                    '{{selector}} h1.et_pb_timeline_title, {{selector}} h2.et_pb_timeline_title, {{selector}} h3.et_pb_timeline_title, {{selector}} h4.et_pb_timeline_title, {{selector}} h5.et_pb_timeline_title, {{selector}} h6.et_pb_timeline_title',
-                'settings' => [
-                    'decoration' => [
-                        'font' => [
-                            'groupType' => 'group-item',
-                            'item' => [
-                                'groupSlug' => 'designTitle',
-                                'priority' => 10,
-                                'render' => true,
-                                'component' => [
-                                    'type' => 'group',
-                                    'name' => 'divi/font',
-                                    'props' => [
-                                        'grouped' => false,
-                                        'groupLabel' => 'Title Text',
-                                        'fieldLabel' => 'Title',
-                                        'dynamicSubgroupHost' => true
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ],
-            'titleEven' => [
-                'type' => 'object',
-                'label' => 'Title (Even)',
-                'elementType' => 'element',
-                'selector' =>
-                    '{{selector}} :where(.et_pb_timeline_track) > :nth-child(even) h1.et_pb_timeline_title, {{selector}} :where(.et_pb_timeline_track) > :nth-child(even) h2.et_pb_timeline_title, {{selector}} :where(.et_pb_timeline_track) > :nth-child(even) h3.et_pb_timeline_title, {{selector}} :where(.et_pb_timeline_track) > :nth-child(even) h4.et_pb_timeline_title, {{selector}} :where(.et_pb_timeline_track) > :nth-child(even) h5.et_pb_timeline_title, {{selector}} :where(.et_pb_timeline_track) > :nth-child(even) h6.et_pb_timeline_title',
-                'settings' => [
-                    'decoration' => [
-                        'font' => [
-                            'groupType' => 'group-item',
-                            'item' => [
-                                'groupSlug' => 'designTitleeven',
-                                'priority' => 10,
-                                'render' => true,
-                                'component' => [
-                                    'type' => 'group',
-                                    'name' => 'divi/font',
-                                    'props' => [
-                                        'grouped' => false,
-                                        'groupLabel' => 'Title Text (Even)',
-                                        'fieldLabel' => 'Title',
-                                        'dynamicSubgroupHost' => true,
-                                        'fields' => [
-                                            'headingLevel' => [
-                                                'render' => false
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ],
-            'content' => [
-                'type' => 'object',
-                'label' => 'Body',
-                'elementType' => 'element',
-                'selector' => '{{selector}} .et_pb_timeline_content',
-                'settings' => [
-                    'decoration' => [
-                        'bodyFont' => [
-                            'groupType' => 'group-item',
-                            'item' => [
-                                'groupSlug' => 'designContent',
-                                'priority' => 10,
-                                'render' => true,
-                                'component' => [
-                                    'type' => 'group',
-                                    'name' => 'divi/font-body',
-                                    'props' => [
-                                        'grouped' => false,
-                                        'dynamicSubgroupHost' => true
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ],
-            'contentEven' => [
-                'type' => 'object',
-                'label' => 'Body (Even)',
-                'elementType' => 'element',
-                'selector' =>
-                    '{{selector}} :where(.et_pb_timeline_track) > :nth-child(even) .et_pb_timeline_content',
-                'settings' => [
-                    'decoration' => [
-                        'bodyFont' => [
-                            'groupType' => 'group-item',
-                            'item' => [
-                                'groupSlug' => 'designContenteven',
-                                'priority' => 10,
-                                'render' => true,
-                                'component' => [
-                                    'type' => 'group',
-                                    'name' => 'divi/font-body',
-                                    'props' => [
-                                        'grouped' => false,
-                                        'dynamicSubgroupHost' => true
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ],
-        'customCssFields' => [
-            'track' => [
-                'label' => 'Track',
-                'subName' => 'track',
-                'selectorSuffix' => ' .et_pb_timeline_track'
-            ],
-            'item' => [
-                'label' => 'Item',
-                'subName' => 'item',
-                'selectorSuffix' => ' .et_pb_timeline_item'
-            ],
-            'spacer' => [
-                'label' => 'Spacer',
-                'subName' => 'spacer',
-                'selectorSuffix' => ' .et_pb_timeline_spacer'
-            ],
-            'connector' => [
-                'label' => 'Connector',
-                'subName' => 'connector',
-                'selectorSuffix' => ' .et_pb_timeline_connector'
-            ],
-            'marker' => [
-                'label' => 'Marker',
-                'subName' => 'marker',
-                'selectorSuffix' => ' .et_pb_timeline_marker'
-            ],
-            'card' => [
-                'label' => 'Card',
-                'subName' => 'card',
-                'selectorSuffix' => ' .et_pb_timeline_card'
-            ],
-            'date' => [
-                'label' => 'Date',
-                'subName' => 'date',
-                'selectorSuffix' => ' .et_pb_timeline_date'
-            ],
-            'title' => [
-                'label' => 'Title',
-                'subName' => 'title',
-                'selectorSuffix' => ' .et_pb_timeline_title'
-            ],
-            'content' => [
-                'label' => 'Content',
-                'subName' => 'content',
-                'selectorSuffix' => ' .et_pb_timeline_content'
-            ]
-        ],
-        'settings' => [
-            'content' => 'auto',
-            'advanced' => 'auto',
-            'groups' => [
-                'contentElements' => [
-                    'panel' => 'content',
-                    'priority' => 5,
-                    'groupName' => 'contentElements',
-                    'multiElements' => true,
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Elements',
-                            'preset' => 'content'
-                        ]
-                    ]
-                ],
-                'designTimeline' => [
-                    'panel' => 'design',
-                    'priority' => 10,
-                    'groupName' => 'designTimeline',
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Timeline',
-                            'preset' => 'content'
-                        ]
-                    ]
-                ],
-                'designTrack' => [
-                    'panel' => 'design',
-                    'priority' => 12,
-                    'groupName' => 'designTrack',
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Track',
-                            'clipboardCategory' => 'style',
-                            'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ],
-                'designItem' => [
-                    'panel' => 'design',
-                    'priority' => 14,
-                    'groupName' => 'designItem',
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Item',
-                            'clipboardCategory' => 'style',
-                            'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ],
-                'designItemeven' => [
-                    'panel' => 'design',
-                    'priority' => 15,
-                    'groupName' => 'designItemeven',
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Item (Even)',
-                            'clipboardCategory' => 'style',
-                            'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ],
-                'designSpacer' => [
-                    'panel' => 'design',
-                    'priority' => 17,
-                    'groupName' => 'designSpacer',
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Spacer',
-                            'clipboardCategory' => 'style',
-                            'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ],
-                'designSpacereven' => [
-                    'panel' => 'design',
-                    'priority' => 18,
-                    'groupName' => 'designSpacereven',
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Spacer (Even)',
-                            'clipboardCategory' => 'style',
-                            'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ],
-                'designConnector' => [
-                    'panel' => 'design',
-                    'priority' => 20,
-                    'groupName' => 'designConnector',
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Connector',
-                            'clipboardCategory' => 'style',
-                            'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ],
-                'designMarker' => [
-                    'panel' => 'design',
-                    'priority' => 22,
-                    'groupName' => 'designMarker',
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Marker',
-                            'clipboardCategory' => 'style',
-                            'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ],
-                'designCard' => [
-                    'panel' => 'design',
-                    'priority' => 24,
-                    'groupName' => 'designCard',
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Card',
-                            'clipboardCategory' => 'style',
-                            'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ],
-                'designCardeven' => [
-                    'panel' => 'design',
-                    'priority' => 25,
-                    'groupName' => 'designCardeven',
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Card (Even)',
-                            'clipboardCategory' => 'style',
-                            'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ],
-                'designDate' => [
-                    'panel' => 'design',
-                    'priority' => 27,
-                    'groupName' => 'dateText',
-                    'multiElements' => true,
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Date Text',
-                            'clipboardCategory' => 'style',
-                            'presetGroup' => 'divi/font',
-                            'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ],
-                'designDateeven' => [
-                    'panel' => 'design',
-                    'priority' => 28,
-                    'groupName' => 'dateTextEven',
-                    'multiElements' => true,
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Date Text (Even)',
-                            'clipboardCategory' => 'style',
-                            'presetGroup' => 'divi/font',
-                            'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ],
-                'designTitle' => [
-                    'panel' => 'design',
-                    'priority' => 30,
-                    'groupName' => 'titleText',
-                    'multiElements' => true,
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Title Text',
-                            'clipboardCategory' => 'style',
-                            'presetGroup' => 'divi/font',
-                            'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ],
-                'designTitleeven' => [
-                    'panel' => 'design',
-                    'priority' => 31,
-                    'groupName' => 'titleTextEven',
-                    'multiElements' => true,
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Title Text (Even)',
-                            'clipboardCategory' => 'style',
-                            'presetGroup' => 'divi/font',
-                            'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ],
-                'designContent' => [
-                    'panel' => 'design',
-                    'priority' => 33,
-                    'groupName' => 'bodyText',
-                    'multiElements' => true,
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Body Text',
-                            'clipboardCategory' => 'style',
-                            'presetGroup' => 'divi/font-body',
-                            'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ],
-                'designContenteven' => [
-                    'panel' => 'design',
-                    'priority' => 34,
-                    'groupName' => 'bodyTextEven',
-                    'multiElements' => true,
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Body Text (Even)',
-                            'clipboardCategory' => 'style',
-                            'presetGroup' => 'divi/font-body',
-                            'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ]
-            ]
-        ],
-        'mousetrap' => [
-            'inner' => [
-                'edited' => true
-            ]
-        ]
-    ],
-    'timeline-item' => [
-        'name' => 'divi/timeline-item',
-        'd4Shortcode' => 'et_pb_timeline_item',
-        'moduleClassName' => 'et_pb_timeline_item',
-        'moduleOrderClassName' => 'et_pb_timeline_item',
-        'title' => 'Timeline Item',
-        'titles' => 'Timeline Items',
-        'moduleIcon' => 'divi/module-timeline-item',
-        'category' => 'child-module',
-        'childrenName' => [],
-        'attributes' => [
-            'module' => [
-                'type' => 'object',
-                'selector' =>
-                    '{{selectorPrefix}}.et_pb_timeline {{baseSelector}}',
-                'settings' => [
-                    'meta' => [
-                        'meta' => []
-                    ],
-                    'advanced' => [
-                        'elements' => [],
-                        'html' => [],
-                        'link' => [],
-                        'loop' => []
-                    ],
-                    'decoration' => [
-                        'animation' => [],
-                        'attributes' => [],
-                        'background' => [],
-                        'border' => [],
-                        'boxShadow' => [],
-                        'conditions' => [],
-                        'disabledOn' => [],
-                        'filters' => [],
-                        'overflow' => [],
-                        'order' => [],
-                        'position' => [],
-                        'scroll' => [],
-                        'sizing' => [],
-                        'spacing' => [],
-                        'transform' => [],
-                        'transition' => [],
-                        'zIndex' => []
-                    ]
-                ],
-                'styleProps' => [
-                    'selector' =>
-                        '{{selectorPrefix}}.et_pb_timeline {{baseSelector}}.et_pb_timeline_item'
-                ]
-            ],
-            'spacer' => [
-                'type' => 'object',
-                'label' => 'Spacer',
-                'elementType' => 'element',
-                'elementProps' => [
-                    'groupedOptionGroup' => true
-                ],
-                'selector' =>
-                    '{{selectorPrefix}}.et_pb_timeline {{baseSelector}} .et_pb_timeline_spacer',
-                'attributes' => [
-                    'class' => 'et_pb_timeline_spacer'
-                ],
-                'tagName' => 'div',
-                'settings' => [
-                    'advanced' => [
-                        'displayElementsOnSpacer' => [
-                            'groupType' => 'group-item',
-                            'item' => [
-                                'groupSlug' => 'designSpacer',
-                                'attrName' =>
-                                    'spacer.advanced.displayElementsOnSpacer',
-                                'label' => 'Display Elements On Spacer',
-                                'description' =>
-                                    'When enabled, nested modules are rendered inside this timeline spacer instead of the card.',
-                                'category' => 'configuration',
-                                'priority' => 3,
-                                'render' => true,
-                                'features' => [
-                                    'responsive' => false,
-                                    'hover' => false,
-                                    'sticky' => false,
-                                    'preset' => ['html']
-                                ],
-                                'component' => [
-                                    'type' => 'field',
-                                    'name' => 'divi/toggle'
-                                ]
-                            ]
-                        ]
-                    ],
-                    'decoration' => [
-                        'background' => [],
-                        'border' => [],
-                        'boxShadow' => [],
-                        'layout' => [],
-                        'sizing' => [
-                            'item' => [
-                                'groupSlug' => 'designSpacer',
-                                'component' => [
-                                    'props' => [
-                                        'fields' => [
-                                            'flexType' => [
-                                                'render' => false
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'spacing' => []
-                    ]
-                ]
-            ],
-            'connector' => [
-                'type' => 'object',
-                'label' => 'Connector',
-                'elementType' => 'element',
-                'elementProps' => [
-                    'groupedOptionGroup' => true
-                ],
-                'selector' =>
-                    '{{selectorPrefix}}.et_pb_timeline {{baseSelector}} .et_pb_timeline_connector',
-                'attributes' => [
-                    'class' => 'et_pb_timeline_connector'
-                ],
-                'tagName' => 'div',
-                'settings' => [
-                    'decoration' => [
-                        'background' => [],
-                        'border' => [],
-                        'boxShadow' => [],
-                        'sizing' => [
-                            'item' => [
-                                'groupSlug' => 'designConnector',
-                                'component' => [
-                                    'props' => [
-                                        'fields' => [
-                                            'alignSelf' => [
-                                                'render' => false
-                                            ],
-                                            'flexType' => [
-                                                'render' => false
-                                            ],
-                                            'size' => [
-                                                'render' => false
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'spacing' => []
-                    ]
-                ]
-            ],
-            'marker' => [
-                'type' => 'object',
-                'label' => 'Marker',
-                'elementType' => 'element',
-                'elementProps' => [
-                    'groupedOptionGroup' => true
-                ],
-                'selector' =>
-                    '{{selectorPrefix}}.et_pb_timeline {{baseSelector}} .et_pb_timeline_marker',
-                'attributes' => [
-                    'class' => 'et_pb_timeline_marker'
-                ],
-                'tagName' => 'div',
-                'settings' => [
-                    'advanced' => [
-                        'position' => [
-                            'groupType' => 'group-item',
-                            'item' => [
-                                'groupSlug' => 'designMarker',
-                                'attrName' => 'marker.advanced',
-                                'subName' => 'position',
-                                'label' => 'Marker Position',
-                                'description' => 'Choose marker position.',
-                                'category' => 'layout',
-                                'priority' => 5,
-                                'render' => true,
-                                'features' => [
-                                    'responsive' => false,
-                                    'hover' => false,
-                                    'sticky' => false,
-                                    'preset' => 'content'
-                                ],
-                                'component' => [
-                                    'type' => 'field',
-                                    'name' => 'divi/select',
-                                    'props' => [
-                                        'defaultValue' => 'default',
-                                        'options' => [
-                                            'default' => [
-                                                'label' => 'Default'
-                                            ],
-                                            'start' => [
-                                                'label' => 'Start'
-                                            ],
-                                            'center' => [
-                                                'label' => 'Center'
-                                            ],
-                                            'end' => [
-                                                'label' => 'End'
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ],
-                    'innerContent' => [
-                        'groupType' => 'group-item',
-                        'item' => [
-                            'groupSlug' => 'contentItemContent',
-                            'attrName' => 'marker.innerContent',
-                            'label' => 'Icon',
-                            'description' =>
-                                'Choose an icon to display inside the timeline marker.',
-                            'category' => 'basic_option',
-                            'priority' => 40,
-                            'render' => true,
-                            'features' => [
-                                'preset' => 'content'
-                            ],
-                            'component' => [
-                                'type' => 'field',
-                                'name' => 'divi/icon-picker'
-                            ]
-                        ]
-                    ],
-                    'decoration' => [
-                        'icon' => [
-                            'groupType' => 'group-item',
-                            'item' => [
-                                'priority' => 10,
-                                'render' => true,
-                                'groupSlug' => 'designMarker',
-                                'component' => [
-                                    'name' => 'divi/icon',
-                                    'type' => 'group',
-                                    'props' => [
-                                        'attrName' => 'marker.decoration.icon',
-                                        'groupLabel' => 'Icon',
-                                        'fields' => [
-                                            'icon' => [
-                                                'render' => false
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'background' => [],
-                        'border' => [],
-                        'boxShadow' => [],
-                        'sizing' => [
-                            'item' => [
-                                'groupSlug' => 'designMarker',
-                                'component' => [
-                                    'props' => [
-                                        'fields' => [
-                                            'alignSelf' => [
-                                                'render' => false
-                                            ],
-                                            'flexType' => [
-                                                'render' => false
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'spacing' => []
-                    ]
-                ],
-                'styleProps' => [
-                    'icon' => [
-                        'selector' =>
-                            '{{selectorPrefix}}.et_pb_timeline {{baseSelector}} .et_pb_timeline_marker .et-pb-icon'
-                    ]
-                ]
-            ],
-            'card' => [
-                'type' => 'object',
-                'label' => 'Card',
-                'elementType' => 'element',
-                'elementProps' => [
-                    'groupedOptionGroup' => true
-                ],
-                'selector' =>
-                    '{{selectorPrefix}}.et_pb_timeline {{baseSelector}} .et_pb_timeline_card',
-                'attributes' => [
-                    'class' => 'et_pb_timeline_card'
-                ],
-                'tagName' => 'div',
-                'settings' => [
-                    'decoration' => [
-                        'background' => [],
-                        'border' => [],
-                        'boxShadow' => [],
-                        'layout' => [],
-                        'sizing' => [
-                            'item' => [
-                                'groupSlug' => 'designCard',
-                                'component' => [
-                                    'props' => [
-                                        'fields' => [
-                                            'alignSelf' => [
-                                                'render' => false
-                                            ],
-                                            'flexType' => [
-                                                'render' => false
-                                            ],
-                                            'size' => [
-                                                'render' => false
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ],
-                        'spacing' => []
-                    ]
-                ]
-            ],
-            'date' => [
-                'type' => 'object',
-                'selector' =>
-                    '{{selectorPrefix}}.et_pb_timeline {{baseSelector}} .et_pb_timeline_date',
-                'label' => 'Date',
-                'elementType' => 'element',
-                'attributes' => [
-                    'class' => 'et_pb_timeline_date'
-                ],
-                'tagName' => 'div',
-                'inlineEditor' => 'plainText',
-                'childrenSanitizer' => 'et_core_esc_previously',
-                'settings' => [
-                    'innerContent' => [
-                        'groupType' => 'group-item',
-                        'item' => [
-                            'groupSlug' => 'contentItemContent',
-                            'attrName' => 'date.innerContent',
-                            'label' => 'Date',
-                            'description' =>
-                                'Set timeline item date/label text.',
-                            'category' => 'basic_option',
-                            'priority' => 10,
-                            'render' => true,
-                            'features' => [
-                                'dynamicContent' => [
-                                    'type' => 'text'
-                                ],
-                                'preset' => 'content'
-                            ],
-                            'component' => [
-                                'type' => 'field',
-                                'name' => 'divi/text'
-                            ]
-                        ]
-                    ],
-                    'decoration' => [
-                        'font' => [
-                            'groupType' => 'group-item',
-                            'item' => [
-                                'groupSlug' => 'designDate',
-                                'priority' => 10,
-                                'render' => true,
-                                'component' => [
-                                    'type' => 'group',
-                                    'name' => 'divi/font',
-                                    'props' => [
-                                        'grouped' => false,
-                                        'groupLabel' => 'Date Text',
-                                        'fieldLabel' => 'Date',
-                                        'dynamicSubgroupHost' => true
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ],
-            'title' => [
-                'type' => 'object',
-                'selector' =>
-                    '{{selectorPrefix}}.et_pb_timeline {{baseSelector}} h1.et_pb_timeline_title, {{selectorPrefix}}.et_pb_timeline {{baseSelector}} h2.et_pb_timeline_title, {{selectorPrefix}}.et_pb_timeline {{baseSelector}} h3.et_pb_timeline_title, {{selectorPrefix}}.et_pb_timeline {{baseSelector}} h4.et_pb_timeline_title, {{selectorPrefix}}.et_pb_timeline {{baseSelector}} h5.et_pb_timeline_title, {{selectorPrefix}}.et_pb_timeline {{baseSelector}} h6.et_pb_timeline_title',
-                'attributes' => [
-                    'class' => 'et_pb_timeline_title'
-                ],
-                'tagName' => 'h3',
-                'inlineEditor' => 'plainText',
-                'label' => 'Title',
-                'elementType' => 'heading',
-                'childrenSanitizer' => 'et_core_esc_previously',
-                'settings' => [
-                    'innerContent' => [
-                        'groupType' => 'group-item',
-                        'item' => [
-                            'groupSlug' => 'contentItemContent',
-                            'attrName' => 'title.innerContent',
-                            'label' => 'Title',
-                            'description' => 'Set timeline item title text.',
-                            'category' => 'basic_option',
-                            'priority' => 20,
-                            'render' => true,
-                            'features' => [
-                                'dynamicContent' => [
-                                    'type' => 'text'
-                                ],
-                                'preset' => 'content'
-                            ],
-                            'component' => [
-                                'type' => 'field',
-                                'name' => 'divi/text'
-                            ]
-                        ]
-                    ],
-                    'decoration' => [
-                        'font' => [
-                            'groupType' => 'group-item',
-                            'item' => [
-                                'groupSlug' => 'designTitle',
-                                'priority' => 10,
-                                'render' => true,
-                                'component' => [
-                                    'type' => 'group',
-                                    'name' => 'divi/font',
-                                    'props' => [
-                                        'grouped' => false,
-                                        'groupLabel' => 'Title Text',
-                                        'fieldLabel' => 'Title',
-                                        'dynamicSubgroupHost' => true
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                'styleProps' => [
-                    'font' => [
-                        'headingLevel' => 'h3'
-                    ]
-                ]
-            ],
-            'content' => [
-                'type' => 'object',
-                'selector' =>
-                    '{{selectorPrefix}}.et_pb_timeline {{baseSelector}} .et_pb_timeline_content',
-                'label' => 'Body',
-                'elementType' => 'content',
-                'attributes' => [
-                    'class' => 'et_pb_timeline_content'
-                ],
-                'tagName' => 'div',
-                'allowHtml' => true,
-                'allowEmptyValue' => true,
-                'settings' => [
-                    'advanced' => [
-                        'text' => [
-                            'groupType' => 'group-item',
-                            'item' => [
-                                'groupSlug' => 'contentItemContent',
-                                'render' => false
-                            ]
-                        ]
-                    ],
-                    'innerContent' => [
-                        'groupType' => 'group-item',
-                        'item' => [
-                            'groupSlug' => 'contentItemContent',
-                            'attrName' => 'content.innerContent',
-                            'label' => 'Body',
-                            'description' => 'Set timeline item body text.',
-                            'category' => 'basic_option',
-                            'priority' => 30,
-                            'render' => true,
-                            'features' => [
-                                'dynamicContent' => [
-                                    'type' => 'text'
-                                ],
-                                'preset' => 'content'
-                            ],
-                            'component' => [
-                                'type' => 'field',
-                                'name' => 'divi/richtext'
-                            ]
-                        ]
-                    ],
-                    'decoration' => [
-                        'bodyFont' => [
-                            'groupType' => 'group-item',
-                            'item' => [
-                                'groupSlug' => 'designContent',
-                                'priority' => 10,
-                                'render' => true,
-                                'component' => [
-                                    'type' => 'group',
-                                    'name' => 'divi/font-body',
-                                    'props' => [
-                                        'grouped' => false,
-                                        'dynamicSubgroupHost' => true
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ],
-        'customCssFields' => [
-            'spacer' => [
-                'label' => 'Spacer',
-                'subName' => 'spacer',
-                'selectorSuffix' => ' .et_pb_timeline_spacer'
-            ],
-            'connector' => [
-                'label' => 'Connector',
-                'subName' => 'connector',
-                'selectorSuffix' => ' .et_pb_timeline_connector'
-            ],
-            'marker' => [
-                'label' => 'Marker',
-                'subName' => 'marker',
-                'selectorSuffix' => ' .et_pb_timeline_marker'
-            ],
-            'card' => [
-                'label' => 'Card',
-                'subName' => 'card',
-                'selectorSuffix' => ' .et_pb_timeline_card'
-            ],
-            'date' => [
-                'label' => 'Date',
-                'subName' => 'date',
-                'selectorSuffix' => ' .et_pb_timeline_date'
-            ],
-            'title' => [
-                'label' => 'Title',
-                'subName' => 'title',
-                'selectorSuffix' => ' .et_pb_timeline_title'
-            ],
-            'content' => [
-                'label' => 'Content',
-                'subName' => 'content',
-                'selectorSuffix' => ' .et_pb_timeline_content'
-            ]
-        ],
-        'settings' => [
-            'content' => 'auto',
-            'design' => 'auto',
-            'advanced' => 'auto',
-            'groups' => [
-                'contentItemContent' => [
-                    'panel' => 'content',
-                    'priority' => 10,
-                    'groupName' => 'contentItemContent',
-                    'multiElements' => true,
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Item Content',
-                            'preset' => 'content'
-                        ]
-                    ]
-                ],
-                'designSpacer' => [
-                    'panel' => 'design',
-                    'priority' => 10,
-                    'groupName' => 'designSpacer',
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Spacer',
-                            'clipboardCategory' => 'style',
-                            'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ],
-                'designConnector' => [
-                    'panel' => 'design',
-                    'priority' => 20,
-                    'groupName' => 'designConnector',
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Connector',
-                            'clipboardCategory' => 'style',
-                            'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ],
-                'designMarker' => [
-                    'panel' => 'design',
-                    'priority' => 30,
-                    'groupName' => 'designMarker',
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Marker',
-                            'clipboardCategory' => 'style',
-                            'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ],
-                'designCard' => [
-                    'panel' => 'design',
-                    'priority' => 40,
-                    'groupName' => 'designCard',
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Card',
-                            'clipboardCategory' => 'style',
-                            'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ],
-                'designDate' => [
-                    'panel' => 'design',
-                    'priority' => 45,
-                    'groupName' => 'dateText',
-                    'multiElements' => true,
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Date Text',
-                            'clipboardCategory' => 'style',
-                            'presetGroup' => 'divi/font',
-                            'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ],
-                'designTitle' => [
-                    'panel' => 'design',
-                    'priority' => 50,
-                    'groupName' => 'titleText',
-                    'multiElements' => true,
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Title Text',
-                            'clipboardCategory' => 'style',
-                            'presetGroup' => 'divi/font',
-                            'dynamicSubgroupHost' => true
-                        ]
-                    ]
-                ],
-                'designContent' => [
-                    'panel' => 'design',
-                    'priority' => 55,
-                    'groupName' => 'bodyText',
-                    'multiElements' => true,
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Body Text',
-                            'clipboardCategory' => 'style',
                             'presetGroup' => 'divi/font-body',
                             'dynamicSubgroupHost' => true
                         ]
@@ -43752,7 +40608,6 @@ return [
                 'supportsCustomAttributes' => true,
                 'tagName' => 'h5',
                 'inlineEditor' => 'plainText',
-                'allowHtml' => true,
                 'elementType' => 'heading',
                 'childrenSanitizer' => 'et_core_esc_previously',
                 'settings' => [
@@ -44065,490 +40920,6 @@ return [
             ]
         ]
     ],
-    'tooltip' => [
-        'name' => 'divi/tooltip',
-        'd4Shortcode' => '',
-        'moduleClassName' => 'et_pb_tooltip',
-        'moduleOrderClassName' => 'et_pb_tooltip',
-        'title' => 'Tooltip',
-        'titles' => 'Tooltips',
-        'moduleIcon' => 'divi/module-tooltip',
-        'category' => 'module',
-        'childrenName' => [],
-        'videos' => [
-            [
-                'id' => 'novideo',
-                'name' => 'Tooltip module'
-            ]
-        ],
-        'attributes' => [
-            'content' => [
-                'type' => 'object',
-                'selector' => '{{selector}} .et_pb_tooltip_inner',
-                'supportsCustomAttributes' => true,
-                'elementType' => 'content',
-                'attributes' => [
-                    'class' => 'et_pb_tooltip_inner'
-                ],
-                'settings' => [
-                    'innerContent' => [
-                        'groupType' => 'group-item',
-                        'item' => [
-                            'groupSlug' => 'contentText',
-                            'priority' => 5,
-                            'render' => true,
-                            'attrName' => 'content.innerContent',
-                            'label' => 'Body',
-                            'description' =>
-                                'Here you can create the content that will be used within the tooltip.',
-                            'category' => 'basic_option',
-                            'features' => [
-                                'dynamicContent' => [
-                                    'type' => 'text'
-                                ],
-                                'sticky' => false,
-                                'preset' => 'content'
-                            ],
-                            'component' => [
-                                'type' => 'field',
-                                'name' => 'divi/richtext'
-                            ]
-                        ]
-                    ],
-                    'decoration' => [
-                        'bodyFont' => []
-                    ]
-                ]
-            ],
-            'module' => [
-                'type' => 'object',
-                'selector' => '{{selector}}',
-                'styleProps' => [
-                    'background' => [],
-                    'border' => [],
-                    'boxShadow' => [],
-                    'sizing' => [],
-                    'spacing' => [
-                        'important' => true
-                    ],
-                    'layout' => [],
-                    'filters' => [],
-                    'transform' => [],
-                    'animation' => [],
-                    'transition' => [],
-                    'overflow' => []
-                ],
-                'settings' => [
-                    'meta' => [
-                        'meta' => []
-                    ],
-                    'advanced' => [
-                        'elements' => [],
-                        'html' => [],
-                        'link' => [],
-                        'loop' => [],
-                        'tooltip' => [
-                            'groupType' => 'group-items',
-                            'items' => [
-                                'trigger' => [
-                                    'groupSlug' => 'designTooltip',
-                                    'priority' => 10,
-                                    'render' => true,
-                                    'attrName' => 'module.advanced.tooltip',
-                                    'subName' => 'trigger',
-                                    'label' => 'Show Tooltip On',
-                                    'description' =>
-                                        'Choose when the tooltip is shown to visitors.',
-                                    'category' => 'basic_option',
-                                    'features' => [
-                                        'responsive' => true,
-                                        'hover' => false,
-                                        'sticky' => false,
-                                        'preset' => ['script']
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/select',
-                                        'props' => [
-                                            'defaultValue' => 'hover',
-                                            'options' => [
-                                                'hover' => [
-                                                    'label' => 'Hover'
-                                                ],
-                                                'click' => [
-                                                    'label' => 'Click'
-                                                ],
-                                                'always' => [
-                                                    'label' => 'Always'
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ],
-                                'positionMode' => [
-                                    'groupSlug' => 'designTooltip',
-                                    'priority' => 15,
-                                    'render' => true,
-                                    'attrName' => 'module.advanced.tooltip',
-                                    'subName' => 'positionMode',
-                                    'label' => 'Tooltip Movement',
-                                    'description' =>
-                                        'Anchored keeps the tooltip fixed relative to the target. Follow cursor moves it with the pointer while open.',
-                                    'category' => 'basic_option',
-                                    'features' => [
-                                        'responsive' => true,
-                                        'hover' => false,
-                                        'sticky' => false,
-                                        'preset' => ['script']
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/select',
-                                        'props' => [
-                                            'defaultValue' => 'anchored',
-                                            'options' => [
-                                                'anchored' => [
-                                                    'label' => 'Anchored'
-                                                ],
-                                                'followCursor' => [
-                                                    'label' => 'Follow Cursor'
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ],
-                                'tooltipPlacementGrid' => [
-                                    'groupSlug' => 'designTooltip',
-                                    'priority' => 22,
-                                    'render' => true,
-                                    'attrName' => 'module.advanced.tooltip',
-                                    'subName' => 'placement',
-                                    'label' => 'Tooltip Position',
-                                    'description' =>
-                                        'Inner grid keeps the tooltip within the target; outer ring places it outside. This sets placement, inside/outside bounds, and edge alignment.',
-                                    'category' => 'basic_option',
-                                    'features' => [
-                                        'responsive' => true,
-                                        'hover' => false,
-                                        'sticky' => false,
-                                        'preset' => ['script']
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/placement-grid-picker',
-                                        'props' => [
-                                            'layout' => 'outer-inner',
-                                            'defaultValue' =>
-                                                'outside top center'
-                                        ]
-                                    ]
-                                ],
-                                'skid' => [
-                                    'groupSlug' => 'designTooltip',
-                                    'priority' => 50,
-                                    'render' => true,
-                                    'attrName' => 'module.advanced.tooltip',
-                                    'subName' => 'skid',
-                                    'label' => 'Tooltip Skid',
-                                    'description' =>
-                                        'Shifts the tooltip along the target edge (cross-axis offset from the placement).',
-                                    'category' => 'basic_option',
-                                    'features' => [
-                                        'responsive' => true,
-                                        'hover' => false,
-                                        'sticky' => false,
-                                        'preset' => ['script'],
-                                        'dynamicContent' => [
-                                            'type' => 'number'
-                                        ]
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/range',
-                                        'props' => [
-                                            'cssProperty' => 'margin',
-                                            'defaultUnit' => 'px'
-                                        ]
-                                    ]
-                                ],
-                                'distance' => [
-                                    'groupSlug' => 'designTooltip',
-                                    'priority' => 60,
-                                    'render' => true,
-                                    'attrName' => 'module.advanced.tooltip',
-                                    'subName' => 'distance',
-                                    'label' => 'Tooltip Distance',
-                                    'description' =>
-                                        'Gap from the target along the placement direction (main-axis offset).',
-                                    'category' => 'basic_option',
-                                    'features' => [
-                                        'responsive' => true,
-                                        'hover' => false,
-                                        'sticky' => false,
-                                        'preset' => ['script'],
-                                        'dynamicContent' => [
-                                            'type' => 'number'
-                                        ]
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/range',
-                                        'props' => [
-                                            'cssProperty' => 'margin',
-                                            'defaultUnit' => 'px'
-                                        ]
-                                    ]
-                                ],
-                                'openDelay' => [
-                                    'groupSlug' => 'designTooltip',
-                                    'priority' => 70,
-                                    'render' => true,
-                                    'attrName' => 'module.advanced.tooltip',
-                                    'subName' => 'openDelay',
-                                    'label' => 'Tooltip Open Delay',
-                                    'description' =>
-                                        'Delay before the tooltip opens.',
-                                    'category' => 'basic_option',
-                                    'features' => [
-                                        'responsive' => true,
-                                        'hover' => false,
-                                        'sticky' => false,
-                                        'preset' => ['script'],
-                                        'dynamicContent' => [
-                                            'type' => 'number'
-                                        ]
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/range',
-                                        'props' => [
-                                            'cssProperty' =>
-                                                'transition-duration',
-                                            'defaultUnit' => 'ms',
-                                            'minLimit' => 0
-                                        ]
-                                    ]
-                                ],
-                                'closeDelay' => [
-                                    'groupSlug' => 'designTooltip',
-                                    'priority' => 80,
-                                    'render' => true,
-                                    'attrName' => 'module.advanced.tooltip',
-                                    'subName' => 'closeDelay',
-                                    'label' => 'Tooltip Close Delay',
-                                    'description' =>
-                                        'Delay before the tooltip closes (mainly for hover).',
-                                    'category' => 'basic_option',
-                                    'features' => [
-                                        'responsive' => true,
-                                        'hover' => false,
-                                        'sticky' => false,
-                                        'preset' => ['script'],
-                                        'dynamicContent' => [
-                                            'type' => 'number'
-                                        ]
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/range',
-                                        'props' => [
-                                            'cssProperty' =>
-                                                'transition-duration',
-                                            'defaultUnit' => 'ms',
-                                            'minLimit' => 0
-                                        ]
-                                    ]
-                                ],
-                                'showArrow' => [
-                                    'groupSlug' => 'designTooltip',
-                                    'priority' => 85,
-                                    'render' => true,
-                                    'attrName' => 'module.advanced.tooltip',
-                                    'subName' => 'showArrow',
-                                    'label' => 'Show Tooltip Arrow',
-                                    'description' =>
-                                        'Display a small pointer toward the parent module.',
-                                    'category' => 'basic_option',
-                                    'features' => [
-                                        'responsive' => true,
-                                        'hover' => false,
-                                        'sticky' => false,
-                                        'preset' => ['script']
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/toggle',
-                                        'props' => [
-                                            'defaultValue' => 'off'
-                                        ]
-                                    ]
-                                ],
-                                'arrowColor' => [
-                                    'groupSlug' => 'designTooltip',
-                                    'priority' => 90,
-                                    'render' => true,
-                                    'attrName' => 'module.advanced.tooltip',
-                                    'subName' => 'arrowColor',
-                                    'label' => 'Tooltip Arrow Color',
-                                    'description' =>
-                                        'Choose the fill color for the tooltip arrow. By default this matches the module background color.',
-                                    'category' => 'basic_option',
-                                    'features' => [
-                                        'responsive' => true,
-                                        'hover' => false,
-                                        'sticky' => false,
-                                        'preset' => ['script', 'style'],
-                                        'dynamicContent' => [
-                                            'type' => 'color'
-                                        ]
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/color-picker'
-                                    ]
-                                ],
-                                'arrowPlacement' => [
-                                    'groupSlug' => 'designTooltip',
-                                    'priority' => 91,
-                                    'render' => true,
-                                    'attrName' => 'module.advanced.tooltip',
-                                    'subName' => 'arrowPlacement',
-                                    'label' => 'Tooltip Arrow Placement',
-                                    'description' =>
-                                        'Choose which tooltip edge shows the arrow and where it sits along that edge (outer ring).',
-                                    'category' => 'basic_option',
-                                    'features' => [
-                                        'responsive' => true,
-                                        'hover' => false,
-                                        'sticky' => false,
-                                        'preset' => ['script']
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/placement-grid-picker',
-                                        'props' => [
-                                            'layout' => 'outer-only',
-                                            'defaultValue' =>
-                                                'outside bottom center'
-                                        ]
-                                    ]
-                                ],
-                                'arrowOffset' => [
-                                    'groupSlug' => 'designTooltip',
-                                    'priority' => 95,
-                                    'render' => true,
-                                    'attrName' => 'module.advanced.tooltip',
-                                    'subName' => 'arrowOffset',
-                                    'label' => 'Tooltip Arrow Position',
-                                    'description' =>
-                                        'Slide the arrow along the edge that faces the target.',
-                                    'category' => 'basic_option',
-                                    'features' => [
-                                        'responsive' => true,
-                                        'hover' => false,
-                                        'sticky' => false,
-                                        'preset' => ['script'],
-                                        'dynamicContent' => [
-                                            'type' => 'number'
-                                        ]
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/range',
-                                        'props' => [
-                                            'cssProperty' => 'margin',
-                                            'defaultUnit' => 'px'
-                                        ]
-                                    ]
-                                ],
-                                'arrowSize' => [
-                                    'groupSlug' => 'designTooltip',
-                                    'priority' => 96,
-                                    'render' => true,
-                                    'attrName' => 'module.advanced.tooltip',
-                                    'subName' => 'arrowSize',
-                                    'label' => 'Tooltip Arrow Size',
-                                    'description' =>
-                                        'Control how large the arrow appears.',
-                                    'category' => 'basic_option',
-                                    'features' => [
-                                        'responsive' => true,
-                                        'hover' => false,
-                                        'sticky' => false,
-                                        'preset' => ['script'],
-                                        'dynamicContent' => [
-                                            'type' => 'number'
-                                        ]
-                                    ],
-                                    'component' => [
-                                        'type' => 'field',
-                                        'name' => 'divi/range',
-                                        'props' => [
-                                            'cssProperty' => 'margin',
-                                            'defaultUnit' => 'px'
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ],
-                    'decoration' => [
-                        'animation' => [],
-                        'attributes' => [],
-                        'background' => [],
-                        'border' => [],
-                        'boxShadow' => [],
-                        'conditions' => [],
-                        'disabledOn' => [],
-                        'filters' => [],
-                        'interactions' => [],
-                        'layout' => [],
-                        'order' => [],
-                        'overflow' => [],
-                        'scroll' => [],
-                        'sizing' => [],
-                        'spacing' => [],
-                        'sticky' => [],
-                        'transform' => [],
-                        'transition' => [],
-                        'zIndex' => []
-                    ]
-                ]
-            ]
-        ],
-        'customCssFields' => [],
-        'settings' => [
-            'content' => 'auto',
-            'design' => 'auto',
-            'advanced' => 'auto',
-            'groups' => [
-                'contentText' => [
-                    'panel' => 'content',
-                    'priority' => 5,
-                    'groupName' => 'contentText',
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Text',
-                            'preset' => 'content'
-                        ]
-                    ]
-                ],
-                'designTooltip' => [
-                    'panel' => 'design',
-                    'priority' => 3,
-                    'groupName' => 'designTooltip',
-                    'component' => [
-                        'name' => 'divi/composite',
-                        'props' => [
-                            'groupLabel' => 'Tooltip',
-                            'presetGroup' => 'divi/tooltip'
-                        ]
-                    ]
-                ]
-            ]
-        ]
-    ],
     'video' => [
         'name' => 'divi/video',
         'd4Shortcode' => 'et_pb_video',
@@ -44601,24 +40972,7 @@ return [
                                 'value' => [
                                     'margin-left' => true,
                                     'margin-right' => true,
-                                    'width' => true,
-                                    'height' => true,
-                                    'min-height' => true,
-                                    'max-height' => true
-                                ]
-                            ]
-                        ],
-                        'propertySelectors' => [
-                            'desktop' => [
-                                'value' => [
-                                    'height' =>
-                                        '{{selector}}, {{selector}} .et_pb_video_box, {{selector}} .et_pb_video_box .fluid-width-video-wrapper, {{selector}} .et_pb_video_box .fluid-width-video-wrapper iframe, {{selector}} .et_pb_video_box .fluid-width-video-wrapper object, {{selector}} .et_pb_video_box .fluid-width-video-wrapper embed, {{selector}} .et_pb_video_box video',
-                                    'min-height' =>
-                                        '{{selector}}, {{selector}} .et_pb_video_box, {{selector}} .et_pb_video_box .fluid-width-video-wrapper, {{selector}} .et_pb_video_box .fluid-width-video-wrapper iframe, {{selector}} .et_pb_video_box .fluid-width-video-wrapper object, {{selector}} .et_pb_video_box .fluid-width-video-wrapper embed, {{selector}} .et_pb_video_box video',
-                                    'max-height' =>
-                                        '{{selector}}, {{selector}} .et_pb_video_box, {{selector}} .et_pb_video_box .fluid-width-video-wrapper, {{selector}} .et_pb_video_box .fluid-width-video-wrapper iframe, {{selector}} .et_pb_video_box .fluid-width-video-wrapper object, {{selector}} .et_pb_video_box .fluid-width-video-wrapper embed, {{selector}} .et_pb_video_box video',
-                                    'aspect-ratio' =>
-                                        '{{selector}}, {{selector}} .et_pb_video_box, {{selector}} .et_pb_video_box .fluid-width-video-wrapper, {{selector}} .et_pb_video_box .fluid-width-video-wrapper iframe, {{selector}} .et_pb_video_box .fluid-width-video-wrapper object, {{selector}} .et_pb_video_box .fluid-width-video-wrapper embed, {{selector}} .et_pb_video_box video'
+                                    'width' => true
                                 ]
                             ]
                         ]
@@ -47615,35 +43969,99 @@ return [
                 'selector' => '{{selector}} table.cart img',
                 'settings' => [
                     'decoration' => [
-                        'image' => [
-                            'panel' => 'design',
-                            'groupType' => 'group',
-                            'groupName' => 'image',
-                            'priority' => 10,
-                            'component' => [
-                                'type' => 'group',
-                                'name' => 'divi/image',
-                                'props' => [
-                                    'attrName' => 'image',
-                                    'groupLabel' => 'Image',
-                                    'grouped' => true,
-                                    'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
+                        'border' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/border',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
                                 ]
                             ]
-                        ]
-                    ]
-                ],
-                'styleProps' => [
-                    'fit' => [
-                        'selector' => '{{selector}} table.cart img'
-                    ],
-                    'sizing' => [
-                        'propertySelectors' => [
-                            'desktop' => [
-                                'value' => [
-                                    'aspect-ratio' =>
-                                        '{{selector}} table.cart img'
+                        ],
+                        'spacing' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'attrName' => 'image.decoration.spacing',
+                                'priority' => 30,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/spacing',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'filters' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/filters',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'sizing' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designSizing',
+                                'attrName' => 'image.decoration.sizing',
+                                'priority' => 10,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/sizing',
+                                    'props' => [
+                                        'grouped' => false,
+                                        'fieldLabel' => 'Image',
+                                        'fields' => [
+                                            'maxWidth' => [
+                                                'render' => true,
+                                                'label' => 'Image Width',
+                                                'description' =>
+                                                    'Adjust the width of the image within the table.',
+                                                'category' => 'layout'
+                                            ],
+                                            'alignment' => [
+                                                'render' => false
+                                            ],
+                                            'alignSelf' => [
+                                                'render' => false
+                                            ],
+                                            'size' => [
+                                                'render' => false
+                                            ],
+                                            'width' => [
+                                                'render' => false
+                                            ],
+                                            'height' => [
+                                                'render' => false
+                                            ],
+                                            'minHeight' => [
+                                                'render' => false
+                                            ],
+                                            'maxHeight' => [
+                                                'render' => false
+                                            ]
+                                        ]
+                                    ]
                                 ]
                             ]
                         ]
@@ -48123,6 +44541,20 @@ return [
                         'name' => 'divi/composite',
                         'props' => [
                             'groupLabel' => 'Remove Icon'
+                        ]
+                    ]
+                ],
+                'designImage' => [
+                    'panel' => 'design',
+                    'priority' => 50,
+                    'groupName' => 'image',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Image',
+                            'presetGroup' => 'divi/image',
+                            'dynamicSubgroupHost' => true
                         ]
                     ]
                 ],
@@ -49297,30 +45729,30 @@ return [
                 ],
                 'styleProps' => [
                     'selector' =>
-                        '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} .checkout .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} .checkout .form-row .input-text',
+                        '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} form .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} form .form-row .input-text',
                     'background' => [
                         'selector' =>
-                            '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} .checkout .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} .checkout .form-row .input-text'
+                            '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} form .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} form .form-row .input-text'
                     ],
                     'border' => [
                         'propertySelectors' => [
                             'desktop' => [
                                 'value' => [
                                     'border-radius' =>
-                                        '.woocommerce {{selector}} .select2-container--default.select2-container--open .select2-selection--single,.woocommerce {{selector}} .checkout .form-row input.input-text:focus, {{selector}} .select2-container--default.select2-container--open .select2-selection--single:focus, {{selector}} .checkout .form-row .input-text:focus',
+                                        '.woocommerce {{selector}} .select2-container--default.select2-container--open .select2-selection--single,.woocommerce {{selector}} form .form-row input.input-text:focus, {{selector}} .select2-container--default.select2-container--open .select2-selection--single:focus, {{selector}} form .form-row .input-text:focus',
                                     'border-style' =>
-                                        '.woocommerce {{selector}} .select2-container--default.select2-container--open .select2-selection--single,.woocommerce {{selector}} .checkout .form-row .input-text:focus, {{selector}} .select2-container--default.select2-container--open .select2-selection--single:focus, {{selector}} .checkout .form-row .input-text:focus'
+                                        '.woocommerce {{selector}} .select2-container--default.select2-container--open .select2-selection--single,.woocommerce {{selector}} form .form-row .input-text:focus, {{selector}} .select2-container--default.select2-container--open .select2-selection--single:focus, {{selector}} form .form-row .input-text:focus'
                                 ]
                             ]
                         ]
                     ],
                     'boxShadow' => [
                         'selector' =>
-                            '{{selector}} .select2-container--default .select2-selection--single,{{selector}} .checkout .form-row input.input-text'
+                            '{{selector}} .select2-container--default .select2-selection--single,{{selector}} form .form-row input.input-text'
                     ],
                     'font' => [
                         'selector' =>
-                            '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} .checkout .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} .checkout .form-row .input-text',
+                            '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} form .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} form .form-row .input-text',
                         'important' => [
                             'desktop' => [
                                 'value' => [
@@ -49336,14 +45768,14 @@ return [
                             'desktop' => [
                                 'value' => [
                                     'color' =>
-                                        '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} .checkout .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} .checkout .form-row .input-text'
+                                        '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} form .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} form .form-row .input-text'
                                 ]
                             ]
                         ]
                     ],
                     'spacing' => [
                         'selector' =>
-                            '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} .checkout .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} .checkout .form-row .input-text',
+                            '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} form .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} form .form-row .input-text',
                         'important' => [
                             'desktop' => [
                                 'value' => [
@@ -49356,9 +45788,9 @@ return [
                             'desktop' => [
                                 'value' => [
                                     'margin' =>
-                                        '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} .checkout .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} .checkout .form-row .input-text',
+                                        '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} form .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} form .form-row .input-text',
                                     'padding' =>
-                                        '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} .checkout .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} .checkout .form-row .input-text'
+                                        '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} form .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} form .form-row .input-text'
                                 ]
                             ]
                         ]
@@ -49573,13 +46005,13 @@ return [
             'fieldLabel' => [
                 'label' => 'Field Label',
                 'subName' => 'fieldLabel',
-                'selectorSuffix' => ' .checkout .form-row label'
+                'selectorSuffix' => ' form .form-row label'
             ],
             'formField' => [
                 'label' => 'Fields',
                 'subName' => 'formField',
                 'selectorSuffix' =>
-                    ' .select2-container--default .select2-selection--single, .checkout .form-row .input-text'
+                    ' .select2-container--default .select2-selection--single, form .form-row .input-text'
             ],
             'formNotice' => [
                 'label' => 'Form Notice',
@@ -49864,16 +46296,16 @@ return [
                             'desktop' => [
                                 'value' => [
                                     'border-radius' =>
-                                        '{{selector}} .checkout .form-row textarea.input-text:focus',
+                                        '{{selector}} form .form-row textarea.input-text:focus',
                                     'border-style' =>
-                                        '{{selector}} .checkout .form-row textarea.input-text:focus'
+                                        '{{selector}} form .form-row textarea.input-text:focus'
                                 ]
                             ]
                         ]
                     ],
                     'font' => [
                         'selector' =>
-                            '{{selector}} .checkout .form-row .input-text, {{selector}} .checkout .form-row .input-text::placeholder, {{selector}} .checkout .form-row .input-text::-webkit-input-placeholder, {{selector}} .checkout .form-row .input-text::-moz-placeholder, {{selector}} .checkout .form-row .input-text:-ms-input-placeholder',
+                            '{{selector}} form .form-row .input-text, {{selector}} form .form-row .input-text::placeholder, {{selector}} form .form-row .input-text::-webkit-input-placeholder, {{selector}} form .form-row .input-text::-moz-placeholder, {{selector}} form .form-row .input-text:-ms-input-placeholder',
                         'important' => [
                             'desktop' => [
                                 'value' => [
@@ -49886,7 +46318,7 @@ return [
                         'selectors' => [
                             'desktop' => [
                                 'hover' =>
-                                    '{{selector}} .checkout .input-text, {{selector}} .checkout .input-text:hover::placeholder, {{selector}} .checkout .input-text:hover::-webkit-input-placeholder, {{selector}} .checkout .input-text:hover::-moz-placeholder, {{selector}} .checkout .input-text:hover:-ms-input-placeholder'
+                                    '{{selector}} form .input-text, {{selector}} form .input-text:hover::placeholder, {{selector}} form .input-text:hover::-webkit-input-placeholder, {{selector}} form .input-text:hover::-moz-placeholder, {{selector}} form .input-text:hover:-ms-input-placeholder'
                             ]
                         ]
                     ]
@@ -49902,18 +46334,18 @@ return [
             'fieldLabel' => [
                 'label' => 'Field Label',
                 'subName' => 'fieldLabel',
-                'selectorSuffix' => ' .checkout .form-row label'
+                'selectorSuffix' => ' form .form-row label'
             ],
             'fields' => [
                 'label' => 'Fields',
                 'subName' => 'fields',
-                'selectorSuffix' => ' .checkout .input-text'
+                'selectorSuffix' => ' form .input-text'
             ],
             'fieldsPlaceholder' => [
                 'label' => 'Fields Placeholder',
                 'subName' => 'fieldsPlaceholder',
                 'selectorSuffix' =>
-                    ' .checkout .form-row .input-text::placeholder, .checkout .form-row .input-text::-webkit-input-placeholder, .checkout .form-row .input-text::-moz-placeholder, .checkout .form-row .input-text:-ms-input-placeholder'
+                    ' form .form-row .input-text::placeholder, form .form-row .input-text::-webkit-input-placeholder, form .form-row .input-text::-moz-placeholder, form .form-row .input-text:-ms-input-placeholder'
             ]
         ],
         'settings' => [
@@ -51853,30 +48285,30 @@ return [
                 ],
                 'styleProps' => [
                     'selector' =>
-                        '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} .checkout .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} .checkout .form-row .input-text',
+                        '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} form .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} form .form-row .input-text',
                     'background' => [
                         'selector' =>
-                            '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} .checkout .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} .checkout .form-row .input-text'
+                            '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} form .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} form .form-row .input-text'
                     ],
                     'border' => [
                         'propertySelectors' => [
                             'desktop' => [
                                 'value' => [
                                     'border-radius' =>
-                                        '.woocommerce {{selector}} .select2-container--default.select2-container--open .select2-selection--single,.woocommerce {{selector}} .checkout .form-row input.input-text:focus, {{selector}} .select2-container--default.select2-container--open .select2-selection--single:focus, {{selector}} .checkout .form-row .input-text:focus',
+                                        '.woocommerce {{selector}} .select2-container--default.select2-container--open .select2-selection--single,.woocommerce {{selector}} form .form-row input.input-text:focus, {{selector}} .select2-container--default.select2-container--open .select2-selection--single:focus, {{selector}} form .form-row .input-text:focus',
                                     'border-style' =>
-                                        '.woocommerce {{selector}} .select2-container--default.select2-container--open .select2-selection--single,.woocommerce {{selector}} .checkout .form-row .input-text:focus, {{selector}} .select2-container--default.select2-container--open .select2-selection--single:focus, {{selector}} .checkout .form-row .input-text:focus'
+                                        '.woocommerce {{selector}} .select2-container--default.select2-container--open .select2-selection--single,.woocommerce {{selector}} form .form-row .input-text:focus, {{selector}} .select2-container--default.select2-container--open .select2-selection--single:focus, {{selector}} form .form-row .input-text:focus'
                                 ]
                             ]
                         ]
                     ],
                     'boxShadow' => [
                         'selector' =>
-                            '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} .checkout .form-row input.input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} .checkout .form-row .input-text'
+                            '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} form .form-row input.input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} form .form-row .input-text'
                     ],
                     'font' => [
                         'selector' =>
-                            '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} .checkout .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} .checkout .form-row .input-text',
+                            '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} form .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} form .form-row .input-text',
                         'important' => [
                             'desktop' => [
                                 'value' => [
@@ -51892,14 +48324,14 @@ return [
                             'desktop' => [
                                 'value' => [
                                     'color' =>
-                                        '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} .checkout .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} .checkout .form-row .input-text'
+                                        '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} form .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} form .form-row .input-text'
                                 ]
                             ]
                         ]
                     ],
                     'spacing' => [
                         'selector' =>
-                            '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} .checkout .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} .checkout .form-row .input-text',
+                            '.woocommerce {{selector}} .select2-container--default .select2-selection--single,.woocommerce {{selector}} form .form-row .input-text, {{selector}} .select2-container--default .select2-selection--single, {{selector}} form .form-row .input-text',
                         'important' => [
                             'desktop' => [
                                 'value' => [
@@ -51978,13 +48410,13 @@ return [
             'fieldLabel' => [
                 'label' => 'Field Label',
                 'subName' => 'fieldLabel',
-                'selectorSuffix' => ' .checkout .form-row label'
+                'selectorSuffix' => ' form .form-row label'
             ],
             'formField' => [
                 'label' => 'Fields',
                 'subName' => 'formField',
                 'selectorSuffix' =>
-                    ' .select2-container--default .select2-selection--single, .checkout .form-row .input-text'
+                    ' .select2-container--default .select2-selection--single, form .form-row .input-text'
             ]
         ],
         'settings' => [
@@ -54136,37 +50568,18 @@ return [
                         'galleryCaptions' => []
                     ],
                     'decoration' => [
-                        'sizing' => [
-                            'groupType' => 'group-item',
-                            'item' => [
-                                'groupSlug' => 'designImage',
-                                'attrName' => 'image.decoration.sizing',
-                                'priority' => 10,
-                                'render' => true,
-                                'component' => [
-                                    'type' => 'group',
-                                    'name' => 'divi/sizing',
-                                    'props' => [
-                                        'grouped' => true,
-                                        'fieldLabel' => 'Image',
-                                        'dynamicSubgroupHostLayoutStyle' =>
-                                            'moduleLayout'
-                                    ]
-                                ]
-                            ]
-                        ],
                         'border' => [
                             'groupType' => 'group-item',
                             'item' => [
                                 'groupSlug' => 'designImage',
                                 'attrName' => 'image.decoration.border',
-                                'priority' => 20,
+                                'priority' => 10,
                                 'render' => true,
                                 'component' => [
                                     'type' => 'group',
                                     'name' => 'divi/border',
                                     'props' => [
-                                        'grouped' => true,
+                                        'grouped' => false,
                                         'fieldLabel' => 'Image'
                                     ]
                                 ]
@@ -54177,13 +50590,13 @@ return [
                             'item' => [
                                 'groupSlug' => 'designImage',
                                 'attrName' => 'image.decoration.border',
-                                'priority' => 30,
+                                'priority' => 20,
                                 'render' => true,
                                 'component' => [
                                     'type' => 'group',
                                     'name' => 'divi/box-shadow',
                                     'props' => [
-                                        'grouped' => true,
+                                        'grouped' => false,
                                         'fieldLabel' => 'Image'
                                     ]
                                 ]
@@ -54194,7 +50607,7 @@ return [
                             'item' => [
                                 'groupSlug' => 'designImage',
                                 'attrName' => 'image.decoration.border',
-                                'priority' => 40,
+                                'priority' => 30,
                                 'render' => true,
                                 'component' => [
                                     'type' => 'group',
@@ -54413,16 +50826,6 @@ return [
                                                     'display' => 'grid',
                                                     'gridColumnCount' => '4'
                                                 ]
-                                            ],
-                                            'tablet' => [
-                                                'value' => [
-                                                    'gridColumnCount' => '2'
-                                                ]
-                                            ],
-                                            'phone' => [
-                                                'value' => [
-                                                    'gridColumnCount' => '1'
-                                                ]
                                             ]
                                         ],
                                         'fields' => [
@@ -54633,8 +51036,7 @@ return [
                         'name' => 'divi/composite',
                         'props' => [
                             'groupLabel' => 'Image',
-                            'dynamicSubgroupHost' => true,
-                            'dynamicSubgroupHostLayoutStyle' => 'moduleLayout'
+                            'dynamicSubgroupHost' => true
                         ]
                     ]
                 ],
@@ -54769,39 +51171,100 @@ return [
             'image' => [
                 'type' => 'object',
                 'settings' => [
+                    'advanced' => [
+                        'forceFullwidth' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'attrName' => 'image.advanced.forceFullwidth',
+                                'label' => 'Force Fullwidth',
+                                'description' =>
+                                    'When enabled, this will force your image to extend 100% of the width of the column it\'s in.',
+                                'category' => 'layout',
+                                'priority' => 10,
+                                'render' => true,
+                                'features' => [
+                                    'hover' => false,
+                                    'sticky' => false
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/toggle'
+                                ]
+                            ]
+                        ]
+                    ],
                     'decoration' => [
-                        'image' => [
-                            'panel' => 'design',
-                            'groupType' => 'group',
-                            'groupName' => 'image',
-                            'priority' => 20,
-                            'component' => [
-                                'type' => 'group',
-                                'name' => 'divi/image',
-                                'props' => [
-                                    'attrName' => 'image',
-                                    'groupLabel' => 'Image',
-                                    'grouped' => true,
-                                    'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
+                        'border' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'attrName' => 'image.decoration.border',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/border',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'boxShadow' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'attrName' => 'image.decoration.boxShadow',
+                                'priority' => 30,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/box-shadow',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'spacing' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 40,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/spacing',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'filters' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'attrName' => 'image.decoration.filters',
+                                'priority' => 60,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/filters',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
                                 ]
                             ]
                         ]
                     ]
                 ],
                 'styleProps' => [
-                    'background' => [
-                        'selector' =>
-                            '{{selector}} div.images ol.flex-control-thumbs.flex-control-nav li, {{selector}} .flex-viewport, {{selector}} .woocommerce-product-gallery--without-images .woocommerce-product-gallery__wrapper'
-                    ],
-                    'transform' => [
-                        'selector' =>
-                            '{{selector}} div.images ol.flex-control-thumbs.flex-control-nav li, {{selector}} .flex-viewport, {{selector}} .woocommerce-product-gallery--without-images .woocommerce-product-gallery__wrapper'
-                    ],
-                    'fit' => [
-                        'selector' =>
-                            '{{selector}} .woocommerce-product-gallery__image img'
-                    ],
                     'border' => [
                         'propertySelectors' => [
                             'desktop' => [
@@ -54824,15 +51287,7 @@ return [
                     ],
                     'sizing' => [
                         'selector' =>
-                            '{{selector}} div.images ol.flex-control-thumbs.flex-control-nav li, {{selector}} .flex-viewport, {{selector}} .woocommerce-product-gallery--without-images .woocommerce-product-gallery__wrapper, {{selector}} .woocommerce-product-gallery > div:not(.flex-viewport) .woocommerce-product-gallery__image, {{selector}} .woocommerce-product-gallery > .woocommerce-product-gallery__wrapper .woocommerce-product-gallery__image',
-                        'propertySelectors' => [
-                            'desktop' => [
-                                'value' => [
-                                    'aspect-ratio' =>
-                                        '{{selector}} .woocommerce-product-gallery__image img'
-                                ]
-                            ]
-                        ]
+                            '{{selector}} div.images ol.flex-control-thumbs.flex-control-nav li, {{selector}} .flex-viewport, {{selector}} .woocommerce-product-gallery--without-images .woocommerce-product-gallery__wrapper, {{selector}} .woocommerce-product-gallery > div:not(.flex-viewport) .woocommerce-product-gallery__image, {{selector}} .woocommerce-product-gallery > .woocommerce-product-gallery__wrapper .woocommerce-product-gallery__image'
                     ],
                     'filters' => [
                         'selector' =>
@@ -55140,6 +51595,18 @@ return [
                         'props' => [
                             'groupLabel' => 'Elements',
                             'preset' => 'content'
+                        ]
+                    ]
+                ],
+                'designImage' => [
+                    'panel' => 'design',
+                    'priority' => 10,
+                    'groupName' => 'designImage',
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Image',
+                            'dynamicSubgroupHost' => true
                         ]
                     ]
                 ],
@@ -56301,40 +52768,60 @@ return [
                     '{{selector}}.et_pb_wc_reviews #reviews #comments ol.commentlist li img.avatar',
                 'settings' => [
                     'decoration' => [
-                        'image' => [
-                            'panel' => 'design',
-                            'groupType' => 'group',
-                            'groupName' => 'image',
-                            'priority' => 10,
-                            'component' => [
-                                'type' => 'group',
-                                'name' => 'divi/image',
-                                'props' => [
-                                    'attrName' => 'image',
-                                    'groupLabel' => 'Image',
-                                    'grouped' => true,
-                                    'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
+                        'border' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'attrName' => 'image.decoration.border',
+                                'priority' => 10,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/border',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'boxShadow' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'attrName' => 'image.decoration.boxShadow',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/box-shadow',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'filters' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'attrName' => 'image.decoration.filters',
+                                'priority' => 30,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/filters',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
                                 ]
                             ]
                         ]
                     ]
                 ],
                 'styleProps' => [
-                    'fit' => [
-                        'selector' =>
-                            '{{selector}}.et_pb_wc_reviews #reviews #comments ol.commentlist li img.avatar'
-                    ],
-                    'sizing' => [
-                        'propertySelectors' => [
-                            'desktop' => [
-                                'value' => [
-                                    'aspect-ratio' =>
-                                        '{{selector}}.et_pb_wc_reviews #reviews #comments ol.commentlist li img.avatar'
-                                ]
-                            ]
-                        ]
-                    ],
                     'border' => [
                         'propertySelectors' => [
                             'desktop' => [
@@ -56885,6 +53372,18 @@ return [
                             'clipboardCategory' => 'style',
                             'groupLabel' => 'Fields',
                             'attrName' => 'field',
+                            'dynamicSubgroupHost' => true
+                        ]
+                    ]
+                ],
+                'designImage' => [
+                    'panel' => 'design',
+                    'priority' => 15,
+                    'groupName' => 'designImage',
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Image',
                             'dynamicSubgroupHost' => true
                         ]
                     ]
@@ -58044,43 +54543,73 @@ return [
                 'type' => 'object',
                 'settings' => [
                     'decoration' => [
-                        'image' => [
-                            'panel' => 'design',
-                            'groupType' => 'group',
-                            'groupName' => 'image',
-                            'priority' => 20,
-                            'component' => [
-                                'type' => 'group',
-                                'name' => 'divi/image',
-                                'props' => [
-                                    'attrName' => 'image',
-                                    'groupLabel' => 'Image',
-                                    'grouped' => true,
-                                    'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
+                        'border' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/border',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'boxShadow' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/box-shadow',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'spacing' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 30,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/spacing',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'filters' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 40,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/filters',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
                                 ]
                             ]
                         ]
                     ]
                 ],
                 'styleProps' => [
-                    'background' => [
-                        'selector' => '{{selector}}.et_pb_module .et_shop_image'
-                    ],
-                    'fit' => [
-                        'selector' => '{{selector}} .et_shop_image img'
-                    ],
-                    'sizing' => [
-                        'selector' => '{{selector}} .et_shop_image',
-                        'propertySelectors' => [
-                            'desktop' => [
-                                'value' => [
-                                    'aspect-ratio' =>
-                                        '{{selector}} .et_shop_image img'
-                                ]
-                            ]
-                        ]
-                    ],
                     'border' => [
                         'selector' => '{{selector}}.et_pb_module .et_shop_image'
                     ],
@@ -58842,6 +55371,19 @@ return [
                         ]
                     ]
                 ],
+                'designImage' => [
+                    'panel' => 'design',
+                    'priority' => 15,
+                    'groupName' => 'designImage',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Image',
+                            'dynamicSubgroupHost' => true
+                        ]
+                    ]
+                ],
                 'designStarRating' => [
                     'panel' => 'design',
                     'priority' => 20,
@@ -59079,46 +55621,74 @@ return [
                 'type' => 'object',
                 'settings' => [
                     'decoration' => [
-                        'image' => [
-                            'panel' => 'design',
-                            'groupType' => 'group',
-                            'groupName' => 'image',
-                            'priority' => 20,
-                            'component' => [
-                                'type' => 'group',
-                                'name' => 'divi/image',
-                                'props' => [
-                                    'attrName' => 'image',
-                                    'groupLabel' => 'Image',
-                                    'grouped' => true,
-                                    'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
+                        'border' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/border',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'boxShadow' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/box-shadow',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'spacing' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'attrName' => 'image.decoration.spacing',
+                                'priority' => 30,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/spacing',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'filters' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/filters',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
                                 ]
                             ]
                         ]
                     ]
                 ],
                 'styleProps' => [
-                    'background' => [
-                        'selector' =>
-                            '{{selector}}.et_pb_shop .et_shop_image > img, {{selector}}.et_pb_shop .et_shop_image .et_overlay',
-                        'important' => true
-                    ],
-                    'fit' => [
-                        'selector' =>
-                            '{{selector}}.et_pb_shop .et_shop_image > img'
-                    ],
-                    'sizing' => [
-                        'selector' => '{{selector}}.et_pb_shop .et_shop_image',
-                        'propertySelectors' => [
-                            'desktop' => [
-                                'value' => [
-                                    'aspect-ratio' =>
-                                        '{{selector}}.et_pb_shop .et_shop_image > img'
-                                ]
-                            ]
-                        ]
-                    ],
                     'border' => [
                         'propertySelectors' => [
                             'desktop' => [
@@ -59964,6 +56534,19 @@ return [
                         ]
                     ]
                 ],
+                'designImage' => [
+                    'panel' => 'design',
+                    'priority' => 15,
+                    'groupName' => 'designImage',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Image',
+                            'dynamicSubgroupHost' => true
+                        ]
+                    ]
+                ],
                 'designStarRating' => [
                     'panel' => 'design',
                     'priority' => 20,
@@ -60188,56 +56771,84 @@ return [
                 'selector' => '{{selector}} .et_shop_image',
                 'settings' => [
                     'decoration' => [
-                        'image' => [
-                            'panel' => 'design',
-                            'groupType' => 'group',
-                            'groupName' => 'image',
-                            'priority' => 10,
-                            'component' => [
-                                'type' => 'group',
-                                'name' => 'divi/image',
-                                'props' => [
-                                    'attrName' => 'image',
-                                    'groupLabel' => 'Image',
-                                    'grouped' => true,
-                                    'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
+                        'border' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 10,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/border',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'boxShadow' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/box-shadow',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'spacing' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 30,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/spacing',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'filters' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designImage',
+                                'priority' => 40,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/filters',
+                                    'props' => [
+                                        'grouped' => true,
+                                        'fieldLabel' => 'Image'
+                                    ]
                                 ]
                             ]
                         ]
                     ]
                 ],
                 'styleProps' => [
-                    'fit' => [
-                        'selector' => '{{selector}} .et_shop_image img'
-                    ],
-                    'sizing' => [
-                        'selector' => '{{selector}} .et_shop_image',
-                        'propertySelectors' => [
-                            'desktop' => [
-                                'value' => [
-                                    'aspect-ratio' =>
-                                        '{{selector}} .et_shop_image img'
-                                ]
-                            ]
-                        ]
-                    ],
                     'border' => [
                         'propertySelectors' => [
                             'desktop' => [
-                                'hover' => [
-                                    'border-radius' =>
-                                        '{{selector}}.et_pb_module .et_shop_image > img{{:hover}}, {{selector}}.et_pb_module .et_shop_image .et_overlay'
-                                ],
                                 'value' => [
                                     'border-radius' =>
-                                        '{{selector}}.et_pb_module .et_shop_image > img, {{selector}}.et_pb_module .et_shop_image .et_overlay',
+                                        '{{selector}}.et_pb_module .et_shop_image',
                                     'border-style' =>
-                                        '{{selector}}.et_pb_module .et_shop_image > img, {{selector}}.et_pb_module .et_shop_image .et_overlay'
+                                        '{{selector}}.et_pb_module .et_shop_image'
                                 ]
                             ]
-                        ],
-                        'important' => true
+                        ]
                     ],
                     'boxShadow' => [
                         'selector' => '{{selector}} .et_shop_image',
@@ -61022,6 +57633,18 @@ return [
                         'name' => 'divi/composite',
                         'props' => [
                             'groupLabel' => 'Overlay'
+                        ]
+                    ]
+                ],
+                'designImage' => [
+                    'panel' => 'design',
+                    'priority' => 10,
+                    'groupName' => 'designImage',
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Image',
+                            'dynamicSubgroupHost' => true
                         ]
                     ]
                 ],
