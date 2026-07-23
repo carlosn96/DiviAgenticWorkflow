@@ -120,9 +120,10 @@ class Divi_Form_Renderer extends Divi_Base_Renderer {
 				}
 
 			if ( isset( $data['use_captcha'] ) ) {
+				$enabled = ( $data['use_captcha'] === 'off' || $data['use_captcha'] === false || $data['use_captcha'] === 0 || $data['use_captcha'] === '0' ) ? 'off' : 'on';
 				$attrs['module']['advanced']['spamProtection']['desktop']['value'] = [
-					'enabled'         => $data['use_captcha'] ? 'on' : 'off',
-					'useBasicCaptcha' => $data['use_captcha'] ? 'on' : 'off',
+					'enabled'         => $enabled,
+					'useBasicCaptcha' => $enabled,
 				];
 			}
 
