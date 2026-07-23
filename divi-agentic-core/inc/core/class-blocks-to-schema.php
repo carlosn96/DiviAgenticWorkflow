@@ -399,17 +399,11 @@ class BlocksToSchema {
                 // 1. Detect global color ID (gcid-*) in string and replace entire value with the token
                 if (preg_match('/gcid-([a-zA-Z0-9_-]+)/', $v, $m)) {
                     $key = $m[1];
-                    // Map common customizer overrides to their short names
-                    $customizer_slots = [
-                        'primary-color' => 'primary',
-                        'secondary-color' => 'secondary',
-                        'heading-color' => 'heading',
-                        'body-color' => 'body',
-                        'link-color' => 'link'
-                    ];
-                    $mapped_key = $customizer_slots[$key] ?? $key;
+                    // Customizer slot reverse map — desde Token_Registry
+                    $inverse_slots = \DAC\Core\Token_Registry::get_inverse_customizer_slots();
+                    $mapped_key = $inverse_slots[$key] ?? $key;
                     
-                    if (isset($color_tokens[$mapped_key]) || isset($customizer_slots[$key])) {
+                    if (isset($color_tokens[$mapped_key]) || isset($inverse_slots[$key])) {
                         $arr[$k] = "{{design:color:{$mapped_key}}}";
                         continue;
                     }

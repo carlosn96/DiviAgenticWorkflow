@@ -106,13 +106,7 @@ class Agentic_Command {
             //   "customizer": { "primary": "accent", "secondary": "premium", ... }
             // Maps short slot names → Divi gcid IDs, then reads the referenced
             // token hex. No hardcoded mapping needed — change the JSON, not PHP.
-            $customizer_slots = [
-                'primary'   => 'gcid-primary-color',
-                'secondary' => 'gcid-secondary-color',
-                'heading'   => 'gcid-heading-color',
-                'body'      => 'gcid-body-color',
-                'link'      => 'gcid-link-color',
-            ];
+            $customizer_slots = \DAC\Core\Token_Registry::get_customizer_slots();
             $customizer_map = $ds['customizer'] ?? [];
             foreach ( $customizer_map as $slot => $token_key ) {
                 $gcid = $customizer_slots[ $slot ] ?? '';

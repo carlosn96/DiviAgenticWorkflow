@@ -4,12 +4,13 @@ namespace DAC\Core;
 /**
  * Design Resolver v2.0 — Lee tokens desde stores nativos Divi 5
  *
+ * gvid prefixes obtenidos dinámicamente de Token_Registry.
+ * Si agregas un nuevo token gvid, solo tocas class-token-registry.php.
+ *
  * Resuelve:
- *   - {{design:color:key}}     → var(--gcid-*) desde Global Colors
- *   - {{design:radius:key}}    → valor desde Global Variables (numbers)
- *   - {{design:space:key}}     → valor desde Global Variables (numbers)
- *   - {{design:font:key}}      → valor desde Global Variables (fonts)
- *   - "$preset" en objetos     → deep-merge desde divitheme.json['presets']
+ *   - {{design:color:key}}       → var(--gcid-*) desde Global Colors
+ *   - {{design:<prefix>:key}}    → valor desde Global Variables (numbers/fonts)
+ *   - "$preset" en objetos       → deep-merge desde divitheme.json['presets']
  *
  * divitheme.json solo contiene presets + metadata.
  * Los tokens viven en los stores nativos de Divi 5.
@@ -74,8 +75,8 @@ class Design_Resolver {
 
         foreach ( $global_colors as $gcid => $data ) {
             $slug = preg_replace( '/^gcid-/', '', $gcid );
-            // Skip customizer slots (gcid-primary-color, etc.)
-            if ( in_array( $slug, [ 'primary-color', 'secondary-color', 'heading-color', 'body-color', 'link-color' ], true ) ) {
+            // Skip customizer slots (gcid-primary-color, etc.) — desde Token_Registry
+            if ( in_array( $slug, Token_Registry::get_gcid_slugs_to_skip(), true ) ) {
                 continue;
             }
             $token = "{{design:color:{$slug}}}";
@@ -87,7 +88,18 @@ class Design_Resolver {
         if ( ! class_exists( '\ET\Builder\Packages\GlobalData\GlobalData' ) ) return;
 
         $global_vars = \ET\Builder\Packages\GlobalData\GlobalData::get_global_variables();
-        if ( empty( $global_vars ) ) return;
+
+        // Fallback: si gvids no existen (brand-sync no se ha corrido),
+        // usar defaults de Token_Registry
+        if ( empty( $global_vars ) ) {
+            $this->flatten_gvid_defaults_from_registry();
+            return;
+        }
+
+        // Build regex dinamically from Token_Registry
+        $prefixes = Token_Registry::get_gvid_prefixes();
+        if ( empty( $prefixes ) ) return;
+        $gvid_pattern = '/^gvid-(' . implode( '|', $prefixes ) . ')-(.+)$/';
 
         foreach ( $global_vars as $gvid_type => $items ) {
             if ( ! is_array( $items ) ) continue;
@@ -95,16 +107,48 @@ class Design_Resolver {
                 $value = $item['value'] ?? '';
                 if ( $value === '' ) continue;
 
-                // gvid-space-sm → {{design:space:sm}}
-                // gvid-radius-sm → {{design:radius:sm}}
-                // gvid-font-body → {{design:font:body}}
-                if ( preg_match( '/^gvid-(space|radius|font)-(.+)$/', $gvid, $m ) ) {
+                if ( preg_match( $gvid_pattern, $gvid, $m ) ) {
                     $group = $m[1];
                     $key   = $m[2];
                     $token = "{{design:{$group}:{$key}}}";
                     $this->flat_tokens[ $token ] = $value;
                 }
             }
+        }
+    }
+
+    /**
+     * Fallback cuando no hay gvids sincronizados.
+     * Lee defaults de Token_Registry::get_gvid_groups() para producir los mismos tokens
+     * que brand-sync.php registraría como gvids.
+     * Garantizado en sincronía porque usa el mismo método del Registry.
+     */
+    private function flatten_gvid_defaults_from_registry(): void {
+        $groups = Token_Registry::get_gvid_groups();
+        $defaults = Token_Registry::get_defaults();
+
+        // Numbers group: radius, space, shadow, easing, duration
+        $numbers = $groups['numbers'] ?? [];
+        foreach ( $numbers as $source_key => $def ) {
+            $value = $defaults[ $source_key ] ?? null;
+            if ( empty( $value ) ) continue;
+            $parts = explode( '_', $source_key );
+            $type = $parts[0];
+            $slug = implode( '_', array_slice( $parts, 1 ) );
+            $token = "{{design:{$type}:{$slug}}}";
+            $this->flat_tokens[ $token ] = $value;
+        }
+
+        // Fonts group
+        $fonts = $groups['fonts'] ?? [];
+        foreach ( $fonts as $source_key => $def ) {
+            $value = $defaults[ $source_key ] ?? null;
+            if ( empty( $value ) ) continue;
+            $family = explode( ',', $value )[0];
+            $family = trim( $family, "'\" " );
+            $slug = substr( $source_key, 5 ); // 'font_display' → 'display'
+            $token = "{{design:font:{$slug}}}";
+            $this->flat_tokens[ $token ] = $family;
         }
     }
 
