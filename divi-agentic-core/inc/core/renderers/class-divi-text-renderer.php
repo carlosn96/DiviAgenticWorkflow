@@ -41,13 +41,50 @@ class Divi_Text_Renderer extends Divi_Base_Renderer {
 
 		// In Divi 5, text fonts belong to content.decoration, not module.
 		if ( $slug === 'divi/text' || $slug === 'divi/heading' ) {
-			if ( isset( $data['headingFont'] ) ) {
-				$attrs['content']['decoration']['headingFont'] = $data['headingFont'];
+			$hf = $data['headingFont'] ?? $attrs['module']['headingFont'] ?? null;
+			if ( $hf ) {
+				$attrs['content']['decoration']['headingFont'] = $hf;
 				unset( $attrs['module']['headingFont'] );
+				if ( isset( $data['content'] ) && is_string( $data['content'] ) ) {
+					$html = $data['content'];
+					foreach ( $hf as $tag => $font_data ) {
+						if ( isset( $font_data['font']['desktop']['value']['color'] ) ) {
+							$color  = $font_data['font']['desktop']['value']['color'];
+							$tag_re = '/<' . $tag . '([^>]*)>/i';
+							$html   = preg_replace_callback( $tag_re, function ( $m ) use ( $color ) {
+								if ( strpos( $m[1], 'style=' ) !== false ) {
+									return preg_replace( '/style="([^"]*)"/', 'style="color:' . $color . ';$1"', $m[0] );
+								} else {
+									return '<' . $tag . $m[1] . ' style="color:' . $color . ';">';
+								}
+							}, $html );
+						}
+					}
+					$attrs['content']['innerContent'] = [ 'desktop' => [ 'value' => $html ] ];
+				}
 			}
-			if ( isset( $data['bodyFont'] ) ) {
-				$attrs['content']['decoration']['bodyFont'] = $data['bodyFont'];
+			$bf = $data['bodyFont'] ?? $attrs['module']['bodyFont'] ?? null;
+			if ( $bf ) {
+				$attrs['content']['decoration']['bodyFont'] = $bf;
 				unset( $attrs['module']['bodyFont'] );
+				if ( isset( $data['content'] ) && is_string( $data['content'] ) ) {
+					if ( isset( $bf['body']['font']['desktop']['value']['color'] ) ) {
+						$color = $bf['body']['font']['desktop']['value']['color'];
+						$html  = $attrs['content']['innerContent']['desktop']['value'] ?? $data['content'];
+						$tags  = [ 'p', 'span', 'div', 'li' ];
+						foreach ( $tags as $tag ) {
+							$tag_re = '/<' . $tag . '([^>]*)>/i';
+							$html   = preg_replace_callback( $tag_re, function ( $m ) use ( $color ) {
+								if ( strpos( $m[1], 'style=' ) !== false ) {
+									return preg_replace( '/style="([^"]*)"/', 'style="color:' . $color . ';$1"', $m[0] );
+								} else {
+									return '<' . $tag . $m[1] . ' style="color:' . $color . ';">';
+								}
+							}, $html );
+						}
+						$attrs['content']['innerContent'] = [ 'desktop' => [ 'value' => $html ] ];
+					}
+				}
 			}
 		}
 
@@ -76,6 +113,20 @@ class Divi_Text_Renderer extends Divi_Base_Renderer {
 				$attrs['title']['decoration']['font']['font'] = $font_src;
 			}
 			unset( $attrs['module']['decoration']['font'] );
+		}
+
+		// Override native module text color from headingFont to prevent "light" default (white).
+		if ( $slug === 'divi/text' || $slug === 'divi/heading' ) {
+			$hf = $data['headingFont'] ?? $attrs['module']['headingFont'] ?? null;
+			if ( $hf ) {
+				foreach ( $hf as $tag => $font_data ) {
+					if ( isset( $font_data['font']['desktop']['value']['color'] ) ) {
+						$color = $font_data['font']['desktop']['value']['color'];
+						$attrs['module']['advanced']['text']['text']['desktop']['value']['color'] = $color;
+						break;
+					}
+				}
+			}
 		}
 
 		return [
