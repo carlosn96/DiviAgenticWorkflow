@@ -1,23 +1,25 @@
 # Design System Inputs & Outputs
 
-> ⚠️ **Legacy**: This documents the old `build_design_system.py` pipeline. The current pipeline uses `brand-sync.php` to write `_design_vars.json` content directly to `wp_options['et_divi']`, bypassing brand.css and divitheme.json generation. See `AGENTS.md` section 5 for the current pipeline.
+> **Pipeline actual**: `inc/core/class-brand-sync-handler.php` (`Brand_Sync_Handler`) lee `_design_vars.json` y sincroniza a 4 destinos via `wp brand sync`: et_divi (Customizer), divitheme.json (solo presets + strategy), gcids (Global Colors), gvids (Global Variables: radios, espacios, fuentes, sombras, animaciones).
 
-## 1. Brand Generator (`brand_generator.py`)
+## 1. Inicialización (`wp brand init`)
 
-**Path:** `workspace/brand_generator.py`
+**Source:** `inc/cli/class-brand-command.php` → `Brand_Init_Handler` (inline)
 
-Generates initial brand files from minimal input.
+Crea el scaffold de archivos de marca a partir de un slug. No acepta parámetros de diseño — solo genera el archivo JSON vacío para que el diseñador lo edite.
 
 ```powershell
-python DAW_bundle/workspace/brand_generator.py --site <slug> --name "<Brand>" --accent "#HEX" [--tone luxury|tech|organic|minimal] [--from-design DESIGN.md]
+wp brand init <slug>
 ```
 
 **Outputs** in `site/<slug>/brand/`:
-- `_design_vars.json` — brand variables (colors, fonts, radii, spaces)
-- `_design_presets.json` — 64 empty preset placeholders
-- `_content_bank.json` — copy, page_layouts, design_direction (copied from `site/example/brand/` template)
+- `_design_vars.json` — scaffold con keys vacías listas para editar
+- No genera `_design_presets.json` ni `_content_bank.json` (se crean manualmente si se necesitan)
 
-Tone override writes `strategy` field with `<tone>-<hue_type>`. Strategy detection uses CIELCH + semantic analysis (BrandStrategy class in build_design_system.py).
+**Flujo recomendado tras init:**
+1. Cargar un skill de dirección visual (`hallmark`, `impeccable`, `high-end-visual-design`)
+2. Editar `_design_vars.json` con criterio de diseño real
+3. Ejecutar `wp brand sync <slug>` para sincronizar a WordPress
 
 ---
 
@@ -83,14 +85,23 @@ Each `section_type` is a **semantic intent label**, not a visual slot. It maps t
 
 **Path:** `site/<DAW_SITE>/brand/_design_vars.json`
 
-| Prefix | Variables | Example |
-|--------|-----------|---------|
-| `color_` | `accent`, `accent_hover`, `ink`, `ink_soft`, `surface_deep/mid/light/white`, `text_primary/secondary/on_dark`, `success`, `error` | `"#2A9D8F"` |
-| `font_` | `display`, `body`, `ui` | `"'Fredoka', sans-serif"` |
-| `customizer_` | `primary`, `secondary`, `heading`, `body`, `link` | `"accent"` |
-| `radius_` | `sm`, `md`, `lg`, `xl`, `full` | `"8px"` |
-| `space_` | `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl` | `"24px"` |
-| `brand_name`, `brand_description` | strings | `"Misiu Clínica Felina"` |
+| Prefix / Key | Variables | Mapeo Divi |
+|---|---|---|
+| `brand_name`, `brand_description` | strings | divitheme.json metadata |
+| `color_` | `accent`, `accent_hover`, `ink`, `ink_soft`, `surface_deep/mid/light/white`, `text_primary/secondary/on_dark`, `success`, `error` | et_divi Customizer (38+ opciones) + gcids |
+| `font_` | `display`, `body`, `ui` | et_divi font families + gvids fonts |
+| `font_` sizing | `body_size`, `body_height`, `body_weight`, `heading_weight`, `heading_size_h1..h6` | et_divi font values + heading sizes |
+| `customizer_` | `primary`, `secondary`, `heading`, `body`, `link` | Mapeo a gcid slots del Customizer |
+| `radius_` | `sm`, `md`, `lg`, `xl`, `full` | gvids numbers |
+| `space_` | `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl` | gvids numbers |
+| `shadow_` | `sm`, `md`, `lg`, `xl` | gvids numbers |
+| `easing_` | `default`, `enter`, `exit` | gvids numbers |
+| `duration_` | `fast`, `normal`, `slow` | gvids numbers |
+| `button_` | `border_radius`, `border_width`, `font_size`, `font_style`, `text_color`, `text_color_hover`, `border_color` | et_divi button options |
+| `layout_` | `content_width`, `fixed_nav`, `sidebar` | et_divi layout options |
+| `perf_` | `dynamic_framework`, `dynamic_icons`, `critical_css`, `defer_block_css`, `jquery_body`, `disable_emojis` | et_divi performance options |
+| `social_` | `facebook`, `twitter`, `instagram`, `youtube`, `linkedin` | et_divi social URLs |
+| `logo_id`, `favicon_id`, `apple_icon_id` | attachment IDs | divi_logo, site_icon, divi_apple_touch_icon |
 
 ---
 
@@ -109,7 +120,7 @@ Optional user override presets. Dict keyed by preset category name:
 
 Categories: `section`, `text`, `module`, `divider`, `animation`, `scroll`, `transform`.
 
-Each preset body follows Divi 5 module attribute structure. Values are deep-merged into auto-generated presets from `build_design_system.py`. Empty dicts `{}` are filtered out silently.
+Each preset body follows Divi 5 module attribute structure. Values are deep-merged into auto-generated presets from `Brand_Sync_Handler::sync_divitheme()`. Empty dicts `{}` are filtered out silently.
 
 ---
 
@@ -117,97 +128,56 @@ Each preset body follows Divi 5 module attribute structure. Values are deep-merg
 
 **Path:** `site/<DAW_SITE>/brand/_effects.css`
 
-Optional. Custom CSS appended verbatim to `brand.css` during `build_design_system.py`. Used for per-brand animations, blob backgrounds, badge positioning, button overrides, etc. Not required — if missing, only auto-generated `daw-*` classes go into `brand.css`.
+Optional. Custom CSS intended for per-brand animations, blob backgrounds, badge positioning, button overrides, etc. Not processed by the PHP handler — consumed by the external `build_design_system.py` (legacy) or enqueued manually. Not required for the `wp brand sync` flow.
 
 ---
 
-## 6. `build_design_system.py`
+## 6. `Brand_Sync_Handler` (Pipeline Actual)
 
-**Path:** `workspace/build_design_system.py`
+**Source:** `inc/core/class-brand-sync-handler.php`
 
 ### Input
 
 | Source | File | Purpose |
 |--------|------|---------|
-| Auto-discovered | `site/<DAW_SITE>/brand/_design_vars.json` | Brand variables (colors, fonts, radii, spaces) |
-| Auto-discovered | `site/<DAW_SITE>/brand/_design_presets.json` | User override presets (optional) |
-| Auto-discovered | `site/<DAW_SITE>/brand/_effects.css` | Custom CSS appended to output (optional) |
-| CLI `--vars` | Explicit path | Override auto-discovered vars |
-| CLI `--presets` | Explicit path | Override auto-discovered presets |
-| CLI `--out` | Explicit path | Override output path |
-| Environment | `.env` → `DAW_SITE` | Determines which `site/` directory to use |
+| **Único** | `site/<DAW_SITE>/brand/_design_vars.json` | Brand variables (colors, fonts, radii, spaces, buttons, layout, perf, social, logo) |
+
+The handler reads `_design_vars.json` and writes to **4 Divi stores** in a single pass. No intermediate files, no CIELCH pipeline, no palette generation.
 
 ### Output
 
-| File | Path | Contents |
-|------|------|----------|
-| `divitheme.json` | `site/<DAW_SITE>/design-system/divitheme.json` | Full schema: name, strategy, tokens (color/font/radius/space), customizer mapping, 58 presets |
-| `brand.css` | `site/<DAW_SITE>/brand/assets/css/brand.css` | CSS custom properties `--daw-*` + utility classes + `_effects.css` appendage |
+| Destino | API / Mecanismo | Qué escribe |
+|---------|-----------------|-------------|
+| `wp_options['et_divi']` | `update_option()` | 40+ keys: colores, fuentes, heading sizes h1–h6, botones (7), layout (3), performance (6), social (5), logo, favicon |
+| Global Colors (gcids) | `GlobalData::set_global_colors()` | ~10 colores: accent, surface scale, text, functional |
+| Global Variables (gvids) | `GlobalData::set_global_variables()` | ~22 vars: radios (5), espacios (7), sombras (4), easings (3), duraciones (3) |
+| `divitheme.json` | `file_put_contents()` | Solo `presets` + `strategy` (sin tokens — se leen de stores nativos Divi 5) |
 
-### `divitheme.json` top-level keys
-
-```json
-{
-  "name": "Brand Name",
-  "description": "Brand description",
-  "strategy": "cool-luxury|warm-premium|...",
-  "tokens": {
-    "color": { ... },
-    "font": { ... },
-    "radius": { ... },
-    "space": { ... }
-  },
-  "customizer": {
-    "primary": "accent",
-    "secondary": "accent-hover",
-    "heading": "text-primary",
-    "body": "text-secondary",
-    "link": "accent"
-  },
-  "presets": {
-    "section": { "hero-dark": {...}, "hero-glass": {...}, "light": {...}, "dark": {...}, "white": {...}, "trust-bar": {...}, ... },
-    "text": { "eyebrow": {...}, "display": {...}, "heading-*": {...}, "body": {...}, "body-sm": {...}, "stat-num-dark": {...}, "stat-label-dark": {...}, ... },
-    "module": { "glass-card": {...}, "glass-card-dark": {...}, "hover-glow": {...}, "hover-lift": {...}, "glass-button": {...}, "glass-input": {...}, ... },
-    "divider": { "curve-bottom": {...}, "wave-top": {...}, "tilt-top": {...}, ... },
-    "animation": { "fade-in": {...}, "slide-up": {...}, "zoom-in": {...}, "stagger-reveal": {...}, "blur-reveal": {...}, ... },
-    "scroll": { "fade-in": {...}, "parallax-up": {...}, "reveal": {...}, "blur-in": {...}, ... },
-    "transform": { "hover-lift": {...}, "hover-scale": {...}, "hover-glow": {...}, "hover-expand": {...}, ... }
-  }
-}
-```
-
-### CLI Flags
+### Flujo interno
 
 ```
-  -v, --vars PATH         Explicit vars file (override auto-discover)
-  -p, --presets PATH      Explicit presets file (override auto-discover)
-  -o, --out PATH          Output path (override auto-discover)
-  --no-enrich             Skip intelligence: raw vars only, no palette/presets
-  --validate-only         Validate only, no write
-  -q, --quiet             Minimal output
-  --substitute-colors     Replace {{design:color:...}} with hex values in output
+Brand_Sync_Handler::run($site)
+  ├── validate($site)               ← checks vars file exists + required tokens
+  ├── load_json($vars_path)         ← reads _design_vars.json
+  ├── resolve_paths($site, $vars)   ← resolves divitheme.json path
+  ├── sync_et_divi($site, $vars)    ← update_option('et_divi', ...)
+  ├── sync_divitheme($vars)         ← escribe presets + strategy
+  ├── sync_global_colors($vars)     ← GlobalData::set_global_colors()
+  ├── sync_global_variables($vars)  ← GlobalData::set_global_variables()
+  └── flush_divi_cache()            ← delete et-cache + core caches
 ```
 
-### CIELCH Pipeline
+### Lo que NO hace
 
-```
-accent HEX → BrandStrategy.analyze() → strategy dict (hue_type, semantic, glass_viable, ...)
-                                  ↓
-accent + strategy → PaletteEngine.generate() → full palette (25+ colors: accent variants, surface scale, text, glass, glow, aura, borders, functional)
-                                  ↓
-strategy → TypographyEngine.generate() → fonts dict + rules (weights, line heights, tracking) + sizes (clamp())
-                                  ↓
-palette + strategy + typography → PresetBuilder.build() → 58 presets across 7 categories
-                                  ↓
-VisualValidator.validate() → WCAG AA/AAA + Delta E harmony checks
-                                  ↓
-build_complete_schema() → divitheme.json + brand.css
-```
+- ❌ No genera paletas (no hay CIELCH, PaletteEngine, ni inteligencia de color)
+- ❌ No genera CSS (`brand.css` no se crea ni se encola)
+- ❌ No genera presets (solo copia los que vienen en `_design_vars.json` si existen)
+- ❌ No resuelve `{{design:color:*}}` — eso lo hace `Design_Resolver` durante `deploy_page`
+- ❌ No hay `build_design_system.py` — ese pipeline fue reemplazado
 
-### Notes
+### Notas
 
-- `_effects.css` is appended to `brand.css` after auto-generated classes.
-- `brand.css` is the **single source of truth** for brand CSS. No DB storage.
-- Switch `--no-enrich` to skip CIELCH intelligence (pass through raw vars only).
-- Run `wp agentic global_colors sync --design-system="..."` after each design system change.
-- `brand.css` lives per-brand: `site/<DAW_SITE>/brand/assets/css/brand.css`. Plugin enqueues the correct one via `DAW_SITE` env var.
+- Los tokens (color, font, radius, space) se almacenan en stores nativos Divi 5 (`GlobalData`), no en `divitheme.json`.
+- `divitheme.json` queda solo con `presets` + `strategy` para consumo del Layout Engine durante deploy.
+- El CSS del brand lo genera Divi automáticamente desde `et_divi` options. No hay CSS propio de marca.
+- `wp brand reset` revierte todo: elimina `et_divi`, limpia gcids/gvids, vacía `divitheme.json` y flushes cachés.

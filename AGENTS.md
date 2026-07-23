@@ -58,14 +58,14 @@ Brand vars (_design_vars.json)
 ### 2.1 Brand Sync (único comando)
 
 ```powershell
-wp eval-file bin/brand-sync.php
+wp brand sync
 ```
 
 Lee `_design_vars.json` y sincroniza **todo** el ecosistema Divi:
 
 | Destino | Qué escribe | Impacto |
 |---------|-------------|---------|
-| `wp_options['et_divi']` | 38+ opciones de color + 5 fuentes + logo + font sizes/weights | Tema global (header, footer, menú, tipografía) |
+| `wp_options['et_divi']` | Colores, fuentes, heading sizes h1-h6, botones (7 opciones), layout (3), performance (6), social (5), logo, favicon | Tema global completo |
 | Global Colors (gcids) | Todos los colores via `GlobalData::set_global_colors()` | gcids vivos en páginas existentes y futuras |
 | Global Variables (gvids) | Radios, espacios y fuentes via `GlobalData::set_global_variables()` | Variables nativas Divi 5 editables desde VB |
 | `divitheme.json` | Solo presets + strategy | Design_Resolver los usa para merge estructural en deploy |
@@ -97,10 +97,10 @@ Capa 0 — Brand Vars
   → Define colores, fuentes, radios, espacios, logo, customizer mapping
 
 Capa 1 — Brand Sync (todo en uno)
-  wp eval-file bin/brand-sync.php
-  → 1. Escribe et_divi (Customizer global — header, footer, menú, tipografía, font sizes)
+  wp brand sync
+  → 1. Escribe et_divi (Customizer global — colores, fuentes, heading sizes h1-h6, botones, layout, performance, social, logo, favicon)
   → 2. Registra gcids via GlobalData::set_global_colors() (colores vivos en VB)
-  → 3. Registra gvids via GlobalData::set_global_variables() (radios, espacios, fuentes como variables nativas Divi 5)
+  → 3. Registra gvids via GlobalData::set_global_variables() (radios, espacios, fuentes, sombras, animaciones como variables nativas Divi 5)
   → 4. Actualiza divitheme.json (solo presets + metadata)
   → 5. Flush caché CSS de Divi
 
@@ -341,13 +341,32 @@ Los tokens (color, font, radius, space) ya no están en `divitheme.json`. `Desig
 
 ## 6. Cómo Crear una Nueva Marca
 
+> **UN SOLO COMANDO**: `wp brand`. Sin `eval-file`. Sin scripts sueltos.
+
+```powershell
+# Con .env (DAW_SITE=nombre-de-tu-marca)
+.\wp brand init
+.\wp brand sync
+
+# Con slug directo (sin tocar .env)
+.\wp brand init <sitio>
+.\wp brand sync <sitio>
+```
+
+### Pasos detallados
+
 ```powershell
 # 1. Editar .env — DAW_SITE=nombre-de-tu-marca
 
-# 2. Editar site/<DAW_SITE>/brand/_design_vars.json con colores, fuentes, logo, radios, espacios
+# 2. Generar _design_vars.json (solo si no existe)
+.\wp brand init
 
-# 3. Sincronizar TODO (Customizer + divitheme.json + gcids)
-.\wp eval-file DAW_bundle/divi-agentic-core/bin/brand-sync.php
+# 3. Cargar skill de dirección visual (hallmark, impeccable, high-end-visual-design)
+#    y editar site/<DAW_SITE>/brand/_design_vars.json con criterio de diseño real
+#    → Consultar references/design-system-inputs.md (sección 3) para el mapeo exacto de cada key
+
+# 4. Sincronizar TODO (Customizer + divitheme.json + gcids + gvids)
+.\wp brand sync
 
 # 4. Crear page-defs + sections (ver §4)
 
@@ -365,7 +384,7 @@ python DAW_bundle/workspace/combine.py `
 
 ## 7. Global Colors (gcids)
 
-Los gcids se sincronizan automáticamente al ejecutar `brand-sync.php`. No es necesario un paso aparte.
+Los gcids se sincronizan automáticamente al ejecutar `wp brand sync`. No es necesario un paso aparte.
 
 Para verificar estado:
 
@@ -386,7 +405,7 @@ Si no hay gcids sincronizados, `deploy_page` emite warning y resuelve a hex.
 4. Colores siempre como `{{design:color:*}}`, nunca hex hardcodeados en schemas.
 5. **Deploy directo.** Usar `wp agentic deploy_page`, no `build_page.php`.
 6. **CSS vía Divi Customizer.** El brand se sincroniza a `et_divi` opciones; Divi genera el CSS automáticamente. No hay CSS propio de marca.
-7. **Brand sync único.** `brand-sync.php` lee `_design_vars.json` y escribe a `wp_options['et_divi']`. No hay otro paso.
+7. **Brand sync único.** `wp brand sync` lee `_design_vars.json` y escribe a `wp_options['et_divi']`. No hay otro paso.
 8. **Frontera site/:** Todo dato de proyecto va en `site/<DAW_SITE>/`. El framework no contiene datos de proyecto.
 9. **Pipeline de página:** `page-defs/<slug>.json` (manifiesto) → `workspace/combine.py` → `wp agentic deploy_page` → página en WP.
 10. **Layout Engine refactorizado:** Renderers modulares en `inc/core/renderers/`.
@@ -403,9 +422,10 @@ Si no hay gcids sincronizados, `deploy_page` emite warning y resuelve a hex.
 ```
 ┌──────────────────────────────────────────────────────────────┐
 │ CAPA 3 — CLI / Orquestador                                   │
-│   divi-agentic-core/bin/brand-sync.php                       │
-│   workspace/automation/{ux_pro,m}_brief_generator.py         │
-│   wp agentic deploy_page (vía WP-CLI)                        │
+│   wp brand sync                                              │
+│   wp brand init                                              │
+│   wp brand reset                                             │
+│   wp agentic deploy_page                                     │
 ├──────────────────────────────────────────────────────────────┤
 │ CAPA 2 — Aplicación / Layout Engine                          │
 │   divi-agentic-core/inc/core/class-layout-engine.php         │
@@ -420,8 +440,8 @@ Si no hay gcids sincronizados, `deploy_page` emite warning y resuelve a hex.
 ├──────────────────────────────────────────────────────────────┤
 │ CAPA 1 — Brand Vars → Divi Customizer                        │
 │   site/<DAW_SITE>/brand/_design_vars.json                    │
-│   divi-agentic-core/bin/brand-sync.php                       │
-│     → Mapea 38 opciones de color + fuentes a et_divi        │
+│   wp brand sync                                              │
+│     → Mapea colores, fuentes, heading sizes, botones, layout, performance, social, favicon a et_divi │
 │     → Divi genera CSS automáticamente                        │
 └──────────────────────────────────────────────────────────────┘
 ```
@@ -436,6 +456,7 @@ Si no hay gcids sincronizados, `deploy_page` emite warning y resuelve a hex.
 | Diccionario de bloques | `daw-skill/references/blocks-dictionary.md` | Guía de 102 módulos Divi 5 |
 | Lógica del Ingeniero | `daw-skill/references/engineer.md` | Comandos CLI, deploy, verificación |
 | Lógica del Diseñador | `daw-skill/references/designer.md` | Mapeo semántico → bloques, tokens, presets |
+| Brand Commands | `wp brand {init,sync,reset,status}` | Gestión completa del sistema de diseño |
 | Layout Engine | `divi-agentic-core/inc/core/class-layout-engine.php` | Dispatcher con renderers modulares |
 | Renderers | `divi-agentic-core/inc/core/renderers/*.php` | 13 renderers (structural, text, button, media, form, content, container, dynamic, woo, generic, dgpc, dac) |
 | Refactor Plan | `divi-agentic-core/inc/core/REFACTOR-PLAN.md` | Plan de migración del monolito a renderers |
