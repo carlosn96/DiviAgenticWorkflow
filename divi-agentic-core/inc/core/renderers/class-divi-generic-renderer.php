@@ -229,8 +229,21 @@ class Divi_Generic_Renderer extends Divi_Base_Renderer {
 				}
 				break;
 
+			case 'divi/breadcrumbs':
+				foreach ( [ 'home', 'separator' ] as $bc_key ) {
+					if ( isset( $data[ $bc_key ] ) ) {
+						$attrs[ $bc_key ] = $data[ $bc_key ];
+					}
+				}
+				foreach ( [ 'breadcrumbLink', 'breadcrumb', 'trail' ] as $bc_key ) {
+					if ( isset( $data[ $bc_key ] ) ) {
+						$attrs[ $bc_key ] = $data[ $bc_key ];
+					}
+				}
+				break;
+
 			case in_array( $slug, [
-				'divi/before-after-image', 'divi/canvas-portal', 'divi/breadcrumbs',
+				'divi/before-after-image', 'divi/canvas-portal',
 				'divi/link', 'divi/post-slider', 'divi/signup-custom-field',
 			], true ):
 				if ( isset( $data['before_src'] ) && isset( $data['after_src'] ) ) {

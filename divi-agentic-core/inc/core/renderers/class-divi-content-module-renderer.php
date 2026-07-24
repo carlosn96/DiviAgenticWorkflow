@@ -191,6 +191,12 @@ class Divi_ContentModule_Renderer extends Divi_Base_Renderer {
 				] ],
 			];
 		}
+		$adv = $data['iconAdvanced'] ?? $data['icon_advanced'] ?? null;
+		if ( $adv && isset( $adv['desktop']['value'] ) && is_array( $adv['desktop']['value'] ) ) {
+			foreach ( $adv['desktop']['value'] as $key => $val ) {
+				$attrs['icon']['advanced'][ $key ] = [ 'desktop' => [ 'value' => $val ] ];
+			}
+		}
 	}
 
 	/**
