@@ -1,7 +1,12 @@
 {
-    "_count": 102,
+    "_count": 103,
     "_note": "Indice ligero para consulta DAW. Para atributos detallados: php divi-agentic-core\/bin\/extract-module-meta.php <slug>",
     "modules": {
+        "blog-module": {
+            "slug": "blog-module",
+            "name": "dgbm/blog-module",
+            "category": "module"
+        },
         "accordion": {
             "slug": "accordion",
             "name": "divi\/accordion",

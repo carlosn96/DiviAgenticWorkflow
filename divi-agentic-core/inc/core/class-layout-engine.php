@@ -123,6 +123,19 @@ class Layout_Engine {
 
             $json_attrs = json_encode( $attrs, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
             return "<!-- wp:{$slug} {$json_attrs} -->\n{$inner}{$inner_html}<!-- /wp:{$slug} -->\n";
+        } elseif ( $slug === 'dgbm_blog_module' ) {
+            $renderer = new \Divi_Agentic_Core\Core\Renderers\Dgbm_Renderer();
+            $result = $renderer->render( $slug, $data, $content_key, $children_html );
+            $shortcode = $result['inner_html'];
+
+            $wrapper_attrs = [
+                'shortcodeName' => 'dgbm_blog_module',
+                'nonconvertible' => 'yes',
+                'innerHTML'     => $shortcode,
+            ];
+
+            $json_attrs = json_encode( $wrapper_attrs, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_QUOT );
+            return "<!-- wp:divi/shortcode-module {$json_attrs} -->\n{$shortcode}\n<!-- /wp:divi/shortcode-module -->\n";
         } elseif ( $is_divi ) {
             // --- GROUP 1: Structural containers ---
             $structural_slugs = [ 'divi/section', 'divi/row', 'divi/column', 'divi/column-inner' ];

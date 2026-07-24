@@ -1,3 +1,4 @@
+dgbm/blog-module
 divi/accordion
 divi/accordion-item
 divi/audio
