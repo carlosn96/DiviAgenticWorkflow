@@ -52,24 +52,87 @@ class Divi_Generic_Renderer extends Divi_Base_Renderer {
 				break;
 
 			case $slug === 'divi/blog':
-				$post_attrs = [];
 				foreach ( [
 					'type', 'number', 'categories', 'dateFormat', 'excerptLength', 'offset',
-					'showExcerpt', 'showAuthor', 'showDate', 'showCategories', 'showComments',
-					'useCurrentLoop',
+					'showExcerpt', 'useCurrentLoop', 'excerptContent', 'excerptManual',
 				] as $key ) {
 					if ( isset( $data[ $key ] ) ) {
-						$post_attrs[ $key ] = $data[ $key ];
+						$attrs['post']['advanced'][ $key ] = [ 'desktop' => [ 'value' => $data[ $key ] ] ];
 					}
 				}
-				if ( ! empty( $post_attrs ) ) {
-					$attrs['post']['advanced'] = [];
-					foreach ( $post_attrs as $k => $v ) {
-						$attrs['post']['advanced'][ $k ] = [ 'desktop' => [ 'value' => $v ] ];
+				foreach ( [
+					'showAuthor', 'showDate', 'showCategories', 'showComments',
+				] as $key ) {
+					if ( isset( $data[ $key ] ) ) {
+						$attrs['meta']['advanced'][ $key ] = [ 'desktop' => [ 'value' => $data[ $key ] ] ];
 					}
 				}
 				if ( isset( $data['show_featured_image'] ) ) {
 					$attrs['image']['advanced']['enable'] = [ 'desktop' => [ 'value' => $data['show_featured_image'] ] ];
+				}
+				foreach ( [
+					'readMore' => 'readMore.advanced.enable',
+					'pagination' => 'pagination.advanced.enable',
+					'overlay' => 'overlay.advanced.enable',
+					'fullwidth' => 'fullwidth.advanced.enable',
+				] as $input_key => $attr_path ) {
+					if ( isset( $data[ $input_key ] ) ) {
+						$parts = explode( '.', $attr_path );
+						$ref = &$attrs;
+						foreach ( $parts as $p ) {
+							if ( ! isset( $ref[ $p ] ) ) {
+								$ref[ $p ] = [];
+							}
+							$ref = &$ref[ $p ];
+						}
+						$ref = [ 'desktop' => [ 'value' => $data[ $input_key ] ] ];
+					}
+				}
+				if ( isset( $data['blogGrid_columns'] ) ) {
+					$attrs['blogGrid']['decoration']['layout']['desktop']['value']['display'] = 'grid';
+					$attrs['blogGrid']['decoration']['layout']['desktop']['value']['gridColumnCount'] = $data['blogGrid_columns'];
+				}
+				if ( isset( $data['overlayColor'] ) ) {
+					$attrs['overlay']['decoration']['background']['desktop']['value']['color'] = $data['overlayColor'];
+				}
+				if ( isset( $data['masonryBg'] ) ) {
+					$attrs['masonry']['decoration']['background']['desktop']['value']['color'] = $data['masonryBg'];
+				}
+				foreach ( [
+					'titleFont' => 'title.decoration.font.font.desktop.value',
+					'metaFont' => 'meta.decoration.font.font.desktop.value',
+					'readMoreFont' => 'readMore.decoration.font.font.desktop.value',
+					'paginationFont' => 'pagination.decoration.font.font.desktop.value',
+				] as $input_key => $attr_path ) {
+					if ( isset( $data[ $input_key ] ) && is_array( $data[ $input_key ] ) ) {
+						$parts = explode( '.', $attr_path );
+						$ref = &$attrs;
+						foreach ( $parts as $p ) {
+							if ( ! isset( $ref[ $p ] ) ) {
+								$ref[ $p ] = [];
+							}
+							$ref = &$ref[ $p ];
+						}
+						$ref = array_merge( $ref, $data[ $input_key ] );
+					}
+				}
+				if ( isset( $data['contentFont'] ) && is_array( $data['contentFont'] ) ) {
+					$attrs['content']['decoration']['bodyFont']['body']['font']['desktop']['value'] = array_merge(
+						$attrs['content']['decoration']['bodyFont']['body']['font']['desktop']['value'] ?? [],
+						$data['contentFont']
+					);
+				}
+				if ( isset( $data['overlayIcon'] ) || isset( $data['overlayIconColor'] ) ) {
+					$icon = $attrs['overlayIcon']['decoration']['icon']['desktop']['value'] ?? [];
+					if ( isset( $data['overlayIcon'] ) ) {
+						$icon['unicode'] = $data['overlayIcon'];
+						$icon['type'] = $icon['type'] ?? 'divi';
+						$icon['weight'] = $icon['weight'] ?? '400';
+					}
+					if ( isset( $data['overlayIconColor'] ) ) {
+						$icon['color'] = $data['overlayIconColor'];
+					}
+					$attrs['overlayIcon']['decoration']['icon']['desktop']['value'] = $icon;
 				}
 				break;
 

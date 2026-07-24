@@ -563,9 +563,81 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
   "showDate": "on",
   "showCategories": "on",
   "showComments": "off",
-  "show_featured_image": "on"
+  "show_featured_image": "on",
+  "readMore": "off",
+  "pagination": "on",
+  "overlay": "off",
+  "fullwidth": "on",
+  "excerptContent": "off",
+  "excerptManual": "on",
+  "useCurrentLoop": "off",
+  "blogGrid_columns": 3,
+  "overlayColor": "rgba(0,0,0,0.3)",
+  "overlayIcon": "&#xe050;",
+  "overlayIconColor": "#ffffff",
+  "masonryBg": "#f5f5f5",
+  "titleFont": {
+    "fontFamily": "var(--font-display)",
+    "size": "24px",
+    "weight": "700",
+    "color": "#1a1a1a",
+    "headingLevel": "h2"
+  },
+  "metaFont": {
+    "fontFamily": "var(--font-ui)",
+    "size": "14px",
+    "color": "#666666"
+  },
+  "contentFont": {
+    "fontFamily": "var(--font-body)",
+    "size": "16px",
+    "color": "#333333"
+  },
+  "readMoreFont": {
+    "fontFamily": "var(--font-ui)",
+    "size": "14px",
+    "weight": "600",
+    "color": "#c0392b"
+  },
+  "paginationFont": {
+    "fontFamily": "var(--font-ui)",
+    "size": "14px",
+    "color": "#333333"
+  }
 }
 ```
+
+| Atributo | Ruta Divi 5 | Descripción |
+| :--- | :--- | :--- |
+| `type` | `post.advanced.type` | Post type slug |
+| `number` | `post.advanced.number` | Posts per page |
+| `categories` | `post.advanced.categories` | Array de category IDs |
+| `dateFormat` | `post.advanced.dateFormat` | Formato PHP de fecha |
+| `excerptLength` | `post.advanced.excerptLength` | Longitud del excerpt |
+| `offset` | `post.advanced.offset` | Posts a saltar |
+| `showExcerpt` | `post.advanced.showExcerpt` | Mostrar excerpt on/off |
+| `useCurrentLoop` | `post.advanced.useCurrentLoop` | Usar loop actual on/off |
+| `excerptContent` | `post.advanced.excerptContent` | "off"=excerpt, "on"=contenido completo |
+| `excerptManual` | `post.advanced.excerptManual` | Usar excerpt manual on/off |
+| `showAuthor` | `meta.advanced.showAuthor` | Mostrar autor on/off |
+| `showDate` | `meta.advanced.showDate` | Mostrar fecha on/off |
+| `showCategories` | `meta.advanced.showCategories` | Mostrar categorías on/off |
+| `showComments` | `meta.advanced.showComments` | Mostrar comentarios on/off |
+| `show_featured_image` | `image.advanced.enable` | Mostrar imagen destacada on/off |
+| `readMore` | `readMore.advanced.enable` | Botón "Leer más" on/off |
+| `pagination` | `pagination.advanced.enable` | Paginación on/off |
+| `overlay` | `overlay.advanced.enable` | Overlay en hover de imagen on/off |
+| `fullwidth` | `fullwidth.advanced.enable` | Layout fullwidth on/off |
+| `blogGrid_columns` | `blogGrid.decoration.layout.desktop.value.gridColumnCount` | Columnas del grid (2, 3, 4) |
+| `overlayColor` | `overlay.decoration.background.desktop.value.color` | Color del overlay |
+| `overlayIcon` | `overlayIcon.decoration.icon.desktop.value.unicode` | Ícono del overlay |
+| `overlayIconColor` | `overlayIcon.decoration.icon.desktop.value.color` | Color del ícono overlay |
+| `masonryBg` | `masonry.decoration.background.desktop.value.color` | Color de fondo de tarjetas masonry |
+| `titleFont` | `title.decoration.font.font.desktop.value.*` | Objeto font del título (fontFamily, size, weight, color, headingLevel) |
+| `metaFont` | `meta.decoration.font.font.desktop.value.*` | Objeto font del meta |
+| `contentFont` | `content.decoration.bodyFont.body.font.desktop.value.*` | Objeto font del body |
+| `readMoreFont` | `readMore.decoration.font.font.desktop.value.*` | Objeto font del read more |
+| `paginationFont` | `pagination.decoration.font.font.desktop.value.*` | Objeto font de la paginación |
 
 ### divi/post-title
 **Título dinámico del post actual.** No necesita contenido estático.
