@@ -193,6 +193,30 @@ class Divi_Button_Renderer extends Divi_Base_Renderer {
 			}
 		}
 
+		// 7. Button Icon — Divi 5 reads from button.decoration.button.desktop.value.icon
+		if ( isset( $data['button_icon'] ) ) {
+			if ( ! isset( $attrs['button']['decoration'] ) ) {
+				$attrs['button']['decoration'] = [];
+			}
+
+			$attrs['button']['decoration']['button'] = [
+				'desktop' => [
+					'value' => [
+						'icon' => [
+							'enable'    => $data['use_button_icon'] ?? 'on',
+							'placement' => 'right',
+							'onHover'   => 'on',
+							'settings'  => [
+								'unicode' => $data['button_icon'],
+								'type'    => 'fa',
+								'weight'  => '900',
+							],
+						],
+					],
+				],
+			];
+		}
+
 		return [
 			'attrs'      => $attrs,
 			'inner'      => '',
