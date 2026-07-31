@@ -41,7 +41,7 @@ abstract class Divi_Base_Renderer implements Block_Renderer_Interface {
 			'module'         => [],
 		];
 
-		$style_keys = [ 'decoration', 'boxShadow', 'spacing', 'meta', 'advanced', 'headingFont', 'bodyFont', 'animation', 'transform' ];
+		$style_keys = [ 'decoration', 'boxShadow', 'spacing', 'meta', 'advanced', 'headingFont', 'bodyFont', 'link', 'animation', 'transform' ];
 		foreach ( $style_keys as $key ) {
 			if ( isset( $data[ $key ] ) ) {
 				$attrs['module'][ $key ] = $data[ $key ];
