@@ -20,7 +20,7 @@ class Divi_Dynamic_Renderer extends Divi_Base_Renderer {
 	/**
 	 * Extra top-level attrs to pass through for dynamic blocks.
 	 */
-	private const EXTRA_ATTRS = [ 'title', 'meta', 'textWrapper', 'image', 'content', 'elements' ];
+	private const EXTRA_ATTRS = [ 'title', 'meta', 'textWrapper', 'image', 'content', 'elements', 'featuredImage' ];
 
 	/**
 	 * @inheritDoc
