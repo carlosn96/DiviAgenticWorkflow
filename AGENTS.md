@@ -1,43 +1,76 @@
-# DAW — Divi Agentic Workflow
+﻿# DAW — Divi Agentic Workflow
 
-Pipeline completo de diseño → deploy para Divi 5.5.0. Este documento describe el flujo real, no el idealizado.
+Pipeline completo de diseño → deploy para Divi 5.9.0. Este documento describe el flujo real, no el idealizado.
 
-Todos los paths son relativos a `DAW_bundle/` salvo que se indique. Los comandos se ejecutan desde la raíz del proyecto (`divitheme/`).
+Todos los paths del documento son relativos al directorio DAW (`<daw-root>/`) salvo que se indique. Los comandos se ejecutan desde ese mismo directorio.
+
+El proyecto tiene dos raíces:
+- **`$WpRoot`** — raíz de WordPress (contiene `wp.bat`, `wp-content/`, etc.)
+- **`$DawRoot`** — directorio del framework DAW (contiene este `AGENTS.md`, `site/`, `workspace/`, etc.)
+
+`$DawRoot` siempre está dentro de `$WpRoot`. Los scripts en `workspace/` resuelven ambas automáticamente.
+
+### 0.1. Prerrequisito: wrapper `wp`
+
+Debe existir un wrapper `wp` en `$WpRoot` que invoque WP-CLI. Los scripts en `workspace/` lo buscan como `wp.bat` (Windows) o `wp` (Unix) allí.
+
+El wrapper debe ser un **passthrough directo** — sin lógica de detección ni validación en runtime. La validación se hace al CREAR el wrapper para tu entorno, no en cada ejecución.
+
+Elige el que corresponda a tu entorno:
+
+| Entorno | Contenido del wrapper |
+|---------|----------------------|
+| **WP-CLI global** (PATH) | `@ECHO OFF & wp %*` (Win) / `#!/bin/bash && exec wp "$@"` (Unix) |
+| **phar local** (raíz del proyecto) | `@ECHO OFF & php "%~dp0wp-cli.phar" %*` (Win) / `#!/bin/bash && php "$(dirname "$0")/wp-cli.phar" "$@"` (Unix) |
+| **Local by Flywheel** | `@ECHO OFF & "C:\Users\<user>\AppData\Local\Local\resources\extra-resources\php\php.exe" "%~dp0wp-cli.phar" %*` (ajustar ruta) |
+| **XAMPP** | `@ECHO OFF & "C:\xampp\php\php.exe" "%~dp0wp-cli.phar" %*` (ajustar ruta) |
+
+La raíz del proyecto es donde está este wrapper. Los scripts en `workspace/` solo apuntan a él.
 
 ---
 
 ## 1. Mapa del DAW
 
 ```
-DAW_bundle/
-├── AGENTS.md                      <- Este archivo (fuente de verdad del pipeline real)
-├── README.md
-├── .env.example
-├── .gitignore
-├── site/                          <- ⭐ DATOS DE PROYECTO (separados del framework)
-│   ├── <DAW_SITE>/                <-    Marca apuntada por .env DAW_SITE
-│   │   ├── brand/                 <-       _design_vars.json (único input de marca)
-│   │   ├── page-defs/             <-       Definiciones de página
-│   │   │   ├── <slug>.json        <-          Manifiesto: lista de secciones
-│   │   │   └── sections/          <-          Archivos de sección individuales
-│   │   ├── plans/                 <-       plan.json generado por VIE
-│   │   ├── design-system/         <-       divitheme.json (gcids, presets)
-│   │   ├── briefs/                <-       Briefs de diseño
-│   │   └── content_state/         <-       Estado entre fases
-│   └── example/                   <-    Template para nuevas marcas
-├── _archive/                      <- Código y marcas archivadas
-├── daw-skill/SKILL.md             <- ⭐ Orquestación de 4 fases
-├── daw/                           <- Shared kernel (cfg, types, tokens)
-├── vie/                           <- Visual Impact Engine
-├── workspace/                     <- Scripts principales
-│   ├── combine.py                 <-    Resuelve manifiesto + secciones → JSON combinado
-│   └── automation/                <-    generate_brief.py, etc.
-└── divi-agentic-core/
-    ├── Plugin WordPress (Layout Engine, CLI, metadata)
-    └── bin/
-        ├── brand-sync.php         <- ⭐ Brand vars → wp_options['et_divi'] (Customizer)
-        ├── build_page.php         <- Legacy (no usar)
-        └── verify_page.php        <- Verificación post-deploy
+<wp-root>/                         ← $WpRoot (WordPress root)
+├── wp.bat                         <- ⭐ Wrapper que invoca WP-CLI (ver §0.1)
+├── wp-cli.phar                    <- WP-CLI binary (opcional si hay global)
+├── wp-content/                    <- WordPress content
+│   └── et-cache/                  <- Cache estática de Divi (flusheable)
+│
+└── <daw-root>/                    ← $DawRoot (DAW framework)
+    ├── AGENTS.md                  <- Este archivo (fuente de verdad del pipeline)
+    ├── README.md
+    ├── .env.example
+    ├── .gitignore
+    ├── site/                      <- ⭐ DATOS DE PROYECTO (separados del framework)
+    │   ├── <DAW_SITE>/            <-    Marca apuntada por .env DAW_SITE
+    │   │   ├── brand/             <-       _design_vars.json (único input de marca)
+    │   │   ├── page-defs/         <-       Definiciones de página (ver §4)
+    │   │   │   ├── inicio/        <-          Página: inicio
+    │   │   │   ├── header/        <-          Componente: header
+    │   │   │   ├── footer/        <-          Componente: footer
+    │   │   │   └── ...            <-          Más páginas/componentes
+    │   │   ├── design-system/     <-       divitheme.json (gcids, presets)
+    │   │   ├── plans/             <-       plan.json generado por VIE
+    │   │   ├── briefs/            <-       Briefs de diseño
+    │   │   └── content_state/     <-       Estado entre fases
+    │   └── example/               <-    Template para nuevas marcas
+    ├── _archive/                  <- Código y marcas archivadas
+    ├── daw-skill/                 <- Orquestación de 4 fases
+    ├── daw/                       <- Shared kernel (cfg, types, tokens)
+    ├── vie/                       <- Visual Impact Engine
+    ├── workspace/                 <- Scripts transversales (no dependientes de site)
+    │   ├── combine.py             <-    Resuelve manifiesto + secciones → JSON combinado
+    │   ├── deploy.ps1             <-    Wrapper: combine + deploy_page + flush (páginas)
+    │   ├── deploy-template.ps1    <-    Wrapper: combina + deploy_global_ecosystem + flush
+    │   └── automation/            <-    generate_brief.py, etc.
+    └── divi-agentic-core/
+        ├── Plugin WordPress (Layout Engine, CLI, metadata)
+        └── bin/
+            ├── brand-sync.php     <- ⭐ Brand vars → wp_options['et_divi']
+            ├── build_page.php     <- Legacy (no usar)
+            └── verify_page.php    <- Verificación post-deploy
 ```
 
 ---
@@ -46,19 +79,42 @@ DAW_bundle/
 
 ```
 Brand vars (_design_vars.json)
-  → brand-sync.php
+  → [opcional] wp brand validate --skill=X   ← 54+ checks de calidad
+  → [opcional] wp brand approve [--skill=X]  ← persiste aprobación con vars_hash
+  → wp brand sync [--force]                  ← bloquea si no hay approve o si vars cambiaron
     → wp_options['et_divi'] (Customizer global)
     → divitheme.json (tokens + presets)
     → gcids via GlobalData::set_global_colors()
-  → page-defs/<slug>.json (manifiesto) + sections/*.json
-  → python workspace/combine.py → <slug>-combined.json
-  → wp agentic deploy_page → post_content en WP
+  → site/<DAW_SITE>/page-defs/<slug>/manifest.json + sections/*.json
+  → python workspace/combine.py → <slug>-combined.json  (ver §4.4)
+  → workspace\deploy.ps1 → página en WP con Divi 5 blocks  (ver §4.5)
+  → (ó workspace\deploy-template.ps1 para templates globales, ver §5.5)
 ```
 
-### 2.1 Brand Sync (único comando)
+### 2.1 Brand Sync — quality gate integrado
 
 ```powershell
-wp brand sync
+wp brand sync           # Falla si no hay .design-pass o si vars cambiaron y no pasan validación
+wp brand sync --force   # Bypass total del quality gate
+```
+
+El quality gate tiene dos capas:
+
+| Capa | Qué checkea | Cómo se saltea |
+|------|-------------|----------------|
+| Aprobación | `.design-pass` existe con `vars_hash` coincidente | `--force` |
+| Validación mecánica | 54 checks: contraste WCAG AAA, escala headings/spaces/radii, armonía cromática, pairing tipográfico | `--force` |
+
+Si `_design_vars.json` se edita después de `approve`, el hash cambia y sync re-valida automático.
+
+```powershell
+# Flujo completo recomendado
+wp brand init <slug>                         # Crear vars
+wp brand validate <slug> --suggest           # Ver calidad + sugerencias
+wp brand approve <slug>                      # Aprobar (solo mecánico)
+wp brand validate <slug> --skill=hallmark    # Validar con skill
+wp brand approve <slug> --skill=hallmark     # Aprobar con skill
+wp brand sync <slug>                         # Sincronizar
 ```
 
 Lee `_design_vars.json` y sincroniza **todo** el ecosistema Divi:
@@ -74,19 +130,13 @@ Divi regenera CSS automáticamente. Un solo comando, todo sincronizado.
 
 ### 2.2 Page Deploy
 
-```powershell
-# 1. Combinar manifiesto + secciones
-python DAW_bundle/workspace/combine.py `
-  DAW_bundle/site/<DAW_SITE>/page-defs/<slug>.json `
-  --out DAW_bundle/site/<DAW_SITE>/page-defs/<slug>-combined.json
+El deploy se hace con un solo comando usando el wrapper:
 
-# 2. Deploy
-.\wp.bat agentic deploy_page `
-  --title="Título" --slug="<slug>" `
-  --schema="DAW_bundle/site/<DAW_SITE>/page-defs/<slug>-combined.json" `
-  --design-system="DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json"
+```powershell
+.\workspace\deploy.ps1 -Slug inicio -Title "Inicio"
 ```
 
+Esto ejecuta: combine.py → `wp agentic deploy_page` → cache flush. Usa `$env:DAW_SITE` para el site, o pásalo con `-Site <site>`.
 ---
 
 ## 3. Pipeline Diseño → Deploy (Capas)
@@ -113,28 +163,52 @@ Capa 2 — Page Deploy
 
 ---
 
-## 4. Page Definition — Cómo usar combine.py
+## 4. Page Definition — Estructura y Deploy
+
+> Los comandos de esta sección se ejecutan desde la raíz del proyecto.
 
 ### 4.1. Estructura
 
 ```
 site/<DAW_SITE>/page-defs/
-├── <slug>.json          ← Manifiesto (lista de secciones)
-├── combine.py           ← [MOVIO a workspace/combine.py]
-└── sections/
-    ├── hero.json        ← Cada archivo = una sección Divi 5
-    ├── services.json
-    └── ...
+├── inicio/                 ← Cada carpeta = una página o componente
+│   ├── manifest.json       ← Manifiesto (lista de secciones)
+│   ├── sections/           ← Archivos de sección individuales
+│   ├── css/                ← CSS freeForm por sección (mismo nivel que sections/)
+│   └── inicio-combined.json ← Output de combine.py (no editar)
+├── header/                 ← Componente template
+│   ├── manifest.json
+│   ├── sections/
+│   ├── css/
+│   └── header-combined.json
+├── footer/
+│   ├── manifest.json
+│   ├── sections/
+│   ├── css/
+│   └── footer-combined.json
+└── ...                     ← Más páginas/componentes
 ```
+
+Los scripts `workspace/combine.py`, `workspace/deploy.ps1` y `workspace/deploy-template.ps1` son transversales — se usan desde cualquier site.
 
 ### 4.2. Crear el manifiesto
 
-El manifiesto solo define qué secciones incluir y en qué orden:
+El manifiesto (`manifest.json`) solo define qué secciones incluir y en qué orden, dentro de la carpeta de cada página:
 
 ```json
 {
   "_manifest": "v1",
   "title": "Título de la Página",
+  "slug": "inicio",
+  "sections": [
+    "sections/hero.json",
+    "sections/services.json",
+    "sections/cta-final.json"
+  ]
+}
+```
+
+Los paths de `sections/` son **relativos al directorio de la página** (donde está `manifest.json`).e la Página",
   "slug": "mi-pagina",
   "sections": [
     "sections/hero.json",
@@ -171,7 +245,7 @@ Cada archivo en `sections/` contiene UNA sección de Divi 5. Sigue esta estructu
       "desktop": { "value": { "class": "daw-hero", "id": "mi-seccion" } }
     }
   },
-  "css": "",    ← LO LLENA combine.py DESDE sections/css/<module>.css
+  "css": "",    ← LO LLENA combine.py DESDE css/<module>.css
   "rows": [
     {
       "column_structure": "1_1",
@@ -237,7 +311,7 @@ Cada archivo en `sections/` contiene UNA sección de Divi 5. Sigue esta estructu
 7. Tipografía: `bodyFont.p.font.desktop.value` con `fontFamily`, `size`, `weight`, `color`, etc. NO CSS manual.
 8. **CSS freeForm** (campo `"css"`): Solo para lo que no tiene atributo nativo. Y **sin `<` en ninguna parte** (ver §4.6).
 9. Botones: `type: "divi/button"` con `decoration.button.desktop.value.backgroundColor`, `textColor`, etc. + `button_text`, `button_url`.
-10. El CSS de sección se almacena en `sections/css/<module>.css` y lo inyecta `combine.py`. El campo `"css"` en el JSON se deja vacío (`""`).
+10. El CSS de sección se almacena en `css/<module>.css` al mismo nivel que `sections/`, y lo inyecta `combine.py`. El campo `"css"` en el JSON se deja vacío (`""`).
 
 ### 4.6. ⚠️ Pipeline del freeForm CSS — peligro de `<`
 
@@ -260,9 +334,9 @@ section["css"] (en JSON)
 
 **Regla**: NINGÚN `<` en el CSS de sección. Ni siquiera en comentarios.
 
-**Dónde almacenar CSS de sección**:
+**Dónde almacenar CSS de sección** (al mismo nivel que `sections/`):
 ```
-sections/css/
+css/
 ├── hero.css       ← combine.py lo lee y lo inyecta en section["css"]
 └── ...
 ```
@@ -299,25 +373,253 @@ update_post_meta($page_id, '_et_pb_custom_css', wp_slash($page_css));
 ### 4.4. Combinar
 
 ```powershell
-python DAW_bundle/workspace/combine.py `
-  DAW_bundle/site/<DAW_SITE>/page-defs/<slug>.json `
-  --out DAW_bundle/site/<DAW_SITE>/page-defs/<slug>-combined.json
+python workspace/combine.py site/<DAW_SITE>/page-defs/<slug>/manifest.json --out site/<DAW_SITE>/page-defs/<slug>/<slug>-combined.json
 ```
 
-Esto resuelve los paths relativos del manifiesto, junta todas las secciones en un solo JSON, y lo escribe en `<slug>-combined.json`. Si existe `sections/css/<section-name>.css`, `combine.py` lo inyecta automáticamente en el campo `"css"` de la sección (freeForm nativo Divi 5).
+Esto resuelve los paths relativos del manifiesto, junta todas las secciones en un solo JSON, y lo escribe en `<slug>-combined.json` dentro de la carpeta de la página/componente. Si existe `css/<section-name>.css` (al mismo nivel que `sections/`), `combine.py` lo inyecta automáticamente en el campo `"css"` de la sección (freeForm nativo Divi 5).
 
-### 4.5. Desplegar
+### 4.5. Desplegar (wrapper)
 
 ```powershell
-.\wp.bat agentic deploy_page `
-  --title="Título" --slug="<slug>" `
-  --schema="DAW_bundle/site/<DAW_SITE>/page-defs/<slug>-combined.json" `
-  --design-system="DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json"
+.\workspace\deploy.ps1 -Slug inicio -Title "Inicio"
 ```
+
+Opciones:
+- `-Site` — nombre del site (default: `$env:DAW_SITE`)
+- `-SkipCache` — saltar limpieza de caché
 
 ---
 
-## 5. ⭐ Brand → Divi Customizer (Pipeline Actual)
+## 5. Theme Builder Ecosystem — Templates Globales
+
+El pipeline desplega componentes del Theme Builder (header, footer, body) y los asigna a templates con alcance definido.
+
+### 5.0. Comandos atómicos (CQRS)
+
+Cada comando hace una sola cosa y es componible:
+
+| Comando | Propósito |
+|---------|-----------|
+| `template_create --use-on="x" --title="y"` | Crea template. Falla si --use-on ya existe |
+| `template_find --use-on="x"` | Retorna ID del template o 0 si no existe |
+| `template_ensure --use-on="x" --title="y"` | Crea si no existe, retorna ID existente si ya está |
+| `template_default` | Retorna el template default (lo crea si no existe) |
+| `template_show <id>` | Muestra el template (use-on, layouts asignados, enabled) |
+| `template_update <id> --title --use-on` | Actualiza título y/o use-on de un template existente |
+| `template_delete <id>` | Trashes el template y lo desvincula del Theme Builder (soft delete) |
+| `template_wire <id> --*-id=<x> [--*-enabled=1] [--*-global=1]` | Asigna layouts, enabled, y global flags a un template |
+| `layout_deploy <type> --schema=<path> [--design-system=...]` | Crea un nuevo layout (nunca sobrescribe). Retorna ID |
+| `layout_ensure <type> --schema=<path> --by-id=<id> [--design-system=...]` | Actualiza un layout existente por ID |
+| `layout_list <type>` | Lista layouts existentes con ID y título |
+
+Uso típico combinado:
+
+```powershell
+# Crear template + layouts desde cero
+$tid = wp agentic template_create --use-on="singular:post_type:page:all" --title="Pages"
+$hid = wp agentic layout_deploy header --schema="site/<site>/page-defs/header/header-combined.json"
+$fid = wp agentic layout_deploy footer --schema="site/<site>/page-defs/footer/footer-combined.json"
+$bid = wp agentic layout_deploy body --schema="site/<site>/page-defs/body/body-combined.json"
+wp agentic template_wire $tid --header-id=$hid --footer-id=$fid --body-id=$bid
+
+# Hotfix: actualizar solo footer
+wp agentic layout_ensure footer --schema="site/<site>/page-defs/footer/footer-combined.json" --by-id=456
+```
+
+### 5.1. Estructura de componentes
+
+Los componentes (header, footer, body) usan la misma estructura que las páginas:
+
+```
+site/<DAW_SITE>/page-defs/
+├── header/                  ← Componente: header global
+│   ├── manifest.json
+│   ├── sections/
+│   ├── css/
+│   └── header-combined.json
+├── footer/                  ← Componente: footer global
+│   ├── manifest.json
+│   ├── sections/
+│   ├── css/
+│   └── footer-combined.json
+└── body/                    ← Componente: body (ej. 404, landing)
+    ├── manifest.json
+    ├── sections/
+    ├── css/
+    └── body-combined.json
+```
+
+### 5.2. Comando: `deploy_global_ecosystem`
+
+Despliega los 3 componentes y los asigna a un template. El flag `--mode` define el comportamiento (default: `create`):
+
+| Modo | Qué hace | Cuándo usarlo |
+|------|----------|---------------|
+| `create` | Solo crea. Falla si el template o layout ya existe | Seguro por defecto — evita sobreescrituras accidentales |
+| `update` | Solo actualiza. Requiere `--template-id` o `--*-id` | Hotfix sobre un ID específico |
+| `upsert` | Crea si no existe, actualiza si ya existe | Scripts automatizados donde da igual crear/actualizar |
+
+```powershell
+.\wp.bat agentic deploy_global_ecosystem \
+  --header="site/<DAW_SITE>/page-defs/header/header-combined.json" \
+  --footer="site/<DAW_SITE>/page-defs/footer/footer-combined.json" \
+  --body="site/<DAW_SITE>/page-defs/body/body-combined.json" \
+  [--mode=upsert|create|update] \
+  [--design-system="site/<DAW_SITE>/design-system/divitheme.json"] \
+  [--use-on="singular:post_type:page:all"] \
+  [--title="Mi Template"] \
+  [--template-id=<id>] \
+  [--header-id=<id>] [--footer-id=<id>] [--body-id=<id>] \
+  [--header-enabled=<0|1>] [--footer-enabled=<0|1>] [--body-enabled=<0|1>]
+```
+
+| Parámetro | Requerido | Descripción |
+|-----------|-----------|-------------|
+| `--header` | sí | Path al JSON combinado del header |
+| `--footer` | sí | Path al JSON combinado del footer |
+| `--body` | sí | Path al JSON combinado del body |
+| `--mode` | no | `create` (default) | `create` (falla si existe), `update` (requiere IDs), `upsert` (crea o actualiza) |
+| `--design-system` | no | Path a `divitheme.json` para resolver tokens |
+| `--use-on` | var | Alcance del template (ver §5.4). Requerido en `create` |
+| `--title` | var | Título del template. Requerido en `create` |
+| `--template-id` | no | Template existente a actualizar. Requerido en `update` sin `--use-on` |
+| `--header-id` | no | Layout de header específico. Requerido en `update` para layouts |
+| `--footer-id` | no | Layout de footer específico. Requerido en `update` para layouts |
+| `--body-id` | no | Layout de body específico. Requerido en `update` para layouts |
+| `--header-enabled` | no | `1` o `0`. Default: `1` |
+| `--footer-enabled` | no | `1` o `0`. Default: `1` |
+| `--body-enabled` | no | `1` o `0`. Default: `1` |
+
+### 5.3. Comportamiento del pipeline
+
+**Resolución de template** (según `--mode`):
+
+| Modo | `--template-id` | `--use-on` match 1 | `--use-on` match varios | `--use-on` match 0 |
+|------|----------------|--------------------|------------------------|-------------------|
+| `create` | error | error (ya existe) | error (ya existe) | crea nuevo |
+| `update` | usa ese ID | error (ambiguo, usa `--template-id`) | error (ambiguo) | error (no existe) |
+| `upsert` | usa ese ID | actualiza ese | error, pide `--template-id` | crea nuevo |
+
+**Resolución de layouts (header/footer/body)** (según `--mode`):
+
+| Modo | `--*-id` dado | Sin `--*-id` |
+|------|---------------|--------------|
+| `create` | error (no puede targetear un layout existente) | crea nuevo layout |
+| `update` | actualiza ese ID | error (requiere `--*-id`) |
+| `upsert` | actualiza ese ID | busca más referenciado → menor ID → crea |
+
+**Meta asignado a cada layout (`apply_divi_meta`):**
+```php
+_et_pb_use_builder = on
+_et_pb_use_divi_5 = on
+_et_pb_show_page_creation = off
+_et_pb_built_with_d5 = 1
+_et_pb_built_for_post_type = page
+_et_pb_gutter_width = 3
+_et_pb_enable_shortcode_tracking = ''
+_et_pb_custom_css = ''
+_et_pb_first_image = ''
+_et_pb_truncate_post = ''
+_et_pb_truncate_post_date = ''
+_et_builder_version = (versión actual de Divi)
+_et_theme_builder_marked_as_unused → eliminado
+```
+
+### 5.4. Valores válidos para `--use-on`
+
+El pipeline valida contra patrones que Divi reconoce:
+
+| Valor | Descripción |
+|-------|-------------|
+| `404` | Página 404 |
+| `search` | Resultados de búsqueda |
+| `homepage` | Página de inicio |
+| `singular:post_type:<type>:all` | Todos los posts de un tipo (ej. `page`, `post`) |
+| `singular:post_type:<type>:id:<id>` | Post específico por ID |
+| `singular:post_type:<type>:children:id:<id>` | Hijos de un post |
+| `singular:taxonomy:<tax>:term:id:<id>` | Término de taxonomía |
+| `archive:all` | Todos los archivos |
+| `archive:post_type:<type>` | Archivo por post type |
+| `archive:taxonomy:<tax>:all` | Archivos de taxonomía |
+| `archive:taxonomy:<tax>:term:id:<id>` | Término específico |
+| `archive:user:all` | Todos los autores |
+| `archive:user:id:<id>` | Autor específico |
+| `archive:user:role:<role>` | Rol de autor |
+| `archive:date:all` | Archivos por fecha |
+
+### 5.5. Wrapper: `deploy-template.ps1`
+
+Wrapper que usa comandos atómicos internamente. **Despliega solo los componentes que se le indiquen**, no requiere header+footer+body juntos.
+
+```powershell
+.\workspace\deploy-template.ps1 -UseOn "singular:post_type:page:all" -Title "Todas las páginas"
+```
+
+### 5.5. Wrapper: `deploy-template.ps1`
+
+Despliega templates **default** (`-Default`, aplica a todas las páginas) o **custom** (`-UseOn`, condiciones específicas).
+
+El término "global" en los flags `-*Global` se refiere exclusivamente a si el **layout** es **compartido** entre varios templates (`=1`) o **exclusivo** de este template (`=0`). No confundir con template default.
+
+```powershell
+# Default — aplica a TODAS las páginas (template con _et_default=1)
+.\workspace\deploy-template.ps1 -Default -Title "Footer"
+
+# Custom — solo páginas que cumplan la condición
+.\workspace\deploy-template.ps1 -UseOn "singular:post_type:page:all" -Title "Footer Pages"
+```
+
+**Resolución de componentes:**
+- Si se pasa algún `-HeaderPath`, `-FooterPath` o `-BodyPath` → despliega **solo esos** (standalone)
+- Si no se pasa ningún path → usa los paths por defecto (`page-defs/header/`, `page-defs/footer/`, `page-defs/body/`)
+
+**Reuso de layouts:** cuando no se especifica `-*Id`, el script consulta si el template ya tiene un layout asignado para ese componente. Si existe, lo actualiza (no duplica). Si no, crea uno nuevo.
+
+Parámetros:
+
+| Parámetro | Requerido | Default | Descripción |
+|-----------|-----------|---------|-------------|
+| `-Title` | sí | — | Nombre del template |
+| `-UseOn` | var | — | Condición para template personalizado (§5.4). Requerido si no `-Default` |
+| `-Default` | var | — | Template default (aplica a todas las páginas). Excluye `-UseOn` |
+| `-Site` | no | `$env:DAW_SITE` | Site/DAW_SITE |
+| `-Mode` | no | `create` | create (default), update o upsert |
+| `-TemplateId` | no | 0 | Template ID específico a actualizar |
+| `-HeaderPath` | no | default global | Path custom al combined JSON del header |
+| `-FooterPath` | no | default global | Path custom al combined JSON del footer |
+| `-BodyPath` | no | default global | Path custom al combined JSON del body |
+| `-HeaderId` | no | 0 | Layout ID a actualizar (si no se da, reusa existente del template o crea) |
+| `-FooterId` | no | 0 | Layout ID a actualizar (si no se da, reusa existente del template o crea) |
+| `-BodyId` | no | 0 | Layout ID a actualizar (si no se da, reusa existente del template o crea) |
+| `-HeaderEnabled` | no | 1 | 0 deshabilita header en este template |
+| `-FooterEnabled` | no | 1 | 0 deshabilita footer en este template |
+| `-BodyEnabled` | no | 1 | 0 deshabilita body en este template |
+| `-HeaderGlobal` | no | 1 | 0 si layout de header es exclusivo de este template (no compartido) |
+| `-FooterGlobal` | no | 1 | 0 si layout de footer es exclusivo de este template |
+| `-BodyGlobal` | no | 1 | 0 si layout de body es exclusivo de este template |
+| `-SkipCombine` | no | — | Saltar combinación de manifests |
+| `-SkipCache` | no | — | Saltar flush de caché |
+
+Ejemplos:
+
+```powershell
+# Footer default (todas las páginas)
+.\workspace\deploy-template.ps1 -Default -Title "Footer Principal" -FooterPath "site/<site>/page-defs/footer/footer-combined.json"
+
+# Footer custom (solo páginas)
+.\workspace\deploy-template.ps1 -UseOn "singular:post_type:page:all" -Title "Footer Pages" -FooterPath "site/<site>/page-defs/footer/footer-combined.json"
+
+# Footer + header, sin body
+.\workspace\deploy-template.ps1 -UseOn "singular:post_type:landing:all" -Title "Landings" -HeaderPath "..." -FooterPath "..."
+
+# Solo body, layout exclusivo (no compartido)
+.\workspace\deploy-template.ps1 -UseOn "404" -Title "Error 404" -BodyPath "..." -BodyGlobal 0 -HeaderEnabled 0 -FooterEnabled 0
+
+# Actualizar template existente, solo body
+.\workspace\deploy-template.ps1 -UseOn "singular:post_type:post:all" -Title "Blog" -TemplateId 123 -BodyId 456
+```
+
+## 6. ⭐ Brand → Divi Customizer (Pipeline Actual)
 
 El brand ya no genera CSS propio. Divi renderiza todo desde sus opciones nativas de Customizer.
 
@@ -339,7 +641,7 @@ Los tokens (color, font, radius, space) ya no están en `divitheme.json`. `Desig
 
 ---
 
-## 6. Cómo Crear una Nueva Marca
+## 7. Cómo Crear una Nueva Marca
 
 > **UN SOLO COMANDO**: `wp brand`. Sin `eval-file`. Sin scripts sueltos.
 
@@ -358,31 +660,34 @@ Los tokens (color, font, radius, space) ya no están en `divitheme.json`. `Desig
 ```powershell
 # 1. Editar .env — DAW_SITE=nombre-de-tu-marca
 
-# 2. Generar _design_vars.json (solo si no existe)
-.\wp brand init
+# 2. Generar _design_vars.json con scaffold genérico o con skill
+.\wp brand init                                    # scaffold genérico
+.\wp brand init --skill=hallmark                    # scaffold con valores hallmark
 
-# 3. Cargar skill de dirección visual (hallmark, impeccable, high-end-visual-design)
-#    y editar site/<DAW_SITE>/brand/_design_vars.json con criterio de diseño real
-#    → Consultar references/design-system-inputs.md (sección 3) para el mapeo exacto de cada key
+# 3. Validar calidad de diseño (opcional, recomendado)
+.\wp brand validate <slug>                          # 54 checks mecánicos
+.\wp brand validate <slug> --suggest               # + sugerencias correctivas
+.\wp brand validate <slug> --skill=hallmark         # + validación contra skill
 
-# 4. Sincronizar TODO (Customizer + divitheme.json + gcids + gvids)
-.\wp brand sync
+# 4. Aprobar para habilitar sync (opcional)
+.\wp brand approve <slug>                           # solo mecánico
+.\wp brand approve <slug> --skill=hallmark          # mecánico + skill
 
-# 4. Crear page-defs + sections (ver §4)
+# 5. Sincronizar TODO (Customizer + divitheme.json + gcids + gvids)
+.\wp brand sync <slug>                              # respeta quality gate
+.\wp brand sync <slug> --force                      # bypass total
 
-# 5. Combinar y desplegar
-python DAW_bundle/workspace/combine.py `
-  DAW_bundle/site/<DAW_SITE>/page-defs/<slug>.json `
-  --out DAW_bundle/site/<DAW_SITE>/page-defs/<slug>-combined.json
-.\wp.bat agentic deploy_page `
-  --title="Título" --slug="<slug>" `
-  --schema="DAW_bundle/site/<DAW_SITE>/page-defs/<slug>-combined.json" `
-  --design-system="DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json"
+# 6. Crear page-defs + sections (ver §4)
+
+# 7. Combinar y desplegar
+
+```powershell
+.\workspace\deploy.ps1 -Slug inicio -Title "Inicio"
 ```
 
 ---
 
-## 7. Global Colors (gcids)
+## 8. Global Colors (gcids)
 
 Los gcids se sincronizan automáticamente al ejecutar `wp brand sync`. No es necesario un paso aparte.
 
@@ -390,34 +695,34 @@ Para verificar estado:
 
 | Acción | Comando |
 |--------|---------|
-| Verificar | `.\wp.bat agentic global_colors status --design-system="DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json"` |
+| Verificar | `.\wp.bat agentic global_colors status --design-system="site/<DAW_SITE>/design-system/divitheme.json"` |
 | Listar | `.\wp.bat agentic global_colors list` |
 
 Si no hay gcids sincronizados, `deploy_page` emite warning y resuelve a hex.
 
 ---
 
-## 8. Reglas DAW
+## 9. Reglas DAW
 
 1. No editar `divitheme.json` a mano — se genera desde `_design_vars.json`. Editar `_design_vars.json` y re-sincronizar.
 2. No usar `divi/code` como comodín — consultar `blocks-dictionary.md` primero.
 3. No usar `et_pb_*` (shortcodes Divi 4) — solo namespace `divi/*`.
 4. Colores siempre como `{{design:color:*}}`, nunca hex hardcodeados en schemas.
-5. **Deploy directo.** Usar `wp agentic deploy_page`, no `build_page.php`.
+5. **Deploy via wrapper scripts.** Usar `.\workspace\deploy.ps1` para páginas (§4.5) o `.\workspace\deploy-template.ps1` para templates (§5.5). No usar `build_page.php` ni comandos sueltos.
 6. **CSS vía Divi Customizer.** El brand se sincroniza a `et_divi` opciones; Divi genera el CSS automáticamente. No hay CSS propio de marca.
 7. **Brand sync único.** `wp brand sync` lee `_design_vars.json` y escribe a `wp_options['et_divi']`. No hay otro paso.
 8. **Frontera site/:** Todo dato de proyecto va en `site/<DAW_SITE>/`. El framework no contiene datos de proyecto.
-9. **Pipeline de página:** `page-defs/<slug>.json` (manifiesto) → `workspace/combine.py` → `wp agentic deploy_page` → página en WP.
+9. **Pipeline de página:** `site/<DAW_SITE>/page-defs/<slug>/manifest.json` → `workspace/combine.py` → `wp agentic deploy_page` → página en WP.
 10. **Layout Engine refactorizado:** Renderers modulares en `inc/core/renderers/`.
 11. **VIE (Visual Impact Engine):** Alternativa automática: `brief → vie/cli.py → plans/ → deploy_page`.
 12. **DIE (ML):** Archivado en `_archive/die_pipeline/`. No usar para páginas nuevas.
 13. **Sin fallbacks silenciosos:** Si `DAW_SITE` no está definido, el pipeline falla inmediatamente.
 14. **CSS de sección autocontenido:** Cada sección lleva su propio CSS inline (freeForm en el atributo `css`). CSS global de página va en el Custom CSS de la página vía WordPress.
-15. **⚠️ Sin `<` en freeForm CSS:** `wp_strip_all_tags()` trunca el CSS al encontrar `<`. Almacenar CSS en `sections/css/<module>.css` (lo inyecta `combine.py`).
+15. **⚠️ Sin `<` en freeForm CSS:** `wp_strip_all_tags()` trunca el CSS al encontrar `<`. Almacenar CSS en `css/<module>.css` (mismo nivel que `sections/`, lo inyecta `combine.py`).
 
 ---
 
-## 9. Arquitectura en Capas
+## 10. Arquitectura en Capas
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
@@ -448,7 +753,7 @@ Si no hay gcids sincronizados, `deploy_page` emite warning y resuelve a hex.
 
 ---
 
-## 10. Referencias
+## 11. Referencias
 
 | Recurso | Path | Propósito |
 |---------|------|-----------|
@@ -456,7 +761,9 @@ Si no hay gcids sincronizados, `deploy_page` emite warning y resuelve a hex.
 | Diccionario de bloques | `daw-skill/references/blocks-dictionary.md` | Guía de 102 módulos Divi 5 |
 | Lógica del Ingeniero | `daw-skill/references/engineer.md` | Comandos CLI, deploy, verificación |
 | Lógica del Diseñador | `daw-skill/references/designer.md` | Mapeo semántico → bloques, tokens, presets |
-| Brand Commands | `wp brand {init,sync,reset,status}` | Gestión completa del sistema de diseño |
+| Brand Commands | `wp brand {init,sync,reset,status,validate}` | Gestión completa del sistema de diseño |
+| Skill Selection | `references/skill-selection.md` | Qué skill cargar según tipo de proyecto |
+| Design Validator | `inc/core/class-design-validator.php` | 54+ checks: contraste WCAG AAA, escala, armonía deltaE, pairing tipográfico |
 | Layout Engine | `divi-agentic-core/inc/core/class-layout-engine.php` | Dispatcher con renderers modulares |
 | Renderers | `divi-agentic-core/inc/core/renderers/*.php` | 13 renderers (structural, text, button, media, form, content, container, dynamic, woo, generic, dgpc, dac) |
 | Refactor Plan | `divi-agentic-core/inc/core/REFACTOR-PLAN.md` | Plan de migración del monolito a renderers |

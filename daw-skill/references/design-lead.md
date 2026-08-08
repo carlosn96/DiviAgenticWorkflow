@@ -355,3 +355,31 @@ RESTRICCIONES PARA EL DISEÑADOR:
   - No catálogo como fuente de estructura (solo proporciones si se consulta).
   - No et_pb_*.
 ```
+
+---
+
+## 7. Design Quality Gate (Brand Level)
+
+Las 6 Leyes validan **página** (layout, alternancia, hover, anclas). El brand level (colores, fuentes, escalas, radios) se valida automáticamente vía `Design_Validator` antes de `wp brand sync`:
+
+| Check | Regla |
+|-------|-------|
+| Contraste WCAG AAA | Body text ≥ 7:1, large text ≥ 4.5:1 |
+| Heading scale | Progresión armónica ratio ~1.25 |
+| Spacing scale | Progresión armónica ratio ~1.5 |
+| Radius scale | Progresión armónica ratio ~2.0 |
+| Font pairing | Dos fuentes de misma categoría = fail |
+| Valores requeridos | Presentes y con formato válido |
+
+```powershell
+# Verificar antes de sincronizar
+wp brand validate <slug>
+
+# Sync respeta el gate — falla si validate no pasa
+wp brand sync <slug>
+
+# Bypass explícito
+wp brand sync <slug> --force
+```
+
+El Design Lead no necesita correr esto manualmente. `Brand_Sync_Handler` lo ejecuta automáticamente. Si falla, el sync se aborta con instrucciones.

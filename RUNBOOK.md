@@ -52,6 +52,9 @@ python DiviAgenticWorkflow/workspace/combine.py `
 ## Notas
 
 - `wp brand` es el ÚNICO comando que existe para el usuario.
+- `wp brand validate` corre 20 checks de diseño (contraste WCAG AAA, escalas, pairing). `sync` lo exige.
+- `wp brand sync --force` bypassa validación (visible warning en output).
+- Si no sabes qué skill cargar para editar `_design_vars.json`, consulta `references/skill-selection.md`.
 - Los scripts en `bin/` (`brand-sync.php`, `brand-reset.php`, `brand.php`) son LEGACY. No se usan. El plugin registra el comando `wp brand` directamente.
 - Los skills de dirección visual (hallmark, impeccable, high-end-visual-design) deben cargarse ANTES de editar `_design_vars.json`.
 - Token_Registry, Design_Resolver, Customizer_Engine son internos. No hay que pensarlos.
