@@ -4,10 +4,11 @@ namespace DAC\Core;
 
 use WP_CLI;
 use DAC\Core\Token_Registry;
+use DAC\Core\Design_Validator;
 
 class Brand_Sync_Handler {
 
-    public static function run(?string $site = null): void {
+    public static function run(?string $site = null, bool $force = false): void {
         $vars_path = null;
 
         if ($site) {
@@ -26,6 +27,53 @@ class Brand_Sync_Handler {
         }
 
         self::validate_vars($vars);
+
+        // ── Design quality gate ──
+        //   Cache válido  : .design-pass existe, vars_hash coincide, gate=ok → salta
+        //   Cache vencido : .design-pass no existe, hash cambió, o gate previo=fail → re-valida
+        if (!$force) {
+            $vars_dir    = dirname($vars_path);
+            $design_pass = $vars_dir . '/.design-pass';
+            $current_hash = md5_file($vars_path);
+
+            if (!file_exists($design_pass)) {
+                WP_CLI::warning('╔══════════════════════════════════════════════════╗');
+                WP_CLI::warning('║  DISEÑO NO APROBADO                            ║');
+                WP_CLI::warning('╠══════════════════════════════════════════════════╣');
+                WP_CLI::warning('║  Ejecuta: wp brand approve <slug>              ║');
+                WP_CLI::warning('║       o: wp brand approve <slug> --skill=<skill>║');
+                WP_CLI::warning('╚══════════════════════════════════════════════════╝');
+                WP_CLI::error('Sync aborted: diseño no aprobado.');
+            }
+
+            $pass_data = json_decode(file_get_contents($design_pass), true);
+            $skill_label = $pass_data['skill'] ?? 'mecánico';
+            $stale = ($pass_data['vars_hash'] ?? null) !== $current_hash;
+
+            if ($pass_data['gate'] && !$stale) {
+                WP_CLI::success("Quality gate: aprobado por {$skill_label} el {$pass_data['approved_at']}");
+            } else {
+                if ($stale) {
+                    WP_CLI::warning("_design_vars.json cambió desde la última aprobación ({$skill_label}). Re-validando...");
+                }
+                $validation = Design_Validator::run($vars);
+                if (!$validation['summary']['gate']) {
+                    WP_CLI::warning('╔══════════════════════════════════════════════════╗');
+                    WP_CLI::warning('║ Design validation FAILED                       ║');
+                    WP_CLI::warning('╠══════════════════════════════════════════════════╣');
+                    WP_CLI::warning('║ Corrige los errores primero o usa --force      ║');
+                    WP_CLI::warning('╚══════════════════════════════════════════════════╝');
+                    WP_CLI::log('');
+                    WP_CLI::log("  Fail: {$validation['summary']['fail']}  Warn: {$validation['summary']['warn']}");
+                    WP_CLI::log('');
+                    WP_CLI::log('  Ejecuta: wp brand validate ' . ($site ?: ''));
+                    WP_CLI::error('Sync aborted.');
+                }
+                WP_CLI::success("Quality gate: pasado (re-validado) — {$skill_label}");
+            }
+        } else {
+            WP_CLI::warning('⚠ Bypass de validación de diseño — usar solo si sabes lo que haces.');
+        }
 
         $brand_name = $vars['brand_name'] ?? basename(dirname(dirname($vars_path)));
         WP_CLI::log('── Syncing brand: ' . $brand_name . ' ──');
@@ -258,7 +306,8 @@ class Brand_Sync_Handler {
             if ($value === '') continue;
             $family = explode(',', $value)[0];
             $family = trim($family, "'\" ");
-            $gvids['fonts']['gvid-font-' . str_replace('_', '-', $source_key)] = [
+            $gvid_name = 'gvid-' . str_replace('_', '-', $source_key);
+            $gvids['fonts'][$gvid_name] = [
                 'label'  => 'Font ' . ucfirst(str_replace('_', ' ', $source_key)),
                 'value'  => $family,
                 'order'  => $order++,
