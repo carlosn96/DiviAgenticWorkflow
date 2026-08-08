@@ -24,21 +24,7 @@ class Brand_Reset_Handler {
         WP_CLI::success('gcids, gvids y hash de sync eliminados.');
 
         WP_CLI::log('');
-        WP_CLI::log('3. Opciones residuales _et_builder_* / et_divi_builder_*...');
-        global $wpdb;
-        $residual = $wpdb->get_col("
-            SELECT option_name FROM {$wpdb->options}
-            WHERE option_name LIKE '_et\\_builder\\_%'
-               OR option_name LIKE 'et_divi\\_builder\\_%'
-        ");
-        foreach ($residual as $name) {
-            delete_option($name);
-            WP_CLI::log("   eliminada: {$name}");
-        }
-        WP_CLI::success(count($residual) . ' opciones residuales eliminadas.');
-
-        WP_CLI::log('');
-        WP_CLI::log('4. Restaurando divitheme.json...');
+        WP_CLI::log('3. Restaurando divitheme.json...');
         if ($site) {
             $divitheme_path = dirname(DIVI_AGENTIC_CORE_DIR) . '/site/' . $site . '/design-system/divitheme.json';
             if (file_exists($divitheme_path)) {
@@ -54,18 +40,17 @@ class Brand_Reset_Handler {
         }
 
         WP_CLI::log('');
-        WP_CLI::log('5. Limpiando cachés...');
+        WP_CLI::log('4. Limpiando caché de CSS Divi...');
         $upload_dir = wp_get_upload_dir();
         $et_cache = $upload_dir['basedir'] . '/et-cache';
+        $count = 0;
         if (is_dir($et_cache)) {
-            $count = 0;
             $iterator = new \RecursiveIteratorIterator(
                 new \RecursiveDirectoryIterator($et_cache, \RecursiveDirectoryIterator::SKIP_DOTS),
                 \RecursiveIteratorIterator::CHILD_FIRST
             );
             foreach ($iterator as $f) {
                 if ($f->isFile()) { unlink($f->getRealPath()); $count++; }
-                if ($f->isDir())  { rmdir($f->getRealPath()); }
             }
             WP_CLI::log("   et-cache: {$count} archivos eliminados");
         } else {
@@ -73,11 +58,11 @@ class Brand_Reset_Handler {
         }
 
         delete_option('et_core_page_resource_auto_clear');
-        wp_cache_flush();
+        update_option('et_core_page_resource_auto_clear', time());
         if (function_exists('et_core_clear_wp_cache')) {
             et_core_clear_wp_cache();
         }
-        WP_CLI::success('Cachés limpiadas.');
+        WP_CLI::success('Cachés de CSS limpiadas y marcadas para regeneración.');
 
         WP_CLI::log('');
         WP_CLI::log(str_repeat('─', 50));
