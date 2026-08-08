@@ -26,6 +26,7 @@ class Token_Registry {
             'brand_name' => [
                 'type'     => 'string',
                 'required' => true,
+                'default'  => 'Mi Marca',
                 'et_divi'  => [],
             ],
             'brand_description' => [
@@ -39,6 +40,11 @@ class Token_Registry {
             'color_accent' => [
                 'type'     => 'color',
                 'required' => true,
+                'validate' => [
+                    'contrast_against' => ['color_surface_light', 'color_surface_white', 'color_surface_deep'],
+                    'contrast_min'     => 4.5,
+                    'harmony_group'    => 'primary',
+                ],
                 'et_divi'  => [
                     'accent_color', 'link_color',
                     'menu_link_active', 'fixed_menu_link_active',
@@ -55,6 +61,11 @@ class Token_Registry {
                 'type'     => 'color',
                 'required' => false,
                 'default'  => null,
+                'validate' => [
+                    'contrast_against' => ['color_surface_light', 'color_surface_white'],
+                    'contrast_min'     => 4.5,
+                    'harmony_group'    => 'primary',
+                ],
                 'et_divi'  => ['all_buttons_bg_color_hover'],
             ],
             'color_ink' => [
@@ -72,6 +83,11 @@ class Token_Registry {
             'color_surface_deep' => [
                 'type'     => 'color',
                 'required' => true,
+                'validate' => [
+                    'contrast_against' => ['color_text_on_dark'],
+                    'contrast_min'     => 7.0,
+                    'harmony_group'    => 'surface',
+                ],
                 'et_divi'  => [
                     'primary_nav_bg', 'fixed_primary_nav_bg',
                     'mobile_primary_nav_bg',
@@ -82,34 +98,58 @@ class Token_Registry {
                 'type'     => 'color',
                 'required' => false,
                 'default'  => null,
+                'validate' => [
+                    'harmony_group' => 'surface',
+                ],
                 'et_divi'  => ['primary_nav_dropdown_bg', 'secondary_nav_dropdown_bg'],
             ],
             'color_surface_light' => [
                 'type'     => 'color',
                 'required' => false,
                 'default'  => null,
+                'validate' => [
+                    'harmony_group' => 'surface',
+                ],
                 'et_divi'  => [],
             ],
             'color_surface_white' => [
                 'type'     => 'color',
                 'required' => false,
                 'default'  => '#ffffff',
+                'validate' => [
+                    'harmony_group' => 'surface',
+                ],
                 'et_divi'  => [],
             ],
             'color_text_primary' => [
                 'type'     => 'color',
                 'required' => true,
+                'validate' => [
+                    'contrast_against' => ['color_surface_light', 'color_surface_white'],
+                    'contrast_min'     => 7.0,
+                    'harmony_group'    => 'text',
+                ],
                 'et_divi'  => ['font_color', 'header_color', 'bottom_bar_text_color'],
             ],
             'color_text_secondary' => [
                 'type'     => 'color',
                 'required' => false,
                 'default'  => '#666666',
+                'validate' => [
+                    'contrast_against' => ['color_surface_light', 'color_surface_white'],
+                    'contrast_min'     => 7.0,
+                    'harmony_group'    => 'text',
+                ],
                 'et_divi'  => [],
             ],
             'color_text_on_dark' => [
                 'type'     => 'color',
                 'required' => true,
+                'validate' => [
+                    'contrast_against' => ['color_surface_deep'],
+                    'contrast_min'     => 7.0,
+                    'harmony_group'    => 'text',
+                ],
                 'et_divi'  => [
                     'menu_link', 'fixed_menu_link',
                     'secondary_nav_text_color_new', 'secondary_nav_dropdown_link_color',
@@ -123,12 +163,22 @@ class Token_Registry {
                 'type'     => 'color',
                 'required' => false,
                 'default'  => '#28a745',
+                'validate' => [
+                    'contrast_against' => ['color_surface_light', 'color_surface_white'],
+                    'contrast_min'     => 4.5,
+                    'harmony_group'    => 'functional',
+                ],
                 'et_divi'  => [],
             ],
             'color_error' => [
                 'type'     => 'color',
                 'required' => false,
                 'default'  => '#dc3545',
+                'validate' => [
+                    'contrast_against' => ['color_surface_light', 'color_surface_white'],
+                    'contrast_min'     => 4.5,
+                    'harmony_group'    => 'functional',
+                ],
                 'et_divi'  => [],
             ],
 
@@ -136,12 +186,18 @@ class Token_Registry {
             'font_display' => [
                 'type'     => 'font-family',
                 'required' => true,
+                'validate' => [
+                    'pairing_group' => 'display',
+                ],
                 'et_divi'  => ['heading_font'],
                 'gvid'     => 'fonts',
             ],
             'font_body' => [
                 'type'     => 'font-family',
                 'required' => true,
+                'validate' => [
+                    'pairing_group' => 'sans',
+                ],
                 'et_divi'  => ['body_font', 'primary_nav_font', 'secondary_nav_font', 'slide_nav_font', 'all_buttons_font'],
                 'gvid'     => 'fonts',
             ],
@@ -149,6 +205,9 @@ class Token_Registry {
                 'type'     => 'font-family',
                 'required' => false,
                 'default'  => null,
+                'validate' => [
+                    'pairing_group' => 'sans',
+                ],
                 'et_divi'  => [],
                 'gvid'     => 'fonts',
             ],
@@ -160,28 +219,28 @@ class Token_Registry {
             'font_heading_weight' => ['type' => 'number', 'et_divi' => ['heading_font_weight']],
 
             // ── Heading sizes h1-h6 → et_divi (no gvid) ──
-            'font_heading_size_h1' => ['type' => 'size', 'default' => '48px', 'et_divi' => ['heading_font_size_h1']],
-            'font_heading_size_h2' => ['type' => 'size', 'default' => '36px', 'et_divi' => ['heading_font_size_h2']],
-            'font_heading_size_h3' => ['type' => 'size', 'default' => '28px', 'et_divi' => ['heading_font_size_h3']],
-            'font_heading_size_h4' => ['type' => 'size', 'default' => '24px', 'et_divi' => ['heading_font_size_h4']],
-            'font_heading_size_h5' => ['type' => 'size', 'default' => '20px', 'et_divi' => ['heading_font_size_h5']],
-            'font_heading_size_h6' => ['type' => 'size', 'default' => '18px', 'et_divi' => ['heading_font_size_h6']],
+            'font_heading_size_h1' => ['type' => 'size', 'default' => '48px', 'validate' => ['scale_group' => 'heading', 'order' => 1], 'et_divi' => ['heading_font_size_h1']],
+            'font_heading_size_h2' => ['type' => 'size', 'default' => '36px', 'validate' => ['scale_group' => 'heading', 'order' => 2], 'et_divi' => ['heading_font_size_h2']],
+            'font_heading_size_h3' => ['type' => 'size', 'default' => '28px', 'validate' => ['scale_group' => 'heading', 'order' => 3], 'et_divi' => ['heading_font_size_h3']],
+            'font_heading_size_h4' => ['type' => 'size', 'default' => '24px', 'validate' => ['scale_group' => 'heading', 'order' => 4], 'et_divi' => ['heading_font_size_h4']],
+            'font_heading_size_h5' => ['type' => 'size', 'default' => '20px', 'validate' => ['scale_group' => 'heading', 'order' => 5], 'et_divi' => ['heading_font_size_h5']],
+            'font_heading_size_h6' => ['type' => 'size', 'default' => '18px', 'validate' => ['scale_group' => 'heading', 'order' => 6], 'et_divi' => ['heading_font_size_h6']],
 
             // ── Radii → gvids numbers ──
-            'radius_sm'   => ['type' => 'size', 'default' => '4px',   'et_divi' => [], 'gvid' => 'numbers'],
-            'radius_md'   => ['type' => 'size', 'default' => '8px',   'et_divi' => [], 'gvid' => 'numbers'],
-            'radius_lg'   => ['type' => 'size', 'default' => '16px',  'et_divi' => [], 'gvid' => 'numbers'],
-            'radius_xl'   => ['type' => 'size', 'default' => '24px',  'et_divi' => [], 'gvid' => 'numbers'],
-            'radius_full' => ['type' => 'size', 'default' => '9999px','et_divi' => [], 'gvid' => 'numbers'],
+            'radius_sm'   => ['type' => 'size', 'default' => '4px',   'validate' => ['scale_group' => 'radius', 'order' => 1], 'et_divi' => [], 'gvid' => 'numbers'],
+            'radius_md'   => ['type' => 'size', 'default' => '8px',   'validate' => ['scale_group' => 'radius', 'order' => 2], 'et_divi' => [], 'gvid' => 'numbers'],
+            'radius_lg'   => ['type' => 'size', 'default' => '16px',  'validate' => ['scale_group' => 'radius', 'order' => 3], 'et_divi' => [], 'gvid' => 'numbers'],
+            'radius_xl'   => ['type' => 'size', 'default' => '24px',  'validate' => ['scale_group' => 'radius', 'order' => 4], 'et_divi' => [], 'gvid' => 'numbers'],
+            'radius_full' => ['type' => 'size', 'default' => '9999px','validate' => ['scale_group' => 'radius', 'order' => 5], 'et_divi' => [], 'gvid' => 'numbers'],
 
             // ── Spaces → gvids numbers ──
-            'space_xs'  => ['type' => 'size', 'default' => '8px',   'et_divi' => [], 'gvid' => 'numbers'],
-            'space_sm'  => ['type' => 'size', 'default' => '12px',  'et_divi' => [], 'gvid' => 'numbers'],
-            'space_md'  => ['type' => 'size', 'default' => '16px',  'et_divi' => [], 'gvid' => 'numbers'],
-            'space_lg'  => ['type' => 'size', 'default' => '24px',  'et_divi' => [], 'gvid' => 'numbers'],
-            'space_xl'  => ['type' => 'size', 'default' => '32px',  'et_divi' => [], 'gvid' => 'numbers'],
-            'space_2xl' => ['type' => 'size', 'default' => '64px',  'et_divi' => [], 'gvid' => 'numbers'],
-            'space_3xl' => ['type' => 'size', 'default' => '128px', 'et_divi' => [], 'gvid' => 'numbers'],
+            'space_xs'  => ['type' => 'size', 'default' => '8px',   'validate' => ['scale_group' => 'space', 'order' => 1], 'et_divi' => [], 'gvid' => 'numbers'],
+            'space_sm'  => ['type' => 'size', 'default' => '12px',  'validate' => ['scale_group' => 'space', 'order' => 2], 'et_divi' => [], 'gvid' => 'numbers'],
+            'space_md'  => ['type' => 'size', 'default' => '16px',  'validate' => ['scale_group' => 'space', 'order' => 3], 'et_divi' => [], 'gvid' => 'numbers'],
+            'space_lg'  => ['type' => 'size', 'default' => '24px',  'validate' => ['scale_group' => 'space', 'order' => 4], 'et_divi' => [], 'gvid' => 'numbers'],
+            'space_xl'  => ['type' => 'size', 'default' => '32px',  'validate' => ['scale_group' => 'space', 'order' => 5], 'et_divi' => [], 'gvid' => 'numbers'],
+            'space_2xl' => ['type' => 'size', 'default' => '64px',  'validate' => ['scale_group' => 'space', 'order' => 6], 'et_divi' => [], 'gvid' => 'numbers'],
+            'space_3xl' => ['type' => 'size', 'default' => '128px', 'validate' => ['scale_group' => 'space', 'order' => 7], 'et_divi' => [], 'gvid' => 'numbers'],
 
             // ── Shadows → gvids numbers ──
             'shadow_sm' => ['type' => 'string', 'default' => '0 1px 2px rgba(0,0,0,0.1)',  'et_divi' => [], 'gvid' => 'numbers'],
@@ -204,14 +263,14 @@ class Token_Registry {
             'button_border_width'   => ['type' => 'size',   'default' => '0',      'et_divi' => ['all_buttons_border_width']],
             'button_font_size'      => ['type' => 'size',   'default' => '16px',   'et_divi' => ['all_buttons_font_size']],
             'button_font_style'     => ['type' => 'string', 'default' => '',       'et_divi' => ['all_buttons_font_style']],
-            'button_text_color'     => ['type' => 'color',  'default' => '#ffffff', 'et_divi' => ['all_buttons_text_color']],
-            'button_text_color_hover' => ['type' => 'color','default' => '#ffffff', 'et_divi' => ['all_buttons_text_color_hover']],
+            'button_text_color'        => ['type' => 'color', 'default' => '#ffffff', 'validate' => ['contrast_against' => ['color_accent', 'color_accent_hover'], 'contrast_min' => 4.5], 'et_divi' => ['all_buttons_text_color']],
+            'button_text_color_hover'  => ['type' => 'color', 'default' => '#ffffff', 'validate' => ['contrast_against' => ['color_accent_hover', 'color_accent'], 'contrast_min' => 4.5], 'et_divi' => ['all_buttons_text_color_hover']],
             'button_border_color'   => ['type' => 'color',  'default' => null,     'et_divi' => ['all_buttons_border_color']],
 
             // ── Layout → et_divi ──
-            'layout_content_width' => ['type' => 'size',   'default' => '1200px', 'et_divi' => ['content_width']],
+            'layout_content_width' => ['type' => 'size',   'default' => '1200px', 'et_divi' => []],
             'layout_fixed_nav'     => ['type' => 'on_off', 'default' => 'on',     'et_divi' => ['divi_fixed_nav']],
-            'layout_sidebar'       => ['type' => 'on_off', 'default' => 'no',     'et_divi' => ['divi_sidebar']],
+            'layout_sidebar'       => ['type' => 'on_off', 'default' => 'no',     'et_divi' => []],
 
             // ── Performance → et_divi ──
             'perf_dynamic_framework' => ['type' => 'on_off', 'default' => 'on', 'et_divi' => ['divi_dynamic_module_framework']],
@@ -409,6 +468,21 @@ class Token_Registry {
             $inverse[$slug] = $short;
         }
         return $inverse;
+    }
+
+    /**
+     * Returns validation rules: key → validate metadata.
+     * Usado por Design_Validator para checks de contraste, escala y pairing.
+     */
+    public static function get_validation_rules(): array {
+        self::init();
+        $rules = [];
+        foreach (self::$tokens as $key => $def) {
+            if (!empty($def['validate'])) {
+                $rules[$key] = $def['validate'];
+            }
+        }
+        return $rules;
     }
 
     /**
