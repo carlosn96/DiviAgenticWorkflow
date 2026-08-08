@@ -204,14 +204,27 @@ class Divi_ContentModule_Renderer extends Divi_Base_Renderer {
 	 */
 	private function render_toggle( array $data, array &$attrs ): void {
 		$this->set_text_attrs( $data, $attrs, [ 'title', 'content' ] );
+
+		// Copy title.decoration from raw data if present (native block format)
+		if ( isset( $data['title']['decoration'] ) ) {
+			$attrs['title']['decoration'] = $data['title']['decoration'];
+		}
+
 		if ( isset( $data['headingFont'] ) && is_array( $data['headingFont'] ) ) {
 			$attrs['title']['decoration']['font']['font'] = $data['headingFont'];
 			unset( $attrs['module']['headingFont'] );
 		}
+
+		// Copy content.decoration from raw data if present (native block format)
+		if ( isset( $data['content']['decoration'] ) ) {
+			$attrs['content']['decoration'] = $data['content']['decoration'];
+		}
+
 		if ( isset( $data['bodyFont'] ) ) {
 			$attrs['content']['decoration']['bodyFont'] = $data['bodyFont'];
 			unset( $attrs['module']['bodyFont'] );
 		}
+
 		foreach ( [ 'openToggle', 'closedToggle', 'openToggleIcon', 'closedToggleIcon' ] as $tk ) {
 			if ( isset( $data[ $tk ] ) ) {
 				$attrs[ $tk ] = $data[ $tk ];
