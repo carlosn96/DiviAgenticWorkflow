@@ -13,12 +13,49 @@ require_once __DIR__ . '/interface-block-renderer.php';
 require_once __DIR__ . '/trait-block-helpers.php';
 
 /**
+ * ARCHIVO DE REFERENCIA PARA ATRIBUTOS DE FUENTE DGPC
+ *
+ * El plugin DGPC (DiviGear Product Carousel) tiene una tabla de conversion
+ * oficial en:
+ *   wp-content/plugins/dg-product-carousel/Builder/Server/modules-json/
+ *     product-carousel/conversion-outline.json
+ *
+ * Esa tabla mapea las claves de fuente de Divi 4 a las rutas de atributos
+ * de Divi 5. El mapa canonico es:
+ *
+ *   D4 font key   → Ruta D5
+ *   ────────────     ─────────────
+ *   title (schema key)       → title_text.decoration.font
+ *   price (schema key)       → price_text.decoration.font
+ *   description (schema key) → description_text.decoration.font
+ *   sale (schema key)        → sale_text.decoration.font
+ *   cart (schema key)        → cart_button.decoration.font
+ *
+ * FORMATO DE DATOS DE FUENTE EN D5:
+ *   La ruta D5 (e.g. cart_button.decoration.font) debe contener un objeto
+ *   fuente en el formato canonico de Divi 5 (single-nested font):
+ *     { font: { desktop: { value: { fontFamily, color, size, textAlign, ... } } } }
+ *   normalize_dgpc_font() acepta tanto este formato como el legacy
+ *   double-nested {font:{font:{desktop:{value:{...}}}}} y siempre
+ *   retorna single-nested.
+ *   El contenedor exterior { decoration: { font: ... } } lo agrega este
+ *   renderer en el bucle font_map mas abajo.
+ *
+ * ERROR CORREGIDO (2026-07-28):
+ *   Antes este bucle almacenaba los datos de fuente directamente como
+ *   atributos top-level (e.g. attrs['cart'] = { font: { font: ... } }),
+ *   SIN el wrapper decoration.font y SIN renombrar cart → cart_button.
+ *   Divi 5 no aplicaba los estilos porque los datos quedaban en la ruta
+ *   incorrecta. Ahora se usa font_map + wrapper decoration.font.
+ */
+
+/**
  * Class Dgpc_Renderer
  */
 class Dgpc_Renderer implements Block_Renderer_Interface {
 	use Block_Helpers;
 
-	/** @var string Divi builder version injected from dispatcher. */
+	/** @var string|null Divi builder version injected from dispatcher. */
 	private ?string $builder_version = null;
 
 	/**
@@ -51,8 +88,12 @@ class Dgpc_Renderer implements Block_Renderer_Interface {
 	}
 
 	/**
-	 * Convert a font schema (VIE style) into the flat font.font structure
-	 * expected by the dgpc/product-carousel block.
+	 * Normalize font data to Divi 5 canonical format.
+	 *
+	 * Divi 5 font groups store values as {font:{desktop:{value:{...}}}}.
+	 * This function accepts either that canonical form or the legacy
+	 * double-nested {font:{font:{desktop:{value:{...}}}}} and always
+	 * returns the single-nested D5 form.
 	 *
 	 * @param mixed $font_data Raw font data from schema.
 	 * @return array|null Normalized font data or null.
@@ -62,19 +103,16 @@ class Dgpc_Renderer implements Block_Renderer_Interface {
 			return null;
 		}
 
-		// Already in the expected shape?
-		if ( isset( $font_data['font']['font']['desktop']['value'] ) ) {
+		// D5 canonical: {font:{desktop:{value:{...}}}}
+		if ( isset( $font_data['font']['desktop']['value'] ) ) {
 			return $font_data;
 		}
 
-		// VIE shorthand: { "font": { "desktop": { "value": { ... } } } }
-		if ( isset( $font_data['font']['desktop']['value'] ) ) {
+		// Legacy double-nested: {font:{font:{desktop:{value:{...}}}}}
+		// Unwrap to remove the extra font layer.
+		if ( isset( $font_data['font']['font']['desktop']['value'] ) ) {
 			return [
-				'font' => [
-					'font' => [
-						'desktop' => $font_data['font']['desktop'],
-					],
-				],
+				'font' => $font_data['font']['font'],
 			];
 		}
 
@@ -195,15 +233,28 @@ class Dgpc_Renderer implements Block_Renderer_Interface {
 			}
 		}
 
-		// Typography sub-fields are stored as top-level font attrs
-		// (title_text, price_text, description, sale, cart).
-		$font_keys = [ 'title_text', 'price_text', 'description', 'sale', 'cart' ];
-		foreach ( $font_keys as $key ) {
-			if ( ! isset( $data[ $key ] ) ) {
+		// Typography sub-fields — map D4 font keys (from schema) to D5 attr paths
+		// conversion-outline.json: {title→title_text, price→price_text, description→description_text, sale→sale_text, cart→cart_button}
+		// D5 expects {key: {decoration: {font: {font: {desktop: {value: ...}}}}}}
+		// Output at attr[key] = {key: {decoration: {font: $normalized}}}
+		// where $normalized is always {font:{desktop:{value:{...}}}}
+		$font_map = [
+			'title'       => 'title_text',
+			'price'       => 'price_text',
+			'description' => 'description_text',
+			'sale'        => 'sale_text',
+			'cart'        => 'cart_button',
+		];
+		foreach ( $font_map as $d4_key => $d5_key ) {
+			if ( ! isset( $data[ $d4_key ] ) ) {
 				continue;
 			}
-			$normalized = $this->normalize_dgpc_font( $data[ $key ] );
-			$attrs[ $key ] = $normalized ?? $data[ $key ];
+			$normalized = $this->normalize_dgpc_font( $data[ $d4_key ] );
+			if ( $normalized !== null ) {
+				$attrs[ $d5_key ] = [ 'decoration' => [ 'font' => $normalized ] ];
+			} else {
+				$attrs[ $d5_key ] = $data[ $d4_key ];
+			}
 		}
 
 		return $attrs;
