@@ -19,8 +19,9 @@ class Design_Resolver {
 
     private array $design;
     private array $flat_tokens = [];
+    private ?array $brand_vars = null;
 
-    public function __construct( string $design_system_path ) {
+    public function __construct( string $design_system_path, ?string $brand_vars_path = null ) {
         if ( ! file_exists( $design_system_path ) ) {
             \WP_CLI::error( "Design system file not found: {$design_system_path}" );
         }
@@ -34,6 +35,15 @@ class Design_Resolver {
         }
 
         $this->design = $decoded;
+
+        if ( $brand_vars_path && file_exists( $brand_vars_path ) ) {
+            $brand_raw = file_get_contents( $brand_vars_path );
+            $brand_decoded = json_decode( $brand_raw, true );
+            if ( json_last_error() === JSON_ERROR_NONE && is_array( $brand_decoded ) ) {
+                $this->brand_vars = $brand_decoded;
+            }
+        }
+
         $this->flatten_tokens();
     }
 
@@ -85,36 +95,32 @@ class Design_Resolver {
     }
 
     private function flatten_from_global_variables(): void {
-        if ( ! class_exists( '\ET\Builder\Packages\GlobalData\GlobalData' ) ) return;
-
-        $global_vars = \ET\Builder\Packages\GlobalData\GlobalData::get_global_variables();
-
-        // Fallback: si gvids no existen (brand-sync no se ha corrido),
-        // usar defaults de Token_Registry
-        if ( empty( $global_vars ) ) {
-            $this->flatten_gvid_defaults_from_registry();
-            return;
-        }
-
-        // Build regex dinamically from Token_Registry
-        $prefixes = Token_Registry::get_gvid_prefixes();
-        if ( empty( $prefixes ) ) return;
-        $gvid_pattern = '/^gvid-(' . implode( '|', $prefixes ) . ')-(.+)$/';
-
-        foreach ( $global_vars as $gvid_type => $items ) {
-            if ( ! is_array( $items ) ) continue;
-            foreach ( $items as $gvid => $item ) {
-                $value = $item['value'] ?? '';
-                if ( $value === '' ) continue;
-
-                if ( preg_match( $gvid_pattern, $gvid, $m ) ) {
-                    $group = $m[1];
-                    $key   = $m[2];
-                    $token = "{{design:{$group}:{$key}}}";
-                    $this->flat_tokens[ $token ] = $value;
+        // Try gvids from GlobalData (numbers, fonts, etc.)
+        if ( class_exists( '\ET\Builder\Packages\GlobalData\GlobalData' ) ) {
+            $global_vars = \ET\Builder\Packages\GlobalData\GlobalData::get_global_variables();
+            if ( ! empty( $global_vars ) && ! empty( array_filter( $global_vars ) ) ) {
+                $prefixes = Token_Registry::get_gvid_prefixes();
+                if ( ! empty( $prefixes ) ) {
+                    $gvid_pattern = '/^gvid-(' . implode( '|', $prefixes ) . ')-(.+)$/';
+                    foreach ( $global_vars as $gvid_type => $items ) {
+                        if ( ! is_array( $items ) ) continue;
+                        foreach ( $items as $gvid => $item ) {
+                            $value = $item['value'] ?? '';
+                            if ( $value === '' ) continue;
+                            if ( preg_match( $gvid_pattern, $gvid, $m ) ) {
+                                $group = $m[1];
+                                $key   = $m[2];
+                                $token = "{{design:{$group}:{$key}}}";
+                                $this->flat_tokens[ $token ] = $value;
+                            }
+                        }
+                    }
                 }
             }
         }
+
+        // Fallback: resolver tokens que no vinieron de gvids usando brand_vars
+        $this->flatten_gvid_defaults_from_registry();
     }
 
     /**
@@ -130,7 +136,7 @@ class Design_Resolver {
         // Numbers group: radius, space, shadow, easing, duration
         $numbers = $groups['numbers'] ?? [];
         foreach ( $numbers as $source_key => $def ) {
-            $value = $defaults[ $source_key ] ?? null;
+            $value = $this->brand_vars[ $source_key ] ?? $defaults[ $source_key ] ?? null;
             if ( empty( $value ) ) continue;
             $parts = explode( '_', $source_key );
             $type = $parts[0];
@@ -142,7 +148,7 @@ class Design_Resolver {
         // Fonts group
         $fonts = $groups['fonts'] ?? [];
         foreach ( $fonts as $source_key => $def ) {
-            $value = $defaults[ $source_key ] ?? null;
+            $value = $this->brand_vars[ $source_key ] ?? $defaults[ $source_key ] ?? null;
             if ( empty( $value ) ) continue;
             $family = explode( ',', $value )[0];
             $family = trim( $family, "'\" " );
