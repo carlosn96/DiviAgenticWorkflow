@@ -41,8 +41,11 @@ PLUGIN_REL = os.path.join(
 # Nombres no deseados dentro del zip (git, cache, basura).
 EXCLUDED_NAMES = {".git", "__pycache__", ".DS_Store", "Thumbs.db"}
 EXCLUDED_SUFFIXES = (".pyc", ".pyo", ".log", ".swp")
-# Archivos sueltos del repo que no deben viajar en el paquete.
-EXCLUDED_FILES = {".gitignore", ".gitattributes", ".editorconfig"}
+# Archivos sueltos del repo que no deben viajar en el paquete de producción.
+# README.md y AGENTS.md son documentación de desarrollo; WordPress no las usa
+# (el estándar del repo público es readme.txt, no README.md) y no forman parte
+# del plugin en producción.
+EXCLUDED_FILES = {".gitignore", ".gitattributes", ".editorconfig", "README.md", "AGENTS.md"}
 
 
 def plugin_root():
