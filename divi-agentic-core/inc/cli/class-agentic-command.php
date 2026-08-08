@@ -261,7 +261,12 @@ class Agentic_Command {
                 \WP_CLI::log( 'Global colors active — tokens resolve to var(--gcid-*)' );
             }
 
-            $resolver = new \DAC\Core\Design_Resolver( $assoc_args['design-system'] );
+            $brand_vars_path = preg_replace( '#design-system/divitheme\.json$#', 'brand/_design_vars.json', $assoc_args['design-system'] );
+            if ( ! file_exists( $brand_vars_path ) ) {
+                $brand_vars_path = null;
+            }
+
+            $resolver = new \DAC\Core\Design_Resolver( $assoc_args['design-system'], $brand_vars_path );
             $raw = $resolver->resolve_schema_string( $raw );
             \WP_CLI::log( "Design tokens resolved from: {$assoc_args['design-system']}" );
 
@@ -321,96 +326,816 @@ class Agentic_Command {
     }
 
     /**
-     * Deploys the Global Theme Builder Ecosystem.
+     * Creates a template. Fails if --use-on already exists.
      *
      * ## OPTIONS
      *
-     * --header=<path>
-     * : Path to the Header JSON.
+     * --use-on=<scope>
+     * : Template scope (_et_use_on). See the main command help for valid patterns.
      *
-     * --footer=<path>
-     * : Path to the Footer JSON.
+     * --title=<title>
+     * : Title for the template.
      *
-     * --body=<path>
-     * : Path to the Body JSON.
+     * ## EXAMPLES
+     *
+     *     wp agentic template_create --use-on="singular:post_type:page:all" --title="Pages"
+     *
+     * @when after_wp_load
+     */
+    public function template_create( $args, $assoc_args ) {
+        $use_on = $assoc_args['use-on'] ?? '';
+        $title  = $assoc_args['title'] ?? '';
+        if ( empty( $use_on ) || empty( $title ) ) {
+            \WP_CLI::error( "--use-on and --title are required." );
+        }
+        $this->validate_use_on( $use_on );
+
+        $existing = $this->find_templates_by_use_on( $use_on );
+        if ( ! empty( $existing ) ) {
+            $tid = $existing[0]->ID;
+            \WP_CLI::error( "Template for '{$use_on}' already exists (ID {$tid}). Check with: template_show {$tid}. To update: template_update {$tid} --title=\"{$title}\" or deploy_global_ecosystem --mode=update --template-id={$tid} ..." );
+        }
+
+        $id = $this->create_template( $use_on, $title );
+        \WP_CLI::success( "Template created: ID {$id}." );
+    }
+
+    /**
+     * Finds a template by --use-on. Returns 0 if not found.
+     *
+     * ## OPTIONS
+     *
+     * --use-on=<scope>
+     * : Template scope (_et_use_on).
+     *
+     * @when after_wp_load
+     */
+    public function template_find( $args, $assoc_args ) {
+        $use_on = $assoc_args['use-on'] ?? '';
+        if ( empty( $use_on ) ) {
+            \WP_CLI::error( "--use-on is required." );
+        }
+
+        $existing = $this->find_templates_by_use_on( $use_on );
+        if ( count( $existing ) > 1 ) {
+            $ids = array_map( fn( $p ) => $p->ID, $existing );
+            \WP_CLI::error( "Multiple templates for '{$use_on}': IDs " . implode( ', ', $ids ) );
+        }
+        if ( empty( $existing ) ) {
+            \WP_CLI::log( '0 (not found)' );
+            return;
+        }
+        \WP_CLI::log( (string) $existing[0]->ID );
+    }
+
+    /**
+     * Ensures a template exists for --use-on with the given title.
+     * Creates if missing, updates title if exists (idempotent).
+     *
+     * ## OPTIONS
+     *
+     * --use-on=<scope>
+     * : Template scope (_et_use_on).
+     *
+     * --title=<title>
+     * : Title for the template.
+     *
+     * @when after_wp_load
+     */
+    public function template_ensure( $args, $assoc_args ) {
+        $use_on = $assoc_args['use-on'] ?? '';
+        $title  = $assoc_args['title'] ?? '';
+        if ( empty( $use_on ) || empty( $title ) ) {
+            \WP_CLI::error( "--use-on and --title are required." );
+        }
+        $this->validate_use_on( $use_on );
+
+        $existing = $this->find_templates_by_use_on( $use_on );
+        if ( count( $existing ) > 1 ) {
+            $ids = array_map( fn( $p ) => $p->ID, $existing );
+            \WP_CLI::error( "Multiple templates for '{$use_on}': IDs " . implode( ', ', $ids ) . '. Use template_update <id> --title=...' );
+        }
+
+        if ( ! empty( $existing ) ) {
+            $id = $existing[0]->ID;
+            wp_update_post([ 'ID' => $id, 'post_title' => sanitize_text_field( $title ) ]);
+            $this->register_template_with_theme_builder( $id );
+            \WP_CLI::log( (string) $id );
+            return;
+        }
+
+        $id = $this->create_template( $use_on, $title );
+        \WP_CLI::log( (string) $id );
+    }
+
+    /**
+     * Updates a template's title and/or use-on by ID.
+     *
+     * ## OPTIONS
+     *
+     * <id>
+     * : Template ID.
+     *
+     * [--title=<title>]
+     * : New title.
+     *
+     * [--use-on=<scope>]
+     * : New _et_use_on scope.
+     *
+     * @when after_wp_load
+     */
+    public function template_update( $args, $assoc_args ) {
+        $template_id = (int) ( $args[0] ?? 0 );
+        if ( $template_id < 1 ) {
+            \WP_CLI::error( "Usage: wp agentic template_update <id> [--title=...] [--use-on=...]" );
+        }
+        $post = get_post( $template_id );
+        if ( ! $post || $post->post_type !== 'et_template' ) {
+            \WP_CLI::error( "Template ID {$template_id} not found." );
+        }
+
+        $updated = false;
+        if ( isset( $assoc_args['title'] ) ) {
+            wp_update_post([ 'ID' => $template_id, 'post_title' => sanitize_text_field( $assoc_args['title'] ) ]);
+            \WP_CLI::log( "  Title updated." );
+            $updated = true;
+        }
+        if ( isset( $assoc_args['use-on'] ) ) {
+            $this->validate_use_on( $assoc_args['use-on'] );
+            delete_post_meta( $template_id, '_et_use_on' );
+            add_post_meta( $template_id, '_et_use_on', $assoc_args['use-on'] );
+            \WP_CLI::log( "  Use-on updated to: {$assoc_args['use-on']}" );
+            $updated = true;
+        }
+
+        if ( ! $updated ) {
+            \WP_CLI::error( "Nothing to update. Pass --title, --use-on, or both." );
+        }
+
+        \WP_CLI::success( "Template {$template_id} updated." );
+    }
+
+    /**
+     * Shows template details.
+     *
+     * ## OPTIONS
+     *
+     * <id>
+     * : Template ID.
+     *
+     * @when after_wp_load
+     */
+    public function template_show( $args, $assoc_args ) {
+        $template_id = (int) ( $args[0] ?? 0 );
+        if ( $template_id < 1 ) {
+            \WP_CLI::error( "Usage: wp agentic template_show <id>" );
+        }
+        $post = get_post( $template_id );
+        if ( ! $post || $post->post_type !== 'et_template' ) {
+            \WP_CLI::error( "Template ID {$template_id} not found." );
+        }
+
+        $use_on   = get_post_meta( $template_id, '_et_use_on', true );
+        $enabled  = get_post_meta( $template_id, '_et_enabled', true );
+        $default  = get_post_meta( $template_id, '_et_default', true );
+        $header   = (int) get_post_meta( $template_id, '_et_header_layout_id', true );
+        $footer   = (int) get_post_meta( $template_id, '_et_footer_layout_id', true );
+        $body     = (int) get_post_meta( $template_id, '_et_body_layout_id', true );
+
+        \WP_CLI\Utils\format_items( 'table', [ [
+            'ID'      => $template_id,
+            'title'   => $post->post_title,
+            'use_on'  => $use_on ?: '(none)',
+            'default' => $default ?: '0',
+            'enabled' => $enabled ?: '0',
+            'header'  => $header ?: '—',
+            'footer'  => $footer ?: '—',
+            'body'    => $body ?: '—',
+        ] ], [ 'ID', 'title', 'use_on', 'default', 'enabled', 'header', 'footer', 'body' ] );
+    }
+
+    /**
+     * Wires layouts to a template.
+     *
+     * ## OPTIONS
+     *
+     * <id>
+     * : Template ID.
+     *
+     * [--header-id=<id>]
+     * : Header layout ID to assign.
+     *
+     * [--footer-id=<id>]
+     * : Footer layout ID to assign.
+     *
+     * [--body-id=<id>]
+     * : Body layout ID to assign.
+     *
+     * [--header-enabled=<0|1>]
+     * : Enable header region. Default: 1.
+     *
+     * [--footer-enabled=<0|1>]
+     * : Enable footer region. Default: 1.
+     *
+     * [--body-enabled=<0|1>]
+     * : Enable body region. Default: 1.
+     *
+     * [--header-global=<0|1>]
+     * : Whether header layout is shared across templates. Default: 1.
+     *
+     * [--footer-global=<0|1>]
+     * : Whether footer layout is shared across templates. Default: 1.
+     *
+     * [--body-global=<0|1>]
+     * : Whether body layout is shared across templates. Default: 1.
+     *
+     * @when after_wp_load
+     */
+    public function template_wire( $args, $assoc_args ) {
+        $template_id = (int) ( $args[0] ?? 0 );
+        if ( $template_id < 1 ) {
+            \WP_CLI::error( "Usage: wp agentic template_wire <id> [--header-id=...] [--footer-id=...] [--body-id=...]" );
+        }
+        $post = get_post( $template_id );
+        if ( ! $post || $post->post_type !== 'et_template' ) {
+            \WP_CLI::error( "Template ID {$template_id} not found." );
+        }
+
+        $components = [ 'header', 'footer', 'body' ];
+        foreach ( $components as $key ) {
+            $id_key = "{$key}-id";
+            $enabled_key = "{$key}-enabled";
+            $global_key = "{$key}-global";
+
+            if ( isset( $assoc_args[ $id_key ] ) ) {
+                $layout_id = (int) $assoc_args[ $id_key ];
+                $post_type = "et_{$key}_layout";
+                $layout = get_post( $layout_id );
+                if ( ! $layout || $layout->post_type !== $post_type ) {
+                    \WP_CLI::error( "{$post_type} ID {$layout_id} not found." );
+                }
+                update_post_meta( $template_id, "_et_{$key}_layout_id", $layout_id );
+                \WP_CLI::log( "  Wired {$key} layout ID {$layout_id} to template {$template_id}." );
+            } else {
+                update_post_meta( $template_id, "_et_{$key}_layout_id", 0 );
+            }
+
+            $enabled = isset( $assoc_args[ $enabled_key ] ) ? $assoc_args[ $enabled_key ] : '1';
+            update_post_meta( $template_id, "_et_{$key}_layout_enabled", $enabled );
+
+            $global = isset( $assoc_args[ $global_key ] ) ? $assoc_args[ $global_key ] : '1';
+            update_post_meta( $template_id, "_et_{$key}_layout_global", $global );
+        }
+
+        // Ensure template is active — Divi marks unused templates with this meta on UI saves
+        delete_post_meta( $template_id, '_et_theme_builder_marked_as_unused' );
+
+        // Re-register with Theme Builder in case it was detached by a UI save
+        $this->register_template_with_theme_builder( $template_id );
+
+        \WP_CLI::success( "Template {$template_id} wired." );
+    }
+
+    /**
+     * Returns the default template ID (creates one if none exists).
+     *
+     * ## OPTIONS
+     *
+     * [--title=<title>]
+     * : Title to set on the default template.
+     *
+     * ## EXAMPLES
+     *
+     *     wp agentic template_default
+     *     wp agentic template_default --title="Footer Global"
+     *
+     * @when after_wp_load
+     */
+    public function template_default( $args, $assoc_args ) {
+        $id = $this->get_or_create_default_template();
+        if ( isset( $assoc_args['title'] ) ) {
+            wp_update_post([ 'ID' => $id, 'post_title' => sanitize_text_field( $assoc_args['title'] ) ]);
+        }
+        \WP_CLI::log( (string) $id );
+    }
+
+    /**
+     * Trashes a template and detaches it from the Theme Builder.
+     *
+     * Follows Divi's own deletion pattern:
+     * - Trashes the et_template post (soft delete)
+     * - Removes the template ID from the Theme Builder post's _et_template meta
+     * - Does NOT trash associated layouts — Divi marks them unused and
+     *   cleans up after 7 days via et_theme_builder_trash_draft_and_unused_posts()
+     *
+     * ## OPTIONS
+     *
+     * <id>
+     * : Template ID to trash.
+     *
+     * @when after_wp_load
+     */
+    public function template_delete( $args, $assoc_args ) {
+        $template_id = (int) ( $args[0] ?? 0 );
+        if ( $template_id < 1 ) {
+            \WP_CLI::error( "Usage: wp agentic template_delete <id>" );
+        }
+
+        $post = get_post( $template_id );
+        if ( ! $post || $post->post_type !== 'et_template' ) {
+            \WP_CLI::error( "Template ID {$template_id} not found or not an et_template." );
+        }
+
+        // Detach from Theme Builder post's _et_template meta (match D5 REST pattern)
+        $this->detach_template_from_theme_builder( $template_id );
+
+        // Trash the template (soft delete — Divi pattern)
+        wp_trash_post( $template_id );
+
+        \WP_CLI::success( "Template {$template_id} trashed." );
+    }
+
+    private function detach_template_from_theme_builder( int $template_id ): void {
+        if ( ! defined( 'ET_THEME_BUILDER_THEME_BUILDER_POST_TYPE' ) ) {
+            return;
+        }
+
+        $live_id = et_theme_builder_get_theme_builder_post_id( true, false );
+        if ( ! $live_id ) {
+            return;
+        }
+
+        $existing = get_post_meta( $live_id, '_et_template', false );
+        if ( empty( $existing ) || ! in_array( (string) $template_id, $existing, true ) ) {
+            return;
+        }
+
+        delete_post_meta( $live_id, '_et_template' );
+        foreach ( $existing as $tid ) {
+            if ( (string) $template_id !== $tid ) {
+                add_post_meta( $live_id, '_et_template', $tid );
+            }
+        }
+        \WP_CLI::log( "  Detached template {$template_id} from Theme Builder post {$live_id}." );
+    }
+
+    /**
+     * Deploys a layout from a combined JSON. Always creates a new layout post.
+     *
+     * ## OPTIONS
+     *
+     * <type>
+     * : Layout type: header, footer, or body.
+     *
+     * --schema=<path>
+     * : Path to the combined JSON file.
      *
      * [--design-system=<path>]
      * : Path to the design-system JSON file for token/preset resolution.
      *
      * @when after_wp_load
      */
-    public function deploy_global_ecosystem( $args, $assoc_args ) {
-        $engine = new \DAC\Core\Layout_Engine();
-
-        $ds_path = $assoc_args['design-system'] ?? null;
-
-        // 1. Get or Create Default Template
-        $template_id = $this->get_or_create_default_template();
-        \WP_CLI::log( "Using Default Template ID: {$template_id}" );
-
-        // 2. Deploy Header
-        $header_id = $this->deploy_tb_component( $assoc_args['header'], 'et_header_layout', 'Global Header', $ds_path );
-        update_post_meta( $template_id, '_et_header_layout_id', $header_id );
-        update_post_meta( $template_id, '_et_header_layout_enabled', '1' );
-
-        // 3. Deploy Footer
-        $footer_id = $this->deploy_tb_component( $assoc_args['footer'], 'et_footer_layout', 'Global Footer', $ds_path );
-        update_post_meta( $template_id, '_et_footer_layout_id', $footer_id );
-        update_post_meta( $template_id, '_et_footer_layout_enabled', '1' );
-
-        // 4. Deploy Body
-        $body_id = $this->deploy_tb_component( $assoc_args['body'], 'et_body_layout', 'Global Body', $ds_path );
-        update_post_meta( $template_id, '_et_body_layout_id', $body_id );
-        update_post_meta( $template_id, '_et_body_layout_enabled', '1' );
-
-        if ( function_exists( 'et_core_clear_wp_cache' ) ) {
-            et_core_clear_wp_cache();
+    public function layout_deploy( $args, $assoc_args ) {
+        $type   = $args[0] ?? '';
+        $post_type = $this->layout_type_to_post_type( $type );
+        if ( ! $post_type ) {
+            \WP_CLI::error( "Invalid type: {$type}. Use: header, footer, or body." );
+        }
+        $path = $assoc_args['schema'] ?? '';
+        if ( empty( $path ) ) {
+            \WP_CLI::error( "--schema is required." );
         }
 
-        \WP_CLI::success( "Global Theme Builder Ecosystem fully reconstructed!" );
+        $layout_id = $this->compile_and_insert_layout( 0, $path, $post_type, $assoc_args['design-system'] ?? null );
+        \WP_CLI::success( "{$type} layout created: ID {$layout_id}." );
+        \WP_CLI::log( (string) $layout_id );
     }
 
-    private function deploy_tb_component( $path, $type, $title, $ds_path = null ) {
-        if ( ! file_exists( $path ) ) \WP_CLI::error( "File not found: {$path}" );
+    /**
+     * Updates an existing layout by ID. Fails if ID not found.
+     *
+     * ## OPTIONS
+     *
+     * <type>
+     * : Layout type: header, footer, or body.
+     *
+     * --schema=<path>
+     * : Path to the combined JSON file.
+     *
+     * --by-id=<id>
+     * : Layout ID to update.
+     *
+     * [--design-system=<path>]
+     * : Path to the design-system JSON file.
+     *
+     * @when after_wp_load
+     */
+    public function layout_ensure( $args, $assoc_args ) {
+        $type   = $args[0] ?? '';
+        $post_type = $this->layout_type_to_post_type( $type );
+        if ( ! $post_type ) {
+            \WP_CLI::error( "Invalid type: {$type}. Use: header, footer, or body." );
+        }
+        $path      = $assoc_args['schema'] ?? '';
+        $layout_id = (int) ( $assoc_args['by-id'] ?? 0 );
+        if ( empty( $path ) || $layout_id < 1 ) {
+            \WP_CLI::error( "--schema and --by-id are required." );
+        }
+
+        $post = get_post( $layout_id );
+        if ( ! $post || $post->post_type !== $post_type ) {
+            \WP_CLI::error( "{$post_type} ID {$layout_id} not found." );
+        }
+
+        $result_id = $this->compile_and_insert_layout( $layout_id, $path, $post_type, $assoc_args['design-system'] ?? null );
+        \WP_CLI::success( "{$type} layout updated: ID {$result_id}." );
+        \WP_CLI::log( (string) $result_id );
+    }
+
+    /**
+     * Lists layouts of a given type.
+     *
+     * ## OPTIONS
+     *
+     * <type>
+     * : Layout type: header, footer, or body.
+     *
+     * @when after_wp_load
+     */
+    public function layout_list( $args, $assoc_args ) {
+        $type   = $args[0] ?? '';
+        $post_type = $this->layout_type_to_post_type( $type );
+        if ( ! $post_type ) {
+            \WP_CLI::error( "Invalid type: {$type}. Use: header, footer, or body." );
+        }
+
+        $layouts = get_posts([
+            'post_type'      => $post_type,
+            'posts_per_page' => -1,
+            'post_status'    => 'publish',
+            'orderby'        => 'ID',
+            'order'          => 'ASC',
+        ]);
+
+        if ( empty( $layouts ) ) {
+            \WP_CLI::log( "No {$type} layouts found." );
+            return;
+        }
+
+        $items = array_map( fn( $p ) => [
+            'ID'    => $p->ID,
+            'title' => $p->post_title,
+            'slug'  => $p->post_name,
+        ], $layouts );
+        \WP_CLI\Utils\format_items( 'table', $items, [ 'ID', 'title', 'slug' ] );
+    }
+
+    private function layout_type_to_post_type( string $type ): ?string {
+        return match ( $type ) {
+            'header' => 'et_header_layout',
+            'footer' => 'et_footer_layout',
+            'body'   => 'et_body_layout',
+            default  => null,
+        };
+    }
+
+    private function find_templates_by_use_on( string $use_on ): array {
+        return get_posts([
+            'post_type'      => 'et_template',
+            'posts_per_page' => -1,
+            'post_status'    => 'publish',
+            'meta_key'       => '_et_use_on',
+            'meta_value'     => $use_on,
+        ]);
+    }
+
+    private function create_template( string $use_on, string $title ): int {
+        if ( empty( $title ) ) {
+            \WP_CLI::error( "--title is required when creating a new template." );
+        }
+        $template_id = wp_insert_post([
+            'post_title'  => sanitize_text_field( $title ),
+            'post_author' => 1,
+            'post_type'   => 'et_template',
+            'post_status' => 'publish',
+        ]);
+        update_post_meta( $template_id, '_et_autogenerated_title', '1' );
+        update_post_meta( $template_id, '_et_default', '0' );
+        update_post_meta( $template_id, '_et_enabled', '1' );
+        delete_post_meta( $template_id, '_et_use_on' );
+        add_post_meta( $template_id, '_et_use_on', $use_on );
+        $this->register_template_with_theme_builder( $template_id );
+        \WP_CLI::log( "  Created new Template ID {$template_id}." );
+        return $template_id;
+    }
+
+    private function resolve_template_by_id( int $template_id ): void {
+        $post = get_post( $template_id );
+        if ( ! $post || $post->post_type !== 'et_template' ) {
+            \WP_CLI::error( "Template ID {$template_id} not found or not an et_template." );
+        }
+        \WP_CLI::log( "  Template ID {$template_id} resolved." );
+    }
+
+    private function compile_and_insert_layout( int $layout_id, string $path, string $post_type, ?string $ds_path ): int {
+        if ( ! file_exists( $path ) ) {
+            \WP_CLI::error( "File not found: {$path}" );
+        }
 
         $raw = file_get_contents( $path );
+        $raw = ltrim( $raw, "\xEF\xBB\xBF" );
+        $raw = trim( $raw );
 
         if ( $ds_path ) {
-            $resolver = new \DAC\Core\Design_Resolver( $ds_path );
+            $brand_vars_path = preg_replace( '#design-system/divitheme\.json$#', 'brand/_design_vars.json', $ds_path );
+            if ( ! file_exists( $brand_vars_path ) ) {
+                $brand_vars_path = null;
+            }
+            $resolver = new \DAC\Core\Design_Resolver( $ds_path, $brand_vars_path );
             $raw = $resolver->resolve_schema_string( $raw );
+        }
+
+        $validation_errors = $this->validate_schema_string( $raw );
+        if ( ! empty( $validation_errors ) ) {
+            foreach ( $validation_errors as $error ) {
+                \WP_CLI::error( "Schema validation error: {$error}" );
+            }
         }
 
         $engine = new \DAC\Core\Layout_Engine();
         $blocks = $engine->compile( $raw );
 
-        // Find existing to avoid duplicates in TB — use post_type only, not title
-        $existing = get_posts([
-            'post_type'      => $type,
-            'posts_per_page' => 1,
-            'post_status'    => 'publish',
-            'orderby'        => 'ID',
-            'order'          => 'ASC'
-        ]);
+        $title = ( $layout_id > 0 ) ? get_the_title( $layout_id ) : "Global " . ucfirst( str_replace( 'et_', '', str_replace( '_layout', '', $post_type ) ) );
 
         $post_data = [
-            'post_title'   => sanitize_text_field( $title ),
+            'post_title'   => $title,
             'post_content' => wp_slash( $blocks ),
             'post_status'  => 'publish',
-            'post_type'    => $type,
+            'post_type'    => $post_type,
             'post_author'  => 1,
         ];
 
-        if ( ! empty( $existing ) ) {
-            $post_data['ID'] = $existing[0]->ID;
+        if ( $layout_id > 0 ) {
+            $post_data['ID'] = $layout_id;
             $post_id = wp_update_post( $post_data );
-            \WP_CLI::log( "Updated {$type} ID: {$post_id}" );
+            \WP_CLI::log( "  Updated {$post_type} ID {$post_id}." );
         } else {
             $post_id = wp_insert_post( $post_data );
-            \WP_CLI::log( "Created {$type} ID: {$post_id}" );
+            \WP_CLI::log( "  Created {$post_type} ID {$post_id}." );
         }
 
         $this->apply_divi_meta( $post_id );
         return $post_id;
+    }
+
+    /**
+     * Convenience wrapper: deploys header + footer + body in one command.
+     *
+     * For fine-grained control, use the atomic commands:
+     *   template_create, template_ensure, template_find
+     *   layout_deploy, layout_ensure
+     *   template_wire
+     *
+     * Behaviour by --mode:
+     *   create  Calls template_create + layout_deploy for each component.
+     *           Fails if template (by --use-on) already exists.
+     *   update  Calls layout_ensure for each component with provided IDs.
+     *           Requires --header-id, --footer-id or --body-id.
+     *   upsert  (default) Calls template_ensure + layout_ensure for each.
+     *
+     * ## OPTIONS
+     *
+     * [--header=<path>]
+     * : Path to the Header combined JSON.
+     *
+     * [--footer=<path>]
+     * : Path to the Footer combined JSON.
+     *
+     * [--body=<path>]
+     * : Path to the Body combined JSON.
+     *
+     * [--design-system=<path>]
+     * : Path to the design-system JSON file for token/preset resolution.
+     *
+     * [--mode=<mode>]
+     * : Operation mode: create (default), update, or upsert. See description above.
+     *
+     * [--template-id=<id>]
+     * : Target an existing et_template by ID.
+     *
+     * [--use-on=<scope>]
+     * : Template scope (_et_use_on). Divi-recognised patterns:
+     *   - 404                                  → 404 page
+     *   - search                               → search results
+     *   - homepage                             → front page
+     *   - singular:post_type:<type>:all        → all posts of a type
+     *   - singular:post_type:<type>:id:<id>    → specific post ID
+     *   - singular:post_type:<type>:children:id:<id> → child posts
+     *   - singular:taxonomy:<tax>:term:id:<id> → taxonomy term
+     *   - archive:all                          → all archives
+     *   - archive:post_type:<type>             → post type archive
+     *   - archive:taxonomy:<tax>:all           → taxonomy archive
+     *   - archive:taxonomy:<tax>:term:id:<id>  → term archive
+     *   - archive:user:all                     → all authors
+     *   - archive:user:id:<id>                 → specific author
+     *   - archive:user:role:<role>             → author role
+     *   - archive:date:all                     → date archives
+     *
+     * [--title=<title>]
+     * : Title for the template. Required when creating (mode=create or mode=upsert).
+     *
+     * [--header-id=<id>]
+     * : Target an existing et_header_layout by ID.
+     *
+     * [--footer-id=<id>]
+     * : Target an existing et_footer_layout by ID.
+     *
+     * [--body-id=<id>]
+     * : Target an existing et_body_layout by ID.
+     *
+     * [--header-enabled=<0|1>]
+     * : Enable/disable header region on the template. Default: 1.
+     *
+     * [--footer-enabled=<0|1>]
+     * : Enable/disable footer region on the template. Default: 1.
+     *
+     * [--body-enabled=<0|1>]
+     * : Enable/disable body region on the template. Default: 1.
+     *
+     * [--header-global=<0|1>]
+     * : Whether header layout is shared across templates. Default: 1.
+     *
+     * [--footer-global=<0|1>]
+     * : Whether footer layout is shared across templates. Default: 1.
+     *
+     * [--body-global=<0|1>]
+     * : Whether body layout is shared across templates. Default: 1.
+     *
+     * ## EXAMPLES
+     *
+     *     # Create new template for all pages (fails if use-on already exists)
+     *     wp agentic deploy_global_ecosystem \
+     *       --header="site/cristorey/page-defs/header/header-combined.json" \
+     *       --footer="site/cristorey/page-defs/footer/footer-combined.json" \
+     *       --body="site/cristorey/page-defs/body/body-combined.json" \
+     *       --design-system="site/cristorey/design-system/divitheme.json" \
+     *       --mode=create \
+     *       --use-on="singular:post_type:page:all" \
+     *       --title="Todas las páginas"
+     *
+     *     # Upsert: create or update by use-on match (safe default)
+     *     wp agentic deploy_global_ecosystem \
+     *       --header="site/cristorey/page-defs/header/header-combined.json" \
+     *       --footer="site/cristorey/page-defs/footer/footer-combined.json" \
+     *       --body="site/cristorey/page-defs/body/body-combined.json" \
+     *       --use-on="singular:post_type:page:all" \
+     *       --title="Todas las páginas"
+     *
+     *     # Update specific template by ID
+     *     wp agentic deploy_global_ecosystem \
+     *       --header="site/cristorey/page-defs/header/header-combined.json" \
+     *       --footer="site/cristorey/page-defs/footer/footer-combined.json" \
+     *       --body="site/cristorey/page-defs/body/body-combined.json" \
+     *       --mode=update --template-id=123
+     *
+     *     # Update specific footer layout only
+     *     wp agentic deploy_global_ecosystem \
+     *       --header="site/cristorey/page-defs/header/header-combined.json" \
+     *       --footer="site/cristorey/page-defs/footer/footer-combined.json" \
+     *       --body="site/cristorey/page-defs/body/body-combined.json" \
+     *       --mode=update --footer-id=456
+     *
+     *     # 404 template with body only (no header/footer)
+     *     wp agentic deploy_global_ecosystem \
+     *       --header="site/cristorey/page-defs/header/header-combined.json" \
+     *       --footer="site/cristorey/page-defs/footer/footer-combined.json" \
+     *       --body="site/cristorey/page-defs/body/body-combined.json" \
+     *       --use-on="404" --title="Página 404" \
+     *       --header-enabled=0 --footer-enabled=0
+     *
+     * @when after_wp_load
+     */
+    public function deploy_global_ecosystem( $args, $assoc_args ) {
+        $mode = $assoc_args['mode'] ?? 'create';
+        if ( ! in_array( $mode, [ 'create', 'update', 'upsert' ], true ) ) {
+            \WP_CLI::error( "Invalid --mode: {$mode}. Use: create, update, or upsert." );
+        }
+
+        $ds_path     = $assoc_args['design-system'] ?? null;
+        $use_on      = $assoc_args['use-on'] ?? '';
+        $title       = $assoc_args['title'] ?? '';
+        $template_id = isset( $assoc_args['template-id'] ) ? (int) $assoc_args['template-id'] : 0;
+
+        // Resolve template
+        if ( $template_id > 0 ) {
+            $this->resolve_template_by_id( $template_id );
+        } elseif ( $mode === 'create' ) {
+            if ( empty( $use_on ) ) {
+                \WP_CLI::error( "--use-on is required in create mode." );
+            }
+            $this->validate_use_on( $use_on );
+            $existing = $this->find_templates_by_use_on( $use_on );
+            if ( ! empty( $existing ) ) {
+                \WP_CLI::error( "Template for '{$use_on}' already exists (ID {$existing[0]->ID})." );
+            }
+            if ( empty( $title ) ) {
+                \WP_CLI::error( "--title is required in create mode." );
+            }
+            $template_id = $this->create_template( $use_on, $title );
+        } elseif ( $mode === 'update' ) {
+            if ( $template_id < 1 && empty( $use_on ) ) {
+                \WP_CLI::error( "--mode=update requires --template-id or --use-on." );
+            }
+            if ( $template_id < 1 ) {
+                $existing = $this->find_templates_by_use_on( $use_on );
+                if ( count( $existing ) > 1 ) {
+                    $ids = array_map( fn( $p ) => $p->ID, $existing );
+                    \WP_CLI::error( "Multiple templates for '{$use_on}': IDs " . implode( ', ', $ids ) . '. Use --template-id.' );
+                }
+                if ( empty( $existing ) ) {
+                    \WP_CLI::error( "No template found for '{$use_on}'. Use --mode=upsert or --mode=create." );
+                }
+                $template_id = $existing[0]->ID;
+            }
+            $this->resolve_template_by_id( $template_id );
+        } else {
+            // upsert
+            if ( $template_id > 0 ) {
+                $this->resolve_template_by_id( $template_id );
+            } elseif ( ! empty( $use_on ) ) {
+                $this->validate_use_on( $use_on );
+                $existing = $this->find_templates_by_use_on( $use_on );
+                if ( count( $existing ) > 1 ) {
+                    $ids = array_map( fn( $p ) => $p->ID, $existing );
+                    \WP_CLI::error( "Multiple templates for '{$use_on}': IDs " . implode( ', ', $ids ) . '. Use --template-id.' );
+                }
+                if ( ! empty( $existing ) ) {
+                    $template_id = $existing[0]->ID;
+                } else {
+                    if ( empty( $title ) ) {
+                        \WP_CLI::error( "--title is required when creating a new template." );
+                    }
+                    $template_id = $this->create_template( $use_on, $title );
+                }
+            } else {
+                $template_id = $this->get_or_create_default_template();
+            }
+        }
+
+        // Wire use-on to template if provided
+        if ( ! empty( $use_on ) ) {
+            delete_post_meta( $template_id, '_et_use_on' );
+            add_post_meta( $template_id, '_et_use_on', $use_on );
+        }
+
+        // Deploy layouts
+        $components = [
+            'header' => [ 'post_type' => 'et_header_layout', 'id_key' => 'header-id' ],
+            'footer' => [ 'post_type' => 'et_footer_layout', 'id_key' => 'footer-id' ],
+            'body'   => [ 'post_type' => 'et_body_layout',   'id_key' => 'body-id' ],
+        ];
+
+        foreach ( $components as $key => $cfg ) {
+            $specific_id = isset( $assoc_args[ $cfg['id_key'] ] ) ? (int) $assoc_args[ $cfg['id_key'] ] : 0;
+
+            if ( $mode === 'create' ) {
+                if ( $specific_id > 0 ) {
+                    \WP_CLI::error( "--mode=create cannot target an existing layout. Omit --{$cfg['id_key']}." );
+                }
+                $layout_id = $this->compile_and_insert_layout( 0, $assoc_args[ $key ], $cfg['post_type'], $ds_path );
+            } elseif ( $mode === 'update' ) {
+                if ( $specific_id < 1 ) {
+                    \WP_CLI::error( "--mode=update requires --{$cfg['id_key']} for the {$key} layout." );
+                }
+                $layout_id = $this->compile_and_insert_layout( $specific_id, $assoc_args[ $key ], $cfg['post_type'], $ds_path );
+            } else {
+                // upsert
+                if ( $specific_id > 0 ) {
+                    $layout_id = $this->compile_and_insert_layout( $specific_id, $assoc_args[ $key ], $cfg['post_type'], $ds_path );
+                } else {
+                    $referenced = $this->find_most_referenced_layout_id( $cfg['post_type'] );
+                    if ( $referenced ) {
+                        $layout_id = $this->compile_and_insert_layout( $referenced, $assoc_args[ $key ], $cfg['post_type'], $ds_path );
+                    } else {
+                        $lowest = $this->find_lowest_id_layout( $cfg['post_type'] );
+                        if ( $lowest ) {
+                            $layout_id = $this->compile_and_insert_layout( $lowest, $assoc_args[ $key ], $cfg['post_type'], $ds_path );
+                        } else {
+                            $layout_id = $this->compile_and_insert_layout( 0, $assoc_args[ $key ], $cfg['post_type'], $ds_path );
+                        }
+                    }
+                }
+            }
+
+            update_post_meta( $template_id, "_et_{$key}_layout_id", $layout_id );
+            update_post_meta( $template_id, "_et_{$key}_layout_enabled", $assoc_args[ "{$key}-enabled" ] ?? '1' );
+        }
+
+        if ( function_exists( 'et_core_clear_wp_cache' ) ) {
+            et_core_clear_wp_cache();
+        }
+
+        \WP_CLI::success( "Ecosystem deployed: template ID {$template_id}." );
     }
 
     private function get_or_create_default_template() {
@@ -433,12 +1158,99 @@ class Agentic_Command {
         return $template_id;
     }
 
+    private function register_template_with_theme_builder( int $template_id ): void {
+        if ( ! defined( 'ET_THEME_BUILDER_THEME_BUILDER_POST_TYPE' ) ) {
+            return;
+        }
+        $tb_query = new \WP_Query([
+            'post_type'              => ET_THEME_BUILDER_THEME_BUILDER_POST_TYPE,
+            'post_status'            => 'publish',
+            'posts_per_page'         => 1,
+            'orderby'                => 'date',
+            'order'                  => 'desc',
+            'fields'                 => 'ids',
+            'no_found_rows'          => true,
+            'update_post_meta_cache' => false,
+            'update_post_term_cache' => false,
+            'meta_key'               => '_et_library_theme_builder',
+            'meta_compare'           => 'NOT EXISTS',
+        ]);
+
+        if ( empty( $tb_query->posts ) ) {
+            return;
+        }
+
+        $tb_id = $tb_query->posts[0];
+        $existing = get_post_meta( $tb_id, '_et_template', false );
+
+        if ( ! in_array( (string) $template_id, $existing, true ) ) {
+            add_post_meta( $tb_id, '_et_template', (string) $template_id );
+            \WP_CLI::log( "Registered template {$template_id} with Theme Builder post {$tb_id}." );
+        }
+    }
+
+    private function validate_use_on( string $value ): void {
+        $patterns = [
+            '/^(404|search|homepage)$/',
+            '/^singular:post_type:[a-z_]+:(all|id:\d+|children:id:\d+)$/',
+            '/^singular:taxonomy:[a-z_]+:term:id:\d+$/',
+            '/^archive:(all|post_type:[a-z_]+|date:all|user:(all|id:\d+|role:\w+))$/',
+            '/^archive:taxonomy:[a-z_]+:(all|term:id:\d+)$/',
+        ];
+
+        foreach ( $patterns as $pattern ) {
+            if ( preg_match( $pattern, $value ) ) {
+                return;
+            }
+        }
+
+        \WP_CLI::error( "Invalid --use-on value: '{$value}'. Must be a valid Divi Theme Builder condition (e.g., '404', 'singular:post_type:page:all', 'archive:post_type:post')." );
+    }
+
     private function apply_divi_meta( $post_id ) {
         update_post_meta( $post_id, '_et_pb_use_builder', 'on' );
         update_post_meta( $post_id, '_et_pb_use_divi_5', 'on' );
         update_post_meta( $post_id, '_et_pb_show_page_creation', 'off' );
-        update_post_meta( $post_id, '_et_pb_built_with_d5', '1' );
+        update_post_meta( $post_id, '_et_pb_built_for_post_type', 'page' );
+        update_post_meta( $post_id, '_et_pb_gutter_width', '3' );
+        update_post_meta( $post_id, '_et_pb_enable_shortcode_tracking', '' );
+        update_post_meta( $post_id, '_et_pb_custom_css', '' );
+        update_post_meta( $post_id, '_et_pb_first_image', '' );
+        update_post_meta( $post_id, '_et_pb_truncate_post', '' );
+        update_post_meta( $post_id, '_et_pb_truncate_post_date', '' );
         update_post_meta( $post_id, '_et_builder_version', DIVI_BUILDER_VERSION );
+        delete_post_meta( $post_id, '_et_theme_builder_marked_as_unused' );
+    }
+
+    private function find_most_referenced_layout_id( string $type ): ?int {
+        $meta_key = [
+            'et_header_layout' => '_et_header_layout_id',
+            'et_footer_layout' => '_et_footer_layout_id',
+            'et_body_layout'   => '_et_body_layout_id',
+        ][ $type ] ?? '';
+
+        if ( empty( $meta_key ) ) {
+            return null;
+        }
+
+        global $wpdb;
+        $results = $wpdb->get_results( $wpdb->prepare(
+            "SELECT meta_value, COUNT(*) as cnt FROM {$wpdb->postmeta}
+             WHERE meta_key = %s AND meta_value != ''
+             GROUP BY meta_value
+             ORDER BY cnt DESC
+             LIMIT 1",
+            $meta_key
+        ) );
+
+        if ( ! empty( $results ) ) {
+            $id = (int) $results[0]->meta_value;
+            if ( get_post_type( $id ) === $type ) {
+                return $id;
+            }
+        }
+
+        return null;
     }
 
     /**
