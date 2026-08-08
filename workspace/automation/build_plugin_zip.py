@@ -30,13 +30,13 @@ No modifica el plugin ni ningún archivo remoto.
 
 import argparse
 import os
+import re
 import sys
 import zipfile
 
 PLUGIN_REL = os.path.join(
     "app", "public", "wp-content", "plugins", "sanpablo-librerias"
 )
-DEFAULT_OUT = os.path.join(os.getcwd(), "sanpablo-librerias.zip")
 
 # Nombres no deseados dentro del zip (git, cache, basura).
 EXCLUDED_NAMES = {".git", "__pycache__", ".DS_Store", "Thumbs.db"}
@@ -54,6 +54,18 @@ def plugin_root():
             return here
         here = os.path.dirname(here)
     return None
+
+
+def plugin_version(src_dir: str) -> str:
+    """Lee la versión desde el header del archivo principal del plugin."""
+    main_file = os.path.join(src_dir, "sanpablo-librerias.php")
+    try:
+        with open(main_file, "r", encoding="utf-8", errors="replace") as fh:
+            content = fh.read()
+    except OSError:
+        return "0.0.0"
+    m = re.search(r"Version:\s*([0-9]+\.[0-9]+\.[0-9]+)", content)
+    return m.group(1) if m else "0.0.0"
 
 
 def should_skip(relpath: str, name: str) -> bool:
@@ -100,7 +112,7 @@ def build_zip(src_dir: str, zip_path: str) -> int:
 def main():
     parser = argparse.ArgumentParser(description="Empaqueta sanpablo-librerias en un zip instalable.")
     parser.add_argument("--plugin", help="Ruta al directorio del plugin (default: app/public/wp-content/plugins/sanpablo-librerias)")
-    parser.add_argument("--out", help="Ruta del zip de salida (default: ./sanpablo-librerias.zip)")
+    parser.add_argument("--out", help="Ruta del zip de salida (default: ./sanpablo-librerias-<version>.zip)")
     args = parser.parse_args()
 
     root = plugin_root()
@@ -112,7 +124,8 @@ def main():
         )
         return 1
 
-    out = args.out or DEFAULT_OUT
+    version = plugin_version(src)
+    out = args.out or os.path.join(os.getcwd(), f"sanpablo-librerias-{version}.zip")
     return build_zip(src, out)
 
 
