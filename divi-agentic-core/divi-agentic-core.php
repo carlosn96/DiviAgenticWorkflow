@@ -238,6 +238,7 @@ if ( function_exists( 'add_action' ) ) {
 			$ds = json_decode( file_get_contents( $ds_path ), true );
 			if ( $ds && isset( $ds['tokens']['font'] ) ) {
 				$google_font_map = [
+					'Oswald'         => 'Oswald:wght@400;500;600;700',
 					'Cinzel'         => 'Cinzel:wght@400;500;600;700',
 					'Jost'           => 'Jost:wght@300;400;500;600;700',
 					'Fredoka'        => 'Fredoka:wght@400;500;600;700',

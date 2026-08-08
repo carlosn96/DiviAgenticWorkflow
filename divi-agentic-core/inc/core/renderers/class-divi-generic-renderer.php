@@ -28,6 +28,9 @@ class Divi_Generic_Renderer extends Divi_Base_Renderer {
 
 		switch ( true ) {
 			case $slug === 'divi/divider':
+				if ( isset( $data['divider'] ) ) {
+					$attrs['divider'] = $data['divider'];
+				}
 				$line_props = [];
 				foreach ( [ 'show', 'color', 'style', 'position', 'weight' ] as $prop ) {
 					if ( isset( $data[ $prop ] ) ) {
