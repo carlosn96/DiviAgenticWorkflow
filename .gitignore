@@ -1,5 +1,9 @@
-# site/ NO se ignora en bloque: site/.gitignore define qué sí se versiona
-# (estructura y datos fuente) y qué no (outputs generados: pages/, design-system/, content_state/).
+# El DAW es agnóstico al proyecto: solo el template site/example se versiona.
+# Los sitios reales (site/<slug>) viven fuera del repo — aquí quedan ignorados.
+# Dentro de site/example, site/.gitignore excluye los outputs generados
+# (pages/, design-system/, content_state/).
+site/*/
+!site/example/
 
 # Deprecated catalog templates (Divi 4 compiled)
 workspace/catalog/
