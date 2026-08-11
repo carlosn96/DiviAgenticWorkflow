@@ -13,13 +13,10 @@ param (
 
 $ErrorActionPreference = "Stop"
 
-# Default configuration
-$WPCLI = "DAW_bundle\wp.bat"
-$ProjectRoot = $PWD.Path
-
-# Resolve project root (DAW_bundle is one level below project root)
+# Resolve project root (bundle is one level below project root; wrapper is at project root)
 $DAWRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path
 $ProjectRoot = (Resolve-Path (Join-Path $DAWRoot "..")).Path
+$WPCLI = Join-Path $ProjectRoot "wp.bat"
 $EnvFile = Join-Path $ProjectRoot ".env"
 if (Test-Path $EnvFile) {
     Get-Content $EnvFile | Where-Object { $_ -match '^\s*([^#]+?)\s*=\s*(.*)$' } | ForEach-Object {
