@@ -1,6 +1,6 @@
 ---
 name: daw-skill
-description: The unified source of truth for the local Divi Agentic Workflow (DAW) in divitheme. Use this for any task involving the creation, modification, or deployment of Divi 5 pages. It orchestrates the 4-phase workflow: Analysis, Design Research, Mapping, and Execution. Brand CSS is now handled via Divi Customizer (brand-sync.php → et_divi).
+description: The unified source of truth for the local Divi Agentic Workflow (DAW). Use this for any task involving the creation, modification, or deployment of Divi 5 pages. It orchestrates the 4-phase workflow: Analysis, Design Research, Mapping, and Execution. Brand vars are synced to Divi Customizer via `wp brand sync` (→ et_divi + gcids + gvids).
 ---
 
 # DAW-Skill: Divi Agentic Workflow Orchestrator (v5.0)
@@ -16,11 +16,11 @@ Motor definitivo para la construcción de sitios con **Divi 5.5.0 Native**. Apli
 
 ```
 Brand vars (_design_vars.json)
-  → brand-sync.php
+  → wp brand sync
     → wp_options['et_divi'] (Customizer global)
-    → divitheme.json (tokens + presets)
+    → divitheme.json (presets + strategy)
     → gcids via GlobalData::set_global_colors()
-  → page-defs/<slug>.json (manifiesto) + sections/*.json
+  → page-defs/<slug>/manifest.json + sections/*.json
   → python workspace/combine.py → <slug>-combined.json
   → wp agentic deploy_page → post_content en WP
 ```
@@ -30,7 +30,7 @@ Brand vars (_design_vars.json)
 ## ⚡ Brand Sync (único comando)
 
 ```powershell
-wp eval-file divi-agentic-core/bin/brand-sync.php
+.\wp brand sync <slug>
 ```
 
 Sincroniza **todo** en un solo paso:
@@ -106,7 +106,7 @@ Secciones con alternancia de fondo: [✓ ley 1]
 }
 ```
 2. Crear cada sección en `site/<DAW_SITE>/page-defs/sections/<slug>.json`
-3. Combinar: `python DAW_bundle/workspace/combine.py <manifest> --out <combined>.json`
+3. Combinar: `python workspace/combine.py <manifest> --out <combined>.json`
 4. El JSON combinado se pasa a `wp agentic deploy_page`
 
 **Verificación antes de entregar a Fase 4:**
@@ -128,16 +128,16 @@ Secciones con alternancia de fondo: [✓ ley 1]
 **Flujo actual:**
 ```powershell
 # 1. Combinar manifiesto + secciones
-python DAW_bundle/workspace/combine.py `
-  DAW_bundle/site/<DAW_SITE>/page-defs/<slug>.json `
-  --out DAW_bundle/site/<DAW_SITE>/page-defs/<slug>-combined.json
+python workspace/combine.py `
+  site/<DAW_SITE>/page-defs/<slug>/manifest.json `
+  --out site/<DAW_SITE>/page-defs/<slug>/<slug>-combined.json
 
 # 2. Deploy directo (Layout Engine refactorizado con renderers modulares)
 .\wp.bat agentic deploy_page `
   --title="Título de la página" `
   --slug="<slug>" `
-  --schema="DAW_bundle/site/<DAW_SITE>/page-defs/<slug>-combined.json" `
-  --design-system="DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json"
+  --schema="site/<DAW_SITE>/page-defs/<slug>/<slug>-combined.json" `
+  --design-system="site/<DAW_SITE>/design-system/divitheme.json"
 ```
 
 > [!IMPORTANT]
@@ -160,8 +160,8 @@ URL: <http://...>
 ```powershell
 # 1. Editar brand/_design_vars.json (solo lo que cambia)
 # 2. Sincronizar todo:
-.\wp eval-file DAW_bundle/divi-agentic-core/bin/brand-sync.php
-#    → et_divi (Customizer) + divitheme.json (tokens) + gcids (colores vivos)
+.\wp brand sync <DAW_SITE>
+#    → et_divi (Customizer) + divitheme.json (presets) + gcids (colores vivos) + gvids
 ```
 
 - **Contenedores**: usar decoration nativa (background, spacing) en vez de clases.
@@ -175,13 +175,13 @@ URL: <http://...>
 > [!CAUTION]
 > **PROHIBIDO** usar `et_pb_*` (shortcodes Divi 4). El Layout Engine espera únicamente `divi/*`.
 
-`DAW_SITE` en `.env` define qué directorio `site/` usar. `brand-sync.php` auto-descubre la ruta:
+`DAW_SITE` en `.env` define qué directorio `site/` usar. `wp brand sync` auto-descubre la ruta:
 
 ```powershell
 # Editar .env: DAW_SITE=nueva-marca
 # Editar site/<DAW_SITE>/brand/_design_vars.json
 # Sincronizar todo:
-.\wp eval-file DAW_bundle/divi-agentic-core/bin/brand-sync.php
+.\wp brand sync
 ```
 
 ---
@@ -194,7 +194,7 @@ URL: <http://...>
 | Estándares del proyecto | `references/knowledge.md` | Reglas técnicas |
 | Lógica del Diseñador | `references/designer.md` | Mapeo semántico → page-defs |
 | Lógica del Ingeniero | `references/engineer.md` | CLI, deploy, verificación |
-| Pipeline DAW | `DAW_bundle/AGENTS.md` | Fuente de verdad del flujo completo |
-| Brand Sync | `DAW_bundle/divi-agentic-core/bin/brand-sync.php` | Mapeo `_design_vars.json` → `et_divi` |
+| Pipeline DAW | `AGENTS.md` | Fuente de verdad del flujo completo |
+| Brand Sync | `wp brand sync` | Mapeo `_design_vars.json` → `et_divi` + gcids + gvids |
 | Inputs del Brand | `references/design-system-inputs.md` | Formatos de `_design_vars.json`, brief JSON |
-| VIE package | `DAW_bundle/vie/README.md` | Visual Impact Engine |
+| VIE package | `_archive/vie/vie/README.md` | Visual Impact Engine (archivado, no usar) |

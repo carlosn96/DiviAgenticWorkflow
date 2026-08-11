@@ -8,17 +8,17 @@ Este archivo contiene las reglas técnicas inmutables del proyecto.
 
 | Path | Propósito |
 |------|-----------|
-| `DAW_bundle/site/<DAW_SITE>/page-defs/` | Page-defs de entrada (manifiesto + secciones) |
-| `DAW_bundle/site/<DAW_SITE>/design-system/` | `divitheme.json` generado |
-| `DAW_bundle/site/<DAW_SITE>/brand/` | `_design_vars.json` (único input de marca) |
-| `DAW_bundle/divi-agentic-core/` | Plugin WordPress (junction link) |
-| `DAW_bundle/divi-agentic-core/bin/brand-sync.php` | Sincroniza `_design_vars.json` → `et_divi` |
+| `site/<DAW_SITE>/page-defs/` | Page-defs de entrada (manifiesto + secciones) |
+| `site/<DAW_SITE>/design-system/` | `divitheme.json` generado |
+| `site/<DAW_SITE>/brand/` | `_design_vars.json` (único input de marca) |
+| `divi-agentic-core/` | Plugin WordPress (junction link) |
+| `wp brand sync` | Sincroniza `_design_vars.json` → `et_divi` |
 
 ---
 
 ## Flujo de Brand (Actual)
 
-- **brand-sync.php** lee `_design_vars.json` y sincroniza **todo**:
+- **`wp brand sync`** lee `_design_vars.json` y sincroniza **todo**:
   - `wp_options['et_divi']` (Customizer global)
   - `design-system/divitheme.json` (tokens para Design_Resolver)
   - gcids via `GlobalData::set_global_colors()` (colores vivos)
@@ -44,5 +44,5 @@ Este archivo contiene las reglas técnicas inmutables del proyecto.
 ## Referencias
 
 - `AGENTS.md` (raíz proyecto) — reglas de operación
-- `DAW_bundle/AGENTS.md` — pipeline DAW completo
+- `AGENTS.md` (DAW) — pipeline DAW completo
 - `daw-skill/SKILL.md` — 4 fases

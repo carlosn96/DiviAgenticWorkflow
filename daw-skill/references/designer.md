@@ -134,15 +134,15 @@ Las secciones se referencian como paths relativos al directorio `page-defs/`.
 
 ```powershell
 # Combinar manifiesto + secciones en un solo JSON
-python DAW_bundle/workspace/combine.py `
-  DAW_bundle/site/<DAW_SITE>/page-defs/<slug>.json `
-  --out DAW_bundle/site/<DAW_SITE>/page-defs/<slug>-combined.json
+python workspace/combine.py `
+  site/<DAW_SITE>/page-defs/<slug>/manifest.json `
+  --out site/<DAW_SITE>/page-defs/<slug>/<slug>-combined.json
 
 # Deploy directo (Layout Engine refactorizado)
 .\wp.bat agentic deploy_page `
   --title="Título" --slug="<slug>" `
-  --schema="DAW_bundle/site/<DAW_SITE>/page-defs/<slug>-combined.json" `
-  --design-system="DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json"
+  --schema="site/<DAW_SITE>/page-defs/<slug>/<slug>-combined.json" `
+  --design-system="site/<DAW_SITE>/design-system/divitheme.json"
 ```
 
 ---
@@ -218,8 +218,7 @@ Cuando definas estilos de botón en `decoration.button.desktop.value`:
 El brand se define en `_design_vars.json` y se sincroniza a Divi Customizer:
 
 ```powershell
-.\wp eval-file DAW_bundle/divi-agentic-core/bin/brand-sync.php `
-  DAW_bundle/site/<DAW_SITE>/brand/_design_vars.json
+.\wp brand sync <DAW_SITE>
 ```
 
 Esto escribe 38+ opciones de color + fuentes a `wp_options['et_divi']`. Divi genera CSS automáticamente. No se genera `brand.css` ni se ejecuta `build_design_system.py`.

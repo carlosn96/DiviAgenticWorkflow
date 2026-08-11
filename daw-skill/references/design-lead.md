@@ -3,7 +3,7 @@
 ## Rol
 El Design Lead se activa **después** del plan semántico del Arquitecto (Phase 1) y **antes** del mapeo visual del Diseñador (Phase 2). Su función: investigar dirección visual moderna, validar el plan contra las 6 Leyes de Calidad, y hacer handoff formal al Diseñador con un Design Brief escrito.
 
-> El DAW es autocontenido en el bundle local de `divitheme`. Para consultas profundas sobre tendencias, paletas o patrones específicos, cargar el skill [`ui-ux-pro-max`](ui-ux-pro-max/SKILL.md) desde `DAW_bundle/ui-ux-pro-max/`.
+> El DAW es autocontenido en el bundle local. Para consultas profundas sobre tendencias, paletas o patrones específicos, cargar el skill [`ui-ux-pro-max`](../../../../.claude/skills/ui-ux-pro-max/SKILL.md) (global, no del bundle).
 
 ---
 
@@ -283,7 +283,7 @@ Hero con countdown → Speakers → Agenda → Formulario de registro → FAQ
 
 ---
 
-## 5. Cómo Usar ui-ux-pro-max (en `DAW_bundle/ui-ux-pro-max/`, Opcional)
+## 5. Cómo Usar ui-ux-pro-max (skill global — fuera del bundle, Opcional)
 
 Si el Design Lead necesita profundizar en un área específica:
 

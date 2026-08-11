@@ -10,10 +10,10 @@ Tomar la definición de página, construir el schema completo y desplegarlo en W
 Si el brand cambió (colores, fuentes, logo), sincronizar antes de desplegar:
 
 ```powershell
-.\wp eval-file DAW_bundle/divi-agentic-core/bin/brand-sync.php
+.\wp brand sync <slug>
 ```
 
-Esto sincroniza **todo** en un paso: `et_divi` (Customizer) + `divitheme.json` (tokens) + gcids (colores globales vivos) + gvids (variables nativas Divi 5 para radios, espacios y fuentes).
+Esto sincroniza **todo** en un paso: `et_divi` (Customizer) + `divitheme.json` (presets) + gcids (colores globales vivos) + gvids (variables nativas Divi 5 para radios, espacios y fuentes).
 
 ---
 
@@ -21,12 +21,12 @@ Esto sincroniza **todo** en un paso: `et_divi` (Customizer) + `divitheme.json` (
 
 ### Paso 1: Combinar manifiesto + secciones
 
-El page-def se divide en manifiesto (`<slug>.json`) y secciones (`sections/*.json`):
+El page-def se divide en manifiesto (`manifest.json`) y secciones (`sections/*.json`):
 
 ```powershell
-python DAW_bundle/workspace/combine.py `
-  DAW_bundle/site/<DAW_SITE>/page-defs/<slug>.json `
-  --out DAW_bundle/site/<DAW_SITE>/page-defs/<slug>-combined.json
+python workspace/combine.py `
+  site/<DAW_SITE>/page-defs/<slug>/manifest.json `
+  --out site/<DAW_SITE>/page-defs/<slug>/<slug>-combined.json
 ```
 
 ### Paso 2: Deploy directo (con Layout Engine refactorizado)
@@ -35,8 +35,8 @@ python DAW_bundle/workspace/combine.py `
 .\wp.bat agentic deploy_page `
   --title="Título de la página" `
   --slug="<slug>" `
-  --schema="DAW_bundle/site/<DAW_SITE>/page-defs/<slug>-combined.json" `
-  --design-system="DAW_bundle/site/<DAW_SITE>/design-system/divitheme.json"
+  --schema="site/<DAW_SITE>/page-defs/<slug>/<slug>-combined.json" `
+  --design-system="site/<DAW_SITE>/design-system/divitheme.json"
 ```
 
 `deploy_page` hace todo:
@@ -84,7 +84,7 @@ python DAW_bundle/workspace/combine.py `
 
 ## Brand CSS (Pipeline Actual)
 
-El brand se sincroniza a `wp_options['et_divi']` mediante `brand-sync.php`. Divi genera y encola el CSS automáticamente. No hay CSS propio de marca, ni encolado manual, ni archivos brand.css en disco.
+El brand se sincroniza a `wp_options['et_divi']` mediante `wp brand sync`. Divi genera y encola el CSS automáticamente. No hay CSS propio de marca, ni encolado manual, ni archivos brand.css en disco.
 
 ---
 
