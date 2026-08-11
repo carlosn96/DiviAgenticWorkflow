@@ -49,6 +49,20 @@ python DiviAgenticWorkflow/workspace/combine.py `
 .\wp brand sync
 ```
 
+## Verificación de mantenimiento
+
+`site/example` es la plantilla para marcas nuevas. Para asegurar que sigue alineado con `Token_Registry` (fuente de verdad de keys) y con la estructura documentada:
+
+```powershell
+php divi-agentic-core/bin/check-example.php                     # verificar site/example (exit 0 = OK, 1 = desincronizado)
+php divi-agentic-core/bin/check-example.php --fix               # regenerar vars + estructura de site/example
+php divi-agentic-core/bin/check-example.php --active            # validar el site activo (DAW_SITE)
+php divi-agentic-core/bin/check-example.php --site=<slug>       # validar un site productivo puntual
+php divi-agentic-core/bin/check-example.php --all               # site/example + site activo
+```
+
+Ejecutarlo cada vez que se agregue/quiten tokens en `Token_Registry` o se cambie la estructura de `site/`. Cuando `--active`/`--site=` reporta keys obsoletas o faltantes en un site productivo, corregir `site/<slug>/brand/_design_vars.json` (agregar las faltantes, quitar las obsoletas) y re-sincronizar con `wp brand sync <slug>`.
+
 ## Notas
 
 - `wp brand` es el ÚNICO comando que existe para el usuario.
