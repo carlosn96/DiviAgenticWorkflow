@@ -25,9 +25,9 @@ wp brand init <slug>
 
 ## 2. Brief Format
 
-**Path:** `workspace/automation/{ux_pro_brief_generator.py,generate_brief.py}`
+**Path (archivados):** `_archive/workspace/automation/{ux_pro_brief_generator.py,generate_brief.py}` — los generadores Python de briefs fueron archivados. El flujo actual de briefs es manual: se escriben como `site/<DAW_SITE>/page-defs/<slug>/brief.md` (o `instruccion.txt`) y se traducen a manifesto + secciones (ver AGENTS.md §4).
 
-Briefs are JSON files stored in `site/<DAW_SITE>/briefs/`.
+Briefs son JSON files stored in `site/<DAW_SITE>/briefs/` (estructura legacy, no usada en el pipeline actual):
 
 ```json
 {

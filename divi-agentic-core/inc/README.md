@@ -1,36 +1,30 @@
-# Ecosistema INC v3.0: Arquitecto Institucional Autónomo
+# divi-agentic-core — Plugin WordPress del DAW
 
-Este ecosistema unifica la inteligencia del DAW (Divi Agentic Workflow) con un motor de ejecución nativo para Divi 5.
+Motor nativo para Divi 5: Layout Engine con renderers modulares, sistema de diseño de marca (Token_Registry), y comandos WP-CLI.
 
-## 🏗️ Arquitectura del Sistema
+## Arquitectura
 
-El framework está diseñado para ser autosuficiente y opera bajo una estructura de carga unificada:
+- **`inc/loader.php`**: Autoloader PSR-4 (namespace `DAC\` + renderers `Divi_Agentic_Core\Core\Renderers`).
+- **`inc/core/`**: Token_Registry (fuente de verdad de tokens de marca), Brand_Sync_Handler, Brand_Reset_Handler, Design_Validator, Design_Resolver, Layout_Engine, renderers/, skills/ (hallmark, high-end, impeccable), intelligence/ (catálogos CSV).
+- **`inc/cli/`**: Comandos WP-CLI (`wp brand {init,validate,approve,revoke,sync,reset,status}`, `wp agentic {deploy_page,export_page,global_colors,layout_*,template_*,deploy_global_ecosystem}`).
+- **`data/`**: Metadata de módulos Divi 5 (`_all_modules_metadata.php`, schemas).
+- **`modules/`**: Módulos Divi 5 custom (module.json + render.php + view.js).
+- **`bin/`**: Scripts de inspección y utilidades (ver `divi-agentic-core/bin/AGENTS.md`).
 
-- **`inc/loader.php`**: El Director. Gestiona la carga automática de todas las clases del sistema.
-- **`inc/core/`**: El Músculo. Contiene los motores de Layout, Customizer, Inteligencia (Brain) y Comunicación (AI Bridge).
-- **`inc/cli/`**: La Interfaz. Comandos WP-CLI para la operación diaria.
-- **`inc/docs/`**: El Conocimiento. Documentación exhaustiva para agentes e ingenieros.
+## Guía rápida
 
-## 🚀 Guía de Inicio Rápido
+### Marca
 
-### 1. Generación de Páginas
-Para crear una página desde un prompt humano con inyección nativa:
 ```powershell
-.\wp.bat agentic generate --prompt="Página de Bachillerato con hero y tabla de costos" --title="Bachillerato" --slug="bachillerato" --deploy
+.\wp.bat brand init <site>            # crear _design_vars.json
+.\wp.bat brand validate <site>        # 54 checks mecánicos
+.\wp.bat brand sync <site>            # vars → et_divi + gcids + gvids + divitheme.json
 ```
 
-### 2. Aplicación de Identidad (Branding)
-Para inyectar el ADN de marca desde un archivo de diseño:
+### Deploy de página
+
 ```powershell
-.\wp.bat agentic theme_apply ./workspace/design/identidad-corporativa.md
+.\workspace\deploy.ps1 -Slug <slug> -Title "<Título>"
 ```
 
-## 📚 Documentación Maestra (Sin Ambigüedades)
-
-Para operar el sistema con éxito, consulta estos dos pilares:
-
-1.  **[Manual Operativo DAW](../inc/docs/workflow.md)**: El proceso paso a paso desde el prompt hasta la persistencia en producción. **Lectura obligatoria para nuevos agentes.**
-2.  **[Manifiesto Arquitectónico y Catálogo](../inc/docs/architectural-manifesto.md)**: El estándar de diseño, tokens disponibles y el diccionario técnico de componentes (Presets).
-
----
-*Nota: Este sistema reemplaza y absorbe todas las capacidades del antiguo framework DAC. No se requieren dependencias externas para la construcción del sitio.*
+Detalle del flujo completo en `AGENTS.md` (raíz del DAW) y `RUNBOOK.md`.

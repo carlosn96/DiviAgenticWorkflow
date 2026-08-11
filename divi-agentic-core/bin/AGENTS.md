@@ -1,5 +1,21 @@
 # Scripts de inspección de módulos y schemas
 
+## check-example.php
+Mantiene `site/example` sincronizado con `Token_Registry` y con la estructura de carpetas documentada. Es el mecanismo de mantenimiento de la plantilla de marcas nuevas. También valida sitios productivos contra el mismo contrato.
+
+```powershell
+php divi-agentic-core/bin/check-example.php                     # verificar site/example (exit 0 = OK, 1 = desincronizado)
+php divi-agentic-core/bin/check-example.php --fix               # regenerar vars + estructura de site/example
+php divi-agentic-core/bin/check-example.php --active            # validar el site activo (DAW_SITE de .env)
+php divi-agentic-core/bin/check-example.php --site=<slug>       # validar un site productivo puntual
+php divi-agentic-core/bin/check-example.php <slug>              # forma corta de --site=
+php divi-agentic-core/bin/check-example.php --all               # site/example + site activo
+```
+
+Verifica: (1) keys de `site/<slug>/brand/_design_vars.json` == schema de `Token_Registry` (+ `customizer_*`), (2) para `example`, dirs esperados presentes y obsoletos ausentes. Correr tras tocar `Token_Registry` o la estructura de `site/`. Cuando un site productivo diverge, corregir su `_design_vars.json` y re-sincronizar con `wp brand sync`.
+
+---
+
 ## inspect-module.php
 Inspecciona atributos de un módulo desde el metadata oficial de Divi 5.
 
@@ -36,7 +52,7 @@ php divi-agentic-core/bin/generate-module-schema.php --all --out dir/           
 php divi-agentic-core/bin/generate-module-schema.php --list                        # listar keys
 ```
 
-Fuente de verdad única para la estructura de módulos. `build_page.php` lee los JSON que este script produce.
+Fuente de verdad única para la estructura de módulos. El Layout Engine usa estos schemas vía `Module_Metadata` (ver `divi-agentic-core/inc/core/trait-module-metadata.php`).
 
 ---
 
