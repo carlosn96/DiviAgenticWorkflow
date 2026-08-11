@@ -1,5 +1,5 @@
-# Ignore generated page schemas (output of build_page.php --out)
-site/
+# site/ NO se ignora en bloque: site/.gitignore define qué sí se versiona
+# (estructura y datos fuente) y qué no (outputs generados: pages/, design-system/, content_state/).
 
 # Deprecated catalog templates (Divi 4 compiled)
 workspace/catalog/
