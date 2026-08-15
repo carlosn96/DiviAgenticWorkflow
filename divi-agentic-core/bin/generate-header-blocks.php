@@ -25,7 +25,7 @@ $props = fn($arr) => json_encode($arr, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_U
 
 $version = defined('DIVI_BUILDER_VERSION')
     ? DIVI_BUILDER_VERSION
-    : (function_exists('wp_get_theme') && ($t = wp_get_theme('Divi'))->exists() ? $t->get('Version') : '5.7.4');
+    : (function_exists('wp_get_theme') && ($t = wp_get_theme('Divi'))->exists() ? $t->get('Version') : '5.10.1');
 
 // Image block
 $img_logo = $props([

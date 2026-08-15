@@ -2,7 +2,7 @@
 namespace DAC\CLI;
 
 /**
- * Agentic Command v3.1 — Deploys pages and global layouts with Divi 5.7.4.
+ * Agentic Command v3.1 — Deploys pages and global layouts with Divi 5.10.1.
  *
  * Validates schema blocks, resolves design tokens via Design_Resolver,
  * then compiles to Divi 5 blocks via Layout_Engine.

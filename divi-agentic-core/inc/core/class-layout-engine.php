@@ -5,7 +5,7 @@ require_once __DIR__ . '/trait-module-metadata.php';
 require_once __DIR__ . '/renderers/trait-block-helpers.php';
 
 /**
- * Layout Engine v12.1 — Divi 5.7.4 Native Render (Metadata-Driven)
+ * Layout Engine v12.1 — Divi 5.10.1 Native Render (Metadata-Driven)
  *
  * Pure structural compiler: receives a pre-resolved schema and maps it
  * to Divi 5 blocks. Uses official Divi 5 metadata for serialization paths.

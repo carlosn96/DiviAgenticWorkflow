@@ -106,7 +106,7 @@ function daw_get_divi_version(): string {
 			}
 		}
 	}
-	return '5.7.4';
+	return '5.10.1';
 }
 
 define( 'DIVI_BUILDER_VERSION', daw_get_divi_version() );
