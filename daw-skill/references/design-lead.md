@@ -3,7 +3,7 @@
 ## Rol
 El Design Lead se activa **después** del plan semántico del Arquitecto (Phase 1) y **antes** del mapeo visual del Diseñador (Phase 2). Su función: investigar dirección visual moderna, validar el plan contra las 6 Leyes de Calidad, y hacer handoff formal al Diseñador con un Design Brief escrito.
 
-> El DAW es autocontenido en el bundle local. Para consultas profundas sobre tendencias, paletas o patrones específicos, cargar el skill [`ui-ux-pro-max`](../../../../.claude/skills/ui-ux-pro-max/SKILL.md) (global, no del bundle).
+> El DAW es autocontenido en el bundle local. Para consultas profundas sobre tendencias, paletas o patrones específicos, cargar el skill global `ui-ux-pro-max` (no referencia por path — se resuelve por nombre en la configuración del agente).
 
 ---
 
@@ -12,26 +12,29 @@ El Design Lead se activa **después** del plan semántico del Arquitecto (Phase 
 > [!CAUTION]
 > Estas 6 leyes se validan **ANTES** de escribir una sola línea de JSON. Si cualquier ley no se satisface en el plan, el Design Lead propone alternativa y re-valida. Son un bloqueante, no una sugerencia.
 
+> [!WARNING]
+> ⚠️ **Los presets citados en este documento (`section:hero-dark`, `text:display-xl`, `module:feature-card`, `transform:hover-lift`, …) NO existen en `divitheme.json` hoy** (`"presets": []`). Las Leyes expresan **intenciones de diseño**; el Diseñador las implementa con **decoration nativa + tokens `{{design:color:*}}`/`{{design:font:*}}`/`{{design:space:*}}`**, no con presets. Verificar siempre contra `site/<DAW_SITE>/design-system/divitheme.json` antes de usar cualquier preset.
+
 Estas leyes se aplican **siempre**, sin importar el proyecto ni el design system cargado. Son el piso mínimo que separa un diseño profesional de uno genérico.
 
 ### Ley 1 — Contraste de Sección ⛔ BLOQUEANTE
-Nunca 2 secciones consecutivas del mismo color de fondo. El ritmo visual **obligatorio** es alternar profundidad. Documentar la secuencia completa de presets de sección antes del handoff:
+Nunca 2 secciones consecutivas del mismo color de fondo. El ritmo visual **obligatorio** es alternar profundidad. Documentar la secuencia completa de fondos (tokens `{{design:color:*}}` de `_design_vars.json`, p.ej. `surface-deep`/`surface-light`/`surface-white`) antes del handoff:
 
 ```
-Ejemplo correcto:
-  sec-1: section:hero-dark     ← oscuro
-  sec-2: section:light         ← claro
-  sec-3: section:white         ← blanco / tarjetas
-  sec-4: section:dark          ← oscuro alternativo
-  sec-5: section:light         ← claro cierre
+Ejemplo correcto (tokens del design system):
+  sec-1: {{design:color:surface-deep}}     ← oscuro
+  sec-2: {{design:color:surface-light}}    ← claro
+  sec-3: {{design:color:surface-white}}    ← blanco / tarjetas
+  sec-4: {{design:color:surface-mid}}      ← oscuro alternativo
+  sec-5: {{design:color:surface-light}}    ← claro cierre
 ```
 
 El ojo necesita puntos de respiro y sorpresa. Una página toda blanca es invisible. Una página toda oscura es opresiva.
 
 ### Ley 2 — Titular Dominante ⛔ BLOQUEANTE
-El H1 del hero **SIEMPRE** usa el preset `text:display-xl` (72px desktop mínimo) aplicado a un bloque `divi/heading`. Si el design system no tiene una fuente `display`, usar la fuente `ui` con `weight: 800`. El titular es el primer punto de contacto visual — debe ser imposible de ignorar.
+El H1 del hero **SIEMPRE** es dominante tipográficamente: un bloque `divi/heading` o `divi/text` con `headingFont.h1` (o `bodyFont`) a tamaño **≥ 2rem desktop mínimo (intención: ~XL/72px), escala responsive -35/40%** (tokens `{{design:font:*}}`/`{{design:color:*}}`). Si el design system no tiene una fuente `display`, usar la fuente `ui` con `weight: 800`. El titular es el primer punto de contacto visual — debe ser imposible de ignorar. (El lint `lint_page_def.php` Ley 2 valida ≥2rem en la primera sección.)
 
-No se acepta un hero sin titular `display-xl` o `hero-title`. Si el plan semántico no lo incluye, agregar uno.
+No se acepta un hero sin titular XL dominante. Si el plan semántico no lo incluye, agregar uno.
 
 ### Ley 3 — Espacio Negativo Mínimo ⛔ BLOQUEANTE
 - Todas las secciones: `padding-top` y `padding-bottom` mínimo de `{{design:space:2xl}}` (96px).
@@ -45,11 +48,11 @@ Todo elemento interactivo documenta un estado hover antes del handoff al Diseña
 
 | Tipo de elemento | Comportamiento hover |
 |---|---|
-| Botones primarios | Cambio a `accent-hover` + `transform:hover-lift` |
-| Cards / Tarjetas | `transform:hover-lift` (translateY -8px + sombra expandida) |
-| Cards de features | `presets: ["module:feature-card", "transform:hover-lift"]` |
-| Cards glass | `presets: ["module:glass-card", "transform:hover-lift"]` |
-| Imágenes enlazadas | `transform:hover-scale` (scale 1.03) |
+| Botones primarios | `decoration.button.hover` (color más oscuro / `{{design:color:*}}`) + `decoration.transform.hover` |
+| Cards / Tarjetas | `decoration.transform.hover` (translateY -8px + sombra expandida) |
+| Cards de features | `decoration.transform.hover` (translateY + sombra) — sin presets |
+| Cards glass | `decoration.transform.hover` (translateY + sombra) — sin presets |
+| Imágenes enlazadas | `decoration.transform.hover` (scale 1.03) |
 
 Si el plan semántico incluye tarjetas o botones sin hover documentado, el Design Lead los agrega antes del handoff.
 
@@ -58,10 +61,10 @@ Cada sección tiene **un** elemento que domina y ancla la mirada. El Design Lead
 
 | Tipo de sección | Elemento ancla |
 |---|---|
-| Hero | El titular `display-xl` enorme |
-| Stats / Números | El número en escala masiva (preset `module:stat-item`, 48px+) |
+| Hero | El titular XL (`headingFont.h1` ≥ 2rem desktop) |
+| Stats / Números | El número en escala masiva (≥ 48px, `{{design:color:*}}` acento) |
 | Features | El ícono o imagen de la card |
-| Testimonial | La cita en serif itálica (preset `module:testimonial-card`) |
+| Testimonial | La cita en serif itálica (bodyFont serif, tamaño grande) |
 | CTA Final | El botón grande y aislado, con espacio negativo masivo alrededor |
 | About / Content | La imagen o elemento visual dominante en la columna visual |
 
@@ -84,13 +87,13 @@ El Diseñador implementa estos valores en `headingFont.desktop/tablet/phone.valu
 
 | Anti-patrón | Alternativa DAW Premium |
 |-------------|------------------------|
-| Colores de acento como fondo de secciones | Solo `section:*` presets para fondos. `accent` solo en CTAs y elementos de énfasis |
+| Colores de acento como fondo de secciones | Fondos vía tokens `{{design:color:surface-*}}` (Ley 1). `accent` solo en CTAs y elementos de énfasis |
 | Emojis como iconos | Usar iconos Divi nativos `&#xe03a;` via `divi/blurb` o SVG en `divi/image` |
-| Hero con slider genérico y texto pequeño | Hero tipográfico con `text:display-xl` y padding masivo |
+| Hero con slider genérico y texto pequeño | Hero tipográfico con `divi/heading`/`divi/text` XL (≥2rem) y padding masivo |
 | Texto gris sobre gris | Contraste estricto mínimo 4.5:1. Verificar con tokens `{{design:color:*}}` |
-| Cards planas sin fondo, sombra ni radio | Preset `module:feature-card` (sombra masiva) o `module:glass-card` |
+| Cards planas sin fondo, sombra ni radio | decoration nativa: `background` (surface-white) + `border` radio + `shadow` (no existen presets `module:feature-card`/`glass-card` en `divitheme.json`) |
 | Todas las secciones en fondo blanco | Alternancia obligatoria (Ley 1) |
-| `divi/text` con `presets: ["text:display-xl"]` para el H1 | Usar `divi/heading` con `presets: ["text:display-xl"]`. El texto body no es el bloque correcto para titulares H1 |
+| `divi/text` con headingFont.h1 para el H1 | Correcto si usa `divi/text` con `headingFont.h1` + decoration (es el patrón real). NO usar `divi/code` con `<h1>` inline — el bloque correcto es `divi/heading` o `divi/text` con `headingFont` |
 
 ---
 
@@ -161,12 +164,14 @@ Estilo visual: <editorial / modern / premium / minimal / dramatic>
 Tono: <descripciones breves del tono visual>
 
 ALTERNANCIA DE FONDOS (Ley 1 ✓):
-  sec-1: <section:preset>
-  sec-2: <section:preset>
+  sec-1: <token de fondo — {{design:color:surface-deep}} / surface-light / surface-white, alternando>
+  sec-2: <token de fondo distinto>
   ...
 
+> **Variable-availability gate (antes de definir tokens en el brief):** los tokens (`{{design:color:*}}`, `{{design:font:*}}`, `{{design:space:*}}`) SOLO existen si `wp brand sync` los registró como gcids/gvids. Verificar: `.\wp agentic global_colors status` y `.\wp agentic global_colors list`. Si el bucket necesario está vacío (sin colores/espacios/fuentes), **preguntar al usuario**: *(a)* generar el sistema de variables (recomendado — `wp brand sync` ya lo hace desde `_design_vars.json`) o *(b)* construir con valores inline. Nunca inventar nombres de token (`{{design:color:navy-700}}`) que no estén en `_design_vars.json` — se resolverían como literal inválido. Nombres exactos en `site/<DAW_SITE>/brand/_design_vars.json` (keys snake_case → kebab-case).
+
 TITULAR HERO (Ley 2 ✓):
-  Bloque: divi/heading, preset: text:display-xl
+  Bloque: divi/heading (headingFont.h1, tamaño XL desktop ~72px con escala responsive)
   Contenido: "<texto del titular>"
 
 ESPACIO NEGATIVO (Ley 3 ✓):
@@ -174,12 +179,12 @@ ESPACIO NEGATIVO (Ley 3 ✓):
   Cards: padding mínimo {{design:space:lg}} (40px)
 
 HOVER DOCUMENTADO (Ley 4 ✓):
-  - Botones primarios: preset module:btn-primary + transform:hover-lift
-  - Cards de features: preset module:feature-card + transform:hover-lift
+  - Botones primarios: decoration hover en button.decoration (color más oscuro) + transform
+  - Cards de features: decoration hover (sombra expandida + translateY)
   - [otros elementos interactivos]
 
 ANCLAS VISUALES (Ley 5 ✓):
-  - sec-1 hero: titular display-xl
+  - sec-1 hero: titular XL (headingFont.h1 ≥ 2rem)
   - sec-2 features: íconos de blurb
   - [ancla por sección]
 
@@ -314,15 +319,15 @@ Estilo visual: Moderno Ultra-Premium
 Tono: Austero, erudito, confianza institucional sin frivolidad
 
 ALTERNANCIA DE FONDOS (Ley 1 ✓):
-  sec-1: section:hero-dark        (hero tipográfico oscuro)
-  sec-2: section:trust-bar        (barra de stats, oscuro suave)
-  sec-3: section:light            (features grid, claro cálido)
-  sec-4: section:white            (about / imagen, blanco limpio)
-  sec-5: section:dark             (testimonials, oscuro)
-  sec-6: section:cta-epic         (CTA final, impacto máximo)
+  sec-1: section hero oscuro (surface-deep)       (hero tipográfico oscuro)
+  sec-2: barra de stats, oscuro suave             (surface-mid)
+  sec-3: features grid, claro cálido              (surface-light)
+  sec-4: about / imagen, blanco limpio            (surface-white)
+  sec-5: testimonials, oscuro                     (surface-deep)
+  sec-6: CTA final, impacto máximo                (accent)
 
 TITULAR HERO (Ley 2 ✓):
-  Bloque: divi/heading, preset: text:hero-title
+  Bloque: divi/heading o divi/text (headingFont.h1), tamaño XL (≥2rem desktop)
   Contenido: "Bibliotheca San Pablo"
 
 ESPACIO NEGATIVO (Ley 3 ✓):
@@ -330,19 +335,19 @@ ESPACIO NEGATIVO (Ley 3 ✓):
   Cards feature-card: decoration.spacing padding 40px
 
 HOVER DOCUMENTADO (Ley 4 ✓):
-  - Botones: module:btn-primary + transform:hover-lift
-  - Feature cards: module:feature-card + transform:hover-lift
-  - Testimonial cards: module:testimonial-card + transform:hover-scale
+  - Botones: button.decoration hover (accent_hover) + transform
+  - Feature cards: decoration hover sombra expandida + translateY
+  - Testimonial cards: decoration hover scale 1.03
 
 ANCLAS VISUALES (Ley 5 ✓):
-  - Hero: titular hero-title masivo
-  - Stats bar: números en stat-num (48px+)
-  - Features: íconos Divi &#xe03a; en cada blurb
-  - Testimonials: cita en quote-serif itálica
-  - CTA: botón btn-primary aislado con padding masivo
+  - Hero: titular masivo (72px)
+  - Stats bar: números en escala grande (48px+)
+  - Features: íconos Divi en cada blurb
+  - Testimonials: cita en serif itálica
+  - CTA: botón aislado con padding masivo
 
 ESCALA RESPONSIVA (Ley 6 ✓):
-  H1 (hero-title): desktop 68px / tablet 42px / mobile 28px
+  H1 (hero): desktop 72px / tablet 42px / mobile 28px
   H2 (headline): desktop 40px / tablet 30px / mobile 22px
 
 DECISIONES:

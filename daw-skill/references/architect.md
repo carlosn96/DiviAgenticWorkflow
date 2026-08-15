@@ -6,6 +6,39 @@ Understand the business requirement and output a structured narrative blueprint 
 
 ---
 
+## 0. Discovery (ask BEFORE analyzing)
+
+Nunca planificar sobre suposiciones cuando unas preguntas lo aclararían. El brief ("haz una página X") casi nunca basta.
+
+**Reglas:**
+- **Skip lo ya sabido.** Si el brief responde una pregunta, no la repitas.
+- **Batch en un solo mensaje**, numeradas, para una sola respuesta del usuario.
+- **Cap:** 4–6 preguntas (hasta 8 en complejas). Prioriza las de mayor impacto.
+- **Ofrece defaults:** "si no sabes, asumo X" — el usuario puede responder "all defaults / just go".
+- **No bloquear:** si el usuario dice "just go" o el request es trivial, procede con **assumptions documentadas** en el plan.
+
+**Banco de preguntas core (elige las relevantes):**
+
+1. **Goal & CTA** — ¿cuál es la UNA acción de la página, y qué dice + a dónde va el botón principal?
+2. **Audiencia & tono** — ¿para quién es, y qué vibe (institucional / comercial / premium / minimal)?
+3. **Brand** — ¿colores (hex) y fuentes? ¿Logo?
+4. **Contenido** — ¿tienen copy e imágenes reales, o escribo placeholder creíble?
+5. **Secciones must-have** — ¿qué debe tener (o NO tener) la página?
+6. **Referencia** — ¿algún sitio cuyo estilo quieras emular?
+7. **Alcance** — ¿página sola o template Theme Builder? ¿longitud concisa vs completa?
+
+**Add-ons por tipo de página** (solo los aplicables):
+
+- **Producto:** nombre, precio, features, nº de imágenes de galería, reviews, ¿comprar vs consultar?
+- **Pricing:** nº de tiers, nombres/precios, toggle mensual/anual, plan destacado.
+- **Portfolio:** nº de proyectos, categorías/filtros, grid vs caso de estudio.
+- **Contacto:** campos del form, ¿mapa? (requiere Maps API key), info de oficina/horario.
+- **Blog/dinámico:** ¿posts reales de WP (Loop Builder) o cards estáticas? ¿cuántos?
+
+> **Verbatim-copy rule (crítica):** cuando el usuario entrega copy O una página de referencia, **transcribirlo EXACTO — nunca parafrasear, reescribir o "mejorar"**. Generar wording fresco SOLO para copy genuinamente faltante. Antes de deploy, diff del texto on-page vs la fuente. (Los LLM tienden a reescribir cerca de una referencia — resistir.)
+
+---
+
 ## 1. Brand Identity Analysis
 
 Before touching layout, establish the brand's narrative posture:
@@ -341,3 +374,5 @@ The Architect delivers this JSON to the Design Lead. This is the sole deliverabl
 - [ ] `cultural_notes` are specific to the audience (not generic)
 - [ ] `content_outline` provides enough specificity for a copywriter to write from
 - [ ] `accessibility_notes` include at least 3 concrete requirements
+- [ ] Discovery questions were asked (or waived by "just go") with assumptions documented
+- [ ] **Copy is verbatim** vs la fuente/referencia del usuario — sin parafraseo (verbatim-copy rule)

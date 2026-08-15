@@ -58,7 +58,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 | Atributo | Tipo | Obligatorio | Descripción |
 | :--- | :--- | :--- | :--- |
-| `presets` | `string[]` | No | `["section:hero-image-dark"]`, `["section:light"]`, `["section:cta-epic"]` |
+| `presets` | `string[]` | No | `["section:hero-image-dark"]`, `["section:light"]`, `["section:cta-epic"]`. ⚠️ Solo usar si el preset **existe** en `divitheme.json` — hoy `"presets": []`, así que en la práctica se usa decoration nativa + `{{design:color:*}}` |
 | `decoration` | object | No | Background, spacing, border, animation del contenedor |
 | `background_image` | string | No | URL de imagen de fondo |
 | `bg_gradient` | object | No | Shorthand para gradient overlay. Ej: `{ "type": "linear", "direction": "135deg", "overlaysImage": "on", "stops": [{ "color": "rgba(0,0,0,0.8)", "position": "0%" }, { "color": "rgba(0,0,0,0)", "position": "100%" }] }` |
@@ -740,6 +740,39 @@ Usar cuando se construyen páginas de tienda / producto. Todos soportan decorati
 | `divi/portfolio` | Grid de proyectos |
 | `divi/filterable-portfolio` | Portfolio filtrable |
 | `divi/canvas-portal` | Portal canvas 3D |
+
+---
+
+## 10b. Bloques 5.10 + Dinámicos (referencia divi5-skill)
+
+Módulos verificados en la línea 5.10 (source-verified / render-verified en `test/divi5-skill/`).
+
+| Bloque | Uso |
+| :--- | :--- |
+| `divi/timeline` | Cronología / pasos con fechas. Hijos `divi/timeline-item`. Preferir sobre blurbs-en-fila cuando el orden/tiempo importa (arquetipo Process/Steps) |
+| `divi/timeline-item` | Item individual de timeline (`title`, `content`) |
+| `divi/table-of-contents` | TOC de la página. ⚠️ En 5.10 requiere Theme Builder + guardado vía VB (no deployable puro) — marcar ⚠️ en COVERAGE |
+| `divi/tooltip` | Popover hover/click/always que se ancla al módulo padre (v0.6.0, render-confirmed) |
+| `divi/instagram-feed` | Feed de Instagram (token requerido) |
+| `divi/video-slider` | Slider de videos |
+| `divi/post-filter` | Filtrado en vivo de resultados Loop Builder (nuevo en 5.10) |
+| `divi/post-filter-item` | Item del filtro (`post-filter` + `post-filter-item` juntos) |
+
+**Patrón Loop Builder** (contenido dinámico real — recomendado sobre cards hardcodeadas cuando el contenido viene de WP):
+
+```json
+{
+  "module": "divi/group",
+  "layout": { "loop": { "desktop": { "value": { "postType": "post", "postsPerPage": 3 } } } },
+  "children": [
+    { "module": "divi/post-title", "loopItem": true },
+    { "module": "divi/featured-image", "loopItem": true },
+    { "module": "divi/post-content", "loopItem": true, "advanced": { "text": { "text": { "desktop": { "value": { "textAlign": "left" } } } } } }
+  ]
+}
+```
+
+> El loop item es un `divi/group` con `layout.loop` + hijos dinámicos (`divi/post-title`, `divi/featured-image`, `divi/post-content`, `divi/post-excerpt`…). Para blogs/portafolios/proyectos es la vía correcta — no hardcodear cards duplicadas. Relacionado con la regla de contenido editorial de AGENTS.md.
 
 ---
 
