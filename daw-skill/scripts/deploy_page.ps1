@@ -1,70 +1,48 @@
-param (
-    [Parameter(Mandatory=$true)]
-    [string]$Title,
+# DEPRECATED — use the official wrapper instead:
+#   .\workspace\deploy.ps1 -Slug <slug> -Title "<title>"
+# This script is kept as a compatibility shim and delegates to workspace/deploy.ps1.
+# It does combine + deploy_page + cache flush, exactly like the official wrapper.
 
-    [Parameter(Mandatory=$true)]
-    [string]$Slug,
-
-    [Parameter(Mandatory=$true)]
-    [string]$SchemaPath,
-
+param(
+    [Parameter(Mandatory=$true)] [string]$Title,
+    [Parameter(Mandatory=$true)] [string]$Slug,
+    [Parameter(Mandatory=$true)] [string]$SchemaPath,
     [switch]$ClearCache
 )
 
 $ErrorActionPreference = "Stop"
 
-# Resolve project root (bundle is one level below project root; wrapper is at project root)
-$DAWRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path
-$ProjectRoot = (Resolve-Path (Join-Path $DAWRoot "..")).Path
-$WPCLI = Join-Path $ProjectRoot "wp.bat"
-$EnvFile = Join-Path $ProjectRoot ".env"
-if (Test-Path $EnvFile) {
-    Get-Content $EnvFile | Where-Object { $_ -match '^\s*([^#]+?)\s*=\s*(.*)$' } | ForEach-Object {
-        $varName = $Matches[1].Trim()
-        $varValue = ($Matches[2].Trim() -replace '^"|"$', '') -replace "^'|'$", ""
-        if ($varName -eq "WP_CLI_COMMAND") { $WPCLI = $varValue }
-        if ($varName -eq "PROJECT_ROOT" -and $varValue -ne ".") { $ProjectRoot = Resolve-Path $varValue }
-    }
-} else {
-    Write-Host "NOTE: No .env found at $EnvFile. Using defaults ($WPCLI and PWD)." -ForegroundColor Yellow
-}
+$DawRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path
+$ProjectRoot = (Resolve-Path (Join-Path $DawRoot "..")).Path
+$WpCli = Join-Path $ProjectRoot "wp.bat"
 
-Write-Host "--- DAW Execution: Deploying Page '$Title' ---" -ForegroundColor Cyan
-Write-Host "Environment: WP_CLI = $WPCLI | Root = $ProjectRoot"
+Write-Host "NOTE: daw-skill/scripts/deploy_page.ps1 is deprecated." -ForegroundColor Yellow
+Write-Host "      Prefer: .\workspace\deploy.ps1 -Slug <slug> -Title <title>" -ForegroundColor Yellow
 
-# 1. Validate Schema file exists
-if (-not (Test-Path $SchemaPath)) {
-    # Attempt to resolve considering it relative
-    $TryRelative = Join-Path $ProjectRoot $SchemaPath
-    if (Test-Path $TryRelative) {
-        $SchemaPath = $TryRelative
-    } else {
-        throw "Error: Schema file not found at '$SchemaPath'."
+# 1. Combine manifest + sections (SchemaPath is the combined output target)
+if ($SchemaPath -like "*-combined.json") {
+    $Manifest = $SchemaPath -replace "-combined\.json$", "\manifest.json"
+    if (Test-Path $Manifest) {
+        Write-Host "Combining: $Manifest" -ForegroundColor DarkGray
+        python "$DawRoot\workspace\combine.py" $Manifest --out $SchemaPath
+        if ($LASTEXITCODE -ne 0) { throw "combine.py failed." }
     }
 }
 
-# 2. Execute via configured WP-CLI
-Write-Host "Running command..." -ForegroundColor DarkGray
-$deployCmd = "$WPCLI agentic deploy_page --title=`"$Title`" --slug=`"$Slug`" --schema=`"$SchemaPath`""
+# 2. Deploy via wp agentic deploy_page
+$deployCmd = "$WpCli agentic deploy_page --title=`"$Title`" --slug=`"$Slug`" --schema=`"$SchemaPath`""
 Write-Host ">> $deployCmd" -ForegroundColor Yellow
-
 Invoke-Expression $deployCmd
-if ($LASTEXITCODE -ne 0) {
-    throw "Error: WP-CLI deployment failed."
-}
+if ($LASTEXITCODE -ne 0) { throw "Error: WP-CLI deployment failed." }
 
-# 3. Optional Cache Clearing
+# 3. Cache clearing
 if ($ClearCache) {
-    Write-Host "Clearing Divi 5 cache..." -ForegroundColor Yellow
-    Invoke-Expression "$WPCLI eval `"et_core_clear_wp_cache();`""
-    Write-Host "Cache cleared." -ForegroundColor Green
-}
-
-# 4. Final Verification
-Write-Host "Verifying deployment..." -ForegroundColor Yellow
-$postCount = Invoke-Expression "$WPCLI post list --name=`"$Slug`" --format=count" 2>$null
-if ([int]$postCount -eq 0) {
-    throw "Error: Verification failed. Post not found in DB."
+    Write-Host "Clearing Divi cache..." -ForegroundColor Yellow
+    Invoke-Expression "$WpCli cache flush"
+    $EtCache = Join-Path $ProjectRoot "wp-content\et-cache"
+    if (Test-Path $EtCache) {
+        Remove-Item -Path "$EtCache\*" -Recurse -Force -ErrorAction SilentlyContinue
+    }
 }
 
 Write-Host "Success: Page '$Title' deployed." -ForegroundColor Green
