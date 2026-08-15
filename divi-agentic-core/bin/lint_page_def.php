@@ -114,6 +114,10 @@ function report(string $check, bool $ok, string $detail = '', bool $blocking = t
 }
 
 // ── Ley 1: Contraste de Sección ──────────────────
+// El design system actual no usa presets (`"presets": []`); el ritmo visual
+// se expresa con tokens nativos. Comparamos el token de fondo (color/image)
+// entre secciones adyacentes como WARNING (no bloqueante): el page-def real
+// puede tener secciones contiguas con el mismo token si el diseño lo pide.
 $sections = $page_def['sections'] ?? [];
 $section_presets = [];
 foreach ($sections as $i => $sec) {
@@ -142,7 +146,23 @@ for ($i = 1; $i < count($sections); $i++) {
 }
 report("Ley 1 — Contraste de Sección: no consecutive same section presets", $ley1_ok, $ley1_detail);
 
-// ── Ley 2: Titular Dominante ─────────────────────
+// Ley 1 nativa (WARN): misma decoration.background color entre secciones adyacentes.
+$ley1n_ok = true;
+$ley1n_detail = '';
+for ($i = 1; $i < count($sections); $i++) {
+    $prev_bg = $sections[$i - 1]['decoration']['background']['desktop']['value']['color'] ?? '';
+    $curr_bg = $sections[$i]['decoration']['background']['desktop']['value']['color'] ?? '';
+    if ($prev_bg !== '' && $prev_bg === $curr_bg) {
+        $ley1n_ok = false;
+        $ley1n_detail = "sec-{$i} and sec-" . ($i - 1) . " share background token '{$curr_bg}' (WARN — puede ser intencional)";
+        break;
+    }
+}
+report("Ley 1 nativa — backgrounds adyacentes distintos", $ley1n_ok, $ley1n_detail, false);
+
+// ── Ley 2: Titular Dominante (nativo, sin presets) ─
+// El hero (primera sección) debe contener un divi/heading o divi/text cuyo
+// headingFont (h1/h2/h3) o bodyFont declare un size desktop dominante (≥ 2rem).
 $ley2_ok = false;
 $ley2_detail = '';
 if (!empty($sections)) {
@@ -161,24 +181,40 @@ if (!empty($sections)) {
     }
     foreach ($modules as $mod) {
         $type = $mod['type'] ?? $mod['module'] ?? '';
-        $presets = $mod['presets'] ?? [];
-        $is_heading = ($type === 'divi/heading' || $type === 'divi/text');
-        $has_display_xl = false;
-        foreach ($presets as $p) {
-            if (str_contains($p, 'display-xl') || str_contains($p, 'hero-title')) {
-                $has_display_xl = true;
+        if ($type !== 'divi/heading' && $type !== 'divi/text') {
+            continue;
+        }
+        $font_groups = [$mod['headingFont'] ?? [], $mod['bodyFont'] ?? []];
+        $found_size = 0.0;
+        foreach ($font_groups as $fg) {
+            foreach ($fg as $level => $group) {
+                foreach ($group['font'] ?? [] as $bp => $entry) {
+                    if ($bp !== 'desktop' || !isset($entry['value']['size'])) {
+                        continue;
+                    }
+                    $size = $entry['value']['size'];
+                    $rem = 0.0;
+                    if (preg_match('/^([\d.]+)rem$/', $size, $m)) {
+                        $rem = (float) $m[1];
+                    } elseif (preg_match('/^([\d.]+)px$/', $size, $m)) {
+                        $rem = (float) $m[1] / 16;
+                    }
+                    if ($rem > $found_size) {
+                        $found_size = $rem;
+                    }
+                }
             }
         }
-        if ($is_heading && $has_display_xl) {
+        if ($found_size >= 2.0) {
             $ley2_ok = true;
             break;
         }
     }
     if (!$ley2_ok) {
-        $ley2_detail = 'No divi/heading with text:display-xl or text:hero-title found in first section (hero)';
+        $ley2_detail = 'No divi/heading|divi/text with dominant desktop size (≥2rem) found in first section (hero)';
     }
 }
-report("Ley 2 — Titular Dominante: hero has divi/heading with display-xl", $ley2_ok, $ley2_detail);
+report("Ley 2 — Titular Dominante: hero has dominant heading (≥2rem native)", $ley2_ok, $ley2_detail);
 
 // ── Ley 3: Espacio Negativo Mínimo ────────────────
 $ley3_ok = true;
@@ -224,48 +260,39 @@ foreach ($sections as $i => $sec) {
 }
 report("Ley 3 — Espacio Negativo Mínimo: sections ≥96px, cards ≥40px", $ley3_ok, $ley3_detail);
 
-// ── Ley 4: Micro-interacción en Elementos Clickeables ──
+// ── Ley 4: Micro-interacción en Elementos Clickeables (nativo) ──
+// Sin presets (`"presets": []`), los botones reales (divi/button) deben tener
+// un hover declarado: decoration.button.hover.* o decoration.transform.hover.*.
 $ley4_ok = true;
 $ley4_detail = '';
-$clickable_presets_needing_hover = ['module:btn-primary', 'module:btn-ghost', 'module:btn-outline-light', 'module:feature-card', 'module:testimonial-card', 'module:glass-card'];
 foreach ($sections as $i => $sec) {
     foreach ($sec['rows'] ?? [] as $row) {
         foreach ($row['columns'] ?? $row['modules'] ?? [] as $col) {
             $col_modules = $col['modules'] ?? (isset($col['type']) ? [$col] : []);
             foreach ($col_modules as $mod) {
-                $mod_presets = $mod['presets'] ?? [];
-                $has_clickable = false;
-                foreach ($mod_presets as $p) {
-                    if (in_array($p, $clickable_presets_needing_hover)) {
-                        $has_clickable = true;
-                        break;
-                    }
+                $type = $mod['type'] ?? $mod['module'] ?? '';
+                $is_clickable = ($type === 'divi/button');
+                if (!$is_clickable) {
+                    continue;
                 }
-                if ($has_clickable) {
-                    $hover_transform = $mod['decoration']['transform']['hover'] ?? [];
-                    $btn_hover = $mod['decoration']['button']['hover'] ?? [];
-                    $hover_preset = false;
-                    foreach ($mod_presets as $p) {
-                        if (str_contains($p, 'transform:hover-')) {
-                            $hover_preset = true;
-                            break;
-                        }
-                    }
-                    if (empty($hover_transform) && empty($btn_hover) && !$hover_preset) {
-                        $ley4_ok = false;
-                        $ley4_detail = "section {$i}: clickable module without hover state";
-                        break 3;
-                    }
+                $btn_hover = $mod['decoration']['button']['hover'] ?? [];
+                $transform_hover = $mod['decoration']['transform']['hover'] ?? [];
+                $has_hover = !empty($btn_hover) || !empty($transform_hover);
+                if (!$has_hover) {
+                    $ley4_ok = false;
+                    $ley4_detail = "section {$i}: divi/button without hover state (decoration.button.hover or decoration.transform.hover)";
+                    break 3;
                 }
             }
         }
     }
 }
-report("Ley 4 — Micro-interacción: clickable elements have hover state", $ley4_ok, $ley4_detail);
+report("Ley 4 — Micro-interacción: divi/button have hover state (nativo)", $ley4_ok, $ley4_detail);
 
-// ── Ley 5: Anclaje Visual por Sección ────────────
+// ── Ley 5: Anclaje Visual por Sección (nativo) ───
 $ley5_ok = true;
 $ley5_detail = '';
+$ley5_anchor_warn = '';
 foreach ($sections as $i => $sec) {
     $total_modules = 0;
     foreach ($sec['rows'] ?? [] as $row) {
@@ -284,18 +311,33 @@ foreach ($sections as $i => $sec) {
         foreach ($row['columns'] ?? $row['modules'] ?? [] as $col) {
             $col_modules = $col['modules'] ?? (isset($col['type']) ? [$col] : []);
             foreach ($col_modules as $mod) {
-                $presets = $mod['presets'] ?? [];
-                foreach ($presets as $p) {
-                    if (str_contains($p, 'display-xl') || str_contains($p, 'hero-title') || str_contains($p, 'stat-num') || str_contains($p, 'stat-item') || $mod['type'] === 'divi/image') {
-                        $has_large_module = true;
-                        break 3;
+                $type = $mod['type'] ?? $mod['module'] ?? '';
+                if ($type === 'divi/image' || $type === 'divi/svg' || $type === 'divi/number-counter' || $type === 'divi/circle-counter') {
+                    $has_large_module = true;
+                    break 3;
+                }
+                // Heading/text grande (≥2rem desktop) como ancla.
+                foreach ([$mod['headingFont'] ?? [], $mod['bodyFont'] ?? []] as $fg) {
+                    foreach ($fg as $level => $group) {
+                        $size = $group['font']['desktop']['value']['size'] ?? '';
+                        if (preg_match('/^([\d.]+)rem$/', $size, $m) && (float) $m[1] >= 2.0) {
+                            $has_large_module = true;
+                            break 5;
+                        }
                     }
                 }
             }
         }
     }
+    if (!$has_large_module) {
+        $ley5_anchor_warn = "section {$i}: no large visual anchor (image/svg/counter or heading ≥2rem)";
+    }
 }
 report("Ley 5 — Anclaje Visual: each section has at least one module", $ley5_ok, $ley5_detail);
+if ($ley5_anchor_warn) {
+    $passed--; $warnings++;
+    echo "  [WARN] {$ley5_anchor_warn}\n";
+}
 
 // ── Ley 6: Escala Responsiva Declarada ───────────
 $ley6_ok = true;
@@ -419,6 +461,68 @@ if ($presets_data) {
     }
 }
 report("All referenced presets exist in _design_presets.json", $presets_ok, $presets_detail, false);
+
+// ── Gotchas de autoría render-verificados (schema DAW) ──
+// Estos checks reflejan trampas verificadas en render que el pipeline DAW
+// resuelve y que conviene señalar a tiempo (WARN no bloqueante en la mayoría).
+// NOTA: enable gates / button.spacing / position NO se checkean aquí porque el
+// Layout Engine ya los normaliza (class-divi-button-renderer.php, base-renderer).
+
+// 1. Responsive: filas multi-columna deben declarar flexDirection column en tablet.
+//    (Divi 5 rows NO auto-stackean; si solo hay desktop, se avisa.)
+$resp_ok = true;
+$resp_detail = '';
+foreach ($sections as $i => $sec) {
+    foreach ($sec['rows'] ?? [] as $ri => $row) {
+        $struct = $row['column_structure'] ?? '';
+        $col_count = $struct ? count(explode(',', $struct)) : (count($row['columns'] ?? []) > 1 ? count($row['columns']) : 1);
+        if ($col_count <= 1) {
+            continue;
+        }
+        $layout = $row['decoration']['layout'] ?? [];
+        $tablet = $layout['tablet']['value'] ?? null;
+        $has_tablet_stack = is_array($tablet) && (($tablet['flexDirection'] ?? '') === 'column');
+        if (!$has_tablet_stack && !isset($layout['tablet'])) {
+            $resp_ok = false;
+            $resp_detail = "section {$i} row {$ri}: multi-column row without tablet flexDirection:column (rows don't auto-stack)";
+            break 2;
+        }
+    }
+}
+report("Responsive — rows multi-columna apilan en tablet (flexDirection:column)", $resp_ok, $resp_detail, false);
+
+// 2. CSS freeForm con '<' (wp_strip_all_tags trunca — regla #15).
+$css_lt = false;
+foreach ($sections as $i => $sec) {
+    if (!empty($sec['css'] ?? '') && str_contains($sec['css'], '<')) {
+        $css_lt = true;
+        break;
+    }
+}
+$css_ok = !$css_lt;
+report("CSS freeForm sin '<' (wp_strip_all_tags trunca — regla #15)", $css_ok, $css_lt ? 'Found < in section css — se truncará el CSS' : '');
+
+// 3. Gradient stop positions sin '%' (trait-block-helpers rtrim).
+$grad_ok = true;
+$grad_detail = '';
+foreach ($sections as $i => $sec) {
+    foreach ($sec['rows'] ?? [] as $row) {
+        foreach ($row['columns'] ?? $row['modules'] ?? [] as $col) {
+            $col_modules = $col['modules'] ?? (isset($col['type']) ? [$col] : []);
+            foreach (array_merge([$sec], $col_modules) as $node) {
+                $gradient = $node['decoration']['background']['desktop']['value']['gradient'] ?? [];
+                foreach ($gradient['stops'] ?? [] as $stop) {
+                    if (isset($stop['position']) && is_string($stop['position']) && str_contains($stop['position'], '%')) {
+                        $grad_ok = false;
+                        $grad_detail = "section {$i}: gradient stop position '{$stop['position']}' has % (normalizer lo recorta)";
+                        break 4;
+                    }
+                }
+            }
+        }
+    }
+}
+report("Gradient stops sin '%'", $grad_ok, $grad_detail);
 
 echo str_repeat('-', 50) . "\n";
 
