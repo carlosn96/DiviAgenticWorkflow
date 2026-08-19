@@ -1,5 +1,5 @@
 # Scripts de inspección de módulos y schemas
-
+--- https://github.com/16wells/divi-docs
 ## check-example.php
 Mantiene `site/example` sincronizado con `Token_Registry` y con la estructura de carpetas documentada. Es el mecanismo de mantenimiento de la plantilla de marcas nuevas. También valida sitios productivos contra el mismo contrato.
 
