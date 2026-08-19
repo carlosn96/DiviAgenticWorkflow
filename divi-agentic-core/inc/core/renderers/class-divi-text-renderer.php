@@ -42,7 +42,7 @@ class Divi_Text_Renderer extends Divi_Base_Renderer {
 		// Font data → content.decoration (Divi 5 stores fonts here).
 		// Inline style injection via regex is REMOVED because it corrupts HTML tags.
 		// Font rendering is handled by generate_font_css() → freeForm CSS below.
-		if ( $slug === 'divi/text' || $slug === 'divi/heading' ) {
+		if ( $slug === 'divi/text' ) {
 			$hf = $data['headingFont'] ?? $attrs['module']['headingFont'] ?? null;
 			if ( $hf ) {
 				$attrs['content']['decoration']['headingFont'] = $hf;
@@ -65,7 +65,27 @@ class Divi_Text_Renderer extends Divi_Base_Renderer {
 			} elseif ( isset( $data['title']['level'] ) ) {
 				$heading_level = $data['title']['level'];
 			}
-			$attrs['title']['innerContent']                                = [ 'desktop' => [ 'value' => $heading_text ] ];
+			$attrs['title']['innerContent'] = [ 'desktop' => [ 'value' => $heading_text ] ];
+
+			// Merge headingFont into the native title.decoration.font.font path
+			// so Divi generates CSS for size/weight/color/fontFamily per breakpoint
+			// instead of only headingLevel.
+			$hf = $data['headingFont'] ?? null;
+			if ( is_array( $hf ) ) {
+				$level_font = $hf[ $heading_level ] ?? ( $hf['h1'] ?? $hf );
+				if ( is_array( $level_font ) ) {
+					$font_src = $level_font['font'] ?? $level_font;
+					foreach ( [ 'desktop', 'tablet', 'phone' ] as $bp ) {
+						if ( isset( $font_src[ $bp ]['value'] ) && is_array( $font_src[ $bp ]['value'] ) ) {
+							foreach ( $font_src[ $bp ]['value'] as $k => $v ) {
+								$attrs['title']['decoration']['font']['font'][ $bp ]['value'][ $k ] = $v;
+							}
+						}
+					}
+				}
+				unset( $attrs['module']['headingFont'] );
+			}
+
 			$attrs['title']['decoration']['font']['font']['desktop']['value']['headingLevel'] = $heading_level;
 		}
 
