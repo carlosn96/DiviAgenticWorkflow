@@ -261,7 +261,7 @@ class Agentic_Command {
                 \WP_CLI::log( 'Global colors active — tokens resolve to var(--gcid-*)' );
             }
 
-            $brand_vars_path = preg_replace( '#design-system/divitheme\.json$#', 'brand/_design_vars.json', $assoc_args['design-system'] );
+            $brand_vars_path = preg_replace( '#(design-system[\\\\/])?divitheme\.json$#', 'brand/_design_vars.json', $assoc_args['design-system'] );
             if ( ! file_exists( $brand_vars_path ) ) {
                 $brand_vars_path = null;
             }
@@ -847,7 +847,7 @@ class Agentic_Command {
         $raw = trim( $raw );
 
         if ( $ds_path ) {
-            $brand_vars_path = preg_replace( '#design-system/divitheme\.json$#', 'brand/_design_vars.json', $ds_path );
+            $brand_vars_path = preg_replace( '#(design-system[\\\\/])?divitheme\.json$#', 'brand/_design_vars.json', $ds_path );
             if ( ! file_exists( $brand_vars_path ) ) {
                 $brand_vars_path = null;
             }
