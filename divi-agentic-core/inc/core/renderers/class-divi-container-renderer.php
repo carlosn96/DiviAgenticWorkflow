@@ -65,6 +65,18 @@ class Divi_Container_Renderer extends Divi_Base_Renderer {
 				'divi/fullwidth-slider', 'divi/pricing-tables', 'divi/fullwidth-portfolio',
 			], true ):
 				$inner_html = $children_html;
+
+				// Accordion: pass through the closed-state toggle icon (native Divi 5 attr).
+				if ( $slug === 'divi/accordion' ) {
+					foreach ( [ 'closedToggleIcon', 'openToggleIcon', 'closedToggle', 'openToggle' ] as $tk ) {
+						if ( isset( $data[ $tk ] ) ) {
+							$attrs[ $tk ] = $data[ $tk ];
+						}
+					}
+					if ( isset( $data['_module_preset'] ) ) {
+						$attrs['_module_preset'] = $data['_module_preset'];
+					}
+				}
 				break;
 		}
 
