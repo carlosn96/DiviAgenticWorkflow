@@ -115,6 +115,33 @@ class Divi_ContentModule_Renderer extends Divi_Base_Renderer {
 			$attrs['title']['innerContent']['desktop']['value'] = [ 'text' => $raw ];
 		}
 
+		// Merge headingFont into the native title.decoration.font.font path
+		// (same unwrap pattern as divi/heading) so Divi emits CSS for the blurb title.
+		$hf = $data['headingFont'] ?? null;
+		if ( is_array( $hf ) ) {
+			$level = $data['titleLevel'] ?? ( $data['title']['level'] ?? 'h4' );
+			$level_font = $hf[ $level ] ?? ( $hf['h1'] ?? $hf );
+			if ( is_array( $level_font ) ) {
+				$font_src = $level_font['font'] ?? $level_font;
+				foreach ( [ 'desktop', 'tablet', 'phone' ] as $bp ) {
+					if ( isset( $font_src[ $bp ]['value'] ) && is_array( $font_src[ $bp ]['value'] ) ) {
+						foreach ( $font_src[ $bp ]['value'] as $k => $v ) {
+							$attrs['title']['decoration']['font']['font'][ $bp ]['value'][ $k ] = $v;
+						}
+					}
+				}
+				$attrs['title']['decoration']['font']['font']['desktop']['value']['headingLevel'] = $level;
+			}
+			unset( $attrs['module']['headingFont'] );
+		}
+
+		// Body font → content.decoration.bodyFont (native Divi 5 path for blurb content)
+		$bf = $data['bodyFont'] ?? null;
+		if ( is_array( $bf ) ) {
+			$attrs['content']['decoration']['bodyFont'] = $bf;
+			unset( $attrs['module']['bodyFont'] );
+		}
+
 		if ( isset( $data['imageIcon'] ) ) {
 			$attrs['imageIcon'] = $data['imageIcon'];
 		} elseif ( isset( $data['icon'] ) ) {
@@ -140,6 +167,22 @@ class Divi_ContentModule_Renderer extends Divi_Base_Renderer {
 					'animation' => 'off',
 				] ],
 			];
+		}
+
+		// icon_advanced → imageIcon.advanced (color, placement, size, etc.)
+		$adv = $data['icon_advanced'] ?? $data['iconAdvanced'] ?? null;
+		if ( $adv && is_array( $adv ) ) {
+			if ( isset( $adv['desktop']['value'] ) && is_array( $adv['desktop']['value'] ) ) {
+				foreach ( $adv['desktop']['value'] as $key => $val ) {
+					$attrs['imageIcon']['advanced'][ $key ] = [ 'desktop' => [ 'value' => $val ] ];
+				}
+			}
+			$map = [ 'color' => 'color', 'size' => 'size', 'placement' => 'placement' ];
+			foreach ( $map as $src => $dst ) {
+				if ( isset( $adv['desktop']['value'][ $src ] ) ) {
+					$attrs['imageIcon']['advanced'][ $dst ] = [ 'desktop' => [ 'value' => $adv['desktop']['value'][ $src ] ] ];
+				}
+			}
 		}
 	}
 
@@ -183,13 +226,16 @@ class Divi_ContentModule_Renderer extends Divi_Base_Renderer {
 	 */
 	private function render_icon( array $data, array &$attrs ): void {
 		if ( isset( $data['icon'] ) ) {
-			$attrs['icon']['innerContent'] = [
-				'desktop' => [ 'value' => [
-					'icon'    => $data['icon'],
-					'link'    => $data['link'] ?? '',
-					'linkUrl' => $data['link_url'] ?? '',
-				] ],
-			];
+			// Divi 5 expects icon.innerContent.desktop.value = { unicode, type, weight }.
+			// Support both a ready object and the {icon:{unicode,type,weight}} wrapper.
+			$icon_val = $data['icon'];
+			if ( is_array( $icon_val ) && isset( $icon_val['icon'] ) && is_array( $icon_val['icon'] ) ) {
+				$icon_val = $icon_val['icon'];
+			}
+			if ( is_string( $icon_val ) ) {
+				$icon_val = [ 'unicode' => $icon_val, 'type' => 'fa', 'weight' => '900' ];
+			}
+			$attrs['icon']['innerContent'] = [ 'desktop' => [ 'value' => $icon_val ] ];
 		}
 		$adv = $data['iconAdvanced'] ?? $data['icon_advanced'] ?? null;
 		if ( $adv && isset( $adv['desktop']['value'] ) && is_array( $adv['desktop']['value'] ) ) {
@@ -210,8 +256,13 @@ class Divi_ContentModule_Renderer extends Divi_Base_Renderer {
 			$attrs['title']['decoration'] = $data['title']['decoration'];
 		}
 
+		// headingFont → title.decoration.font.font (native Divi 5 path).
+		// Normalize: unwrap a `{h5:{font:{desktop:{value:{...}}}}}` wrapper into the
+		// flat `{desktop:{value:{..., headingLevel}}}` shape the toggle schema expects.
 		if ( isset( $data['headingFont'] ) && is_array( $data['headingFont'] ) ) {
-			$attrs['title']['decoration']['font']['font'] = $data['headingFont'];
+			$hf = $data['headingFont'];
+			$flat = $this->normalize_font_group( $hf, 'h5' );
+			$attrs['title']['decoration']['font']['font'] = $flat;
 			unset( $attrs['module']['headingFont'] );
 		}
 
@@ -230,6 +281,81 @@ class Divi_ContentModule_Renderer extends Divi_Base_Renderer {
 				$attrs[ $tk ] = $data[ $tk ];
 			}
 		}
+
+		// Allow disabling the Divi module preset (e.g. '__ET_DISABLED_PRESET__')
+		// so module-specific icon/color overrides aren't beaten by the default preset.
+		if ( isset( $data['_module_preset'] ) ) {
+			$attrs['_module_preset'] = $data['_module_preset'];
+			unset( $data['_module_preset'] );
+		}
+	}
+
+	/**
+	 * Normalize a font-group input into the flat `{bp:{value:{...}}}` shape Divi expects.
+	 *
+	 * Accepts:
+	 *   A) flat  { "desktop": { "value": {...} }, "phone": { "value": {...} } }
+	 *   B) level { "h5": { "font": { "desktop": { "value": {...} } } } }
+	 *   C) font  { "font": { "desktop": { "value": {...} } } }
+	 *
+	 * @param array  $font_group Input font group.
+	 * @param string $default_level Fallback heading level (e.g. 'h5').
+	 * @return array Flat breakpoint-keyed font object.
+	 */
+	private function normalize_font_group( array $font_group, string $default_level ): array {
+		$level_font = $font_group[ $default_level ] ?? null;
+		if ( is_array( $level_font ) && isset( $level_font['font'] ) ) {
+			$font_src = $level_font['font'];
+		} else {
+			$font_src = $font_group['font'] ?? $font_group;
+		}
+
+		$font_src = $this->normalize_flat_font( $font_src );
+
+		if ( ! isset( $font_src['desktop']['value']['headingLevel'] ) ) {
+			if ( ! isset( $font_src['desktop'] ) ) {
+				$font_src['desktop'] = [ 'value' => [] ];
+			}
+			if ( ! is_array( $font_src['desktop']['value'] ) ) {
+				$font_src['desktop']['value'] = [];
+			}
+			$font_src['desktop']['value']['headingLevel'] = $default_level;
+		}
+
+		return $font_src;
+	}
+
+	/**
+	 * Ensure a font source is breakpoint-keyed: {bp:{value:{...}}}.
+	 *
+	 * @param mixed $font Font source.
+	 * @return array Flat breakpoint-keyed font object.
+	 */
+	private function normalize_flat_font( $font ): array {
+		if ( ! is_array( $font ) ) {
+			return [ 'desktop' => [ 'value' => [] ] ];
+		}
+		$modes = [ 'desktop', 'tablet', 'phone' ];
+		$has_mode = ! empty( array_intersect( $modes, array_keys( $font ) ) );
+		if ( ! $has_mode ) {
+			$flat = [];
+			foreach ( $modes as $bp ) {
+				$flat[ $bp ] = [ 'value' => $font ];
+			}
+			return $flat;
+		}
+		$flat = $font;
+		foreach ( $modes as $bp ) {
+			if ( ! isset( $flat[ $bp ] ) ) {
+				continue;
+			}
+			if ( ! is_array( $flat[ $bp ] ) ) {
+				$flat[ $bp ] = [ 'value' => $flat[ $bp ] ];
+			} elseif ( ! isset( $flat[ $bp ]['value'] ) || ! is_array( $flat[ $bp ]['value'] ) ) {
+				$flat[ $bp ] = [ 'value' => $flat[ $bp ]['value'] ?? [] ];
+			}
+		}
+		return $flat;
 	}
 
 	/**
@@ -261,6 +387,19 @@ class Divi_ContentModule_Renderer extends Divi_Base_Renderer {
 					$attrs['button'][ $k ] = $data['button'][ $k ];
 				}
 			}
+		}
+
+		// Pass through toggle/accordion icon overrides (native Divi 5 attrs).
+		foreach ( [ 'openToggle', 'closedToggle', 'openToggleIcon', 'closedToggleIcon' ] as $tk ) {
+			if ( isset( $data[ $tk ] ) ) {
+				$attrs[ $tk ] = $data[ $tk ];
+			}
+		}
+
+		// Allow disabling the Divi module preset so module icon/color overrides win.
+		if ( isset( $data['_module_preset'] ) ) {
+			$attrs['_module_preset'] = $data['_module_preset'];
+			unset( $data['_module_preset'] );
 		}
 	}
 
