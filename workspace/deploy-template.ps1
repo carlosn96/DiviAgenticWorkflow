@@ -42,8 +42,9 @@ $HasCustomPath = $HeaderPath -or $FooterPath -or $BodyPath
 $Components = @()
 
 function Add-Component($key, $path) {
-    $manifest = "$DawRoot\$SchemaBase\$key\manifest.json"
-    $script:Components += @{ key=$key; path=$path; manifest=$manifest }
+    $parent = Split-Path $path -Parent
+    $combineKey = if ($parent) { Split-Path $parent -Leaf } else { $key }
+    $script:Components += @{ key=$key; path=$path; combineKey=$combineKey }
 }
 
 if ($HasCustomPath) {
@@ -65,11 +66,12 @@ Write-Host "  Components: $($Components.key -join ', ')" -ForegroundColor Gray
 if (-not $SkipCombine) {
     Write-Host "[1/4] Combining manifests..." -ForegroundColor Yellow
     foreach ($comp in $Components) {
-        if (Test-Path $comp.manifest) {
-            $out = "$DawRoot\$SchemaBase\$($comp.key)\$($comp.key)-combined.json"
-            Write-Host "  -> $($comp.key)..."
-            python "$PSScriptRoot\combine.py" $comp.manifest --out $out
-            if ($LASTEXITCODE -ne 0) { throw "combine.py failed for $($comp.key)" }
+        $manifest = "$DawRoot\$SchemaBase\$($comp.combineKey)\manifest.json"
+        if (Test-Path $manifest) {
+            $out = "$DawRoot\$SchemaBase\$($comp.combineKey)\$($comp.combineKey)-combined.json"
+            Write-Host "  -> $($comp.combineKey)..."
+            python "$PSScriptRoot\combine.py" $manifest --out $out
+            if ($LASTEXITCODE -ne 0) { throw "combine.py failed for $($comp.combineKey)" }
         }
     }
     Write-Host "  Done." -ForegroundColor Green
@@ -96,14 +98,16 @@ if ($Default) {
         if ($LASTEXITCODE -ne 0) { throw "template_create: $tid" }
     } elseif ($Mode -eq "update") {
         $tid = & $WpCli agentic template_find --use-on="$UseOn" 2>&1 | Select-Object -Last 1
-        if ($LASTEXITCODE -ne 0 -or $tid -eq "0 (not found)") { throw "Template for '$UseOn' not found" }
+        $tid = ([regex]::Match("$tid", '\d+')).Value
+        if ($LASTEXITCODE -ne 0 -or $tid -eq "0") { throw "Template for '$UseOn' not found" }
     } else {
         $tid = & $WpCli agentic template_ensure --use-on="$UseOn" --title="$Title" 2>&1 | Select-Object -Last 1
         if ($LASTEXITCODE -ne 0) { throw "template_ensure: $tid" }
     }
     Write-Host "  Custom template ID: $tid" -ForegroundColor Green
 }
-$tid = $tid.Trim()
+$tid = ([regex]::Match("$tid", '\d+')).Value
+if (-not $tid) { throw "Could not parse template ID from output." }
 
 # Step 3: Resolve existing layout IDs from template, then deploy
 Write-Host "[3/4] Deploying components..." -ForegroundColor Yellow
