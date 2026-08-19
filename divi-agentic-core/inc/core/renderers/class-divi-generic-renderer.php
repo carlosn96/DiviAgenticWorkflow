@@ -55,8 +55,14 @@ class Divi_Generic_Renderer extends Divi_Base_Renderer {
 				break;
 
 			case $slug === 'divi/blog':
+				// NOTE: 'type' es la key de dispatch del Layout Engine (divi/blog),
+				// NO el post type. El post type nativo por defecto es 'post'.
+				// Para grids de CPTs usar la key 'post_type' en el schema.
+				if ( isset( $data['post_type'] ) ) {
+					$attrs['post']['advanced']['type'] = [ 'desktop' => [ 'value' => $data['post_type'] ] ];
+				}
 				foreach ( [
-					'type', 'number', 'categories', 'dateFormat', 'excerptLength', 'offset',
+					'number', 'categories', 'dateFormat', 'excerptLength', 'offset',
 					'showExcerpt', 'useCurrentLoop', 'excerptContent', 'excerptManual',
 				] as $key ) {
 					if ( isset( $data[ $key ] ) ) {
