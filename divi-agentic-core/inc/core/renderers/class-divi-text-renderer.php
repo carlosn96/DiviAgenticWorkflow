@@ -57,15 +57,23 @@ class Divi_Text_Renderer extends Divi_Base_Renderer {
 
 		// divi/heading needs title.innerContent + headingLevel for Divi 5.
 		if ( $slug === 'divi/heading' && isset( $data['content'] ) ) {
-			$heading_text  = $data['content'];
 			$heading_level = $data['level'] ?? 'h2';
-			if ( preg_match( '/<h([1-6])>/', $heading_text, $m ) ) {
-				$heading_level = 'h' . $m[1];
-				$heading_text  = strip_tags( $heading_text );
-			} elseif ( isset( $data['title']['level'] ) ) {
-				$heading_level = $data['title']['level'];
+			if ( is_array( $data['content'] ) && isset( $data['content']['innerContent'] ) ) {
+				// Dynamic / structured content: pass through untouched, keep level from attr.
+				$attrs['title']['innerContent'] = $data['content']['innerContent'];
+				if ( isset( $data['title']['level'] ) ) {
+					$heading_level = $data['title']['level'];
+				}
+			} else {
+				$heading_text = is_string( $data['content'] ) ? $data['content'] : '';
+				if ( preg_match( '/<h([1-6])>/', $heading_text, $m ) ) {
+					$heading_level = 'h' . $m[1];
+					$heading_text  = strip_tags( $heading_text );
+				} elseif ( isset( $data['title']['level'] ) ) {
+					$heading_level = $data['title']['level'];
+				}
+				$attrs['title']['innerContent'] = [ 'desktop' => [ 'value' => $heading_text ] ];
 			}
-			$attrs['title']['innerContent'] = [ 'desktop' => [ 'value' => $heading_text ] ];
 
 			// Merge headingFont into the native title.decoration.font.font path
 			// so Divi generates CSS for size/weight/color/fontFamily per breakpoint
