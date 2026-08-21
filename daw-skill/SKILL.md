@@ -213,5 +213,5 @@ URL: <http://...>
 | Brand Sync | `wp brand sync` | Mapeo `_design_vars.json` → `et_divi` + gcids + gvids |
 | Inputs del Brand | `../references/design-system-inputs.md` | Formatos de `_design_vars.json`, brief JSON |
 | Scripts de inspección | `../divi-agentic-core/bin/AGENTS.md` | check-example, lint_page_def, verify_page, inspect-*, generate-module-schema… |
-| Referencia externa de módulos | `../../test/divi5-skill/DIVI5-*.md` | Recetas y schema render-verificados de Divi 5.10 (componentes, presets, MCP) |
+| Referencia externa de módulos | `references/blocks-dictionary.md` | 102 módulos Divi 5.10 (la biblioteca `test/divi5-skill/DIVI5-*.md` es opcional y no se incluye en este bundle) |
 | VIE package | `../_archive/vie/vie/README.md` | Visual Impact Engine (archivado, no usar) |

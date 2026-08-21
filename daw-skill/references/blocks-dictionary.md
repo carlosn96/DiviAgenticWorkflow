@@ -106,7 +106,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/text",
+  "type": "divi/text",
   "content": "<h1>T\u00edtulo <em>Principal</em></h1><p>Descripci\u00f3n.</p>",
   "headingFont": {
     "h1": { "font": { "desktop": { "value": { "fontFamily": "{{design:font:display}}", "color": "{{design:color:white}}", "size": "48px" } } } }
@@ -129,7 +129,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/code",
+  "type": "divi/code",
   "content": "<div class=\"custom-wrapper\"><a href=\"/tienda\" class=\"btn\">Explorar</a></div>"
 }
 ```
@@ -139,7 +139,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/heading",
+  "type": "divi/heading",
   "content": "T\u00edtulo de la secci\u00f3n",
   "headingFont": {
     "h2": { "font": { "desktop": { "value": { "fontFamily": "{{design:font:display}}", "size": "36px" } } } }
@@ -152,7 +152,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/image",
+  "type": "divi/image",
   "src": "{{SITE_URL}}/wp-content/uploads/imagen.jpg",
   "alt": "Descripci\u00f3n de la imagen",
   "decoration": { "border": { "desktop": { "value": { "radius": { "sync": "on", "topLeft": "8px", "topRight": "8px", "bottomRight": "8px", "bottomLeft": "8px" } } } } }
@@ -164,7 +164,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/button",
+  "type": "divi/button",
   "button_text": "Explorar tienda",
   "button_url": "/tienda",
   "decoration": {
@@ -178,7 +178,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/video",
+  "type": "divi/video",
   "src": "https://www.youtube.com/watch?v=VIDEO_ID",
   "webm": ""
 }
@@ -192,7 +192,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/icon",
+  "type": "divi/icon",
   "icon": "&#x1F4D6;",
   "link": "",
   "link_url": ""
@@ -204,7 +204,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/divider",
+  "type": "divi/divider",
   "show": "on"
 }
 ```
@@ -214,7 +214,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/gallery",
+  "type": "divi/gallery",
   "gallery_ids": [123, 456, 789],
   "fullwidth": "off"
 }
@@ -229,7 +229,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/toggle",
+  "type": "divi/toggle",
   "title": "Pregunta frecuente",
   "content": "<p>Respuesta detallada aqu\u00ed.</p>"
 }
@@ -240,10 +240,10 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/accordion",
+  "type": "divi/accordion",
   "children": [
-    { "module": "divi/accordion-item", "title": "Pregunta 1", "content": "<p>Respuesta 1</p>" },
-    { "module": "divi/accordion-item", "title": "Pregunta 2", "content": "<p>Respuesta 2</p>" }
+    { "type": "divi/accordion-item", "title": "Pregunta 1", "content": "<p>Respuesta 1</p>" },
+    { "type": "divi/accordion-item", "title": "Pregunta 2", "content": "<p>Respuesta 2</p>" }
   ]
 }
 ```
@@ -262,10 +262,10 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/tabs",
+  "type": "divi/tabs",
   "children": [
-    { "module": "divi/tab", "title": "Tab 1", "content": "<p>Contenido 1</p>" },
-    { "module": "divi/tab", "title": "Tab 2", "content": "<p>Contenido 2</p>" }
+    { "type": "divi/tab", "title": "Tab 1", "content": "<p>Contenido 1</p>" },
+    { "type": "divi/tab", "title": "Tab 2", "content": "<p>Contenido 2</p>" }
   ]
 }
 ```
@@ -275,7 +275,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/dropdown",
+  "type": "divi/dropdown",
   "title": "Opci\u00f3n",
   "content": "<p>Contenido desplegable</p>"
 }
@@ -286,13 +286,13 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/contact-form",
+  "type": "divi/contact-form",
   "email_to": "correo@ejemplo.com",
   "success_message": "Gracias por contactarnos",
   "submit_text": "Enviar mensaje",
   "children": [
-    { "module": "divi/contact-field", "field_type": "text", "field_label": "Nombre", "required": true },
-    { "module": "divi/contact-field", "field_type": "email", "field_label": "Correo", "required": true }
+    { "type": "divi/contact-field", "field_type": "text", "field_label": "Nombre", "required": true },
+    { "type": "divi/contact-field", "field_type": "email", "field_label": "Correo", "required": true }
   ]
 }
 ```
@@ -310,7 +310,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/contact-form-7",
+  "type": "divi/contact-form-7",
   "form_id": "123"
 }
 ```
@@ -320,7 +320,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/menu",
+  "type": "divi/menu",
   "menu_id": 2
 }
 ```
@@ -330,10 +330,10 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/social-media-follow",
+  "type": "divi/social-media-follow",
   "children": [
-    { "module": "divi/social-media-follow-network", "social_network": "facebook", "link": "https://facebook.com/marca" },
-    { "module": "divi/social-media-follow-network", "social_network": "instagram", "link": "https://instagram.com/marca" }
+    { "type": "divi/social-media-follow-network", "social_network": "facebook", "link": "https://facebook.com/marca" },
+    { "type": "divi/social-media-follow-network", "social_network": "instagram", "link": "https://instagram.com/marca" }
   ]
 }
 ```
@@ -355,7 +355,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/blurb",
+  "type": "divi/blurb",
   "title": "Editorial",
   "content": "<p>M\u00e1s de 5,000 t\u00edtulos.</p>",
   "icon": "&#x1F4D6;",
@@ -378,7 +378,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/number-counter",
+  "type": "divi/number-counter",
   "title": "A\u00f1os de experiencia",
   "number": "50+",
   "headingFont": {
@@ -395,7 +395,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/cta",
+  "type": "divi/cta",
   "title": "\u00bfListo para empezar?",
   "content": "<p>Cont\u00e1ctanos hoy.</p>",
   "button_text": "Cont\u00e1ctanos",
@@ -408,7 +408,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/testimonial",
+  "type": "divi/testimonial",
   "content": "<p>Excelente servicio y atenci\u00f3n.</p>",
   "author": "Mar\u00eda Garc\u00eda",
   "src": "{{SITE_URL}}/uploads/foto.jpg"
@@ -420,7 +420,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/team-member",
+  "type": "divi/team-member",
   "name": "Juan P\u00e9rez",
   "position": "Director Editorial",
   "content": "<p>Biograf\u00eda del miembro.</p>",
@@ -433,7 +433,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/pricing-table",
+  "type": "divi/pricing-table",
   "title": "Plan Premium",
   "content": "<ul><li>Feature 1</li><li>Feature 2</li></ul>",
   "pricing": { "price": "$299", "currency": "MXN", "sum": "/mes" },
@@ -447,10 +447,10 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/icon-list",
+  "type": "divi/icon-list",
   "children": [
-    { "module": "divi/icon-list-item", "title": "Env\u00edo gratis", "icon": "&#x2714;" },
-    { "module": "divi/icon-list-item", "title": "Soporte 24/7", "icon": "&#x2714;" }
+    { "type": "divi/icon-list-item", "title": "Env\u00edo gratis", "icon": "&#x2714;" },
+    { "type": "divi/icon-list-item", "title": "Soporte 24/7", "icon": "&#x2714;" }
   ]
 }
 ```
@@ -460,7 +460,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/search",
+  "type": "divi/search",
   "show_button": "on",
   "exclude_pages": "off",
   "exclude_posts": "off"
@@ -472,7 +472,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/map",
+  "type": "divi/map",
   "address": "Av. Insurgentes Sur 123, CDMX",
   "mouse_wheel": "on",
   "mobile_dragging": "on"
@@ -484,7 +484,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/sidebar",
+  "type": "divi/sidebar",
   "area": "sidebar-1",
   "show_border": "on"
 }
@@ -495,7 +495,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/login",
+  "type": "divi/login",
   "content": "<p>Inicia sesi\u00f3n para acceder.</p>",
   "button_text": "Entrar"
 }
@@ -506,7 +506,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/countdown-timer",
+  "type": "divi/countdown-timer",
   "title": "Oferta termina en:"
 }
 ```
@@ -520,10 +520,10 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/slider",
+  "type": "divi/slider",
   "children": [
     {
-      "module": "divi/slide",
+      "type": "divi/slide",
       "title": "Slide 1",
       "content": "<p>Descripci\u00f3n del slide.</p>",
       "src": "{{SITE_URL}}/uploads/slide1.jpg",
@@ -554,7 +554,7 @@ Usa esta tabla cuando tengas un elemento semántico y necesites saber qué bloqu
 
 ```json
 {
-  "module": "divi/blog",
+  "type": "divi/blog",
   "type": "post",
   "number": 6,
   "categories": [5, 12],
@@ -670,7 +670,7 @@ Usar cuando el diseño requiere ancho completo (full viewport). Compatibles con 
 
 ```json
 {
-  "module": "divi/fullwidth-header",
+  "type": "divi/fullwidth-header",
   "title": "T\u00edtulo del Proyecto",
   "subtitle": "Subt\u00edtulo de la marca",
   "content": "<p>Descripci\u00f3n del hero.</p>",
@@ -762,12 +762,12 @@ Módulos verificados en la línea 5.10 (source-verified / render-verified en `te
 
 ```json
 {
-  "module": "divi/group",
+  "type": "divi/group",
   "layout": { "loop": { "desktop": { "value": { "postType": "post", "postsPerPage": 3 } } } },
   "children": [
-    { "module": "divi/post-title", "loopItem": true },
-    { "module": "divi/featured-image", "loopItem": true },
-    { "module": "divi/post-content", "loopItem": true, "advanced": { "text": { "text": { "desktop": { "value": { "textAlign": "left" } } } } } }
+    { "type": "divi/post-title", "loopItem": true },
+    { "type": "divi/featured-image", "loopItem": true },
+    { "type": "divi/post-content", "loopItem": true, "advanced": { "text": { "text": { "desktop": { "value": { "textAlign": "left" } } } } } }
   ]
 }
 ```

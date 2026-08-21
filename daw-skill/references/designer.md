@@ -373,4 +373,4 @@ Antes de entregar a Fase 4:
 - `site/<DAW_SITE>/brand/_design_vars.json` — fuente de tokens (nombres → `{{design:*}}`)
 - `site/<DAW_SITE>/design-system/divitheme.json` — presets + strategy (los tokens se leen de stores nativos)
 - [`../SKILL.md`](../SKILL.md) — 4 fases completas
-- `test/divi5-skill/DIVI5-RECIPES.md` — biblioteca de componentes render-verificados (referencia externa)
+- `references/blocks-dictionary.md` — fuente autoritativa de componentes render-verificados (la biblioteca externa `test/divi5-skill/DIVI5-*.md` es opcional y no se incluye en este bundle)
