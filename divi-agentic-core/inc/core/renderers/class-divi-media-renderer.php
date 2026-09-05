@@ -25,25 +25,104 @@ class Divi_Media_Renderer extends Divi_Base_Renderer {
 		switch ( $slug ) {
 			case 'divi/image':
 			case 'divi/fullwidth-image':
-				// Support flat src or nested image.innerContent.desktop.value.src
-				if ( isset( $data['image']['innerContent']['desktop']['value']['src'] ) ) {
-					$img_data = $data['image']['innerContent']['desktop']['value'];
-				} elseif ( isset( $data['src'] ) ) {
-					$img_data = $data;
-				}
-				if ( isset( $img_data ) ) {
-					$img = [
-						'src' => $img_data['src'],
-						'alt' => $img_data['alt'] ?? '',
-					];
-					foreach ( [ 'id', 'titleText', 'width', 'height', 'linkUrl', 'linkTarget' ] as $k ) {
-						if ( isset( $img_data[ $k ] ) ) {
-							$img[ $k ] = $img_data[ $k ];
+				$inner_content = [];
+
+				if ( isset( $data['image']['innerContent'] ) && is_array( $data['image']['innerContent'] ) ) {
+					foreach ( [ 'desktop', 'tablet', 'phone' ] as $bp ) {
+						if ( isset( $data['image']['innerContent'][ $bp ]['value'] ) ) {
+							$bp_val = $data['image']['innerContent'][ $bp ]['value'];
+							$src    = $bp_val['src'] ?? '';
+							if ( is_string( $src ) && str_starts_with( $src, '/' ) && function_exists( 'home_url' ) ) {
+								$src = home_url( $src );
+							}
+							$bp_img = [
+								'src'       => $src,
+								'alt'       => $bp_val['alt'] ?? ( $data['alt'] ?? '' ),
+								'titleText' => $bp_val['titleText'] ?? ( $data['titleText'] ?? '' ),
+							];
+							foreach ( [ 'id', 'width', 'height', 'linkUrl', 'linkTarget' ] as $k ) {
+								if ( isset( $bp_val[ $k ] ) ) {
+									$bp_img[ $k ] = (string) $bp_val[ $k ];
+								}
+							}
+							// Auto-resolve attachment metadata if missing
+							if ( ( empty( $bp_img['id'] ) || empty( $bp_img['width'] ) ) && function_exists( 'attachment_url_to_postid' ) && ! empty( $src ) ) {
+								$att_id = attachment_url_to_postid( $src );
+								if ( $att_id ) {
+									if ( empty( $bp_img['id'] ) ) {
+										$bp_img['id'] = (string) $att_id;
+									}
+									$meta = wp_get_attachment_metadata( $att_id );
+									if ( empty( $bp_img['width'] ) && ! empty( $meta['width'] ) ) {
+										$bp_img['width'] = (string) $meta['width'];
+									}
+									if ( empty( $bp_img['height'] ) && ! empty( $meta['height'] ) ) {
+										$bp_img['height'] = (string) $meta['height'];
+									}
+								}
+							}
+							$inner_content[ $bp ] = [ 'value' => $bp_img ];
 						}
 					}
-					$attrs['image']['innerContent'] = [
-						'desktop' => [ 'value' => $img ],
-					];
+				} elseif ( isset( $data['src'] ) ) {
+					$breakpoints = [ 'desktop', 'tablet', 'phone' ];
+					$src_map     = [];
+
+					if ( is_array( $data['src'] ) ) {
+						$src_map = $data['src'];
+					} else {
+						$src_map['desktop'] = $data['src'];
+						if ( isset( $data['src_tablet'] ) || isset( $data['tablet']['src'] ) ) {
+							$src_map['tablet'] = $data['src_tablet'] ?? $data['tablet']['src'];
+						}
+						if ( isset( $data['src_phone'] ) || isset( $data['phone']['src'] ) ) {
+							$src_map['phone'] = $data['src_phone'] ?? $data['phone']['src'];
+						}
+					}
+
+					foreach ( $breakpoints as $bp ) {
+						if ( ! isset( $src_map[ $bp ] ) ) {
+							continue;
+						}
+						$src = $src_map[ $bp ];
+						if ( is_string( $src ) && str_starts_with( $src, '/' ) && function_exists( 'home_url' ) ) {
+							$src = home_url( $src );
+						}
+						$bp_img = [
+							'src' => $src,
+							'alt' => $data['alt'] ?? '',
+						];
+						foreach ( [ 'id', 'titleText', 'width', 'height', 'linkUrl', 'linkTarget' ] as $k ) {
+							if ( isset( $data[ $k ] ) ) {
+								$bp_img[ $k ] = (string) $data[ $k ];
+							}
+						}
+						// Auto-resolve attachment metadata if missing
+						if ( ( empty( $bp_img['id'] ) || empty( $bp_img['width'] ) ) && function_exists( 'attachment_url_to_postid' ) && ! empty( $src ) ) {
+							$att_id = attachment_url_to_postid( $src );
+							if ( $att_id ) {
+								$bp_img['id'] = (string) $att_id;
+								$meta = wp_get_attachment_metadata( $att_id );
+								if ( empty( $bp_img['width'] ) && ! empty( $meta['width'] ) ) {
+									$bp_img['width'] = (string) $meta['width'];
+								}
+								if ( empty( $bp_img['height'] ) && ! empty( $meta['height'] ) ) {
+									$bp_img['height'] = (string) $meta['height'];
+								}
+								if ( empty( $bp_img['titleText'] ) ) {
+									$att_post = get_post( $att_id );
+									if ( $att_post && ! empty( $att_post->post_title ) ) {
+										$bp_img['titleText'] = $att_post->post_title;
+									}
+								}
+							}
+						}
+						$inner_content[ $bp ] = [ 'value' => $bp_img ];
+					}
+				}
+
+				if ( ! empty( $inner_content ) ) {
+					$attrs['image']['innerContent'] = $inner_content;
 				}
 
 				foreach ( [ 'lightbox', 'overlay', 'overlayIcon' ] as $img_attr ) {
