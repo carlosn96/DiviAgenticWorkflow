@@ -177,11 +177,14 @@ class Divi_Media_Renderer extends Divi_Base_Renderer {
 
 			case 'divi/video':
 			case 'divi/audio':
-				if ( isset( $data['src'] ) ) {
+				if ( isset( $data['video']['innerContent'] ) ) {
+					// Schema provides native video.innerContent — pass through directly.
+					$attrs['video'] = $data['video'];
+				} elseif ( isset( $data['src'] ) ) {
 					$attrs['video']['innerContent'] = [
 						'desktop' => [ 'value' => [
-							'video' => $data['src'],
-							'webm'  => $data['webm'] ?? '',
+							'src'  => $data['src'],
+							'webm' => $data['webm'] ?? '',
 						] ],
 					];
 				}
