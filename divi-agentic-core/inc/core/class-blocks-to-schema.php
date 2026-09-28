@@ -69,6 +69,11 @@ class BlocksToSchema {
         // Extraer decoraciones comunes
         $this->extract_common_styles($block, $section);
         
+        // CSS freeForm a nivel de sección (p. ej. overlay popup del flyin)
+        if ( ! empty( $block['attrs']['css'] ) ) {
+            $section['css'] = $block['attrs']['css'];
+        }
+        
         // Convertir filas internas
         $rows = [];
         foreach ($block['innerBlocks'] as $row_block) {
@@ -220,6 +225,11 @@ class BlocksToSchema {
                     $module['button_text'] = $btn['text'];
                     $module['button_url'] = $btn['linkUrl'] ?? '#';
                 }
+                // Preservar la decoration del botón (background, border, font, spacing)
+                // para round-trip fiel — el renderer la mapea a button.decoration.
+                if ( ! empty( $attrs['button']['decoration'] ) ) {
+                    $module['button_decoration'] = $attrs['button']['decoration'];
+                }
                 break;
                 
             case 'divi/blurb':
@@ -313,8 +323,32 @@ class BlocksToSchema {
                 break;
                 
             default:
-                // Módulo genérico (ej. accordion, tabs, signup, contact-form)
-                // Conserva hijos de forma nativa e intenta extraer contenido básico
+                // Módulo custom (dgpc/*, dgbm/*) o genérico.
+                // Preserva los attrs top-level del bloque como passthrough para
+                // que el renderer pueda reconstruir el bloque fielmente (round-trip).
+                // Excluye las claves estructurales que el schema ya maneja
+                // (module, builderVersion, css se conservan vía extract_common_styles/css).
+                if ( str_starts_with( $name, 'dgpc/' ) || str_starts_with( $name, 'dgbm/' ) ) {
+                    $passthrough_keys = [
+                        'module', 'builderVersion', 'modulePreset',
+                        'decoration', 'advanced', 'meta', 'css',
+                    ];
+                    foreach ( $attrs as $k => $v ) {
+                        if ( in_array( $k, $passthrough_keys, true ) ) {
+                            continue;
+                        }
+                        // "type" del bloque custom es su attrs interno (p. ej.
+                        // {"innerContent":{"desktop":{"value":"product_category"}}})
+                        // y colisiona con el type identificador del schema.
+                        if ( $k === 'type' && $v === $attrs['module']['type'] ?? null ) {
+                            continue;
+                        }
+                        if ( $k === 'type' && is_array( $v ) ) {
+                            continue;
+                        }
+                        $module[ $k ] = $v;
+                    }
+                }
                 if (!empty($block['innerBlocks'])) {
                     $children = [];
                     foreach ($block['innerBlocks'] as $child_block) {
@@ -328,6 +362,21 @@ class BlocksToSchema {
                     }
                 }
                 break;
+        }
+        
+        // Passthrough de attrs top-level del bloque para round-trip fiel.
+        // El renderer reconstruye el bloque desde el schema; cualquier attrs
+        // que el mapeo selectivo no capturó (p. ej. srcset en imágenes,
+        // include_categories en dgpc carousels, modulePreset, css de slide)
+        // se conserva aquí para que el deploy no pierda datos.
+        $passthrough_exclude = [ 'module', 'builderVersion' ];
+        if ( ! empty( $attrs ) && is_array( $attrs ) ) {
+            foreach ( $attrs as $k => $v ) {
+                if ( in_array( $k, $passthrough_exclude, true ) || isset( $module[ $k ] ) ) {
+                    continue;
+                }
+                $module[ $k ] = $v;
+            }
         }
         
         return $module;
@@ -365,8 +414,15 @@ class BlocksToSchema {
      * Simplifica las estructuras "desktop => [value => X]" de decoración en el JSON
      */
     private function unwrap_decoration(array $dec): array {
+        // Keys de Divi 5 que usan "desktop => value => {...}" con estructura interna
+        // propia y NO deben desenrollarse (perderían su shape nativo).
+        $no_unwrap = [ 'interactions', 'attributes' ];
         $clean = [];
         foreach ($dec as $k => $v) {
+            if ( in_array( $k, $no_unwrap, true ) ) {
+                $clean[$k] = $v;
+                continue;
+            }
             if (is_array($v) && isset($v['desktop']['value']) && count($v) === 1) {
                 $clean[$k] = $v['desktop']['value'];
             } else {
@@ -383,7 +439,11 @@ class BlocksToSchema {
         foreach ($arr as $k => $v) {
             if (is_array($v)) {
                 $arr[$k] = $this->clean_array($v);
-                if (empty($arr[$k]) && $arr[$k] !== 0 && $arr[$k] !== '0') {
+                // Conservar keys que son contenedores de fuente/decoration aunque
+                // queden estructuralmente vacías (p. ej. cart_button con style:[]),
+                // para que el renderer no pierda el atributo en el round-trip.
+                $is_font_container = ( $k === 'decoration' || $k === 'font' || $k === 'font' );
+                if (empty($arr[$k]) && $arr[$k] !== 0 && $arr[$k] !== '0' && !$is_font_container) {
                     unset($arr[$k]);
                 }
             } elseif ($v === null || $v === '') {

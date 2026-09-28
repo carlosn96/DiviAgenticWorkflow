@@ -116,6 +116,19 @@ class Layout_Engine {
                 $attrs['type'] = 'dgpc/product-carousel';
             }
 
+            // Round-trip passthrough: restore schema keys that the renderer's
+            // allowlist didn't map (export_page preserved them verbatim).
+            $passthrough_skip = [ '_type', 'module', 'children', 'type', 'columns', 'rows', 'column_structure', '_raw_attrs' ];
+            foreach ( $data as $key => $value ) {
+                if ( in_array( $key, $passthrough_skip, true ) || isset( $attrs[ $key ] ) ) {
+                    continue;
+                }
+                if ( $key === 'builderVersion' ) {
+                    continue;
+                }
+                $attrs[ $key ] = $value;
+            }
+
             // Apply shared post-processing (gcid, gradient, background) and serialize.
             $attrs = self::convert_gcid_to_variable_syntax( $attrs );
             $attrs = self::normalize_gradient_stops( $attrs );
@@ -155,6 +168,21 @@ class Layout_Engine {
                 if ( isset( $data[ $key ] ) && ! isset( $attrs[ $key ] ) ) {
                     $attrs[ $key ] = $data[ $key ];
                 }
+            }
+
+            // Round-trip passthrough: schema keys that the renderer didn't map
+            // (export_page preserved them verbatim) are restored so the deployed
+            // block keeps the original attributes (dgpc settings, modulePreset,
+            // slide css, srcset/sizes, etc.). Skip structural/internal keys.
+            $passthrough_skip = [ '_type', 'module', 'children', 'type', 'columns', 'rows', 'column_structure', '_raw_attrs' ];
+            foreach ( $data as $key => $value ) {
+                if ( in_array( $key, $passthrough_skip, true ) || isset( $attrs[ $key ] ) ) {
+                    continue;
+                }
+                if ( $key === 'builderVersion' ) {
+                    continue;
+                }
+                $attrs[ $key ] = $value;
             }
         }
 
