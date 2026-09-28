@@ -7,8 +7,8 @@
  * this to stop guessing and compile blocks against the real spec.
  *
  * Files consumed:
- *   - _all_modules_metadata.php              (2.6MB — schema: types, settings, groups)
- *   - _all_modules_default_render_attributes.php (155KB — default values per attribute)
+ *   - _all_modules_metadata.php              (3.1MB — schema: types, settings, groups)
+ *   - _all_modules_default_render_attributes.php (174KB — default values per attribute)
  */
 
 trait Module_Metadata {
