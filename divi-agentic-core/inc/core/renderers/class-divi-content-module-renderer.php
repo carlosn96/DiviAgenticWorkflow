@@ -120,9 +120,30 @@ class Divi_ContentModule_Renderer extends Divi_Base_Renderer {
 		$hf = $data['headingFont'] ?? null;
 		if ( is_array( $hf ) ) {
 			$level = $data['titleLevel'] ?? ( $data['title']['level'] ?? 'h4' );
-			$level_font = $hf[ $level ] ?? ( $hf['h1'] ?? $hf );
-			if ( is_array( $level_font ) ) {
-				$font_src = $level_font['font'] ?? $level_font;
+			$font_src = null;
+
+			// Shape A: dict keyed by heading level: { h4: { font: {bp: {value}} } }
+			if ( isset( $hf[ $level ] ) && is_array( $hf[ $level ] ) ) {
+				$level_font = $hf[ $level ];
+				$font_src   = $level_font['font'] ?? $level_font;
+			}
+
+			// Shape B: flat indexed list [ { bp: { value: {...} } } ] (BlocksToSchema export)
+			if ( $font_src === null && isset( $hf[0] ) && is_array( $hf[0] ) ) {
+				$candidate = $hf[0];
+				if ( isset( $candidate['font'] ) && is_array( $candidate['font'] ) ) {
+					$font_src = $candidate['font'];
+				} elseif ( isset( $candidate['desktop']['value'] ) ) {
+					$font_src = $candidate;
+				}
+			}
+
+			// Shape C: flat breakpoint dict directly: { bp: { value: {...} } }
+			if ( $font_src === null && isset( $hf['desktop']['value'] ) ) {
+				$font_src = $hf;
+			}
+
+			if ( is_array( $font_src ) ) {
 				foreach ( [ 'desktop', 'tablet', 'phone' ] as $bp ) {
 					if ( isset( $font_src[ $bp ]['value'] ) && is_array( $font_src[ $bp ]['value'] ) ) {
 						foreach ( $font_src[ $bp ]['value'] as $k => $v ) {

@@ -40,7 +40,7 @@ class Divi_Media_Renderer extends Divi_Base_Renderer {
 								'alt'       => $bp_val['alt'] ?? ( $data['alt'] ?? '' ),
 								'titleText' => $bp_val['titleText'] ?? ( $data['titleText'] ?? '' ),
 							];
-							foreach ( [ 'id', 'width', 'height', 'linkUrl', 'linkTarget' ] as $k ) {
+							foreach ( [ 'id', 'titleText', 'width', 'height', 'linkUrl', 'linkTarget', 'srcset', 'sizes' ] as $k ) {
 								if ( isset( $bp_val[ $k ] ) ) {
 									$bp_img[ $k ] = (string) $bp_val[ $k ];
 								}
@@ -92,7 +92,7 @@ class Divi_Media_Renderer extends Divi_Base_Renderer {
 							'src' => $src,
 							'alt' => $data['alt'] ?? '',
 						];
-						foreach ( [ 'id', 'titleText', 'width', 'height', 'linkUrl', 'linkTarget' ] as $k ) {
+						foreach ( [ 'id', 'titleText', 'width', 'height', 'linkUrl', 'linkTarget', 'srcset', 'sizes' ] as $k ) {
 							if ( isset( $data[ $k ] ) ) {
 								$bp_img[ $k ] = (string) $data[ $k ];
 							}
@@ -176,15 +176,28 @@ class Divi_Media_Renderer extends Divi_Base_Renderer {
 				break;
 
 			case 'divi/video':
-			case 'divi/audio':
-				if ( isset( $data['video']['innerContent'] ) ) {
-					// Schema provides native video.innerContent — pass through directly.
+				if ( isset( $data['video'] ) ) {
 					$attrs['video'] = $data['video'];
 				} elseif ( isset( $data['src'] ) ) {
+					$val = [ 'src' => $data['src'] ];
+					if ( ! empty( $data['webm'] ) ) {
+						$val['webm'] = $data['webm'];
+					}
 					$attrs['video']['innerContent'] = [
+						'desktop' => [ 'value' => $val ],
+						'tablet'  => [ 'value' => $val ],
+						'phone'   => [ 'value' => $val ],
+					];
+				}
+				break;
+
+			case 'divi/audio':
+				if ( isset( $data['audio'] ) ) {
+					$attrs['audio'] = $data['audio'];
+				} elseif ( isset( $data['src'] ) ) {
+					$attrs['audio']['innerContent'] = [
 						'desktop' => [ 'value' => [
-							'src'  => $data['src'],
-							'webm' => $data['webm'] ?? '',
+							'src' => $data['src'],
 						] ],
 					];
 				}

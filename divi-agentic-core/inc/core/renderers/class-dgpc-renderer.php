@@ -167,15 +167,30 @@ class Dgpc_Renderer implements Block_Renderer_Interface {
 			if ( is_string( $css ) ) {
 				$attrs['css'] = [ 'desktop' => [ 'value' => [ 'freeForm' => $css ] ] ];
 			} elseif ( is_array( $css ) ) {
+				$is_freeform = false;
 				foreach ( [ 'desktop', 'tablet', 'phone' ] as $bp ) {
 					if ( isset( $css[ $bp ] ) ) {
 						$bp_css = $css[ $bp ];
-						if ( is_string( $bp_css ) ) {
-							$attrs['css'][ $bp ] = [ 'value' => [ 'freeForm' => $bp_css ] ];
-						} elseif ( is_array( $bp_css ) ) {
-							$attrs['css'][ $bp ] = $bp_css;
+						if ( is_string( $bp_css ) || ( is_array( $bp_css ) && isset( $bp_css['value']['freeForm'] ) ) ) {
+							$is_freeform = true;
+							break;
 						}
 					}
+				}
+				if ( $is_freeform ) {
+					foreach ( [ 'desktop', 'tablet', 'phone' ] as $bp ) {
+						if ( isset( $css[ $bp ] ) ) {
+							$bp_css = $css[ $bp ];
+							if ( is_string( $bp_css ) ) {
+								$attrs['css'][ $bp ] = [ 'value' => [ 'freeForm' => $bp_css ] ];
+							} elseif ( is_array( $bp_css ) ) {
+								$attrs['css'][ $bp ] = $bp_css;
+							}
+						}
+					}
+				} else {
+					// Native D5 css shape (e.g. {desktop:{value:{title:"..."}}}) — passthrough.
+					$attrs['css'] = $css;
 				}
 			}
 		}

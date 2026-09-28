@@ -170,12 +170,25 @@ class Divi_Generic_Renderer extends Divi_Base_Renderer {
 				break;
 
 			case $slug === 'divi/icon-list-item':
-				$label = $data['title'] ?? ( isset( $data['content'] ) && is_string( $data['content'] ) ? $data['content'] : null );
-				if ( $label !== null ) {
-					$attrs['title']['innerContent'] = [ 'desktop' => [ 'value' => $label ] ];
+				// Divi 5 stores the item label in content.innerContent (renders into
+				// .et_pb_icon_list_text), and the item icon in icon.innerContent.
+				$label = $data['content'] ?? $data['title'] ?? null;
+				if ( is_array( $label ) && isset( $label['innerContent'] ) ) {
+					$attrs['content'] = $label;
+				} elseif ( $label !== null ) {
+					$attrs['content']['innerContent'] = [ 'desktop' => [ 'value' => $label ] ];
 				}
-				if ( isset( $data['icon'] ) ) {
-					$attrs['icon'] = [ 'advanced' => [ 'icon' => [ 'desktop' => [ 'value' => $data['icon'] ] ] ] ];
+
+				$icon = $data['icon'] ?? null;
+				if ( is_array( $icon ) && isset( $icon['innerContent'] ) ) {
+					$val = $icon['innerContent']['desktop']['value'] ?? null;
+					if ( is_array( $val ) && isset( $val['icon'] ) ) {
+						$val = $val['icon'];
+					}
+					$icon['innerContent']['desktop']['value'] = $val;
+					$attrs['icon'] = $icon;
+				} elseif ( is_array( $icon ) && isset( $icon['unicode'] ) ) {
+					$attrs['icon'] = [ 'innerContent' => [ 'desktop' => [ 'value' => $icon ] ] ];
 				}
 				break;
 
@@ -238,7 +251,7 @@ class Divi_Generic_Renderer extends Divi_Base_Renderer {
 				}
 				break;
 
-			case 'divi/breadcrumbs':
+			case $slug === 'divi/breadcrumbs':
 				foreach ( [ 'home', 'separator' ] as $bc_key ) {
 					if ( isset( $data[ $bc_key ] ) ) {
 						$attrs[ $bc_key ] = $data[ $bc_key ];
@@ -251,9 +264,28 @@ class Divi_Generic_Renderer extends Divi_Base_Renderer {
 				}
 				break;
 
+			case $slug === 'divi/link':
+				$link_text = $data['text'] ?? ( is_string( $data['content'] ?? null ) ? $data['content'] : '' );
+				$attrs['content'] = [
+					'innerContent' => [ 'desktop' => [ 'value' => [
+						'text'       => $link_text,
+						'linkUrl'    => $data['link'] ?? $data['link_url'] ?? $data['url'] ?? '',
+						'linkTarget' => $data['link_target'] ?? $data['target'] ?? 'off',
+						'rel'        => $data['rel'] ?? [],
+					] ] ],
+					'decoration'   => [],
+				];
+				if ( isset( $data['font'] ) && is_array( $data['font'] ) ) {
+					$attrs['content']['decoration']['font']['font'] = $data['font'];
+				}
+				if ( isset( $data['icon'] ) && is_array( $data['icon'] ) ) {
+					$attrs['icon'] = [ 'innerContent' => $data['icon'] ];
+				}
+				break;
+
 			case in_array( $slug, [
 				'divi/before-after-image', 'divi/canvas-portal',
-				'divi/link', 'divi/post-slider', 'divi/signup-custom-field',
+				'divi/post-slider', 'divi/signup-custom-field',
 			], true ):
 				if ( isset( $data['before_src'] ) && isset( $data['after_src'] ) ) {
 					$attrs['image'] = [ 'innerContent' => [ 'desktop' => [ 'value' => [

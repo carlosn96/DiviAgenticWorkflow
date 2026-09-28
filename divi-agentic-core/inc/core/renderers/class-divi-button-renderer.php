@@ -33,6 +33,13 @@ class Divi_Button_Renderer extends Divi_Base_Renderer {
 			];
 		}
 
+		// Round-trip passthrough: when the schema preserved the full native
+		// button.decoration (export_page → BlocksToSchema), restore it verbatim
+		// so colors/borders/fonts from the original page survive redeploy.
+		if ( isset( $data['button_decoration'] ) && is_array( $data['button_decoration'] ) ) {
+			$attrs['button']['decoration'] = $data['button_decoration'];
+		}
+
 		// Map the custom preset attributes under module.decoration.button
 		// to standard Divi 5 button attributes under button.decoration.
 		if ( isset( $attrs['module']['decoration']['button'] ) ) {

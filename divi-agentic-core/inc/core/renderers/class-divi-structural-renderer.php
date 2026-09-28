@@ -69,8 +69,12 @@ class Divi_Structural_Renderer extends Divi_Base_Renderer {
 	 * @return array Updated attrs.
 	 */
 	private function render_section( string $slug, array $data, array $attrs ): array {
+		$section_type = $data['advanced']['type']['desktop']['value']
+			?? $data['type']
+			?? 'regular';
+
 		$attrs['module']['advanced']['type'] = [
-			'desktop' => [ 'value' => 'regular' ],
+			'desktop' => [ 'value' => $section_type ],
 		];
 
 		$parallax_val = ( isset( $data['parallax'] ) && $data['parallax'] === 'on' ) ? 'on' : 'off';
