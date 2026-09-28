@@ -5,7 +5,7 @@ require_once __DIR__ . '/trait-module-metadata.php';
 require_once __DIR__ . '/renderers/trait-block-helpers.php';
 
 /**
- * Layout Engine v12.1 — Divi 5.10.1 Native Render (Metadata-Driven)
+ * Layout Engine v12.2 — Divi 5.13.1 Native Render (Metadata-Driven)
  *
  * Pure structural compiler: receives a pre-resolved schema and maps it
  * to Divi 5 blocks. Uses official Divi 5 metadata for serialization paths.
@@ -93,13 +93,6 @@ class Layout_Engine {
         ];
 
         $is_divi = strpos( $slug, 'divi/' ) === 0;
-
-        $is_divi = strpos( $slug, 'divi/' ) === 0;
-
-        $attrs = [
-            'builderVersion' => $this->d5_version,
-            'module' => []
-        ];
 
         // --- DGPCommerce Product Carousel: custom third-party block ---
         // Handled early because it is NOT a native Divi 5 block; it stores
@@ -265,7 +258,7 @@ class Layout_Engine {
 
         $form_slugs = [
             'divi/contact-form', 'divi/contact-field', 'divi/login',
-            'divi/subscribe', 'divi/search',
+            'divi/search',
         ];
         if ( in_array( $slug, $form_slugs, true ) ) {
             return new \Divi_Agentic_Core\Core\Renderers\Divi_Form_Renderer();
@@ -286,8 +279,7 @@ class Layout_Engine {
         $container_slugs = [
             'divi/menu', 'divi/fullwidth-menu',
             'divi/row-inner', 'divi/group', 'divi/group-carousel',
-            'divi/timeline',
-            'divi/global-layout', 'divi/layout', 'divi/placeholder',
+            'divi/timeline', 'divi/global-layout',
             'divi/slider', 'divi/video-slider', 'divi/accordion',
             'divi/tabs', 'divi/social-media-follow', 'divi/icon-list',
             'divi/fullwidth-slider', 'divi/pricing-tables', 'divi/fullwidth-portfolio',
@@ -306,6 +298,20 @@ class Layout_Engine {
 
         if ( strpos( $slug, 'divi/woocommerce-' ) === 0 || $slug === 'divi/shop' ) {
             return new \Divi_Agentic_Core\Core\Renderers\Divi_Woo_Renderer();
+        }
+
+        // Modules without a dedicated family renderer: serialized from the
+        // official Divi 5 metadata (innerContent groups + canonical defaults).
+        $metadata_slugs = [
+            'divi/canvas-portal', 'divi/charts', 'divi/gravity-forms',
+            'divi/imagely-gallery', 'divi/instagram-feed', 'divi/payment-button',
+            'divi/table-of-contents', 'divi/tooltip', 'divi/before-after-image',
+            'divi/signup-custom-field', 'divi/counters', 'divi/post-filter',
+            'divi/post-filter-item', 'divi/post-slider', 'divi/fullwidth-post-slider',
+            'divi/timeline-item',
+        ];
+        if ( in_array( $slug, $metadata_slugs, true ) ) {
+            return new \Divi_Agentic_Core\Core\Renderers\Divi_Metadata_Renderer();
         }
 
         return new \Divi_Agentic_Core\Core\Renderers\Divi_Generic_Renderer();

@@ -4,8 +4,7 @@
  *
  * Handles divider, map/fullwidth-map, blog, sidebar, login,
  * contact-form-7, icon-list-item, lottie, svg, map-pin, dropdown,
- * portfolio/filterable-portfolio, before-after-image, canvas-portal,
- * breadcrumbs, link, post-slider, signup, signup-custom-field,
+ * portfolio/filterable-portfolio, breadcrumbs, link, signup,
  * and all fullwidth-* generic fallthroughs.
  *
  * @package Divi_Agentic_Core
@@ -43,8 +42,19 @@ class Divi_Generic_Renderer extends Divi_Base_Renderer {
 				break;
 
 			case in_array( $slug, [ 'divi/map', 'divi/fullwidth-map' ], true ):
-				if ( isset( $data['address'] ) ) {
-					$attrs['map']['innerContent'] = [ 'desktop' => [ 'value' => $data['address'] ] ];
+				// Divi 5 map.innerContent.desktop.value is an object
+				// {address, zoom, lat, lng}, not a plain string.
+				$map_val = $attrs['map']['innerContent']['desktop']['value'] ?? [];
+				if ( ! is_array( $map_val ) ) {
+					$map_val = [];
+				}
+				foreach ( [ 'address', 'zoom', 'lat', 'lng' ] as $map_key ) {
+					if ( isset( $data[ $map_key ] ) ) {
+						$map_val[ $map_key ] = $data[ $map_key ];
+					}
+				}
+				if ( ! empty( $map_val ) ) {
+					$attrs['map']['innerContent'] = [ 'desktop' => [ 'value' => $map_val ] ];
 				}
 				if ( isset( $data['mouse_wheel'] ) ) {
 					$attrs['map']['advanced']['mouseWheel'] = [ 'desktop' => [ 'value' => $data['mouse_wheel'] ] ];
@@ -202,8 +212,22 @@ class Divi_Generic_Renderer extends Divi_Base_Renderer {
 				break;
 
 			case $slug === 'divi/map-pin':
-				if ( isset( $data['address'] ) ) {
-					$attrs['pin'] = [ 'innerContent' => [ 'desktop' => [ 'value' => $data['address'] ] ] ];
+				// Divi 5 pin.innerContent.desktop.value is an object
+				// {address, zoom, lat, lng}, not a plain string.
+				$pin_val = $attrs['pin']['innerContent']['desktop']['value'] ?? [];
+				if ( ! is_array( $pin_val ) ) {
+					$pin_val = [];
+				}
+				foreach ( [ 'address', 'zoom', 'lat', 'lng' ] as $pin_key ) {
+					if ( isset( $data[ $pin_key ] ) ) {
+						$pin_val[ $pin_key ] = $data[ $pin_key ];
+					}
+				}
+				if ( ! empty( $pin_val ) ) {
+					$attrs['pin']['innerContent'] = [ 'desktop' => [ 'value' => $pin_val ] ];
+				}
+				if ( isset( $data['title'] ) ) {
+					$attrs['title']['innerContent'] = [ 'desktop' => [ 'value' => $data['title'] ] ];
 				}
 				if ( isset( $data['content'] ) ) {
 					$attrs['content']['innerContent'] = [ 'desktop' => [ 'value' => $data['content'] ] ];
@@ -283,26 +307,6 @@ class Divi_Generic_Renderer extends Divi_Base_Renderer {
 				}
 				break;
 
-			case in_array( $slug, [
-				'divi/before-after-image', 'divi/canvas-portal',
-				'divi/post-slider', 'divi/signup-custom-field',
-			], true ):
-				if ( isset( $data['before_src'] ) && isset( $data['after_src'] ) ) {
-					$attrs['image'] = [ 'innerContent' => [ 'desktop' => [ 'value' => [
-						'before' => $data['before_src'],
-						'after'  => $data['after_src'],
-					] ] ] ];
-				}
-				break;
-
-			case $slug === 'divi/timeline-item':
-				foreach ( [ 'date', 'title', 'content', 'marker', 'spacer' ] as $tl_key ) {
-					if ( isset( $data[ $tl_key ] ) ) {
-						$attrs[ $tl_key ] = $data[ $tl_key ];
-					}
-				}
-				break;
-
 			case strpos( $slug, 'divi/fullwidth-' ) === 0:
 				if ( isset( $data['content'] ) ) {
 					$attrs['content']['innerContent'] = [ 'desktop' => [ 'value' => $data['content'] ] ];
@@ -310,10 +314,12 @@ class Divi_Generic_Renderer extends Divi_Base_Renderer {
 				break;
 		}
 
+		// Preserve nested blocks: modules routed through Generic may still be
+		// container-like (e.g. map -> map-pin). Without this, children are dropped.
 		return [
 			'attrs'      => $attrs,
 			'inner'      => '',
-			'inner_html' => '',
+			'inner_html' => $children_html,
 		];
 	}
 }
