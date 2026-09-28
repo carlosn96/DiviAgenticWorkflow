@@ -365,6 +365,13 @@ return [
                 ]
             ],
             'decoration' => [
+                'layout' => [
+                    'desktop' => [
+                        'value' => [
+                            'flexDirection' => 'row'
+                        ]
+                    ]
+                ],
                 'spacing' => [
                     'desktop' => [
                         'value' => [
@@ -462,6 +469,94 @@ return [
                 'canvasId' => [
                     'desktop' => [
                         'value' => ''
+                    ]
+                ]
+            ]
+        ]
+    ],
+    'charts' => [
+        'module' => [
+            'meta' => [
+                'adminLabel' => [
+                    'desktop' => [
+                        'value' => 'Chart'
+                    ]
+                ]
+            ]
+        ],
+        'chart' => [
+            'advanced' => [
+                'config' => [
+                    'desktop' => [
+                        'value' => [
+                            'type' => 'line',
+                            'showTitle' => 'on',
+                            'showSubtitle' => 'on',
+                            'showLegend' => 'on',
+                            'showLegendTitle' => 'off',
+                            'showTooltip' => 'on'
+                        ]
+                    ]
+                ],
+                'title' => [
+                    'font' => [
+                        'desktop' => [
+                            'value' => [
+                                'textAlign' => 'center'
+                            ]
+                        ]
+                    ]
+                ],
+                'subtitle' => [
+                    'font' => [
+                        'desktop' => [
+                            'value' => [
+                                'textAlign' => 'center'
+                            ]
+                        ]
+                    ]
+                ],
+                'legend' => [
+                    'layout' => [
+                        'desktop' => [
+                            'value' => [
+                                'position' => 'top',
+                                'align' => 'center'
+                            ]
+                        ]
+                    ],
+                    'markers' => [
+                        'desktop' => [
+                            'value' => [
+                                'padding' => '10px',
+                                'usePointStyle' => 'off',
+                                'pointStyle' => 'circle',
+                                'boxWidth' => '40px',
+                                'boxHeight' => '12px'
+                            ]
+                        ]
+                    ]
+                ],
+                'tooltip' => [
+                    'box' => [
+                        'desktop' => [
+                            'value' => [
+                                'backgroundColor' => 'rgba(0, 0, 0, 0.8)',
+                                'borderColor' => 'rgba(0, 0, 0, 0)',
+                                'borderWidth' => '0px',
+                                'cornerRadius' => '6px',
+                                'padding' => '6px'
+                            ]
+                        ]
+                    ],
+                    'colorBoxes' => [
+                        'desktop' => [
+                            'value' => [
+                                'displayColors' => 'on',
+                                'boxWidth' => '12px',
+                                'boxHeight' => '12px'
+                            ]
+                        ]
                     ]
                 ]
             ]
@@ -615,6 +710,11 @@ return [
                 'showReply' => [
                     'desktop' => [
                         'value' => 'on'
+                    ]
+                ],
+                'showLabels' => [
+                    'desktop' => [
+                        'value' => 'off'
                     ]
                 ],
                 'text' => [
@@ -791,6 +891,11 @@ return [
                 ]
             ],
             'advanced' => [
+                'showLabels' => [
+                    'desktop' => [
+                        'value' => 'off'
+                    ]
+                ],
                 'spamProtection' => [
                     'desktop' => [
                         'value' => [
@@ -866,6 +971,19 @@ return [
                         'value' => [
                             'margin' => [
                                 'bottom' => '0px'
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'button' => [
+            'decoration' => [
+                'button' => [
+                    'desktop' => [
+                        'value' => [
+                            'icon' => [
+                                'enable' => 'on'
                             ]
                         ]
                     ]
@@ -1109,7 +1227,8 @@ return [
                         'value' => [
                             'showOn' => 'hover',
                             'direction' => 'below',
-                            'alignment' => 'start'
+                            'alignment' => 'start',
+                            'offset' => '20px'
                         ]
                     ]
                 ]
@@ -1293,6 +1412,11 @@ return [
                     'desktop' => [
                         'value' => 'center'
                     ]
+                ],
+                'maxWidth' => [
+                    'desktop' => [
+                        'value' => '100%'
+                    ]
                 ]
             ]
         ],
@@ -1412,8 +1536,7 @@ return [
                             'width' => 'auto',
                             'maxWidth' => 'none',
                             'minHeight' => 'auto',
-                            'maxHeight' => 'none',
-                            'height' => '440px'
+                            'maxHeight' => 'none'
                         ]
                     ]
                 ]
@@ -2152,6 +2275,75 @@ return [
             ]
         ]
     ],
+    'gravity-forms' => [
+        'module' => [
+            'meta' => [
+                'adminLabel' => [
+                    'desktop' => [
+                        'value' => 'Gravity Forms'
+                    ]
+                ]
+            ]
+        ],
+        'gravityForm' => [
+            'advanced' => [
+                'useAjax' => [
+                    'desktop' => [
+                        'value' => 'off'
+                    ]
+                ],
+                'showValidationMessagesPreview' => [
+                    'desktop' => [
+                        'value' => 'off'
+                    ]
+                ],
+                'showConfirmationMessagePreview' => [
+                    'desktop' => [
+                        'value' => 'off'
+                    ]
+                ]
+            ]
+        ],
+        'button' => [
+            'decoration' => [
+                'button' => [
+                    'desktop' => [
+                        'value' => [
+                            'icon' => [
+                                'enable' => 'off'
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'nextButton' => [
+            'decoration' => [
+                'button' => [
+                    'desktop' => [
+                        'value' => [
+                            'icon' => [
+                                'enable' => 'off'
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'previousButton' => [
+            'decoration' => [
+                'button' => [
+                    'desktop' => [
+                        'value' => [
+                            'icon' => [
+                                'enable' => 'off'
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ],
     'group' => [
         'module' => [
             'meta' => [
@@ -2430,6 +2622,80 @@ return [
             ]
         ]
     ],
+    'imagely-gallery' => [
+        'module' => [
+            'meta' => [
+                'adminLabel' => [
+                    'desktop' => [
+                        'value' => 'Imagely Gallery'
+                    ]
+                ]
+            ]
+        ]
+    ],
+    'instagram-feed' => [
+        'module' => [
+            'meta' => [
+                'adminLabel' => [
+                    'desktop' => [
+                        'value' => 'Instagram Feed'
+                    ]
+                ]
+            ]
+        ],
+        'feed' => [
+            'decoration' => [
+                'layout' => [
+                    'desktop' => [
+                        'value' => [
+                            'display' => 'grid',
+                            'gridColumnWidths' => 'equal',
+                            'gridColumnCount' => '3',
+                            'rowGap' => '16px',
+                            'columnGap' => '16px'
+                        ]
+                    ]
+                ]
+            ],
+            'advanced' => [
+                'config' => [
+                    'desktop' => [
+                        'value' => [
+                            'lightbox' => 'on'
+                        ]
+                    ]
+                ]
+            ],
+            'innerContent' => [
+                'desktop' => [
+                    'value' => [
+                        'accountId' => '',
+                        'postCount' => '6'
+                    ]
+                ]
+            ]
+        ],
+        'followButton' => [
+            'advanced' => [
+                'show' => [
+                    'desktop' => [
+                        'value' => 'on'
+                    ]
+                ]
+            ],
+            'decoration' => [
+                'button' => [
+                    'desktop' => [
+                        'value' => [
+                            'icon' => [
+                                'enable' => 'on'
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ],
     'link' => [
         'module' => [
             'meta' => [
@@ -2609,15 +2875,6 @@ return [
                         'value' => 'Map'
                     ]
                 ]
-            ],
-            'decoration' => [
-                'sizing' => [
-                    'desktop' => [
-                        'value' => [
-                            'height' => '440px'
-                        ]
-                    ]
-                ]
             ]
         ]
     ],
@@ -2670,6 +2927,18 @@ return [
                     'desktop' => [
                         'value' => [
                             'color' => '#ffffff'
+                        ]
+                    ]
+                ],
+                'layout' => [
+                    'tablet' => [
+                        'value' => [
+                            'justifyContent' => 'space-between'
+                        ]
+                    ],
+                    'phone' => [
+                        'value' => [
+                            'justifyContent' => 'space-between'
                         ]
                     ]
                 ]
@@ -2838,6 +3107,67 @@ return [
             ]
         ]
     ],
+    'payment-button' => [
+        'module' => [
+            'meta' => [
+                'adminLabel' => [
+                    'desktop' => [
+                        'value' => 'Payment Button'
+                    ]
+                ]
+            ],
+            'advanced' => [
+                'html' => [
+                    'desktop' => [
+                        'value' => [
+                            'elementType' => 'a'
+                        ]
+                    ]
+                ],
+                'text' => [
+                    'text' => [
+                        'desktop' => [
+                            'value' => [
+                                'color' => 'light'
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'button' => [
+            'decoration' => [
+                'button' => [
+                    'desktop' => [
+                        'value' => [
+                            'icon' => [
+                                'enable' => 'on',
+                                'onHover' => 'off',
+                                'placement' => 'left',
+                                'settings' => [
+                                    'unicode' => '&#xf1ed;',
+                                    'type' => 'fa',
+                                    'weight' => '400'
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'innerContent' => [
+                'desktop' => [
+                    'value' => [
+                        'provider' => 'paypal',
+                        'environment' => 'sandbox',
+                        'amountMode' => 'fixed',
+                        'amount' => '10.00',
+                        'currency' => 'USD',
+                        'openInNewTab' => 'off'
+                    ]
+                ]
+            ]
+        ]
+    ],
     'portfolio' => [
         'module' => [
             'meta' => [
@@ -2935,6 +3265,86 @@ return [
         ]
     ],
     'post-content' => [],
+    'post-filter' => [
+        'module' => [
+            'meta' => [
+                'adminLabel' => [
+                    'desktop' => [
+                        'value' => 'Post Filter'
+                    ]
+                ]
+            ],
+            'advanced' => [
+                'filters' => [
+                    'desktop' => [
+                        'value' => [
+                            'applyMode' => 'submit',
+                            'relation' => 'and'
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'button' => [
+            'decoration' => [
+                'button' => [
+                    'desktop' => [
+                        'value' => [
+                            'icon' => [
+                                'enable' => 'on'
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ],
+    'post-filter-item' => [
+        'module' => [
+            'decoration' => [
+                'sizing' => [
+                    'desktop' => [
+                        'value' => [
+                            'flexType' => '24_24'
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'field' => [
+            'innerContent' => [
+                'desktop' => [
+                    'value' => [
+                        'type' => 'text',
+                        'fieldValueType' => 'text',
+                        'option' => 'post_content',
+                        'optionsMethod' => 'automatic',
+                        'labelDateFormat' => 'M j, Y'
+                    ]
+                ]
+            ]
+        ],
+        'label' => [
+            'innerContent' => [
+                'desktop' => [
+                    'value' => 'Search'
+                ]
+            ]
+        ],
+        'button' => [
+            'decoration' => [
+                'button' => [
+                    'desktop' => [
+                        'value' => [
+                            'icon' => [
+                                'enable' => 'on'
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ],
     'post-nav' => [
         'module' => [
             'meta' => [
@@ -3130,6 +3540,21 @@ return [
                     'desktop' => [
                         'value' => 'on'
                     ]
+                ],
+                'style' => [
+                    'desktop' => [
+                        'value' => 'dot'
+                    ]
+                ],
+                'showCounter' => [
+                    'desktop' => [
+                        'value' => 'on'
+                    ]
+                ],
+                'showSwipeLabel' => [
+                    'desktop' => [
+                        'value' => 'on'
+                    ]
                 ]
             ]
         ],
@@ -3236,20 +3661,7 @@ return [
                 ]
             ]
         ],
-        'featuredImage' => [
-            'decoration' => [
-                'sizing' => [
-                    'desktop' => [
-                        'value' => [
-                            'alignment' => 'center',
-                            'width' => '100%',
-                            'maxWidth' => 'none',
-                            'height' => 'auto',
-                            'maxHeight' => 'none'
-                        ]
-                    ]
-                ]
-            ],
+        'image' => [
             'advanced' => [
                 'enabled' => [
                     'desktop' => [
@@ -3259,11 +3671,6 @@ return [
                 'placement' => [
                     'desktop' => [
                         'value' => 'below'
-                    ]
-                ],
-                'forceFullwidth' => [
-                    'desktop' => [
-                        'value' => 'on'
                     ]
                 ]
             ]
@@ -3523,6 +3930,11 @@ return [
                         'value' => [
                             'enabled' => 'off'
                         ]
+                    ]
+                ],
+                'showLabels' => [
+                    'desktop' => [
+                        'value' => 'off'
                     ]
                 ]
             ],
@@ -3860,6 +4272,21 @@ return [
                     'desktop' => [
                         'value' => 'on'
                     ]
+                ],
+                'style' => [
+                    'desktop' => [
+                        'value' => 'dot'
+                    ]
+                ],
+                'showCounter' => [
+                    'desktop' => [
+                        'value' => 'on'
+                    ]
+                ],
+                'showSwipeLabel' => [
+                    'desktop' => [
+                        'value' => 'on'
+                    ]
                 ]
             ]
         ],
@@ -4006,7 +4433,83 @@ return [
             ]
         ]
     ],
+    'svg' => [
+        'module' => [
+            'meta' => [
+                'adminLabel' => [
+                    'desktop' => [
+                        'value' => 'SVG'
+                    ]
+                ]
+            ]
+        ],
+        'svg' => [
+            'innerContent' => [
+                'desktop' => [
+                    'value' => [
+                        'sourceType' => 'code',
+                        'linkTarget' => 'off'
+                    ]
+                ]
+            ]
+        ]
+    ],
     'tab' => [],
+    'table-of-contents' => [
+        'module' => [
+            'meta' => [
+                'adminLabel' => [
+                    'desktop' => [
+                        'value' => 'Table of Contents'
+                    ]
+                ]
+            ]
+        ],
+        'title' => [
+            'decoration' => [
+                'font' => [
+                    'font' => [
+                        'desktop' => [
+                            'value' => [
+                                'headingLevel' => 'h2'
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'innerContent' => [
+                'desktop' => [
+                    'value' => 'Table of Contents'
+                ]
+            ]
+        ],
+        'list' => [
+            'advanced' => [
+                'layout' => [
+                    'desktop' => [
+                        'value' => [
+                            'markerStyle' => 'ordered'
+                        ]
+                    ]
+                ],
+                'interaction' => [
+                    'desktop' => [
+                        'value' => [
+                            'smoothScroll' => 'on',
+                            'scrollOffsetPx' => '0'
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'emptyState' => [
+            'innerContent' => [
+                'desktop' => [
+                    'value' => 'No headings found in this post.'
+                ]
+            ]
+        ]
+    ],
     'tabs' => [
         'module' => [
             'meta' => [
@@ -4140,6 +4643,38 @@ return [
             ]
         ]
     ],
+    'timeline' => [
+        'module' => [
+            'meta' => [
+                'adminLabel' => [
+                    'desktop' => [
+                        'value' => 'Timeline'
+                    ]
+                ]
+            ],
+            'advanced' => [
+                'timeline' => [
+                    'desktop' => [
+                        'value' => [
+                            'direction' => 'vertical',
+                            'position' => 'right'
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ],
+    'timeline-item' => [
+        'module' => [
+            'meta' => [
+                'adminLabel' => [
+                    'desktop' => [
+                        'value' => 'Timeline Item'
+                    ]
+                ]
+            ]
+        ]
+    ],
     'toggle' => [
         'module' => [
             'meta' => [
@@ -4187,6 +4722,36 @@ return [
                             'value' => [
                                 'headingLevel' => 'h5'
                             ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ],
+    'tooltip' => [
+        'module' => [
+            'meta' => [
+                'adminLabel' => [
+                    'desktop' => [
+                        'value' => 'Tooltip'
+                    ]
+                ]
+            ],
+            'advanced' => [
+                'tooltip' => [
+                    'desktop' => [
+                        'value' => [
+                            'trigger' => 'hover',
+                            'positionMode' => 'anchored',
+                            'placement' => 'outside top center',
+                            'skid' => '0px',
+                            'distance' => '8px',
+                            'openDelay' => 0,
+                            'closeDelay' => 0,
+                            'showArrow' => 'off',
+                            'arrowPlacement' => 'outside bottom center',
+                            'arrowOffset' => '0px',
+                            'arrowSize' => '6px'
                         ]
                     ]
                 ]
@@ -4414,6 +4979,14 @@ return [
         ],
         'button' => [
             'decoration' => [
+                'background' => [
+                    'desktop' => [
+                        'value' => [
+                            'color' => '#ffffff',
+                            'enableColor' => 'on'
+                        ]
+                    ]
+                ],
                 'button' => [
                     'desktop' => [
                         'value' => [
@@ -4500,6 +5073,19 @@ return [
             ]
         ],
         'button' => [
+            'decoration' => [
+                'button' => [
+                    'desktop' => [
+                        'value' => [
+                            'icon' => [
+                                'enable' => 'on'
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'disabledButton' => [
             'decoration' => [
                 'button' => [
                     'desktop' => [
@@ -4761,7 +5347,14 @@ return [
                     'desktop' => [
                         'value' => [
                             'icon' => [
-                                'enable' => 'on'
+                                'enable' => 'on',
+                                'onHover' => 'on',
+                                'placement' => 'right',
+                                'settings' => [
+                                    'unicode' => '&#x35;',
+                                    'type' => 'divi',
+                                    'weight' => '400'
+                                ]
                             ]
                         ]
                     ]
@@ -4894,6 +5487,20 @@ return [
                             'gridColumnCount' => '4',
                             'rowGap' => '30px'
                         ]
+                    ],
+                    'tablet' => [
+                        'value' => [
+                            'columnGap' => '30px',
+                            'gridColumnCount' => '2',
+                            'rowGap' => '30px'
+                        ]
+                    ],
+                    'phone' => [
+                        'value' => [
+                            'columnGap' => '30px',
+                            'gridColumnCount' => '1',
+                            'rowGap' => '30px'
+                        ]
                     ]
                 ]
             ]
@@ -4939,15 +5546,6 @@ return [
                 'adminLabel' => [
                     'desktop' => [
                         'value' => 'Woo Product Images'
-                    ]
-                ]
-            ]
-        ],
-        'image' => [
-            'advanced' => [
-                'forceFullwidth' => [
-                    'desktop' => [
-                        'value' => 'off'
                     ]
                 ]
             ]
@@ -5469,6 +6067,22 @@ return [
                 'product' => [
                     'desktop' => [
                         'value' => 'dynamic'
+                    ]
+                ]
+            ]
+        ],
+        'image' => [
+            'decoration' => [
+                'border' => [
+                    'desktop' => [
+                        'value' => [
+                            'styles' => [
+                                'all' => [
+                                    'style' => 'solid',
+                                    'width' => '0px'
+                                ]
+                            ]
+                        ]
                     ]
                 ]
             ]

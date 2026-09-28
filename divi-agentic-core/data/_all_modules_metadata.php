@@ -6,6 +6,15 @@ return [
         'd4Shortcode' => 'et_pb_accordion',
         'title' => 'Accordion',
         'titles' => 'Accordions',
+        'description' =>
+            'Stacked panels visitors can expand to reveal hidden content, ideal for FAQs and feature lists.',
+        'keywords' => [
+            'faq',
+            'collapse',
+            'expand',
+            'toggle list',
+            'disclosure'
+        ],
         'moduleIcon' => 'divi/module-accordion',
         'childModuleName' => 'divi/accordion-item',
         'childModuleTitle' => 'Accordion Item',
@@ -167,7 +176,7 @@ return [
             'title' => [
                 'type' => 'object',
                 'selector' =>
-                    '{{selector}} h1.et_pb_toggle_title, {{selector}} h2.et_pb_toggle_title, {{selector}} h3.et_pb_toggle_title, {{selector}} h4.et_pb_toggle_title, {{selector}} h5.et_pb_toggle_title, {{selector}} h6.et_pb_toggle_title',
+                    '{{selector}} > .et_pb_toggle > h1.et_pb_toggle_title, {{selector}} > .et_pb_toggle > h2.et_pb_toggle_title, {{selector}} > .et_pb_toggle > h3.et_pb_toggle_title, {{selector}} > .et_pb_toggle > h4.et_pb_toggle_title, {{selector}} > .et_pb_toggle > h5.et_pb_toggle_title, {{selector}} > .et_pb_toggle > h6.et_pb_toggle_title',
                 'settings' => [
                     'decoration' => [
                         'font' => [
@@ -203,11 +212,11 @@ return [
             'closedToggleIcon' => [
                 'type' => 'object',
                 'selector' =>
-                    '{{selector}} .et_pb_toggle_close:not(.et_pb_toggle_empty) .et_pb_toggle_title:before',
+                    '{{selector}} > .et_pb_toggle_close:not(.et_pb_toggle_empty) > .et_pb_toggle_title:before',
                 'styleProps' => [
                     'icon' => [
                         'selector' =>
-                            '{{selector}} .et_pb_toggle_close:not(.et_pb_toggle_empty) .et_pb_toggle_title:before',
+                            '{{selector}} > .et_pb_toggle_close:not(.et_pb_toggle_empty) > .et_pb_toggle_title:before',
                         'important' => [
                             'desktop' => [
                                 'value' => [
@@ -330,7 +339,7 @@ return [
                 'styleProps' => [
                     'font' => [
                         'selector' =>
-                            '{{selector}}.et_pb_accordion .et_pb_toggle_open .et_pb_toggle_title'
+                            '{{selector}}.et_pb_accordion > .et_pb_toggle_open > .et_pb_toggle_title'
                     ]
                 ],
                 'settings' => [
@@ -389,7 +398,7 @@ return [
                 'styleProps' => [
                     'font' => [
                         'selector' =>
-                            '{{selector}} .et_pb_toggle_close h1.et_pb_toggle_title,{{selector}} .et_pb_toggle_close h2.et_pb_toggle_title,{{selector}} .et_pb_toggle_close h3.et_pb_toggle_title,{{selector}} .et_pb_toggle_close h4.et_pb_toggle_title,{{selector}} .et_pb_toggle_close h5.et_pb_toggle_title,{{selector}} .et_pb_toggle_close h6.et_pb_toggle_title'
+                            '{{selector}} > .et_pb_toggle_close > h1.et_pb_toggle_title,{{selector}} > .et_pb_toggle_close > h2.et_pb_toggle_title,{{selector}} > .et_pb_toggle_close > h3.et_pb_toggle_title,{{selector}} > .et_pb_toggle_close > h4.et_pb_toggle_title,{{selector}} > .et_pb_toggle_close > h5.et_pb_toggle_title,{{selector}} > .et_pb_toggle_close > h6.et_pb_toggle_title'
                     ]
                 ],
                 'settings' => [
@@ -460,12 +469,13 @@ return [
             'toggleTitle' => [
                 'label' => 'Toggle Title',
                 'subName' => 'toggleTitle',
-                'selectorSuffix' => ' .et_pb_toggle_title'
+                'selectorSuffix' => ' > .et_pb_toggle > .et_pb_toggle_title'
             ],
             'toggleIcon' => [
                 'label' => 'Toggle Icon',
                 'subName' => 'toggleIcon',
-                'selectorSuffix' => ' .et_pb_toggle_title:before'
+                'selectorSuffix' =>
+                    ' > .et_pb_toggle > .et_pb_toggle_title:before'
             ],
             'toggleContent' => [
                 'label' => 'Toggle Content',
@@ -577,6 +587,9 @@ return [
         'd4Shortcode' => 'et_pb_accordion_item',
         'title' => 'Accordion Item',
         'titles' => 'Accordion Items',
+        'description' =>
+            'A single expandable panel inside an Accordion module; not used on its own.',
+        'keywords' => ['panel', 'collapsible item', 'expander'],
         'moduleIcon' => 'divi/module-accordion-item',
         'category' => 'child-module',
         'childrenName' => [],
@@ -662,7 +675,7 @@ return [
             ],
             'title' => [
                 'type' => 'object',
-                'selector' => '{{selector}} .et_pb_toggle_title',
+                'selector' => '{{selector}} > .et_pb_toggle_title',
                 'supportsCustomAttributes' => true,
                 'attributes' => [
                     'class' => 'et_pb_toggle_title'
@@ -744,16 +757,16 @@ return [
             'closedToggleIcon' => [
                 'type' => 'object',
                 'selector' =>
-                    '{{selector}}.et_pb_toggle_close:not(.et_pb_toggle_empty) .et_pb_toggle_title:before',
+                    '{{selector}}.et_pb_toggle_close:not(.et_pb_toggle_empty) > .et_pb_toggle_title:before',
                 'styleProps' => [
                     'icon' => [
                         'selector' =>
-                            '{{selector}}.et_pb_toggle_close:not(.et_pb_toggle_empty) .et_pb_toggle_title:before',
+                            '{{selector}}.et_pb_toggle_close:not(.et_pb_toggle_empty) > .et_pb_toggle_title:before',
                         'propertySelectors' => [
                             'desktop' => [
                                 'value' => [
                                     'font-size' =>
-                                        '{{selector}}.et_pb_toggle_close:not(.et_pb_toggle_empty) .et_pb_toggle_title:before, {{selector}}.et_pb_toggle_close:not(.et_pb_toggle_empty) .et_vb_toggle_overlay'
+                                        '{{selector}}.et_pb_toggle_close:not(.et_pb_toggle_empty) > .et_pb_toggle_title:before, {{selector}}.et_pb_toggle_close:not(.et_pb_toggle_empty) .et_vb_toggle_overlay'
                                 ]
                             ]
                         ],
@@ -1052,12 +1065,12 @@ return [
             'toggleTitle' => [
                 'label' => 'Toggle Title',
                 'subName' => 'toggleTitle',
-                'selectorSuffix' => ' .et_pb_toggle_title'
+                'selectorSuffix' => ' > .et_pb_toggle_title'
             ],
             'toggleIcon' => [
                 'label' => 'Toggle Icon',
                 'subName' => 'toggleIcon',
-                'selectorSuffix' => ' .et_pb_toggle_title:before'
+                'selectorSuffix' => ' > .et_pb_toggle_title:before'
             ],
             'toggleContent' => [
                 'label' => 'Toggle Content',
@@ -1142,6 +1155,9 @@ return [
         'moduleClassName' => 'et_pb_audio',
         'title' => 'Audio',
         'titles' => 'Audios',
+        'description' =>
+            'Audio player with cover art for embedding podcasts, music, or voice clips.',
+        'keywords' => ['music', 'podcast', 'player', 'sound', 'mp3'],
         'moduleIcon' => 'divi/module-audio',
         'category' => 'module',
         'childrenName' => [],
@@ -1244,8 +1260,7 @@ return [
                         'selector' => '{{selector}}.et_pb_audio_module'
                     ],
                     'layout' => [
-                        'selector' =>
-                            '{{selector}}, {{selector}} .et_pb_audio_module_content'
+                        'selector' => '{{selector}} .et_pb_audio_module_content'
                     ]
                 ],
                 'styleComponentsProps' => [
@@ -1643,6 +1658,9 @@ return [
         'moduleOrderClassName' => 'et_pb_before_after_image',
         'title' => 'Before/After Image',
         'titles' => 'Before/After Images',
+        'description' =>
+            'Stack two images so visitors can drag a slider to compare a before and after state.',
+        'keywords' => ['comparison', 'image slider', 'reveal', 'split image'],
         'moduleIcon' => 'divi/module-before-after-image',
         'category' => 'module',
         'childrenName' => [],
@@ -2244,6 +2262,15 @@ return [
         'd4Shortcode' => 'et_pb_blog',
         'title' => 'Blog',
         'titles' => 'Blogs',
+        'description' =>
+            'Configurable list of posts with featured images, excerpts, and meta in grid or list layouts.',
+        'keywords' => [
+            'post list',
+            'recent posts',
+            'article feed',
+            'news feed',
+            'archive'
+        ],
         'moduleIcon' => 'divi/module-blog',
         'childrenName' => [],
         'category' => 'module',
@@ -2771,7 +2798,7 @@ return [
                                 'desktop' => [
                                     'value' => [
                                         'text-align' =>
-                                            '{{selector}} .wp-pagenavi'
+                                            '{{selector}} .wp-pagenavi, {{selector}} .pagination'
                                     ]
                                 ]
                             ]
@@ -3381,6 +3408,9 @@ return [
         'd4Shortcode' => 'et_pb_blurb',
         'title' => 'Blurb',
         'titles' => 'Blurbs',
+        'description' =>
+            'Compact feature card pairing an icon or image with a heading and short description.',
+        'keywords' => ['feature', 'callout', 'card', 'highlight', 'tile'],
         'moduleIcon' => 'divi/module-blurb',
         'category' => 'module',
         'childrenName' => [],
@@ -3744,8 +3774,7 @@ return [
                         'important' => true
                     ],
                     'layout' => [
-                        'selector' =>
-                            '{{selector}}, {{selector}} .et_pb_blurb_content'
+                        'selector' => '{{selector}} .et_pb_blurb_content'
                     ]
                 ]
             ],
@@ -4019,6 +4048,9 @@ return [
         'moduleOrderClassName' => 'et_pb_breadcrumbs',
         'title' => 'Breadcrumbs',
         'titles' => 'Breadcrumbs',
+        'description' =>
+            'Hierarchical link trail showing where the current page sits in the site structure.',
+        'keywords' => ['trail', 'navigation path', 'crumbs', 'site path'],
         'moduleIcon' => 'divi/module-woocommerce-breadcrumb',
         'category' => 'module',
         'childrenName' => [],
@@ -4420,6 +4452,9 @@ return [
         'moduleOrderClassName' => 'et_pb_button',
         'title' => 'Button',
         'titles' => 'Buttons',
+        'description' =>
+            'Single styled link that drives a visitor toward one specific action or destination.',
+        'keywords' => ['link', 'cta link', 'click', 'action button'],
         'moduleIcon' => 'divi/module-button',
         'category' => 'module',
         'childrenName' => [],
@@ -4746,6 +4781,11 @@ return [
         'wrapper' => [
             'status' => true,
             'tag' => 'div'
+        ],
+        'mousetrap' => [
+            'zIndex' => [
+                'edited' => 1
+            ]
         ]
     ],
     'canvas-portal' => [
@@ -4753,6 +4793,14 @@ return [
         'd4Shortcode' => 'et_pb_canvas_portal',
         'title' => 'Canvas Portal',
         'titles' => 'Canvas Portals',
+        'description' =>
+            'Layered portal surface where modules can float above the standard page flow for hero or overlay layouts.',
+        'keywords' => [
+            'overlay',
+            'absolute layer',
+            'free canvas',
+            'stacking layer'
+        ],
         'moduleIcon' => 'divi/canvas-portal',
         'childrenName' => [],
         'category' => 'module',
@@ -4871,6 +4919,641 @@ return [
             ]
         ]
     ],
+    'charts' => [
+        'name' => 'divi/charts',
+        'd4Shortcode' => 'et_pb_charts',
+        'moduleClassName' => 'et_pb_charts',
+        'moduleOrderClassName' => 'et_pb_charts',
+        'title' => 'Chart',
+        'titles' => 'Charts',
+        'description' =>
+            'Interactive bar, line, pie, and other charts built from customizable data tables.',
+        'moduleIcon' => 'divi/module-charts',
+        'category' => 'module',
+        'childrenName' => [],
+        'videos' => [],
+        'attributes' => [
+            'module' => [
+                'type' => 'object',
+                'selector' => '{{selector}}',
+                'settings' => [
+                    'meta' => [
+                        'meta' => []
+                    ],
+                    'advanced' => [
+                        'elements' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'contentElements',
+                                'priority' => 5,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/elements',
+                                    'props' => [
+                                        'grouped' => false
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'html' => [],
+                        'link' => [],
+                        'loop' => []
+                    ],
+                    'decoration' => [
+                        'layout' => [],
+                        'animation' => [],
+                        'attributes' => [],
+                        'background' => [],
+                        'border' => [],
+                        'boxShadow' => [],
+                        'conditions' => [],
+                        'disabledOn' => [],
+                        'filters' => [],
+                        'interactions' => [],
+                        'overflow' => [],
+                        'order' => [],
+                        'position' => [],
+                        'scroll' => [],
+                        'sizing' => [],
+                        'spacing' => [],
+                        'sticky' => [],
+                        'transform' => [],
+                        'transition' => [],
+                        'zIndex' => []
+                    ]
+                ]
+            ],
+            'chart' => [
+                'type' => 'object',
+                'selector' => '{{selector}} .et_pb_charts__canvas-wrap',
+                'attributes' => [
+                    'class' => 'et_pb_charts__canvas-wrap'
+                ],
+                'elementType' => 'element',
+                'settings' => [
+                    'innerContent' => [
+                        'groupType' => 'group-items',
+                        'items' => [
+                            'data' => [
+                                'groupSlug' => 'contentChart',
+                                'attrName' => 'chart.innerContent',
+                                'subName' => 'data',
+                                'label' => 'Data',
+                                'description' =>
+                                    'Edit chart labels and values.',
+                                'priority' => 10,
+                                'render' => true,
+                                'category' => 'basic_option',
+                                'features' => [
+                                    'preset' => 'content',
+                                    'responsive' => false
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/table-editor',
+                                    'props' => [
+                                        'allowVerticalScroll' => false,
+                                        'minColumns' => 2
+                                    ]
+                                ]
+                            ],
+                            'title' => [
+                                'groupSlug' => 'contentChart',
+                                'attrName' => 'chart.innerContent',
+                                'subName' => 'title',
+                                'label' => 'Title',
+                                'description' =>
+                                    'Set chart title text rendered by Chart.js.',
+                                'priority' => 20,
+                                'render' => true,
+                                'category' => 'basic_option',
+                                'features' => [
+                                    'dynamicContent' => [
+                                        'type' => 'text'
+                                    ],
+                                    'hover' => false,
+                                    'sticky' => false,
+                                    'responsive' => false,
+                                    'preset' => 'content'
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/text'
+                                ]
+                            ],
+                            'subtitle' => [
+                                'groupSlug' => 'contentChart',
+                                'attrName' => 'chart.innerContent',
+                                'subName' => 'subtitle',
+                                'label' => 'Subtitle',
+                                'description' =>
+                                    'Set chart subtitle text rendered by Chart.js.',
+                                'priority' => 40,
+                                'render' => true,
+                                'category' => 'basic_option',
+                                'features' => [
+                                    'dynamicContent' => [
+                                        'type' => 'text'
+                                    ],
+                                    'hover' => false,
+                                    'sticky' => false,
+                                    'responsive' => false,
+                                    'preset' => 'content'
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/text'
+                                ]
+                            ],
+                            'legendTitle' => [
+                                'groupSlug' => 'contentChart',
+                                'attrName' => 'chart.innerContent',
+                                'subName' => 'legendTitle',
+                                'label' => 'Legend Title',
+                                'description' =>
+                                    'Set legend title text rendered by Chart.js.',
+                                'priority' => 46,
+                                'render' => true,
+                                'category' => 'basic_option',
+                                'features' => [
+                                    'dynamicContent' => [
+                                        'type' => 'text'
+                                    ],
+                                    'hover' => false,
+                                    'sticky' => false,
+                                    'responsive' => false,
+                                    'preset' => 'content'
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/text'
+                                ]
+                            ]
+                        ]
+                    ],
+                    'advanced' => [
+                        'config' => [
+                            'groupType' => 'group-items',
+                            'items' => [
+                                'type' => [
+                                    'groupSlug' => 'contentChart',
+                                    'attrName' => 'chart.advanced.config',
+                                    'subName' => 'type',
+                                    'label' => 'Chart Type',
+                                    'description' =>
+                                        'Choose the chart visualization type.',
+                                    'priority' => 5,
+                                    'render' => true,
+                                    'category' => 'basic_option',
+                                    'features' => [
+                                        'preset' => ['html']
+                                    ],
+                                    'component' => [
+                                        'type' => 'field',
+                                        'name' => 'divi/select',
+                                        'props' => [
+                                            'defaultValue' => 'line',
+                                            'options' => [
+                                                'line' => [
+                                                    'label' => 'Line'
+                                                ],
+                                                'area' => [
+                                                    'label' => 'Area'
+                                                ],
+                                                'bar' => [
+                                                    'label' => 'Bar'
+                                                ],
+                                                'radar' => [
+                                                    'label' => 'Radar'
+                                                ],
+                                                'pie' => [
+                                                    'label' => 'Pie'
+                                                ],
+                                                'doughnut' => [
+                                                    'label' => 'Doughnut'
+                                                ],
+                                                'polarArea' => [
+                                                    'label' => 'Polar Area'
+                                                ],
+                                                'scatter' => [
+                                                    'label' => 'Scatter'
+                                                ],
+                                                'bubble' => [
+                                                    'label' => 'Bubble'
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ],
+                                'showTitle' => [
+                                    'groupSlug' => 'contentElements',
+                                    'attrName' => 'chart.advanced.config',
+                                    'subName' => 'showTitle',
+                                    'label' => 'Show Title',
+                                    'description' =>
+                                        'Enable title drawing inside the canvas.',
+                                    'priority' => 10,
+                                    'render' => true,
+                                    'category' => 'configuration',
+                                    'features' => [
+                                        'hover' => false,
+                                        'sticky' => false,
+                                        'responsive' => false,
+                                        'preset' => ['html']
+                                    ],
+                                    'component' => [
+                                        'type' => 'field',
+                                        'name' => 'divi/toggle'
+                                    ]
+                                ],
+                                'showSubtitle' => [
+                                    'groupSlug' => 'contentElements',
+                                    'attrName' => 'chart.advanced.config',
+                                    'subName' => 'showSubtitle',
+                                    'label' => 'Show Subtitle',
+                                    'description' =>
+                                        'Enable subtitle drawing inside the canvas.',
+                                    'priority' => 30,
+                                    'render' => true,
+                                    'category' => 'configuration',
+                                    'features' => [
+                                        'hover' => false,
+                                        'sticky' => false,
+                                        'responsive' => false,
+                                        'preset' => ['html']
+                                    ],
+                                    'component' => [
+                                        'type' => 'field',
+                                        'name' => 'divi/toggle'
+                                    ]
+                                ],
+                                'showLegend' => [
+                                    'groupSlug' => 'contentElements',
+                                    'attrName' => 'chart.advanced.config',
+                                    'subName' => 'showLegend',
+                                    'label' => 'Show Legend',
+                                    'description' =>
+                                        'Display the chart legend.',
+                                    'priority' => 40,
+                                    'render' => true,
+                                    'category' => 'configuration',
+                                    'features' => [
+                                        'hover' => false,
+                                        'sticky' => false,
+                                        'responsive' => false,
+                                        'preset' => ['html']
+                                    ],
+                                    'component' => [
+                                        'type' => 'field',
+                                        'name' => 'divi/toggle'
+                                    ]
+                                ],
+                                'showLegendTitle' => [
+                                    'groupSlug' => 'contentElements',
+                                    'attrName' => 'chart.advanced.config',
+                                    'subName' => 'showLegendTitle',
+                                    'label' => 'Show Legend Title',
+                                    'description' =>
+                                        'Display legend title text.',
+                                    'priority' => 45,
+                                    'render' => true,
+                                    'category' => 'configuration',
+                                    'features' => [
+                                        'hover' => false,
+                                        'sticky' => false,
+                                        'responsive' => false,
+                                        'preset' => ['html']
+                                    ],
+                                    'component' => [
+                                        'type' => 'field',
+                                        'name' => 'divi/toggle'
+                                    ]
+                                ],
+                                'showTooltip' => [
+                                    'groupSlug' => 'contentElements',
+                                    'attrName' => 'chart.advanced.config',
+                                    'subName' => 'showTooltip',
+                                    'label' => 'Show Tooltip',
+                                    'description' =>
+                                        'Enable value tooltips on hover.',
+                                    'priority' => 50,
+                                    'render' => true,
+                                    'category' => 'configuration',
+                                    'features' => [
+                                        'hover' => false,
+                                        'sticky' => false,
+                                        'responsive' => false,
+                                        'preset' => ['html']
+                                    ],
+                                    'component' => [
+                                        'type' => 'field',
+                                        'name' => 'divi/toggle'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'title' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designChartTitle',
+                                'attrName' => 'chart.advanced.title',
+                                'priority' => 10,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/font-chart-js',
+                                    'props' => [
+                                        'attrName' => 'chart.advanced.title',
+                                        'grouped' => false,
+                                        'groupLabel' => 'Title Text',
+                                        'fieldLabel' => 'Title',
+                                        'dynamicSubgroupHost' => true,
+                                        'supportsCapitalization' => true
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'subtitle' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designChartSubtitle',
+                                'attrName' => 'chart.advanced.subtitle',
+                                'priority' => 10,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/font-chart-js',
+                                    'props' => [
+                                        'attrName' => 'chart.advanced.subtitle',
+                                        'grouped' => false,
+                                        'groupLabel' => 'Subtitle Text',
+                                        'fieldLabel' => 'Subtitle',
+                                        'dynamicSubgroupHost' => true,
+                                        'supportsCapitalization' => true
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'legend' => [
+                            'groupType' => 'group-items',
+                            'items' => [
+                                'title' => [
+                                    'groupSlug' => 'designChartLegendGeneral',
+                                    'attrName' => 'chart.advanced.legend.title',
+                                    'priority' => 10,
+                                    'render' => true,
+                                    'component' => [
+                                        'type' => 'group',
+                                        'name' => 'divi/font-chart-js',
+                                        'props' => [
+                                            'attrName' =>
+                                                'chart.advanced.legend.title',
+                                            'groupLabel' => 'Title Text',
+                                            'fieldLabel' => 'Legend Title',
+                                            'supportsPresets' => false
+                                        ]
+                                    ]
+                                ],
+                                'titleColor' => [
+                                    'groupSlug' => 'designChartLegendGeneral',
+                                    'attrName' => 'chart.advanced.legend.title',
+                                    'subName' => 'color',
+                                    'label' => 'Legend Title Color',
+                                    'priority' => 11,
+                                    'render' => false,
+                                    'category' => 'configuration',
+                                    'features' => [
+                                        'responsive' => false
+                                    ],
+                                    'component' => [
+                                        'type' => 'field',
+                                        'name' => 'divi/color-picker'
+                                    ]
+                                ],
+                                'labels' => [
+                                    'groupSlug' => 'designChartLegendGeneral',
+                                    'attrName' =>
+                                        'chart.advanced.legend.labels',
+                                    'priority' => 20,
+                                    'render' => true,
+                                    'component' => [
+                                        'type' => 'group',
+                                        'name' => 'divi/font-chart-js',
+                                        'props' => [
+                                            'attrName' =>
+                                                'chart.advanced.legend.labels',
+                                            'groupLabel' => 'Label Text',
+                                            'fieldLabel' => 'Legend Labels',
+                                            'supportsPresets' => false
+                                        ]
+                                    ]
+                                ],
+                                'layout' => [
+                                    'groupSlug' => 'designChartLegendGeneral',
+                                    'priority' => 30,
+                                    'render' => true,
+                                    'component' => [
+                                        'type' => 'group',
+                                        'name' => 'divi/charts-legend-layout',
+                                        'props' => [
+                                            'attrName' =>
+                                                'chart.advanced.legend.layout',
+                                            'groupLabel' => 'Layout',
+                                            'fieldLabel' => 'Layout'
+                                        ]
+                                    ]
+                                ],
+                                'markers' => [
+                                    'groupSlug' => 'designChartLegendGeneral',
+                                    'priority' => 40,
+                                    'render' => true,
+                                    'component' => [
+                                        'type' => 'group',
+                                        'name' => 'divi/charts-legend-markers',
+                                        'props' => [
+                                            'attrName' =>
+                                                'chart.advanced.legend.markers',
+                                            'groupLabel' => 'Markers',
+                                            'fieldLabel' => 'Markers'
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'tooltip' => [
+                            'groupType' => 'group-items',
+                            'items' => [
+                                'titleFont' => [
+                                    'groupSlug' => 'designChartTooltipGeneral',
+                                    'attrName' =>
+                                        'chart.advanced.tooltip.titleFont',
+                                    'priority' => 10,
+                                    'render' => true,
+                                    'component' => [
+                                        'type' => 'group',
+                                        'name' => 'divi/font-chart-js',
+                                        'props' => [
+                                            'attrName' =>
+                                                'chart.advanced.tooltip.titleFont',
+                                            'groupLabel' => 'Title Text',
+                                            'fieldLabel' => 'Tooltip Title',
+                                            'supportsPresets' => false
+                                        ]
+                                    ]
+                                ],
+                                'bodyFont' => [
+                                    'groupSlug' => 'designChartTooltipGeneral',
+                                    'attrName' =>
+                                        'chart.advanced.tooltip.bodyFont',
+                                    'priority' => 20,
+                                    'render' => true,
+                                    'component' => [
+                                        'type' => 'group',
+                                        'name' => 'divi/font-chart-js',
+                                        'props' => [
+                                            'attrName' =>
+                                                'chart.advanced.tooltip.bodyFont',
+                                            'groupLabel' => 'Body Text',
+                                            'fieldLabel' => 'Tooltip Body',
+                                            'supportsPresets' => false
+                                        ]
+                                    ]
+                                ],
+                                'box' => [
+                                    'groupSlug' => 'designChartTooltipGeneral',
+                                    'priority' => 30,
+                                    'render' => true,
+                                    'component' => [
+                                        'type' => 'group',
+                                        'name' => 'divi/charts-tooltip-box',
+                                        'props' => [
+                                            'attrName' =>
+                                                'chart.advanced.tooltip.box',
+                                            'groupLabel' => 'Box',
+                                            'fieldLabel' => 'Box'
+                                        ]
+                                    ]
+                                ],
+                                'colorBoxes' => [
+                                    'groupSlug' => 'designChartTooltipGeneral',
+                                    'priority' => 40,
+                                    'render' => true,
+                                    'component' => [
+                                        'type' => 'group',
+                                        'name' =>
+                                            'divi/charts-tooltip-color-boxes',
+                                        'props' => [
+                                            'attrName' =>
+                                                'chart.advanced.tooltip.colorBoxes',
+                                            'groupLabel' => 'Color Boxes',
+                                            'fieldLabel' => 'Color Boxes'
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'customCssFields' => [
+            'chartCanvas' => [
+                'label' => 'Chart Canvas',
+                'subName' => 'chartCanvas',
+                'selectorSuffix' => ' .et_pb_charts__canvas-wrap'
+            ]
+        ],
+        'script' => ['divi-module-library-script-charts'],
+        'settings' => [
+            'design' => 'auto',
+            'advanced' => 'auto',
+            'groups' => [
+                'contentChart' => [
+                    'panel' => 'content',
+                    'priority' => 10,
+                    'groupName' => 'chart',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Chart',
+                            'preset' => 'content'
+                        ]
+                    ]
+                ],
+                'contentElements' => [
+                    'panel' => 'content',
+                    'priority' => 17,
+                    'groupName' => 'elements',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Elements',
+                            'preset' => 'content'
+                        ]
+                    ]
+                ],
+                'designChartTitle' => [
+                    'panel' => 'design',
+                    'priority' => 20,
+                    'groupName' => 'title',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Title Text',
+                            'clipboardCategory' => 'style',
+                            'presetGroup' => 'divi/font',
+                            'dynamicSubgroupHost' => true
+                        ]
+                    ]
+                ],
+                'designChartSubtitle' => [
+                    'panel' => 'design',
+                    'priority' => 30,
+                    'groupName' => 'subtitle',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Subtitle Text',
+                            'clipboardCategory' => 'style',
+                            'presetGroup' => 'divi/font',
+                            'dynamicSubgroupHost' => true
+                        ]
+                    ]
+                ],
+                'designChartLegendGeneral' => [
+                    'panel' => 'design',
+                    'priority' => 40,
+                    'groupName' => 'legendGeneral',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Legend',
+                            'clipboardCategory' => 'style'
+                        ]
+                    ]
+                ],
+                'designChartTooltipGeneral' => [
+                    'panel' => 'design',
+                    'priority' => 50,
+                    'groupName' => 'tooltipGeneral',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Tooltip',
+                            'clipboardCategory' => 'style'
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ],
     'circle-counter' => [
         'name' => 'divi/circle-counter',
         'd4Shortcode' => 'et_pb_circle_counter',
@@ -4878,6 +5561,9 @@ return [
         'moduleOrderClassName' => 'et_pb_circle_counter',
         'title' => 'Circle Counter',
         'titles' => 'Circle Counters',
+        'description' =>
+            'Animated circular progress ring that counts up to a percentage to highlight a single metric.',
+        'keywords' => ['progress ring', 'percentage', 'donut chart', 'kpi'],
         'moduleIcon' => 'divi/module-circle-counter',
         'category' => 'module',
         'childrenName' => [],
@@ -5357,6 +6043,14 @@ return [
                     ]
                 ]
             ]
+        ],
+        'mousetrap' => [
+            'inner' => [
+                'edited' => true
+            ],
+            'zIndex' => [
+                'edited' => 'hasInlineTextOnEdit'
+            ]
         ]
     ],
     'code' => [
@@ -5366,6 +6060,9 @@ return [
         'moduleOrderClassName' => 'et_pb_code',
         'title' => 'Code',
         'titles' => 'Codes',
+        'description' =>
+            'Embed raw HTML, JavaScript, or shortcodes that render unchanged on the front-end.',
+        'keywords' => ['html', 'embed', 'snippet', 'raw markup', 'shortcode'],
         'moduleIcon' => 'divi/module-code',
         'category' => 'module',
         'videos' => [
@@ -5531,6 +6228,9 @@ return [
         'd4Shortcode' => 'et_pb_column',
         'title' => 'Column',
         'titles' => 'Columns',
+        'description' =>
+            'Vertical layout slot inside a row that stacks any modules into a single column of content.',
+        'keywords' => ['layout', 'vertical', 'stack', 'cell'],
         'moduleIcon' => 'divi/module-column',
         'nestable' => true,
         'category' => 'structure',
@@ -5715,6 +6415,14 @@ return [
         'd4Shortcode' => 'et_pb_column_inner',
         'title' => 'Inner Column',
         'titles' => 'Inner Columns',
+        'description' =>
+            'Column variant used inside an inner row for deeper layout nesting.',
+        'keywords' => [
+            'nested column',
+            'sub column',
+            'inner cell',
+            'nested cell'
+        ],
         'moduleIcon' => 'divi/module-column',
         'category' => 'structure',
         'childrenName' => [],
@@ -5823,6 +6531,9 @@ return [
         'moduleOrderClassName' => 'et_pb_comments',
         'title' => 'Comments',
         'titles' => 'Comments',
+        'description' =>
+            'Renders the comment thread and reply form for the current post or page.',
+        'keywords' => ['discussion', 'replies', 'thread', 'post comments'],
         'moduleIcon' => 'divi/module-comments',
         'category' => 'module',
         'childrenName' => [],
@@ -5892,6 +6603,35 @@ return [
                                 'category' => 'configuration',
                                 'features' => [
                                     'sticky' => false,
+                                    'preset' => ['html']
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/toggle',
+                                    'props' => [
+                                        'options' => [
+                                            'off' => 'No',
+                                            'on' => 'Yes'
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'showLabels' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'contentElements',
+                                'priority' => 11,
+                                'render' => true,
+                                'attrName' => 'module.advanced.showLabels',
+                                'label' => 'Show Labels',
+                                'description' =>
+                                    'Whether or not to show field labels in the comment form.',
+                                'category' => 'configuration',
+                                'features' => [
+                                    'responsive' => false,
+                                    'sticky' => false,
+                                    'hover' => false,
                                     'preset' => ['html']
                                 ],
                                 'component' => [
@@ -6410,6 +7150,9 @@ return [
         'moduleOrderClassName' => 'et_pb_contact_field',
         'title' => 'Field',
         'titles' => 'Fields',
+        'description' =>
+            'A single input inside a Contact Form, configured with type, label, and validation rules.',
+        'keywords' => ['form field', 'input', 'form input'],
         'category' => 'child-module',
         'childrenName' => [],
         'videos' => [],
@@ -6427,11 +7170,13 @@ return [
                             '{{selector}} input[type=text], {{selector}} input[type=email], {{selector}} textarea, {{selector}}[data-type=checkbox], {{selector}}[data-type=radio], {{selector}}[data-type=select], {{selector}}[data-type=select] select'
                     ],
                     'spacing' => [
+                        'selector' =>
+                            '{{selectorPrefix}}.et_pb_contact_form {{baseSelector}}',
                         'propertySelectors' => [
                             'desktop' => [
                                 'value' => [
                                     'padding' =>
-                                        '{{selectorPrefix}}p{{baseSelector}}'
+                                        '{{selectorPrefix}}.et_pb_contact_form {{baseSelector}}.et_pb_contact_field'
                                 ]
                             ]
                         ],
@@ -6445,26 +7190,16 @@ return [
                     ],
                     'border' => [
                         'selector' =>
-                            '.et_pb_contact_form_container {{selector}}.et_pb_contact_field',
-                        'propertySelectors' => [
-                            'desktop' => [
-                                'value' => [
-                                    'border-radius' =>
-                                        '.et_pb_contact_form_container {{selector}}.et_pb_contact_field .input, .et_pb_contact_form_container {{selector}}.et_pb_contact_field .input[type="checkbox"] + label i, .et_pb_contact_form_container {{selector}}.et_pb_contact_field .input[type="radio"] + label i',
-                                    'border-style' =>
-                                        '.et_pb_contact_form_container {{selector}}.et_pb_contact_field .input, .et_pb_contact_form_container {{selector}}.et_pb_contact_field .input[type="checkbox"] + label i, .et_pb_contact_form_container {{selector}}.et_pb_contact_field .input[type="radio"] + label i'
-                                ]
-                            ]
-                        ]
+                            '.et_pb_contact_form_container {{selector}}.et_pb_contact_field'
                     ],
                     'boxShadow' => [
                         'selector' =>
-                            '{{selector}} input, {{selector}} select, {{selector}} textarea, {{selector}} .et_pb_contact_field_options_list label > i',
+                            '.et_pb_contact_form_container {{selector}}.et_pb_contact_field',
                         'important' => true
                     ],
                     'filters' => [
                         'selector' =>
-                            '{{selector}} input, {{selector}} textarea, {{selector}} label'
+                            '.et_pb_contact_form_container {{selector}}.et_pb_contact_field'
                     ]
                 ],
                 'settings' => [
@@ -6502,13 +7237,7 @@ return [
                     'decoration' => [
                         'layout' => [],
                         'background' => [],
-                        'border' => [
-                            'component' => [
-                                'props' => [
-                                    'fieldLabel' => 'Input'
-                                ]
-                            ]
-                        ],
+                        'border' => [],
                         'animation' => [],
                         'attributes' => [],
                         'boxShadow' => [],
@@ -7117,6 +7846,14 @@ return [
         'moduleOrderClassName' => 'et_pb_contact_form',
         'title' => 'Contact Form',
         'titles' => 'Contact Forms',
+        'description' =>
+            'Customizable contact form that emails submissions and supports captcha and conditional logic.',
+        'keywords' => [
+            'inquiry form',
+            'message form',
+            'lead form',
+            'feedback form'
+        ],
         'moduleIcon' => 'divi/module-contact-form',
         'childModuleName' => 'divi/contact-field',
         'childModuleTitle' => 'Field',
@@ -7188,6 +7925,33 @@ return [
                                     'name' => 'divi/elements',
                                     'props' => [
                                         'grouped' => false
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'showLabels' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'contentElements',
+                                'priority' => 10,
+                                'render' => true,
+                                'attrName' => 'module.advanced.showLabels',
+                                'label' => 'Show Labels',
+                                'description' =>
+                                    'Whether to show field labels above Contact Form inputs. When disabled, labels are hidden and text fields use the field title as a placeholder.',
+                                'category' => 'configuration',
+                                'features' => [
+                                    'sticky' => false,
+                                    'preset' => ['html']
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/toggle',
+                                    'props' => [
+                                        'options' => [
+                                            'off' => 'No',
+                                            'on' => 'Yes'
+                                        ]
                                     ]
                                 ]
                             ]
@@ -7774,6 +8538,9 @@ return [
         'moduleOrderClassName' => 'et_pb_contact_form_7',
         'title' => 'Contact Form 7 Styler',
         'titles' => 'Contact Form 7 Stylers',
+        'description' =>
+            'Style and render any Contact Form 7 form created by the popular third-party plugin.',
+        'keywords' => ['cf7', 'wpcf7', 'form plugin', 'styler'],
         'moduleIcon' => 'divi/module-contact-form-7',
         'category' => 'module',
         'attributes' => [
@@ -8503,6 +9270,15 @@ return [
         'moduleOrderClassName' => 'et_pb_countdown_timer',
         'title' => 'Countdown Timer',
         'titles' => 'Countdown Timers',
+        'description' =>
+            'Live timer counting down to a specific date and time for launches, sales, or events.',
+        'keywords' => [
+            'timer',
+            'launch timer',
+            'sale countdown',
+            'event clock',
+            'deadline'
+        ],
         'moduleIcon' => 'divi/module-countdown-timer',
         'category' => 'module',
         'childrenName' => [],
@@ -8927,6 +9703,9 @@ return [
         'd4Shortcode' => 'et_pb_counter',
         'title' => 'Bar Counter',
         'titles' => 'Bar Counter',
+        'description' =>
+            'A single labeled progress bar inside a Bar Counters module.',
+        'keywords' => ['progress bar', 'skill bar', 'horizontal bar'],
         'moduleIcon' => 'divi/module-bar-counter',
         'category' => 'child-module',
         'childrenName' => [],
@@ -8998,7 +9777,8 @@ return [
                         'propertySelectors' => [
                             'desktop' => [
                                 'value' => [
-                                    'width' => '{{selector}}'
+                                    'width' =>
+                                        '{{selectorPrefix}}.et_pb_counters {{baseSelector}}'
                                 ]
                             ]
                         ]
@@ -9146,6 +9926,11 @@ return [
                                             'groupName' => 'divi/background',
                                             'priority' => 10,
                                             'render' => true,
+                                            'features' => [
+                                                'dynamicContent' => [
+                                                    'type' => 'color'
+                                                ]
+                                            ],
                                             'component' => [
                                                 'type' => 'field',
                                                 'name' => 'divi/color-picker',
@@ -9247,6 +10032,14 @@ return [
         'd4Shortcode' => 'et_pb_counters',
         'title' => 'Bar Counters',
         'titles' => 'Bar Counters',
+        'description' =>
+            'Animated horizontal bars showing labeled values, useful for skills or progress comparisons.',
+        'keywords' => [
+            'progress bars',
+            'skills',
+            'stats',
+            'horizontal bar chart'
+        ],
         'moduleIcon' => 'divi/module-bar-counters',
         'childModuleName' => 'divi/counter',
         'childModuleTitle' => 'Bar Counter',
@@ -9521,10 +10314,21 @@ return [
                 ],
                 'styleProps' => [
                     'font' => [
+                        'propertySelectors' => [
+                            'font' => [
+                                'desktop' => [
+                                    'value' => [
+                                        'text-align' =>
+                                            '{{selector}}.et_pb_counters .et_pb_counter_amount'
+                                    ]
+                                ]
+                            ]
+                        ],
                         'important' => [
                             'font' => [
                                 'desktop' => [
                                     'value' => [
+                                        'text-align' => true,
                                         'color' => true
                                     ]
                                 ]
@@ -9558,6 +10362,11 @@ return [
                                             'groupName' => 'divi/background',
                                             'priority' => 10,
                                             'render' => true,
+                                            'features' => [
+                                                'dynamicContent' => [
+                                                    'type' => 'color'
+                                                ]
+                                            ],
                                             'component' => [
                                                 'type' => 'field',
                                                 'name' => 'divi/color-picker',
@@ -9635,6 +10444,15 @@ return [
         'moduleOrderClassName' => 'et_pb_cta',
         'title' => 'Call To Action',
         'titles' => 'Call To Actions',
+        'description' =>
+            'Eye-catching block combining a headline, body text, and button to push a single conversion goal.',
+        'keywords' => [
+            'banner',
+            'promo',
+            'hero block',
+            'conversion',
+            'jumbotron'
+        ],
         'moduleIcon' => 'divi/module-cta',
         'category' => 'module',
         'childrenName' => [],
@@ -10025,6 +10843,9 @@ return [
         'd4Shortcode' => 'et_pb_divider',
         'title' => 'Divider',
         'titles' => 'Dividers',
+        'description' =>
+            'Thin horizontal line used to visually separate content blocks within a column.',
+        'keywords' => ['separator', 'line', 'hr', 'rule'],
         'moduleIcon' => 'divi/module-divider',
         'category' => 'module',
         'videos' => [
@@ -10116,6 +10937,7 @@ return [
                                 'value' => [
                                     'margin-left' => true,
                                     'margin-right' => true,
+                                    'min-height' => true,
                                     'width' => true
                                 ]
                             ]
@@ -10331,6 +11153,9 @@ return [
         'moduleOrderClassName' => 'et_pb_dropdown',
         'title' => 'Dropdown',
         'titles' => 'Dropdowns',
+        'description' =>
+            'Click-triggered menu that reveals a list of links or text choices.',
+        'keywords' => ['menu', 'select', 'flyout', 'picker'],
         'moduleIcon' => 'divi/module-dropdown',
         'category' => 'module',
         'childrenName' => [],
@@ -10643,6 +11468,14 @@ return [
         'd4Shortcode' => 'et_pb_filterable_portfolio',
         'title' => 'Filterable Portfolio',
         'titles' => 'Filterable Portfolios',
+        'description' =>
+            'Portfolio grid with on-page category buttons that filter items without a page reload.',
+        'keywords' => [
+            'projects filter',
+            'isotope',
+            'tag filter',
+            'work showcase'
+        ],
         'moduleIcon' => 'divi/module-filterable-portfolio',
         'category' => 'module',
         'childrenName' => [],
@@ -11107,6 +11940,12 @@ return [
                             'desktop' => [
                                 'value' => [
                                     'aspect-ratio' =>
+                                        '{{selector}} .et_portfolio_image img',
+                                    'height' =>
+                                        '{{selector}} .et_portfolio_image img',
+                                    'min-height' =>
+                                        '{{selector}} .et_portfolio_image img',
+                                    'max-height' =>
                                         '{{selector}} .et_portfolio_image img'
                                 ]
                             ]
@@ -11377,6 +12216,9 @@ return [
         'moduleOrderClassName' => 'et_pb_fullwidth_code',
         'title' => 'Fullwidth Code',
         'titles' => 'Fullwidth Codes',
+        'description' =>
+            'Embed raw HTML or JavaScript inside an edge-to-edge container that ignores the section content width.',
+        'keywords' => ['wide embed', 'edge-to-edge html', 'raw markup'],
         'moduleIcon' => 'divi/module-code',
         'category' => 'fullwidth-module',
         'videos' => [
@@ -11518,6 +12360,15 @@ return [
         'd4Shortcode' => 'et_pb_fullwidth_header',
         'title' => 'Hero',
         'titles' => 'Heroes',
+        'description' =>
+            'Edge-to-edge hero banner with headline, subhead, buttons, and background media; typically the first thing on a page.',
+        'keywords' => [
+            'hero banner',
+            'masthead',
+            'jumbotron',
+            'splash',
+            'landing header'
+        ],
         'moduleIcon' => 'divi/module-fullwidth-header',
         'category' => 'fullwidth-module',
         'childrenName' => [],
@@ -12671,6 +13522,14 @@ return [
         'd4Shortcode' => 'et_pb_fullwidth_image',
         'title' => 'Fullwidth Image',
         'titles' => 'Fullwidth Images',
+        'description' =>
+            'Edge-to-edge single image used as a wide visual break in the page flow.',
+        'keywords' => [
+            'hero image',
+            'banner image',
+            'edge-to-edge picture',
+            'wide image'
+        ],
         'moduleIcon' => 'divi/module-image',
         'category' => 'fullwidth-module',
         'videos' => [
@@ -13006,6 +13865,9 @@ return [
         'd4Shortcode' => 'et_pb_fullwidth_map',
         'title' => 'Fullwidth Map',
         'titles' => 'Fullwidth Maps',
+        'description' =>
+            'Edge-to-edge Google Map for use as a contact-page hero or location showcase.',
+        'keywords' => ['wide map', 'location hero', 'contact map'],
         'moduleIcon' => 'divi/module-map',
         'category' => 'fullwidth-module',
         'moduleClassName' => 'et_pb_map_container',
@@ -13172,7 +14034,9 @@ return [
                         'propertySelectors' => [
                             'desktop' => [
                                 'value' => [
-                                    'height' => '{{selector}} > .et_pb_map'
+                                    'height' => '{{selector}} > .et_pb_map',
+                                    'min-height' => '{{selector}} > .et_pb_map',
+                                    'max-height' => '{{selector}} > .et_pb_map'
                                 ]
                             ]
                         ]
@@ -13263,6 +14127,9 @@ return [
         'd4Shortcode' => 'et_pb_fullwidth_menu',
         'title' => 'Fullwidth Menu',
         'titles' => 'Fullwidth Menus',
+        'description' =>
+            'Edge-to-edge horizontal navigation menu spanning the full browser width.',
+        'keywords' => ['wide navbar', 'site nav', 'full bleed menu'],
         'moduleIcon' => 'divi/module-menu',
         'category' => 'fullwidth-module',
         'videos' => [
@@ -13408,7 +14275,7 @@ return [
                     ],
                     'boxShadow' => [
                         'selector' =>
-                            '{{selector}} .et_pb_menu__logo-wrap .et_pb_menu__logo'
+                            '{{selector}} .et_pb_menu__logo-wrap .et_pb_menu__logo img'
                     ],
                     'filters' => [
                         'selector' => '{{selector}} .et_pb_menu__logo-wrap img'
@@ -14648,6 +15515,9 @@ return [
         'd4Shortcode' => 'et_pb_fullwidth_portfolio',
         'title' => 'Post Carousel',
         'titles' => 'Post Carousels',
+        'description' =>
+            'Edge-to-edge carousel showcasing portfolio projects as large rotating tiles.',
+        'keywords' => ['project carousel', 'work showcase', 'portfolio slider'],
         'moduleIcon' => 'divi/module-fullwidth-portfolio',
         'category' => 'fullwidth-module',
         'childrenName' => [],
@@ -15436,6 +16306,14 @@ return [
         'name' => 'divi/fullwidth-post-content',
         'title' => 'Fullwidth Post Content',
         'titles' => 'Fullwidth Post Contents',
+        'description' =>
+            'Edge-to-edge variant of post content for theme-builder templates that need a wider body.',
+        'keywords' => [
+            'wide entry content',
+            'wide page body',
+            'edge-to-edge content',
+            'wide the content'
+        ],
         'moduleIcon' => 'divi/module-post-content',
         'category' => 'fullwidth-module',
         'videos' => [],
@@ -15552,6 +16430,13 @@ return [
         'moduleOrderClassName' => 'et_pb_fullwidth_post_slider',
         'title' => 'Fullwidth Post Slider',
         'titles' => 'Fullwidth Post Sliders',
+        'description' =>
+            'Edge-to-edge slider that auto-pulls recent posts and rotates them as hero-style cards.',
+        'keywords' => [
+            'featured posts hero',
+            'blog hero slider',
+            'edge-to-edge post carousel'
+        ],
         'moduleIcon' => 'divi/module-post-slider',
         'category' => 'fullwidth-module',
         'videos' => [
@@ -16839,6 +17724,9 @@ return [
         'd4Shortcode' => 'et_pb_fullwidth_post_title',
         'title' => 'Fullwidth Post Title',
         'titles' => 'Fullwidth Post Titles',
+        'description' =>
+            'Edge-to-edge variant of post title for theme-builder templates that need a hero-style title bar.',
+        'keywords' => ['wide title bar', 'page title hero', 'wide entry title'],
         'moduleIcon' => 'divi/module-post-title',
         'category' => 'fullwidth-module',
         'videos' => [
@@ -17602,6 +18490,13 @@ return [
         'd4Shortcode' => 'et_pb_fullwidth_slider',
         'title' => 'Fullwidth Slider',
         'titles' => 'Fullwidth Sliders',
+        'description' =>
+            'Edge-to-edge rotating banner of slides combining headlines, buttons, and background media.',
+        'keywords' => [
+            'hero slider',
+            'edge-to-edge carousel',
+            'full bleed slider'
+        ],
         'moduleIcon' => 'divi/module-slider',
         'category' => 'fullwidth-module',
         'childModuleName' => 'divi/slide',
@@ -18636,6 +19531,9 @@ return [
         'moduleOrderClassName' => 'et_pb_gallery',
         'title' => 'Gallery',
         'titles' => 'Galleries',
+        'description' =>
+            'Grid or slider of images displayed in a clickable thumbnail layout.',
+        'keywords' => ['photos', 'image grid', 'masonry', 'thumbnails'],
         'moduleIcon' => 'divi/module-gallery',
         'category' => 'module',
         'childrenName' => [],
@@ -19619,15 +20517,1464 @@ return [
         'name' => 'divi/global-layout',
         'title' => 'Global Layout',
         'titles' => 'Global Layouts',
+        'description' =>
+            'Embeds a reusable layout that updates everywhere it appears when edited in one place.',
+        'keywords' => [
+            'reusable layout',
+            'shared layout',
+            'synced',
+            'template',
+            'global section'
+        ],
         'moduleIcon' => 'divi/global-layout',
         'category' => 'structure',
         'attributes' => []
+    ],
+    'gravity-forms' => [
+        'name' => 'divi/gravity-forms',
+        'd4Shortcode' => '',
+        'moduleClassName' => 'et_pb_gravity_forms',
+        'moduleOrderClassName' => 'et_pb_gravity_forms',
+        'title' => 'Gravity Form',
+        'titles' => 'Gravity Forms',
+        'description' =>
+            'Embed and style any form created by the popular Gravity Forms plugin.',
+        'moduleIcon' => 'divi/module-gravity-forms',
+        'category' => 'module',
+        'childrenName' => [],
+        'attributes' => [
+            'module' => [
+                'type' => 'object',
+                'selector' => '{{selector}}',
+                'settings' => [
+                    'meta' => [
+                        'meta' => []
+                    ],
+                    'advanced' => [
+                        'elements' => [],
+                        'html' => [],
+                        'loop' => []
+                    ],
+                    'decoration' => [
+                        'animation' => [],
+                        'attributes' => [],
+                        'background' => [],
+                        'border' => [],
+                        'boxShadow' => [],
+                        'conditions' => [],
+                        'disabledOn' => [],
+                        'filters' => [],
+                        'interactions' => [],
+                        'layout' => [],
+                        'order' => [],
+                        'overflow' => [],
+                        'position' => [],
+                        'scroll' => [],
+                        'sizing' => [],
+                        'spacing' => [],
+                        'sticky' => [],
+                        'transform' => [],
+                        'transition' => [],
+                        'zIndex' => []
+                    ]
+                ]
+            ],
+            'gravityForm' => [
+                'type' => 'object',
+                'selector' => '{{selector}} .et_pb_gravity_form_embed',
+                'settings' => [
+                    'innerContent' => [
+                        'groupType' => 'group-items',
+                        'items' => [
+                            'formId' => [
+                                'groupSlug' => 'contentGravityForm',
+                                'attrName' => 'gravityForm.innerContent',
+                                'subName' => 'formId',
+                                'label' => 'Form',
+                                'description' => 'Select a Gravity Form.',
+                                'priority' => 5,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/select-gravity-forms'
+                                ],
+                                'features' => [
+                                    'responsive' => false,
+                                    'psuedo' => false,
+                                    'sticky' => false,
+                                    'preset' => 'content'
+                                ]
+                            ]
+                        ]
+                    ],
+                    'advanced' => [
+                        'useAjax' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'contentGravityForm',
+                                'attrName' => 'gravityForm.advanced.useAjax',
+                                'label' => 'Use Ajax',
+                                'description' =>
+                                    'Submit the form without reloading the page using Gravity Forms’ built-in Ajax. Leave off for a standard postback submission (default).',
+                                'priority' => 18,
+                                'render' => true,
+                                'category' => 'configuration',
+                                'features' => [
+                                    'responsive' => false,
+                                    'hover' => false,
+                                    'sticky' => false,
+                                    'preset' => 'content'
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/toggle'
+                                ]
+                            ]
+                        ],
+                        'showValidationMessagesPreview' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'contentGravityForm',
+                                'attrName' =>
+                                    'gravityForm.advanced.showValidationMessagesPreview',
+                                'label' =>
+                                    'Show validation messages (builder preview)',
+                                'description' =>
+                                    'Visual Builder only. Renders real Gravity Forms validation summary and field validation messages so Design → Validation summary and Field validation message match front-end copy.',
+                                'priority' => 20,
+                                'render' => true,
+                                'category' => 'configuration',
+                                'features' => [
+                                    'responsive' => false,
+                                    'hover' => false,
+                                    'sticky' => false,
+                                    'preset' => 'content'
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/toggle'
+                                ]
+                            ]
+                        ],
+                        'showConfirmationMessagePreview' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'contentGravityForm',
+                                'attrName' =>
+                                    'gravityForm.advanced.showConfirmationMessagePreview',
+                                'label' =>
+                                    'Show confirmation message (builder preview)',
+                                'description' =>
+                                    'Visual Builder only. Replaces the form preview with sample confirmation markup so you can style Design → Confirmation message.',
+                                'priority' => 25,
+                                'render' => true,
+                                'category' => 'configuration',
+                                'features' => [
+                                    'responsive' => false,
+                                    'hover' => false,
+                                    'sticky' => false,
+                                    'preset' => 'content'
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/toggle'
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'title' => [
+                'type' => 'object',
+                'label' => 'Title Text',
+                'elementType' => 'element',
+                'selector' =>
+                    '{{selector}} .et_pb_gravity_form_embed .gform_title',
+                'settings' => [
+                    'decoration' => [
+                        'font' => [
+                            'priority' => 10,
+                            'component' => [
+                                'props' => [
+                                    'groupLabel' => 'Title Text',
+                                    'fieldLabel' => 'Title',
+                                    'dynamicSubgroupHost' => true
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'sectionHeading' => [
+                'type' => 'object',
+                'label' => 'Section Heading',
+                'elementType' => 'element',
+                'selector' =>
+                    '{{selector}} .et_pb_gravity_form_embed .gsection_title',
+                'settings' => [
+                    'decoration' => [
+                        'font' => [
+                            'priority' => 14,
+                            'component' => [
+                                'props' => [
+                                    'groupLabel' => 'Section Heading Text',
+                                    'fieldLabel' => 'Section heading',
+                                    'dynamicSubgroupHost' => true
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'subLabel' => [
+                'type' => 'object',
+                'label' => 'Sub-label Text',
+                'elementType' => 'element',
+                'selector' =>
+                    '{{selector}} .et_pb_gravity_form_embed .gform-field-label--type-sub, {{selector}} .et_pb_gravity_form_embed .gform-field-label--type-sub-large',
+                'settings' => [
+                    'decoration' => [
+                        'font' => [
+                            'priority' => 16,
+                            'component' => [
+                                'props' => [
+                                    'groupLabel' => 'Sub-label Text',
+                                    'fieldLabel' => 'Compound sublabel',
+                                    'dynamicSubgroupHost' => true
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'description' => [
+                'type' => 'object',
+                'label' => 'Description',
+                'elementType' => 'element',
+                'selector' =>
+                    '{{selector}} .et_pb_gravity_form_embed .gform_description, {{selector}} .et_pb_gravity_form_embed .gsection_description, {{selector}} .et_pb_gravity_form_embed .gfield_description:not(.gfield_validation_message):not(.validation_message), {{selector}} .et_pb_gravity_form_embed .gfield_consent_description',
+                'settings' => [
+                    'decoration' => [
+                        'font' => [
+                            'priority' => 12,
+                            'component' => [
+                                'props' => [
+                                    'dynamicSubgroupHost' => true
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'field' => [
+                'type' => 'object',
+                'selector' =>
+                    '{{selector}} .et_pb_gravity_form_embed input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]):not([type="button"]):not([type="hidden"]):not(.gform-phone__search), {{selector}} .et_pb_gravity_form_embed textarea, {{selector}} .et_pb_gravity_form_embed select, {{selector}} .et_pb_gravity_form_embed button.gform-phone__country-selector',
+                'elementType' => 'field',
+                'settings' => [
+                    'decoration' => [],
+                    'advanced' => []
+                ]
+            ],
+            'radioButton' => [
+                'type' => 'object',
+                'selector' =>
+                    '{{selector}} .et_pb_gravity_form_embed input[type="radio"], {{selector}} .et_pb_gravity_form_embed .gfield_radio label',
+                'elementType' => 'field',
+                'settings' => [
+                    'decoration' => [],
+                    'advanced' => []
+                ]
+            ],
+            'checkbox' => [
+                'type' => 'object',
+                'selector' =>
+                    '{{selector}} .et_pb_gravity_form_embed input[type="checkbox"], {{selector}} .et_pb_gravity_form_embed .gfield_checkbox label, {{selector}} .et_pb_gravity_form_embed .ginput_container_consent .gfield_consent_label',
+                'elementType' => 'field',
+                'settings' => [
+                    'decoration' => [],
+                    'advanced' => []
+                ]
+            ],
+            'imageChoice' => [
+                'type' => 'object',
+                'label' => 'Image Choice',
+                'selector' =>
+                    '{{selector}} .et_pb_gravity_form_embed .gfield--type-image_choice .gfield-choice-image',
+                'elementType' => 'image',
+                'styleProps' => [
+                    'fit' => [
+                        'selector' =>
+                            '{{selector}} .et_pb_gravity_form_embed .gfield--type-image_choice .gfield-choice-image'
+                    ],
+                    'filters' => [
+                        'selector' =>
+                            '{{selector}} .et_pb_gravity_form_embed .gfield--type-image_choice .gfield-choice-image'
+                    ],
+                    'sizing' => [
+                        'selector' =>
+                            '{{selector}} .et_pb_gravity_form_embed .gfield--type-image_choice .gfield-choice-image-wrapper'
+                    ],
+                    'border' => [
+                        'selector' =>
+                            '{{selector}} .et_pb_gravity_form_embed .gfield--type-image_choice .gfield-choice-image-wrapper'
+                    ],
+                    'boxShadow' => [
+                        'selector' =>
+                            '{{selector}} .et_pb_gravity_form_embed .gfield--type-image_choice .gfield-choice-image-wrapper'
+                    ]
+                ]
+            ],
+            'button' => [
+                'type' => 'object',
+                'label' => 'Submit button',
+                'selector' =>
+                    '{{selector}} .et_pb_gravity_form_embed .et_pb_button.gform_button, {{selector}} .et_pb_gravity_form_embed input[type="submit"].gform_button, {{selector}} .et_pb_gravity_form_embed button[type="submit"].gform_button',
+                'elementType' => 'button',
+                'styleProps' => [
+                    'background' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'background-color' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'border' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'border-radius' => true,
+                                    'border-top-left-radius' => true,
+                                    'border-top-right-radius' => true,
+                                    'border-bottom-right-radius' => true,
+                                    'border-bottom-left-radius' => true,
+                                    'border-top-width' => true,
+                                    'border-right-width' => true,
+                                    'border-bottom-width' => true,
+                                    'border-left-width' => true,
+                                    'border-top-style' => true,
+                                    'border-right-style' => true,
+                                    'border-bottom-style' => true,
+                                    'border-left-style' => true,
+                                    'border-top-color' => true,
+                                    'border-right-color' => true,
+                                    'border-bottom-color' => true,
+                                    'border-left-color' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'boxShadow' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'box-shadow' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'font' => [
+                        'important' => [
+                            'font' => [
+                                'desktop' => [
+                                    'value' => [
+                                        'color' => true,
+                                        'font-family' => true,
+                                        'font-size' => true,
+                                        'font-style' => true,
+                                        'font-weight' => true,
+                                        'letter-spacing' => true,
+                                        'line-height' => true,
+                                        'text-align' => true,
+                                        'text-transform' => true,
+                                        'text-decoration-line' => true,
+                                        'text-decoration-color' => true,
+                                        'text-decoration-style' => true,
+                                        'text-decoration-thickness' => true
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ],
+                    'spacing' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'margin-top' => true,
+                                    'margin-right' => true,
+                                    'margin-bottom' => true,
+                                    'margin-left' => true,
+                                    'padding-top' => true,
+                                    'padding-right' => true,
+                                    'padding-bottom' => true,
+                                    'padding-left' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'sizing' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'width' => true,
+                                    'min-width' => true,
+                                    'height' => true,
+                                    'min-height' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'button' => []
+                ],
+                'settings' => [
+                    'advanced' => [],
+                    'decoration' => [
+                        'background' => [],
+                        'border' => [],
+                        'boxShadow' => [],
+                        'button' => [
+                            'priority' => 51,
+                            'component' => [
+                                'props' => [
+                                    'dynamicSubgroupHost' => true,
+                                    'groupLabel' => 'Submit button',
+                                    'fieldLabel' => 'Submit button',
+                                    'fields' => [
+                                        'alignment' => [
+                                            'render' => false
+                                        ],
+                                        'buttonIconGroup' => [
+                                            'render' => false
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'font' => [],
+                        'sizing' => [],
+                        'spacing' => []
+                    ]
+                ]
+            ],
+            'nextButton' => [
+                'type' => 'object',
+                'label' => 'Next page button',
+                'selector' =>
+                    '{{selector}} .et_pb_gravity_form_embed input[type="button"].gform_next_button, {{selector}} .et_pb_gravity_form_embed button[type="button"].gform_next_button',
+                'elementType' => 'button',
+                'styleProps' => [
+                    'background' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'background-color' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'border' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'border-radius' => true,
+                                    'border-top-left-radius' => true,
+                                    'border-top-right-radius' => true,
+                                    'border-bottom-right-radius' => true,
+                                    'border-bottom-left-radius' => true,
+                                    'border-top-width' => true,
+                                    'border-right-width' => true,
+                                    'border-bottom-width' => true,
+                                    'border-left-width' => true,
+                                    'border-top-style' => true,
+                                    'border-right-style' => true,
+                                    'border-bottom-style' => true,
+                                    'border-left-style' => true,
+                                    'border-top-color' => true,
+                                    'border-right-color' => true,
+                                    'border-bottom-color' => true,
+                                    'border-left-color' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'boxShadow' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'box-shadow' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'font' => [
+                        'important' => [
+                            'font' => [
+                                'desktop' => [
+                                    'value' => [
+                                        'color' => true,
+                                        'font-family' => true,
+                                        'font-size' => true,
+                                        'font-style' => true,
+                                        'font-weight' => true,
+                                        'letter-spacing' => true,
+                                        'line-height' => true,
+                                        'text-align' => true,
+                                        'text-transform' => true,
+                                        'text-decoration-line' => true,
+                                        'text-decoration-color' => true,
+                                        'text-decoration-style' => true,
+                                        'text-decoration-thickness' => true
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ],
+                    'spacing' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'margin-top' => true,
+                                    'margin-right' => true,
+                                    'margin-bottom' => true,
+                                    'margin-left' => true,
+                                    'padding-top' => true,
+                                    'padding-right' => true,
+                                    'padding-bottom' => true,
+                                    'padding-left' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'sizing' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'width' => true,
+                                    'min-width' => true,
+                                    'height' => true,
+                                    'min-height' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'button' => []
+                ],
+                'settings' => [
+                    'advanced' => [],
+                    'decoration' => [
+                        'background' => [],
+                        'border' => [],
+                        'boxShadow' => [],
+                        'button' => [
+                            'priority' => 53,
+                            'component' => [
+                                'props' => [
+                                    'dynamicSubgroupHost' => true,
+                                    'groupLabel' => 'Next page button',
+                                    'fieldLabel' => 'Next page button',
+                                    'fields' => [
+                                        'alignment' => [
+                                            'render' => false
+                                        ],
+                                        'buttonIconGroup' => [
+                                            'render' => false
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'font' => [],
+                        'sizing' => [],
+                        'spacing' => []
+                    ]
+                ]
+            ],
+            'previousButton' => [
+                'type' => 'object',
+                'label' => 'Previous page button',
+                'selector' =>
+                    '{{selector}} .et_pb_gravity_form_embed input[type="button"].gform_previous_button, {{selector}} .et_pb_gravity_form_embed button[type="button"].gform_previous_button',
+                'elementType' => 'button',
+                'styleProps' => [
+                    'background' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'background-color' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'border' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'border-radius' => true,
+                                    'border-top-left-radius' => true,
+                                    'border-top-right-radius' => true,
+                                    'border-bottom-right-radius' => true,
+                                    'border-bottom-left-radius' => true,
+                                    'border-top-width' => true,
+                                    'border-right-width' => true,
+                                    'border-bottom-width' => true,
+                                    'border-left-width' => true,
+                                    'border-top-style' => true,
+                                    'border-right-style' => true,
+                                    'border-bottom-style' => true,
+                                    'border-left-style' => true,
+                                    'border-top-color' => true,
+                                    'border-right-color' => true,
+                                    'border-bottom-color' => true,
+                                    'border-left-color' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'boxShadow' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'box-shadow' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'font' => [
+                        'important' => [
+                            'font' => [
+                                'desktop' => [
+                                    'value' => [
+                                        'color' => true,
+                                        'font-family' => true,
+                                        'font-size' => true,
+                                        'font-style' => true,
+                                        'font-weight' => true,
+                                        'letter-spacing' => true,
+                                        'line-height' => true,
+                                        'text-align' => true,
+                                        'text-transform' => true,
+                                        'text-decoration-line' => true,
+                                        'text-decoration-color' => true,
+                                        'text-decoration-style' => true,
+                                        'text-decoration-thickness' => true
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ],
+                    'spacing' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'margin-top' => true,
+                                    'margin-right' => true,
+                                    'margin-bottom' => true,
+                                    'margin-left' => true,
+                                    'padding-top' => true,
+                                    'padding-right' => true,
+                                    'padding-bottom' => true,
+                                    'padding-left' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'sizing' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'width' => true,
+                                    'min-width' => true,
+                                    'height' => true,
+                                    'min-height' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'button' => []
+                ],
+                'settings' => [
+                    'advanced' => [],
+                    'decoration' => [
+                        'background' => [],
+                        'border' => [],
+                        'boxShadow' => [],
+                        'button' => [
+                            'priority' => 54,
+                            'component' => [
+                                'props' => [
+                                    'dynamicSubgroupHost' => true,
+                                    'groupLabel' => 'Previous page button',
+                                    'fieldLabel' => 'Previous page button',
+                                    'fields' => [
+                                        'alignment' => [
+                                            'render' => false
+                                        ],
+                                        'buttonIconGroup' => [
+                                            'render' => false
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'font' => [],
+                        'sizing' => [],
+                        'spacing' => []
+                    ]
+                ]
+            ],
+            'saveButton' => [
+                'type' => 'object',
+                'label' => 'Save & Continue button',
+                'selector' =>
+                    '{{selector}} .et_pb_gravity_form_embed button.gform_save_link',
+                'elementType' => 'button',
+                'styleProps' => [
+                    'background' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'background-color' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'border' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'border-radius' => true,
+                                    'border-top-left-radius' => true,
+                                    'border-top-right-radius' => true,
+                                    'border-bottom-right-radius' => true,
+                                    'border-bottom-left-radius' => true,
+                                    'border-top-width' => true,
+                                    'border-right-width' => true,
+                                    'border-bottom-width' => true,
+                                    'border-left-width' => true,
+                                    'border-top-style' => true,
+                                    'border-right-style' => true,
+                                    'border-bottom-style' => true,
+                                    'border-left-style' => true,
+                                    'border-top-color' => true,
+                                    'border-right-color' => true,
+                                    'border-bottom-color' => true,
+                                    'border-left-color' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'boxShadow' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'box-shadow' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'font' => [
+                        'important' => [
+                            'font' => [
+                                'desktop' => [
+                                    'value' => [
+                                        'color' => true,
+                                        'font-family' => true,
+                                        'font-size' => true,
+                                        'font-style' => true,
+                                        'font-weight' => true,
+                                        'letter-spacing' => true,
+                                        'line-height' => true,
+                                        'text-align' => true,
+                                        'text-transform' => true,
+                                        'text-decoration-line' => true,
+                                        'text-decoration-color' => true,
+                                        'text-decoration-style' => true,
+                                        'text-decoration-thickness' => true
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ],
+                    'spacing' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'margin-top' => true,
+                                    'margin-right' => true,
+                                    'margin-bottom' => true,
+                                    'margin-left' => true,
+                                    'padding-top' => true,
+                                    'padding-right' => true,
+                                    'padding-bottom' => true,
+                                    'padding-left' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'sizing' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'width' => true,
+                                    'min-width' => true,
+                                    'height' => true,
+                                    'min-height' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'button' => []
+                ],
+                'settings' => [
+                    'advanced' => [],
+                    'decoration' => [
+                        'background' => [],
+                        'border' => [],
+                        'boxShadow' => [],
+                        'button' => [
+                            'priority' => 52,
+                            'component' => [
+                                'props' => [
+                                    'dynamicSubgroupHost' => true,
+                                    'groupLabel' => 'Save & Continue button',
+                                    'fieldLabel' => 'Save & Continue button',
+                                    'fields' => [
+                                        'alignment' => [
+                                            'render' => false
+                                        ],
+                                        'buttonIconGroup' => [
+                                            'render' => false
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'font' => [],
+                        'sizing' => [],
+                        'spacing' => []
+                    ]
+                ]
+            ],
+            'fileUploadButton' => [
+                'type' => 'object',
+                'label' => 'File upload button',
+                'selector' =>
+                    '{{selector}} .et_pb_gravity_form_embed input[type="file"]::file-selector-button',
+                'elementType' => 'button',
+                'styleProps' => [
+                    'selector' =>
+                        '{{selector}} .et_pb_gravity_form_embed input[type="file"]::file-selector-button',
+                    'background' => [
+                        'selectors' => [
+                            'desktop' => [
+                                'value' =>
+                                    '{{selector}} .et_pb_gravity_form_embed input[type="file"]::file-selector-button',
+                                'hover' =>
+                                    '{{selector}} .et_pb_gravity_form_embed input[type="file"]:hover::file-selector-button',
+                                'focus' =>
+                                    '{{selector}} .et_pb_gravity_form_embed input[type="file"]:focus::file-selector-button'
+                            ]
+                        ]
+                    ],
+                    'border' => [
+                        'selectors' => [
+                            'desktop' => [
+                                'value' =>
+                                    '{{selector}} .et_pb_gravity_form_embed input[type="file"]::file-selector-button',
+                                'hover' =>
+                                    '{{selector}} .et_pb_gravity_form_embed input[type="file"]:hover::file-selector-button',
+                                'focus' =>
+                                    '{{selector}} .et_pb_gravity_form_embed input[type="file"]:focus::file-selector-button'
+                            ]
+                        ]
+                    ],
+                    'boxShadow' => [
+                        'selectors' => [
+                            'desktop' => [
+                                'value' =>
+                                    '{{selector}} .et_pb_gravity_form_embed input[type="file"]::file-selector-button',
+                                'hover' =>
+                                    '{{selector}} .et_pb_gravity_form_embed input[type="file"]:hover::file-selector-button',
+                                'focus' =>
+                                    '{{selector}} .et_pb_gravity_form_embed input[type="file"]:focus::file-selector-button'
+                            ]
+                        ]
+                    ],
+                    'font' => [
+                        'selectors' => [
+                            'desktop' => [
+                                'value' =>
+                                    '{{selector}} .et_pb_gravity_form_embed input[type="file"]::file-selector-button',
+                                'hover' =>
+                                    '{{selector}} .et_pb_gravity_form_embed input[type="file"]:hover::file-selector-button',
+                                'focus' =>
+                                    '{{selector}} .et_pb_gravity_form_embed input[type="file"]:focus::file-selector-button'
+                            ]
+                        ]
+                    ],
+                    'spacing' => [
+                        'selectors' => [
+                            'desktop' => [
+                                'value' =>
+                                    '{{selector}} .et_pb_gravity_form_embed input[type="file"]::file-selector-button',
+                                'hover' =>
+                                    '{{selector}} .et_pb_gravity_form_embed input[type="file"]:hover::file-selector-button',
+                                'focus' =>
+                                    '{{selector}} .et_pb_gravity_form_embed input[type="file"]:focus::file-selector-button'
+                            ]
+                        ]
+                    ],
+                    'sizing' => [
+                        'selectors' => [
+                            'desktop' => [
+                                'value' =>
+                                    '{{selector}} .et_pb_gravity_form_embed input[type="file"]::file-selector-button',
+                                'hover' =>
+                                    '{{selector}} .et_pb_gravity_form_embed input[type="file"]:hover::file-selector-button',
+                                'focus' =>
+                                    '{{selector}} .et_pb_gravity_form_embed input[type="file"]:focus::file-selector-button'
+                            ]
+                        ]
+                    ],
+                    'button' => [
+                        'disableAlignmentStyles' => true,
+                        'selectors' => [
+                            'desktop' => [
+                                'value' =>
+                                    '{{selector}} .et_pb_gravity_form_embed input[type="file"]::file-selector-button',
+                                'hover' =>
+                                    '{{selector}} .et_pb_gravity_form_embed input[type="file"]:hover::file-selector-button',
+                                'focus' =>
+                                    '{{selector}} .et_pb_gravity_form_embed input[type="file"]:focus::file-selector-button'
+                            ]
+                        ]
+                    ]
+                ],
+                'settings' => [
+                    'advanced' => [],
+                    'decoration' => [
+                        'background' => [],
+                        'border' => [],
+                        'boxShadow' => [],
+                        'button' => [
+                            'priority' => 55,
+                            'component' => [
+                                'props' => [
+                                    'dynamicSubgroupHost' => true,
+                                    'dynamicSubgroupExcludedComponents' => [
+                                        'divi/layout',
+                                        'divi/animation'
+                                    ],
+                                    'groupLabel' => 'File upload button',
+                                    'fieldLabel' => 'File upload button',
+                                    'fields' => [
+                                        'alignment' => [
+                                            'render' => false
+                                        ],
+                                        'buttonIconGroup' => [
+                                            'render' => false
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'font' => [],
+                        'sizing' => [
+                            'component' => [
+                                'props' => [
+                                    'fields' => [
+                                        'alignment' => [
+                                            'render' => false
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'spacing' => []
+                    ]
+                ]
+            ],
+            'validationSummary' => [
+                'type' => 'object',
+                'label' => 'Validation Summary',
+                'elementType' => 'element',
+                'selector' =>
+                    '{{selector}} .et_pb_gravity_form_embed .gform_validation_errors',
+                'styleProps' => [
+                    'bodyFont' => [
+                        'selector' =>
+                            '{{selector}} .et_pb_gravity_form_embed .gform_validation_errors, {{selector}} .et_pb_gravity_form_embed .gform_validation_errors .gform_submission_error',
+                        'propertySelectors' => [
+                            'body' => [
+                                'font' => [
+                                    'desktop' => [
+                                        'value' => [
+                                            'color' =>
+                                                '{{selector}} .et_pb_gravity_form_embed .gform_validation_errors, {{selector}} .et_pb_gravity_form_embed .gform_validation_errors .gform_submission_error, {{selector}} .et_pb_gravity_form_embed .gform_validation_errors .gform_submission_error .gform-icon, {{selector}} .et_pb_gravity_form_embed .gform_validation_errors .gform_submission_error .gform-icon::before'
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ],
+                    'background' => [],
+                    'border' => [],
+                    'boxShadow' => [],
+                    'spacing' => []
+                ],
+                'settings' => [
+                    'decoration' => [
+                        'bodyFont' => [
+                            'priority' => 56,
+                            'component' => [
+                                'props' => [
+                                    'dynamicSubgroupHost' => true
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'validationFieldMessage' => [
+                'type' => 'object',
+                'label' => 'Field Validation',
+                'elementType' => 'element',
+                'selector' =>
+                    '{{selector}} .et_pb_gravity_form_embed .gfield .gfield_validation_message, {{selector}} .et_pb_gravity_form_embed .gfield .gfield_description.validation_message',
+                'styleProps' => [
+                    'font' => [],
+                    'background' => [],
+                    'border' => [],
+                    'boxShadow' => [],
+                    'spacing' => []
+                ],
+                'settings' => [
+                    'decoration' => [
+                        'font' => [
+                            'priority' => 57,
+                            'component' => [
+                                'props' => [
+                                    'dynamicSubgroupHost' => true
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'formConfirmation' => [
+                'type' => 'object',
+                'label' => 'Confirmation',
+                'elementType' => 'element',
+                'selector' =>
+                    '{{selector}} .et_pb_gravity_form_embed .gform_confirmation_wrapper',
+                'styleProps' => [
+                    'bodyFont' => [
+                        'selector' =>
+                            '{{selector}} .et_pb_gravity_form_embed .gform_confirmation_message'
+                    ],
+                    'background' => [],
+                    'border' => [],
+                    'boxShadow' => [],
+                    'spacing' => []
+                ],
+                'settings' => [
+                    'decoration' => [
+                        'bodyFont' => [
+                            'priority' => 58,
+                            'component' => [
+                                'props' => [
+                                    'dynamicSubgroupHost' => true
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'progressBar' => [
+                'type' => 'object',
+                'label' => 'Progress Bar',
+                'elementType' => 'element',
+                'selector' =>
+                    '{{selector}} .et_pb_gravity_form_embed .gf_progressbar_wrapper',
+                'styleProps' => [
+                    'font' => [
+                        'selector' =>
+                            '{{selector}} .et_pb_gravity_form_embed .gf_progressbar_title, {{selector}} .et_pb_gravity_form_embed .gf_progressbar_title span, {{selector}} .et_pb_gravity_form_embed .gf_progressbar_percentage span',
+                        'important' => [
+                            'font' => [
+                                'desktop' => [
+                                    'value' => [
+                                        'line-height' => true
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'propertySelectors' => [
+                            'font' => [
+                                'desktop' => [
+                                    'value' => [
+                                        'line-height' =>
+                                            '{{selector}} .et_pb_gravity_form_embed .gf_progressbar_title'
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ],
+                    'background' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'background-color' => true
+                                ]
+                            ]
+                        ],
+                        'selector' =>
+                            '{{selector}} .et_pb_gravity_form_embed .gf_progressbar_percentage'
+                    ],
+                    'border' => [
+                        'selector' =>
+                            '{{selector}} .et_pb_gravity_form_embed .gf_progressbar'
+                    ],
+                    'boxShadow' => [
+                        'selector' =>
+                            '{{selector}} .et_pb_gravity_form_embed .gf_progressbar'
+                    ],
+                    'sizing' => [
+                        'selector' =>
+                            '{{selector}} .et_pb_gravity_form_embed .gf_progressbar',
+                        'propertySelectors' => [
+                            'desktop' => [
+                                'value' => [
+                                    'width' =>
+                                        '{{selector}} .et_pb_gravity_form_embed .gf_progressbar',
+                                    'max-width' =>
+                                        '{{selector}} .et_pb_gravity_form_embed .gf_progressbar',
+                                    'min-width' =>
+                                        '{{selector}} .et_pb_gravity_form_embed .gf_progressbar',
+                                    'margin-left' =>
+                                        '{{selector}} .et_pb_gravity_form_embed .gf_progressbar',
+                                    'margin-right' =>
+                                        '{{selector}} .et_pb_gravity_form_embed .gf_progressbar',
+                                    'min-height' =>
+                                        '{{selector}} .et_pb_gravity_form_embed .gf_progressbar_percentage',
+                                    'height' =>
+                                        '{{selector}} .et_pb_gravity_form_embed .gf_progressbar_percentage',
+                                    'max-height' =>
+                                        '{{selector}} .et_pb_gravity_form_embed .gf_progressbar_percentage'
+                                ]
+                            ]
+                        ]
+                    ],
+                    'spacing' => [
+                        'propertySelectors' => [
+                            'desktop' => [
+                                'value' => [
+                                    'padding' =>
+                                        '{{selector}} .et_pb_gravity_form_embed .gf_progressbar'
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                'settings' => [
+                    'decoration' => [
+                        'font' => [
+                            'priority' => 50,
+                            'component' => [
+                                'props' => [
+                                    'dynamicSubgroupHost' => true
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'requiredMarker' => [
+                'type' => 'object',
+                'label' => 'Required Marker Text',
+                'elementType' => 'element',
+                'selector' =>
+                    '{{selector}} .et_pb_gravity_form_embed .gfield_required.gfield_required_text, {{selector}} .et_pb_gravity_form_embed .gfield_required.gfield_required_asterisk, {{selector}} .et_pb_gravity_form_embed .gfield_required.gfield_required_custom',
+                'styleProps' => [
+                    'background' => [],
+                    'border' => [],
+                    'boxShadow' => [],
+                    'font' => [],
+                    'sizing' => [],
+                    'spacing' => []
+                ],
+                'settings' => [
+                    'decoration' => [
+                        'font' => [
+                            'priority' => 49,
+                            'component' => [
+                                'props' => [
+                                    'groupLabel' => 'Required Marker Text',
+                                    'fieldLabel' => 'Required Marker',
+                                    'dynamicSubgroupHost' => true
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'customCssFields' => [
+            'gravityForm' => [
+                'label' => 'Form',
+                'subName' => 'gravityForm',
+                'selectorSuffix' => ' .et_pb_gravity_form_embed'
+            ],
+            'title' => [
+                'label' => 'Title Text',
+                'subName' => 'title',
+                'selectorSuffix' => ' .et_pb_gravity_form_embed .gform_title'
+            ],
+            'sectionHeading' => [
+                'label' => 'Section Heading',
+                'subName' => 'sectionHeading',
+                'selectorSuffix' => ' .et_pb_gravity_form_embed .gsection_title'
+            ],
+            'fieldLabel' => [
+                'label' => 'Field Labels',
+                'subName' => 'fieldLabel',
+                'selectorSuffix' =>
+                    ' .et_pb_gravity_form_embed label.gfield_label, .et_pb_gravity_form_embed legend.gfield_label'
+            ],
+            'subLabel' => [
+                'label' => 'Compound Sublabels',
+                'subName' => 'subLabel',
+                'selectorSuffix' =>
+                    ' .et_pb_gravity_form_embed .gform-field-label--type-sub, .et_pb_gravity_form_embed .gform-field-label--type-sub-large'
+            ],
+            'description' => [
+                'label' => 'Description Text',
+                'subName' => 'description',
+                'selectorSuffix' =>
+                    ' .et_pb_gravity_form_embed .gform_description, .et_pb_gravity_form_embed .gsection_description, .et_pb_gravity_form_embed .gfield_description:not(.gfield_validation_message):not(.validation_message), .et_pb_gravity_form_embed .gfield_consent_description'
+            ],
+            'field' => [
+                'label' => 'Input Fields',
+                'subName' => 'field',
+                'selectorSuffix' =>
+                    ' .et_pb_gravity_form_embed input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]):not([type="button"]):not([type="hidden"]):not(.gform-phone__search), .et_pb_gravity_form_embed textarea, .et_pb_gravity_form_embed select, .et_pb_gravity_form_embed button.gform-phone__country-selector'
+            ],
+            'radioButton' => [
+                'label' => 'Radio Buttons',
+                'subName' => 'radioButton',
+                'selectorSuffix' =>
+                    ' .et_pb_gravity_form_embed input[type="radio"], .et_pb_gravity_form_embed .gfield_radio label'
+            ],
+            'checkbox' => [
+                'label' => 'Checkboxes',
+                'subName' => 'checkbox',
+                'selectorSuffix' =>
+                    ' .et_pb_gravity_form_embed input[type="checkbox"], .et_pb_gravity_form_embed .gfield_checkbox label, .et_pb_gravity_form_embed .ginput_container_consent .gfield_consent_label'
+            ],
+            'imageChoice' => [
+                'label' => 'Image Choice',
+                'subName' => 'imageChoice',
+                'selectorSuffix' =>
+                    ' .et_pb_gravity_form_embed .gfield--type-image_choice .gfield-choice-image'
+            ],
+            'requiredMarker' => [
+                'label' => 'Required Marker Text',
+                'subName' => 'requiredMarker',
+                'selectorSuffix' =>
+                    ' .et_pb_gravity_form_embed .gfield_required.gfield_required_text, .et_pb_gravity_form_embed .gfield_required.gfield_required_asterisk, .et_pb_gravity_form_embed .gfield_required.gfield_required_custom'
+            ],
+            'progressBar' => [
+                'label' => 'Progress Bar Text',
+                'subName' => 'progressBar',
+                'selectorSuffix' =>
+                    ' .et_pb_gravity_form_embed .gf_progressbar_wrapper'
+            ],
+            'button' => [
+                'label' => 'Submit button',
+                'subName' => 'button',
+                'selectorSuffix' =>
+                    ' .et_pb_gravity_form_embed .et_pb_button.gform_button, .et_pb_gravity_form_embed input[type="submit"].gform_button, .et_pb_gravity_form_embed button[type="submit"].gform_button'
+            ],
+            'nextButton' => [
+                'label' => 'Next page button',
+                'subName' => 'nextButton',
+                'selectorSuffix' =>
+                    ' .et_pb_gravity_form_embed input[type="button"].gform_next_button, .et_pb_gravity_form_embed button[type="button"].gform_next_button'
+            ],
+            'previousButton' => [
+                'label' => 'Previous page button',
+                'subName' => 'previousButton',
+                'selectorSuffix' =>
+                    ' .et_pb_gravity_form_embed input[type="button"].gform_previous_button, .et_pb_gravity_form_embed button[type="button"].gform_previous_button'
+            ],
+            'saveButton' => [
+                'label' => 'Save & Continue button',
+                'subName' => 'saveButton',
+                'selectorSuffix' =>
+                    ' .et_pb_gravity_form_embed button.gform_save_link'
+            ],
+            'fileUploadButton' => [
+                'label' => 'File upload button',
+                'subName' => 'fileUploadButton',
+                'selectorSuffix' =>
+                    ' .et_pb_gravity_form_embed input[type="file"]::file-selector-button'
+            ],
+            'validationSummary' => [
+                'label' => 'Validation Summary Text',
+                'subName' => 'validationSummary',
+                'selectorSuffix' =>
+                    ' .et_pb_gravity_form_embed .gform_validation_errors'
+            ],
+            'validationFieldMessage' => [
+                'label' => 'Field Validation Text',
+                'subName' => 'validationFieldMessage',
+                'selectorSuffix' =>
+                    ' .et_pb_gravity_form_embed .gfield .gfield_validation_message, .et_pb_gravity_form_embed .gfield .gfield_description.validation_message'
+            ],
+            'formConfirmation' => [
+                'label' => 'Confirmation Text',
+                'subName' => 'formConfirmation',
+                'selectorSuffix' =>
+                    ' .et_pb_gravity_form_embed .gform_confirmation_wrapper'
+            ]
+        ],
+        'settings' => [
+            'content' => 'auto',
+            'design' => 'auto',
+            'advanced' => 'auto',
+            'groups' => [
+                'contentGravityForm' => [
+                    'panel' => 'content',
+                    'priority' => 5,
+                    'groupName' => 'contentGravityForm',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Gravity Form'
+                        ]
+                    ]
+                ],
+                'designFieldField' => [
+                    'panel' => 'design',
+                    'priority' => 20,
+                    'groupName' => 'field',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/form-field',
+                        'props' => [
+                            'groupLabel' => 'Input',
+                            'clipboardCategory' => 'style',
+                            'attrName' => 'field',
+                            'dynamicSubgroupHost' => true,
+                            'defaultGroupAttr' => [
+                                'decoration' => [
+                                    'border' => [
+                                        'desktop' => [
+                                            'value' => [
+                                                'styles' => [
+                                                    'all' => [
+                                                        'width' => '1px'
+                                                    ]
+                                                ]
+                                            ]
+                                        ]
+                                    ],
+                                    'labelFont' => [
+                                        'font' => [
+                                            'desktop' => [
+                                                'value' => [
+                                                    'size' => '14px',
+                                                    'weight' => '500'
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                'designCheckbox' => [
+                    'panel' => 'design',
+                    'priority' => 30,
+                    'groupName' => 'checkbox',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/checkbox',
+                        'props' => [
+                            'groupLabel' => 'Checkbox',
+                            'clipboardCategory' => 'style',
+                            'attrName' => 'checkbox',
+                            'mode' => 'native',
+                            'dynamicSubgroupHost' => true,
+                            'useComponentNameAsPresetGroup' => true
+                        ]
+                    ]
+                ],
+                'designRadioButton' => [
+                    'panel' => 'design',
+                    'priority' => 40,
+                    'groupName' => 'radioButton',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/radio',
+                        'props' => [
+                            'groupLabel' => 'Radio',
+                            'clipboardCategory' => 'style',
+                            'attrName' => 'radioButton',
+                            'mode' => 'native',
+                            'dynamicSubgroupHost' => true,
+                            'useComponentNameAsPresetGroup' => true
+                        ]
+                    ]
+                ],
+                'designImageChoice' => [
+                    'panel' => 'design',
+                    'priority' => 48,
+                    'groupName' => 'imageChoice',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/image',
+                        'props' => [
+                            'attrName' => 'imageChoice',
+                            'groupLabel' => 'Image Choice',
+                            'grouped' => true,
+                            'dynamicSubgroupHost' => true,
+                            'dynamicSubgroupExcludedComponents' => [
+                                'divi/layout',
+                                'divi/background'
+                            ],
+                            'presetGroup' => 'divi/image',
+                            'fields' => [
+                                'sizingGroup' => [
+                                    'component' => [
+                                        'props' => [
+                                            'fields' => [
+                                                'flexType' => [
+                                                    'render' => false
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
     ],
     'group' => [
         'name' => 'divi/group',
         'd4Shortcode' => '',
         'title' => 'Group',
         'titles' => 'Groups',
+        'description' =>
+            'Generic container that bundles multiple modules so they share styling, animation, or visibility rules.',
+        'keywords' => ['container', 'wrapper', 'box', 'set', 'module group'],
         'moduleIcon' => 'divi/module-group',
         'category' => 'structure',
         'childrenName' => [],
@@ -19739,6 +22086,9 @@ return [
         'name' => 'divi/group-carousel',
         'title' => 'Group Carousel',
         'titles' => 'Group Carousels',
+        'description' =>
+            'Horizontally scrollable carousel of grouped content blocks for slide-based storytelling.',
+        'keywords' => ['content carousel', 'block slider', 'horizontal scroll'],
         'moduleIcon' => 'divi/module-group-carousel',
         'childModuleName' => 'divi/group',
         'childModuleTitle' => 'Carousel Slide',
@@ -19810,6 +22160,7 @@ return [
                                     ]
                                 ],
                                 'features' => [
+                                    'preset' => ['script'],
                                     'dynamicContent' => [
                                         'type' => 'number'
                                     ]
@@ -19841,6 +22192,7 @@ return [
                                     ]
                                 ],
                                 'features' => [
+                                    'preset' => ['script'],
                                     'dynamicContent' => [
                                         'type' => 'number'
                                     ]
@@ -20692,6 +23044,9 @@ return [
         'moduleOrderClassName' => 'et_pb_heading',
         'title' => 'Heading',
         'titles' => 'Headings',
+        'description' =>
+            'Standalone H1 to H6 title used to anchor a section or introduce a content block.',
+        'keywords' => ['title', 'h1', 'h2', 'h3', 'subtitle', 'headline'],
         'moduleIcon' => 'divi/module-heading',
         'category' => 'module',
         'childrenName' => [],
@@ -20914,6 +23269,9 @@ return [
         'd4Shortcode' => 'et_pb_icon',
         'title' => 'Icon',
         'titles' => 'Icons',
+        'description' =>
+            'Decorative or supporting glyph picked from the built-in icon set.',
+        'keywords' => ['glyph', 'symbol', 'pictogram'],
         'moduleIcon' => 'divi/module-icon',
         'category' => 'module',
         'childrenName' => [],
@@ -21242,6 +23600,14 @@ return [
         'moduleOrderClassName' => 'et_pb_icon_list',
         'title' => 'Icon List',
         'titles' => 'Icon Lists',
+        'description' =>
+            'Bullet list where each item is led by a custom icon instead of a default marker.',
+        'keywords' => [
+            'feature list',
+            'bullet list',
+            'checklist',
+            'iconified list'
+        ],
         'moduleIcon' => 'divi/module-icon-list',
         'childModuleName' => 'divi/icon-list-item',
         'childModuleTitle' => 'Icon List Item',
@@ -21588,6 +23954,9 @@ return [
         'moduleOrderClassName' => 'et_pb_icon_list_item',
         'title' => 'Icon List Item',
         'titles' => 'Icon List Items',
+        'description' =>
+            'A single bullet inside an Icon List module with its own icon and label.',
+        'keywords' => ['icon bullet', 'list entry', 'icon row'],
         'moduleIcon' => 'divi/module-icon-list-item',
         'category' => 'child-module',
         'childrenName' => [],
@@ -21744,7 +24113,7 @@ return [
                     'boxShadow' => [],
                     'spacing' => [
                         'selector' =>
-                            '.et_pb_icon_list {{selector}}.et_pb_icon_list_item .et-pb-icon'
+                            '{{selectorPrefix}}.et_pb_icon_list {{baseSelector}}.et_pb_icon_list_item .et-pb-icon'
                     ]
                 ],
                 'settings' => [
@@ -21959,6 +24328,9 @@ return [
         'd4Shortcode' => 'et_pb_image',
         'title' => 'Image',
         'titles' => 'Images',
+        'description' =>
+            'Single picture with optional caption, link, and lightbox overlay.',
+        'keywords' => ['picture', 'photo', 'figure', 'graphic'],
         'moduleIcon' => 'divi/module-image',
         'category' => 'module',
         'childrenName' => [],
@@ -22459,6 +24831,720 @@ return [
             ]
         ]
     ],
+    'imagely-gallery' => [
+        'name' => 'divi/imagely-gallery',
+        'd4Shortcode' => '',
+        'moduleClassName' => 'et_pb_imagely_gallery',
+        'moduleOrderClassName' => 'et_pb_imagely_gallery',
+        'title' => 'Imagely Gallery',
+        'titles' => 'Imagely Galleries',
+        'description' =>
+            'Display a gallery from the Imagely NextGEN plugin with Divi styling controls.',
+        'moduleIcon' => 'divi/module-imagely-gallery',
+        'category' => 'module',
+        'childrenName' => [],
+        'attributes' => [
+            'module' => [
+                'type' => 'object',
+                'selector' => '{{selector}}',
+                'settings' => [
+                    'meta' => [
+                        'meta' => []
+                    ],
+                    'advanced' => [
+                        'elements' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'contentElements',
+                                'priority' => 5,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/elements',
+                                    'props' => [
+                                        'grouped' => false
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'html' => [],
+                        'link' => [],
+                        'loop' => []
+                    ],
+                    'decoration' => [
+                        'animation' => [],
+                        'attributes' => [],
+                        'background' => [],
+                        'border' => [],
+                        'boxShadow' => [],
+                        'conditions' => [],
+                        'disabledOn' => [],
+                        'filters' => [],
+                        'interactions' => [],
+                        'overflow' => [],
+                        'order' => [],
+                        'position' => [],
+                        'scroll' => [],
+                        'sizing' => [],
+                        'spacing' => [],
+                        'sticky' => [],
+                        'transform' => [],
+                        'transition' => [],
+                        'zIndex' => []
+                    ]
+                ],
+                'styleProps' => [
+                    'spacing' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'margin' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'sizing' => [
+                        'propertySelectors' => [
+                            'desktop' => [
+                                'value' => [
+                                    'margin-left' =>
+                                        '{{selector}}.et_pb_module',
+                                    'margin-right' =>
+                                        '{{selector}}.et_pb_module'
+                                ]
+                            ]
+                        ],
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'margin-left' => true,
+                                    'margin-right' => true
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'imagelyGallery' => [
+                'type' => 'object',
+                'settings' => [
+                    'innerContent' => [
+                        'groupType' => 'group-item',
+                        'item' => [
+                            'groupSlug' => 'contentGallery',
+                            'attrName' => 'imagelyGallery.innerContent',
+                            'subName' => 'galleryId',
+                            'label' => 'Gallery',
+                            'description' =>
+                                'Select the Imagely gallery to display.',
+                            'category' => 'basic_option',
+                            'priority' => 10,
+                            'render' => true,
+                            'features' => [
+                                'hover' => false,
+                                'sticky' => false,
+                                'responsive' => false,
+                                'preset' => 'content'
+                            ],
+                            'component' => [
+                                'type' => 'field',
+                                'name' => 'divi/select-imagely-gallery',
+                                'props' => [
+                                    'options' => []
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'title' => [
+                'type' => 'object',
+                'label' => 'Title Text',
+                'elementType' => 'element',
+                'selector' =>
+                    '{{selector}}.et_pb_module .et-imagely-content .ngg-imagebrowser > h3',
+                'settings' => [
+                    'decoration' => [
+                        'font' => [
+                            'priority' => 11,
+                            'component' => [
+                                'props' => [
+                                    'groupLabel' => 'Title Text',
+                                    'fieldLabel' => 'Title',
+                                    'dynamicSubgroupHost' => true
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                'styleProps' => [
+                    'font' => [
+                        'important' => [
+                            'font' => [
+                                'desktop' => [
+                                    'value' => [
+                                        'font-size' => true
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ],
+                    'spacing' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'margin' => true,
+                                    'padding' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'sizing' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'margin-left' => true,
+                                    'margin-right' => true
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'image' => [
+                'type' => 'object',
+                'label' => 'Gallery Image',
+                'elementType' => 'element',
+                'elementProps' => [
+                    'groupedOptionGroup' => true
+                ],
+                'selector' =>
+                    '{{selector}}.et_pb_module .et-imagely-content .ngg-imagebrowser .pic img, {{selector}}.et_pb_module .et-imagely-content .ngg-galleryoverview .ngg-gallery-thumbnail img, {{selector}}.et_pb_module .et-imagely-content .ngg-galleryoverview.carousel-view .ngg-basic-thumbnails-carousel > a > img, {{selector}}.et_pb_module .et-imagely-content .ngg-slideshow img',
+                'styleProps' => [
+                    'sizing' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'max-height' => true,
+                                    'max-width' => true
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                'settings' => [
+                    'decoration' => [
+                        'image' => [
+                            'panel' => 'design',
+                            'groupType' => 'group',
+                            'groupName' => 'image',
+                            'priority' => 10,
+                            'component' => [
+                                'type' => 'group',
+                                'name' => 'divi/image',
+                                'props' => [
+                                    'attrName' => 'image',
+                                    'groupLabel' => 'Image',
+                                    'grouped' => true,
+                                    'dynamicSubgroupHost' => true,
+                                    'presetGroup' => 'divi/image',
+                                    'dynamicSubgroupExcludedComponents' => [
+                                        'divi/layout'
+                                    ],
+                                    'fields' => [
+                                        'sizingGroup' => [
+                                            'component' => [
+                                                'props' => [
+                                                    'dynamicSubgroupHostLayoutStyle' =>
+                                                        'block'
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'counter' => [
+                'type' => 'object',
+                'label' => 'Counter Text',
+                'elementType' => 'element',
+                'selector' =>
+                    '{{selector}}.et_pb_module .et-imagely-content .ngg-imagebrowser-nav .counter',
+                'settings' => [
+                    'decoration' => [
+                        'font' => [
+                            'priority' => 12,
+                            'component' => [
+                                'props' => [
+                                    'fieldLabel' => 'Counter',
+                                    'groupLabel' => 'Counter Text',
+                                    'dynamicSubgroupHost' => true
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                'styleProps' => [
+                    'font' => [
+                        'important' => [
+                            'font' => [
+                                'desktop' => [
+                                    'value' => [
+                                        'font-size' => true
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'description' => [
+                'type' => 'object',
+                'label' => 'Description Text',
+                'elementType' => 'element',
+                'selector' =>
+                    '{{selector}}.et_pb_module .et-imagely-content .ngg-imagebrowser-desc, {{selector}}.et_pb_module .et-imagely-content .ngg-galleryoverview .ngg-gallery-thumbnail > span',
+                'settings' => [
+                    'decoration' => [
+                        'font' => [
+                            'priority' => 13,
+                            'component' => [
+                                'props' => [
+                                    'fieldLabel' => 'Description',
+                                    'groupLabel' => 'Description Text',
+                                    'dynamicSubgroupHost' => true
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'tagCloud' => [
+                'type' => 'object',
+                'label' => 'Tag Cloud Text',
+                'elementType' => 'element',
+                'selector' =>
+                    '{{selector}}.et_pb_module .et-imagely-content .ngg-tagcloud ul.wp-tag-cloud li a',
+                'settings' => [
+                    'decoration' => [
+                        'font' => [
+                            'priority' => 14,
+                            'component' => [
+                                'props' => [
+                                    'fieldLabel' => 'Tag Cloud',
+                                    'groupLabel' => 'Tag Cloud Text',
+                                    'dynamicSubgroupHost' => true,
+                                    'dynamicSubgroupExcludedComponents' => [
+                                        'divi/layout'
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                'styleProps' => [
+                    'font' => [
+                        'propertySelectors' => [
+                            'font' => [
+                                'desktop' => [
+                                    'value' => [
+                                        'text-align' =>
+                                            '{{selector}}.et_pb_module .et-imagely-content'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'important' => [
+                            'font' => [
+                                'desktop' => [
+                                    'value' => [
+                                        'font-size' => true
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'pagination' => [
+                'type' => 'object',
+                'label' => 'Pagination Text',
+                'elementType' => 'element',
+                'selector' =>
+                    '{{selector}}.et_pb_module .et-imagely-content .ngg-navigation a, {{selector}}.et_pb_module .et-imagely-content .ngg-navigation span.current, {{selector}}.et_pb_module .et-imagely-content .ngg-navigation span.ellipsis',
+                'settings' => [
+                    'decoration' => [
+                        'font' => [
+                            'priority' => 15,
+                            'component' => [
+                                'props' => [
+                                    'fieldLabel' => 'Pagination',
+                                    'groupLabel' => 'Pagination Text',
+                                    'dynamicSubgroupHost' => true,
+                                    'dynamicSubgroupExcludedComponents' => [
+                                        'divi/layout'
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                'styleProps' => [
+                    'font' => [
+                        'propertySelectors' => [
+                            'font' => [
+                                'desktop' => [
+                                    'value' => [
+                                        'text-align' =>
+                                            '{{selector}}.et_pb_module .et-imagely-content .ngg-navigation'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'important' => [
+                            'font' => [
+                                'desktop' => [
+                                    'value' => [
+                                        'color' => true,
+                                        'text-decoration-line' => true,
+                                        'text-decoration-color' => true,
+                                        'text-decoration-style' => true,
+                                        'text-decoration-thickness' => true
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'slideshowLink' => [
+                'type' => 'object',
+                'label' => 'View Link Text',
+                'elementType' => 'element',
+                'selector' =>
+                    '{{selector}}.et_pb_imagely_gallery.et_pb_module .et-imagely-content .slideshowlink a',
+                'settings' => [
+                    'decoration' => [
+                        'font' => [
+                            'priority' => 16,
+                            'component' => [
+                                'props' => [
+                                    'fieldLabel' => 'View Link',
+                                    'groupLabel' => 'View Link Text',
+                                    'dynamicSubgroupHost' => true,
+                                    'fields' => [
+                                        'textAlign' => [
+                                            'render' => false
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                'styleProps' => [
+                    'font' => [
+                        'important' => [
+                            'font' => [
+                                'desktop' => [
+                                    'value' => [
+                                        'text-decoration-line' => true,
+                                        'text-decoration-color' => true,
+                                        'text-decoration-style' => true,
+                                        'text-decoration-thickness' => true
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ],
+                    'border' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'border-style' => true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'boxShadow' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'box-shadow' => true
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'exifMetaData' => [
+                'type' => 'object',
+                'label' => 'EXIF Meta Data Text',
+                'elementType' => 'element',
+                'selector' =>
+                    '{{selector}}.et_pb_module .et-imagely-content .et-imagely-exif',
+                'settings' => [
+                    'decoration' => [
+                        'font' => [
+                            'priority' => 17,
+                            'component' => [
+                                'props' => [
+                                    'fieldLabel' => 'EXIF Meta Data',
+                                    'groupLabel' => 'EXIF Meta Data Text',
+                                    'dynamicSubgroupHost' => true,
+                                    'dynamicSubgroupExcludedComponents' => [
+                                        'divi/layout'
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                'styleProps' => [
+                    'font' => [
+                        'selector' =>
+                            '{{selector}}.et_pb_module .et-imagely-content .et-imagely-exif, {{selector}}.et_pb_module .et-imagely-content .et-imagely-exif h3, {{selector}}.et_pb_module .et-imagely-content .et-imagely-exif th, {{selector}}.et_pb_module .et-imagely-content .et-imagely-exif td'
+                    ]
+                ]
+            ],
+            'navigationArrows' => [
+                'type' => 'object',
+                'label' => 'Navigation Arrows',
+                'elementType' => 'button',
+                'elementProps' => [
+                    'groupedOptionGroup' => true
+                ],
+                'selector' =>
+                    '{{selector}}.et_pb_module .et-imagely-content .ngg-slideshow .slick-prev, {{selector}}.et_pb_module .et-imagely-content .ngg-slideshow .slick-next, {{selector}}.et_pb_module .et-imagely-content .ngg-imagebrowser-nav .back, {{selector}}.et_pb_module .et-imagely-content .ngg-imagebrowser-nav .next',
+                'settings' => [
+                    'advanced' => [
+                        'size' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designNavigationArrows',
+                                'attrName' => 'navigationArrows.advanced.size',
+                                'label' => 'Arrow Size',
+                                'description' =>
+                                    'Adjust the size of the navigation arrows (slideshow and image browser).',
+                                'priority' => 10,
+                                'render' => true,
+                                'defaultAttr' => [
+                                    'desktop' => [
+                                        'value' => '32px'
+                                    ]
+                                ],
+                                'features' => [
+                                    'dynamicContent' => [
+                                        'type' => 'number'
+                                    ]
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/range',
+                                    'props' => [
+                                        'minLimit' => 0,
+                                        'defaultUnit' => 'px'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'color' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designNavigationArrows',
+                                'attrName' => 'navigationArrows.advanced.color',
+                                'label' => 'Arrow Color',
+                                'description' =>
+                                    'Choose a color for the navigation arrows (slideshow and image browser).',
+                                'priority' => 20,
+                                'render' => true,
+                                'features' => [
+                                    'dynamicContent' => [
+                                        'type' => 'color'
+                                    ]
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/color-picker'
+                                ]
+                            ]
+                        ]
+                    ],
+                    'decoration' => [
+                        'button' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designNavigationArrows',
+                                'priority' => 30,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/button',
+                                    'props' => [
+                                        'grouped' => false,
+                                        'fieldLabel' => 'Arrow',
+                                        'attrName' => 'navigationArrows',
+                                        'dynamicSubgroupHost' => true,
+                                        'dynamicSubgroupExcludedComponents' => [
+                                            'divi/layout',
+                                            'divi/animation'
+                                        ],
+                                        'fields' => [
+                                            'fontGroup' => [
+                                                'render' => false
+                                            ],
+                                            'buttonIconGroup' => [
+                                                'render' => false
+                                            ],
+                                            'backgroundGroup' => [
+                                                'component' => [
+                                                    'props' => [
+                                                        'hidePanels' => [
+                                                            'mask',
+                                                            'pattern',
+                                                            'video'
+                                                        ]
+                                                    ]
+                                                ]
+                                            ],
+                                            'sizingGroup' => [
+                                                'component' => [
+                                                    'props' => [
+                                                        'fields' => [
+                                                            'alignment' => [
+                                                                'render' => false
+                                                            ],
+                                                            'alignSelf' => [
+                                                                'render' => false
+                                                            ],
+                                                            'gridAlignSelf' => [
+                                                                'render' => false
+                                                            ],
+                                                            'gridJustifySelf' => [
+                                                                'render' => false
+                                                            ]
+                                                        ]
+                                                    ]
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'customCssFields' => [
+            'title' => [
+                'label' => 'Title Text',
+                'subName' => 'title',
+                'selectorSuffix' =>
+                    ' .et-imagely-content .ngg-imagebrowser > h3'
+            ],
+            'image' => [
+                'label' => 'Gallery Image',
+                'subName' => 'image',
+                'selectorSuffix' =>
+                    ' .et-imagely-content .ngg-imagebrowser .pic img, .et-imagely-content .ngg-galleryoverview .ngg-gallery-thumbnail img, .et-imagely-content .ngg-galleryoverview.carousel-view .ngg-basic-thumbnails-carousel > a > img, .et-imagely-content .ngg-slideshow img'
+            ],
+            'counter' => [
+                'label' => 'Counter Text',
+                'subName' => 'counter',
+                'selectorSuffix' =>
+                    ' .et-imagely-content .ngg-imagebrowser-nav .counter'
+            ],
+            'description' => [
+                'label' => 'Description Text',
+                'subName' => 'description',
+                'selectorSuffix' =>
+                    ' .et-imagely-content .ngg-imagebrowser-desc, .et-imagely-content .ngg-galleryoverview .ngg-gallery-thumbnail > span'
+            ],
+            'galleryWrapper' => [
+                'label' => 'Gallery Wrapper',
+                'subName' => 'galleryWrapper',
+                'selectorSuffix' => ' .et-imagely-content'
+            ],
+            'exifMetaData' => [
+                'label' => 'EXIF Meta Data',
+                'subName' => 'exifMetaData',
+                'selectorSuffix' => ' .et-imagely-content .et-imagely-exif'
+            ],
+            'tagCloud' => [
+                'label' => 'Tag Cloud Text',
+                'subName' => 'tagCloud',
+                'selectorSuffix' =>
+                    ' .et-imagely-content .ngg-tagcloud ul.wp-tag-cloud li a'
+            ],
+            'pagination' => [
+                'label' => 'Pagination Text',
+                'subName' => 'pagination',
+                'selectorSuffix' =>
+                    ' .et-imagely-content .ngg-navigation a, .et-imagely-content .ngg-navigation span.current, .et-imagely-content .ngg-navigation span.ellipsis'
+            ],
+            'slideshowLink' => [
+                'label' => 'View Link',
+                'subName' => 'slideshowLink',
+                'selectorSuffix' =>
+                    '.et_pb_module .et-imagely-content .slideshowlink a'
+            ],
+            'navigationArrows' => [
+                'label' => 'Navigation Arrows',
+                'subName' => 'navigationArrows',
+                'selectorSuffix' =>
+                    ' .et-imagely-content .ngg-slideshow .slick-prev, .et-imagely-content .ngg-slideshow .slick-next, .et-imagely-content .ngg-imagebrowser-nav .back, .et-imagely-content .ngg-imagebrowser-nav .next'
+            ]
+        ],
+        'settings' => [
+            'content' => 'auto',
+            'design' => 'auto',
+            'advanced' => 'auto',
+            'groups' => [
+                'contentElements' => [
+                    'panel' => 'content',
+                    'priority' => 30,
+                    'groupName' => 'contentElements',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Elements',
+                            'preset' => 'content'
+                        ]
+                    ]
+                ],
+                'contentGallery' => [
+                    'panel' => 'content',
+                    'priority' => 10,
+                    'groupName' => 'imagelyGallery',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Gallery',
+                            'initialOpen' => true
+                        ]
+                    ]
+                ],
+                'designNavigationArrows' => [
+                    'panel' => 'design',
+                    'priority' => 20,
+                    'groupName' => 'designNavigationArrows',
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Navigation Arrows',
+                            'dynamicSubgroupHost' => true
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ],
     'instagram-feed' => [
         'name' => 'divi/instagram-feed',
         'd4Shortcode' => 'et_pb_instagram_feed',
@@ -22466,6 +25552,8 @@ return [
         'moduleOrderClassName' => 'et_pb_instagram_feed',
         'title' => 'Instagram Feed',
         'titles' => 'Instagram Feeds',
+        'description' =>
+            'Shows a grid of recent Instagram posts from a connected account.',
         'moduleIcon' => 'divi/module-instagram-feed',
         'category' => 'module',
         'childrenName' => [],
@@ -22835,6 +25923,9 @@ return [
         'moduleOrderClassName' => 'et_pb_link',
         'title' => 'Link',
         'titles' => 'Links',
+        'description' =>
+            'Inline anchor wrapping another module so the whole block becomes clickable.',
+        'keywords' => ['anchor', 'clickable', 'url', 'hyperlink'],
         'moduleIcon' => 'divi/module-link',
         'category' => 'module',
         'childrenName' => [],
@@ -23263,6 +26354,9 @@ return [
         'd4Shortcode' => 'et_pb_login',
         'title' => 'Login',
         'titles' => 'Logins',
+        'description' =>
+            'Front-end login form so visitors can sign in without visiting wp-login.php.',
+        'keywords' => ['sign in', 'auth', 'member login', 'wp-login'],
         'moduleIcon' => 'divi/module-login',
         'category' => 'module',
         'childrenName' => [],
@@ -23752,6 +26846,14 @@ return [
         'moduleOrderClassName' => 'et_pb_lottie',
         'title' => 'Lottie',
         'titles' => 'Lottie Animations',
+        'description' =>
+            'Render a Lottie JSON animation with playback, loop, and trigger controls.',
+        'keywords' => [
+            'animation',
+            'motion',
+            'json animation',
+            'after effects'
+        ],
         'moduleIcon' => 'divi/module-lottie',
         'category' => 'module',
         'childrenName' => [],
@@ -24027,6 +27129,9 @@ return [
         'moduleOrderClassName' => 'et_pb_map',
         'title' => 'Map',
         'titles' => 'Maps',
+        'description' =>
+            'Embeds an interactive Google Map centered on configured coordinates with custom pins.',
+        'keywords' => ['google map', 'location', 'address map', 'directions'],
         'moduleIcon' => 'divi/module-map',
         'childModuleName' => 'divi/map-pin',
         'childModuleTitle' => 'Pin',
@@ -24057,6 +27162,8 @@ return [
                             'desktop' => [
                                 'value' => [
                                     'height' => '{{selector}} > .et_pb_map',
+                                    'min-height' => '{{selector}} > .et_pb_map',
+                                    'max-height' => '{{selector}} > .et_pb_map',
                                     'margin-left' =>
                                         '{{selector}}.et_pb_module',
                                     'margin-right' =>
@@ -24393,6 +27500,9 @@ return [
         'd4Shortcode' => 'et_pb_map_pin',
         'title' => 'Map Pin',
         'titles' => 'Map Pins',
+        'description' =>
+            'A single map marker inside a Map or Fullwidth Map module with coordinates and tooltip content.',
+        'keywords' => ['map marker', 'location pin', 'address marker'],
         'moduleIcon' => 'divi/module-map-pin',
         'category' => 'child-module',
         'attributes' => [
@@ -24545,6 +27655,9 @@ return [
         'd4Shortcode' => 'et_pb_menu',
         'title' => 'Menu',
         'titles' => 'Menus',
+        'description' =>
+            'Renders a WordPress nav menu with horizontal, vertical, or mobile-friendly hamburger layouts.',
+        'keywords' => ['navigation', 'nav', 'header menu', 'navbar'],
         'moduleIcon' => 'divi/module-menu',
         'category' => 'module',
         'childrenName' => [],
@@ -24724,7 +27837,7 @@ return [
                     ],
                     'boxShadow' => [
                         'selector' =>
-                            '{{selector}} .et_pb_menu__logo-wrap .et_pb_menu__logo'
+                            '{{selector}} .et_pb_menu__logo-wrap .et_pb_menu__logo img'
                     ],
                     'filters' => [
                         'selector' => '{{selector}} .et_pb_menu__logo-wrap img'
@@ -24966,6 +28079,16 @@ return [
                                 'hover' =>
                                     '{{selector}}.et_pb_menu .et_pb_menu__menu > nav > ul > li > a',
                                 'active' =>
+                                    '{{selector}}.et_pb_menu .et_pb_menu__menu > nav > ul > li > a'
+                            ]
+                        ]
+                    ],
+                    'boxShadow' => [
+                        'selectors' => [
+                            'desktop' => [
+                                'value' =>
+                                    '{{selector}}.et_pb_menu .et_pb_menu__menu > nav > ul > li > a',
+                                'hover' =>
                                     '{{selector}}.et_pb_menu .et_pb_menu__menu > nav > ul > li > a'
                             ]
                         ]
@@ -25960,6 +29083,9 @@ return [
         'moduleOrderClassName' => 'et_pb_number_counter',
         'title' => 'Number Counter',
         'titles' => 'Number Counters',
+        'description' =>
+            'Large animated number that counts up to a target value to emphasize a statistic.',
+        'keywords' => ['stat', 'kpi', 'big number', 'metric', 'rolling number'],
         'moduleIcon' => 'divi/module-number-counter',
         'category' => 'module',
         'childrenName' => [],
@@ -26241,11 +29367,598 @@ return [
             ]
         ]
     ],
+    'payment-button' => [
+        'name' => 'divi/payment-button',
+        'moduleClassName' => 'et_pb_button',
+        'moduleOrderClassName' => 'et_pb_payment_button',
+        'title' => 'Payment Button',
+        'titles' => 'Payment Buttons',
+        'description' =>
+            'Button that collects payments through supported gateways such as PayPal or Stripe.',
+        'moduleIcon' => 'divi/module-payment-button',
+        'category' => 'module',
+        'childrenName' => [],
+        'videos' => [
+            [
+                'id' => 'xDJFksZljlc',
+                'name' => 'An introduction to the Payment Button module'
+            ],
+            [
+                'id' => '1iqjhnHVA9Y',
+                'name' => 'Design Settings and Advanced Module Settings'
+            ],
+            [
+                'id' => 'boNZZ0MYU0E',
+                'name' => 'Saving and loading from the library'
+            ]
+        ],
+        'attributes' => [
+            'module' => [
+                'type' => 'object',
+                'selector' => '{{selector}}',
+                'styleProps' => [
+                    'spacing' => [
+                        'selector' => '{{wrapperSelector}}',
+                        'propertySelectors' => [
+                            'desktop' => [
+                                'value' => [
+                                    'padding' =>
+                                        '{{wrapperSelector}} {{baseSelector}}'
+                                ]
+                            ]
+                        ],
+                        'important' => true
+                    ],
+                    'transform' => [
+                        'selector' => '{{wrapperSelector}} {{baseSelector}}'
+                    ],
+                    'position' => [
+                        'selector' => '{{wrapperSelector}}'
+                    ],
+                    'order' => [
+                        'selector' => '{{wrapperSelector}}'
+                    ]
+                ],
+                'settings' => [
+                    'meta' => [
+                        'meta' => []
+                    ],
+                    'advanced' => [
+                        'elements' => [],
+                        'html' => [],
+                        'loop' => [],
+                        'text' => [
+                            'component' => [
+                                'props' => [
+                                    'fields' => [
+                                        'orientation' => [
+                                            'render' => false
+                                        ],
+                                        'textShadowGroup' => [
+                                            'render' => false
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'alignment' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designAlignment',
+                                'priority' => 5,
+                                'render' => true,
+                                'attrName' => 'module.advanced.alignment',
+                                'label' => 'Payment Button Alignment',
+                                'description' =>
+                                    'Here you can define the alignment of Payment Button.',
+                                'category' => 'configuration',
+                                'multipleChoices' => false,
+                                'features' => [
+                                    'hover' => false,
+                                    'sticky' => false,
+                                    'preset' => ['html']
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/button-options',
+                                    'props' => [
+                                        'options' => [
+                                            'left' => [
+                                                'icon' => 'divi/align-left'
+                                            ],
+                                            'center' => [
+                                                'icon' => 'divi/align-center'
+                                            ],
+                                            'right' => [
+                                                'icon' => 'divi/align-right'
+                                            ]
+                                        ],
+                                        'showLabel' => false
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ],
+                    'decoration' => [
+                        'layout' => [],
+                        'animation' => [],
+                        'attributes' => [],
+                        'boxShadow' => [],
+                        'conditions' => [],
+                        'disabledOn' => [],
+                        'filters' => [],
+                        'interactions' => [],
+                        'overflow' => [],
+                        'order' => [],
+                        'position' => [],
+                        'scroll' => [],
+                        'spacing' => [],
+                        'sticky' => [],
+                        'transform' => [],
+                        'transition' => [],
+                        'zIndex' => []
+                    ]
+                ]
+            ],
+            'button' => [
+                'type' => 'object',
+                'customPostTypeSelector' =>
+                    'body.et-db #page-container #et-boc .et-l {{baseSelector}}',
+                'selector' =>
+                    'body #page-container .et_pb_section {{baseSelector}}',
+                'elementType' => 'button',
+                'styleProps' => [
+                    'font' => [
+                        'important' => [
+                            'font' => [
+                                'desktop' => [
+                                    'value' => [
+                                        'color' => true,
+                                        'font-size' => true,
+                                        'letter-spacing' => true,
+                                        'line-height' => true
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ],
+                    'spacing' => [
+                        'important' => true
+                    ]
+                ],
+                'settings' => [
+                    'innerContent' => [
+                        'groupType' => 'into-multiple-groups',
+                        'groups' => [
+                            'payment' => [
+                                'groupType' => 'group-items',
+                                'items' => [
+                                    'provider' => [
+                                        'groupSlug' => 'contentPayment',
+                                        'priority' => 10,
+                                        'render' => true,
+                                        'attrName' => 'button.innerContent',
+                                        'subName' => 'provider',
+                                        'label' => 'Provider',
+                                        'description' =>
+                                            'Choose the payment provider for this checkout button.',
+                                        'category' => 'configuration',
+                                        'features' => [
+                                            'responsive' => false,
+                                            'sticky' => false,
+                                            'hover' => false,
+                                            'preset' => 'content'
+                                        ],
+                                        'component' => [
+                                            'type' => 'field',
+                                            'name' => 'divi/payment-provider'
+                                        ]
+                                    ],
+                                    'resourceId' => [
+                                        'groupSlug' => 'contentPayment',
+                                        'priority' => 20,
+                                        'render' => true,
+                                        'attrName' => 'button.innerContent',
+                                        'subName' => 'resourceId',
+                                        'label' => 'Resource',
+                                        'description' =>
+                                            'Select the payment account or resource that will process payments.',
+                                        'category' => 'configuration',
+                                        'features' => [
+                                            'responsive' => false,
+                                            'sticky' => false,
+                                            'hover' => false,
+                                            'preset' => 'content'
+                                        ],
+                                        'component' => [
+                                            'type' => 'field',
+                                            'name' => 'divi/payment-resource'
+                                        ]
+                                    ],
+                                    'environment' => [
+                                        'groupSlug' => 'contentPayment',
+                                        'priority' => 30,
+                                        'render' => true,
+                                        'attrName' => 'button.innerContent',
+                                        'subName' => 'environment',
+                                        'label' => 'Environment',
+                                        'description' =>
+                                            'Choose whether to run transactions in Sandbox (testing) or Live (production) mode.',
+                                        'category' => 'configuration',
+                                        'features' => [
+                                            'responsive' => false,
+                                            'sticky' => false,
+                                            'hover' => false,
+                                            'preset' => 'content'
+                                        ],
+                                        'component' => [
+                                            'type' => 'field',
+                                            'name' => 'divi/select',
+                                            'props' => [
+                                                'defaultValue' => 'sandbox',
+                                                'options' => [
+                                                    'sandbox' => [
+                                                        'label' => 'Sandbox'
+                                                    ],
+                                                    'live' => [
+                                                        'label' => 'Live'
+                                                    ]
+                                                ]
+                                            ]
+                                        ]
+                                    ],
+                                    'amountMode' => [
+                                        'groupSlug' => 'contentPayment',
+                                        'priority' => 40,
+                                        'render' => true,
+                                        'attrName' => 'button.innerContent',
+                                        'subName' => 'amountMode',
+                                        'label' => 'Amount Mode',
+                                        'description' =>
+                                            'Choose whether the payment amount is fixed or entered by the customer at checkout.',
+                                        'category' => 'configuration',
+                                        'features' => [
+                                            'responsive' => false,
+                                            'sticky' => false,
+                                            'hover' => false,
+                                            'preset' => 'content'
+                                        ],
+                                        'component' => [
+                                            'type' => 'field',
+                                            'name' => 'divi/select',
+                                            'props' => [
+                                                'defaultValue' => 'fixed',
+                                                'options' => [
+                                                    'fixed' => [
+                                                        'label' => 'Fixed'
+                                                    ],
+                                                    'user-defined' => [
+                                                        'label' =>
+                                                            'User Defined'
+                                                    ]
+                                                ]
+                                            ]
+                                        ]
+                                    ],
+                                    'amount' => [
+                                        'groupSlug' => 'contentPayment',
+                                        'priority' => 50,
+                                        'render' => true,
+                                        'attrName' => 'button.innerContent',
+                                        'subName' => 'amount',
+                                        'label' => 'Amount',
+                                        'description' =>
+                                            'Enter the fixed payment amount to charge when Amount Mode is set to Fixed.',
+                                        'category' => 'configuration',
+                                        'features' => [
+                                            'responsive' => false,
+                                            'sticky' => false,
+                                            'hover' => false,
+                                            'preset' => 'content',
+                                            'dynamicContent' => [
+                                                'type' => 'text'
+                                            ]
+                                        ],
+                                        'component' => [
+                                            'type' => 'field',
+                                            'name' => 'divi/text'
+                                        ]
+                                    ],
+                                    'currency' => [
+                                        'groupSlug' => 'contentPayment',
+                                        'priority' => 60,
+                                        'render' => true,
+                                        'attrName' => 'button.innerContent',
+                                        'subName' => 'currency',
+                                        'label' => 'Currency',
+                                        'description' =>
+                                            'Select the currency used for the payment amount.',
+                                        'category' => 'configuration',
+                                        'features' => [
+                                            'responsive' => false,
+                                            'sticky' => false,
+                                            'hover' => false,
+                                            'preset' => 'content'
+                                        ],
+                                        'component' => [
+                                            'type' => 'field',
+                                            'name' => 'divi/select',
+                                            'props' => [
+                                                'defaultValue' => 'USD',
+                                                'options' =>
+                                                    'paymentButtonCurrencyOptions',
+                                                'searchable' => true,
+                                                'searchPlaceholder' =>
+                                                    'Search currency or country'
+                                            ]
+                                        ]
+                                    ],
+                                    'returnUrl' => [
+                                        'groupSlug' => 'contentPayment',
+                                        'priority' => 70,
+                                        'render' => true,
+                                        'attrName' => 'button.innerContent',
+                                        'subName' => 'returnUrl',
+                                        'label' => 'Return URL',
+                                        'description' =>
+                                            'Enter the URL where customers are redirected after completing a successful payment. When left blank, customers return to the page where the payment was initiated.',
+                                        'category' => 'configuration',
+                                        'features' => [
+                                            'responsive' => false,
+                                            'sticky' => false,
+                                            'hover' => false,
+                                            'preset' => 'content',
+                                            'dynamicContent' => [
+                                                'type' => 'url'
+                                            ]
+                                        ],
+                                        'component' => [
+                                            'type' => 'field',
+                                            'name' => 'divi/text'
+                                        ]
+                                    ],
+                                    'cancelUrl' => [
+                                        'groupSlug' => 'contentPayment',
+                                        'priority' => 80,
+                                        'render' => true,
+                                        'attrName' => 'button.innerContent',
+                                        'subName' => 'cancelUrl',
+                                        'label' => 'Cancel URL',
+                                        'description' =>
+                                            'Enter the URL where customers are redirected when they cancel the payment. When left blank, customers return to the page where the payment was initiated.',
+                                        'category' => 'configuration',
+                                        'features' => [
+                                            'responsive' => false,
+                                            'sticky' => false,
+                                            'hover' => false,
+                                            'preset' => 'content',
+                                            'dynamicContent' => [
+                                                'type' => 'url'
+                                            ]
+                                        ],
+                                        'component' => [
+                                            'type' => 'field',
+                                            'name' => 'divi/text'
+                                        ]
+                                    ],
+                                    'description' => [
+                                        'groupSlug' => 'contentPayment',
+                                        'priority' => 85,
+                                        'render' => true,
+                                        'attrName' => 'button.innerContent',
+                                        'subName' => 'description',
+                                        'label' => 'Description',
+                                        'description' =>
+                                            'Enter the payment description shown to customers on the PayPal checkout page.',
+                                        'category' => 'configuration',
+                                        'features' => [
+                                            'responsive' => false,
+                                            'sticky' => false,
+                                            'hover' => false,
+                                            'preset' => 'content',
+                                            'dynamicContent' => [
+                                                'type' => 'text'
+                                            ]
+                                        ],
+                                        'component' => [
+                                            'type' => 'field',
+                                            'name' => 'divi/text'
+                                        ]
+                                    ],
+                                    'openInNewTab' => [
+                                        'groupSlug' => 'contentPayment',
+                                        'priority' => 90,
+                                        'render' => true,
+                                        'attrName' => 'button.innerContent',
+                                        'subName' => 'openInNewTab',
+                                        'label' => 'Open In New Tab',
+                                        'description' =>
+                                            'Choose whether the checkout page opens in a new browser tab.',
+                                        'category' => 'configuration',
+                                        'features' => [
+                                            'responsive' => false,
+                                            'sticky' => false,
+                                            'hover' => false,
+                                            'preset' => 'content'
+                                        ],
+                                        'component' => [
+                                            'type' => 'field',
+                                            'name' => 'divi/toggle'
+                                        ]
+                                    ]
+                                ]
+                            ],
+                            'text' => [
+                                'groupType' => 'group-item',
+                                'item' => [
+                                    'description' =>
+                                        'Input your desired button text.',
+                                    'groupSlug' => 'contentText',
+                                    'label' => 'Payment Button Text',
+                                    'priority' => 10,
+                                    'render' => true,
+                                    'subName' => 'text',
+                                    'category' => 'basic_option',
+                                    'features' => [
+                                        'dynamicContent' => [
+                                            'type' => 'text'
+                                        ],
+                                        'sticky' => false,
+                                        'preset' => 'content'
+                                    ],
+                                    'component' => [
+                                        'name' => 'divi/text',
+                                        'type' => 'field'
+                                    ]
+                                ]
+                            ],
+                            'link' => [
+                                'groupType' => 'group-item',
+                                'item' => [
+                                    'groupSlug' => 'contentLink',
+                                    'render' => false
+                                ]
+                            ]
+                        ]
+                    ],
+                    'decoration' => [
+                        'background' => [],
+                        'border' => [],
+                        'boxShadow' => [],
+                        'button' => [
+                            'component' => [
+                                'props' => [
+                                    'dynamicSubgroupHost' => true,
+                                    'dynamicSubgroupLockedSubgroupIds' => [
+                                        'button.decoration.transform',
+                                        'button.decoration.filters',
+                                        'button.decoration.animation'
+                                    ],
+                                    'fields' => [
+                                        'alignment' => [
+                                            'render' => false
+                                        ],
+                                        'boxShadowGroup' => [
+                                            'render' => false
+                                        ],
+                                        'buttonIconGroup' => [
+                                            'component' => [
+                                                'props' => [
+                                                    'fields' => [
+                                                        'placement' => [
+                                                            'features' => [
+                                                                'hover' => false
+                                                            ]
+                                                        ],
+                                                        'onHover' => [
+                                                            'features' => [
+                                                                'hover' => false
+                                                            ]
+                                                        ]
+                                                    ]
+                                                ]
+                                            ]
+                                        ],
+                                        'fontGroup' => [
+                                            'component' => [
+                                                'props' => [
+                                                    'fields' => [
+                                                        'lineHeight' => [
+                                                            'render' => true
+                                                        ],
+                                                        'textAlign' => [
+                                                            'render' => false
+                                                        ]
+                                                    ]
+                                                ]
+                                            ]
+                                        ],
+                                        'spacingGroup' => [
+                                            'render' => false
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'font' => [],
+                        'sizing' => [],
+                        'spacing' => [
+                            'component' => [
+                                'props' => [
+                                    'fields' => [
+                                        'margin' => [
+                                            'render' => false
+                                        ],
+                                        'padding' => [
+                                            'render' => false
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'customCssFields' => [],
+        'settings' => [
+            'content' => 'auto',
+            'design' => 'auto',
+            'advanced' => 'auto',
+            'groups' => [
+                'contentPayment' => [
+                    'panel' => 'content',
+                    'priority' => 5,
+                    'groupName' => 'payment',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Payment',
+                            'preset' => 'content'
+                        ]
+                    ]
+                ],
+                'contentText' => [
+                    'panel' => 'content',
+                    'priority' => 10,
+                    'groupName' => 'text',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Text'
+                        ]
+                    ]
+                ],
+                'designAlignment' => [
+                    'panel' => 'design',
+                    'priority' => 10,
+                    'groupName' => 'alignment',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Alignment',
+                            'clipboardCategory' => 'style'
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'wrapper' => [
+            'status' => true,
+            'tag' => 'div'
+        ]
+    ],
     'portfolio' => [
         'name' => 'divi/portfolio',
         'd4Shortcode' => 'et_pb_portfolio',
         'title' => 'Portfolio',
         'titles' => 'Portfolios',
+        'description' =>
+            'Grid of project items pulled from the portfolio post type with category and tag filters.',
+        'keywords' => ['projects', 'work', 'case studies', 'project grid'],
         'moduleIcon' => 'divi/module-portfolio',
         'category' => 'module',
         'childrenName' => [],
@@ -26281,6 +29994,9 @@ return [
                         ]
                     ],
                     'border' => [
+                        'selector' => '{{selector}} .et_pb_portfolio_item'
+                    ],
+                    'boxShadow' => [
                         'selector' => '{{selector}} .et_pb_portfolio_item'
                     ]
                 ],
@@ -26648,6 +30364,12 @@ return [
                             'desktop' => [
                                 'value' => [
                                     'aspect-ratio' =>
+                                        '{{selector}} .et_portfolio_image img',
+                                    'height' =>
+                                        '{{selector}} .et_portfolio_image img',
+                                    'min-height' =>
+                                        '{{selector}} .et_portfolio_image img',
+                                    'max-height' =>
                                         '{{selector}} .et_portfolio_image img'
                                 ]
                             ]
@@ -26716,6 +30438,20 @@ return [
                 'supportsCustomAttributes' => true,
                 'attributes' => [
                     'class' => 'pagination clearfix'
+                ],
+                'styleProps' => [
+                    'font' => [
+                        'propertySelectors' => [
+                            'font' => [
+                                'desktop' => [
+                                    'value' => [
+                                        'text-align' =>
+                                            '{{selector}} .pagination'
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
                 ],
                 'settings' => [
                     'decoration' => [
@@ -26822,6 +30558,14 @@ return [
         'name' => 'divi/post-content',
         'title' => 'Post Content',
         'titles' => 'Post Contents',
+        'description' =>
+            'Outputs the main content body of the current post inside a theme-builder template.',
+        'keywords' => [
+            'the content',
+            'page body',
+            'dynamic content',
+            'entry content'
+        ],
         'moduleIcon' => 'divi/module-post-content',
         'category' => 'module',
         'videos' => [],
@@ -26924,11 +30668,1341 @@ return [
             ]
         ]
     ],
+    'post-filter' => [
+        'name' => 'divi/post-filter',
+        'd4Shortcode' => 'et_pb_post_filter',
+        'moduleClassName' => 'et_pb_post_filter',
+        'moduleOrderClassName' => 'et_pb_post_filter',
+        'title' => 'Post Filter',
+        'titles' => 'Post Filters',
+        'description' =>
+            'Filter controls that let visitors narrow loop or archive content on the page.',
+        'moduleIcon' => 'divi/module-post-filter',
+        'category' => 'module',
+        'childModuleName' => 'divi/post-filter-item',
+        'childModuleTitle' => 'Post Filter Item',
+        'childModuleTitleAttribute' => 'label',
+        'childModuleMetadata' => [
+            'name' => 'divi/post-filter-item'
+        ],
+        'childrenName' => ['divi/post-filter-item'],
+        'allowAllElements' => true,
+        'videos' => [],
+        'script' => ['divi-module-library-script-post-filter'],
+        'attributes' => [
+            'module' => [
+                'type' => 'object',
+                'selector' => '{{selector}}',
+                'styleProps' => [
+                    'layout' => [
+                        'selector' =>
+                            '{{selector}} .et_pb_post_filter__controls',
+                        'render' => [
+                            'display' => true
+                        ]
+                    ]
+                ],
+                'settings' => [
+                    'meta' => [
+                        'meta' => []
+                    ],
+                    'advanced' => [
+                        'elements' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'contentElements',
+                                'priority' => 5,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/elements',
+                                    'props' => [
+                                        'grouped' => false
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'html' => [],
+                        'loop' => [],
+                        'targetLoop' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'contentTarget',
+                                'attrName' => 'module.advanced.targetLoop',
+                                'label' => 'Target Loop',
+                                'description' =>
+                                    'Choose which loop this filter form should control.',
+                                'render' => true,
+                                'priority' => 5,
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/select',
+                                    'props' => [
+                                        'options' => []
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'filters' => [
+                            'groupType' => 'group-items',
+                            'items' => [
+                                'applyMode' => [
+                                    'groupSlug' => 'contentTarget',
+                                    'attrName' => 'module.advanced.filters',
+                                    'subName' => 'applyMode',
+                                    'label' => 'Apply Mode',
+                                    'description' =>
+                                        'Choose when filter criteria are applied to the targeted loop. Auto updates results as visitors change controls. Submit waits until they click the submit button.',
+                                    'render' => true,
+                                    'priority' => 10,
+                                    'component' => [
+                                        'type' => 'field',
+                                        'name' => 'divi/select',
+                                        'props' => [
+                                            'options' => [
+                                                'auto' => [
+                                                    'label' => 'Auto'
+                                                ],
+                                                'submit' => [
+                                                    'label' => 'Submit'
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ],
+                                'relation' => [
+                                    'groupSlug' => 'contentTarget',
+                                    'attrName' => 'module.advanced.filters',
+                                    'subName' => 'relation',
+                                    'label' => 'Relation',
+                                    'description' =>
+                                        'Choose how multiple active filters combine. "And" requires every filter to match. "Or" requires at least one filter to match.',
+                                    'render' => true,
+                                    'priority' => 15,
+                                    'component' => [
+                                        'type' => 'field',
+                                        'name' => 'divi/select',
+                                        'props' => [
+                                            'options' => [
+                                                'and' => [
+                                                    'label' => 'And'
+                                                ],
+                                                'or' => [
+                                                    'label' => 'Or'
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ],
+                    'decoration' => [
+                        'layout' => [],
+                        'animation' => [],
+                        'attributes' => [],
+                        'background' => [],
+                        'border' => [],
+                        'boxShadow' => [],
+                        'conditions' => [],
+                        'disabledOn' => [],
+                        'filters' => [],
+                        'interactions' => [],
+                        'order' => [],
+                        'overflow' => [],
+                        'position' => [],
+                        'scroll' => [],
+                        'sizing' => [],
+                        'spacing' => [],
+                        'sticky' => [],
+                        'transform' => [],
+                        'transition' => [],
+                        'zIndex' => []
+                    ]
+                ]
+            ],
+            'field' => [
+                'type' => 'object',
+                'elementType' => 'field',
+                'selector' =>
+                    '{{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select), {{selector}} .et_pb_post_filter__item-control-surface select.et_pb_post_filter__item-control',
+                'styleProps' => [
+                    'selector' =>
+                        '{{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select), {{selector}} .et_pb_post_filter__item-control-surface select.et_pb_post_filter__item-control',
+                    'selectors' => [
+                        'desktop' => [
+                            'value' =>
+                                '{{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select), {{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select)::placeholder, {{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select)::-webkit-input-placeholder, {{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select)::-moz-placeholder, {{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select):-ms-input-placeholder, {{selector}} .et_pb_post_filter__item-control-surface select.et_pb_post_filter__item-control',
+                            'hover' =>
+                                '{{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select):hover, {{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select):hover::placeholder, {{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select):hover::-webkit-input-placeholder, {{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select):hover::-moz-placeholder, {{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select):hover:-ms-input-placeholder, {{selector}} .et_pb_post_filter__item-control-surface select.et_pb_post_filter__item-control:hover'
+                        ]
+                    ]
+                ],
+                'settings' => [
+                    'decoration' => [],
+                    'advanced' => []
+                ]
+            ],
+            'option' => [
+                'type' => 'object',
+                'label' => 'Option',
+                'elementType' => 'element',
+                'elementProps' => [
+                    'groupedOptionGroup' => true
+                ],
+                'selector' => '{{selector}} .et_pb_post_filter__item-option',
+                'settings' => [
+                    'decoration' => [
+                        'background' => [
+                            'item' => [
+                                'groupSlug' => 'designOption',
+                                'component' => [
+                                    'props' => [
+                                        'hidePanels' => [
+                                            'video',
+                                            'pattern',
+                                            'mask'
+                                        ],
+                                        'fields' => [
+                                            'image' => [
+                                                'parallaxEnabled' => [
+                                                    'render' => false
+                                                ],
+                                                'parallaxMethod' => [
+                                                    'render' => false
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'border' => [],
+                        'boxShadow' => [],
+                        'sizing' => [],
+                        'spacing' => []
+                    ]
+                ]
+            ],
+            'checkbox' => [
+                'type' => 'object',
+                'elementType' => 'field',
+                'selector' =>
+                    '{{selector}} .et_pb_post_filter__item-control[type=checkbox]',
+                'styleProps' => [
+                    'selector' =>
+                        '{{selector}} .et_pb_post_filter__item-control[type=checkbox]',
+                    'selectors' => [
+                        'desktop' => [
+                            'value' =>
+                                '{{selector}}.et_pb_post_filter .et_pb_post_filter__item-control[type=checkbox] + label i',
+                            'hover' =>
+                                '{{selector}}.et_pb_post_filter .et_pb_post_filter__item-control[type=checkbox] + label i'
+                        ]
+                    ]
+                ],
+                'settings' => [
+                    'decoration' => [],
+                    'advanced' => []
+                ]
+            ],
+            'radio' => [
+                'type' => 'object',
+                'elementType' => 'field',
+                'selector' =>
+                    '{{selector}} .et_pb_post_filter__item-control[type=radio]',
+                'styleProps' => [
+                    'selector' =>
+                        '{{selector}} .et_pb_post_filter__item-control[type=radio]',
+                    'selectors' => [
+                        'desktop' => [
+                            'value' =>
+                                '{{selector}}.et_pb_post_filter .et_pb_post_filter__item-control[type=radio] + label i',
+                            'hover' =>
+                                '{{selector}}.et_pb_post_filter .et_pb_post_filter__item-control[type=radio] + label i'
+                        ]
+                    ]
+                ],
+                'settings' => [
+                    'decoration' => [],
+                    'advanced' => []
+                ]
+            ],
+            'multipleOrderButton' => [
+                'type' => 'object',
+                'elementType' => 'button',
+                'selector' =>
+                    '{{selector}} .et_pb_post_filter__item-multiple-order-action',
+                'settings' => [
+                    'decoration' => [
+                        'button' => [
+                            'priority' => 43,
+                            'component' => [
+                                'props' => [
+                                    'dynamicSubgroupHost' => true,
+                                    'fields' => [
+                                        'buttonIconGroup' => [
+                                            'render' => false
+                                        ]
+                                    ],
+                                    'groupLabel' => 'Multiple Order Button'
+                                ]
+                            ]
+                        ]
+                    ],
+                    'advanced' => []
+                ]
+            ],
+            'button' => [
+                'type' => 'object',
+                'elementType' => 'button',
+                'selector' =>
+                    '{{selector}} .et_pb_post_filter__item-control-button',
+                'settings' => [
+                    'decoration' => [
+                        'background' => [],
+                        'border' => [],
+                        'boxShadow' => [],
+                        'button' => [
+                            'component' => [
+                                'props' => [
+                                    'dynamicSubgroupHost' => true,
+                                    'fields' => [
+                                        'buttonIconGroup' => [
+                                            'component' => [
+                                                'props' => [
+                                                    'fields' => [
+                                                        'settings' => [
+                                                            'render' => false
+                                                        ]
+                                                    ]
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'font' => [],
+                        'sizing' => [],
+                        'spacing' => []
+                    ],
+                    'advanced' => []
+                ],
+                'styleProps' => [
+                    'spacing' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'margin' => true,
+                                    'padding' => true
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'customCssFields' => [
+            'field' => [
+                'label' => 'Field',
+                'subName' => 'field',
+                'selectorSuffix' => ' .et_pb_post_filter__item-control'
+            ],
+            'checkbox' => [
+                'label' => 'Checkbox',
+                'subName' => 'checkbox',
+                'selectorSuffix' =>
+                    ' .et_pb_post_filter__item-control[type=checkbox] + label i'
+            ],
+            'radio' => [
+                'label' => 'Radio',
+                'subName' => 'radio',
+                'selectorSuffix' =>
+                    ' .et_pb_post_filter__item-control[type=radio] + label i'
+            ],
+            'multipleOrderButton' => [
+                'label' => 'Multiple Order Button',
+                'subName' => 'multipleOrderButton',
+                'selectorSuffix' =>
+                    ' .et_pb_post_filter__item-multiple-order-action'
+            ],
+            'button' => [
+                'label' => 'Button',
+                'subName' => 'button',
+                'selectorSuffix' => ' .et_pb_post_filter__item-control-button'
+            ],
+            'option' => [
+                'label' => 'Option',
+                'subName' => 'option',
+                'selectorSuffix' => ' .et_pb_post_filter__item-option'
+            ]
+        ],
+        'settings' => [
+            'design' => 'auto',
+            'advanced' => 'auto',
+            'groups' => [
+                'contentTarget' => [
+                    'panel' => 'content',
+                    'priority' => 5,
+                    'groupName' => 'contentTarget',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Target'
+                        ]
+                    ]
+                ],
+                'contentElements' => [
+                    'panel' => 'content',
+                    'priority' => 10,
+                    'groupName' => 'contentElements',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Elements',
+                            'preset' => 'content'
+                        ]
+                    ]
+                ],
+                'designFieldField' => [
+                    'panel' => 'design',
+                    'priority' => 40,
+                    'groupName' => 'field',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/form-field',
+                        'props' => [
+                            'groupLabel' => 'Field',
+                            'clipboardCategory' => 'style',
+                            'attrName' => 'field',
+                            'dynamicSubgroupHost' => true,
+                            'useComponentNameAsPresetGroup' => true
+                        ]
+                    ]
+                ],
+                'designOption' => [
+                    'panel' => 'design',
+                    'priority' => 41,
+                    'groupName' => 'designOption',
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Option',
+                            'clipboardCategory' => 'style',
+                            'dynamicSubgroupHost' => true
+                        ]
+                    ]
+                ],
+                'designFieldCheckbox' => [
+                    'panel' => 'design',
+                    'priority' => 42,
+                    'groupName' => 'checkbox',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/checkbox',
+                        'props' => [
+                            'groupLabel' => 'Checkbox',
+                            'clipboardCategory' => 'style',
+                            'attrName' => 'checkbox',
+                            'dynamicSubgroupHost' => true,
+                            'useComponentNameAsPresetGroup' => true
+                        ]
+                    ]
+                ],
+                'designFieldRadio' => [
+                    'panel' => 'design',
+                    'priority' => 43,
+                    'groupName' => 'radio',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/radio',
+                        'props' => [
+                            'groupLabel' => 'Radio Options',
+                            'clipboardCategory' => 'style',
+                            'attrName' => 'radio',
+                            'dynamicSubgroupHost' => true,
+                            'useComponentNameAsPresetGroup' => true
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ],
+    'post-filter-item' => [
+        'name' => 'divi/post-filter-item',
+        'd4Shortcode' => 'et_pb_post_filter_item',
+        'moduleClassName' => 'et_pb_post_filter_item',
+        'moduleOrderClassName' => 'et_pb_post_filter_item',
+        'title' => 'Post Filter Item',
+        'titles' => 'Post Filter Items',
+        'description' =>
+            'A single filter control inside a Post Filter module; not used on its own.',
+        'moduleIcon' => 'divi/module-post-filter-item',
+        'category' => 'child-module',
+        'childrenName' => [],
+        'videos' => [],
+        'attributes' => [
+            'module' => [
+                'type' => 'object',
+                'selector' => '{{selector}}',
+                'settings' => [
+                    'meta' => [
+                        'meta' => []
+                    ],
+                    'advanced' => [
+                        'elements' => [],
+                        'html' => [],
+                        'loop' => []
+                    ],
+                    'decoration' => [
+                        'layout' => [],
+                        'animation' => [],
+                        'attributes' => [],
+                        'background' => [],
+                        'border' => [],
+                        'boxShadow' => [],
+                        'conditions' => [],
+                        'disabledOn' => [],
+                        'filters' => [],
+                        'interactions' => [],
+                        'overflow' => [],
+                        'order' => [],
+                        'position' => [],
+                        'scroll' => [],
+                        'sizing' => [],
+                        'spacing' => [],
+                        'sticky' => [],
+                        'transform' => [],
+                        'transition' => [],
+                        'zIndex' => []
+                    ]
+                ]
+            ],
+            'field' => [
+                'type' => 'object',
+                'elementType' => 'field',
+                'selector' =>
+                    '.et_pb_post_filter {{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select), .et_pb_post_filter {{selector}} .et_pb_post_filter__item-control-surface select.et_pb_post_filter__item-control',
+                'styleProps' => [
+                    'selector' =>
+                        '.et_pb_post_filter {{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select), .et_pb_post_filter {{selector}} .et_pb_post_filter__item-control-surface select.et_pb_post_filter__item-control',
+                    'selectors' => [
+                        'desktop' => [
+                            'value' =>
+                                '.et_pb_post_filter {{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select), .et_pb_post_filter {{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select)::placeholder, .et_pb_post_filter {{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select)::-webkit-input-placeholder, .et_pb_post_filter {{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select)::-moz-placeholder, .et_pb_post_filter {{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select):-ms-input-placeholder, .et_pb_post_filter {{selector}} .et_pb_post_filter__item-control-surface select.et_pb_post_filter__item-control',
+                            'hover' =>
+                                '.et_pb_post_filter {{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select):hover, .et_pb_post_filter {{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select):hover::placeholder, .et_pb_post_filter {{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select):hover::-webkit-input-placeholder, .et_pb_post_filter {{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select):hover::-moz-placeholder, .et_pb_post_filter {{selector}} .et_pb_post_filter__item-control-surface .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio]):not(select):hover:-ms-input-placeholder, .et_pb_post_filter {{selector}} .et_pb_post_filter__item-control-surface select.et_pb_post_filter__item-control:hover'
+                        ]
+                    ]
+                ],
+                'settings' => [
+                    'decoration' => [],
+                    'innerContent' => [
+                        'groupType' => 'group-items',
+                        'items' => [
+                            'type' => [
+                                'groupSlug' => 'contentField',
+                                'attrName' => 'field.innerContent',
+                                'subName' => 'type',
+                                'label' => 'Field Type',
+                                'description' =>
+                                    'Choose which control this filter item renders and how it refines the parent target loop.',
+                                'render' => true,
+                                'priority' => 10,
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/select',
+                                    'props' => [
+                                        'options' => [
+                                            'text' => [
+                                                'label' => 'Text',
+                                                'options' => [
+                                                    'text' => [
+                                                        'label' => 'Text'
+                                                    ]
+                                                ]
+                                            ],
+                                            'single_selection' => [
+                                                'label' => 'Single Selection',
+                                                'options' => [
+                                                    'select' => [
+                                                        'label' => 'Select'
+                                                    ],
+                                                    'radio' => [
+                                                        'label' => 'Radio'
+                                                    ]
+                                                ]
+                                            ],
+                                            'multi_selection' => [
+                                                'label' => 'Multi Selection',
+                                                'options' => [
+                                                    'checkbox' => [
+                                                        'label' => 'Checkbox'
+                                                    ]
+                                                ]
+                                            ],
+                                            'woocommerce' => [
+                                                'label' => 'WooCommerce',
+                                                'options' => [
+                                                    'product-range' => [
+                                                        'label' => 'Price Range'
+                                                    ],
+                                                    'product-status' => [
+                                                        'label' =>
+                                                            'Stock Status'
+                                                    ],
+                                                    'product-review' => [
+                                                        'label' =>
+                                                            'Review Rating'
+                                                    ]
+                                                ]
+                                            ],
+                                            'sort' => [
+                                                'label' => 'Sort',
+                                                'options' => [
+                                                    'orderby' => [
+                                                        'label' => 'Order By'
+                                                    ],
+                                                    'order' => [
+                                                        'label' => 'Order'
+                                                    ],
+                                                    'multiple-order' => [
+                                                        'label' =>
+                                                            'Multiple Order'
+                                                    ]
+                                                ]
+                                            ],
+                                            'button' => [
+                                                'label' => 'Button',
+                                                'options' => [
+                                                    'submit' => [
+                                                        'label' => 'Submit'
+                                                    ],
+                                                    'reset' => [
+                                                        'label' => 'Reset'
+                                                    ]
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ],
+                            'fieldValueType' => [
+                                'groupSlug' => 'contentField',
+                                'attrName' => 'field.innerContent',
+                                'subName' => 'fieldValueType',
+                                'label' => 'Field Value Type',
+                                'description' =>
+                                    'Choose how visitor input is collected and compared for text fields, such as keyword search, number, or date pickers.',
+                                'render' => true,
+                                'priority' => 11,
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/select',
+                                    'props' => [
+                                        'options' => [
+                                            'text' => [
+                                                'label' => 'Text'
+                                            ],
+                                            'number' => [
+                                                'label' => 'Number'
+                                            ],
+                                            'date' => [
+                                                'label' => 'Date'
+                                            ],
+                                            'date-time' => [
+                                                'label' => 'Date Time'
+                                            ],
+                                            'time' => [
+                                                'label' => 'Time'
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ],
+                            'option' => [
+                                'groupSlug' => 'contentField',
+                                'attrName' => 'field.innerContent',
+                                'subName' => 'option',
+                                'label' => 'Field Option',
+                                'description' =>
+                                    'Choose the data source this control filters, such as a taxonomy, author, or custom field. Available choices depend on the parent target loop and field type.',
+                                'render' => true,
+                                'priority' => 15,
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/select',
+                                    'props' => [
+                                        'options' => []
+                                    ]
+                                ]
+                            ],
+                            'customFieldKey' => [
+                                'groupSlug' => 'contentField',
+                                'attrName' => 'field.innerContent',
+                                'subName' => 'customFieldKey',
+                                'label' => 'Meta Key',
+                                'description' =>
+                                    'Enter the custom field meta key to filter when Field Option or Field Value uses a manual custom field.',
+                                'render' => true,
+                                'priority' => 16,
+                                'category' => 'basic_option',
+                                'features' => [
+                                    'sticky' => false,
+                                    'responsive' => false,
+                                    'hover' => false,
+                                    'preset' => 'content'
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/text'
+                                ]
+                            ],
+                            'clearCustomFieldValueOptionsCache' => [
+                                'groupSlug' => 'contentField',
+                                'attrName' => '',
+                                'label' => '',
+                                'description' =>
+                                    'Clears cached automatic custom-field option values so the next page load rediscovers distinct values from the database.',
+                                'render' => true,
+                                'priority' => 55,
+                                'category' => 'basic_option',
+                                'features' => [
+                                    'sticky' => false,
+                                    'responsive' => false,
+                                    'hover' => false,
+                                    'preset' => 'content'
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' =>
+                                        'divi/post-filter-item-clear-custom-field-value-options-cache',
+                                    'props' => [
+                                        'buttonLabel' => 'Clear Cached Options'
+                                    ]
+                                ]
+                            ],
+                            'generateCustomFieldValueOptions' => [
+                                'groupSlug' => 'contentField',
+                                'attrName' => '',
+                                'label' => '',
+                                'description' =>
+                                    'Fetches distinct custom-field values from the database and populates the manual options list below.',
+                                'render' => true,
+                                'priority' => 60,
+                                'category' => 'basic_option',
+                                'features' => [
+                                    'sticky' => false,
+                                    'responsive' => false,
+                                    'hover' => false,
+                                    'preset' => 'content'
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' =>
+                                        'divi/post-filter-item-generate-custom-field-value-options',
+                                    'props' => [
+                                        'buttonLabel' => 'Generate Options'
+                                    ]
+                                ]
+                            ],
+                            'customFieldValueOptionsWarning' => [
+                                'groupSlug' => 'contentField',
+                                'attrName' => '',
+                                'label' => '',
+                                'render' => true,
+                                'priority' => 58,
+                                'category' => 'basic_option',
+                                'features' => [
+                                    'sticky' => false,
+                                    'responsive' => false,
+                                    'hover' => false,
+                                    'preset' => 'content'
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/warning',
+                                    'props' => [
+                                        'message' => ''
+                                    ]
+                                ]
+                            ],
+                            'labelDateFormat' => [
+                                'groupSlug' => 'contentField',
+                                'attrName' => 'field.innerContent',
+                                'subName' => 'labelDateFormat',
+                                'label' => 'Label Date Format',
+                                'description' =>
+                                    'Enter a PHP date format string to format option labels into a more human-readable value. Leave empty to use default labels. See <a href="https://www.php.net/manual/en/datetime.format.php" target="_blank" rel="noopener noreferrer">PHP date format reference</a>.',
+                                'render' => true,
+                                'priority' => 46,
+                                'category' => 'basic_option',
+                                'features' => [
+                                    'sticky' => false,
+                                    'responsive' => false,
+                                    'hover' => false,
+                                    'preset' => 'content'
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/text',
+                                    'props' => [
+                                        'showPlaceholderOnEmpty' => true
+                                    ]
+                                ]
+                            ],
+                            'comparison' => [
+                                'groupSlug' => 'contentField',
+                                'attrName' => 'field.innerContent',
+                                'subName' => 'comparison',
+                                'label' => 'Field Comparison',
+                                'description' =>
+                                    'Choose how the visitor input is compared to the stored value for numeric, date, and custom-field controls.',
+                                'render' => true,
+                                'priority' => 45,
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/select',
+                                    'props' => [
+                                        'options' => [
+                                            '=' => [
+                                                'label' => 'Equals (=)'
+                                            ],
+                                            '!=' => [
+                                                'label' => 'Not Equals (!=)'
+                                            ],
+                                            '>' => [
+                                                'label' => 'Greater Than (>)'
+                                            ],
+                                            '>=' => [
+                                                'label' =>
+                                                    'Greater Than or Equal (>=)'
+                                            ],
+                                            '<' => [
+                                                'label' => 'Less Than (<)'
+                                            ],
+                                            '<=' => [
+                                                'label' =>
+                                                    'Less Than or Equal (<=)'
+                                            ],
+                                            'LIKE' => [
+                                                'label' => 'Contains (LIKE)'
+                                            ],
+                                            'NOT LIKE' => [
+                                                'label' =>
+                                                    'Does Not Contain (NOT LIKE)'
+                                            ],
+                                            'IN' => [
+                                                'label' => 'In List (IN)'
+                                            ],
+                                            'NOT IN' => [
+                                                'label' =>
+                                                    'Not In List (NOT IN)'
+                                            ],
+                                            'EXISTS' => [
+                                                'label' =>
+                                                    'Field Exists (EXISTS)'
+                                            ],
+                                            'NOT EXISTS' => [
+                                                'label' =>
+                                                    'Field Does Not Exist (NOT EXISTS)'
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ],
+                            'placeholder' => [
+                                'groupSlug' => 'contentField',
+                                'attrName' => 'field.innerContent',
+                                'subName' => 'placeholder',
+                                'label' => 'Field Placeholder',
+                                'description' =>
+                                    'Sets hint text inside the control. For search and number inputs this is the HTML placeholder. For select fields this is the empty-state option text. When empty, search and number inputs use the field label (or the default Search text for search fields).',
+                                'render' => true,
+                                'priority' => 40,
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/text'
+                                ]
+                            ],
+                            'optionsMethod' => [
+                                'groupSlug' => 'contentField',
+                                'attrName' => 'field.innerContent',
+                                'subName' => 'optionsMethod',
+                                'label' => 'Options Method',
+                                'description' =>
+                                    'Choose how checkbox, radio, and select options are populated for custom-field filters. Automatic discovers values at render time. Manual lets you define the list yourself.',
+                                'render' => true,
+                                'priority' => 50,
+                                'category' => 'basic_option',
+                                'features' => [
+                                    'sticky' => false,
+                                    'responsive' => false,
+                                    'hover' => false,
+                                    'preset' => 'content'
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/select',
+                                    'props' => [
+                                        'defaultValue' => 'automatic',
+                                        'options' => [
+                                            'automatic' => [
+                                                'label' => 'Automatic'
+                                            ],
+                                            'manual' => [
+                                                'label' => 'Manual'
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ],
+                    'advanced' => [
+                        'orderbyEnabledOptions' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'contentField',
+                                'priority' => 70,
+                                'render' => true,
+                                'attrName' =>
+                                    'field.advanced.orderbyEnabledOptions',
+                                'label' => 'Order By Options',
+                                'description' =>
+                                    'Choose which sort-by choices visitors can select for order-by and multiple-order field types.',
+                                'category' => 'basic_option',
+                                'features' => [
+                                    'sticky' => false,
+                                    'responsive' => false,
+                                    'hover' => false,
+                                    'preset' => 'content'
+                                ],
+                                'component' => [
+                                    'name' => 'divi/checkboxes',
+                                    'type' => 'field',
+                                    'props' => [
+                                        'isShowGroupLabel' => true,
+                                        'options' => []
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'checkboxOptions' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'contentField',
+                                'priority' => 65,
+                                'render' => true,
+                                'attrName' => 'field.advanced.checkboxOptions',
+                                'label' => 'Options',
+                                'description' =>
+                                    'Define the choices visitors can select. Value is submitted in the filter query. Label is shown in the interface.',
+                                'category' => 'basic_option',
+                                'features' => [
+                                    'sticky' => false,
+                                    'responsive' => false,
+                                    'hover' => false,
+                                    'preset' => 'content'
+                                ],
+                                'component' => [
+                                    'name' => 'divi/sortable-list',
+                                    'type' => 'field',
+                                    'props' => [
+                                        'isCheckbox' => true,
+                                        'addFirstOnMount' => true,
+                                        'actions' => [
+                                            'right' => [
+                                                'move',
+                                                'link',
+                                                'copy',
+                                                'delete'
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'radioOptions' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'contentField',
+                                'priority' => 65,
+                                'render' => true,
+                                'attrName' => 'field.advanced.radioOptions',
+                                'label' => 'Options',
+                                'description' =>
+                                    'Define the choices visitors can select. Value is submitted in the filter query. Label is shown in the interface.',
+                                'category' => 'basic_option',
+                                'features' => [
+                                    'sticky' => false,
+                                    'responsive' => false,
+                                    'hover' => false,
+                                    'preset' => 'content'
+                                ],
+                                'component' => [
+                                    'name' => 'divi/sortable-list',
+                                    'type' => 'field',
+                                    'props' => [
+                                        'isRadio' => true,
+                                        'addFirstOnMount' => true,
+                                        'actions' => [
+                                            'right' => [
+                                                'move',
+                                                'link',
+                                                'copy',
+                                                'delete'
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'selectOptions' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'contentField',
+                                'priority' => 65,
+                                'render' => true,
+                                'attrName' => 'field.advanced.selectOptions',
+                                'label' => 'Options',
+                                'description' =>
+                                    'Define the choices visitors can select. Value is submitted in the filter query. Label is shown in the interface.',
+                                'category' => 'basic_option',
+                                'features' => [
+                                    'sticky' => false,
+                                    'responsive' => false,
+                                    'hover' => false,
+                                    'preset' => 'content'
+                                ],
+                                'component' => [
+                                    'name' => 'divi/sortable-list',
+                                    'type' => 'field',
+                                    'props' => [
+                                        'addFirstOnMount' => true,
+                                        'actions' => [
+                                            'right' => [
+                                                'move',
+                                                'copy',
+                                                'delete'
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'option' => [
+                'type' => 'object',
+                'label' => 'Option',
+                'elementType' => 'element',
+                'elementProps' => [
+                    'groupedOptionGroup' => true
+                ],
+                'selector' =>
+                    '.et_pb_post_filter {{selector}} .et_pb_post_filter__item-option',
+                'settings' => [
+                    'decoration' => [
+                        'background' => [
+                            'item' => [
+                                'groupSlug' => 'designOption',
+                                'component' => [
+                                    'props' => [
+                                        'hidePanels' => [
+                                            'video',
+                                            'pattern',
+                                            'mask'
+                                        ],
+                                        'fields' => [
+                                            'image' => [
+                                                'parallaxEnabled' => [
+                                                    'render' => false
+                                                ],
+                                                'parallaxMethod' => [
+                                                    'render' => false
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'border' => [],
+                        'boxShadow' => [],
+                        'sizing' => [],
+                        'spacing' => []
+                    ]
+                ]
+            ],
+            'checkbox' => [
+                'type' => 'object',
+                'elementType' => 'field',
+                'selector' =>
+                    '{{selector}} .et_pb_post_filter__item-control[type=checkbox]',
+                'styleProps' => [
+                    'selector' =>
+                        '{{selector}} .et_pb_post_filter__item-control[type=checkbox]',
+                    'selectors' => [
+                        'desktop' => [
+                            'value' =>
+                                '{{selector}}.et_pb_post_filter_item .et_pb_post_filter__item-control[type=checkbox] + label i',
+                            'hover' =>
+                                '{{selector}}.et_pb_post_filter_item .et_pb_post_filter__item-control[type=checkbox] + label i'
+                        ]
+                    ]
+                ],
+                'settings' => [
+                    'decoration' => [],
+                    'advanced' => []
+                ]
+            ],
+            'radio' => [
+                'type' => 'object',
+                'elementType' => 'field',
+                'selector' =>
+                    '{{selector}} .et_pb_post_filter__item-control[type=radio]',
+                'styleProps' => [
+                    'selector' =>
+                        '{{selector}} .et_pb_post_filter__item-control[type=radio]',
+                    'selectors' => [
+                        'desktop' => [
+                            'value' =>
+                                '{{selector}}.et_pb_post_filter_item .et_pb_post_filter__item-control[type=radio] + label i',
+                            'hover' =>
+                                '{{selector}}.et_pb_post_filter_item .et_pb_post_filter__item-control[type=radio] + label i'
+                        ]
+                    ]
+                ],
+                'settings' => [
+                    'decoration' => [],
+                    'advanced' => []
+                ]
+            ],
+            'multipleOrderButton' => [
+                'type' => 'object',
+                'elementType' => 'button',
+                'selector' =>
+                    '{{selector}} .et_pb_post_filter__item-multiple-order-action',
+                'settings' => [
+                    'decoration' => [
+                        'button' => [
+                            'priority' => 43,
+                            'component' => [
+                                'props' => [
+                                    'dynamicSubgroupHost' => true,
+                                    'fields' => [
+                                        'buttonIconGroup' => [
+                                            'render' => false
+                                        ]
+                                    ],
+                                    'groupLabel' => 'Multiple Order Button'
+                                ]
+                            ]
+                        ]
+                    ],
+                    'advanced' => []
+                ]
+            ],
+            'button' => [
+                'type' => 'object',
+                'elementType' => 'button',
+                'selector' =>
+                    '{{selector}} .et_pb_post_filter__item-control-button',
+                'settings' => [
+                    'decoration' => [
+                        'background' => [],
+                        'border' => [],
+                        'boxShadow' => [],
+                        'button' => [
+                            'component' => [
+                                'props' => [
+                                    'dynamicSubgroupHost' => true
+                                ]
+                            ]
+                        ],
+                        'font' => [],
+                        'sizing' => [],
+                        'spacing' => []
+                    ],
+                    'advanced' => []
+                ],
+                'styleProps' => [
+                    'spacing' => [
+                        'important' => [
+                            'desktop' => [
+                                'value' => [
+                                    'margin' => true,
+                                    'padding' => true
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'label' => [
+                'type' => 'object',
+                'selector' => '{{selector}} .et_pb_post_filter__item-label',
+                'tagName' => 'label',
+                'attributes' => [
+                    'class' => 'et_pb_post_filter__item-label'
+                ],
+                'inlineEditor' => 'plainText',
+                'childrenSanitizer' => 'et_core_esc_previously',
+                'settings' => [
+                    'innerContent' => [
+                        'groupType' => 'group-item',
+                        'item' => [
+                            'groupSlug' => 'contentField',
+                            'attrName' => 'label.innerContent',
+                            'label' => 'Field Label',
+                            'description' =>
+                                'Sets the label shown above the control. For submit and reset field types, this text is used as the button label instead.',
+                            'render' => true,
+                            'priority' => 5,
+                            'component' => [
+                                'type' => 'field',
+                                'name' => 'divi/text'
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'customCssFields' => [
+            'field' => [
+                'label' => 'Field',
+                'subName' => 'field',
+                'selectorSuffix' =>
+                    ' .et_pb_post_filter__item-control:not([type=checkbox]):not([type=radio])'
+            ],
+            'checkbox' => [
+                'label' => 'Checkbox',
+                'subName' => 'checkbox',
+                'selectorSuffix' =>
+                    ' .et_pb_post_filter__item-control[type=checkbox] + label i'
+            ],
+            'radio' => [
+                'label' => 'Radio',
+                'subName' => 'radio',
+                'selectorSuffix' =>
+                    ' .et_pb_post_filter__item-control[type=radio] + label i'
+            ],
+            'multipleOrderButton' => [
+                'label' => 'Multiple Order Button',
+                'subName' => 'multipleOrderButton',
+                'selectorSuffix' =>
+                    ' .et_pb_post_filter__item-multiple-order-action'
+            ],
+            'button' => [
+                'label' => 'Button',
+                'subName' => 'button',
+                'selectorSuffix' => ' .et_pb_post_filter__item-control-button'
+            ],
+            'label' => [
+                'label' => 'Label',
+                'subName' => 'label',
+                'selectorSuffix' => ' .et_pb_post_filter__item-label'
+            ],
+            'option' => [
+                'label' => 'Option',
+                'subName' => 'option',
+                'selectorSuffix' => ' .et_pb_post_filter__item-option'
+            ]
+        ],
+        'settings' => [
+            'design' => 'auto',
+            'advanced' => 'auto',
+            'groups' => [
+                'contentField' => [
+                    'panel' => 'content',
+                    'priority' => 5,
+                    'groupName' => 'contentField',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Field'
+                        ]
+                    ]
+                ],
+                'designFieldField' => [
+                    'panel' => 'design',
+                    'priority' => 40,
+                    'groupName' => 'field',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/form-field',
+                        'props' => [
+                            'groupLabel' => 'Field',
+                            'clipboardCategory' => 'style',
+                            'attrName' => 'field',
+                            'dynamicSubgroupHost' => true,
+                            'useComponentNameAsPresetGroup' => true
+                        ]
+                    ]
+                ],
+                'designOption' => [
+                    'panel' => 'design',
+                    'priority' => 41,
+                    'groupName' => 'designOption',
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Option',
+                            'clipboardCategory' => 'style',
+                            'dynamicSubgroupHost' => true
+                        ]
+                    ]
+                ],
+                'designFieldCheckbox' => [
+                    'panel' => 'design',
+                    'priority' => 42,
+                    'groupName' => 'checkbox',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/checkbox',
+                        'props' => [
+                            'groupLabel' => 'Checkbox',
+                            'clipboardCategory' => 'style',
+                            'attrName' => 'checkbox',
+                            'dynamicSubgroupHost' => true,
+                            'useComponentNameAsPresetGroup' => true
+                        ]
+                    ]
+                ],
+                'designFieldRadio' => [
+                    'panel' => 'design',
+                    'priority' => 43,
+                    'groupName' => 'radio',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/radio',
+                        'props' => [
+                            'groupLabel' => 'Radio Options',
+                            'clipboardCategory' => 'style',
+                            'attrName' => 'radio',
+                            'dynamicSubgroupHost' => true,
+                            'useComponentNameAsPresetGroup' => true
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'script' => ['divi-module-library-script-post-filter-item']
+    ],
     'post-nav' => [
         'name' => 'divi/post-nav',
         'd4Shortcode' => 'et_pb_post_nav',
         'title' => 'Pagination',
         'titles' => 'Paginations',
+        'description' =>
+            'Previous and next navigation links for moving between posts or pages in a sequence.',
+        'keywords' => ['prev next', 'post navigation', 'pager', 'paging'],
         'moduleIcon' => 'divi/module-post-nav',
         'category' => 'module',
         'moduleClassName' => 'et_pb_posts_nav',
@@ -27421,6 +32495,14 @@ return [
         'moduleOrderClassName' => 'et_pb_post_slider',
         'title' => 'Post Slider',
         'titles' => 'Post Sliders',
+        'description' =>
+            'Carousel that automatically pulls recent posts and rotates them as styled slides.',
+        'keywords' => [
+            'blog slider',
+            'news rotator',
+            'featured posts',
+            'recent posts'
+        ],
         'moduleIcon' => 'divi/module-post-slider',
         'category' => 'module',
         'childrenName' => [],
@@ -28355,18 +33437,19 @@ return [
             'pagination' => [
                 'type' => 'object',
                 'selector' =>
-                    '{{selector}} .et-pb-controllers a, {{selector}} .et-pb-controllers .et-pb-active-control',
+                    '{{selector}}:not(.et_pb_slider_bottom_controls) .et-pb-controllers a, {{selector}}:not(.et_pb_slider_bottom_controls) .et-pb-controllers .et-pb-active-control',
                 'settings' => [
                     'advanced' => [
                         'enable' => [
                             'groupType' => 'group-item',
                             'item' => [
                                 'groupSlug' => 'contentElements',
+                                'attrName' => 'pagination.advanced.enable',
                                 'priority' => 10,
                                 'render' => true,
                                 'label' => 'Show Controls',
                                 'description' =>
-                                    'This setting will turn on and off the circle buttons at the bottom of the slider.',
+                                    'This setting will turn on and off the slider controls shown at the bottom of the slider.',
                                 'category' => 'configuration',
                                 'features' => [
                                     'sticky' => false,
@@ -28374,6 +33457,130 @@ return [
                                 ],
                                 'component' => [
                                     'name' => 'divi/toggle',
+                                    'type' => 'field'
+                                ]
+                            ]
+                        ],
+                        'style' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'contentElements',
+                                'attrName' => 'pagination.advanced.style',
+                                'label' => 'Controls Style',
+                                'description' =>
+                                    'Choose between the new swipe controls bar or the classic dot navigation.',
+                                'category' => 'configuration',
+                                'priority' => 11,
+                                'render' => true,
+                                'features' => [
+                                    'sticky' => false,
+                                    'responsive' => false,
+                                    'hover' => false,
+                                    'preset' => ['html']
+                                ],
+                                'component' => [
+                                    'name' => 'divi/select',
+                                    'type' => 'field',
+                                    'props' => [
+                                        'options' => [
+                                            'swipe' => [
+                                                'label' => 'Swipe'
+                                            ],
+                                            'dot' => [
+                                                'label' => 'Dot Navigation'
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'swipeText' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'contentElements',
+                                'attrName' => 'pagination.advanced.swipeText',
+                                'label' => 'Swipe Label',
+                                'description' =>
+                                    'Customize the swipe indicator text shown on the right side of the controls bar.',
+                                'category' => 'configuration',
+                                'priority' => 12,
+                                'render' => true,
+                                'features' => [
+                                    'sticky' => false,
+                                    'responsive' => false,
+                                    'hover' => false,
+                                    'preset' => ['html']
+                                ],
+                                'component' => [
+                                    'name' => 'divi/text',
+                                    'type' => 'field'
+                                ]
+                            ]
+                        ],
+                        'showCounter' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'contentElements',
+                                'attrName' => 'pagination.advanced.showCounter',
+                                'label' => 'Show Slide Count',
+                                'description' =>
+                                    'Turn on and off the slide count text (e.g. 01 / 04) on the controls bar.',
+                                'category' => 'configuration',
+                                'priority' => 13,
+                                'render' => true,
+                                'features' => [
+                                    'sticky' => false,
+                                    'responsive' => false,
+                                    'hover' => false,
+                                    'preset' => ['html']
+                                ],
+                                'component' => [
+                                    'name' => 'divi/toggle',
+                                    'type' => 'field'
+                                ]
+                            ]
+                        ],
+                        'showSwipeLabel' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'contentElements',
+                                'attrName' =>
+                                    'pagination.advanced.showSwipeLabel',
+                                'label' => 'Show Swipe Label',
+                                'description' =>
+                                    'Turn on and off the swipe indicator text on the controls bar.',
+                                'category' => 'configuration',
+                                'priority' => 14,
+                                'render' => true,
+                                'features' => [
+                                    'sticky' => false,
+                                    'responsive' => false,
+                                    'hover' => false,
+                                    'preset' => ['html']
+                                ],
+                                'component' => [
+                                    'name' => 'divi/toggle',
+                                    'type' => 'field'
+                                ]
+                            ]
+                        ],
+                        'color' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designNavigation',
+                                'attrName' => 'pagination.advanced.color',
+                                'label' => 'Controls Text Color',
+                                'description' =>
+                                    'Pick a color for the slide count and swipe label text in the swipe controls bar.',
+                                'priority' => 15,
+                                'render' => true,
+                                'features' => [
+                                    'dynamicContent' => [
+                                        'type' => 'color'
+                                    ]
+                                ],
+                                'component' => [
+                                    'name' => 'divi/color-picker',
                                     'type' => 'field'
                                 ]
                             ]
@@ -28719,6 +33926,9 @@ return [
         'd4Shortcode' => 'et_pb_post_title',
         'title' => 'Post Title',
         'titles' => 'Post Titles',
+        'description' =>
+            'Outputs the title of the current post; used inside theme-builder templates.',
+        'keywords' => ['page title', 'dynamic title', 'entry title'],
         'moduleIcon' => 'divi/module-post-title',
         'category' => 'module',
         'childrenName' => [],
@@ -29290,6 +34500,9 @@ return [
         'd4Shortcode' => 'et_pb_pricing_table',
         'title' => 'Pricing Table',
         'titles' => 'Pricing Table Items',
+        'description' =>
+            'A single plan column inside a Pricing Tables module with its own price and feature list.',
+        'keywords' => ['pricing column', 'plan', 'tier'],
         'moduleIcon' => 'divi/module-pricing-table',
         'category' => 'child-module',
         'childrenName' => [],
@@ -30224,6 +35437,14 @@ return [
         'd4Shortcode' => 'et_pb_pricing_tables',
         'title' => 'Pricing Tables',
         'titles' => 'Pricing Tables',
+        'description' =>
+            'Side-by-side pricing plans with features, prices, and call-to-action buttons.',
+        'keywords' => [
+            'plans',
+            'tiers',
+            'price comparison',
+            'subscription tiers'
+        ],
         'moduleIcon' => 'divi/module-pricing-tables',
         'childModuleName' => 'divi/pricing-table',
         'childModuleTitle' => 'Pricing Table',
@@ -31493,6 +36714,9 @@ return [
         'd4Shortcode' => 'et_pb_row',
         'title' => 'Row',
         'titles' => 'Rows',
+        'description' =>
+            'Horizontal layout slot inside a section that holds one or more columns side by side.',
+        'keywords' => ['layout', 'grid', 'columns', 'horizontal layout'],
         'moduleIcon' => 'divi/module-row',
         'nestable' => true,
         'childModuleName' => 'divi/column',
@@ -31748,6 +36972,9 @@ return [
         'd4Shortcode' => 'et_pb_row_inner',
         'title' => 'Inner Row',
         'titles' => 'Inner Rows',
+        'description' =>
+            'Nested row used inside a column to create a second layer of columns for complex grids.',
+        'keywords' => ['nested row', 'sub row', 'inner grid', 'nested grid'],
         'moduleIcon' => 'divi/row',
         'childModuleName' => 'divi/column-inner',
         'childModuleTitle' => 'Inner Column',
@@ -31937,6 +37164,9 @@ return [
         'd4Shortcode' => 'et_pb_search',
         'title' => 'Search',
         'titles' => 'Searches',
+        'description' =>
+            'Site search input that returns matching posts and pages on submit.',
+        'keywords' => ['search box', 'search bar', 'find', 'site search'],
         'moduleIcon' => 'divi/module-search',
         'category' => 'module',
         'childrenName' => [],
@@ -32327,6 +37557,15 @@ return [
         'name' => 'divi/section',
         'title' => 'Section',
         'titles' => 'Sections',
+        'description' =>
+            'Top-level horizontal band that spans the full width of a page and holds rows of content.',
+        'keywords' => [
+            'container',
+            'wrapper',
+            'band',
+            'stripe',
+            'page section'
+        ],
         'moduleIcon' => 'divi/module-section',
         'category' => 'structure',
         'd4Shortcode' => 'et_pb_section',
@@ -32923,6 +38162,9 @@ return [
         'd4Shortcode' => 'et_pb_sidebar',
         'title' => 'Sidebar',
         'titles' => 'Sidebars',
+        'description' =>
+            'Drop a WordPress widget area into any column so widgets can appear anywhere on the page.',
+        'keywords' => ['widget area', 'widgets', 'aside'],
         'moduleIcon' => 'divi/module-sidebar',
         'category' => 'module',
         'childrenName' => [],
@@ -33297,6 +38539,15 @@ return [
         'moduleOrderClassName' => 'et_pb_signup',
         'title' => 'Email Optin',
         'titles' => 'Email Optins',
+        'description' =>
+            'Newsletter sign-up form connected to a mailing-list provider for collecting subscribers.',
+        'keywords' => [
+            'newsletter',
+            'subscribe',
+            'mailing list',
+            'lead capture',
+            'opt in'
+        ],
         'moduleIcon' => 'divi/module-signup',
         'category' => 'module',
         'childModuleName' => 'divi/signup-custom-field',
@@ -33331,7 +38582,30 @@ return [
                         'html' => [],
                         'link' => [],
                         'loop' => [],
-                        'text' => []
+                        'text' => [],
+                        'showLabels' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'priority' => 10,
+                                'groupSlug' => 'contentFields',
+                                'render' => true,
+                                'attrName' => 'module.advanced.showLabels',
+                                'label' => 'Show Labels',
+                                'description' =>
+                                    'Whether or not to show field labels in the opt-in form.',
+                                'category' => 'configuration',
+                                'features' => [
+                                    'responsive' => false,
+                                    'sticky' => false,
+                                    'hover' => false,
+                                    'preset' => ['html']
+                                ],
+                                'component' => [
+                                    'name' => 'divi/toggle',
+                                    'type' => 'field'
+                                ]
+                            ]
+                        ]
                     ],
                     'decoration' => [
                         'animation' => [],
@@ -34378,6 +39652,9 @@ return [
         'moduleOrderClassName' => 'et_pb_signup_custom_field',
         'title' => 'Custom Field',
         'titles' => 'Custom Fields',
+        'description' =>
+            'An extra input inside an Email Optin module for collecting more than just an email address.',
+        'keywords' => ['optin field', 'newsletter field', 'extra input'],
         'category' => 'child-module',
         'videos' => [],
         'attributes' => [
@@ -35221,6 +40498,14 @@ return [
         'd4Shortcode' => 'et_pb_slide',
         'title' => 'Slide',
         'titles' => 'Slides',
+        'description' =>
+            'A single slide inside a Slider or Fullwidth Slider with its own background and content.',
+        'keywords' => [
+            'slide item',
+            'carousel slide',
+            'slider slide',
+            'slideshow item'
+        ],
         'moduleIcon' => 'divi/module-slide',
         'category' => 'child-module',
         'childrenName' => [],
@@ -36116,6 +41401,9 @@ return [
         'd4Shortcode' => 'et_pb_slider',
         'title' => 'Slider',
         'titles' => 'Sliders',
+        'description' =>
+            'Rotating carousel of slides combining background images, headings, and buttons.',
+        'keywords' => ['carousel', 'banner rotator', 'hero slider', 'rotator'],
         'moduleIcon' => 'divi/module-slider',
         'childModuleName' => 'divi/slide',
         'childModuleTitle' => 'Slide',
@@ -36438,7 +41726,7 @@ return [
                                 'attrName' => 'pagination.advanced.show',
                                 'label' => 'Show Controls',
                                 'description' =>
-                                    'This setting will turn on and off the circle buttons at the bottom of the slider.',
+                                    'This setting will turn on and off the slider controls shown at the bottom of the slider.',
                                 'category' => 'configuration',
                                 'priority' => 30,
                                 'render' => true,
@@ -36449,6 +41737,130 @@ return [
                                 'component' => [
                                     'type' => 'field',
                                     'name' => 'divi/toggle'
+                                ]
+                            ]
+                        ],
+                        'style' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'contentElements',
+                                'attrName' => 'pagination.advanced.style',
+                                'label' => 'Controls Style',
+                                'description' =>
+                                    'Choose between the new swipe controls bar or the classic dot navigation.',
+                                'category' => 'configuration',
+                                'priority' => 31,
+                                'render' => true,
+                                'features' => [
+                                    'sticky' => false,
+                                    'responsive' => false,
+                                    'hover' => false,
+                                    'preset' => ['html']
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/select',
+                                    'props' => [
+                                        'options' => [
+                                            'swipe' => [
+                                                'label' => 'Swipe'
+                                            ],
+                                            'dot' => [
+                                                'label' => 'Dot Navigation'
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'swipeText' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'contentElements',
+                                'attrName' => 'pagination.advanced.swipeText',
+                                'label' => 'Swipe Label',
+                                'description' =>
+                                    'Customize the swipe indicator text shown on the right side of the controls bar.',
+                                'category' => 'configuration',
+                                'priority' => 32,
+                                'render' => true,
+                                'features' => [
+                                    'sticky' => false,
+                                    'responsive' => false,
+                                    'hover' => false,
+                                    'preset' => ['html']
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/text'
+                                ]
+                            ]
+                        ],
+                        'showCounter' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'contentElements',
+                                'attrName' => 'pagination.advanced.showCounter',
+                                'label' => 'Show Slide Count',
+                                'description' =>
+                                    'Turn on and off the slide count text (e.g. 01 / 04) on the controls bar.',
+                                'category' => 'configuration',
+                                'priority' => 33,
+                                'render' => true,
+                                'features' => [
+                                    'sticky' => false,
+                                    'responsive' => false,
+                                    'hover' => false,
+                                    'preset' => ['html']
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/toggle'
+                                ]
+                            ]
+                        ],
+                        'showSwipeLabel' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'contentElements',
+                                'attrName' =>
+                                    'pagination.advanced.showSwipeLabel',
+                                'label' => 'Show Swipe Label',
+                                'description' =>
+                                    'Turn on and off the swipe indicator text on the controls bar.',
+                                'category' => 'configuration',
+                                'priority' => 34,
+                                'render' => true,
+                                'features' => [
+                                    'sticky' => false,
+                                    'responsive' => false,
+                                    'hover' => false,
+                                    'preset' => ['html']
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/toggle'
+                                ]
+                            ]
+                        ],
+                        'color' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designNavigation',
+                                'attrName' => 'pagination.advanced.color',
+                                'label' => 'Controls Text Color',
+                                'description' =>
+                                    'Pick a color for the slide count and swipe label text in the swipe controls bar.',
+                                'priority' => 15,
+                                'render' => true,
+                                'features' => [
+                                    'dynamicContent' => [
+                                        'type' => 'color'
+                                    ]
+                                ],
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/color-picker'
                                 ]
                             ]
                         ]
@@ -36979,7 +42391,7 @@ return [
             'dotNav' => [
                 'type' => 'object',
                 'selector' =>
-                    '{{selector}} .et-pb-controllers a, {{selector}} .et-pb-controllers .et-pb-active-control',
+                    '{{selector}}:not(.et_pb_slider_bottom_controls) .et-pb-controllers a, {{selector}}:not(.et_pb_slider_bottom_controls) .et-pb-controllers .et-pb-active-control',
                 'settings' => [
                     'decoration' => [
                         'background' => [
@@ -37179,6 +42591,14 @@ return [
         'name' => 'divi/social-media-follow',
         'title' => 'Social Media Follow',
         'titles' => 'Social Media Follows',
+        'description' =>
+            'Row of icons linking to social profiles so visitors can follow you across networks.',
+        'keywords' => [
+            'social icons',
+            'follow buttons',
+            'social links',
+            'share'
+        ],
         'moduleIcon' => 'divi/module-social-media-follow',
         'category' => 'module',
         'childModuleName' => 'divi/social-media-follow-network',
@@ -37654,6 +43074,9 @@ return [
         'name' => 'divi/social-media-follow-network',
         'title' => 'Social Network',
         'titles' => 'Social Networks',
+        'description' =>
+            'A single social-network icon inside a Social Media Follow module.',
+        'keywords' => ['social icon', 'follow icon', 'network link'],
         'moduleIcon' => 'divi/module-social-media-follow-network',
         'category' => 'child-module',
         'childrenName' => [],
@@ -38029,6 +43452,14 @@ return [
         'moduleOrderClassName' => 'et_pb_svg',
         'title' => 'SVG',
         'titles' => 'SVGs',
+        'description' =>
+            'Embed inline SVG markup for a scalable vector graphic with full styling control.',
+        'keywords' => [
+            'vector',
+            'inline svg',
+            'illustration',
+            'scalable graphic'
+        ],
         'moduleIcon' => 'divi/module-svg',
         'category' => 'module',
         'childrenName' => [],
@@ -38503,6 +43934,9 @@ return [
         'd4Shortcode' => 'et_pb_tab',
         'title' => 'Tab',
         'titles' => 'Tabs',
+        'description' =>
+            'A single tab inside a Tabs module, containing its own panel of content.',
+        'keywords' => ['tab panel', 'tab item', 'tab page', 'tab content'],
         'moduleIcon' => 'divi/module-tab',
         'category' => 'child-module',
         'childrenName' => [],
@@ -38778,6 +44212,8 @@ return [
         'moduleOrderClassName' => 'et_pb_table_of_contents',
         'title' => 'Table of Contents',
         'titles' => 'Table of Contents',
+        'description' =>
+            'Automatically generated list of links to headings on the current page.',
         'moduleIcon' => 'divi/module-table-of-contents',
         'category' => 'module',
         'childrenName' => [],
@@ -39417,6 +44853,9 @@ return [
         'd4Shortcode' => 'et_pb_tabs',
         'title' => 'Tabs',
         'titles' => 'Tabs',
+        'description' =>
+            'Switch between multiple panels of related content using a tabbed navigation bar.',
+        'keywords' => ['tab panels', 'tabbed', 'switcher', 'panels'],
         'moduleIcon' => 'divi/module-tabs',
         'category' => 'module',
         'childModuleName' => 'divi/tab',
@@ -39509,7 +44948,7 @@ return [
             ],
             'content' => [
                 'type' => 'object',
-                'selector' => '{{selector}} .et_pb_all_tabs',
+                'selector' => '{{selector}} > .et_pb_all_tabs',
                 'supportsCustomAttributes' => true,
                 'styleProps' => [
                     'bodyFont' => [
@@ -39571,6 +45010,16 @@ return [
                                     'value' => [
                                         'color' => true
                                     ]
+                                ]
+                            ]
+                        ]
+                    ],
+                    'spacing' => [
+                        'propertySelectors' => [
+                            'desktop' => [
+                                'value' => [
+                                    'padding' =>
+                                        '{{selector}} .et_pb_tabs_controls li'
                                 ]
                             ]
                         ]
@@ -39638,6 +45087,16 @@ return [
                                     'value' => [
                                         'color' => true
                                     ]
+                                ]
+                            ]
+                        ]
+                    ],
+                    'spacing' => [
+                        'propertySelectors' => [
+                            'desktop' => [
+                                'value' => [
+                                    'padding' =>
+                                        '{{selector}} .et_pb_tabs_controls li.et_pb_tab_active'
                                 ]
                             ]
                         ]
@@ -39778,6 +45237,16 @@ return [
         'moduleOrderClassName' => 'et_pb_team_member',
         'title' => 'Person',
         'titles' => 'Persons',
+        'description' =>
+            'Profile card for a person with photo, role, bio, and social links.',
+        'keywords' => [
+            'team',
+            'staff',
+            'profile',
+            'bio',
+            'employee',
+            'about us'
+        ],
         'moduleIcon' => 'divi/module-team-member',
         'category' => 'module',
         'childrenName' => [],
@@ -40112,7 +45581,21 @@ return [
                 ],
                 'styleProps' => [
                     'selector' =>
-                        '{{selector}}.et_pb_team_member .et_pb_team_member_description_content'
+                        '{{selector}}.et_pb_team_member .et_pb_team_member_description_content',
+                    'bodyFont' => [
+                        'propertySelectors' => [
+                            'body' => [
+                                'font' => [
+                                    'desktop' => [
+                                        'value' => [
+                                            'text-align' =>
+                                                '{{selector}}.et_pb_team_member .et_pb_team_member_description_content, {{selector}}.et_pb_team_member .et_pb_team_member_description_content p'
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
                 ],
                 'settings' => [
                     'innerContent' => [
@@ -40345,6 +45828,9 @@ return [
         'name' => 'divi/testimonial',
         'title' => 'Testimonial',
         'titles' => 'Testimonials',
+        'description' =>
+            'Customer quote block with author name, title, and optional photo for social proof.',
+        'keywords' => ['quote', 'review', 'social proof', 'feedback'],
         'moduleIcon' => 'divi/module-testimonial',
         'category' => 'module',
         'd4Shortcode' => 'et_pb_testimonial',
@@ -40373,7 +45859,17 @@ return [
                     ],
                     'layout' => [
                         'selector' =>
-                            '{{selector}}, {{selector}} .et_pb_testimonial_description'
+                            '{{selector}} .et_pb_testimonial_description'
+                    ],
+                    'border' => [
+                        'propertySelectors' => [
+                            'desktop' => [
+                                'value' => [
+                                    'border-radius' =>
+                                        '{{selector}}, {{selector}} > .et-pb-parallax-wrapper'
+                                ]
+                            ]
+                        ]
                     ]
                 ],
                 'settings' => [
@@ -41080,6 +46576,15 @@ return [
         'moduleOrderClassName' => 'et_pb_text',
         'title' => 'Text',
         'titles' => 'Texts',
+        'description' =>
+            'General-purpose body copy block for paragraphs, lists, and inline-formatted prose.',
+        'keywords' => [
+            'paragraph',
+            'body copy',
+            'content',
+            'rich text',
+            'wysiwyg'
+        ],
         'moduleIcon' => 'divi/module-text',
         'category' => 'module',
         'childrenName' => [],
@@ -41398,6 +46903,15 @@ return [
         'moduleOrderClassName' => 'et_pb_timeline',
         'title' => 'Timeline',
         'titles' => 'Timelines',
+        'description' =>
+            'Vertical sequence of events with dates, headings, and descriptions for company history or roadmaps.',
+        'keywords' => [
+            'history',
+            'roadmap',
+            'milestones',
+            'steps',
+            'chronology'
+        ],
         'moduleIcon' => 'divi/module-timeline',
         'childModuleName' => 'divi/timeline-item',
         'childModuleTitle' => 'Timeline Item',
@@ -41701,6 +47215,7 @@ return [
                         'conditions' => [],
                         'disabledOn' => [],
                         'filters' => [],
+                        'interactions' => [],
                         'overflow' => [],
                         'order' => [],
                         'position' => [],
@@ -42819,6 +48334,9 @@ return [
         'moduleOrderClassName' => 'et_pb_timeline_item',
         'title' => 'Timeline Item',
         'titles' => 'Timeline Items',
+        'description' =>
+            'A single event row inside a Timeline module with date, heading, and description.',
+        'keywords' => ['milestone', 'history entry', 'timeline event'],
         'moduleIcon' => 'divi/module-timeline-item',
         'category' => 'child-module',
         'childrenName' => [],
@@ -42846,6 +48364,7 @@ return [
                         'conditions' => [],
                         'disabledOn' => [],
                         'filters' => [],
+                        'interactions' => [],
                         'overflow' => [],
                         'order' => [],
                         'position' => [],
@@ -43482,6 +49001,9 @@ return [
         'name' => 'divi/toggle',
         'title' => 'Toggle',
         'titles' => 'Toggles',
+        'description' =>
+            'Single expandable panel that hides supporting content until the visitor clicks the heading.',
+        'keywords' => ['collapse', 'expand', 'disclosure', 'show hide'],
         'moduleIcon' => 'divi/module-toggle',
         'category' => 'module',
         'd4Shortcode' => 'et_pb_toggle',
@@ -43597,11 +49119,11 @@ return [
             'openToggleIcon' => [
                 'type' => 'object',
                 'selector' =>
-                    '{{selector}}.et_pb_toggle_open .et_pb_toggle_title:before',
+                    '{{selector}}.et_pb_toggle_open > .et_pb_toggle_title:before',
                 'styleProps' => [
                     'icon' => [
                         'selector' =>
-                            '{{selector}}.et_pb_toggle_open .et_pb_toggle_title:before',
+                            '{{selector}}.et_pb_toggle_open > .et_pb_toggle_title:before',
                         'important' => [
                             'desktop' => [
                                 'value' => [
@@ -43671,11 +49193,11 @@ return [
             'closedToggleIcon' => [
                 'type' => 'object',
                 'selector' =>
-                    '{{selector}}.et_pb_toggle_close .et_pb_toggle_title:before',
+                    '{{selector}}.et_pb_toggle_close > .et_pb_toggle_title:before',
                 'styleProps' => [
                     'icon' => [
                         'selector' =>
-                            '{{selector}}.et_pb_toggle_close .et_pb_toggle_title:before',
+                            '{{selector}}.et_pb_toggle_close > .et_pb_toggle_title:before',
                         'important' => [
                             'desktop' => [
                                 'value' => [
@@ -43748,7 +49270,7 @@ return [
                     'class' => 'et_pb_toggle_title'
                 ],
                 'selector' =>
-                    '{{selector}}.et_pb_toggle h5, {{selector}}.et_pb_toggle h1.et_pb_toggle_title, {{selector}}.et_pb_toggle h2.et_pb_toggle_title, {{selector}}.et_pb_toggle h3.et_pb_toggle_title, {{selector}}.et_pb_toggle h4.et_pb_toggle_title, {{selector}}.et_pb_toggle h6.et_pb_toggle_title',
+                    '{{selector}}.et_pb_toggle > h5, {{selector}}.et_pb_toggle > h1.et_pb_toggle_title, {{selector}}.et_pb_toggle > h2.et_pb_toggle_title, {{selector}}.et_pb_toggle > h3.et_pb_toggle_title, {{selector}}.et_pb_toggle > h4.et_pb_toggle_title, {{selector}}.et_pb_toggle > h6.et_pb_toggle_title',
                 'supportsCustomAttributes' => true,
                 'tagName' => 'h5',
                 'inlineEditor' => 'plainText',
@@ -43775,6 +49297,9 @@ return [
                                             'fieldLabel' => 'Title',
                                             'dynamicSubgroupHost' => true,
                                             'fields' => [
+                                                'color' => [
+                                                    'render' => false
+                                                ],
                                                 'headingLevel' => [
                                                     'render' => true
                                                 ]
@@ -43790,7 +49315,7 @@ return [
             'closedTitle' => [
                 'type' => 'object',
                 'selector' =>
-                    '{{selector}}.et_pb_toggle.et_pb_toggle_close h5, {{selector}}.et_pb_toggle.et_pb_toggle_close h1.et_pb_toggle_title, {{selector}}.et_pb_toggle.et_pb_toggle_close h2.et_pb_toggle_title, {{selector}}.et_pb_toggle.et_pb_toggle_close h3.et_pb_toggle_title, {{selector}}.et_pb_toggle.et_pb_toggle_close h4.et_pb_toggle_title, {{selector}}.et_pb_toggle.et_pb_toggle_close h6.et_pb_toggle_title',
+                    '{{selector}}.et_pb_toggle.et_pb_toggle_close > h5, {{selector}}.et_pb_toggle.et_pb_toggle_close > h1.et_pb_toggle_title, {{selector}}.et_pb_toggle.et_pb_toggle_close > h2.et_pb_toggle_title, {{selector}}.et_pb_toggle.et_pb_toggle_close > h3.et_pb_toggle_title, {{selector}}.et_pb_toggle.et_pb_toggle_close > h4.et_pb_toggle_title, {{selector}}.et_pb_toggle.et_pb_toggle_close > h6.et_pb_toggle_title',
                 'settings' => [
                     'innerContent' => [],
                     'decoration' => [
@@ -43878,7 +49403,7 @@ return [
                 'styleProps' => [
                     'font' => [
                         'selector' =>
-                            '{{selector}}.et_pb_toggle.et_pb_toggle_open h5.et_pb_toggle_title, {{selector}}.et_pb_toggle.et_pb_toggle_open h1.et_pb_toggle_title, {{selector}}.et_pb_toggle.et_pb_toggle_open h2.et_pb_toggle_title, {{selector}}.et_pb_toggle.et_pb_toggle_open h3.et_pb_toggle_title, {{selector}}.et_pb_toggle.et_pb_toggle_open h4.et_pb_toggle_title, {{selector}}.et_pb_toggle.et_pb_toggle_open h6.et_pb_toggle_title'
+                            '{{selector}}.et_pb_toggle.et_pb_toggle_open > h5.et_pb_toggle_title, {{selector}}.et_pb_toggle.et_pb_toggle_open > h1.et_pb_toggle_title, {{selector}}.et_pb_toggle.et_pb_toggle_open > h2.et_pb_toggle_title, {{selector}}.et_pb_toggle.et_pb_toggle_open > h3.et_pb_toggle_title, {{selector}}.et_pb_toggle.et_pb_toggle_open > h4.et_pb_toggle_title, {{selector}}.et_pb_toggle.et_pb_toggle_open > h6.et_pb_toggle_title'
                     ]
                 ],
                 'settings' => [
@@ -43973,12 +49498,12 @@ return [
             'toggleTitle' => [
                 'subName' => 'toggleTitle',
                 'label' => 'Toggle Title',
-                'selectorSuffix' => ' .et_pb_toggle_title'
+                'selectorSuffix' => ' > .et_pb_toggle_title'
             ],
             'toggleIcon' => [
                 'subName' => 'toggleIcon',
                 'label' => 'Toggle Icon',
-                'selectorSuffix' => ' .et_pb_toggle_title:before'
+                'selectorSuffix' => ' > .et_pb_toggle_title:before'
             ],
             'toggleContent' => [
                 'subName' => 'toggleContent',
@@ -44072,6 +49597,8 @@ return [
         'moduleOrderClassName' => 'et_pb_tooltip',
         'title' => 'Tooltip',
         'titles' => 'Tooltips',
+        'description' =>
+            'Floating info box that appears on hover, click, or focus to reveal extra content.',
         'moduleIcon' => 'divi/module-tooltip',
         'category' => 'module',
         'childrenName' => [],
@@ -44554,6 +50081,9 @@ return [
         'd4Shortcode' => 'et_pb_video',
         'title' => 'Video',
         'titles' => 'Videos',
+        'description' =>
+            'Self-hosted or remote video player with optional poster image overlay.',
+        'keywords' => ['mp4', 'youtube', 'vimeo', 'media', 'video player'],
         'moduleIcon' => 'divi/module-video',
         'category' => 'module',
         'childrenName' => [],
@@ -44917,6 +50447,9 @@ return [
         'd4Shortcode' => 'et_pb_video_slider',
         'title' => 'Video Slider',
         'titles' => 'Video Sliders',
+        'description' =>
+            'Carousel of multiple videos that visitors can step through one at a time.',
+        'keywords' => ['video gallery', 'video carousel', 'video reel'],
         'moduleIcon' => 'divi/module-video-slider',
         'category' => 'module',
         'videos' => [
@@ -44956,7 +50489,13 @@ return [
                                     'margin-left' =>
                                         '{{selector}}.et_pb_video_slider.et_pb_module, {{selectorPrefix}}.et_pb_sticky {{baseSelector}}.et_pb_video_slider.et_pb_module',
                                     'margin-right' =>
-                                        '{{selector}}.et_pb_video_slider.et_pb_module, {{selectorPrefix}}.et_pb_sticky {{baseSelector}}.et_pb_video_slider.et_pb_module'
+                                        '{{selector}}.et_pb_video_slider.et_pb_module, {{selectorPrefix}}.et_pb_sticky {{baseSelector}}.et_pb_video_slider.et_pb_module',
+                                    'height' =>
+                                        '{{selector}} .et_pb_slider, {{selector}} .et_pb_video_box, {{selector}} .et_pb_video_box .fluid-width-video-wrapper, {{selector}} .et_pb_video_box .fluid-width-video-wrapper iframe, {{selector}} .et_pb_video_box .fluid-width-video-wrapper object, {{selector}} .et_pb_video_box .fluid-width-video-wrapper embed, {{selector}} .et_pb_video_box video',
+                                    'min-height' =>
+                                        '{{selector}} .et_pb_slider, {{selector}} .et_pb_video_box, {{selector}} .et_pb_video_box .fluid-width-video-wrapper, {{selector}} .et_pb_video_box .fluid-width-video-wrapper iframe, {{selector}} .et_pb_video_box .fluid-width-video-wrapper object, {{selector}} .et_pb_video_box .fluid-width-video-wrapper embed, {{selector}} .et_pb_video_box video',
+                                    'max-height' =>
+                                        '{{selector}} .et_pb_slider, {{selector}} .et_pb_video_box, {{selector}} .et_pb_video_box .fluid-width-video-wrapper, {{selector}} .et_pb_video_box .fluid-width-video-wrapper iframe, {{selector}} .et_pb_video_box .fluid-width-video-wrapper object, {{selector}} .et_pb_video_box .fluid-width-video-wrapper embed, {{selector}} .et_pb_video_box video'
                                 ]
                             ]
                         ],
@@ -44965,7 +50504,10 @@ return [
                                 'value' => [
                                     'margin-left' => true,
                                     'margin-right' => true,
-                                    'width' => true
+                                    'width' => true,
+                                    'height' => true,
+                                    'min-height' => true,
+                                    'max-height' => true
                                 ]
                             ]
                         ]
@@ -45358,6 +50900,8 @@ return [
         'd4Shortcode' => 'et_pb_video_slider_item',
         'title' => 'Video Slider Item',
         'titles' => 'Video Slider Items',
+        'description' => 'A single video entry inside a Video Slider module.',
+        'keywords' => ['video slide', 'video carousel item', 'video reel item'],
         'category' => 'child-module',
         'videos' => [],
         'attributes' => [
@@ -45697,6 +51241,15 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_breadcrumb',
         'title' => 'Woo Breadcrumbs',
         'titles' => 'Woo Breadcrumbs',
+        'description' =>
+            'WooCommerce-aware breadcrumb trail that reflects shop, category, and product hierarchy.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'shop trail',
+            'category trail'
+        ],
         'moduleIcon' => 'divi/module-woocommerce-breadcrumb',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -46015,6 +51568,16 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_cart_notice',
         'title' => 'Woo Notice',
         'titles' => 'Woo Notice',
+        'description' =>
+            'Shows WooCommerce success, info, and error messages such as added-to-cart or coupon applied.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'cart message',
+            'flash message',
+            'alert'
+        ],
         'moduleIcon' => 'divi/module-woocommerce-cart-notice',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -46692,6 +52255,16 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_cart_products',
         'title' => 'Woo Cart Products',
         'titles' => 'Woo Cart Products',
+        'description' =>
+            'Editable cart line-item table listing the products currently in the shopper cart.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'cart items',
+            'cart table',
+            'basket'
+        ],
         'moduleIcon' => 'divi/module-woocommerce-cart-products',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -47288,6 +52861,8 @@ return [
                             'groupType' => 'group-item',
                             'item' => [
                                 'groupSlug' => 'designTableRow',
+                                'attrName' => 'tableRow.decoration.background',
+                                'subName' => 'color',
                                 'label' => 'Table Row Background Color',
                                 'description' =>
                                     'Pick a color to fill the module\'s table row.',
@@ -47363,6 +52938,8 @@ return [
                             'groupType' => 'group-item',
                             'item' => [
                                 'groupSlug' => 'designTableCell',
+                                'attrName' => 'tableCell.decoration.background',
+                                'subName' => 'color',
                                 'label' => 'Table Cell Background Color',
                                 'description' =>
                                     'Pick a color to fill the module\'s table cell.',
@@ -48191,6 +53768,16 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_cart_totals',
         'title' => 'Woo Cart Totals',
         'titles' => 'Woo Cart Totals',
+        'description' =>
+            'Cart totals block showing subtotal, shipping, taxes, and the proceed-to-checkout button.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'subtotal',
+            'cart summary',
+            'order totals'
+        ],
         'moduleIcon' => 'divi/module-woocommerce-cart-totals',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -48824,6 +54411,8 @@ return [
                             'groupType' => 'group-item',
                             'item' => [
                                 'groupSlug' => 'designTableCell',
+                                'attrName' => 'tableCell.decoration.background',
+                                'subName' => 'color',
                                 'label' => 'Table Cell Background Color',
                                 'description' =>
                                     'Pick a color to fill the module\'s table cell.',
@@ -48903,6 +54492,8 @@ return [
                             'groupType' => 'group-item',
                             'item' => [
                                 'groupSlug' => 'designTableRow',
+                                'attrName' => 'tableRow.decoration.background',
+                                'subName' => 'color',
                                 'label' => 'Table Row Background Color',
                                 'description' =>
                                     'Pick a color to fill the module\'s table row.',
@@ -49150,6 +54741,15 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_checkout_billing',
         'title' => 'Woo Checkout Billing',
         'titles' => 'Woo Checkout Billing',
+        'description' =>
+            'Billing details form for name, address, and payment contact on the WooCommerce checkout page.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'billing address',
+            'payment details'
+        ],
         'moduleIcon' => 'divi/woo-checkout-billing',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -49711,6 +55311,16 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_checkout_additional_info',
         'title' => 'Woo Checkout Information',
         'titles' => 'Woo Checkout Information',
+        'description' =>
+            'Order notes and additional information field on the WooCommerce checkout page.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'order notes',
+            'extra info',
+            'comments'
+        ],
         'moduleIcon' => 'divi/woo-checkout-information',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -49971,6 +55581,15 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_checkout_order_details',
         'title' => 'Woo Checkout Details',
         'titles' => 'Woo Checkout Details',
+        'description' =>
+            'Order review table on checkout showing items, quantities, and totals before payment.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'order summary',
+            'order review'
+        ],
         'moduleIcon' => 'divi/woo-checkout-details',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -50708,6 +56327,16 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_checkout_payment_info',
         'title' => 'Woo Checkout Payment',
         'titles' => 'Woo Checkout Payment',
+        'description' =>
+            'Payment-method selection block and the place-order button on WooCommerce checkout.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'payment options',
+            'pay button',
+            'place order'
+        ],
         'moduleIcon' => 'divi/woo-checkout-payment',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -50954,6 +56583,8 @@ return [
                 'styleProps' => [
                     'selector' =>
                         'body #page-container {{selector}} #payment #place_order',
+                    'customPostTypeSelector' =>
+                        'body.et-db #page-container #et-boc .et-l {{baseSelector}} #payment #place_order',
                     'border' => [
                         'selector' => '{{selector}} #payment #place_order',
                         'important' => [
@@ -51713,6 +57344,15 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_checkout_shipping',
         'title' => 'Woo Checkout Shipping',
         'titles' => 'Woo Checkout Shipping',
+        'description' =>
+            'Shipping address form and shipping-method selection on the WooCommerce checkout page.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'delivery address',
+            'shipping options'
+        ],
         'moduleIcon' => 'divi/woo-checkout-shipping',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -52131,6 +57771,16 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_cross_sells',
         'title' => 'Woo Cross Sells',
         'titles' => 'Woo Cross Sells',
+        'description' =>
+            'Cross-sell product suggestions shown on the WooCommerce cart page.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'cross-sells',
+            'cart suggestions',
+            'related items'
+        ],
         'moduleIcon' => 'divi/module-woocommerce-related-products',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -52301,6 +57951,16 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_add_to_cart',
         'title' => 'Woo Product Add To Cart',
         'titles' => 'Woo Product Add To Cart',
+        'description' =>
+            'Add-to-cart button with quantity and variations for the current WooCommerce product.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'buy button',
+            'purchase',
+            'checkout button'
+        ],
         'moduleIcon' => 'divi/module-woocommerce-product-add-to-cart',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -52883,6 +58543,16 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_additional_info',
         'title' => 'Woo Product Information',
         'titles' => 'Woo Product Information',
+        'description' =>
+            'Custom-attribute table for the current WooCommerce product covering size, color, materials, and more.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'product attributes',
+            'specs',
+            'specifications'
+        ],
         'moduleIcon' => 'divi/module-woocommerce-product-additional-info',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -53610,6 +59280,15 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_description',
         'title' => 'Woo Product Description',
         'titles' => 'Woo Product Description',
+        'description' =>
+            'Output the long or short description of the current WooCommerce product.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'product info',
+            'item details'
+        ],
         'moduleIcon' => 'divi/module-woocommerce-product-description',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -53867,11 +59546,11 @@ return [
                                         'padding-left' => '{{selector}} ul',
                                         'color' =>
                                             '{{selector}}.et_pb_wc_description ul',
-                                        'line-height' => '{{selector}} ul li',
+                                        'line-height' => '{{selector}} ul > li',
                                         'list-style-type' =>
-                                            '{{selector}} ul li',
+                                            '{{selector}} ul > li',
                                         'list-style-position' =>
-                                            '{{selector}} ul li'
+                                            '{{selector}} ul > li'
                                     ]
                                 ]
                             ],
@@ -53885,11 +59564,11 @@ return [
                                         'padding-left' => '{{selector}} ol',
                                         'color' =>
                                             '{{selector}}.et_pb_wc_description ol',
-                                        'line-height' => '{{selector}} ol li',
+                                        'line-height' => '{{selector}} ol > li',
                                         'list-style-type' =>
-                                            '{{selector}} ol li',
+                                            '{{selector}} ol > li',
                                         'list-style-position' =>
-                                            '{{selector}} ol li'
+                                            '{{selector}} ol > li'
                                     ]
                                 ]
                             ],
@@ -53979,6 +59658,15 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_gallery',
         'title' => 'Woo Product Gallery',
         'titles' => 'Woo Product Gallery',
+        'description' =>
+            'Thumbnail gallery of all media attached to the current WooCommerce product.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'product photos',
+            'product thumbnails'
+        ],
         'moduleIcon' => 'divi/module-woocommerce-product-gallery',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -54250,6 +59938,29 @@ return [
                                 ]
                             ]
                         ],
+                        'postsNumber' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'contentMainContent',
+                                'attrName' => 'content.advanced.postsNumber',
+                                'label' => 'Image Count',
+                                'description' =>
+                                    'Define the number of images that should be displayed per page.',
+                                'category' => 'configuration',
+                                'features' => [
+                                    'responsive' => false,
+                                    'hover' => false,
+                                    'sticky' => false,
+                                    'preset' => 'content'
+                                ],
+                                'priority' => 20,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'field',
+                                    'name' => 'divi/text'
+                                ]
+                            ]
+                        ],
                         'showPagination' => [
                             'groupType' => 'group-item',
                             'item' => [
@@ -54282,8 +59993,7 @@ return [
                                     'name' => 'divi/toggle'
                                 ]
                             ]
-                        ],
-                        'postsNumber' => []
+                        ]
                     ]
                 ]
             ],
@@ -54469,7 +60179,7 @@ return [
                                 'desktop' => [
                                     'value' => [
                                         'text-align' =>
-                                            '{{selector}} .et_pb_gallery .et_pb_gallery_pagination ul'
+                                            '{{selector}}.et_pb_gallery .et_pb_gallery_pagination ul'
                                     ]
                                 ]
                             ]
@@ -54699,6 +60409,15 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_images',
         'title' => 'Woo Product Images',
         'titles' => 'Woo Product Images',
+        'description' =>
+            'Featured-image carousel for the current WooCommerce product on a product-page template.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'product photos',
+            'product carousel'
+        ],
         'moduleIcon' => 'divi/module-woocommerce-product-images',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -55189,6 +60908,16 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_meta',
         'title' => 'Woo Product Meta',
         'titles' => 'Woo Product Meta',
+        'description' =>
+            'Meta block showing the current WooCommerce product SKU, categories, and tags.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'sku',
+            'product categories',
+            'product tags'
+        ],
         'moduleIcon' => 'divi/module-woocommerce-product-meta',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -55560,6 +61289,16 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_price',
         'title' => 'Woo Product Price',
         'titles' => 'Woo Product Price',
+        'description' =>
+            'Output the current WooCommerce product price, including sale formatting.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'cost',
+            'product cost',
+            'sale price'
+        ],
         'moduleIcon' => 'divi/module-woocommerce-product-price',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -55861,6 +61600,16 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_rating',
         'title' => 'Woo Product Rating',
         'titles' => 'Woo Product Rating',
+        'description' =>
+            'Star rating summary for the current WooCommerce product.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'stars',
+            'review summary',
+            'score'
+        ],
         'moduleIcon' => 'divi/module-woocommerce-product-rating',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -56228,6 +61977,16 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_reviews',
         'title' => 'Woo Product Reviews',
         'titles' => 'Woo Product Reviews',
+        'description' =>
+            'Renders customer reviews and the review submission form for the current WooCommerce product.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'ratings',
+            'customer feedback',
+            'testimonials'
+        ],
         'moduleIcon' => 'divi/module-woocommerce-product-reviews',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -56990,6 +62749,15 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_stock',
         'title' => 'Woo Product Stock',
         'titles' => 'Woo Product Stock',
+        'description' =>
+            'Stock status badge for the current WooCommerce product such as in stock, out of stock, or low stock.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'inventory',
+            'availability'
+        ],
         'moduleIcon' => 'divi/module-woocommerce-product-stock',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -57298,6 +63066,15 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_tabs',
         'title' => 'Woo Product Tabs',
         'titles' => 'Woo Product Tabs',
+        'description' =>
+            'Description, additional info, and reviews tab panel for the current WooCommerce product.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'product tabs',
+            'reviews tab'
+        ],
         'moduleIcon' => 'divi/module-woocommerce-product-tabs',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -57724,6 +63501,15 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_title',
         'title' => 'Woo Product Title',
         'titles' => 'Woo Product Title',
+        'description' =>
+            'Output the current WooCommerce product title inside a product-page template.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'product name',
+            'item title'
+        ],
         'moduleIcon' => 'divi/module-woocommerce-product-title',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -57815,6 +63601,10 @@ return [
                     'background' => [
                         'selector' =>
                             '{{selector}}, {{selector}}.et_pb_featured_bg'
+                    ],
+                    'spacing' => [
+                        'selector' => '{{selector}}',
+                        'important' => true
                     ]
                 ]
             ],
@@ -57929,6 +63719,15 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_upsells',
         'title' => 'Woo Product Upsell',
         'titles' => 'Woo Product Upsells',
+        'description' =>
+            'Upsell product suggestions shown on the current WooCommerce product page.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'upsell',
+            'recommended items'
+        ],
         'moduleIcon' => 'divi/module-woocommerce-product-upsell',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -58947,6 +64746,16 @@ return [
         'moduleOrderClassName' => 'et_pb_shop',
         'title' => 'Woo Products',
         'titles' => 'Woo Products',
+        'description' =>
+            'Display a grid of WooCommerce products filtered by category, tag, or recency.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'storefront',
+            'products grid',
+            'product list',
+            'store'
+        ],
         'moduleIcon' => 'divi/module-woocommerce-products',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -59092,7 +64901,17 @@ return [
                                     'groupLabel' => 'Image',
                                     'grouped' => true,
                                     'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
+                                    'presetGroup' => 'divi/image',
+                                    'fields' => [
+                                        'sizingGroup' => [
+                                            'component' => [
+                                                'props' => [
+                                                    'dynamicSubgroupHostLayoutStyle' =>
+                                                        'block'
+                                                ]
+                                            ]
+                                        ]
+                                    ]
                                 ]
                             ]
                         ]
@@ -59114,7 +64933,13 @@ return [
                             'desktop' => [
                                 'value' => [
                                     'aspect-ratio' =>
-                                        '{{selector}}.et_pb_shop .et_shop_image > img'
+                                        '{{selector}}.et_pb_shop .et_shop_image > img',
+                                    'height' =>
+                                        '{{selector}}.et_pb_shop .et_shop_image, {{selector}}.et_pb_shop ul.products li.product .et_shop_image > img',
+                                    'min-height' =>
+                                        '{{selector}}.et_pb_shop .et_shop_image, {{selector}}.et_pb_shop ul.products li.product .et_shop_image > img',
+                                    'max-height' =>
+                                        '{{selector}}.et_pb_shop .et_shop_image, {{selector}}.et_pb_shop ul.products li.product .et_shop_image > img'
                                 ]
                             ]
                         ]
@@ -59877,6 +65702,56 @@ return [
                             '{{selector}}.et_pb_shop .woocommerce ul.products li.product .price ins .amount'
                     ]
                 ]
+            ],
+            'pagination' => [
+                'type' => 'object',
+                'settings' => [
+                    'decoration' => [
+                        'font' => [
+                            'groupType' => 'group-item',
+                            'item' => [
+                                'groupSlug' => 'designPaginationText',
+                                'priority' => 160,
+                                'render' => true,
+                                'component' => [
+                                    'type' => 'group',
+                                    'name' => 'divi/font',
+                                    'props' => [
+                                        'grouped' => false,
+                                        'fieldLabel' => 'Pagination',
+                                        'groupLabel' => 'Pagination',
+                                        'dynamicSubgroupHost' => true
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                'styleProps' => [
+                    'selector' =>
+                        '{{selector}}.et_pb_shop .woocommerce-pagination a.page-numbers, {{selector}}.et_pb_shop .woocommerce-pagination span.page-numbers',
+                    'font' => [
+                        'propertySelectors' => [
+                            'font' => [
+                                'desktop' => [
+                                    'value' => [
+                                        'text-align' =>
+                                            '{{selector}}.et_pb_shop .woocommerce-pagination ul.page-numbers'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'important' => [
+                            'font' => [
+                                'desktop' => [
+                                    'value' => [
+                                        'color' => true
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
             ]
         ],
         'customCssFields' => [
@@ -60042,6 +65917,20 @@ return [
                             'dynamicSubgroupHost' => true
                         ]
                     ]
+                ],
+                'designPaginationText' => [
+                    'panel' => 'design',
+                    'priority' => 55,
+                    'groupName' => 'designPaginationText',
+                    'multiElements' => true,
+                    'component' => [
+                        'name' => 'divi/composite',
+                        'props' => [
+                            'groupLabel' => 'Pagination Text',
+                            'presetGroup' => 'divi/font',
+                            'dynamicSubgroupHost' => true
+                        ]
+                    ]
                 ]
             ]
         ]
@@ -60053,6 +65942,16 @@ return [
         'moduleOrderClassName' => 'et_pb_wc_related_products',
         'title' => 'Woo Related Products',
         'titles' => 'Woo Related Products',
+        'description' =>
+            'Show products related to the current WooCommerce product on a single-product page.',
+        'keywords' => [
+            'woocommerce',
+            'woo',
+            'shop',
+            'related items',
+            'cross sell',
+            'product recommendations'
+        ],
         'moduleIcon' => 'divi/module-woocommerce-related-products',
         'folder' => 'woo-modules',
         'category' => 'module',
@@ -60201,7 +66100,17 @@ return [
                                     'groupLabel' => 'Image',
                                     'grouped' => true,
                                     'dynamicSubgroupHost' => true,
-                                    'presetGroup' => 'divi/image'
+                                    'presetGroup' => 'divi/image',
+                                    'fields' => [
+                                        'sizingGroup' => [
+                                            'component' => [
+                                                'props' => [
+                                                    'dynamicSubgroupHostLayoutStyle' =>
+                                                        'block'
+                                                ]
+                                            ]
+                                        ]
+                                    ]
                                 ]
                             ]
                         ]
@@ -60217,7 +66126,13 @@ return [
                             'desktop' => [
                                 'value' => [
                                     'aspect-ratio' =>
-                                        '{{selector}} .et_shop_image img'
+                                        '{{selector}} .et_shop_image img',
+                                    'height' =>
+                                        '{{selector}} .et_shop_image, {{selector}} ul.products li.product .et_shop_image img',
+                                    'min-height' =>
+                                        '{{selector}} .et_shop_image, {{selector}} ul.products li.product .et_shop_image img',
+                                    'max-height' =>
+                                        '{{selector}} .et_shop_image, {{selector}} ul.products li.product .et_shop_image img'
                                 ]
                             ]
                         ]
@@ -60227,11 +66142,11 @@ return [
                             'desktop' => [
                                 'hover' => [
                                     'border-radius' =>
-                                        '{{selector}}.et_pb_module .et_shop_image > img{{:hover}}, {{selector}}.et_pb_module .et_shop_image .et_overlay'
+                                        '{{selector}}.et_pb_module .et_shop_image > img{{:hover}}, {{selector}}.et_pb_module .et_shop_image{{:hover}} .et_overlay, {{selector}}.et_pb_module .et_shop_image{{:hover}} > .box-shadow-overlay'
                                 ],
                                 'value' => [
                                     'border-radius' =>
-                                        '{{selector}}.et_pb_module .et_shop_image > img, {{selector}}.et_pb_module .et_shop_image .et_overlay',
+                                        '{{selector}}.et_pb_module .et_shop_image > img, {{selector}}.et_pb_module .et_shop_image .et_overlay, {{selector}}.et_pb_module .et_shop_image > .box-shadow-overlay',
                                     'border-style' =>
                                         '{{selector}}.et_pb_module .et_shop_image > img, {{selector}}.et_pb_module .et_shop_image .et_overlay'
                                 ]
@@ -60240,7 +66155,9 @@ return [
                         'important' => true
                     ],
                     'boxShadow' => [
-                        'selector' => '{{selector}} .et_shop_image',
+                        'selector' =>
+                            '{{selector}}.et_pb_module ul.products li.product .et_shop_image > img',
+                        'important' => true,
                         'useOverlay' => true
                     ]
                 ],
