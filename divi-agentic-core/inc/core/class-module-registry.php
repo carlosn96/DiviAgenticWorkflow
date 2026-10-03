@@ -126,7 +126,39 @@ class Module_Registry {
 				}
 
 				if ( $mod['script'] ) {
-					wp_register_script( $block_handle . '-js', false, [], DIVI_AGENTIC_CORE_VERSION, true );
+					$meta = $mod['meta'];
+
+					// CDN CSS libraries declared in module.json (["libsCss" => [...]]).
+					foreach ( ( $meta['libsCss'] ?? [] ) as $lib ) {
+						if ( empty( $lib['handle'] ) || empty( $lib['src'] ) ) {
+							continue;
+						}
+						$handle  = 'dac-libcss-' . $lib['handle'];
+						$version = $lib['version'] ?? DIVI_AGENTIC_CORE_VERSION;
+						if ( ! wp_style_is( $handle, 'registered' ) ) {
+							wp_register_style( $handle, $lib['src'], [], $version );
+						}
+						wp_enqueue_style( $handle );
+					}
+
+					// CDN libraries declared in module.json (["libs" => [...]]):
+					// { "handle": "gsap", "src": "https://unpkg.com/...", "version": "3.13.0", "deps": [] }
+					$lib_deps = [];
+					foreach ( ( $meta['libs'] ?? [] ) as $lib ) {
+						if ( empty( $lib['handle'] ) || empty( $lib['src'] ) ) {
+							continue;
+						}
+						$handle  = 'dac-lib-' . $lib['handle'];
+						$deps    = array_map( fn( $d ) => 'dac-lib-' . $d, $lib['deps'] ?? [] );
+						$version = $lib['version'] ?? DIVI_AGENTIC_CORE_VERSION;
+						if ( ! wp_script_is( $handle, 'registered' ) ) {
+							wp_register_script( $handle, $lib['src'], $deps, $version, true );
+						}
+						wp_enqueue_script( $handle );
+						$lib_deps[] = $handle;
+					}
+
+					wp_register_script( $block_handle . '-js', false, $lib_deps, DIVI_AGENTIC_CORE_VERSION, true );
 					wp_enqueue_script( $block_handle . '-js' );
 					wp_add_inline_script( $block_handle . '-js', file_get_contents( $mod['script'] ) );
 				}

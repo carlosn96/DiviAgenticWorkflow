@@ -205,7 +205,9 @@ class Layout_Engine {
                         $module_type = $item['_type'] ?? (is_string($item['module'] ?? null) ? $item['module'] : null) ?? $item['type'] ?? 'divi/text';
                         $children_key = in_array( $module_type, [
                             'divi/row', 'divi/row-inner', 'divi/group', 'divi/group-carousel'
-                        ], true ) ? 'columns' : '';
+                        ], true ) ? 'columns' : ( in_array( $module_type, [
+                            'divi/contact-form', 'divi/accordion', 'divi/tabs', 'divi/slider', 'divi/counters', 'divi/video-slider'
+                        ], true ) ? 'modules' : '' );
                         $content .= $this->render_block( $module_type, $item, $children_key );
                         break;
                 }

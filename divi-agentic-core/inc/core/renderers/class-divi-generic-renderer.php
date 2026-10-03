@@ -111,6 +111,32 @@ class Divi_Generic_Renderer extends Divi_Base_Renderer {
 					$attrs['blogGrid']['decoration']['layout']['desktop']['value']['display'] = 'grid';
 					$attrs['blogGrid']['decoration']['layout']['desktop']['value']['gridColumnCount'] = $data['blogGrid_columns'];
 				}
+
+				// Responsive grid columns (native, per breakpoint).
+				foreach ( [ 'tablet' => 'blogGrid_columns_tablet', 'phone' => 'blogGrid_columns_phone' ] as $bp => $flat ) {
+					if ( isset( $data[ $flat ] ) ) {
+						$attrs['blogGrid']['decoration']['layout'][ $bp ]['value']['display']         = 'grid';
+						$attrs['blogGrid']['decoration']['layout'][ $bp ]['value']['gridColumnCount'] = $data[ $flat ];
+					}
+				}
+				// Grid gap (native).
+				foreach ( [ 'blogGrid_gap' => 'gap', 'blogGrid_columnGap' => 'columnGap', 'blogGrid_rowGap' => 'rowGap' ] as $flat => $key ) {
+					if ( isset( $data[ $flat ] ) ) {
+						$attrs['blogGrid']['decoration']['layout']['desktop']['value'][ $key ] = $data[ $flat ];
+					}
+				}
+				// Full blogGrid passthrough (gap/columns at any breakpoint via nested structure).
+				if ( isset( $data['blogGrid'] ) && is_array( $data['blogGrid'] ) ) {
+					$attrs['blogGrid'] = array_replace_recursive( $attrs['blogGrid'] ?? [], $data['blogGrid'] );
+				}
+				// Post item (card) decoration passthrough — border is the native decoration of blog post items.
+				if ( isset( $data['post'] ) && is_array( $data['post'] ) && isset( $data['post']['decoration'] ) ) {
+					$attrs['post']['decoration'] = array_replace_recursive( $attrs['post']['decoration'] ?? [], $data['post']['decoration'] );
+				}
+				// Featured image decoration passthrough (fit/object-fit, sizing/aspect).
+				if ( isset( $data['image'] ) && is_array( $data['image'] ) ) {
+					$attrs['image'] = array_replace_recursive( $attrs['image'] ?? [], $data['image'] );
+				}
 				if ( isset( $data['overlayColor'] ) ) {
 					$attrs['overlay']['decoration']['background']['desktop']['value']['color'] = $data['overlayColor'];
 				}
