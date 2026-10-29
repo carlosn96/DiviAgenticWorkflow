@@ -43,7 +43,7 @@ class Divi_Form_Renderer extends Divi_Base_Renderer {
 		switch ( $slug ) {
 			case 'divi/contact-form':
 		// Preserve fully-qualified attrs if already provided.
-		foreach ( [ 'email', 'button', 'messageSuccess', 'form', 'fieldItem', 'module' ] as $top_key ) {
+		foreach ( [ 'email', 'button', 'messageSuccess', 'form', 'fieldItem', 'module', 'field' ] as $top_key ) {
 			if ( isset( $data[ $top_key ] ) ) {
 				$attrs[ $top_key ] = array_replace_recursive( $attrs[ $top_key ] ?? [], $data[ $top_key ] );
 			}
@@ -69,7 +69,8 @@ class Divi_Form_Renderer extends Divi_Base_Renderer {
 
 				// Resolve submit button text.
 				if ( ! isset( $attrs['button']['innerContent']['desktop']['value']['text'] ) ) {
-					$submit_text = $data['submit_text']
+					$submit_text = $data['submit_button_text']
+						?? $data['submit_text']
 						?? $this->get_nested( $data, 'button', 'innerContent', 'desktop', 'value', 'text' )
 						?? null;
 
@@ -119,8 +120,9 @@ class Divi_Form_Renderer extends Divi_Base_Renderer {
 					}
 				}
 
-			if ( isset( $data['use_captcha'] ) ) {
-				$enabled = ( $data['use_captcha'] === 'off' || $data['use_captcha'] === false || $data['use_captcha'] === 0 || $data['use_captcha'] === '0' ) ? 'off' : 'on';
+			$captcha_val = $data['use_captcha'] ?? $data['captcha'] ?? null;
+			if ( null !== $captcha_val ) {
+				$enabled = ( $captcha_val === 'off' || $captcha_val === false || $captcha_val === 0 || $captcha_val === '0' ) ? 'off' : 'on';
 				$attrs['module']['advanced']['spamProtection']['desktop']['value'] = [
 					'enabled'         => $enabled,
 					'useBasicCaptcha' => $enabled,

@@ -68,6 +68,16 @@ class Divi_Generic_Renderer extends Divi_Base_Renderer {
 				// NOTE: 'type' es la key de dispatch del Layout Engine (divi/blog),
 				// NO el post type. El post type nativo por defecto es 'post'.
 				// Para grids de CPTs usar la key 'post_type' en el schema.
+				//
+				// Merge element attribute objects from the schema so their native
+				// style groups (post.decoration.border, image.decoration.sizing/fit,
+				// etc.) can be set as Divi attributes instead of custom CSS.
+				// Flat keys below still win over merged defaults.
+				foreach ( [ 'post', 'image', 'masonry', 'overlay', 'fullwidth', 'readMore', 'pagination', 'meta', 'title', 'content', 'blogGrid' ] as $el ) {
+					if ( isset( $data[ $el ] ) && is_array( $data[ $el ] ) ) {
+						$attrs[ $el ] = array_replace_recursive( $data[ $el ], $attrs[ $el ] ?? [] );
+					}
+				}
 				if ( isset( $data['post_type'] ) ) {
 					$attrs['post']['advanced']['type'] = [ 'desktop' => [ 'value' => $data['post_type'] ] ];
 				}
@@ -199,6 +209,13 @@ class Divi_Generic_Renderer extends Divi_Base_Renderer {
 					$attrs['icon'] = $icon;
 				} elseif ( is_array( $icon ) && isset( $icon['unicode'] ) ) {
 					$attrs['icon'] = [ 'innerContent' => [ 'desktop' => [ 'value' => $icon ] ] ];
+				}
+
+				if ( isset( $data['iconColor'] ) ) {
+					$attrs['icon']['advanced']['color'] = [ 'desktop' => [ 'value' => $data['iconColor'] ] ];
+				}
+				if ( isset( $data['iconSize'] ) ) {
+					$attrs['icon']['advanced']['size'] = [ 'desktop' => [ 'value' => $data['iconSize'] ] ];
 				}
 				break;
 

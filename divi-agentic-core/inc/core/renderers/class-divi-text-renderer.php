@@ -116,6 +116,13 @@ class Divi_Text_Renderer extends Divi_Base_Renderer {
 			}
 		}
 
+		// Generate CSS from fonts, sub-fonts (link, strong, ul, ol), and spacing extensions (scrollMarginTop).
+		$generated_css = $this->generate_font_css( $slug, $attrs );
+		if ( ! empty( $generated_css ) ) {
+			$existing_css = $attrs['css']['desktop']['value']['freeForm'] ?? '';
+			$attrs['css']['desktop']['value']['freeForm'] = $existing_css ? $existing_css . "\n" . $generated_css : $generated_css;
+		}
+
 		return [
 			'attrs'      => $attrs,
 			'inner'      => '',
@@ -124,51 +131,46 @@ class Divi_Text_Renderer extends Divi_Base_Renderer {
 	}
 
 	/**
-	 * Generate CSS from bodyFont/headingFont attributes.
+	 * Generate CSS from bodyFont/headingFont attributes and spacing extensions.
 	 *
 	 * @param string $slug  Module slug.
 	 * @param array  $attrs Current block attributes.
 	 * @return string Generated CSS or empty string.
 	 */
 	private function generate_font_css( string $slug, array $attrs ): string {
-		$css      = '';
+		$css         = '';
 		$order_class = '%%order_class%%';
 
 		if ( $slug === 'divi/text' || $slug === 'divi/heading' ) {
 			$module_class = $attrs['module']['advanced']['htmlAttributes']['desktop']['value']['class'] ?? '';
+			$base_sel     = $module_class ? ".{$module_class}" : $order_class;
 
-			// Heading font (h1-h6 inside .et_pb_text_inner)
-			$hf = $attrs['content']['decoration']['headingFont'] ?? null;
-			if ( $hf ) {
-				foreach ( $hf as $tag => $font_data ) {
-					if ( ! isset( $font_data['font'] ) ) continue;
-					$sel = $module_class ? ".{$module_class} .et_pb_text_inner {$tag}" : "{$order_class} .et_pb_text_inner {$tag}";
-					foreach ( $this->build_font_css_rules( $font_data['font'] ) as $rule ) {
-						$css .= $rule['media'] ? "{$rule['media']}{{$sel} {{$rule['declarations']}}}" : "{$sel} {{$rule['declarations']}}";
-					}
-				}
-			}
-
-			// Body font (p, li, etc. inside .et_pb_text_inner)
+			// Link hover pseudo-class (only if explicitly set, since Divi 5 does not provide a dedicated hover field for link in bodyFont)
 			$bf = $attrs['content']['decoration']['bodyFont'] ?? null;
-			if ( $bf && isset( $bf['body']['font'] ) ) {
-				$sel = $module_class ? ".{$module_class} .et_pb_text_inner" : "{$order_class} .et_pb_text_inner";
-				foreach ( $this->build_font_css_rules( $bf['body']['font'] ) as $rule ) {
-					$css .= $rule['media'] ? "{$rule['media']}{{$sel} {{$rule['declarations']}}}" : "{$sel} {{$rule['declarations']}}";
+			if ( $bf ) {
+				$link_font = $bf['body']['link'] ?? $bf['link']['font'] ?? $bf['link'] ?? null;
+				if ( $link_font ) {
+					$link_font_data = isset( $link_font['font'] ) ? $link_font['font'] : $link_font;
+					$hover_data     = $link_font['hover']['value'] ?? $link_font_data['hover']['value'] ?? null;
+					if ( $hover_data ) {
+						$hover_rules = $this->build_font_css_rules( [ 'desktop' => [ 'value' => $hover_data ] ] );
+						foreach ( $hover_rules as $rule ) {
+							$sel_h = "{$base_sel} .et_pb_text_inner a:hover";
+							$css  .= $rule['media'] ? "{$rule['media']}{{$sel_h} {{$rule['declarations']}}}" : "{$sel_h} {{$rule['declarations']}}";
+						}
+					}
 				}
 			}
 
-			// divi/heading title font (from decoration.font → title.decoration.font.font)
-			if ( $slug === 'divi/heading' ) {
-				$tf = $attrs['title']['decoration']['font']['font']['font'] ?? $attrs['title']['decoration']['font']['font'] ?? null;
-				if ( $tf ) {
-					// Unwrap extra font nesting if present
-					$font_obj = isset( $tf['font'] ) ? $tf['font'] : $tf;
-					$sel = $module_class ? ".{$module_class} .et_pb_heading_container h1, .{$module_class} .et_pb_heading_container h2, .{$module_class} .et_pb_heading_container h3, .{$module_class} .et_pb_heading_container h4, .{$module_class} .et_pb_heading_container h5, .{$module_class} .et_pb_heading_container h6" : "{$order_class} .et_pb_heading_container h1, {$order_class} .et_pb_heading_container h2, {$order_class} .et_pb_heading_container h3, {$order_class} .et_pb_heading_container h4, {$order_class} .et_pb_heading_container h5, {$order_class} .et_pb_heading_container h6";
-					foreach ( $this->build_font_css_rules( $font_obj ) as $rule ) {
-						$css .= $rule['media'] ? "{$rule['media']}{{$sel} {{$rule['declarations']}}}" : "{$sel} {{$rule['declarations']}}";
-					}
-				}
+
+			// 4. Scroll margin top (sticky header offset)
+			$smt = $attrs['module']['decoration']['spacing']['desktop']['value']['scrollMarginTop']
+				?? $attrs['decoration']['spacing']['desktop']['value']['scrollMarginTop']
+				?? $attrs['module']['decoration']['spacing']['desktop']['value']['scroll_margin_top']
+				?? $attrs['decoration']['spacing']['desktop']['value']['scroll_margin_top']
+				?? null;
+			if ( $smt ) {
+				$css .= "{$base_sel} { scroll-margin-top: {$smt} !important; }";
 			}
 		}
 
@@ -223,6 +225,43 @@ class Divi_Text_Renderer extends Divi_Base_Renderer {
 			}
 			if ( isset( $value['fontStyle'] ) ) {
 				$declarations .= 'font-style:' . $value['fontStyle'] . ' !important;';
+			}
+			// Style alias (italic, normal, oblique)
+			if ( isset( $value['style'] ) && in_array( $value['style'], [ 'italic', 'normal', 'oblique' ], true ) ) {
+				$declarations .= 'font-style:' . $value['style'] . ' !important;';
+			}
+			// Text decoration
+			$td = $value['textDecoration'] ?? ( ( isset( $value['style'] ) && in_array( $value['style'], [ 'underline', 'line-through', 'none', 'overline' ], true ) ) ? $value['style'] : null );
+			if ( $td !== null ) {
+				$declarations .= 'text-decoration:' . $td . ' !important;';
+			}
+			// Text decoration color / line color
+			$tdc = $value['textDecorationColor'] ?? $value['lineColor'] ?? null;
+			if ( $tdc !== null ) {
+				$declarations .= 'text-decoration-color:' . $tdc . ' !important;';
+			}
+			// Underline offset
+			$tuo = $value['textUnderlineOffset'] ?? $value['underlineOffset'] ?? null;
+			if ( $tuo !== null ) {
+				$declarations .= 'text-underline-offset:' . $tuo . ' !important;';
+			}
+			// Decoration thickness / line thickness
+			$tdt = $value['textDecorationThickness'] ?? $value['lineThickness'] ?? null;
+			if ( $tdt !== null ) {
+				$declarations .= 'text-decoration-thickness:' . $tdt . ' !important;';
+			}
+			// List styling & list margins
+			if ( isset( $value['listStyleType'] ) ) {
+				$declarations .= 'list-style-type:' . $value['listStyleType'] . ' !important;';
+			}
+			if ( isset( $value['paddingLeft'] ) ) {
+				$declarations .= 'padding-left:' . $value['paddingLeft'] . ' !important;';
+			}
+			if ( isset( $value['marginBottom'] ) ) {
+				$declarations .= 'margin-bottom:' . $value['marginBottom'] . ' !important;';
+			}
+			if ( isset( $value['marginTop'] ) ) {
+				$declarations .= 'margin-top:' . $value['marginTop'] . ' !important;';
 			}
 
 			if ( ! $declarations ) continue;

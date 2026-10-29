@@ -77,6 +77,27 @@ class Divi_Container_Renderer extends Divi_Base_Renderer {
 						$attrs['_module_preset'] = $data['_module_preset'];
 					}
 				}
+
+				// Icon List: pass through icon and listItem styling (native Divi 5 attrs).
+				if ( $slug === 'divi/icon-list' ) {
+					foreach ( [ 'icon', 'listItem' ] as $ik ) {
+						if ( isset( $data[ $ik ] ) ) {
+							$attrs[ $ik ] = $data[ $ik ];
+						}
+					}
+					if ( isset( $data['iconColor'] ) ) {
+						$attrs['icon']['advanced']['color'] = [ 'desktop' => [ 'value' => $data['iconColor'] ] ];
+					}
+					if ( isset( $data['iconSize'] ) ) {
+						$attrs['icon']['advanced']['size'] = [ 'desktop' => [ 'value' => $data['iconSize'] ] ];
+					}
+					if ( isset( $data['listItemFont'] ) ) {
+						$attrs['listItem']['decoration']['font']['font'] = [ 'desktop' => [ 'value' => $data['listItemFont'] ] ];
+					}
+					if ( isset( $data['_module_preset'] ) ) {
+						$attrs['_module_preset'] = $data['_module_preset'];
+					}
+				}
 				break;
 		}
 

@@ -159,8 +159,10 @@ class Divi_Button_Renderer extends Divi_Base_Renderer {
 				if ( $btn_family !== null ) {
 					$target_dec['font']['font'][ $breakpoint ][ $state ]['fontFamily'] = $btn_family;
 				}
-				if ( isset( $val['fontWeight'] ) ) {
-					$target_dec['font']['font'][ $breakpoint ][ $state ]['fontWeight'] = $val['fontWeight'];
+				if ( isset( $val['weight'] ) || isset( $val['fontWeight'] ) ) {
+					// Divi 5 guarda el peso del font group como `weight`; `fontWeight`
+					// se acepta como alias para los page-defs que ya lo usaban.
+					$target_dec['font']['font'][ $breakpoint ][ $state ]['weight'] = $val['weight'] ?? $val['fontWeight'];
 				}
 				$btn_size = $val['fontSize'] ?? $val['size'] ?? null;
 				if ( $btn_size !== null ) {
