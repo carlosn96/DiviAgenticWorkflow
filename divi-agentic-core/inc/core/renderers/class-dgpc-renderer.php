@@ -200,14 +200,14 @@ class Dgpc_Renderer implements Block_Renderer_Interface {
 		// the canonical Divi 5 shape {"innerContent":{"desktop":{"value":...}}}
 		// which must be PRESERVED so the D4 module hydrates $this->props.
 		$carousel_keys = [
-			'type', 'include_categories', 'posts_number', 'orderby',
+			'include_categories', 'posts_number', 'orderby',
 			'add_to_cart', 'product_description', 'description_full',
 			'show_items_desktop', 'show_items_tablet', 'show_items_mobile',
 			'multislide', 'item_spacing', 'transition_duration', 'centermode',
 			'loop', 'autoplay', 'hoverpause', 'autoplay_speed', 'arrow_nav',
 			'dot_nav', 'dot_alignment', 'equal_height', 'item_vertical_align',
 			'effect', 'coverflow_rotate', 'slide_shadow',
-			'overlay', 'ovarlay_color', 'sale_badge_backgeound',
+			'overlay', 'ovarlay_color', 'sale_badge_background',
 			'cart_button_position', 'cart_button_alignment',
 			'add_to_cart_on_bottom', 'cart_button_full',
 			'cart_background', 'cart_background_hover',
@@ -226,6 +226,7 @@ class Dgpc_Renderer implements Block_Renderer_Interface {
 			'content_margin_top', 'content_spacing_top',
 			'add_to_cart_margin', 'add_to_cart_padding',
 			'background_color', 'border_radii',
+			'border_styles', 'box_shadow_style', 'box_shadow_color',
 		];
 		foreach ( $carousel_keys as $key ) {
 			if ( ! isset( $data[ $key ] ) ) {
@@ -237,15 +238,79 @@ class Dgpc_Renderer implements Block_Renderer_Interface {
 			$attrs[ $key ] = $data[ $key ];
 		}
 
-		// The product carousel's "type" attribute (e.g. product_category)
-		// collides with the structural "type" key used by the Layout Engine
-		// to identify the block slug. Schema authors use "type_attr" or
-		// "carousel_type" to disambiguate; map them back to "type".
-		foreach ( [ 'type_attr', 'carousel_type' ] as $alias ) {
-			if ( isset( $data[ $alias ] ) ) {
-				$attrs['type'] = $data[ $alias ];
-				break;
+		// Normalize include_categories for divi/checkboxes component (array of strings)
+		if ( isset( $data['include_categories'] ) ) {
+			if ( is_array( $data['include_categories'] ) && isset( $data['include_categories']['innerContent']['desktop']['value'] ) ) {
+				$val = $data['include_categories']['innerContent']['desktop']['value'];
+				$attrs['include_categories'] = [
+					'innerContent' => [
+						'desktop' => [
+							'value' => array_values( array_map( 'strval', (array) $val ) ),
+						],
+					],
+				];
+			} elseif ( is_array( $data['include_categories'] ) ) {
+				$attrs['include_categories'] = [
+					'innerContent' => [
+						'desktop' => [
+							'value' => array_values( array_map( 'strval', $data['include_categories'] ) ),
+						],
+					],
+				];
+			} elseif ( is_string( $data['include_categories'] ) && $data['include_categories'] !== '' ) {
+				$attrs['include_categories'] = [
+					'innerContent' => [
+						'desktop' => [
+							'value' => array_values( array_filter( array_map( 'trim', explode( ',', $data['include_categories'] ) ) ) ),
+						],
+					],
+				];
 			}
+		}
+
+		// In DGPC module.json, the content source dropdown is attribute `type`
+		// (options: default, latest, featured, sale, best_selling, top_rated, product_category).
+		// In Divi 5 Visual Builder, `include_categories` has:
+		//   "show_if": { "type": "product_category" }
+		// Therefore `type` MUST be properly set to {innerContent:{desktop:{value:"product_category"}}}.
+		// If the schema passed `type` or `carousel_type`, respect it; if `include_categories` is present,
+		// ensure it is "product_category". Never write the string 'dgpc/product-carousel' into `type`.
+		if ( isset( $data['type'] ) && is_array( $data['type'] ) && isset( $data['type']['innerContent'] ) ) {
+			$attrs['type'] = $data['type'];
+		} elseif ( isset( $data['type'] ) && is_string( $data['type'] ) && $data['type'] !== 'dgpc/product-carousel' ) {
+			$attrs['type'] = [
+				'innerContent' => [
+					'desktop' => [
+						'value' => $data['type'],
+					],
+				],
+			];
+		} elseif ( isset( $data['carousel_type'] ) && is_array( $data['carousel_type'] ) ) {
+			$attrs['type'] = $data['carousel_type'];
+		} elseif ( isset( $data['carousel_type'] ) && is_string( $data['carousel_type'] ) ) {
+			$attrs['type'] = [
+				'innerContent' => [
+					'desktop' => [
+						'value' => $data['carousel_type'],
+					],
+				],
+			];
+		} elseif ( ! empty( $attrs['include_categories']['innerContent']['desktop']['value'] ) ) {
+			$attrs['type'] = [
+				'innerContent' => [
+					'desktop' => [
+						'value' => 'product_category',
+					],
+				],
+			];
+		} else {
+			$attrs['type'] = [
+				'innerContent' => [
+					'desktop' => [
+						'value' => 'default',
+					],
+				],
+			];
 		}
 
 		// Typography sub-fields — map D4 font keys (from schema) to D5 attr paths
@@ -266,7 +331,20 @@ class Dgpc_Renderer implements Block_Renderer_Interface {
 			}
 			$normalized = $this->normalize_dgpc_font( $data[ $d4_key ] );
 			if ( $normalized !== null ) {
-				$attrs[ $d5_key ] = [ 'decoration' => [ 'font' => $normalized ] ];
+				// `$normalized` is the font payload itself ({font:{desktop:{value}}});
+				// it is assigned as decoration.font. The same schema key may also
+				// carry sibling decoration groups (e.g. `border` on the cart
+				// button); they are lifted to decoration.border instead of being
+				// nested inside font.
+				$decoration = [ 'font' => $normalized ];
+
+				foreach ( array_diff_key( $data[ $d4_key ], [ 'font' => true ] ) as $group => $value ) {
+					if ( ! empty( $value ) ) {
+						$decoration[ $group ] = $value;
+					}
+				}
+
+				$attrs[ $d5_key ] = [ 'decoration' => $decoration ];
 			} else {
 				$attrs[ $d5_key ] = $data[ $d4_key ];
 			}
