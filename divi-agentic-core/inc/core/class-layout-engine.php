@@ -251,7 +251,10 @@ class Layout_Engine {
                         }
                         $children_key = in_array( $module_type, [
                             'divi/row', 'divi/row-inner', 'divi/group', 'divi/group-carousel'
-                        ], true ) ? 'columns' : ( in_array( $module_type, [ 'divi/column', 'divi/column-inner' ], true ) ? 'modules' : '' );
+                        ], true ) ? 'columns' : ( in_array( $module_type, [
+                            'divi/column', 'divi/column-inner',
+                            'divi/contact-form', 'divi/accordion', 'divi/tabs', 'divi/slider', 'divi/counters', 'divi/video-slider'
+                        ], true ) ? 'modules' : '' );
                         $content .= $this->render_block( $module_type, $item, $children_key );
                         break;
                 }
