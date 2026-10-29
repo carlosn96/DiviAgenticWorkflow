@@ -1,7 +1,8 @@
 <?php
 require_once 'app/public/wp-load.php';
-$post = get_post(127774);
-if (! $post) { echo "NO POST\n"; exit(1); }
+$post_id = isset($argv[1]) ? intval($argv[1]) : 127774;
+$post = get_post($post_id);
+if (! $post) { echo "NO POST $post_id\n"; exit(1); }
 $blocks = parse_blocks($post->post_content);
 
 echo "Top-level blocks: " . count($blocks) . "\n";
