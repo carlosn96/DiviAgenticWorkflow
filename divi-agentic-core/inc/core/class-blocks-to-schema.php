@@ -132,7 +132,7 @@ class BlocksToSchema {
         if ($block['blockName'] !== 'divi/column' && $block['blockName'] !== 'divi/column-inner') return null;
         
         $attrs = $block['attrs']['module'] ?? [];
-        $type = $attrs['advanced']['type']['desktop']['value'] ?? '';
+        $type = $attrs['advanced']['type']['desktop']['value'] ?? $block['attrs']['advanced']['type']['desktop']['value'] ?? '';
         if (!$type) return null;
         
         $column = ['type' => $type];

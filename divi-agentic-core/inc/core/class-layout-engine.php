@@ -104,14 +104,28 @@ class Layout_Engine {
             $inner  = $result['inner'];
             $inner_html = $result['inner_html'];
 
-            // Preserve the original type attr so the block is recognized by the plugin.
-            if ( ! isset( $attrs['type'] ) ) {
-                $attrs['type'] = 'dgpc/product-carousel';
+            // Ensure type is a valid Divi 5 innerContent object, never the module slug string.
+            if ( ! isset( $attrs['type'] ) || is_string( $attrs['type'] ) ) {
+                $attrs['type'] = [
+                    'innerContent' => [
+                        'desktop' => [
+                            'value' => 'default',
+                        ],
+                    ],
+                ];
             }
 
             // Round-trip passthrough: restore schema keys that the renderer's
             // allowlist didn't map (export_page preserved them verbatim).
-            $passthrough_skip = [ '_type', 'module', 'children', 'type', 'columns', 'rows', 'column_structure', '_raw_attrs' ];
+            // IMPORTANTE: NO duplicar a nivel raíz las claves de estructura
+            // (ya viven dentro de module{}) ni las claves D4 de tipografía
+            // (el renderer las mapea a title_text/price_text/cart_button).
+            // Duplicarlas rompe la hidratación del Visual Builder.
+            $passthrough_skip = [
+                '_type', 'module', 'children', 'type', 'columns', 'rows', 'column_structure', '_raw_attrs',
+                'decoration', 'advanced', 'meta', 'admin_label', 'module_class', 'module_id', 'css',
+                'title', 'price', 'description', 'sale', 'cart',
+            ];
             foreach ( $data as $key => $value ) {
                 if ( in_array( $key, $passthrough_skip, true ) || isset( $attrs[ $key ] ) ) {
                     continue;
@@ -167,7 +181,28 @@ class Layout_Engine {
             // (export_page preserved them verbatim) are restored so the deployed
             // block keeps the original attributes (dgpc settings, modulePreset,
             // slide css, srcset/sizes, etc.). Skip structural/internal keys.
-            $passthrough_skip = [ '_type', 'module', 'children', 'type', 'columns', 'rows', 'column_structure', '_raw_attrs' ];
+            $passthrough_skip = [
+                '_type', 'module', 'children', 'type', 'columns', 'rows', 'modules',
+                'column_structure', '_raw_attrs', '_self', 'fields', 'submit_button_text',
+                'submit_text', 'success_message', 'email_to', 'title_text'
+            ];
+            foreach ( $data as $key => $value ) {
+                if ( in_array( $key, $passthrough_skip, true ) || isset( $attrs[ $key ] ) ) {
+                    continue;
+                }
+                if ( $key === 'builderVersion' ) {
+                    continue;
+                }
+                // Divi 5 element attributes (e.g. 'title', 'button', 'content', 'email', etc.)
+                // must be arrays with style/innerContent structures. Never pass through raw strings or scalars.
+                if ( in_array( $key, [ 'title', 'button', 'content', 'email', 'fieldItem', 'messageSuccess', 'search', 'form' ], true ) && ! is_array( $value ) ) {
+                    continue;
+                }
+                $attrs[ $key ] = $value;
+            }
+        } else {
+            // Third-party blocks (e.g. de-ajax-filter/filter-posts, de-ajax-filter/archive-loop, etc.)
+            $passthrough_skip = [ '_type', 'type', 'children', 'columns', 'rows', 'modules', 'column_structure', '_raw_attrs', '_self' ];
             foreach ( $data as $key => $value ) {
                 if ( in_array( $key, $passthrough_skip, true ) || isset( $attrs[ $key ] ) ) {
                     continue;
@@ -176,6 +211,12 @@ class Layout_Engine {
                     continue;
                 }
                 $attrs[ $key ] = $value;
+            }
+            if ( isset( $data['module'] ) && is_array( $data['module'] ) ) {
+                $attrs['module'] = $data['module'];
+            }
+            if ( ! empty( $children_html ) ) {
+                $inner_html = $children_html;
             }
         }
 
@@ -186,6 +227,8 @@ class Layout_Engine {
                 $items_to_render = $data['columns'];
             } elseif ( isset( $data[ $content_key ] ) ) {
                 $items_to_render = $data[ $content_key ];
+            } elseif ( isset( $data['children'] ) && is_array( $data['children'] ) ) {
+                $items_to_render = $data['children'];
             }
         }
 
@@ -203,9 +246,12 @@ class Layout_Engine {
                         break;
                     case 'modules':
                         $module_type = $item['_type'] ?? (is_string($item['module'] ?? null) ? $item['module'] : null) ?? $item['type'] ?? 'divi/text';
+                        if ( in_array( $module_type, [ '4_4', '1_2', '1_3', '2_3', '1_4', '3_4', '1_5', '2_5', '3_5', 'divi/column' ], true ) ) {
+                            $module_type = 'divi/column';
+                        }
                         $children_key = in_array( $module_type, [
                             'divi/row', 'divi/row-inner', 'divi/group', 'divi/group-carousel'
-                        ], true ) ? 'columns' : '';
+                        ], true ) ? 'columns' : ( in_array( $module_type, [ 'divi/column', 'divi/column-inner' ], true ) ? 'modules' : '' );
                         $content .= $this->render_block( $module_type, $item, $children_key );
                         break;
                 }
@@ -227,6 +273,9 @@ class Layout_Engine {
         $json_attrs = json_encode( $attrs, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
 
         $inner = ( $content !== '' || $inner_html !== '' ) ? "{$content}{$inner_html}" : '';
+        if ( $inner === '' && ! empty( $data['_self'] ) ) {
+            return "<!-- wp:{$slug} {$json_attrs} /-->\n";
+        }
         return "<!-- wp:{$slug} {$json_attrs} -->\n{$inner}<!-- /wp:{$slug} -->\n";
     }
 
