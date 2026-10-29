@@ -30,8 +30,8 @@ if ($LASTEXITCODE -ne 0) { throw "combine.py failed" }
 Write-Host "  -> $Combined" -ForegroundColor Green
 
 Write-Host "[2/3] Deploying page..." -ForegroundColor Yellow
-$schemaPath = "site/$Site/page-defs/$Slug/$Slug-combined.json"
-$dsPath = "site/$Site/design-system/divitheme.json"
+$schemaPath = $Combined
+$dsPath = $DesignSystem
 if (Test-Path $DesignSystem) {
     & $WpCli agentic deploy_page --title=$Title --slug=$Slug --schema=$schemaPath --design-system=$dsPath
 } else {
